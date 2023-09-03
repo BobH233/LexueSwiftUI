@@ -14,6 +14,8 @@
 		473BAE942AA4969F00968C3C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE932AA4969F00968C3C /* SettingView.swift */; };
 		473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE952AA496AE00968C3C /* CourseListView.swift */; };
 		473BAE982AA496B800968C3C /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE972AA496B800968C3C /* MessageListView.swift */; };
+		473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */; };
+		473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		473BAE932AA4969F00968C3C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		473BAE952AA496AE00968C3C /* CourseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListView.swift; sourceTree = "<group>"; };
 		473BAE972AA496B800968C3C /* MessageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListView.swift; sourceTree = "<group>"; };
+		473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStorage.swift; sourceTree = "<group>"; };
+		473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +65,9 @@
 				473BAE912AA48E8200968C3C /* Network */,
 				473BAE8D2AA48E4300968C3C /* Views */,
 				473BAE7F2AA48DAA00968C3C /* LexueSwiftUIApp.swift */,
-				473BAE812AA48DAA00968C3C /* ContentView.swift */,
 				473BAE832AA48DAA00968C3C /* Assets.xcassets */,
 				473BAE852AA48DAA00968C3C /* Preview Content */,
+				473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */,
 			);
 			path = LexueSwiftUI;
 			sourceTree = "<group>";
@@ -79,6 +83,7 @@
 		473BAE8D2AA48E4300968C3C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				473BAE812AA48DAA00968C3C /* ContentView.swift */,
 				473BAE902AA48E6700968C3C /* Setting */,
 				473BAE8F2AA48E6000968C3C /* CourseList */,
 				473BAE8E2AA48E5100968C3C /* MessageList */,
@@ -120,6 +125,7 @@
 		473BAE922AA48E9500968C3C /* LocalStorage */ = {
 			isa = PBXGroup;
 			children = (
+				473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */,
 			);
 			path = LocalStorage;
 			sourceTree = "<group>";
@@ -194,9 +200,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */,
 				473BAE942AA4969F00968C3C /* SettingView.swift in Sources */,
 				473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */,
 				473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */,
+				473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */,
 				473BAE982AA496B800968C3C /* MessageListView.swift in Sources */,
 				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,
 			);

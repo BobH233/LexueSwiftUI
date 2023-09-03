@@ -7,9 +7,119 @@
 
 import SwiftUI
 
+
 struct SettingView: View {
+    @State private var isLogin = GlobalVariables.shared.isLogin
+    @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
+    var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
     var body: some View {
-        Text("SettingView")
+        NavigationView {
+            Form {
+                // avatar group
+                Section(header: Text("北理账号")) {
+                    HStack{
+                        Spacer()
+                            .foregroundColor(.blue)
+                        VStack {
+                            Image(uiImage: UIImage(named: "default_avatar")!)
+                                .resizable()
+                                .frame(width:100, height: 100, alignment: .center)
+                                .shadow(radius: 26)
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                                .padding(.top, 10)
+                                
+                            Text("珐露珊")
+                                .font(.title)
+                                .bold()
+                                .padding(.top, 15)
+                                .padding(.bottom, 1)
+                            Text("1120210000")
+                                .bold()
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
+                        Spacer()
+                    }
+                }
+                if GlobalVariables.shared.debugMode {
+                    Section(header: Text("Debug")) {
+                        Toggle(isOn: $isLogin) {
+                            Text("isLogin")
+                        }
+                    }
+                }
+                if isLogin {
+                    NavigationLink(destination: {
+                        
+                    }, label: {
+                        HStack{
+                            Image(systemName: "person.crop.rectangle.fill")
+                                .foregroundColor(.blue)
+                            Text("个人资料")
+                                .foregroundColor(.blue)
+                        }
+                    })
+                    Button(action: {
+                        print("exit login")
+                    }) {
+                        HStack{
+                            Image(systemName: "delete.right.fill")
+                                .foregroundColor(.red)
+                            Text("退出登录")
+                                .foregroundColor(.red)
+                        }
+                    }
+                } else {
+                    NavigationLink(destination: {
+                        
+                    }, label: {
+                        Image(systemName: "person.fill")
+                        Text("绑定北理账号")
+                    })
+                }
+                if isLogin {
+                    Section(header: Text("应用设置")) {
+                        HStack{
+                            NavigationLink(destination: {
+                                
+                            }, label: {
+                                Text("消息源设定")
+                            })
+                        }
+                        HStack{
+                            Picker(selection: $colorSchemeIndex, label: Text("暗黑模式")) {
+                                ForEach(0 ..< colorSchemeText.count) {
+                                    Text(self.colorSchemeText[$0])
+                                }
+                            }
+                        }
+                        .onChange(of: colorSchemeIndex) { newValue in
+                            SettingStorage.shared.preferColorScheme = newValue
+                        }
+                    }
+                }
+                Section(header: Text("关于")) {
+                    NavigationLink(destination: {
+                        
+                    }, label: {
+                        Image(systemName: "lock.circle")
+                            .foregroundColor(.blue)
+                        Text("应用隐私声明")
+                    })
+                    NavigationLink(destination: {
+                        
+                    }, label: {
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.blue)
+                        Text("关于")
+                    })
+                }
+                
+            }
+            .navigationTitle("设置")
+        }
+        
     }
 }
 
