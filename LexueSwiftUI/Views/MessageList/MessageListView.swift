@@ -6,10 +6,88 @@
 //
 
 import SwiftUI
+import SearchBarView
+
+struct MessagesStructure: Identifiable {
+    var id = UUID()
+    var unreadIndicator: String
+    var avatar: String
+    var name: String
+    var messageSummary: String
+    var timestamp: String
+}
 
 struct MessageListView: View {
+    var messages: [MessagesStructure] = [MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Jared", messageSummary: "That's great, I can help you with that! What type of product are you...", timestamp: "13:30 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Martin Steed", messageSummary: "I don't know why people are so anti pineapple pizza. I kind of like it.", timestamp: "12:40 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Zach Friedman", messageSummary: "(Sad fact: you cannot search for a gif of the word “gif”, just gives you gifs.)", timestamp: "11:00 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Kyle & Aaron", messageSummary: "There's no way you'll be able to jump your motorcycle over that bus.", timestamp: "10:36 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Dee McRobie", messageSummary: "Tabs make way more sense than spaces. Convince me I'm wrong. LOL.", timestamp: "9:59 AM"),
+                                         MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Gary Butcher", messageSummary: "(Sad fact: you cannot search for a gif of the word “gif”, just gives you gifs.)", timestamp: "9:26 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Francesco", messageSummary: "I don't know why people are so anti pineapple pizza. I kind of like it.", timestamp: "9:20 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Luke", messageSummary: "There's no way you'll be able to jump your motorcycle over that bus.", timestamp: "9:16 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Ama Aboakye", messageSummary: "Tabs make way more sense than spaces. Convince me I'm wrong. LOL.", timestamp: "9:00 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Adwoa Forson", messageSummary: "That's what I'm talking about!", timestamp: "8:59 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Kofi Mensah", messageSummary: "(Sad fact: you cannot search for a gif of the word “gif”, just gives you gifs.)", timestamp: "8:51 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Amos G.", messageSummary: "Maybe email isn't the best form of communication.", timestamp: "9:36 AM"),
+                                         MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Maren Yustiono", messageSummary: "There's no way you'll be able to jump your motorcycle over that bus.", timestamp: "8:50 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Martin Yustiono", messageSummary: "That's what I'm talking about!", timestamp: "8:45 AM"),
+                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Zain Snowman", messageSummary: "(Sad fact: you cannot search for a gif of the word “gif”, just gives you gifs.)", timestamp: "8:40 AM"),
+                                         MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Kipling West King", messageSummary: "Maybe email isn't the best form of communication.", timestamp: "8:36 AM")]
+    let readIndicator = Color(#colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 0))
+    @State var text1: String = ""
+    
     var body: some View {
-        Text("")
+        NavigationView{
+            VStack {
+                VStack {
+                    List(messages) {
+                        item in
+                        ZStack {
+                            HStack {
+                                ZStack {
+                                    readIndicator
+                                        .frame(width: 10, height: 10)
+                                    Image(item.unreadIndicator)
+                                }
+                                Image(item.avatar)
+                                    .resizable()
+                                    .clipShape(Circle())
+                                    .frame(width: 45, height: 45)
+                                
+                                VStack(alignment: .leading, spacing: 3){
+                                    HStack{
+                                        Text("\(item.name)")
+                                        Spacer()
+                                        HStack {
+                                            Text("\(item.timestamp)")
+                                                .font(.subheadline)
+                                                .foregroundColor(.secondary)
+                                            Image(systemName: "chevron.right")
+                                                .foregroundColor(.secondary)
+                                        }
+                                    }
+                                    Text("\(item.messageSummary)")
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            NavigationLink(destination: {
+                                Text(item.name)
+                            }, label: {
+                                EmptyView()
+                            })
+                            .opacity(0)
+                        }
+                    }
+                }
+                .listStyle(.plain)
+            }
+            .navigationTitle("消息")
+            .searchable(text: $text1)
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        
     }
 }
 

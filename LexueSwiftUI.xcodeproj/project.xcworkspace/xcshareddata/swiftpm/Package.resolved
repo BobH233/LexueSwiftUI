@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "searchbarview",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:rebeloper/SearchBarView.git",
+      "state" : {
+        "revision" : "bfe234a8a2106b075ba1f4d004037a9e149440bd",
+        "version" : "0.1.9"
+      }
+    }
+  ],
+  "version" : 2
+}
