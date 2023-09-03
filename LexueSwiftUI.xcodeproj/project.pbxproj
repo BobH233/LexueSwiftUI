@@ -11,6 +11,9 @@
 		473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE812AA48DAA00968C3C /* ContentView.swift */; };
 		473BAE842AA48DAA00968C3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473BAE832AA48DAA00968C3C /* Assets.xcassets */; };
 		473BAE872AA48DAA00968C3C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473BAE862AA48DAA00968C3C /* Preview Assets.xcassets */; };
+		473BAE942AA4969F00968C3C /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE932AA4969F00968C3C /* SettingView.swift */; };
+		473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE952AA496AE00968C3C /* CourseListView.swift */; };
+		473BAE982AA496B800968C3C /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE972AA496B800968C3C /* MessageListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +22,9 @@
 		473BAE812AA48DAA00968C3C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		473BAE832AA48DAA00968C3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		473BAE862AA48DAA00968C3C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		473BAE932AA4969F00968C3C /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		473BAE952AA496AE00968C3C /* CourseListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListView.swift; sourceTree = "<group>"; };
+		473BAE972AA496B800968C3C /* MessageListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +57,9 @@
 		473BAE7E2AA48DAA00968C3C /* LexueSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				473BAE922AA48E9500968C3C /* LocalStorage */,
+				473BAE912AA48E8200968C3C /* Network */,
+				473BAE8D2AA48E4300968C3C /* Views */,
 				473BAE7F2AA48DAA00968C3C /* LexueSwiftUIApp.swift */,
 				473BAE812AA48DAA00968C3C /* ContentView.swift */,
 				473BAE832AA48DAA00968C3C /* Assets.xcassets */,
@@ -65,6 +74,54 @@
 				473BAE862AA48DAA00968C3C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		473BAE8D2AA48E4300968C3C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				473BAE902AA48E6700968C3C /* Setting */,
+				473BAE8F2AA48E6000968C3C /* CourseList */,
+				473BAE8E2AA48E5100968C3C /* MessageList */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		473BAE8E2AA48E5100968C3C /* MessageList */ = {
+			isa = PBXGroup;
+			children = (
+				473BAE972AA496B800968C3C /* MessageListView.swift */,
+			);
+			path = MessageList;
+			sourceTree = "<group>";
+		};
+		473BAE8F2AA48E6000968C3C /* CourseList */ = {
+			isa = PBXGroup;
+			children = (
+				473BAE952AA496AE00968C3C /* CourseListView.swift */,
+			);
+			path = CourseList;
+			sourceTree = "<group>";
+		};
+		473BAE902AA48E6700968C3C /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				473BAE932AA4969F00968C3C /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		473BAE912AA48E8200968C3C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		473BAE922AA48E9500968C3C /* LocalStorage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LocalStorage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +194,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				473BAE942AA4969F00968C3C /* SettingView.swift in Sources */,
 				473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */,
 				473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */,
+				473BAE982AA496B800968C3C /* MessageListView.swift in Sources */,
+				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +255,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -249,7 +309,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -270,11 +330,14 @@
 				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "乐学助手";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -299,11 +362,14 @@
 				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "乐学助手";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
