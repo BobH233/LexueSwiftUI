@@ -38,6 +38,7 @@ struct SettingView: View {
                                 .bold()
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
+                                .padding(.bottom, 10)
                         }
                         Spacer()
                     }
