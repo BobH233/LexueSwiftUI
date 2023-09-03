@@ -72,6 +72,22 @@ struct MessageListView: View {
                                         .foregroundColor(.secondary)
                                 }
                             }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    print("Hi")
+                                } label: {
+                                    Label("Read", systemImage: "checkmark.circle.fill")
+                                }
+                                .tint(.blue)
+                            }
+                            .swipeActions(edge: .trailing) {
+                                Button {
+                                    print("Hi")
+                                } label: {
+                                    Label("Pin", systemImage: "pin")
+                                }
+                                .tint(.orange)
+                            }
                             NavigationLink(destination: {
                                 Text(item.name)
                             }, label: {
