@@ -18,7 +18,7 @@ struct MessagesStructure: Identifiable {
 }
 
 struct MessageListView: View {
-    var messages: [MessagesStructure] = [MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Jared", messageSummary: "That's great, I can help you with that! What type of product are you...", timestamp: "13:30 AM"),
+    var messages: [MessagesStructure] = [MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
                                          MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Martin Steed", messageSummary: "I don't know why people are so anti pineapple pizza. I kind of like it.", timestamp: "12:40 AM"),
                                          MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Zach Friedman", messageSummary: "(Sad fact: you cannot search for a gif of the word “gif”, just gives you gifs.)", timestamp: "11:00 AM"),
                                          MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Kyle & Aaron", messageSummary: "There's no way you'll be able to jump your motorcycle over that bus.", timestamp: "10:36 AM"),
@@ -70,6 +70,7 @@ struct MessageListView: View {
                                     Text("\(item.messageSummary)")
                                         .font(.subheadline)
                                         .foregroundColor(.secondary)
+                                        .lineLimit(2)
                                 }
                             }
                             .swipeActions(edge: .leading) {
@@ -100,8 +101,8 @@ struct MessageListView: View {
                 .listStyle(.plain)
             }
             .navigationTitle("消息")
-            .searchable(text: $text1)
-            .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $text1, prompt: "搜索消息")
+            .navigationBarTitleDisplayMode(.large)
         }
         
     }

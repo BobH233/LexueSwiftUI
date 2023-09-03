@@ -22,12 +22,18 @@ struct ContentView: View {
                     Text("课程")
                 }
                 .tag(1)
+            DDLListView()
+                .tabItem {
+                    Image(systemName: "calendar")
+                    Text("最近事件")
+                }
+                .tag(2)
             SettingView()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("设置")
                 }
-                .tag(2)
+                .tag(3)
         }
     }
 }

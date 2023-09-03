@@ -9,7 +9,10 @@ import SwiftUI
 
 struct CourseListView: View {
     var body: some View {
-        Text("CourseListView")
+        NavigationView {
+            Text("CourseListView")
+                .navigationTitle("CourseListView")
+        }
     }
 }
 
