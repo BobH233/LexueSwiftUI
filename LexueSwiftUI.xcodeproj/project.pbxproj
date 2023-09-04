@@ -16,7 +16,6 @@
 		473BAE982AA496B800968C3C /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE972AA496B800968C3C /* MessageListView.swift */; };
 		473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */; };
 		473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */; };
-		474C9B762AA4D51D0064B5AF /* SearchBarView in Frameworks */ = {isa = PBXBuildFile; productRef = 474C9B752AA4D51D0064B5AF /* SearchBarView */; };
 		474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* DDLListView.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,7 +38,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				474C9B762AA4D51D0064B5AF /* SearchBarView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,7 +158,6 @@
 			);
 			name = LexueSwiftUI;
 			packageProductDependencies = (
-				474C9B752AA4D51D0064B5AF /* SearchBarView */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -191,7 +188,6 @@
 			);
 			mainGroup = 473BAE732AA48DAA00968C3C;
 			packageReferences = (
-				474C9B742AA4D51D0064B5AF /* XCRemoteSwiftPackageReference "SearchBarView" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -433,25 +429,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		474C9B742AA4D51D0064B5AF /* XCRemoteSwiftPackageReference "SearchBarView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:rebeloper/SearchBarView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.9;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		474C9B752AA4D51D0064B5AF /* SearchBarView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 474C9B742AA4D51D0064B5AF /* XCRemoteSwiftPackageReference "SearchBarView" */;
-			productName = SearchBarView;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 473BAE742AA48DAA00968C3C /* Project object */;
 }

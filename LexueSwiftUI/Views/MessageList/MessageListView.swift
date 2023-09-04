@@ -130,6 +130,41 @@ struct ListItemView: View {
     }
 }
 
+struct ListView: View {
+    @Binding var messages: [MessagesStructure]
+    @Binding var isRefreshing: Bool
+    
+    @Environment(\.refresh) private var refreshAction
+    @ViewBuilder
+    var refreshToolbar: some View {
+        if let doRefresh = refreshAction {
+            if isRefreshing {
+                ProgressView()
+            } else {
+                Button(action: {
+                    Task{
+                        await doRefresh()
+                    }
+                }) {
+                    Image(systemName: "arrow.clockwise")
+                }
+            }
+        }
+    }
+    var body: some View {
+        VStack {
+            List($messages) { item in
+                ListItemView(title: item.name, content: item.messageSummary, unreadCnt: item.unreadCnt, time: item.timestamp, avatar: item.avatar, pinned: item.pinned)
+                    .listRowBackground(Color(item.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
+            }
+            .listStyle(.plain)
+            .toolbar {
+                refreshToolbar
+            }
+        }
+    }
+}
+
 struct MessageListView: View {
     @State var messages: [MessagesStructure] = [
         MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: true),
@@ -146,19 +181,25 @@ struct MessageListView: View {
         MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false)
     ]
     @State var searchText: String = ""
+    @State var isRefreshing: Bool = false
+    
+    func testRefresh() async {
+        Task {
+            isRefreshing = true
+            Thread.sleep(forTimeInterval: 1.5)
+            withAnimation {
+                isRefreshing = false
+            }
+        }
+    }
     
     var body: some View {
         NavigationView{
             VStack {
-                VStack {
-                    List($messages) { item in
-                        ListItemView(title: item.name, content: item.messageSummary, unreadCnt: item.unreadCnt, time: item.timestamp, avatar: item.avatar, pinned: item.pinned)
-                            .listRowBackground(Color(item.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
-                    }
-                }
-                .listStyle(.plain)
+                ListView(messages: $messages, isRefreshing: $isRefreshing)
                 .refreshable {
                     print("refresh")
+                    await testRefresh()
                 }
             }
             .navigationTitle("消息")

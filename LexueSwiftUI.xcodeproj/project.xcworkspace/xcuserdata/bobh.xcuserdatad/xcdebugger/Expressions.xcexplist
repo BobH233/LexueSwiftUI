@@ -18,5 +18,21 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "MessageListView.refreshToolbar.getter:MessageListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "refreshAction">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ListView.refreshToolbar.getter:MessageListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "refreshAction">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>
