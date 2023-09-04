@@ -11,6 +11,7 @@ import SearchBarView
 struct MessagesStructure: Identifiable {
     var id = UUID()
     var unreadIndicator: String
+    var unreadCnt: Int
     var avatar: String
     var name: String
     var messageSummary: String
@@ -18,10 +19,24 @@ struct MessagesStructure: Identifiable {
 }
 
 struct UnreadRedPoint: View {
-    @State var count: Int
+    @Binding var count: Int
+    let readIndicator = Color(#colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 0))
+    let transparentWidth: CGFloat = 30
     var body: some View {
         ZStack {
-            if count != 0 {
+            if count == 0 {
+                readIndicator
+                    .frame(width: transparentWidth, height: transparentWidth)
+                Text("\(count)")
+                    .bold()
+                    .foregroundColor(.clear)
+                    .padding(3)
+                    .background(Color.clear)
+                    .cornerRadius(10)
+                    .font(.system(size: 12))
+            } else if count < 100 {
+                readIndicator
+                    .frame(width: transparentWidth, height: transparentWidth)
                 Text("\(count)")
                     .bold()
                     .foregroundColor(.white)
@@ -30,9 +45,11 @@ struct UnreadRedPoint: View {
                     .cornerRadius(10)
                     .font(.system(size: 12))
             } else {
-                Text("\(count)")
+                readIndicator
+                    .frame(width: transparentWidth, height: transparentWidth)
+                Text("99+")
                     .bold()
-                    .foregroundColor(.clear)
+                    .foregroundColor(.white)
                     .padding(3)
                     .background(Color.red)
                     .cornerRadius(10)
@@ -43,17 +60,16 @@ struct UnreadRedPoint: View {
 }
 
 struct ListItemView: View {
-    @State var title: String
-    @State var content: String
-    @State var unreadCnt: Int
-    @State var time: String
-    @State var avatar: String
-    let readIndicator = Color(#colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 0))
+    @Binding var title: String
+    @Binding var content: String
+    @Binding var unreadCnt: Int
+    @Binding var time: String
+    @Binding var avatar: String
     var body: some View {
         ZStack {
             HStack {
                 ZStack {
-                    UnreadRedPoint(count: unreadCnt)
+                    UnreadRedPoint(count:$unreadCnt)
                 }
                 Image(avatar)
                     .resizable()
@@ -81,6 +97,7 @@ struct ListItemView: View {
             .swipeActions(edge: .leading) {
                 Button {
                     print("Hi")
+                    unreadCnt = 0
                 } label: {
                     Label("Read", systemImage: "checkmark.circle.fill")
                 }
@@ -105,30 +122,28 @@ struct ListItemView: View {
 }
 
 struct MessageListView: View {
-    var messages: [MessagesStructure] = [MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Martin Steed", messageSummary: "I don't know why people are so anti pineapple pizza. I kind of like it.", timestamp: "12:40 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Zach Friedman", messageSummary: "(Sad fact: you cannot search for a gif of the word “gif”, just gives you gifs.)", timestamp: "11:00 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Kyle & Aaron", messageSummary: "There's no way you'll be able to jump your motorcycle over that bus.", timestamp: "10:36 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Dee McRobie", messageSummary: "Tabs make way more sense than spaces. Convince me I'm wrong. LOL.", timestamp: "9:59 AM"),
-                                         MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Gary Butcher", messageSummary: "(Sad fact: you cannot search for a gif of the word “gif”, just gives you gifs.)", timestamp: "9:26 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Francesco", messageSummary: "I don't know why people are so anti pineapple pizza. I kind of like it.", timestamp: "9:20 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Luke", messageSummary: "There's no way you'll be able to jump your motorcycle over that bus.", timestamp: "9:16 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Ama Aboakye", messageSummary: "Tabs make way more sense than spaces. Convince me I'm wrong. LOL.", timestamp: "9:00 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Adwoa Forson", messageSummary: "That's what I'm talking about!", timestamp: "8:59 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Kofi Mensah", messageSummary: "(Sad fact: you cannot search for a gif of the word “gif”, just gives you gifs.)", timestamp: "8:51 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Amos G.", messageSummary: "Maybe email isn't the best form of communication.", timestamp: "9:36 AM"),
-                                         MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Maren Yustiono", messageSummary: "There's no way you'll be able to jump your motorcycle over that bus.", timestamp: "8:50 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Martin Yustiono", messageSummary: "That's what I'm talking about!", timestamp: "8:45 AM"),
-                                         MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Zain Snowman", messageSummary: "(Sad fact: you cannot search for a gif of the word “gif”, just gives you gifs.)", timestamp: "8:40 AM"),
-                                         MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Kipling West King", messageSummary: "Maybe email isn't the best form of communication.", timestamp: "8:36 AM")]
+    @State var messages: [MessagesStructure] = [
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
+        MessagesStructure(unreadIndicator: "", unreadCnt: 2, avatar: "default_avatar", name: "Martin Steed", messageSummary: "I don't know why people are so anti pineapple pizza. I kind of like it.", timestamp: "12:40 AM"),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 123, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 666, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 0, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 0, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48")
+    ]
     @State var searchText: String = ""
     
     var body: some View {
         NavigationView{
             VStack {
                 VStack {
-                    List(messages) { item in
-                        ListItemView(title: item.name, content: item.messageSummary, unreadCnt: 100, time: item.timestamp, avatar: item.avatar)
+                    List($messages) { item in
+                        ListItemView(title: item.name, content: item.messageSummary, unreadCnt: item.unreadCnt, time: item.timestamp, avatar: item.avatar)
                     }
                 }
                 .listStyle(.plain)
@@ -142,6 +157,10 @@ struct MessageListView: View {
         }
         .onChange(of: searchText, perform: { newValue in
             print("search \(newValue)")
+            print("\(messages.count)")
+            for index in 0..<messages.count {
+                messages[index].name = newValue
+            }
         })
         
     }
