@@ -16,6 +16,7 @@ struct MessagesStructure: Identifiable {
     var name: String
     var messageSummary: String
     var timestamp: String
+    var pinned: Bool
 }
 
 struct UnreadRedPoint: View {
@@ -65,6 +66,7 @@ struct ListItemView: View {
     @Binding var unreadCnt: Int
     @Binding var time: String
     @Binding var avatar: String
+    @Binding var pinned: Bool
     var body: some View {
         ZStack {
             HStack {
@@ -96,8 +98,10 @@ struct ListItemView: View {
             }
             .swipeActions(edge: .leading) {
                 Button {
-                    print("Hi")
-                    unreadCnt = 0
+                    print("Hi read")
+                    withAnimation {
+                        unreadCnt = 0
+                    }
                 } label: {
                     Label("Read", systemImage: "checkmark.circle.fill")
                 }
@@ -105,7 +109,12 @@ struct ListItemView: View {
             }
             .swipeActions(edge: .trailing) {
                 Button {
-                    print("Hi")
+                    print("Hi pin")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                        withAnimation {
+                            pinned = !pinned
+                        }
+                    }
                 } label: {
                     Label("Pin", systemImage: "pin")
                 }
@@ -123,18 +132,18 @@ struct ListItemView: View {
 
 struct MessageListView: View {
     @State var messages: [MessagesStructure] = [
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-        MessagesStructure(unreadIndicator: "", unreadCnt: 2, avatar: "default_avatar", name: "Martin Steed", messageSummary: "I don't know why people are so anti pineapple pizza. I kind of like it.", timestamp: "12:40 AM"),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 123, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 666, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 0, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 0, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48")
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: true),
+        MessagesStructure(unreadIndicator: "", unreadCnt: 2, avatar: "default_avatar", name: "Martin Steed", messageSummary: "I don't know why people are so anti pineapple pizza. I kind of like it.", timestamp: "12:40 AM", pinned: true),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 123, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: true),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 666, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 0, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 0, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
+        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false)
     ]
     @State var searchText: String = ""
     
@@ -143,7 +152,8 @@ struct MessageListView: View {
             VStack {
                 VStack {
                     List($messages) { item in
-                        ListItemView(title: item.name, content: item.messageSummary, unreadCnt: item.unreadCnt, time: item.timestamp, avatar: item.avatar)
+                        ListItemView(title: item.name, content: item.messageSummary, unreadCnt: item.unreadCnt, time: item.timestamp, avatar: item.avatar, pinned: item.pinned)
+                            .listRowBackground(Color(item.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
                     }
                 }
                 .listStyle(.plain)
