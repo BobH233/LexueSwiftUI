@@ -27,16 +27,21 @@ private struct BubbleMessageView: View {
                     .font(.system(size: 18))
             }
         } else {
-            ZStack(alignment: .bottomLeading) {
-                Image("leftBubbleTail_light")
-                    .padding(EdgeInsets(top: 0, leading: -5, bottom: -2, trailing: 0))
-                Text(message)
-                    .foregroundColor(.black)
-                    .frame(maxWidth: 200)
-                    .padding(10)
-                    .background(BubbleColorLight)
-                    .cornerRadius(10)
-                    .font(.system(size: 18))
+            HStack {
+                ZStack(alignment: .bottomLeading) {
+                    Image("leftBubbleTail_light")
+                        .padding(EdgeInsets(top: 0, leading: -5, bottom: -4, trailing: 0))
+                    Text(message)
+                        .foregroundColor(.black)
+                        .frame(alignment: .leading)
+                        .padding(10)
+                        .background(BubbleColorLight)
+                        .cornerRadius(10)
+                        .font(.system(size: 18))
+                }
+                .padding(.leading, 20)
+                .padding(.trailing, 50)
+                Spacer()
             }
         }
     }
@@ -44,15 +49,52 @@ private struct BubbleMessageView: View {
 
 struct MessageDetailView: View {
     let contactUid: String
-    
+    @State var contactName: String = "联系人啊"
+    @State private var messages: [ContactMessage] = [
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "我是渣渣辉")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你是谁啊？？？？？？？？？？？？？？？？？")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")])
+    ]
     var body: some View {
         NavigationView {
-            BubbleMessageView(message: "你好啊, 这是多行文字啊啊啊啊啊啊啊啊啊")
+            ScrollView {
+                LazyVStack {
+                    ForEach(messages) { message in
+                        BubbleMessageView(message: message.messageBody[0].text_data!)
+                    }
+                }
+            }
+            .navigationTitle(contactName)
+            .navigationBarTitleDisplayMode(.inline)
+        }
+        .onAppear {
+            // self.messages = GetContactsMessages(contactUid)
         }
     }
 }
 
 #Preview {
-    //BubbleMessageView(message: "你好啊, 这是多行文字啊啊啊啊啊啊啊啊啊")
+//    ScrollView {
+//        BubbleMessageView(message: "你好啊")
+//        BubbleMessageView(message: "你好啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊aaa啊啊啊啊啊啊啊")
+//        BubbleMessageView(message: "你好啊")
+//    }
     MessageDetailView(contactUid: "debug")
 }

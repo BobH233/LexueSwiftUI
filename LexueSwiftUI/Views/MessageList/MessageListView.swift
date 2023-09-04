@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Introspect
 
 // TODO: Move this test struct to @/Models folder
 struct MessagesStructure: Identifiable, Equatable {
@@ -77,6 +78,7 @@ private struct ListItemView: View {
     @Binding var time: String
     @Binding var avatar: String
     @Binding var pinned: Bool
+    @State private var tabBar: UITabBarController! = nil
     var body: some View {
         ZStack {
             HStack {
@@ -107,7 +109,18 @@ private struct ListItemView: View {
                 }
             }
             NavigationLink(destination: {
-                MessageDetailView(contactUid: title)
+                MessageDetailView(contactUid: title, contactName: title)
+                    .introspectTabBarController{(UITabBarController) in
+                        withAnimation {
+                            UITabBarController.tabBar.isHidden = true
+                        }
+                        tabBar = UITabBarController
+                    }
+                    .onDisappear{
+                        withAnimation {
+                            tabBar?.tabBar.isHidden = false
+                        }
+                    }
             }, label: {
                 EmptyView()
             })
