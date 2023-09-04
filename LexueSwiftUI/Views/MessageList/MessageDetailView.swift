@@ -73,17 +73,15 @@ struct MessageDetailView: View {
         ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")])
     ]
     var body: some View {
-        NavigationView {
-            ScrollView {
-                LazyVStack {
-                    ForEach(messages) { message in
-                        BubbleMessageView(message: message.messageBody[0].text_data!)
-                    }
+        ScrollView {
+            LazyVStack {
+                ForEach(messages) { message in
+                    BubbleMessageView(message: message.messageBody[0].text_data!)
                 }
             }
-            .navigationTitle(contactName)
-            .navigationBarTitleDisplayMode(.inline)
         }
+        .navigationTitle(contactName)
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             // self.messages = GetContactsMessages(contactUid)
         }
