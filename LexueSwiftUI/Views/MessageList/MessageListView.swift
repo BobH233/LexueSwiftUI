@@ -8,6 +8,7 @@
 import SwiftUI
 import SearchBarView
 
+// TODO: Move this test struct to @/Models folder
 struct MessagesStructure: Identifiable, Equatable {
     var id = UUID()
     var unreadIndicator: String
@@ -33,6 +34,16 @@ struct UnreadRedPoint: View {
                     .foregroundColor(.clear)
                     .padding(3)
                     .background(Color.clear)
+                    .cornerRadius(10)
+                    .font(.system(size: 12))
+            } else if count < 10 {
+                readIndicator
+                    .frame(width: transparentWidth, height: transparentWidth)
+                Text(" \(count) ")
+                    .bold()
+                    .foregroundColor(.white)
+                    .padding(3)
+                    .background(Color.red)
                     .cornerRadius(10)
                     .font(.system(size: 12))
             } else if count < 100 {

@@ -7,6 +7,52 @@
 
 import SwiftUI
 
+struct CourseCardView: View {
+    let cardHeight: CGFloat = 150
+    let cardCornelRadius: CGFloat = 10
+    let cardHorizontalPadding: CGFloat = 10
+    var body: some View {
+        ZStack {
+            Image("default_course_bg")
+                .resizable()
+                .cornerRadius(cardCornelRadius)
+                .padding(.horizontal, cardHorizontalPadding)
+                .frame(height: cardHeight)
+            
+            Color.clear
+                .background(.ultraThinMaterial)
+                .cornerRadius(cardCornelRadius)
+                .padding(.horizontal, cardHorizontalPadding)
+                .frame(height: cardHeight)
+                .opacity(0.8)
+                
+            
+            VStack(alignment: .leading, spacing: 2) {
+                Spacer()
+                Text("课程名称")
+                    .bold()
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                    .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
+                    .padding(.leading, 10)
+                
+                Text("学院名称")
+                    .bold()
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                    .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
+                    .padding(.leading, 10)
+                    .padding(.bottom, 10)
+            }
+            .frame(height: cardHeight)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, cardHorizontalPadding)
+        }
+    }
+}
+
 struct CourseListView: View {
     var body: some View {
         NavigationView {
@@ -18,6 +64,6 @@ struct CourseListView: View {
 
 struct CourseListView_Previews: PreviewProvider {
     static var previews: some View {
-        CourseListView()
+        CourseCardView()
     }
 }

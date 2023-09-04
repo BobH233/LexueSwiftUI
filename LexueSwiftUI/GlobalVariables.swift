@@ -11,6 +11,7 @@ import SwiftUI
 class GlobalVariables {
     static let shared = GlobalVariables()
     @Published var isLogin = true
+    
     var debugMode = true
 
     private init() {

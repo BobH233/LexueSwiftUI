@@ -17,6 +17,7 @@
 		473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */; };
 		473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */; };
 		474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* DDLListView.swift */; };
+		47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStorage.swift; sourceTree = "<group>"; };
 		473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		474C9B782AA4E38D0064B5AF /* DDLListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLListView.swift; sourceTree = "<group>"; };
+		47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseShortInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 		473BAE7E2AA48DAA00968C3C /* LexueSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				47CBA23F2AA5CE2F009F9242 /* Models */,
 				473BAE922AA48E9500968C3C /* LocalStorage */,
 				473BAE912AA48E8200968C3C /* Network */,
 				473BAE8D2AA48E4300968C3C /* Views */,
@@ -139,6 +142,14 @@
 				474C9B782AA4E38D0064B5AF /* DDLListView.swift */,
 			);
 			path = DDLList;
+			sourceTree = "<group>";
+		};
+		47CBA23F2AA5CE2F009F9242 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +232,7 @@
 				473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */,
 				473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */,
 				473BAE982AA496B800968C3C /* MessageListView.swift in Sources */,
+				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,
 				474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */,
 			);
