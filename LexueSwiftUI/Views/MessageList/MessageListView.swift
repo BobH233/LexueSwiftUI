@@ -8,7 +8,7 @@
 import SwiftUI
 import SearchBarView
 
-struct MessagesStructure: Identifiable {
+struct MessagesStructure: Identifiable, Equatable {
     var id = UUID()
     var unreadIndicator: String
     var unreadCnt: Int
@@ -96,30 +96,6 @@ struct ListItemView: View {
                         .lineLimit(2)
                 }
             }
-            .swipeActions(edge: .leading) {
-                Button {
-                    print("Hi read")
-                    withAnimation {
-                        unreadCnt = 0
-                    }
-                } label: {
-                    Label("Read", systemImage: "checkmark.circle.fill")
-                }
-                .tint(.blue)
-            }
-            .swipeActions(edge: .trailing) {
-                Button {
-                    print("Hi pin")
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
-                        withAnimation {
-                            pinned = !pinned
-                        }
-                    }
-                } label: {
-                    Label("Pin", systemImage: "pin")
-                }
-                .tint(.orange)
-            }
             NavigationLink(destination: {
                 Text(title)
             }, label: {
@@ -155,6 +131,35 @@ struct ListView: View {
         VStack {
             List($messages) { item in
                 ListItemView(title: item.name, content: item.messageSummary, unreadCnt: item.unreadCnt, time: item.timestamp, avatar: item.avatar, pinned: item.pinned)
+                    .swipeActions(edge: .leading) {
+                        Button {
+                            print("Hi read")
+                            withAnimation {
+                                item.unreadCnt.wrappedValue = 0
+                            }
+                        } label: {
+                            Label("Read", systemImage: "checkmark.circle.fill")
+                        }
+                        .tint(.blue)
+                    }
+                    .swipeActions(edge: .trailing) {
+                        Button {
+                            print("Hi pin")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
+                                withAnimation {
+                                    item.pinned.wrappedValue = !item.pinned.wrappedValue
+                                    if(item.pinned.wrappedValue) {
+                                        if let currentIndex = messages.firstIndex(of: item.wrappedValue) {
+                                            messages.move(fromOffsets: IndexSet([currentIndex]), toOffset: 0)
+                                        }
+                                    }
+                                }
+                            }
+                        } label: {
+                            Label("Pin", systemImage: "pin")
+                        }
+                        .tint(.orange)
+                    }
                     .listRowBackground(Color(item.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
             }
             .listStyle(.plain)
