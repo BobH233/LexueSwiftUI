@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CourseShortInfo: Codable {
+struct CourseShortInfo: Codable, Identifiable {
     var id: Int?
     var fullname: String?
     var shortname: String?
@@ -29,3 +29,4 @@ struct CourseShortInfo: Codable {
     var showshortname: Bool?
     var coursecategory: String?
 }
+

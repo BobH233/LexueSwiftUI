@@ -19,6 +19,7 @@ struct CourseCardView: View {
         ZStack {
             Image("default_course_bg")
                 .resizable()
+                .blur(radius: 2)
                 .cornerRadius(cardCornelRadius)
                 .padding(.horizontal, cardHorizontalPadding)
                 .frame(height: cardHeight)
@@ -58,21 +59,87 @@ struct CourseCardView: View {
             .frame(height: cardHeight)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, cardHorizontalPadding)
+            
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        
+                    }) {
+                        Image(systemName: "star")
+                            .foregroundColor(.white)
+                            .font(.system(size: 24).weight(.regular))
+                            .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 2)
+                    }
+                    .padding(.trailing, 10)
+                    .padding(.top, 10)
+                }
+                Spacer()
+            }
+            .frame(height: cardHeight)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, cardHorizontalPadding)
+        }
+    }
+}
+
+private struct ListView: View {
+    @Binding var courses: [CourseShortInfo]
+    @Binding var isRefreshing: Bool
+    
+    @Environment(\.refresh) private var refreshAction
+    @ViewBuilder
+    var refreshToolbar: some View {
+        if let doRefresh = refreshAction {
+            if isRefreshing {
+                ProgressView()
+            } else {
+                Button(action: {
+                    Task{
+                        await doRefresh()
+                    }
+                }) {
+                    Image(systemName: "arrow.clockwise")
+                }
+            }
+        }
+    }
+    var body: some View {
+        VStack {
+            ScrollView {
+                LazyVStack(spacing: 20){
+                    ForEach(courses) { item in
+                        CourseCardView(courseName: item.shortname!, courseCategory: item.coursecategory!, progress: item.progress!)
+                        .listRowSeparator(.hidden)
+                    }
+                }
+            }
+            .toolbar {
+                refreshToolbar
+            }
         }
     }
 }
 
 struct CourseListView: View {
+    @State private var courseList = GlobalVariables.shared.courseList
+    @State var isRefreshing: Bool = false
     var body: some View {
         NavigationView {
-            Text("CourseListView")
-                .navigationTitle("CourseListView")
+            VStack {
+                ListView(courses: $courseList, isRefreshing: $isRefreshing)
+                    .refreshable {
+                        print("refresh")
+                    }
+            }
+            .navigationTitle("课程")
+            .navigationBarTitleDisplayMode(.large)
         }
     }
 }
 
 struct CourseListView_Previews: PreviewProvider {
     static var previews: some View {
-        CourseCardView()
+        CourseListView()
     }
 }

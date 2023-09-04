@@ -20,7 +20,7 @@ struct MessagesStructure: Identifiable, Equatable {
     var pinned: Bool
 }
 
-struct UnreadRedPoint: View {
+private struct UnreadRedPoint: View {
     @Binding var count: Int
     let readIndicator = Color(#colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 0))
     let transparentWidth: CGFloat = 30
@@ -71,7 +71,7 @@ struct UnreadRedPoint: View {
     }
 }
 
-struct ListItemView: View {
+private struct ListItemView: View {
     @Binding var title: String
     @Binding var content: String
     @Binding var unreadCnt: Int
@@ -117,7 +117,7 @@ struct ListItemView: View {
     }
 }
 
-struct ListView: View {
+private struct ListView: View {
     @Binding var messages: [MessagesStructure]
     @Binding var isRefreshing: Bool
     
@@ -173,10 +173,10 @@ struct ListView: View {
                     }
                     .listRowBackground(Color(item.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
             }
-            .listStyle(.plain)
             .toolbar {
                 refreshToolbar
             }
+            .listStyle(.plain)
         }
     }
 }
@@ -213,10 +213,10 @@ struct MessageListView: View {
         NavigationView{
             VStack {
                 ListView(messages: $messages, isRefreshing: $isRefreshing)
-                .refreshable {
-                    print("refresh")
-                    await testRefresh()
-                }
+                    .refreshable {
+                        print("refresh")
+                        await testRefresh()
+                    }
             }
             .navigationTitle("消息")
             .searchable(text: $searchText, prompt: "搜索消息")
