@@ -17,6 +17,31 @@ struct MessagesStructure: Identifiable {
     var timestamp: String
 }
 
+struct UnreadRedPoint: View {
+    @State var count: Int
+    var body: some View {
+        ZStack {
+            if count != 0 {
+                Text("\(count)")
+                    .bold()
+                    .foregroundColor(.white)
+                    .padding(3)
+                    .background(Color.red)
+                    .cornerRadius(10)
+                    .font(.system(size: 12))
+            } else {
+                Text("\(count)")
+                    .bold()
+                    .foregroundColor(.clear)
+                    .padding(3)
+                    .background(Color.red)
+                    .cornerRadius(10)
+                    .font(.system(size: 12))
+            }
+        }
+    }
+}
+
 struct ListItemView: View {
     @State var title: String
     @State var content: String
@@ -28,11 +53,7 @@ struct ListItemView: View {
         ZStack {
             HStack {
                 ZStack {
-                    readIndicator
-                        .frame(width: 10, height: 10)
-                    if unreadCnt > 0 {
-                        Image("unreadIndicator")
-                    }
+                    UnreadRedPoint(count: unreadCnt)
                 }
                 Image(avatar)
                     .resizable()
@@ -100,15 +121,14 @@ struct MessageListView: View {
                                          MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Martin Yustiono", messageSummary: "That's what I'm talking about!", timestamp: "8:45 AM"),
                                          MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Zain Snowman", messageSummary: "(Sad fact: you cannot search for a gif of the word “gif”, just gives you gifs.)", timestamp: "8:40 AM"),
                                          MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Kipling West King", messageSummary: "Maybe email isn't the best form of communication.", timestamp: "8:36 AM")]
-    let readIndicator = Color(#colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 0))
-    @State var text1: String = ""
+    @State var searchText: String = ""
     
     var body: some View {
         NavigationView{
             VStack {
                 VStack {
                     List(messages) { item in
-                        ListItemView(title: item.name, content: item.messageSummary, unreadCnt: 10, time: item.timestamp, avatar: item.avatar)
+                        ListItemView(title: item.name, content: item.messageSummary, unreadCnt: 100, time: item.timestamp, avatar: item.avatar)
                     }
                 }
                 .listStyle(.plain)
@@ -117,9 +137,12 @@ struct MessageListView: View {
                 }
             }
             .navigationTitle("消息")
-            .searchable(text: $text1, prompt: "搜索消息")
+            .searchable(text: $searchText, prompt: "搜索消息")
             .navigationBarTitleDisplayMode(.large)
         }
+        .onChange(of: searchText, perform: { newValue in
+            print("search \(newValue)")
+        })
         
     }
 }
