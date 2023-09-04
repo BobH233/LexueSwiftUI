@@ -20,7 +20,7 @@ struct CourseCardView: View {
     @State var progress = 66
     var body: some View {
         ZStack {
-            Image("default_course_bg2")
+            Image("default_course_bg")
                 .resizable()
                 .blur(radius: 5, opaque: true)
                 .cornerRadius(cardCornelRadius)

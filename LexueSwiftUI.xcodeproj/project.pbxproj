@@ -17,6 +17,9 @@
 		473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */; };
 		473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */; };
 		474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* DDLListView.swift */; };
+		4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8142AA6235C00F812D6 /* ContactsManager.swift */; };
+		4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8162AA6237500F812D6 /* CourseManager.swift */; };
+		4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8182AA6239800F812D6 /* MessageDetailView.swift */; };
 		47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +35,9 @@
 		473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStorage.swift; sourceTree = "<group>"; };
 		473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		474C9B782AA4E38D0064B5AF /* DDLListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLListView.swift; sourceTree = "<group>"; };
+		4799C8142AA6235C00F812D6 /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
+		4799C8162AA6237500F812D6 /* CourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseManager.swift; sourceTree = "<group>"; };
+		4799C8182AA6239800F812D6 /* MessageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailView.swift; sourceTree = "<group>"; };
 		47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseShortInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				473BAE972AA496B800968C3C /* MessageListView.swift */,
+				4799C8182AA6239800F812D6 /* MessageDetailView.swift */,
 			);
 			path = MessageList;
 			sourceTree = "<group>";
@@ -132,6 +139,8 @@
 			isa = PBXGroup;
 			children = (
 				473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */,
+				4799C8142AA6235C00F812D6 /* ContactsManager.swift */,
+				4799C8162AA6237500F812D6 /* CourseManager.swift */,
 			);
 			path = LocalStorage;
 			sourceTree = "<group>";
@@ -227,11 +236,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */,
+				4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */,
 				473BAE942AA4969F00968C3C /* SettingView.swift in Sources */,
 				473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */,
 				473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */,
 				473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */,
 				473BAE982AA496B800968C3C /* MessageListView.swift in Sources */,
+				4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */,
+				4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */,
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,
 				474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */,

@@ -107,7 +107,7 @@ private struct ListItemView: View {
                 }
             }
             NavigationLink(destination: {
-                Text(title)
+                MessageDetailView(contactUid: title)
             }, label: {
                 EmptyView()
             })
