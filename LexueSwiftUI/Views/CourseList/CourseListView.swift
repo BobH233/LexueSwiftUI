@@ -11,6 +11,10 @@ struct CourseCardView: View {
     let cardHeight: CGFloat = 150
     let cardCornelRadius: CGFloat = 10
     let cardHorizontalPadding: CGFloat = 10
+    
+    @State var courseName = "课程名称"
+    @State var courseCategory = "学院名称"
+    @State var progress = 66
     var body: some View {
         ZStack {
             Image("default_course_bg")
@@ -29,7 +33,7 @@ struct CourseCardView: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 Spacer()
-                Text("课程名称")
+                Text(courseName)
                     .bold()
                     .font(.title)
                     .foregroundColor(.white)
@@ -37,14 +41,19 @@ struct CourseCardView: View {
                     .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
                     .padding(.leading, 10)
                 
-                Text("学院名称")
+                Text(courseCategory)
                     .bold()
                     .font(.headline)
                     .foregroundColor(.white)
                     .lineLimit(1)
                     .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
                     .padding(.leading, 10)
+                    .padding(.bottom, 5)
+                ProgressView(value: Double(progress) / 100.0)
+                    .padding(.horizontal, 10)
                     .padding(.bottom, 10)
+                    .accentColor(.white)
+                    .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 2)
             }
             .frame(height: cardHeight)
             .frame(maxWidth: .infinity, alignment: .leading)
