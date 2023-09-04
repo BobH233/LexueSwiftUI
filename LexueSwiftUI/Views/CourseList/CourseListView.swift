@@ -56,7 +56,6 @@ struct CourseCardView: View {
             .frame(height: cardHeight)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, cardHorizontalPadding)
-            
             VStack {
                 HStack {
                     Spacer()
@@ -122,14 +121,26 @@ private struct ListView: View {
 struct CourseListView: View {
     @State private var courseList = GlobalVariables.shared.courseList
     @State var isRefreshing: Bool = false
+    @State var searchText: String = ""
+    func testRefresh() async {
+        Task {
+            isRefreshing = true
+            Thread.sleep(forTimeInterval: 1.5)
+            withAnimation {
+                isRefreshing = false
+            }
+        }
+    }
     var body: some View {
         NavigationView {
             VStack {
                 ListView(courses: $courseList, isRefreshing: $isRefreshing)
                     .refreshable {
                         print("refresh")
+                        await testRefresh()
                     }
             }
+            .searchable(text: $searchText, prompt: "搜索课程")
             .navigationTitle("课程")
             .navigationBarTitleDisplayMode(.large)
         }

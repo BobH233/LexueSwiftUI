@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SearchBarView
 
 // TODO: Move this test struct to @/Models folder
 struct MessagesStructure: Identifiable, Equatable {
@@ -138,6 +137,7 @@ private struct ListView: View {
             }
         }
     }
+    
     var body: some View {
         VStack {
             List($messages) { item in
@@ -172,6 +172,23 @@ private struct ListView: View {
                         .tint(.orange)
                     }
                     .listRowBackground(Color(item.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
+                    .contextMenu(ContextMenu(menuItems: {
+                        Button {
+                            item.pinned.wrappedValue = !item.pinned.wrappedValue
+                        } label: {
+                            if !item.pinned.wrappedValue {
+                                Label("置顶", systemImage: "pin")
+                            } else {
+                                Label("取消置顶", systemImage: "pin")
+                            }
+                        }
+                        
+                        Button {
+                            item.unreadCnt.wrappedValue = 0
+                        } label: {
+                            Label("已读", systemImage: "checkmark.circle.fill")
+                        }
+                    }))
             }
             .toolbar {
                 refreshToolbar
