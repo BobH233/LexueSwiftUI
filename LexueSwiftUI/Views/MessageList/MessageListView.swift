@@ -17,6 +17,72 @@ struct MessagesStructure: Identifiable {
     var timestamp: String
 }
 
+struct ListItemView: View {
+    @State var title: String
+    @State var content: String
+    @State var unreadCnt: Int
+    @State var time: String
+    @State var avatar: String
+    let readIndicator = Color(#colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 0))
+    var body: some View {
+        ZStack {
+            HStack {
+                ZStack {
+                    readIndicator
+                        .frame(width: 10, height: 10)
+                    if unreadCnt > 0 {
+                        Image("unreadIndicator")
+                    }
+                }
+                Image(avatar)
+                    .resizable()
+                    .clipShape(Circle())
+                    .frame(width: 45, height: 45)
+                
+                VStack(alignment: .leading, spacing: 3){
+                    HStack{
+                        Text("\(title)")
+                        Spacer()
+                        HStack {
+                            Text("\(time)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    Text("\(content)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .lineLimit(2)
+                }
+            }
+            .swipeActions(edge: .leading) {
+                Button {
+                    print("Hi")
+                } label: {
+                    Label("Read", systemImage: "checkmark.circle.fill")
+                }
+                .tint(.blue)
+            }
+            .swipeActions(edge: .trailing) {
+                Button {
+                    print("Hi")
+                } label: {
+                    Label("Pin", systemImage: "pin")
+                }
+                .tint(.orange)
+            }
+            NavigationLink(destination: {
+                Text(title)
+            }, label: {
+                EmptyView()
+            })
+            .opacity(0)
+        }
+    }
+}
+
 struct MessageListView: View {
     var messages: [MessagesStructure] = [MessagesStructure(unreadIndicator: "unreadIndicator", avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48"),
                                          MessagesStructure(unreadIndicator: "", avatar: "default_avatar", name: "Martin Steed", messageSummary: "I don't know why people are so anti pineapple pizza. I kind of like it.", timestamp: "12:40 AM"),
@@ -41,64 +107,14 @@ struct MessageListView: View {
         NavigationView{
             VStack {
                 VStack {
-                    List(messages) {
-                        item in
-                        ZStack {
-                            HStack {
-                                ZStack {
-                                    readIndicator
-                                        .frame(width: 10, height: 10)
-                                    Image(item.unreadIndicator)
-                                }
-                                Image(item.avatar)
-                                    .resizable()
-                                    .clipShape(Circle())
-                                    .frame(width: 45, height: 45)
-                                
-                                VStack(alignment: .leading, spacing: 3){
-                                    HStack{
-                                        Text("\(item.name)")
-                                        Spacer()
-                                        HStack {
-                                            Text("\(item.timestamp)")
-                                                .font(.subheadline)
-                                                .foregroundColor(.secondary)
-                                            Image(systemName: "chevron.right")
-                                                .foregroundColor(.secondary)
-                                        }
-                                    }
-                                    Text("\(item.messageSummary)")
-                                        .font(.subheadline)
-                                        .foregroundColor(.secondary)
-                                        .lineLimit(2)
-                                }
-                            }
-                            .swipeActions(edge: .leading) {
-                                Button {
-                                    print("Hi")
-                                } label: {
-                                    Label("Read", systemImage: "checkmark.circle.fill")
-                                }
-                                .tint(.blue)
-                            }
-                            .swipeActions(edge: .trailing) {
-                                Button {
-                                    print("Hi")
-                                } label: {
-                                    Label("Pin", systemImage: "pin")
-                                }
-                                .tint(.orange)
-                            }
-                            NavigationLink(destination: {
-                                Text(item.name)
-                            }, label: {
-                                EmptyView()
-                            })
-                            .opacity(0)
-                        }
+                    List(messages) { item in
+                        ListItemView(title: item.name, content: item.messageSummary, unreadCnt: 10, time: item.timestamp, avatar: item.avatar)
                     }
                 }
                 .listStyle(.plain)
+                .refreshable {
+                    print("refresh")
+                }
             }
             .navigationTitle("消息")
             .searchable(text: $text1, prompt: "搜索消息")
