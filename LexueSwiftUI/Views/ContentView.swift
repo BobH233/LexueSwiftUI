@@ -16,13 +16,13 @@ struct ContentView: View {
                     Text("消息")
                 }
                 .tag(0)
-            CourseListView()
+            CourseListView(debug_use_lazy_v_stack: true)
                 .tabItem {
                     Image(systemName: "graduationcap.fill")
                     Text("课程")
                 }
                 .tag(1)
-            DDLListView()
+            CourseListView(debug_use_lazy_v_stack: false)
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("最近事件")

@@ -12,6 +12,9 @@ struct CourseCardView: View {
     let cardCornelRadius: CGFloat = 10
     let cardHorizontalPadding: CGFloat = 10
     
+    // TODO: remove this when release
+    @State var debug_use_lazy_v_stack: Bool
+    
     @State var courseName = "课程名称"
     @State var courseCategory = "学院名称"
     @State var progress = 66
@@ -36,7 +39,6 @@ struct CourseCardView: View {
                     .font(.title)
                     .foregroundColor(.white)
                     .lineLimit(1)
-                    .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
                     .padding(.leading, 10)
                 
                 Text(courseCategory)
@@ -44,14 +46,12 @@ struct CourseCardView: View {
                     .font(.headline)
                     .foregroundColor(.white)
                     .lineLimit(1)
-                    .shadow(color: .black.opacity(0.5), radius: 5, x: 0, y: 2)
                     .padding(.leading, 10)
                     .padding(.bottom, 5)
                 ProgressView(value: Double(progress) / 100.0)
                     .padding(.horizontal, 10)
                     .padding(.bottom, 10)
                     .accentColor(.white)
-                    .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 2)
             }
             .frame(height: cardHeight)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -65,7 +65,6 @@ struct CourseCardView: View {
                         Image(systemName: "star")
                             .foregroundColor(.white)
                             .font(.system(size: 24).weight(.regular))
-                            .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 2)
                     }
                     .padding(.trailing, 10)
                     .padding(.top, 10)
@@ -76,13 +75,16 @@ struct CourseCardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, cardHorizontalPadding)
         }
-        .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 2)
+        .shadow(radius: 5, x: 0, y: 2)
     }
 }
 
 private struct ListView: View {
     @Binding var courses: [CourseShortInfo]
     @Binding var isRefreshing: Bool
+    
+    // TODO: remove this when release
+    @State var debug_use_lazy_v_stack: Bool
     
     @Environment(\.refresh) private var refreshAction
     @ViewBuilder
@@ -102,12 +104,22 @@ private struct ListView: View {
         }
     }
     var body: some View {
-        VStack {
+        if debug_use_lazy_v_stack {
             ScrollView(.vertical) {
                 LazyVStack(spacing: 20){
                     ForEach(courses) { item in
-                        CourseCardView(courseName: item.shortname!, courseCategory: item.coursecategory!, progress: item.progress!)
-                        .listRowSeparator(.hidden)
+                        CourseCardView(debug_use_lazy_v_stack: debug_use_lazy_v_stack, courseName: item.shortname!, courseCategory: item.coursecategory!, progress: item.progress!)
+                    }
+                }
+            }
+            .toolbar {
+                refreshToolbar
+            }
+        } else {
+            ScrollView(.vertical) {
+                LazyVStack(spacing: 20){
+                    ForEach(courses) { item in
+                        CourseCardView(debug_use_lazy_v_stack: debug_use_lazy_v_stack, courseName: item.shortname!, courseCategory: item.coursecategory!, progress: item.progress!)
                     }
                 }
             }
@@ -115,6 +127,7 @@ private struct ListView: View {
                 refreshToolbar
             }
         }
+        
     }
 }
 
@@ -122,6 +135,7 @@ struct CourseListView: View {
     @State private var courseList = GlobalVariables.shared.courseList
     @State var isRefreshing: Bool = false
     @State var searchText: String = ""
+    @State var debug_use_lazy_v_stack: Bool = true
     func testRefresh() async {
         Task {
             isRefreshing = true
@@ -134,7 +148,7 @@ struct CourseListView: View {
     var body: some View {
         NavigationView {
             VStack {
-                ListView(courses: $courseList, isRefreshing: $isRefreshing)
+                ListView(courses: $courseList, isRefreshing: $isRefreshing, debug_use_lazy_v_stack: debug_use_lazy_v_stack)
                     .refreshable {
                         print("refresh")
                         await testRefresh()

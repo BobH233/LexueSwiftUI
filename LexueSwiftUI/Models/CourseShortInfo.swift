@@ -8,7 +8,7 @@
 import Foundation
 
 struct CourseShortInfo: Codable, Identifiable {
-    var id: Int?
+    var id: String?
     var fullname: String?
     var shortname: String?
     var idnumber: String?
