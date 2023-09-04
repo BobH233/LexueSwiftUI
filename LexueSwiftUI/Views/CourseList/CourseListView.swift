@@ -17,20 +17,17 @@ struct CourseCardView: View {
     @State var progress = 66
     var body: some View {
         ZStack {
-            Image("default_course_bg")
+            Image("default_course_bg2")
                 .resizable()
-                .blur(radius: 2)
+                .blur(radius: 5, opaque: true)
                 .cornerRadius(cardCornelRadius)
                 .padding(.horizontal, cardHorizontalPadding)
                 .frame(height: cardHeight)
-            
-            Color.clear
-                .background(.ultraThinMaterial)
+            Color.white
                 .cornerRadius(cardCornelRadius)
                 .padding(.horizontal, cardHorizontalPadding)
                 .frame(height: cardHeight)
-                .opacity(0.8)
-                
+                .opacity(0.1)
             
             VStack(alignment: .leading, spacing: 2) {
                 Spacer()
@@ -80,6 +77,7 @@ struct CourseCardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, cardHorizontalPadding)
         }
+        .shadow(color: .black.opacity(0.3), radius: 5, x: 0, y: 2)
     }
 }
 
@@ -106,7 +104,7 @@ private struct ListView: View {
     }
     var body: some View {
         VStack {
-            ScrollView {
+            ScrollView(.vertical) {
                 LazyVStack(spacing: 20){
                     ForEach(courses) { item in
                         CourseCardView(courseName: item.shortname!, courseCategory: item.coursecategory!, progress: item.progress!)
