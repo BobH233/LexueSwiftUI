@@ -27,6 +27,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.messages">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ListView.refreshToolbar.getter:MessageListView.swift">
          <PersistentStrings>
             <PersistentString

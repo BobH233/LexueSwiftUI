@@ -95,6 +95,7 @@ private struct ListItemView: View {
                 VStack(alignment: .leading, spacing: 3){
                     HStack{
                         Text("\(title)")
+                            .lineLimit(1)
                         Spacer()
                         HStack {
                             Text("\(time)")

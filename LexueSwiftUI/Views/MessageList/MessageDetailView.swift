@@ -13,36 +13,50 @@ private struct BubbleMessageView: View {
     let BubbleColorDark = Color(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1607843137, alpha: 1))
     let BubbleColorLight = Color(#colorLiteral(red: 0.9137254902, green: 0.9137254902, blue: 0.9215686275, alpha: 1))
     let message: String
-    var body: some View {
+    var BubbleColor: Color {
         if sysColorScheme == .dark {
+            return BubbleColorDark
+        } else {
+            return BubbleColorLight
+        }
+    }
+    var BubbleImageName: String {
+        if sysColorScheme == .dark {
+            return "leftBubbleTail_dark"
+        } else {
+            return "leftBubbleTail_light"
+        }
+    }
+    var BubbleTextColor: Color {
+        if sysColorScheme == .dark {
+            return .white
+        } else {
+            return .black
+        }
+    }
+    var body: some View {
+        HStack {
             ZStack(alignment: .bottomLeading) {
-                Image("leftBubbleTail_dark")
-                    .padding(EdgeInsets(top: 0, leading: -5, bottom: -2, trailing: 0))
+                Image(BubbleImageName)
+                    .padding(EdgeInsets(top: 0, leading: -5, bottom: -4, trailing: 0))
                 Text(message)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: 200)
+                    .foregroundColor(BubbleTextColor)
+                    .frame(alignment: .leading)
                     .padding(10)
-                    .background(BubbleColorDark)
+                    .background(BubbleColor)
                     .cornerRadius(10)
                     .font(.system(size: 18))
             }
-        } else {
-            HStack {
-                ZStack(alignment: .bottomLeading) {
-                    Image("leftBubbleTail_light")
-                        .padding(EdgeInsets(top: 0, leading: -5, bottom: -4, trailing: 0))
-                    Text(message)
-                        .foregroundColor(.black)
-                        .frame(alignment: .leading)
-                        .padding(10)
-                        .background(BubbleColorLight)
-                        .cornerRadius(10)
-                        .font(.system(size: 18))
+            .contextMenu(ContextMenu(menuItems: {
+                Button {
+                    UIPasteboard.general.string = message
+                } label: {
+                    Label("复制", systemImage: "doc.on.doc")
                 }
-                .padding(.leading, 20)
-                .padding(.trailing, 50)
-                Spacer()
-            }
+            }))
+            .padding(.leading, 20)
+            .padding(.trailing, 50)
+            Spacer()
         }
     }
 }
@@ -72,22 +86,28 @@ struct MessageDetailView: View {
         ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
         ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
         ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")])
+        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊233")])
     ]
     var body: some View {
         
         NavigationView {
-            ScrollView {
-                LazyVStack {
-                    ForEach(messages) { message in
-                        BubbleMessageView(message: message.messageBody[0].text_data!)
+            ScrollViewReader { proxy in
+                ScrollView {
+                    LazyVStack {
+                        ForEach(messages) { message in
+                            BubbleMessageView(message: message.messageBody[0].text_data!)
+                        }
                     }
+                    // To let it scroll to the bottom
+                    Text("")
+                        .opacity(0)
+                        .id("empty")
+                        .onAppear {
+                            proxy.scrollTo("empty")
+                        }
                 }
-                Button("dismiss") {
-                    dismiss()
-                }
-                NavigationLink("lalala") {
-                    EmptyView()
+                .onChange(of: messages.count) { _ in
+                    proxy.scrollTo(messages.last?.id)
                 }
             }
             .toolbar {
