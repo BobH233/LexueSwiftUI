@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum MessageBodyType: Codable {
-    case text
-    case image
-    case link
+enum MessageBodyType: Int, Codable {
+    case text = 0
+    case image = 1
+    case link = 2
 }
 
 struct MessageBodyItem: Codable {
@@ -18,11 +18,12 @@ struct MessageBodyItem: Codable {
     var image_data: String?
     var text_data: String?
     var link: String?
+    var link_title: String?
 }
 
 struct ContactMessage: Codable, Identifiable {
     var id = UUID()
-    var sendDate: Int
+    var sendDate: Date
     var senderUid: String?
-    var messageBody: [MessageBodyItem]
+    var messageBody: MessageBodyItem
 }

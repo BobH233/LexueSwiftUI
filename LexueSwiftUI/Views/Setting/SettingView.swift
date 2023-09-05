@@ -48,6 +48,9 @@ struct SettingView: View {
                         Toggle(isOn: $isLogin) {
                             Text("isLogin")
                         }
+                        NavigationLink("Core Data") {
+                            DebugDataView()
+                        }
                     }
                 }
                 if isLogin {
@@ -89,7 +92,7 @@ struct SettingView: View {
                             })
                         }
                         HStack{
-                            Picker(selection: $colorSchemeIndex, label: Text("暗黑模式")) {
+                            Picker(selection: $colorSchemeIndex, label: Text("外观")) {
                                 ForEach(0 ..< colorSchemeText.count) {
                                     Text(self.colorSchemeText[$0])
                                 }

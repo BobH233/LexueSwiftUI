@@ -244,26 +244,21 @@ struct MessageDetailView: View {
     let contactUid: String
     @State var contactName: String = "联系人啊"
     @State private var messages: [ContactMessage] = [
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "我是渣渣辉")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你是谁啊？？？？？？？？？？？？？？？？？")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")]),
-        ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊233")])
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "我是渣渣辉")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你是谁啊？？？？？？？？？？？？？？？？？")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
+        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊"))
     ]
     var body: some View {
         NavigationView {
@@ -273,7 +268,7 @@ struct MessageDetailView: View {
                         BubbleImageMessageView(image: "default_avatar")
                         TimeView(timeStr: "8月28日 周一 08:16")
                         ForEach(messages) { message in
-                            BubbleTextMessageView(message: message.messageBody[0].text_data!)
+                            BubbleTextMessageView(message: message.messageBody.text_data!)
                         }
                         TimeView(timeStr: "19:05")
                         BubbleImageMessageView(image: "test_image")

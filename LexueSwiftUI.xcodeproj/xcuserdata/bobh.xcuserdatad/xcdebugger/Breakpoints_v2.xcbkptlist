@@ -80,8 +80,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "246"
             endingLineNumber = "246"
-            landmarkName = "messages"
-            landmarkType = "24">
+            landmarkName = "MessageDetailView"
+            landmarkType = "14">
             <Locations>
                <Location
                   uuid = "B51DE051-BACB-4A92-A381-D8882607FBCE - 8d97711510ac167c"

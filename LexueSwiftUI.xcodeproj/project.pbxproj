@@ -22,6 +22,10 @@
 		4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8162AA6237500F812D6 /* CourseManager.swift */; };
 		4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8182AA6239800F812D6 /* MessageDetailView.swift */; };
 		4799C81B2AA62CDB00F812D6 /* ContactMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C81A2AA62CDB00F812D6 /* ContactMessage.swift */; };
+		47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */; };
+		47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927822AA77FDA00ABDC53 /* DataController.swift */; };
+		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
+		47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927882AA786ED00ABDC53 /* DebugDataView.swift */; };
 		47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +59,10 @@
 		4799C8162AA6237500F812D6 /* CourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseManager.swift; sourceTree = "<group>"; };
 		4799C8182AA6239800F812D6 /* MessageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailView.swift; sourceTree = "<group>"; };
 		4799C81A2AA62CDB00F812D6 /* ContactMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessage.swift; sourceTree = "<group>"; };
+		47A927802AA77E6500ABDC53 /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
+		47A927822AA77FDA00ABDC53 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
+		47A927882AA786ED00ABDC53 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
 		47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseShortInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				473BAE932AA4969F00968C3C /* SettingView.swift */,
+				47A927882AA786ED00ABDC53 /* DebugDataView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -159,6 +168,7 @@
 				473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */,
 				4799C8142AA6235C00F812D6 /* ContactsManager.swift */,
 				4799C8162AA6237500F812D6 /* CourseManager.swift */,
+				47A927842AA7836300ABDC53 /* MessageManager.swift */,
 			);
 			path = LocalStorage;
 			sourceTree = "<group>";
@@ -176,6 +186,8 @@
 			children = (
 				47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */,
 				4799C81A2AA62CDB00F812D6 /* ContactMessage.swift */,
+				47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */,
+				47A927822AA77FDA00ABDC53 /* DataController.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,8 +277,12 @@
 				4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */,
 				4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */,
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
+				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,
+				47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */,
+				47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */,
 				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,
 				474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */,
+				47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */,
 				4799C81B2AA62CDB00F812D6 /* ContactMessage.swift in Sources */,
 				472984A02AA706BB000814EE /* Extensions.swift in Sources */,
 			);
@@ -475,6 +491,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				47A927802AA77E6500ABDC53 /* MessageModel.xcdatamodel */,
+			);
+			currentVersion = 47A927802AA77E6500ABDC53 /* MessageModel.xcdatamodel */;
+			path = MessageModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 473BAE742AA48DAA00968C3C /* Project object */;
 }

@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct LexueSwiftUIApp: App {
     @Environment(\.colorScheme) var sysColorScheme
+    @StateObject private var dataController = DataController()
     @ObservedObject var settings = SettingStorage.shared
     func getPreferredColorScheme() -> ColorScheme {
         switch settings.preferColorScheme {
@@ -27,8 +28,13 @@ struct LexueSwiftUIApp: App {
         WindowGroup {
             if settings.preferColorScheme == 2 {
                 ContentView()
+                    .environment(\.managedObjectContext,
+                                  dataController.container.viewContext)
             }else{
-                ContentView().preferredColorScheme(getPreferredColorScheme())
+                ContentView()
+                    .environment(\.managedObjectContext,
+                                  dataController.container.viewContext)
+                    .preferredColorScheme(getPreferredColorScheme())
             }
             
         }
