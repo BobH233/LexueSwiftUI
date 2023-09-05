@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-protocol BubbleBaseMessageView: View {
+protocol BubbleBaseColorConfig: View {
     var sysColorScheme: ColorScheme { get }
     var BubbleColor: Color { get }
     var BubbleTextColor: Color { get }
 }
 
-extension BubbleBaseMessageView {
+extension BubbleBaseColorConfig {
     var BubbleColor: Color {
         if sysColorScheme == .dark {
             return Color(#colorLiteral(red: 0.1490196078, green: 0.1490196078, blue: 0.1607843137, alpha: 1))
@@ -135,7 +135,7 @@ struct ChatBubbleShape: Shape {
 }
 
 
-private struct BubbleTextMessageView: View, BubbleBaseMessageView {
+private struct BubbleTextMessageView: View, BubbleBaseColorConfig {
     @Environment(\.colorScheme) var sysColorScheme
     let message: String
     var body: some View {
@@ -157,7 +157,7 @@ private struct BubbleTextMessageView: View, BubbleBaseMessageView {
     }
 }
 
-private struct BubbleImageMessageView: View, BubbleBaseMessageView {
+private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
     
     @Environment(\.colorScheme) var sysColorScheme
     let image: String
@@ -176,6 +176,36 @@ private struct BubbleImageMessageView: View, BubbleBaseMessageView {
             }
         }))
         .padding(.leading, 10)
+    }
+}
+
+private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
+    
+    @Environment(\.colorScheme) var sysColorScheme
+    let linkName: String
+    let url: String
+    var body: some View {
+        if let encodedUrl = URL(string: url) {
+            ChatBubble(direction: .left) {
+                Link(destination: encodedUrl, label: {
+                    Text(linkName)
+                        .underline()
+                })
+                .padding(.vertical, 10)
+                .padding(.horizontal, 20)
+                .background(BubbleColor)
+            }
+            .contextMenu(ContextMenu(menuItems: {
+                Button {
+                    
+                } label: {
+                    Label("复制", systemImage: "doc.on.doc")
+                }
+            }))
+            .padding(.leading, 10)
+        } else {
+            EmptyView()
+        }
     }
 }
 
@@ -218,15 +248,14 @@ struct MessageDetailView: View {
                             BubbleTextMessageView(message: message.messageBody[0].text_data!)
                         }
                         BubbleImageMessageView(image: "test_image")
+                        BubbleLinkMessageView(linkName: "访问北理", url: "https://www.bit.edu.cn")
                     }
                     // To let it scroll to the bottom
                     Text("")
                         .opacity(0)
                         .id("empty")
                         .onAppear {
-                            DispatchQueue.main.async {
-                                proxy.scrollTo("empty")
-                            }
+                            proxy.scrollTo("empty")
                         }
                 }
                 .onChange(of: messages.count) { _ in
