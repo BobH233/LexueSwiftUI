@@ -86,6 +86,18 @@ struct MessageDetailView: View {
                 Button("dismiss") {
                     dismiss()
                 }
+                NavigationLink("lalala") {
+                    EmptyView()
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                    }
+                }
             }
             .navigationTitle(contactName)
             .navigationBarTitleDisplayMode(.inline)
