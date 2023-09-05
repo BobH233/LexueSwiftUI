@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Introspect
 
 // TODO: Move this test struct to @/Models folder
 struct MessagesStructure: Identifiable, Equatable {
@@ -78,7 +77,10 @@ private struct ListItemView: View {
     @Binding var time: String
     @Binding var avatar: String
     @Binding var pinned: Bool
-    @State private var tabBar: UITabBarController! = nil
+    
+    @State private var isPresented = false
+
+    
     var body: some View {
         ZStack {
             HStack {
@@ -108,24 +110,15 @@ private struct ListItemView: View {
                         .lineLimit(2)
                 }
             }
-            NavigationLink(destination: {
-                MessageDetailView(contactUid: title, contactName: title)
-                    .introspectTabBarController{(UITabBarController) in
-                        withAnimation {
-                            UITabBarController.tabBar.isHidden = true
-                        }
-                        tabBar = UITabBarController
-                    }
-                    .onDisappear{
-                        withAnimation {
-                            tabBar?.tabBar.isHidden = false
-                        }
-                    }
+            Button(action: {
+                isPresented.toggle()
             }, label: {
                 EmptyView()
             })
-            .opacity(0)
         }
+        .fullScreenCover(isPresented: $isPresented, content: {
+            MessageDetailView(contactUid: title, contactName: title)
+        })
     }
 }
 

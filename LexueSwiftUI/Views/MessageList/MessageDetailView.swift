@@ -48,6 +48,8 @@ private struct BubbleMessageView: View {
 }
 
 struct MessageDetailView: View {
+    @Environment(\.dismiss) var dismiss
+    
     let contactUid: String
     @State var contactName: String = "联系人啊"
     @State private var messages: [ContactMessage] = [
@@ -73,18 +75,25 @@ struct MessageDetailView: View {
         ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊")])
     ]
     var body: some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(messages) { message in
-                    BubbleMessageView(message: message.messageBody[0].text_data!)
+        
+        NavigationView {
+            ScrollView {
+                LazyVStack {
+                    ForEach(messages) { message in
+                        BubbleMessageView(message: message.messageBody[0].text_data!)
+                    }
+                }
+                Button("dismiss") {
+                    dismiss()
                 }
             }
+            .navigationTitle(contactName)
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                // self.messages = GetContactsMessages(contactUid)
+            }
         }
-        .navigationTitle(contactName)
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            // self.messages = GetContactsMessages(contactUid)
-        }
+        
     }
 }
 

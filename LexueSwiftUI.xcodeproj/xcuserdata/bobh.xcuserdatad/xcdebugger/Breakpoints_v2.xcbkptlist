@@ -30,8 +30,8 @@
             filePath = "LexueSwiftUI/Views/MessageList/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "refreshToolbar"
             landmarkType = "24">
             <Locations>
@@ -64,54 +64,6 @@
                   startingLineNumber = "140"
                   endingLineNumber = "140"
                   offsetFromSymbolStart = "2536">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "692E8360-5A78-4D55-95A8-43471E6C0C75"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LexueSwiftUI/Views/MessageList/MessageDetailView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "692E8360-5A78-4D55-95A8-43471E6C0C75 - a4f0657941388590"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in LexueSwiftUI.MessageDetailView.body.getter : some"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/MessageList/MessageDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "72">
-               </Location>
-               <Location
-                  uuid = "692E8360-5A78-4D55-95A8-43471E6C0C75 - a4f065794138872e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; () in LexueSwiftUI.MessageDetailView.body.getter : some"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/MessageList/MessageDetailView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "0">
                </Location>
             </Locations>
          </BreakpointContent>
