@@ -77,8 +77,10 @@ private struct ListItemView: View {
     @Binding var time: String
     @Binding var avatar: String
     @Binding var pinned: Bool
+    @Binding var isOpenDatailView: Bool
     
     @State private var isPresented = false
+    @State private var isFirstOpened = 0
 
     
     var body: some View {
@@ -112,20 +114,19 @@ private struct ListItemView: View {
                 }
             }
             Button(action: {
-                isPresented.toggle()
+                isFirstOpened = 0
+                isOpenDatailView.toggle()
             }, label: {
                 EmptyView()
             })
         }
-        .fullScreenCover(isPresented: $isPresented, content: {
-            MessageDetailView(contactUid: title, contactName: title)
-        })
     }
 }
 
 private struct ListView: View {
     @Binding var messages: [MessagesStructure]
     @Binding var isRefreshing: Bool
+    @Binding var isOpenDatailView: Bool
     
     @Environment(\.refresh) private var refreshAction
     @ViewBuilder
@@ -148,7 +149,7 @@ private struct ListView: View {
     var body: some View {
         VStack {
             List($messages) { item in
-                ListItemView(title: item.name, content: item.messageSummary, unreadCnt: item.unreadCnt, time: item.timestamp, avatar: item.avatar, pinned: item.pinned)
+                ListItemView(title: item.name, content: item.messageSummary, unreadCnt: item.unreadCnt, time: item.timestamp, avatar: item.avatar, pinned: item.pinned, isOpenDatailView: $isOpenDatailView)
                     .swipeActions(edge: .leading) {
                         Button {
                             print("Hi read")
@@ -223,6 +224,8 @@ struct MessageListView: View {
     @State var searchText: String = ""
     @State var isRefreshing: Bool = false
     
+    @State var isOpenDatailView: Bool = false
+    
     func testRefresh() async {
         Task {
             isRefreshing = true
@@ -236,7 +239,7 @@ struct MessageListView: View {
     var body: some View {
         NavigationView{
             VStack {
-                ListView(messages: $messages, isRefreshing: $isRefreshing)
+                ListView(messages: $messages, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView)
                     .refreshable {
                         print("refresh")
                         await testRefresh()
@@ -246,6 +249,9 @@ struct MessageListView: View {
             .searchable(text: $searchText, prompt: "搜索消息")
             .navigationBarTitleDisplayMode(.large)
         }
+        .sheet(isPresented: $isOpenDatailView, content: {
+            MessageDetailView(contactUid: "", contactName: "12345")
+        })
         .onChange(of: searchText, perform: { newValue in
             print("search \(newValue)")
             print("\(messages.count)")

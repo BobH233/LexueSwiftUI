@@ -27,6 +27,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "bottom_scrolled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
          <PersistentStrings>
             <PersistentString

@@ -210,6 +210,28 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
 }
 
 
+struct OnFirstAppearModifier: ViewModifier {
+    let perform:() -> Void
+    @State private var firstTime: Bool = true
+    
+    func body(content: Content) -> some View {
+        content
+            .onAppear {
+                if firstTime {
+                    firstTime = false
+                    self.perform()
+                }
+            }
+    }
+}
+
+
+extension View {
+    func onFirstAppear( perform: @escaping () -> Void ) -> some View {
+        return self.modifier(OnFirstAppearModifier(perform: perform))
+    }
+}
+
 struct MessageDetailView: View {
     @Environment(\.dismiss) var dismiss
     
@@ -238,7 +260,6 @@ struct MessageDetailView: View {
         ContactMessage(sendDate: 0, senderUid: "debug", messageBody: [MessageBodyItem(type: .text, text_data: "你好啊啊233")])
     ]
     var body: some View {
-        
         NavigationView {
             ScrollViewReader { proxy in
                 ScrollView {
@@ -273,9 +294,6 @@ struct MessageDetailView: View {
             }
             .navigationTitle(contactName)
             .navigationBarTitleDisplayMode(.inline)
-            .onAppear {
-                // self.messages = GetContactsMessages(contactUid)
-            }
         }
         
     }
@@ -287,5 +305,5 @@ struct MessageDetailView: View {
 //        BubbleMessageView(message: "你好啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊aaa啊啊啊啊啊啊啊")
 //        BubbleMessageView(message: "你好啊")
 //    }
-    MessageDetailView(contactUid: "debug")
+    MessageDetailView(contactUid: "123", contactName: "debug")
 }
