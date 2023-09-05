@@ -170,7 +170,9 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
         }
         .contextMenu(ContextMenu(menuItems: {
             Button {
-                
+                Task {
+                    UIPasteboard.general.image = UIImage(named: "test_image")
+                }
             } label: {
                 Label("复制", systemImage: "doc.on.doc")
             }
@@ -197,38 +199,20 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
             }
             .contextMenu(ContextMenu(menuItems: {
                 Button {
-                    
+                    UIPasteboard.general.string = url
                 } label: {
-                    Label("复制", systemImage: "doc.on.doc")
+                    Label("复制链接", systemImage: "link")
+                }
+                Button {
+                    UIPasteboard.general.string = linkName
+                } label: {
+                    Label("复制标题", systemImage: "doc.on.doc")
                 }
             }))
             .padding(.leading, 10)
         } else {
             EmptyView()
         }
-    }
-}
-
-
-struct OnFirstAppearModifier: ViewModifier {
-    let perform:() -> Void
-    @State private var firstTime: Bool = true
-    
-    func body(content: Content) -> some View {
-        content
-            .onAppear {
-                if firstTime {
-                    firstTime = false
-                    self.perform()
-                }
-            }
-    }
-}
-
-
-extension View {
-    func onFirstAppear( perform: @escaping () -> Void ) -> some View {
-        return self.modifier(OnFirstAppearModifier(perform: perform))
     }
 }
 

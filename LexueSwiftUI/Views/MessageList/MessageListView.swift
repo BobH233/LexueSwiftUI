@@ -248,6 +248,7 @@ struct MessageListView: View {
             .navigationBarTitleDisplayMode(.large)
         }
         .sheet(isPresented: $isOpenDatailView, content: {
+            // TODO: 传入列表的具体值
             MessageDetailView(contactUid: "", contactName: "12345")
         })
         .onChange(of: searchText, perform: { newValue in

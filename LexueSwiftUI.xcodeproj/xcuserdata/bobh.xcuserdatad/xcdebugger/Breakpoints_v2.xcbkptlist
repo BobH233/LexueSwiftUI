@@ -78,9 +78,9 @@
             filePath = "LexueSwiftUI/Views/MessageList/MessageDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
-            landmarkName = "messages"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "body"
             landmarkType = "24">
             <Locations>
                <Location
