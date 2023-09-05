@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4729849C2AA6EB4F000814EE /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4729849B2AA6EB4F000814EE /* MessageKit */; };
 		473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE7F2AA48DAA00968C3C /* LexueSwiftUIApp.swift */; };
 		473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE812AA48DAA00968C3C /* ContentView.swift */; };
 		473BAE842AA48DAA00968C3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473BAE832AA48DAA00968C3C /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4729849C2AA6EB4F000814EE /* MessageKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +197,7 @@
 			);
 			name = LexueSwiftUI;
 			packageProductDependencies = (
+				4729849B2AA6EB4F000814EE /* MessageKit */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -225,6 +228,7 @@
 			);
 			mainGroup = 473BAE732AA48DAA00968C3C;
 			packageReferences = (
+				4729849A2AA6EB4F000814EE /* XCRemoteSwiftPackageReference "MessageKit" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -471,6 +475,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4729849A2AA6EB4F000814EE /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		4729849B2AA6EB4F000814EE /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4729849A2AA6EB4F000814EE /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 473BAE742AA48DAA00968C3C /* Project object */;
 }
