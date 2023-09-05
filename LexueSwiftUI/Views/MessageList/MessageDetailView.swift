@@ -11,6 +11,7 @@ protocol BubbleBaseColorConfig: View {
     var sysColorScheme: ColorScheme { get }
     var BubbleColor: Color { get }
     var BubbleTextColor: Color { get }
+    var TimeTextColor: Color { get }
 }
 
 extension BubbleBaseColorConfig {
@@ -27,6 +28,14 @@ extension BubbleBaseColorConfig {
             return .white
         } else {
             return .black
+        }
+    }
+    
+    var TimeTextColor: Color {
+        if sysColorScheme == .dark {
+            return .white.opacity(0.5)
+        } else {
+            return .black.opacity(0.5)
         }
     }
 }
@@ -181,6 +190,19 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
     }
 }
 
+private struct TimeView: View, BubbleBaseColorConfig {
+    @Environment(\.colorScheme) var sysColorScheme
+    let timeStr: String
+    var body: some View {
+        Text(timeStr)
+            .font(.subheadline)
+            .foregroundColor(TimeTextColor)
+            .padding(.trailing, 10)
+            .padding(.top, 10)
+        
+    }
+}
+
 private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
     
     @Environment(\.colorScheme) var sysColorScheme
@@ -249,18 +271,23 @@ struct MessageDetailView: View {
                 ScrollView {
                     LazyVStack {
                         BubbleImageMessageView(image: "default_avatar")
+                        TimeView(timeStr: "8月28日 周一 08:16")
                         ForEach(messages) { message in
                             BubbleTextMessageView(message: message.messageBody[0].text_data!)
                         }
+                        TimeView(timeStr: "19:05")
                         BubbleImageMessageView(image: "test_image")
                         BubbleLinkMessageView(linkName: "访问北理", url: "https://www.bit.edu.cn")
+                        Text("")
+                            .opacity(0)
+                            .id("bottom_text")
+                        
                     }
                     // To let it scroll to the bottom
                     Text("")
                         .opacity(0)
-                        .id("empty")
                         .onAppear {
-                            proxy.scrollTo("empty")
+                            proxy.scrollTo("bottom_text")
                         }
                 }
                 .onChange(of: messages.count) { _ in
@@ -284,10 +311,5 @@ struct MessageDetailView: View {
 }
 
 #Preview {
-//    ScrollView {
-//        BubbleMessageView(message: "你好啊")
-//        BubbleMessageView(message: "你好啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊aaa啊啊啊啊啊啊啊")
-//        BubbleMessageView(message: "你好啊")
-//    }
     MessageDetailView(contactUid: "123", contactName: "debug")
 }
