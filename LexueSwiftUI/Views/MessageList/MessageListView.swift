@@ -80,7 +80,6 @@ private struct ListItemView: View {
     @Binding var isOpenDatailView: Bool
     
     @State private var isPresented = false
-    @State private var isFirstOpened = 0
 
     
     var body: some View {
@@ -114,7 +113,6 @@ private struct ListItemView: View {
                 }
             }
             Button(action: {
-                isFirstOpened = 0
                 isOpenDatailView.toggle()
             }, label: {
                 EmptyView()

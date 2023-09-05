@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var ttt = 0
     var body: some View {
         TabView {
             MessageListView()
