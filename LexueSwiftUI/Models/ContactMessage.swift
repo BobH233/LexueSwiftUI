@@ -11,6 +11,9 @@ enum MessageBodyType: Int, Codable {
     case text = 0
     case image = 1
     case link = 2
+    
+    // 只在 MessageDetailView 页面显示这个时间
+    case time = 3
 }
 
 struct MessageBodyItem: Codable {
@@ -19,9 +22,16 @@ struct MessageBodyItem: Codable {
     var text_data: String?
     var link: String?
     var link_title: String?
+    var time_text: String?
 }
 
 struct ContactMessage: Codable, Identifiable {
+    init() {
+        id = UUID()
+        sendDate = Date()
+        senderUid = nil
+        messageBody = MessageBodyItem(type: .text, image_data: nil, text_data: nil, link: nil, link_title: nil)
+    }
     var id = UUID()
     var sendDate: Date
     var senderUid: String?

@@ -23,6 +23,8 @@ class MessageManager {
             return "[链接] \(message.messageBody.link_title!)"
         case .image:
             return "[图片]"
+        default:
+            return "[未知消息]"
         }
     }
     

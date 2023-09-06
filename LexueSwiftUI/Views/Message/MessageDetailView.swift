@@ -240,43 +240,30 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
 
 struct MessageDetailView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.managedObjectContext) var managedObjContext
     
     let contactUid: String
     @State var contactName: String = "联系人啊"
-    @State private var messages: [ContactMessage] = [
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "我是渣渣辉")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你是谁啊？？？？？？？？？？？？？？？？？")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊")),
-        ContactMessage(sendDate: Date(), senderUid: "debug", messageBody: MessageBodyItem(type: .text, text_data: "你好啊啊"))
-    ]
+    @State private var messages: [ContactMessage] = []
     var body: some View {
         NavigationView {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack {
-                        BubbleImageMessageView(image: "default_avatar")
-                        TimeView(timeStr: "8月28日 周一 08:16")
                         ForEach(messages) { message in
-                            BubbleTextMessageView(message: message.messageBody.text_data!)
+                            if message.messageBody.type == .text {
+                                BubbleTextMessageView(message: message.messageBody.text_data!)
+                            } else if message.messageBody.type == .image {
+                                BubbleImageMessageView(image: message.messageBody.image_data!)
+                            } else if message.messageBody.type == .link {
+                                BubbleLinkMessageView(linkName: message.messageBody.link_title!, url: message.messageBody.link!)
+                            } else if message.messageBody.type == .time {
+                                TimeView(timeStr: message.messageBody.time_text!)
+                            }
                         }
-                        TimeView(timeStr: "19:05")
-                        BubbleImageMessageView(image: "test_image")
-                        BubbleLinkMessageView(linkName: "访问北理", url: "https://www.bit.edu.cn")
                         Text("")
                             .opacity(0)
                             .id("bottom_text")
-                        
                     }
                     // To let it scroll to the bottom
                     Text("")
@@ -284,6 +271,13 @@ struct MessageDetailView: View {
                         .onAppear {
                             proxy.scrollTo("bottom_text")
                         }
+                }
+                .onAppear {
+                    let result = DataController.shared.queryMessagesByContactUid(senderUid: "Admin1", context: managedObjContext)
+                    withAnimation {
+                        messages = result
+                    }
+                    print(result)
                 }
                 .onChange(of: messages.count) { _ in
                     proxy.scrollTo(messages.last?.id)

@@ -120,8 +120,8 @@
 		473BAE8D2AA48E4300968C3C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				473BAE8E2AA48E5100968C3C /* MessageList */,
-				473BAE8F2AA48E6000968C3C /* CourseList */,
+				473BAE8E2AA48E5100968C3C /* Message */,
+				473BAE8F2AA48E6000968C3C /* Course */,
 				473BAE902AA48E6700968C3C /* Setting */,
 				474C9B772AA4E3680064B5AF /* DDLList */,
 				473BAE812AA48DAA00968C3C /* ContentView.swift */,
@@ -129,21 +129,21 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		473BAE8E2AA48E5100968C3C /* MessageList */ = {
+		473BAE8E2AA48E5100968C3C /* Message */ = {
 			isa = PBXGroup;
 			children = (
 				473BAE972AA496B800968C3C /* MessageListView.swift */,
 				4799C8182AA6239800F812D6 /* MessageDetailView.swift */,
 			);
-			path = MessageList;
+			path = Message;
 			sourceTree = "<group>";
 		};
-		473BAE8F2AA48E6000968C3C /* CourseList */ = {
+		473BAE8F2AA48E6000968C3C /* Course */ = {
 			isa = PBXGroup;
 			children = (
 				473BAE952AA496AE00968C3C /* CourseListView.swift */,
 			);
-			path = CourseList;
+			path = Course;
 			sourceTree = "<group>";
 		};
 		473BAE902AA48E6700968C3C /* Setting */ = {

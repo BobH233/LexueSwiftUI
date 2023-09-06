@@ -30,8 +30,32 @@ class DataController: ObservableObject {
         }
     }
     
+    func queryMessagesByContactUid(senderUid: String,  context: NSManagedObjectContext) -> [ContactMessage] {
+        let request: NSFetchRequest<MessageStored> = MessageStored.fetchRequest()
+        var ret: [ContactMessage] = [ContactMessage]()
+        request.predicate = NSPredicate(format: "senderUid == %@", senderUid)
+        do {
+            let results = try context.fetch(request)
+            for result in results {
+                var cur: ContactMessage = ContactMessage()
+                cur.id = result.id!
+                cur.sendDate = result.date!
+                cur.senderUid = result.senderUid
+                cur.messageBody.type = MessageBodyType(rawValue: Int(result.type))!
+                cur.messageBody.image_data = result.image_data
+                cur.messageBody.link_title = result.link_title
+                cur.messageBody.link = result.link_data
+                cur.messageBody.text_data = result.text_data
+                ret.append(cur)
+            }
+        } catch {
+            print("查询联系人消息失败：\(error)")
+        }
+        return ret
+    }
+    
     func addMessageStored(senderUid: String, type: MessageBodyType, text_data: String?, image_data: String?, 
-                          link_data: String, date: Date?, context: NSManagedObjectContext) {
+                          link_data: String?, link_title: String?, date: Date?, context: NSManagedObjectContext) {
         let msgStored = MessageStored(context: context)
         msgStored.id = UUID()
         msgStored.senderUid = senderUid
@@ -39,6 +63,7 @@ class DataController: ObservableObject {
         msgStored.text_data = text_data
         msgStored.image_data = image_data
         msgStored.link_data = link_data
+        msgStored.link_title = link_title
         msgStored.date = date ?? Date()
         save(context: context)
     }
