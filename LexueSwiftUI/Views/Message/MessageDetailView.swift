@@ -274,13 +274,10 @@ struct MessageDetailView: View {
                 }
                 .onAppear {
                     let result = DataController.shared.queryMessagesByContactUid(senderUid: "Admin1", context: managedObjContext)
-                    withAnimation {
-                        messages = result
-                    }
-                    print(result)
+                    messages = result
                 }
                 .onChange(of: messages.count) { _ in
-                    proxy.scrollTo(messages.last?.id)
+                    proxy.scrollTo("bottom_text")
                 }
             }
             .toolbar {
