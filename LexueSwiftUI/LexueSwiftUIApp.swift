@@ -30,10 +30,12 @@ struct LexueSwiftUIApp: App {
                 ContentView()
                     .environment(\.managedObjectContext,
                                   dataController.container.viewContext)
+                    .environment(\.locale, Locale.init(identifier: "zh-CN"))
             }else{
                 ContentView()
                     .environment(\.managedObjectContext,
                                   dataController.container.viewContext)
+                    .environment(\.locale, Locale.init(identifier: "zh-CN"))
                     .preferredColorScheme(getPreferredColorScheme())
             }
             
