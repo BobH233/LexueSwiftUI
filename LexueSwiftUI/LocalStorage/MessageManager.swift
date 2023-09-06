@@ -13,9 +13,10 @@ import Foundation
 class MessageManager {
     static let shared = MessageManager()
     
-    private func GetSendDateDescriptionText(sendDate: Date) -> String {
+    func GetSendDateDescriptionText(sendDate: Date) -> String {
         let today = Date()
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "zh-CN")
         if sendDate.isInSameDay(as: today) {
             dateFormatter.dateFormat = "HH:mm"
             return dateFormatter.string(from: sendDate)

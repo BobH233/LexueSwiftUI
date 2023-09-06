@@ -146,18 +146,23 @@ struct ChatBubbleShape: Shape {
 
 private struct BubbleTextMessageView: View, BubbleBaseColorConfig {
     @Environment(\.colorScheme) var sysColorScheme
-    let message: String
+    let message: ContactMessage
+    @State var sendDate: String = ""
     var body: some View {
         ChatBubble(direction: .left) {
-            Text(message)
+            Text(message.messageBody.text_data!)
                 .padding(.vertical, 10)
                 .padding(.horizontal, 20)
                 .foregroundColor(BubbleTextColor)
                 .background(BubbleColor)
         }
+        .onAppear {
+            sendDate = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
+        }
         .contextMenu(ContextMenu(menuItems: {
+            Label("发送日期: \(sendDate)", systemImage: "clock.arrow.circlepath")
             Button {
-                UIPasteboard.general.string = message
+                UIPasteboard.general.string = message.messageBody.text_data!
             } label: {
                 Label("复制", systemImage: "doc.on.doc")
             }
@@ -169,10 +174,10 @@ private struct BubbleTextMessageView: View, BubbleBaseColorConfig {
 private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
     
     @Environment(\.colorScheme) var sysColorScheme
-    let image: String
+    let message: ContactMessage
     var body: some View {
         ChatBubble(direction: .left) {
-            Image(image)
+            Image(message.messageBody.image_data!)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: UIScreen.main.bounds.width - 70)
@@ -192,9 +197,9 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
 
 private struct TimeView: View, BubbleBaseColorConfig {
     @Environment(\.colorScheme) var sysColorScheme
-    let timeStr: String
+    let message: ContactMessage
     var body: some View {
-        Text(timeStr)
+        Text(message.messageBody.time_text!)
             .font(.subheadline)
             .foregroundColor(TimeTextColor)
             .padding(.trailing, 10)
@@ -206,13 +211,12 @@ private struct TimeView: View, BubbleBaseColorConfig {
 private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
     
     @Environment(\.colorScheme) var sysColorScheme
-    let linkName: String
-    let url: String
+    let message: ContactMessage
     var body: some View {
-        if let encodedUrl = URL(string: url) {
+        if let encodedUrl = URL(string: message.messageBody.link!) {
             ChatBubble(direction: .left) {
                 Link(destination: encodedUrl, label: {
-                    Text(linkName)
+                    Text(message.messageBody.link_title!)
                         .underline()
                 })
                 .padding(.vertical, 10)
@@ -221,12 +225,12 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
             }
             .contextMenu(ContextMenu(menuItems: {
                 Button {
-                    UIPasteboard.general.string = url
+                    UIPasteboard.general.string = message.messageBody.link!
                 } label: {
                     Label("复制链接", systemImage: "link")
                 }
                 Button {
-                    UIPasteboard.general.string = linkName
+                    UIPasteboard.general.string = message.messageBody.link_title!
                 } label: {
                     Label("复制标题", systemImage: "doc.on.doc")
                 }
@@ -252,13 +256,13 @@ struct MessageDetailView: View {
                     LazyVStack {
                         ForEach(messages) { message in
                             if message.messageBody.type == .text {
-                                BubbleTextMessageView(message: message.messageBody.text_data!)
+                                BubbleTextMessageView(message: message)
                             } else if message.messageBody.type == .image {
-                                BubbleImageMessageView(image: message.messageBody.image_data!)
+                                BubbleImageMessageView(message: message)
                             } else if message.messageBody.type == .link {
-                                BubbleLinkMessageView(linkName: message.messageBody.link_title!, url: message.messageBody.link!)
+                                BubbleLinkMessageView(message: message)
                             } else if message.messageBody.type == .time {
-                                TimeView(timeStr: message.messageBody.time_text!)
+                                TimeView(message: message)
                             }
                         }
                         Text("")
