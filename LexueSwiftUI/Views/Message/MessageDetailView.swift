@@ -175,6 +175,7 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
     
     @Environment(\.colorScheme) var sysColorScheme
     let message: ContactMessage
+    @State var sendDate: String = ""
     var body: some View {
         ChatBubble(direction: .left) {
             Image(message.messageBody.image_data!)
@@ -182,7 +183,11 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: UIScreen.main.bounds.width - 70)
         }
+        .onAppear {
+            sendDate = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
+        }
         .contextMenu(ContextMenu(menuItems: {
+            Label("发送日期: \(sendDate)", systemImage: "clock.arrow.circlepath")
             Button {
                 Task {
                     UIPasteboard.general.image = UIImage(named: "test_image")
@@ -212,6 +217,7 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
     
     @Environment(\.colorScheme) var sysColorScheme
     let message: ContactMessage
+    @State var sendDate: String = ""
     var body: some View {
         if let encodedUrl = URL(string: message.messageBody.link!) {
             ChatBubble(direction: .left) {
@@ -223,7 +229,11 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
                 .padding(.horizontal, 20)
                 .background(BubbleColor)
             }
+            .onAppear {
+                sendDate = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
+            }
             .contextMenu(ContextMenu(menuItems: {
+                Label("发送日期: \(sendDate)", systemImage: "clock.arrow.circlepath")
                 Button {
                     UIPasteboard.general.string = message.messageBody.link!
                 } label: {
