@@ -274,7 +274,8 @@ struct MessageDetailView: View {
                 }
                 .onAppear {
                     let result = DataController.shared.queryMessagesByContactUid(senderUid: "Admin1", context: managedObjContext)
-                    messages = result
+                    
+                    messages = MessageManager.shared.InjectTimetagForMessages(messages: result)
                 }
                 .onChange(of: messages.count) { _ in
                     proxy.scrollTo("bottom_text")

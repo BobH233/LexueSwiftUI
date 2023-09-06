@@ -30,7 +30,13 @@ struct ContactMessage: Codable, Identifiable {
         id = UUID()
         sendDate = Date()
         senderUid = nil
-        messageBody = MessageBodyItem(type: .text, image_data: nil, text_data: nil, link: nil, link_title: nil)
+        messageBody = MessageBodyItem(type: .text, image_data: nil, text_data: nil, link: nil, link_title: nil, time_text: nil)
+    }
+    init(time_text: String) {
+        id = UUID()
+        sendDate = Date()
+        senderUid = nil
+        messageBody = MessageBodyItem(type: .time, image_data: nil, text_data: nil, link: nil, link_title: nil, time_text: time_text)
     }
     var id = UUID()
     var sendDate: Date
