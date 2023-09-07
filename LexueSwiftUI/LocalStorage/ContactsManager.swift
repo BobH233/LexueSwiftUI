@@ -18,14 +18,12 @@ class ContactsManager: ObservableObject {
         if let contact = contact {
             contact.pinned = isPin
             DataController.shared.save(context: context)
-            for index in 0..<ContactDisplayLists.count {
-                if ContactDisplayLists[index].contactUid == contactUid {
-                    ContactDisplayLists[index].pinned = isPin
-                    GenerateContactDisplayLists(context: context)
-                    break
-                }
-            }
+            GenerateContactDisplayLists(context: context)
         }
+    }
+    
+    func ReadallContact(contactUid: String, isPin: Bool, context: NSManagedObjectContext) {
+        
     }
     
     func GenerateContactDisplayLists(context: NSManagedObjectContext) {

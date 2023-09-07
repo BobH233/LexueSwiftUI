@@ -142,9 +142,7 @@ private struct ListView: View {
                     .id(UUID())
                     .swipeActions(edge: .leading) {
                         Button {
-                            withAnimation {
-                                contact.unreadCount.wrappedValue = 0
-                            }
+                            
                         } label: {
                             Label("Read", systemImage: "checkmark.circle.fill")
                         }
