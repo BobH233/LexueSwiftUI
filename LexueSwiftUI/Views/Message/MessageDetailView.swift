@@ -257,7 +257,7 @@ struct MessageDetailView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     
     let contactUid: String
-    @State var contactName: String = "联系人啊"
+    @State var contactName: String = ""
     @State private var messages: [ContactMessage] = []
     var body: some View {
         NavigationView {
@@ -287,8 +287,10 @@ struct MessageDetailView: View {
                         }
                 }
                 .onAppear {
-                    let result = DataController.shared.queryMessagesByContactUid(senderUid: "Admin1", context: managedObjContext)
+                    let result = DataController.shared.queryMessagesByContactUid(senderUid: contactUid, context: managedObjContext)
+                    let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
                     
+                    contactName = contact!.originName!
                     messages = MessageManager.shared.InjectTimetagForMessages(messages: result)
                 }
                 .onChange(of: messages.count) { _ in

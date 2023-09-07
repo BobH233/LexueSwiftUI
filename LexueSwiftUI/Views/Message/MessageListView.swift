@@ -61,12 +61,14 @@ private struct UnreadRedPoint: View {
 
 private struct ListItemView: View {
     @Binding var title: String
+    @Binding var contactUid: String
     @Binding var content: String
     @Binding var unreadCnt: Int
     @Binding var time: String
     @Binding var avatar: String
     @Binding var pinned: Bool
-    @Binding var isOpenDatailView: Bool
+    @Binding var isOpenDatailView: ContactDisplayModel?
+    @Binding var currentViewContact: ContactDisplayModel
     
     @State private var isPresented = false
 
@@ -103,7 +105,7 @@ private struct ListItemView: View {
                 }
             }
             Button(action: {
-                isOpenDatailView.toggle()
+                isOpenDatailView = currentViewContact
             }, label: {
                 EmptyView()
             })
@@ -115,7 +117,8 @@ private struct ListView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @Binding var contacts: [ContactDisplayModel]
     @Binding var isRefreshing: Bool
-    @Binding var isOpenDatailView: Bool
+    @Binding var isOpenDatailView: ContactDisplayModel?
+    @Binding var currentViewContactUid: String
     
     @Environment(\.refresh) private var refreshAction
     @ViewBuilder
@@ -138,11 +141,14 @@ private struct ListView: View {
     var body: some View {
         VStack {
             List($contacts) { contact in
-                ListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, isOpenDatailView: $isOpenDatailView)
-                    .id(UUID())
+                ListItemView(title: contact.displayName, contactUid: contact.contactUid, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
                     .swipeActions(edge: .leading) {
                         Button {
-                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation {
+                                    ContactsManager.shared.ReadallContact(contactUid: contact.contactUid.wrappedValue, context: managedObjContext)
+                                }
+                            }
                         } label: {
                             Label("Read", systemImage: "checkmark.circle.fill")
                         }
@@ -150,7 +156,15 @@ private struct ListView: View {
                     }
                     .swipeActions(edge: .trailing) {
                         Button {
-                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation(.easeIn) {
+                                    if contact.pinned.wrappedValue {
+                                        ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: false, context: managedObjContext)
+                                    } else {
+                                        ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: true, context: managedObjContext)
+                                    }
+                                }
+                            }
                         } label: {
                             Label("Pin", systemImage: "pin")
                         }
@@ -177,7 +191,11 @@ private struct ListView: View {
                         }
                         
                         Button {
-                            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation {
+                                    ContactsManager.shared.ReadallContact(contactUid: contact.contactUid.wrappedValue, context: managedObjContext)
+                                }
+                            }
                         } label: {
                             Label("已读", systemImage: "checkmark.circle.fill")
                         }
@@ -198,7 +216,9 @@ struct MessageListView: View {
     @State var searchText: String = ""
     @State var isRefreshing: Bool = false
     
-    @State var isOpenDatailView: Bool = false
+    @State var currentViewContactUid = ""
+    
+    @State var isOpenDatailView: ContactDisplayModel? = nil
     
     func testRefresh() async {
         Task {
@@ -213,7 +233,7 @@ struct MessageListView: View {
     var body: some View {
         NavigationView{
             VStack {
-                ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView)
+                ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, currentViewContactUid: $currentViewContactUid)
                     .refreshable {
                         print("refresh")
                         await testRefresh()
@@ -224,12 +244,15 @@ struct MessageListView: View {
             .navigationBarTitleDisplayMode(.large)
         }
         .onAppear {
-            ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation {
+                    ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+                }
+            }
         }
-        .sheet(isPresented: $isOpenDatailView, content: {
-            // TODO: 传入列表的具体值
-            MessageDetailView(contactUid: "", contactName: "12345")
-        })
+        .sheet(item: $isOpenDatailView) { contact in
+            MessageDetailView(contactUid: contact.contactUid)
+        }
         
     }
 }

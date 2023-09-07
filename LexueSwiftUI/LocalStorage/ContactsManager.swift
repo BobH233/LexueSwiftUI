@@ -22,8 +22,13 @@ class ContactsManager: ObservableObject {
         }
     }
     
-    func ReadallContact(contactUid: String, isPin: Bool, context: NSManagedObjectContext) {
-        
+    func ReadallContact(contactUid: String, context: NSManagedObjectContext) {
+        let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
+        if let contact = contact {
+            contact.unreadCount = 0
+            DataController.shared.save(context: context)
+            GenerateContactDisplayLists(context: context)
+        }
     }
     
     func GenerateContactDisplayLists(context: NSManagedObjectContext) {
