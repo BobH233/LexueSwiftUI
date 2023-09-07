@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ContactDisplayModel: Codable, Identifiable  {
+struct ContactDisplayModel: Codable, Identifiable, Equatable  {
     init() {
         id = ""
         lastMessageDate = Date()

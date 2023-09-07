@@ -61,7 +61,6 @@ private struct UnreadRedPoint: View {
 
 private struct ListItemView: View {
     @Binding var title: String
-    @Binding var contactUid: String
     @Binding var content: String
     @Binding var unreadCnt: Int
     @Binding var time: String
@@ -118,7 +117,6 @@ private struct ListView: View {
     @Binding var contacts: [ContactDisplayModel]
     @Binding var isRefreshing: Bool
     @Binding var isOpenDatailView: ContactDisplayModel?
-    @Binding var currentViewContactUid: String
     
     @Environment(\.refresh) private var refreshAction
     @ViewBuilder
@@ -141,7 +139,7 @@ private struct ListView: View {
     var body: some View {
         VStack {
             List($contacts) { contact in
-                ListItemView(title: contact.displayName, contactUid: contact.contactUid, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
+                ListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
                     .swipeActions(edge: .leading) {
                         Button {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -215,8 +213,8 @@ struct MessageListView: View {
     @ObservedObject var contactsManager = ContactsManager.shared
     @State var searchText: String = ""
     @State var isRefreshing: Bool = false
-    
-    @State var currentViewContactUid = ""
+    @State var totalUnread = 0
+    @State var unreadBadge: Text? = nil
     
     @State var isOpenDatailView: ContactDisplayModel? = nil
     
@@ -233,7 +231,7 @@ struct MessageListView: View {
     var body: some View {
         NavigationView{
             VStack {
-                ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, currentViewContactUid: $currentViewContactUid)
+                ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView)
                     .refreshable {
                         print("refresh")
                         await testRefresh()
@@ -243,6 +241,7 @@ struct MessageListView: View {
             .searchable(text: $searchText, prompt: "搜索消息")
             .navigationBarTitleDisplayMode(.large)
         }
+        .badge(unreadBadge)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 withAnimation {
@@ -252,6 +251,23 @@ struct MessageListView: View {
         }
         .sheet(item: $isOpenDatailView) { contact in
             MessageDetailView(contactUid: contact.contactUid)
+        }
+        .onChange(of: contactsManager.ContactDisplayLists) { _ in
+            print("recalc totalUnread")
+            var tmpTotal = 0
+            for contact in ContactsManager.shared.ContactDisplayLists {
+                tmpTotal = tmpTotal + contact.unreadCount
+            }
+            totalUnread = tmpTotal
+        }
+        .onChange(of: totalUnread) { newVal in
+            if newVal == 0 {
+                unreadBadge = nil
+            } else if newVal < 99 {
+                unreadBadge = Text("\(totalUnread)")
+            } else {
+                unreadBadge = Text("99+")
+            }
         }
         
     }
