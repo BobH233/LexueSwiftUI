@@ -287,6 +287,8 @@ struct MessageDetailView: View {
                         }
                 }
                 .onAppear {
+                    // 将未读气泡消除
+                    ContactsManager.shared.ReadallContact(contactUid: contactUid, context: managedObjContext)
                     let result = DataController.shared.queryMessagesByContactUid(senderUid: contactUid, context: managedObjContext)
                     let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
                     
