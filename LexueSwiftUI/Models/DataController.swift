@@ -54,6 +54,26 @@ class DataController: ObservableObject {
         return ret
     }
     
+    func queryLastMessageByContactUid(senderUid: String,  context: NSManagedObjectContext) -> ContactMessage? {
+        let messages = queryMessagesByContactUid(senderUid: senderUid, context: context)
+        if messages.count == 0 {
+            return nil
+        } else {
+            return messages.last
+        }
+    }
+    
+    func getAllContacts(context: NSManagedObjectContext) -> [ContactStored] {
+        let request: NSFetchRequest<ContactStored> = ContactStored.fetchRequest()
+        do {
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            print("查询联系人失败：\(error)")
+        }
+        return []
+    }
+    
     func addMessageStored(senderUid: String, type: MessageBodyType, text_data: String?, image_data: String?, 
                           link_data: String?, link_title: String?, date: Date?, context: NSManagedObjectContext) {
         let msgStored = MessageStored(context: context)
@@ -65,6 +85,33 @@ class DataController: ObservableObject {
         msgStored.link_data = link_data
         msgStored.link_title = link_title
         msgStored.date = date ?? Date()
+        save(context: context)
+    }
+    
+    func findContactStored(contactUid: String, context: NSManagedObjectContext) -> ContactStored? {
+        let request: NSFetchRequest<ContactStored> = ContactStored.fetchRequest()
+        request.predicate = NSPredicate(format: "contactUid == %@", contactUid)
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                return results.first
+            }
+        } catch {
+            print("查询联系人消息失败：\(error)")
+        }
+        return nil
+    }
+    
+    func addContactStored(contactUid: String, originName: String, pinned: Bool?, silent: Bool?, unreadCount: Int32?, avatar_data: String?, context: NSManagedObjectContext) {
+        let contactStored = ContactStored(context: context)
+        contactStored.id = UUID()
+        contactStored.contactUid = contactUid
+        contactStored.lastMessageDate = Date()
+        contactStored.originName = originName
+        contactStored.avatar_data = avatar_data ?? "default_avatar"
+        contactStored.pinned = pinned ?? false
+        contactStored.silent = silent ?? false
+        contactStored.unreadCount = unreadCount ?? 0
         save(context: context)
     }
     

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22221.1" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ContactStored" representedClassName="ContactStored" syncable="YES" codeGenerationType="class">
+        <attribute name="avatar_data" optional="YES" attributeType="String"/>
+        <attribute name="contactUid" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="lastMessageDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="originName" optional="YES" attributeType="String"/>
+        <attribute name="pinned" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="silent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="unreadCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="MessageStored" representedClassName="MessageStored" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>

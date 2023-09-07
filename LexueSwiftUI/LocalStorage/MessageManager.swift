@@ -64,16 +64,22 @@ class MessageManager {
         return ret
     }
     
-    func GetMessageTextDescription(message: ContactMessage) -> String {
-        switch(message.messageBody.type) {
-        case .text:
-            return message.messageBody.text_data ?? ""
-        case .link:
-            return "[链接] \(message.messageBody.link_title!)"
-        case .image:
-            return "[图片]"
-        default:
-            return "[未知消息]"
+    
+    
+    func GetMessageTextDescription(message: ContactMessage?) -> String {
+        if let message = message {
+            switch(message.messageBody.type) {
+            case .text:
+                return message.messageBody.text_data ?? ""
+            case .link:
+                return "[链接] \(message.messageBody.link_title!)"
+            case .image:
+                return "[图片]"
+            default:
+                return "[未知消息]"
+            }
+        } else {
+            return ""
         }
     }
     

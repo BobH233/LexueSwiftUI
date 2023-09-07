@@ -19,6 +19,13 @@ struct DebugDataView: View {
     @State var link_data: String = ""
     @State var link_title: String = ""
     @State var date: Date = Date()
+    
+    @State var contactUid: String = ""
+    @State var originName: String = ""
+    @State var pinned: Bool = false
+    @State var silent: Bool = false
+    
+    @State var isPresentAlert = false
     var body: some View {
         Form {
             Section("message data") {
@@ -37,10 +44,33 @@ struct DebugDataView: View {
                     Spacer()
                     Button("Submit") {
                         DataController.shared.addMessageStored(senderUid: senderUid, type: MessageBodyType(rawValue: setMsgType)!, text_data: text_data, image_data: image_data, link_data: link_data, link_title: link_title, date: date, context: managedObjContext)
+                        isPresentAlert = true
                     }
                     Spacer()
                 }
             }
+            
+            Section("contact data") {
+                TextField("contactUid", text: $contactUid)
+                TextField("originName", text: $originName)
+                Toggle(isOn: $pinned, label: {
+                    Text("pinned")
+                })
+                Toggle(isOn: $silent, label: {
+                    Text("silent")
+                })
+                HStack {
+                    Spacer()
+                    Button("Submit") {
+                        DataController.shared.addContactStored(contactUid: contactUid, originName: originName, pinned: pinned, silent: silent, unreadCount: 0, avatar_data: nil, context: managedObjContext)
+                        isPresentAlert = true
+                    }
+                    Spacer()
+                }
+            }
+        }
+        .alert("保存成功", isPresented: $isPresentAlert) {
+            Button("OK", role: .cancel) { }
         }
     }
 }

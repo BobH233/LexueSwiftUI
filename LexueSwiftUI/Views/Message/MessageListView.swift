@@ -7,17 +7,6 @@
 
 import SwiftUI
 
-// TODO: Move this test struct to @/Models folder
-struct MessagesStructure: Identifiable, Equatable {
-    var id = UUID()
-    var unreadIndicator: String
-    var unreadCnt: Int
-    var avatar: String
-    var name: String
-    var messageSummary: String
-    var timestamp: String
-    var pinned: Bool
-}
 
 private struct UnreadRedPoint: View {
     @Binding var count: Int
@@ -110,6 +99,7 @@ private struct ListItemView: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .lineLimit(2)
+                        .frame(minHeight: 30)
                 }
             }
             Button(action: {
@@ -122,7 +112,8 @@ private struct ListItemView: View {
 }
 
 private struct ListView: View {
-    @Binding var messages: [MessagesStructure]
+    @Environment(\.managedObjectContext) var managedObjContext
+    @Binding var contacts: [ContactDisplayModel]
     @Binding var isRefreshing: Bool
     @Binding var isOpenDatailView: Bool
     
@@ -146,13 +137,13 @@ private struct ListView: View {
     
     var body: some View {
         VStack {
-            List($messages) { item in
-                ListItemView(title: item.name, content: item.messageSummary, unreadCnt: item.unreadCnt, time: item.timestamp, avatar: item.avatar, pinned: item.pinned, isOpenDatailView: $isOpenDatailView)
+            List($contacts) { contact in
+                ListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, isOpenDatailView: $isOpenDatailView)
+                    .id(UUID())
                     .swipeActions(edge: .leading) {
                         Button {
-                            print("Hi read")
                             withAnimation {
-                                item.unreadCnt.wrappedValue = 0
+                                contact.unreadCount.wrappedValue = 0
                             }
                         } label: {
                             Label("Read", systemImage: "checkmark.circle.fill")
@@ -161,28 +152,26 @@ private struct ListView: View {
                     }
                     .swipeActions(edge: .trailing) {
                         Button {
-                            print("Hi pin")
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1){
-                                withAnimation {
-                                    item.pinned.wrappedValue = !item.pinned.wrappedValue
-                                    if(item.pinned.wrappedValue) {
-                                        if let currentIndex = messages.firstIndex(of: item.wrappedValue) {
-                                            messages.move(fromOffsets: IndexSet([currentIndex]), toOffset: 0)
-                                        }
-                                    }
-                                }
-                            }
+                            
                         } label: {
                             Label("Pin", systemImage: "pin")
                         }
                         .tint(.orange)
                     }
-                    .listRowBackground(Color(item.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
+                    .listRowBackground(Color(contact.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
                     .contextMenu(ContextMenu(menuItems: {
                         Button {
-                            item.pinned.wrappedValue = !item.pinned.wrappedValue
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation(.easeIn) {
+                                    if contact.pinned.wrappedValue {
+                                        ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: false, context: managedObjContext)
+                                    } else {
+                                        ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: true, context: managedObjContext)
+                                    }
+                                }
+                            }
                         } label: {
-                            if !item.pinned.wrappedValue {
+                            if !contact.pinned.wrappedValue {
                                 Label("置顶", systemImage: "pin")
                             } else {
                                 Label("取消置顶", systemImage: "pin")
@@ -190,7 +179,7 @@ private struct ListView: View {
                         }
                         
                         Button {
-                            item.unreadCnt.wrappedValue = 0
+                            
                         } label: {
                             Label("已读", systemImage: "checkmark.circle.fill")
                         }
@@ -205,20 +194,9 @@ private struct ListView: View {
 }
 
 struct MessageListView: View {
-    @State var messages: [MessagesStructure] = [
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: true),
-        MessagesStructure(unreadIndicator: "", unreadCnt: 2, avatar: "default_avatar", name: "Martin Steed", messageSummary: "I don't know why people are so anti pineapple pizza. I kind of like it.", timestamp: "12:40 AM", pinned: true),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 123, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: true),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 666, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 0, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 0, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false),
-        MessagesStructure(unreadIndicator: "unreadIndicator", unreadCnt: 12, avatar: "default_avatar", name: "Jared", messageSummary: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", timestamp: "2023年9月23日 23:48", pinned: false)
-    ]
+    @Environment(\.managedObjectContext) var managedObjContext
+    
+    @ObservedObject var contactsManager = ContactsManager.shared
     @State var searchText: String = ""
     @State var isRefreshing: Bool = false
     
@@ -237,7 +215,7 @@ struct MessageListView: View {
     var body: some View {
         NavigationView{
             VStack {
-                ListView(messages: $messages, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView)
+                ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView)
                     .refreshable {
                         print("refresh")
                         await testRefresh()
@@ -247,16 +225,12 @@ struct MessageListView: View {
             .searchable(text: $searchText, prompt: "搜索消息")
             .navigationBarTitleDisplayMode(.large)
         }
+        .onAppear {
+            ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+        }
         .sheet(isPresented: $isOpenDatailView, content: {
             // TODO: 传入列表的具体值
             MessageDetailView(contactUid: "", contactName: "12345")
-        })
-        .onChange(of: searchText, perform: { newValue in
-            print("search \(newValue)")
-            print("\(messages.count)")
-            for index in 0..<messages.count {
-                messages[index].name = newValue
-            }
         })
         
     }
