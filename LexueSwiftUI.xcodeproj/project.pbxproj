@@ -19,6 +19,8 @@
 		473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */; };
 		474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* DDLListView.swift */; };
 		479839DB2AA9FCD40094C5E1 /* ContactDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479839DA2AA9FCD40094C5E1 /* ContactDisplayModel.swift */; };
+		479839DE2AAA2B9B0094C5E1 /* ImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 479839DD2AAA2B9B0094C5E1 /* ImageViewer */; };
+		479839E02AAA2B9B0094C5E1 /* ImageViewerRemote in Frameworks */ = {isa = PBXBuildFile; productRef = 479839DF2AAA2B9B0094C5E1 /* ImageViewerRemote */; };
 		4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8142AA6235C00F812D6 /* ContactsManager.swift */; };
 		4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8162AA6237500F812D6 /* CourseManager.swift */; };
 		4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8182AA6239800F812D6 /* MessageDetailView.swift */; };
@@ -73,6 +75,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				479839E02AAA2B9B0094C5E1 /* ImageViewerRemote in Frameworks */,
+				479839DE2AAA2B9B0094C5E1 /* ImageViewer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +217,8 @@
 			);
 			name = LexueSwiftUI;
 			packageProductDependencies = (
+				479839DD2AAA2B9B0094C5E1 /* ImageViewer */,
+				479839DF2AAA2B9B0094C5E1 /* ImageViewerRemote */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -243,6 +249,7 @@
 			);
 			mainGroup = 473BAE732AA48DAA00968C3C;
 			packageReferences = (
+				479839DC2AAA2B9B0094C5E1 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -495,6 +502,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		479839DC2AAA2B9B0094C5E1 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Jake-Short/swiftui-image-viewer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		479839DD2AAA2B9B0094C5E1 /* ImageViewer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 479839DC2AAA2B9B0094C5E1 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
+			productName = ImageViewer;
+		};
+		479839DF2AAA2B9B0094C5E1 /* ImageViewerRemote */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 479839DC2AAA2B9B0094C5E1 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
+			productName = ImageViewerRemote;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */ = {

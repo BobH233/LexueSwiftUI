@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import ImageViewer
 
 protocol BubbleBaseColorConfig: View {
     var sysColorScheme: ColorScheme { get }
@@ -174,6 +175,9 @@ private struct BubbleTextMessageView: View, BubbleBaseColorConfig {
 private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
     
     @Environment(\.colorScheme) var sysColorScheme
+    @Binding var showImage: Bool
+    @Binding var imageData: Image
+    
     let message: ContactMessage
     @State var sendDate: String = ""
     var body: some View {
@@ -182,6 +186,10 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: UIScreen.main.bounds.width - 70)
+        }
+        .onTapGesture {
+            imageData = Image(message.messageBody.image_data!)
+            showImage = true
         }
         .onAppear {
             sendDate = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
@@ -255,6 +263,8 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
 struct MessageDetailView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var managedObjContext
+    @State var showImageViewer: Bool = false
+    @State var image = Image("default_avatar")
     
     let contactUid: String
     @State var contactName: String = ""
@@ -268,7 +278,7 @@ struct MessageDetailView: View {
                             if message.messageBody.type == .text {
                                 BubbleTextMessageView(message: message)
                             } else if message.messageBody.type == .image {
-                                BubbleImageMessageView(message: message)
+                                BubbleImageMessageView(showImage: $showImageViewer, imageData: $image, message: message)
                             } else if message.messageBody.type == .link {
                                 BubbleLinkMessageView(message: message)
                             } else if message.messageBody.type == .time {
@@ -286,6 +296,7 @@ struct MessageDetailView: View {
                             proxy.scrollTo("bottom_text")
                         }
                 }
+                .overlay(ImageViewer(image: self.$image, viewerShown: self.$showImageViewer))
                 .onAppear {
                     // 将未读气泡消除
                     ContactsManager.shared.ReadallContact(contactUid: contactUid, context: managedObjContext)
