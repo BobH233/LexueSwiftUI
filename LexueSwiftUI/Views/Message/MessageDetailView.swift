@@ -186,6 +186,7 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: UIScreen.main.bounds.width - 70)
+                .background(BubbleColor)
         }
         .onTapGesture {
             imageData = Image(message.messageBody.image_data!)

@@ -43,7 +43,7 @@ struct DebugDataView: View {
                 HStack {
                     Spacer()
                     Button("Submit") {
-                        DataController.shared.addMessageStored(senderUid: senderUid, type: MessageBodyType(rawValue: setMsgType)!, text_data: text_data, image_data: image_data, link_data: link_data, link_title: link_title, date: date, context: managedObjContext)
+                        MessageManager.shared.PushMessage(senderUid: senderUid, type: MessageBodyType(rawValue: setMsgType)!, text_data: text_data, image_data: image_data, link_data: link_data, link_title: link_title, date: date, context: managedObjContext)
                         isPresentAlert = true
                     }
                     Spacer()

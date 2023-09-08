@@ -10,6 +10,7 @@ import SwiftUI
 
 private struct UnreadRedPoint: View {
     @Binding var count: Int
+    @Binding var silent: Bool
     let readIndicator = Color(#colorLiteral(red: 0.3098039329, green: 0.01568627544, blue: 0.1294117719, alpha: 0))
     let transparentWidth: CGFloat = 30
     var body: some View {
@@ -31,7 +32,7 @@ private struct UnreadRedPoint: View {
                     .bold()
                     .foregroundColor(.white)
                     .padding(3)
-                    .background(Color.red)
+                    .background(silent ? Color.gray : Color.red)
                     .cornerRadius(10)
                     .font(.system(size: 12))
             } else if count < 100 {
@@ -41,7 +42,7 @@ private struct UnreadRedPoint: View {
                     .bold()
                     .foregroundColor(.white)
                     .padding(3)
-                    .background(Color.red)
+                    .background(silent ? Color.gray : Color.red)
                     .cornerRadius(10)
                     .font(.system(size: 12))
             } else {
@@ -51,7 +52,7 @@ private struct UnreadRedPoint: View {
                     .bold()
                     .foregroundColor(.white)
                     .padding(3)
-                    .background(Color.red)
+                    .background(silent ? Color.gray : Color.red)
                     .cornerRadius(10)
                     .font(.system(size: 12))
             }
@@ -66,6 +67,7 @@ private struct ListItemView: View {
     @Binding var time: String
     @Binding var avatar: String
     @Binding var pinned: Bool
+    @Binding var silent: Bool
     @Binding var isOpenDatailView: ContactDisplayModel?
     @Binding var currentViewContact: ContactDisplayModel
     
@@ -76,7 +78,7 @@ private struct ListItemView: View {
         ZStack {
             HStack {
                 ZStack {
-                    UnreadRedPoint(count:$unreadCnt)
+                    UnreadRedPoint(count:$unreadCnt, silent: $silent)
                 }
                 Image(avatar)
                     .resizable()
@@ -139,7 +141,7 @@ private struct ListView: View {
     var body: some View {
         VStack {
             List($contacts) { contact in
-                ListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
+                ListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, silent: contact.silent,  isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
                     .swipeActions(edge: .leading) {
                         Button {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -256,6 +258,9 @@ struct MessageListView: View {
             print("recalc totalUnread")
             var tmpTotal = 0
             for contact in ContactsManager.shared.ContactDisplayLists {
+                if contact.silent {
+                    continue
+                }
                 tmpTotal = tmpTotal + contact.unreadCount
             }
             totalUnread = tmpTotal

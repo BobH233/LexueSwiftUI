@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import CoreData
 
 
 class MessageManager {
@@ -64,7 +64,14 @@ class MessageManager {
         return ret
     }
     
-    
+    func PushMessage(senderUid: String, type: MessageBodyType, text_data: String?, image_data: String?,
+                          link_data: String?, link_title: String?, date: Date?, context: NSManagedObjectContext) {
+        DataController.shared.addMessageStored(senderUid: senderUid, type: type, text_data: text_data, image_data: image_data, link_data: link_data, link_title: link_title, date: date, context: context)
+        if var contact = DataController.shared.findContactStored(contactUid: senderUid, context: context) {
+            contact.lastMessageDate = date ?? Date()
+            DataController.shared.save(context: context)
+        }
+    }
     
     func GetMessageTextDescription(message: ContactMessage?) -> String {
         if let message = message {
