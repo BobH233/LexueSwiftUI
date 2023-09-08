@@ -75,6 +75,3 @@ struct DebugDataView: View {
     }
 }
 
-#Preview {
-    DebugDataView()
-}

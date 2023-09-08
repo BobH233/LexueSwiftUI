@@ -182,11 +182,22 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
     @State var sendDate: String = ""
     var body: some View {
         ChatBubble(direction: .left) {
-            Image(message.messageBody.image_data!)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: UIScreen.main.bounds.width - 70)
-                .background(BubbleColor)
+            if let uiImage = UIImage(named: message.messageBody.image_data!) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: UIScreen.main.bounds.width - 70)
+                    .background(BubbleColor)
+            } else {
+                ZStack {
+                    Color.clear
+                        .frame(width: UIScreen.main.bounds.width - 70)
+                        .frame(height: 100)
+                        .background(BubbleColor)
+                    Image(systemName: "photo")
+                }
+            }
+            
         }
         .onTapGesture {
             imageData = Image(message.messageBody.image_data!)
@@ -197,13 +208,18 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
         }
         .contextMenu(ContextMenu(menuItems: {
             Label("发送日期: \(sendDate)", systemImage: "clock.arrow.circlepath")
-            Button {
-                Task {
-                    UIPasteboard.general.image = UIImage(named: "test_image")
+            if let uiImage = UIImage(named: message.messageBody.image_data!) {
+                Button {
+                    Task {
+                        UIPasteboard.general.image = uiImage
+                    }
+                } label: {
+                    Label("复制", systemImage: "doc.on.doc")
                 }
-            } label: {
-                Label("复制", systemImage: "doc.on.doc")
+            } else {
+                Label("图像已损坏", systemImage: "square.and.arrow.up.trianglebadge.exclamationmark")
             }
+            
         }))
         .padding(.leading, 10)
     }
@@ -278,38 +294,37 @@ struct MessageDetailView: View {
                         ForEach(messages) { message in
                             if message.messageBody.type == .text {
                                 BubbleTextMessageView(message: message)
+                                    .id(message.id)
                             } else if message.messageBody.type == .image {
                                 BubbleImageMessageView(showImage: $showImageViewer, imageData: $image, message: message)
+                                    .id(message.id)
                             } else if message.messageBody.type == .link {
                                 BubbleLinkMessageView(message: message)
+                                    .id(message.id)
                             } else if message.messageBody.type == .time {
                                 TimeView(message: message)
+                                    .id(message.id)
                             }
                         }
-                        Text("")
-                            .opacity(0)
-                            .id("bottom_text")
                     }
-                    // To let it scroll to the bottom
-                    Text("")
-                        .opacity(0)
-                        .onAppear {
-                            proxy.scrollTo("bottom_text")
+                    .onAppear {
+                        Task {
+                            // 将未读气泡消除
+                            ContactsManager.shared.ReadallContact(contactUid: contactUid, context: managedObjContext)
+                            let result = DataController.shared.queryMessagesByContactUid(senderUid: contactUid, context: managedObjContext)
+                            let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
+                            contactName = contact!.originName!
+                            messages = MessageManager.shared.InjectTimetagForMessages(messages: result)
+                            // 哪种方法好？
+                            DispatchQueue.main.async {
+                                withAnimation {
+                                    proxy.scrollTo(messages.last?.id)
+                                }
+                            }
                         }
+                    }
                 }
                 .overlay(ImageViewer(image: self.$image, viewerShown: self.$showImageViewer))
-                .onAppear {
-                    // 将未读气泡消除
-                    ContactsManager.shared.ReadallContact(contactUid: contactUid, context: managedObjContext)
-                    let result = DataController.shared.queryMessagesByContactUid(senderUid: contactUid, context: managedObjContext)
-                    let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
-                    
-                    contactName = contact!.originName!
-                    messages = MessageManager.shared.InjectTimetagForMessages(messages: result)
-                }
-                .onChange(of: messages.count) { _ in
-                    proxy.scrollTo("bottom_text")
-                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -325,8 +340,4 @@ struct MessageDetailView: View {
         }
         
     }
-}
-
-#Preview {
-    MessageDetailView(contactUid: "123", contactName: "debug")
 }

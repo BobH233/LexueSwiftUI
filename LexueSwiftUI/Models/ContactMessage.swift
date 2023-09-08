@@ -16,7 +16,7 @@ enum MessageBodyType: Int, Codable {
     case time = 3
 }
 
-struct MessageBodyItem: Codable {
+struct MessageBodyItem: Codable, Equatable {
     var type: MessageBodyType
     var image_data: String?
     var text_data: String?
@@ -25,7 +25,7 @@ struct MessageBodyItem: Codable {
     var time_text: String?
 }
 
-struct ContactMessage: Codable, Identifiable {
+struct ContactMessage: Codable, Identifiable, Equatable {
     init() {
         id = UUID()
         sendDate = Date()
