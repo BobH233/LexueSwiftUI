@@ -171,7 +171,7 @@ private struct ListView: View {
                     .listRowBackground(Color(contact.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
                     .contextMenu(ContextMenu(menuItems: {
                         Button {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 withAnimation(.easeIn) {
                                     if contact.pinned.wrappedValue {
                                         ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: false, context: managedObjContext)
