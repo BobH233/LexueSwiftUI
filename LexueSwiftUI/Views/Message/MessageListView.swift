@@ -224,8 +224,8 @@ struct MessageListView: View {
     @State var isOpenDatailView: ContactDisplayModel? = nil
     
     func testRefresh() async {
+        isRefreshing = true
         Task {
-            isRefreshing = true
             Thread.sleep(forTimeInterval: 1.5)
             withAnimation {
                 isRefreshing = false
@@ -238,10 +238,10 @@ struct MessageListView: View {
             if globalVar.isLogin {
                 VStack {
                     ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView)
-                        .refreshable {
-                            print("refresh")
-                            await testRefresh()
-                        }
+                }
+                .refreshable {
+                    print("refresh")
+                    await testRefresh()
                 }
                 .navigationTitle("消息")
                 .searchable(text: $searchText, prompt: "搜索消息")
