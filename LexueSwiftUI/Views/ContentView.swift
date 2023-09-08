@@ -10,31 +10,31 @@ import SwiftUI
 struct ContentView: View {
     @State private var tabSelection = 0
     var body: some View {
-        TabView {
+        TabView(selection: $tabSelection) {
             MessageListView(tabSelection: $tabSelection)
+                .tag(1)
                 .tabItem {
                     Image(systemName: "message.fill")
                     Text("消息")
                 }
-                .tag(0)
             CourseListView(debug_use_lazy_v_stack: true)
+                .tag(2)
                 .tabItem {
                     Image(systemName: "graduationcap.fill")
                     Text("课程")
                 }
-                .tag(1)
             CourseListView(debug_use_lazy_v_stack: false)
+                .tag(3)
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("最近事件")
                 }
-                .tag(2)
             SettingView()
+                .tag(4)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("设置")
                 }
-                .tag(3)
         }
     }
 }
