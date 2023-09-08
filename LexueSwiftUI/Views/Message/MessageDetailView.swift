@@ -244,13 +244,13 @@ private struct TimeView: View, BubbleBaseColorConfig {
 }
 
 private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
-    
     @Environment(\.colorScheme) var sysColorScheme
     let message: ContactMessage
     @State var sendDate: String = ""
-    var body: some View {
-        if let encodedUrl = URL(string: message.messageBody.link!) {
-            ChatBubble(direction: .left) {
+    @State var url: URL? = nil
+    var body: some View {            
+        ChatBubble(direction: .left) {
+            if let encodedUrl = url {
                 Link(destination: encodedUrl, label: {
                     Text(message.messageBody.link_title!)
                         .underline()
@@ -258,27 +258,34 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
                 .padding(.vertical, 10)
                 .padding(.horizontal, 20)
                 .background(BubbleColor)
+            } else {
+                Text("错误的链接")
+                    .underline()
+                    .foregroundStyle(.red)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 20)
+                    .background(BubbleColor)
             }
-            .onAppear {
-                sendDate = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
-            }
-            .contextMenu(ContextMenu(menuItems: {
-                Label("发送日期: \(sendDate)", systemImage: "clock.arrow.circlepath")
-                Button {
-                    UIPasteboard.general.string = message.messageBody.link!
-                } label: {
-                    Label("复制链接", systemImage: "link")
-                }
-                Button {
-                    UIPasteboard.general.string = message.messageBody.link_title!
-                } label: {
-                    Label("复制标题", systemImage: "doc.on.doc")
-                }
-            }))
-            .padding(.leading, 10)
-        } else {
-            EmptyView()
         }
+        .onAppear {
+            sendDate = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
+            url = URL(string: message.messageBody.link!)
+        }
+        .contextMenu(ContextMenu(menuItems: {
+            Label("发送日期: \(sendDate)", systemImage: "clock.arrow.circlepath")
+            Button {
+                UIPasteboard.general.string = message.messageBody.link!
+            } label: {
+                Label("复制链接", systemImage: "link")
+            }
+            Button {
+                UIPasteboard.general.string = message.messageBody.link_title!
+            } label: {
+                Label("复制标题", systemImage: "doc.on.doc")
+            }
+        }))
+        .padding(.leading, 10)
+
     }
 }
 
