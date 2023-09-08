@@ -221,6 +221,13 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
                 } label: {
                     Label("复制", systemImage: "doc.on.doc")
                 }
+                Button {
+                    Task {
+                        UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
+                    }
+                } label: {
+                    Label("保存到相册", systemImage: "rectangle.stack.badge.plus")
+                }
             } else {
                 Label("图像已损坏", systemImage: "square.and.arrow.up.trianglebadge.exclamationmark")
             }

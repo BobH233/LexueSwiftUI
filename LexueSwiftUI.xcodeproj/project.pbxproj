@@ -241,11 +241,12 @@
 			};
 			buildConfigurationList = 473BAE772AA48DAA00968C3C /* Build configuration list for PBXProject "LexueSwiftUI" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "zh-Hans";
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 473BAE732AA48DAA00968C3C;
 			packageReferences = (
@@ -427,8 +428,10 @@
 				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LexueSwiftUI/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "乐学助手";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要访问你的相册以存储照片";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -459,8 +462,10 @@
 				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LexueSwiftUI/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "乐学助手";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要访问你的相册以存储照片";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
