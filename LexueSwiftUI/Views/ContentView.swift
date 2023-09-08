@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var tabSelection = 0
     var body: some View {
         TabView {
-            MessageListView()
+            MessageListView(tabSelection: $tabSelection)
                 .tabItem {
                     Image(systemName: "message.fill")
                     Text("消息")

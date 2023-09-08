@@ -9,7 +9,8 @@ import SwiftUI
 
 
 struct SettingView: View {
-    @State private var isLogin = GlobalVariables.shared.isLogin
+    @ObservedObject var globalVar = GlobalVariables.shared
+    
     @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
     var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
     var body: some View {
@@ -45,7 +46,7 @@ struct SettingView: View {
                 }
                 if GlobalVariables.shared.debugMode {
                     Section(header: Text("Debug")) {
-                        Toggle(isOn: $isLogin) {
+                        Toggle(isOn: $globalVar.isLogin) {
                             Text("isLogin")
                         }
                         NavigationLink("Core Data") {
@@ -53,7 +54,7 @@ struct SettingView: View {
                         }
                     }
                 }
-                if isLogin {
+                if globalVar.isLogin {
                     NavigationLink(destination: {
                         
                     }, label: {
@@ -82,7 +83,7 @@ struct SettingView: View {
                         Text("绑定北理账号")
                     })
                 }
-                if isLogin {
+                if globalVar.isLogin {
                     Section(header: Text("应用设置")) {
                         HStack{
                             NavigationLink(destination: {

@@ -213,6 +213,9 @@ struct MessageListView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     
     @ObservedObject var contactsManager = ContactsManager.shared
+    @ObservedObject var globalVar = GlobalVariables.shared
+    @Binding var tabSelection: Int
+    @State private var isLogin = GlobalVariables.shared.isLogin
     @State var searchText: String = ""
     @State var isRefreshing: Bool = false
     @State var totalUnread = 0
@@ -232,16 +235,20 @@ struct MessageListView: View {
     
     var body: some View {
         NavigationView{
-            VStack {
-                ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView)
-                    .refreshable {
-                        print("refresh")
-                        await testRefresh()
-                    }
+            if globalVar.isLogin {
+                VStack {
+                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView)
+                        .refreshable {
+                            print("refresh")
+                            await testRefresh()
+                        }
+                }
+                .navigationTitle("消息")
+                .searchable(text: $searchText, prompt: "搜索消息")
+                .navigationBarTitleDisplayMode(.large)
+            } else {
+                UnloginView(tabSelection: $tabSelection)
             }
-            .navigationTitle("消息")
-            .searchable(text: $searchText, prompt: "搜索消息")
-            .navigationBarTitleDisplayMode(.large)
         }
         .badge(unreadBadge)
         .onAppear {
@@ -278,8 +285,28 @@ struct MessageListView: View {
     }
 }
 
+struct UnloginView: View {
+    @Binding var tabSelection: Int
+    var body: some View {
+        VStack {
+            Image(systemName: "person")
+                .resizable()
+                .frame(width: 50, height: 50)
+                .foregroundColor(.gray)
+                .padding(.bottom, 20)
+            Text("请登录使用乐学助手")
+                .font(.title)
+                .foregroundColor(.gray)
+            Button("前往登录") {
+                tabSelection = 4
+            }
+            .buttonStyle(.borderedProminent)
+        }
+    }
+}
+
 struct MessageListView_Previews: PreviewProvider {
     static var previews: some View {
-        MessageListView()
+        UnloginView(tabSelection: .constant(1))
     }
 }

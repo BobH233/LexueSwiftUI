@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class GlobalVariables {
+class GlobalVariables: ObservableObject {
     static let shared = GlobalVariables()
     @Published var isLogin = true
     @Published var courseList: [CourseShortInfo] = [
