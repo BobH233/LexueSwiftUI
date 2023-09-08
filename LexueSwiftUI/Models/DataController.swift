@@ -112,6 +112,7 @@ class DataController: ObservableObject {
         contactStored.pinned = pinned ?? false
         contactStored.silent = silent ?? false
         contactStored.unreadCount = unreadCount ?? 0
+        contactStored.alias = nil
         save(context: context)
     }
     

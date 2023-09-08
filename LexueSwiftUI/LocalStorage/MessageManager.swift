@@ -69,6 +69,7 @@ class MessageManager {
         DataController.shared.addMessageStored(senderUid: senderUid, type: type, text_data: text_data, image_data: image_data, link_data: link_data, link_title: link_title, date: date, context: context)
         if var contact = DataController.shared.findContactStored(contactUid: senderUid, context: context) {
             contact.lastMessageDate = date ?? Date()
+            contact.unreadCount = contact.unreadCount + 1
             DataController.shared.save(context: context)
         }
     }
