@@ -180,9 +180,10 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
     
     let message: ContactMessage
     @State var sendDate: String = ""
+    @State var uiImage: UIImage? = nil
     var body: some View {
         ChatBubble(direction: .left) {
-            if let uiImage = UIImage(named: message.messageBody.image_data!) {
+            if let uiImage = uiImage  {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -200,15 +201,19 @@ private struct BubbleImageMessageView: View, BubbleBaseColorConfig {
             
         }
         .onTapGesture {
+            if uiImage == nil {
+                return
+            }
             imageData = Image(message.messageBody.image_data!)
             showImage = true
         }
         .onAppear {
             sendDate = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
+            uiImage = UIImage(named: message.messageBody.image_data!)
         }
         .contextMenu(ContextMenu(menuItems: {
             Label("发送日期: \(sendDate)", systemImage: "clock.arrow.circlepath")
-            if let uiImage = UIImage(named: message.messageBody.image_data!) {
+            if let uiImage = uiImage {
                 Button {
                     Task {
                         UIPasteboard.general.image = uiImage
