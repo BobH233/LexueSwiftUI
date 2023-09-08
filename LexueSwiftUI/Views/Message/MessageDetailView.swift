@@ -291,12 +291,13 @@ struct MessageDetailView: View {
     let contactUid: String
     @State var contactName: String = ""
     @State private var messages: [ContactMessage] = []
+    @State var loading: Bool = true
     var body: some View {
         NavigationView {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack {
-                        if messages.count == 0 {
+                        if loading {
                             HStack {
                                 Spacer()
                                 ProgressView()
@@ -320,6 +321,7 @@ struct MessageDetailView: View {
                         }
                     }
                     .onAppear {
+                        loading = true
                         Task {
                             // TODO: 删除这个模拟加载时间
                             Thread.sleep(forTimeInterval: 1)
@@ -329,6 +331,7 @@ struct MessageDetailView: View {
                             let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
                             contactName = contact!.originName!
                             withAnimation(.linear(duration: 0.5)) {
+                                loading = false
                                 messages = MessageManager.shared.InjectTimetagForMessages(messages: result)
                             }
                             // 哪种方法好？
