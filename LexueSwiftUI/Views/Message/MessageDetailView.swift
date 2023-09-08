@@ -296,6 +296,13 @@ struct MessageDetailView: View {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack {
+                        if messages.count == 0 {
+                            HStack {
+                                Spacer()
+                                ProgressView()
+                                Spacer()
+                            }
+                        }
                         ForEach(messages) { message in
                             if message.messageBody.type == .text {
                                 BubbleTextMessageView(message: message)
@@ -314,16 +321,22 @@ struct MessageDetailView: View {
                     }
                     .onAppear {
                         Task {
+                            // TODO: 删除这个模拟加载时间
+                            Thread.sleep(forTimeInterval: 1)
                             // 将未读气泡消除
                             ContactsManager.shared.ReadallContact(contactUid: contactUid, context: managedObjContext)
                             let result = DataController.shared.queryMessagesByContactUid(senderUid: contactUid, context: managedObjContext)
                             let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
                             contactName = contact!.originName!
-                            messages = MessageManager.shared.InjectTimetagForMessages(messages: result)
+                            withAnimation(.linear(duration: 0.5)) {
+                                messages = MessageManager.shared.InjectTimetagForMessages(messages: result)
+                            }
                             // 哪种方法好？
-                            DispatchQueue.main.async {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 withAnimation {
-                                    proxy.scrollTo(messages.last?.id)
+                                    for _ in 0..<3 {
+                                        proxy.scrollTo(messages.last?.id)
+                                    }
                                 }
                             }
                         }
