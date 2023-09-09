@@ -120,7 +120,9 @@ private struct ListView: View {
     @Binding var isRefreshing: Bool
     @Binding var isOpenDatailView: ContactDisplayModel?
     
-    @Environment(\.refresh) private var refreshAction
+    
+    
+    let refreshAction: (()async -> Void)?
     @ViewBuilder
     var refreshToolbar: some View {
         if let doRefresh = refreshAction {
@@ -128,8 +130,10 @@ private struct ListView: View {
                 ProgressView()
             } else {
                 Button(action: {
-                    Task{
-                        await doRefresh()
+                    if let refresh = refreshAction {
+                        Task {
+                            await refresh()
+                        }
                     }
                 }) {
                     Image(systemName: "arrow.clockwise")
@@ -227,9 +231,7 @@ struct MessageListView: View {
         isRefreshing = true
         Task {
             Thread.sleep(forTimeInterval: 1.5)
-            withAnimation {
-                isRefreshing = false
-            }
+            isRefreshing = false
         }
     }
     
@@ -237,7 +239,7 @@ struct MessageListView: View {
         NavigationView{
             if globalVar.isLogin {
                 VStack {
-                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView)
+                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, refreshAction: testRefresh)
                 }
                 .refreshable {
                     print("refresh")

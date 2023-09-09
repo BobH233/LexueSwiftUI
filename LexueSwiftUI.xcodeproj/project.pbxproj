@@ -105,7 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				47CBA23F2AA5CE2F009F9242 /* Models */,
-				473BAE922AA48E9500968C3C /* LocalStorage */,
+				473BAE922AA48E9500968C3C /* Managers */,
 				473BAE912AA48E8200968C3C /* Network */,
 				473BAE8D2AA48E4300968C3C /* Views */,
 				473BAE7F2AA48DAA00968C3C /* LexueSwiftUIApp.swift */,
@@ -171,7 +171,7 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		473BAE922AA48E9500968C3C /* LocalStorage */ = {
+		473BAE922AA48E9500968C3C /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */,
@@ -179,7 +179,7 @@
 				4799C8162AA6237500F812D6 /* CourseManager.swift */,
 				47A927842AA7836300ABDC53 /* MessageManager.swift */,
 			);
-			path = LocalStorage;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		474C9B772AA4E3680064B5AF /* DDLList */ = {
