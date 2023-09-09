@@ -262,7 +262,7 @@ struct MessageListView: View {
             MessageDetailView(contactUid: contact.contactUid)
         }
         .onChange(of: contactsManager.ContactDisplayLists) { _ in
-            print("recalc totalUnread")
+            // print("recalc totalUnread")
             var tmpTotal = 0
             for contact in ContactsManager.shared.ContactDisplayLists {
                 if contact.silent {

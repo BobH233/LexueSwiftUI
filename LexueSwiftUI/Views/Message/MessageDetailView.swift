@@ -334,7 +334,7 @@ struct MessageDetailView: View {
                             }
                         }
                     }
-                    .onAppear {
+                    .onFirstAppear {
                         loading = true
                         Task {
                             // TODO: 删除这个模拟加载时间
@@ -370,9 +370,19 @@ struct MessageDetailView: View {
                     }
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: ContactDetailView()) {
+                        Image(systemName: "ellipsis")
+                    }
+                }
+            }
             .navigationTitle(contactName)
             .navigationBarTitleDisplayMode(.inline)
         }
-        
+        .onDisappear {
+            loading = true
+            messages.removeAll()
+        }
     }
 }
