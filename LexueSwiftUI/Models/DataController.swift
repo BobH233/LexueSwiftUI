@@ -50,7 +50,7 @@ class DataController: ObservableObject {
         do {
             let results = try context.fetch(request)
             for result in results {
-                var cur: ContactMessage = wrapperContactMessage(origin: result)
+                let cur: ContactMessage = wrapperContactMessage(origin: result)
                 ret.append(cur)
             }
         } catch {
@@ -67,7 +67,7 @@ class DataController: ObservableObject {
         do {
             let results = try context.fetch(request)
             for result in results {
-                var cur: ContactMessage = wrapperContactMessage(origin: result)
+                let cur: ContactMessage = wrapperContactMessage(origin: result)
                 ret.append(cur)
             }
         } catch {
@@ -139,4 +139,15 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
+}
+
+
+extension ContactStored {
+    func GetDisplayName() -> String {
+        if alias == nil || alias == "" {
+            return originName ?? ""
+        } else {
+            return alias!
+        }
+    }
 }

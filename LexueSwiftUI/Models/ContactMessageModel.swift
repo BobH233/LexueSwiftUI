@@ -43,3 +43,22 @@ struct ContactMessage: Codable, Identifiable, Equatable {
     var senderUid: String?
     var messageBody: MessageBodyItem
 }
+
+struct ContactMessageSearchResult: Codable, Identifiable, Equatable {
+    init() {
+        id = UUID()
+        sendTimeStr = ""
+        contactUid = ""
+        contactName = ""
+        messageStart = ""
+        messageSearched = ""
+        messageEnd = ""
+    }
+    var id = UUID()
+    var sendTimeStr: String
+    var contactName: String
+    var contactUid: String
+    var messageStart: String
+    var messageSearched: String
+    var messageEnd: String
+}

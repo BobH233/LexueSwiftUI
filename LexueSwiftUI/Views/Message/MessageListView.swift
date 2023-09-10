@@ -60,7 +60,7 @@ private struct UnreadRedPoint: View {
     }
 }
 
-private struct ListItemView: View {
+private struct ContactListItemView: View {
     @Binding var title: String
     @Binding var content: String
     @Binding var unreadCnt: Int
@@ -121,7 +121,7 @@ private struct ContactListView: View {
     var body: some View {
         VStack {
             List($contacts) { contact in
-                ListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, silent: contact.silent,  isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
+                ContactListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, silent: contact.silent,  isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
                     .swipeActions(edge: .leading) {
                         Button {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -187,8 +187,76 @@ private struct ContactListView: View {
 }
 
 private struct SearchResultListView: View {
+    @Binding var searchMessageResult: [ContactMessageSearchResult]
     var body: some View {
-        Text("Search result")
+        List {
+            Section("联系人") {
+                
+            }
+            Section("消息(\(searchMessageResult.count)") {
+                ForEach(searchMessageResult) { message in
+                    SearchResultListItemView(title: message.contactName, messageStart: message.messageStart, messageSearched: message.messageSearched, messageEnd: message.messageEnd, time: message.sendTimeStr)
+                }
+            }
+            
+        }
+    }
+}
+
+private struct SearchResultListItemView: View {
+    @State var title: String = "这是联系人"
+    @State var messageStart: String = "这是一段话的开始，"
+    @State var messageSearched: String = "这一段被搜索了啊啊啊啊,"
+    @State var messageEnd: String = "这是那一段话的后面部分"
+    @State var time: String = "昨天 12:00"
+    @State var avatar: String = "default_avatar"
+    var body: some View {
+        ZStack {
+            HStack {
+                Image(avatar)
+                    .resizable()
+                    .clipShape(Circle())
+                    .frame(width: 45, height: 45)
+                
+                VStack(alignment: .leading, spacing: 3){
+                    HStack{
+                        Text("\(title)")
+                            .lineLimit(1)
+                        Spacer()
+                        HStack {
+                            Text("\(time)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .padding(.bottom, 3)
+                    HStack(spacing: 0) {
+                        Text("\(messageStart)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .lineLimit(1)
+                            .truncationMode(.head)
+                        Text("\(messageSearched)")
+                            .font(.subheadline)
+                            .foregroundColor(.accentColor)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                        Text("\(messageEnd)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                    }
+                }
+            }
+            Button(action: {
+                
+            }, label: {
+                EmptyView()
+            })
+        }
     }
 }
 
@@ -201,7 +269,7 @@ private struct ListView: View {
     @Binding var isOpenDatailView: ContactDisplayModel?
     
     @Binding var submittedSearch: Bool
-    
+    @Binding var searchMessageResult: [ContactMessageSearchResult]
     
     
     let refreshAction: (()async -> Void)?
@@ -224,10 +292,15 @@ private struct ListView: View {
                     }
                 } else {
                     // 搜索后的展示视图
-                    SearchResultListView()
+                    SearchResultListView(searchMessageResult: $searchMessageResult)
                 }
             } else {
                 ContactListView(contacts: $contacts, isOpenDatailView: $isOpenDatailView)
+                    .refreshable {
+                        if let refresh = refreshAction {
+                            await refresh()
+                        }
+                    }
                     .toolbar {
                         if isRefreshing {
                             ProgressView()
@@ -269,7 +342,7 @@ struct MessageListView: View {
     @State var unreadBadge: Text? = nil
     
     @State var submittedSearch = false
-    @State var searchMessageResult: [ContactMessage] = []
+    @State var searchMessageResult: [ContactMessageSearchResult] = []
     
     @State var isOpenDatailView: ContactDisplayModel? = nil
     
@@ -288,10 +361,46 @@ struct MessageListView: View {
             return
         }
         
-        let result = DataController.shared.blurSearchMessage(keyword: trimmedKeyword, context: managedObjContext)
-        print(result)
+        var result = DataController.shared.blurSearchMessage(keyword: trimmedKeyword, context: managedObjContext)
+        result.sort { (msg1: ContactMessage, msg2: ContactMessage) in
+            if msg1.senderUid != msg2.senderUid {
+                return msg1.senderUid! < msg2.senderUid!
+            }
+            return msg1.sendDate > msg2.sendDate
+        }
+        searchMessageResult.removeAll()
+        var tmpSearchResult: [ContactMessageSearchResult] = []
+        for (_, message) in result.enumerated() {
+            var cur: ContactMessageSearchResult = ContactMessageSearchResult()
+            let contact = DataController.shared.findContactStored(contactUid: message.senderUid!, context: managedObjContext)
+            if contact == nil {
+                continue
+            }
+            cur.contactUid = message.senderUid!
+            cur.contactName = contact!.GetDisplayName()
+            cur.sendTimeStr = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
+            var searched = false
+            if message.messageBody.type == .text {
+                if let range = message.messageBody.text_data!.range(of: trimmedKeyword) {
+                    cur.messageStart = String(message.messageBody.text_data![..<range.lowerBound])
+                    cur.messageSearched = trimmedKeyword
+                    cur.messageEnd = String(message.messageBody.text_data![range.upperBound...])
+                    searched = true
+                }
+            } else if message.messageBody.type == .link {
+                if let range = message.messageBody.link_title!.range(of: trimmedKeyword) {
+                    cur.messageStart = "[链接]" + String(message.messageBody.link_title![..<range.lowerBound])
+                    cur.messageSearched = trimmedKeyword
+                    cur.messageEnd = String(message.messageBody.link_title![range.upperBound...])
+                    searched = true
+                }
+            }
+            if searched {
+                tmpSearchResult.append(cur)
+            }
+        }
         withAnimation {
-            searchMessageResult = result
+            searchMessageResult = tmpSearchResult
             submittedSearch = true
         }
     }
@@ -300,13 +409,9 @@ struct MessageListView: View {
         NavigationView{
             if globalVar.isLogin {
                 VStack {
-                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, submittedSearch: $submittedSearch, refreshAction: testRefresh)
+                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, submittedSearch: $submittedSearch, searchMessageResult: $searchMessageResult, refreshAction: testRefresh)
                         .searchable(text: $searchText, prompt: "搜索消息")
                         .onSubmit(of: .search, DoSearchMessage)
-                }
-                .refreshable {
-                    print("refresh")
-                    await testRefresh()
                 }
                 .navigationTitle("消息")
                 .navigationBarTitleDisplayMode(.large)
@@ -371,6 +476,6 @@ struct UnloginView: View {
 
 struct MessageListView_Previews: PreviewProvider {
     static var previews: some View {
-        UnloginView(tabSelection: .constant(1))
+        SearchResultListItemView()
     }
 }

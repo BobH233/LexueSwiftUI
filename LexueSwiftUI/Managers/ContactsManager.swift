@@ -69,11 +69,7 @@ class ContactsManager: ObservableObject {
             cur.id = contact.contactUid!
             cur.lastMessageDate = contact.lastMessageDate!
             cur.contactUid = contact.contactUid!
-            if contact.alias != nil && contact.alias != "" {
-                cur.displayName = contact.alias!
-            } else {
-                cur.displayName = contact.originName!
-            }
+            cur.displayName = contact.GetDisplayName()
             cur.avatar_data = contact.avatar_data ?? "default_avatar"
             let latestMsg = DataController.shared.queryLastMessageByContactUid(senderUid: contact.contactUid!, context: context)
             cur.recentMessage = MessageManager.shared.GetMessageTextDescription(message: latestMsg)
