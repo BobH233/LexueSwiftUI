@@ -79,7 +79,7 @@ class DataController: ObservableObject {
     func blurSearchContact(keyword: String, context: NSManagedObjectContext) -> [ContactStored] {
         let request: NSFetchRequest<ContactStored> = ContactStored.fetchRequest()
         var ret: [ContactStored] = [ContactStored]()
-        let predicate = NSPredicate(format: "alias CONTAINS[cd] %@ OR originName CONTAINS[cd] %@", keyword, keyword)
+        let predicate = NSPredicate(format: "alias CONTAINS[cd] %@ OR originName CONTAINS[cd] %@ OR contactUid CONTAINS[cd] %@", keyword, keyword, keyword)
         request.predicate = predicate
         do {
             let results = try context.fetch(request)

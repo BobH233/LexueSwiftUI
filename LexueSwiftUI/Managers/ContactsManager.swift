@@ -64,7 +64,12 @@ class ContactsManager: ObservableObject {
                 return contact1.pinned && !contact2.pinned
             }
         }
+        var uniqueContactUids = Set<String>()
         for contact in contacts {
+            if uniqueContactUids.contains(contact.contactUid!) {
+                continue
+            }
+            uniqueContactUids.insert(contact.contactUid!)
             var cur: ContactDisplayModel = ContactDisplayModel()
             cur.id = contact.contactUid!
             cur.lastMessageDate = contact.lastMessageDate!

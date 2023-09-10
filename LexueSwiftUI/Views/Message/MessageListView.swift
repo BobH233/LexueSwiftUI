@@ -193,7 +193,7 @@ private struct SearchResultListView: View {
     @Binding var isOpenDatailView: ContactDisplayModel?
     var body: some View {
         List {
-            Section("联系人") {
+            Section("联系人(\(searchContactResult.count))") {
                 ForEach(searchContactResult) { contact in
                     SearchResultListItemView(contactUid: contact.contactUid!, msgUUID: nil, title: contact.GetDisplayName(), messageStart: contact.contactUid!, messageSearched: "", messageEnd: "", time: "", isOpenDatailView: $isOpenDatailView)
                 }
@@ -384,7 +384,16 @@ struct MessageListView: View {
         }
         searchMessageResult.removeAll()
         var tmpSearchMessageResult: [ContactMessageSearchResult] = []
-        var tmpSearchContactResult: [ContactStored] = DataController.shared.blurSearchContact(keyword: trimmedKeyword, context: managedObjContext)
+        var tmpSearchContactResult: [ContactStored] = []
+        var uniqueContactUids = Set<String>()
+        let result2 = DataController.shared.blurSearchContact(keyword: trimmedKeyword, context: managedObjContext)
+        for contact in result2 {
+            if uniqueContactUids.contains(contact.contactUid!) {
+                continue
+            }
+            tmpSearchContactResult.append(contact)
+            uniqueContactUids.insert(contact.contactUid!)
+        }
         for (_, message) in result.enumerated() {
             var cur: ContactMessageSearchResult = ContactMessageSearchResult()
             let contact = DataController.shared.findContactStored(contactUid: message.senderUid!, context: managedObjContext)
@@ -397,16 +406,16 @@ struct MessageListView: View {
             cur.messageUUID = message.id
             var searched = false
             if message.messageBody.type == .text {
-                if let range = message.messageBody.text_data!.range(of: trimmedKeyword) {
+                if let range = message.messageBody.text_data!.lowercased().range(of: trimmedKeyword.lowercased()) {
                     cur.messageStart = String(message.messageBody.text_data![..<range.lowerBound])
-                    cur.messageSearched = trimmedKeyword
+                    cur.messageSearched = String(message.messageBody.text_data![range.lowerBound..<range.upperBound])
                     cur.messageEnd = String(message.messageBody.text_data![range.upperBound...])
                     searched = true
                 }
             } else if message.messageBody.type == .link {
-                if let range = message.messageBody.link_title!.range(of: trimmedKeyword) {
-                    cur.messageStart = "[链接]" + String(message.messageBody.link_title![..<range.lowerBound])
-                    cur.messageSearched = trimmedKeyword
+                if let range = message.messageBody.link_title!.lowercased().range(of: trimmedKeyword.lowercased()) {
+                    cur.messageStart = "[链接] " + String(message.messageBody.link_title![..<range.lowerBound])
+                    cur.messageSearched = String(message.messageBody.link_title![range.lowerBound..<range.upperBound])
                     cur.messageEnd = String(message.messageBody.link_title![range.upperBound...])
                     searched = true
                 }
