@@ -61,7 +61,7 @@ struct ContactDetailView: View {
             Toggle("置顶", isOn: $pinned)
             Toggle("消息免打扰", isOn: $silent)
         }
-        .onAppear {
+        .onFirstAppear {
             let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
             if contact != nil {
                 contactAlias = contact!.alias ?? ""

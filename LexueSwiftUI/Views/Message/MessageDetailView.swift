@@ -343,7 +343,11 @@ struct MessageDetailView: View {
                             ContactsManager.shared.ReadallContact(contactUid: contactUid, context: managedObjContext)
                             let result = DataController.shared.queryMessagesByContactUid(senderUid: contactUid, context: managedObjContext)
                             let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
-                            contactName = contact!.originName!
+                            if contact!.alias != nil && contact!.alias != "" {
+                                contactName = contact!.alias!
+                            } else {
+                                contactName = contact!.originName!
+                            }
                             withAnimation(.linear(duration: 0.5)) {
                                 loading = false
                                 messages = MessageManager.shared.InjectTimetagForMessages(messages: result)
@@ -372,7 +376,14 @@ struct MessageDetailView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: ContactDetailView(contactUid: contactUid)) {
+                    NavigationLink(destination: ContactDetailView(contactUid: contactUid).onDisappear {
+                        let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
+                        if contact!.alias != nil && contact!.alias != "" {
+                            contactName = contact!.alias!
+                        } else {
+                            contactName = contact!.originName!
+                        }
+                    }) {
                         Image(systemName: "ellipsis")
                     }
                 }
