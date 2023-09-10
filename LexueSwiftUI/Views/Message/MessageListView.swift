@@ -189,11 +189,14 @@ private struct ContactListView: View {
 
 private struct SearchResultListView: View {
     @Binding var searchMessageResult: [ContactMessageSearchResult]
+    @Binding var searchContactResult: [ContactStored]
     @Binding var isOpenDatailView: ContactDisplayModel?
     var body: some View {
         List {
             Section("联系人") {
-                
+                ForEach(searchContactResult) { contact in
+                    SearchResultListItemView(contactUid: contact.contactUid!, msgUUID: nil, title: contact.GetDisplayName(), messageStart: contact.contactUid!, messageSearched: "", messageEnd: "", time: "", isOpenDatailView: $isOpenDatailView)
+                }
             }
             Section("消息(\(searchMessageResult.count))") {
                 ForEach(searchMessageResult) { message in
@@ -207,7 +210,7 @@ private struct SearchResultListView: View {
 
 private struct SearchResultListItemView: View {
     let contactUid: String
-    let msgUUID: UUID
+    let msgUUID: UUID?
     @State var title: String = "这是联系人"
     @State var messageStart: String = "这是一段话的开始，"
     @State var messageSearched: String = "这一段被搜索了啊啊啊啊,"
@@ -278,6 +281,7 @@ private struct ListView: View {
     
     @Binding var submittedSearch: Bool
     @Binding var searchMessageResult: [ContactMessageSearchResult]
+    @Binding var searchContactResult: [ContactStored]
     
     
     let refreshAction: (()async -> Void)?
@@ -300,7 +304,7 @@ private struct ListView: View {
                     }
                 } else {
                     // 搜索后的展示视图
-                    SearchResultListView(searchMessageResult: $searchMessageResult, isOpenDatailView: $isOpenDatailView)
+                    SearchResultListView(searchMessageResult: $searchMessageResult, searchContactResult: $searchContactResult, isOpenDatailView: $isOpenDatailView)
                 }
             } else {
                 ContactListView(contacts: $contacts, isOpenDatailView: $isOpenDatailView)
@@ -315,6 +319,7 @@ private struct ListView: View {
                         } else {
                             Button(action: {
                                 if let refresh = refreshAction {
+                                    isRefreshing = true
                                     Task {
                                         await refresh()
                                     }
@@ -351,6 +356,7 @@ struct MessageListView: View {
     
     @State var submittedSearch = false
     @State var searchMessageResult: [ContactMessageSearchResult] = []
+    @State var searchContactResult: [ContactStored] = []
     
     @State var isOpenDatailView: ContactDisplayModel? = nil
     
@@ -377,7 +383,8 @@ struct MessageListView: View {
             return msg1.sendDate > msg2.sendDate
         }
         searchMessageResult.removeAll()
-        var tmpSearchResult: [ContactMessageSearchResult] = []
+        var tmpSearchMessageResult: [ContactMessageSearchResult] = []
+        var tmpSearchContactResult: [ContactStored] = DataController.shared.blurSearchContact(keyword: trimmedKeyword, context: managedObjContext)
         for (_, message) in result.enumerated() {
             var cur: ContactMessageSearchResult = ContactMessageSearchResult()
             let contact = DataController.shared.findContactStored(contactUid: message.senderUid!, context: managedObjContext)
@@ -405,11 +412,12 @@ struct MessageListView: View {
                 }
             }
             if searched {
-                tmpSearchResult.append(cur)
+                tmpSearchMessageResult.append(cur)
             }
         }
         withAnimation {
-            searchMessageResult = tmpSearchResult
+            searchContactResult = tmpSearchContactResult
+            searchMessageResult = tmpSearchMessageResult
             submittedSearch = true
         }
     }
@@ -418,7 +426,7 @@ struct MessageListView: View {
         NavigationView{
             if globalVar.isLogin {
                 VStack {
-                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, submittedSearch: $submittedSearch, searchMessageResult: $searchMessageResult, refreshAction: testRefresh)
+                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, submittedSearch: $submittedSearch, searchMessageResult: $searchMessageResult, searchContactResult: $searchContactResult, refreshAction: testRefresh)
                         .searchable(text: $searchText, prompt: "搜索消息")
                         .onSubmit(of: .search, DoSearchMessage)
                 }

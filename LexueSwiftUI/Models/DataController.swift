@@ -76,6 +76,20 @@ class DataController: ObservableObject {
         return ret
     }
     
+    func blurSearchContact(keyword: String, context: NSManagedObjectContext) -> [ContactStored] {
+        let request: NSFetchRequest<ContactStored> = ContactStored.fetchRequest()
+        var ret: [ContactStored] = [ContactStored]()
+        let predicate = NSPredicate(format: "alias CONTAINS[cd] %@ OR originName CONTAINS[cd] %@", keyword, keyword)
+        request.predicate = predicate
+        do {
+            let results = try context.fetch(request)
+            ret = results
+        } catch {
+            print("搜索联系人失败：\(error)")
+        }
+        return ret
+    }
+    
     func queryLastMessageByContactUid(senderUid: String,  context: NSManagedObjectContext) -> ContactMessage? {
         let messages = queryMessagesByContactUid(senderUid: senderUid, context: context)
         if messages.count == 0 {
