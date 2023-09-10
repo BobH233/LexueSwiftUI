@@ -303,6 +303,7 @@ struct MessageDetailView: View {
     @State var image = Image("default_avatar")
     
     let contactUid: String
+    let scrollMsgId: UUID?
     @State var contactName: String = ""
     @State private var messages: [ContactMessage] = []
     @State var loading: Bool = true
@@ -336,6 +337,7 @@ struct MessageDetailView: View {
                     }
                     .onFirstAppear {
                         loading = true
+                        print("scroll to \(scrollMsgId?.uuidString ?? "nil")")
                         Task {
                             // TODO: 删除这个模拟加载时间
                             Thread.sleep(forTimeInterval: 1)
@@ -352,7 +354,11 @@ struct MessageDetailView: View {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 withAnimation {
                                     for _ in 0..<3 {
-                                        proxy.scrollTo(messages.last?.id)
+                                        if scrollMsgId == nil {
+                                            proxy.scrollTo(messages.last?.id)
+                                        } else {
+                                            proxy.scrollTo(scrollMsgId!)
+                                        }
                                     }
                                 }
                             }

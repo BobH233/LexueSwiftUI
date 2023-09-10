@@ -47,6 +47,7 @@ struct ContactMessage: Codable, Identifiable, Equatable {
 struct ContactMessageSearchResult: Codable, Identifiable, Equatable {
     init() {
         id = UUID()
+        messageUUID = UUID()
         sendTimeStr = ""
         contactUid = ""
         contactName = ""
@@ -59,6 +60,7 @@ struct ContactMessageSearchResult: Codable, Identifiable, Equatable {
     var contactName: String
     var contactUid: String
     var messageStart: String
+    var messageUUID: UUID
     var messageSearched: String
     var messageEnd: String
 }

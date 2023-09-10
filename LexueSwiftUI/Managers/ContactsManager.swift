@@ -77,6 +77,7 @@ class ContactsManager: ObservableObject {
             cur.unreadCount = Int(contact.unreadCount)
             cur.pinned = contact.pinned
             cur.silent = contact.silent
+            cur.scrollToMsgId = nil
             result.append(cur)
         }
         ContactDisplayLists = result

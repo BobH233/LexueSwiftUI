@@ -41,6 +41,7 @@ struct ContactDisplayModel: Codable, Identifiable, Equatable  {
         pinned = false
         silent = false
         type = 0
+        scrollToMsgId = nil
     }
     var id: String
     var lastMessageDate: Date
@@ -53,4 +54,5 @@ struct ContactDisplayModel: Codable, Identifiable, Equatable  {
     var pinned: Bool
     var silent: Bool
     var type: Int
+    var scrollToMsgId: UUID?
 }

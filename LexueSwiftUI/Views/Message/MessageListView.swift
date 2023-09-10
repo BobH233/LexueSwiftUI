@@ -106,6 +106,7 @@ private struct ContactListItemView: View {
                 }
             }
             Button(action: {
+                currentViewContact.scrollToMsgId = nil
                 isOpenDatailView = currentViewContact
             }, label: {
                 EmptyView()
@@ -188,14 +189,15 @@ private struct ContactListView: View {
 
 private struct SearchResultListView: View {
     @Binding var searchMessageResult: [ContactMessageSearchResult]
+    @Binding var isOpenDatailView: ContactDisplayModel?
     var body: some View {
         List {
             Section("联系人") {
                 
             }
-            Section("消息(\(searchMessageResult.count)") {
+            Section("消息(\(searchMessageResult.count))") {
                 ForEach(searchMessageResult) { message in
-                    SearchResultListItemView(title: message.contactName, messageStart: message.messageStart, messageSearched: message.messageSearched, messageEnd: message.messageEnd, time: message.sendTimeStr)
+                    SearchResultListItemView(contactUid: message.contactUid, msgUUID: message.messageUUID, title: message.contactName, messageStart: message.messageStart, messageSearched: message.messageSearched, messageEnd: message.messageEnd, time: message.sendTimeStr, isOpenDatailView: $isOpenDatailView)
                 }
             }
             
@@ -204,12 +206,15 @@ private struct SearchResultListView: View {
 }
 
 private struct SearchResultListItemView: View {
+    let contactUid: String
+    let msgUUID: UUID
     @State var title: String = "这是联系人"
     @State var messageStart: String = "这是一段话的开始，"
     @State var messageSearched: String = "这一段被搜索了啊啊啊啊,"
     @State var messageEnd: String = "这是那一段话的后面部分"
     @State var time: String = "昨天 12:00"
     @State var avatar: String = "default_avatar"
+    @Binding var isOpenDatailView: ContactDisplayModel?
     var body: some View {
         ZStack {
             HStack {
@@ -252,7 +257,10 @@ private struct SearchResultListItemView: View {
                 }
             }
             Button(action: {
-                
+                var tmp = ContactDisplayModel()
+                tmp.contactUid = contactUid
+                tmp.scrollToMsgId = msgUUID
+                isOpenDatailView = tmp
             }, label: {
                 EmptyView()
             })
@@ -292,7 +300,7 @@ private struct ListView: View {
                     }
                 } else {
                     // 搜索后的展示视图
-                    SearchResultListView(searchMessageResult: $searchMessageResult)
+                    SearchResultListView(searchMessageResult: $searchMessageResult, isOpenDatailView: $isOpenDatailView)
                 }
             } else {
                 ContactListView(contacts: $contacts, isOpenDatailView: $isOpenDatailView)
@@ -379,6 +387,7 @@ struct MessageListView: View {
             cur.contactUid = message.senderUid!
             cur.contactName = contact!.GetDisplayName()
             cur.sendTimeStr = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
+            cur.messageUUID = message.id
             var searched = false
             if message.messageBody.type == .text {
                 if let range = message.messageBody.text_data!.range(of: trimmedKeyword) {
@@ -428,7 +437,7 @@ struct MessageListView: View {
             }
         }
         .sheet(item: $isOpenDatailView) { contact in
-            MessageDetailView(contactUid: contact.contactUid)
+            MessageDetailView(contactUid: contact.contactUid, scrollMsgId: contact.scrollToMsgId)
         }
         .onChange(of: contactsManager.ContactDisplayLists) { _ in
             // print("recalc totalUnread")
@@ -476,6 +485,7 @@ struct UnloginView: View {
 
 struct MessageListView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchResultListItemView()
+        Text("123")
+        // SearchResultListItemView()
     }
 }
