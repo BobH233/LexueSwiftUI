@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "DataController.blurSearchMessage(keyword:context:):DataController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "(MessageStored)((id)0x600002171400)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in ListItemView.body.getter:MessageListView.swift">
          <PersistentStrings>
             <PersistentString

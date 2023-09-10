@@ -30,6 +30,19 @@ class DataController: ObservableObject {
         }
     }
     
+    private func wrapperContactMessage(origin: MessageStored) -> ContactMessage {
+        var ret: ContactMessage = ContactMessage()
+        ret.id = origin.id!
+        ret.sendDate = origin.date!
+        ret.senderUid = origin.senderUid
+        ret.messageBody.type = MessageBodyType(rawValue: Int(origin.type))!
+        ret.messageBody.image_data = origin.image_data
+        ret.messageBody.link_title = origin.link_title
+        ret.messageBody.link = origin.link_data
+        ret.messageBody.text_data = origin.text_data
+        return ret
+    }
+    
     func queryMessagesByContactUid(senderUid: String,  context: NSManagedObjectContext) -> [ContactMessage] {
         let request: NSFetchRequest<MessageStored> = MessageStored.fetchRequest()
         var ret: [ContactMessage] = [ContactMessage]()
@@ -37,19 +50,28 @@ class DataController: ObservableObject {
         do {
             let results = try context.fetch(request)
             for result in results {
-                var cur: ContactMessage = ContactMessage()
-                cur.id = result.id!
-                cur.sendDate = result.date!
-                cur.senderUid = result.senderUid
-                cur.messageBody.type = MessageBodyType(rawValue: Int(result.type))!
-                cur.messageBody.image_data = result.image_data
-                cur.messageBody.link_title = result.link_title
-                cur.messageBody.link = result.link_data
-                cur.messageBody.text_data = result.text_data
+                var cur: ContactMessage = wrapperContactMessage(origin: result)
                 ret.append(cur)
             }
         } catch {
             print("查询联系人消息失败：\(error)")
+        }
+        return ret
+    }
+    
+    func blurSearchMessage(keyword: String, context: NSManagedObjectContext) -> [ContactMessage] {
+        let request: NSFetchRequest<MessageStored> = MessageStored.fetchRequest()
+        var ret: [ContactMessage] = [ContactMessage]()
+        let predicate = NSPredicate(format: "link_title CONTAINS[cd] %@ OR text_data CONTAINS[cd] %@", keyword, keyword)
+        request.predicate = predicate
+        do {
+            let results = try context.fetch(request)
+            for result in results {
+                var cur: ContactMessage = wrapperContactMessage(origin: result)
+                ret.append(cur)
+            }
+        } catch {
+            print("搜索联系人消息失败：\(error)")
         }
         return ret
     }

@@ -119,68 +119,70 @@ private struct ContactListView: View {
     @Binding var contacts: [ContactDisplayModel]
     @Binding var isOpenDatailView: ContactDisplayModel?
     var body: some View {
-        List($contacts) { contact in
-            ListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, silent: contact.silent,  isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
-                .swipeActions(edge: .leading) {
-                    Button {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            withAnimation {
-                                ContactsManager.shared.ReadallContact(contactUid: contact.contactUid.wrappedValue, context: managedObjContext)
-                            }
-                        }
-                    } label: {
-                        Label("Read", systemImage: "checkmark.circle.fill")
-                    }
-                    .tint(.blue)
-                }
-                .swipeActions(edge: .trailing) {
-                    Button {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            withAnimation(.easeIn) {
-                                if contact.pinned.wrappedValue {
-                                    ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: false, context: managedObjContext)
-                                } else {
-                                    ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: true, context: managedObjContext)
+        VStack {
+            List($contacts) { contact in
+                ListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, silent: contact.silent,  isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
+                    .swipeActions(edge: .leading) {
+                        Button {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation {
+                                    ContactsManager.shared.ReadallContact(contactUid: contact.contactUid.wrappedValue, context: managedObjContext)
                                 }
                             }
+                        } label: {
+                            Label("Read", systemImage: "checkmark.circle.fill")
                         }
-                    } label: {
-                        Label("Pin", systemImage: "pin")
+                        .tint(.blue)
                     }
-                    .tint(.orange)
-                }
-                .listRowBackground(Color(contact.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
-                .contextMenu(ContextMenu(menuItems: {
-                    Button {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            withAnimation(.easeIn) {
-                                if contact.pinned.wrappedValue {
-                                    ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: false, context: managedObjContext)
-                                } else {
-                                    ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: true, context: managedObjContext)
+                    .swipeActions(edge: .trailing) {
+                        Button {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation(.easeIn) {
+                                    if contact.pinned.wrappedValue {
+                                        ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: false, context: managedObjContext)
+                                    } else {
+                                        ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: true, context: managedObjContext)
+                                    }
                                 }
                             }
+                        } label: {
+                            Label("Pin", systemImage: "pin")
                         }
-                    } label: {
-                        if !contact.pinned.wrappedValue {
-                            Label("置顶", systemImage: "pin")
-                        } else {
-                            Label("取消置顶", systemImage: "pin")
-                        }
+                        .tint(.orange)
                     }
-                    
-                    Button {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            withAnimation {
-                                ContactsManager.shared.ReadallContact(contactUid: contact.contactUid.wrappedValue, context: managedObjContext)
+                    .listRowBackground(Color(contact.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
+                    .contextMenu(ContextMenu(menuItems: {
+                        Button {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                withAnimation(.easeIn) {
+                                    if contact.pinned.wrappedValue {
+                                        ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: false, context: managedObjContext)
+                                    } else {
+                                        ContactsManager.shared.PinContact(contactUid: contact.contactUid.wrappedValue, isPin: true, context: managedObjContext)
+                                    }
+                                }
+                            }
+                        } label: {
+                            if !contact.pinned.wrappedValue {
+                                Label("置顶", systemImage: "pin")
+                            } else {
+                                Label("取消置顶", systemImage: "pin")
                             }
                         }
-                    } label: {
-                        Label("已读", systemImage: "checkmark.circle.fill")
-                    }
-                }))
-        }
+                        
+                        Button {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation {
+                                    ContactsManager.shared.ReadallContact(contactUid: contact.contactUid.wrappedValue, context: managedObjContext)
+                                }
+                            }
+                        } label: {
+                            Label("已读", systemImage: "checkmark.circle.fill")
+                        }
+                    }))
+            }
             .listStyle(.plain)
+        }
     }
 }
 
@@ -198,39 +200,60 @@ private struct ListView: View {
     @Binding var isRefreshing: Bool
     @Binding var isOpenDatailView: ContactDisplayModel?
     
+    @Binding var submittedSearch: Bool
+    
     
     
     let refreshAction: (()async -> Void)?
-    @ViewBuilder
-    var refreshToolbar: some View {
-        if isRefreshing {
-            ProgressView()
-        } else {
-            Button(action: {
-                if let refresh = refreshAction {
-                    Task {
-                        await refresh()
-                    }
-                }
-            }) {
-                Image(systemName: "arrow.clockwise")
-            }
-        }
-    }
+
     
     var body: some View {
-        VStack {
+        Group {
             if isSearching {
-                Text("搜索文字消息、链接标题关键词")
+                if !submittedSearch {
+                    // 还没开始搜索的时候显示的提示视图
+                    VStack {
+                        Image(systemName: "magnifyingglass")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .foregroundStyle(.secondary)
+                            .padding(.bottom, 30)
+                        Text("搜索联系人名、文字消息或链接标题关键词")
+                            .bold()
+                            .foregroundStyle(.secondary)
+                    }
+                } else {
+                    // 搜索后的展示视图
+                    SearchResultListView()
+                }
             } else {
                 ContactListView(contacts: $contacts, isOpenDatailView: $isOpenDatailView)
-                .toolbar {
-                    refreshToolbar
-                }
+                    .toolbar {
+                        if isRefreshing {
+                            ProgressView()
+                        } else {
+                            Button(action: {
+                                if let refresh = refreshAction {
+                                    Task {
+                                        await refresh()
+                                    }
+                                }
+                            }) {
+                                Image(systemName: "arrow.clockwise")
+                            }
+                        }
+                    }
             }
-            
         }
+        .onChange(of: isSearching) {newVal in
+            print("start seaching: \(newVal)")
+            if newVal {
+                submittedSearch = false
+            }
+        }
+        
     }
+    
 }
 
 struct MessageListView: View {
@@ -245,6 +268,9 @@ struct MessageListView: View {
     @State var totalUnread = 0
     @State var unreadBadge: Text? = nil
     
+    @State var submittedSearch = false
+    @State var searchMessageResult: [ContactMessage] = []
+    
     @State var isOpenDatailView: ContactDisplayModel? = nil
     
     func testRefresh() async {
@@ -257,13 +283,24 @@ struct MessageListView: View {
     
     func DoSearchMessage() {
         print("do search")
+        let trimmedKeyword = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmedKeyword == "" {
+            return
+        }
+        
+        let result = DataController.shared.blurSearchMessage(keyword: trimmedKeyword, context: managedObjContext)
+        print(result)
+        withAnimation {
+            searchMessageResult = result
+            submittedSearch = true
+        }
     }
     
     var body: some View {
         NavigationView{
             if globalVar.isLogin {
                 VStack {
-                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, refreshAction: testRefresh)
+                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, submittedSearch: $submittedSearch, refreshAction: testRefresh)
                         .searchable(text: $searchText, prompt: "搜索消息")
                         .onSubmit(of: .search, DoSearchMessage)
                 }
