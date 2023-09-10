@@ -25,8 +25,10 @@ struct ContactDetailView: View {
     @State var contactAlias: String = "联系人备注"
     @State var contactUid: String = "test"
     @State var originName: String = "originName"
+    @State var contactTypeStr: String = ""
     @State var pinned: Bool = false
     @State var silent: Bool = false
+    @State var contactType: Int = 0
     var body: some View {
         Form {
             HStack {
@@ -41,6 +43,13 @@ struct ContactDetailView: View {
                     .foregroundColor(.primary)
                 Spacer()
                 Text(originName)
+                    .foregroundColor(.secondary)
+            }
+            HStack {
+                Text("类型")
+                    .foregroundColor(.primary)
+                Spacer()
+                Text(contactTypeStr)
                     .foregroundColor(.secondary)
             }
             NavigationLink {
@@ -68,6 +77,8 @@ struct ContactDetailView: View {
                 originName = contact!.originName!
                 pinned = contact!.pinned
                 silent = contact!.silent
+                contactType = Int(contact!.type)
+                contactTypeStr = ContactTypeString[Int(contact!.type)]
             }
         }
         .onChange(of: pinned) { newVal in

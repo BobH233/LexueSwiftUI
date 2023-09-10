@@ -9,6 +9,7 @@
         <attribute name="originName" optional="YES" attributeType="String"/>
         <attribute name="pinned" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="silent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="unreadCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="MessageStored" representedClassName="MessageStored" syncable="YES" codeGenerationType="class">

@@ -102,9 +102,10 @@ class DataController: ObservableObject {
         return nil
     }
     
-    func addContactStored(contactUid: String, originName: String, pinned: Bool?, silent: Bool?, unreadCount: Int32?, avatar_data: String?, context: NSManagedObjectContext) {
+    func addContactStored(contactUid: String, originName: String, pinned: Bool?, silent: Bool?, unreadCount: Int32?, avatar_data: String?, type: ContactType = .not_spec, context: NSManagedObjectContext) {
         let contactStored = ContactStored(context: context)
         contactStored.id = UUID()
+        contactStored.type = Int32(type.rawValue)
         contactStored.contactUid = contactUid
         contactStored.lastMessageDate = Date()
         contactStored.originName = originName

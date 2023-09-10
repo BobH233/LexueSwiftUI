@@ -25,7 +25,7 @@
 		4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8142AA6235C00F812D6 /* ContactsManager.swift */; };
 		4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8162AA6237500F812D6 /* CourseManager.swift */; };
 		4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8182AA6239800F812D6 /* MessageDetailView.swift */; };
-		4799C81B2AA62CDB00F812D6 /* ContactMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C81A2AA62CDB00F812D6 /* ContactMessage.swift */; };
+		4799C81B2AA62CDB00F812D6 /* ContactMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C81A2AA62CDB00F812D6 /* ContactMessageModel.swift */; };
 		47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */; };
 		47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927822AA77FDA00ABDC53 /* DataController.swift */; };
 		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
@@ -64,7 +64,7 @@
 		4799C8142AA6235C00F812D6 /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
 		4799C8162AA6237500F812D6 /* CourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseManager.swift; sourceTree = "<group>"; };
 		4799C8182AA6239800F812D6 /* MessageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailView.swift; sourceTree = "<group>"; };
-		4799C81A2AA62CDB00F812D6 /* ContactMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessage.swift; sourceTree = "<group>"; };
+		4799C81A2AA62CDB00F812D6 /* ContactMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageModel.swift; sourceTree = "<group>"; };
 		47A927802AA77E6500ABDC53 /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
 		47A927822AA77FDA00ABDC53 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */,
-				4799C81A2AA62CDB00F812D6 /* ContactMessage.swift */,
+				4799C81A2AA62CDB00F812D6 /* ContactMessageModel.swift */,
 				47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */,
 				47A927822AA77FDA00ABDC53 /* DataController.swift */,
 				479839DA2AA9FCD40094C5E1 /* ContactDisplayModel.swift */,
@@ -299,7 +299,7 @@
 				474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */,
 				47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */,
 				479839DB2AA9FCD40094C5E1 /* ContactDisplayModel.swift in Sources */,
-				4799C81B2AA62CDB00F812D6 /* ContactMessage.swift in Sources */,
+				4799C81B2AA62CDB00F812D6 /* ContactMessageModel.swift in Sources */,
 				472984A02AA706BB000814EE /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
