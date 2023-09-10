@@ -372,7 +372,7 @@ struct MessageDetailView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: ContactDetailView()) {
+                    NavigationLink(destination: ContactDetailView(contactUid: contactUid)) {
                         Image(systemName: "ellipsis")
                     }
                 }

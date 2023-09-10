@@ -21,6 +21,22 @@ class ContactsManager: ObservableObject {
             GenerateContactDisplayLists(context: context)
         }
     }
+    func SilentContact(contactUid: String, isSilent: Bool, context: NSManagedObjectContext) {
+        let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
+        if let contact = contact {
+            contact.silent = isSilent
+            DataController.shared.save(context: context)
+            GenerateContactDisplayLists(context: context)
+        }
+    }
+    func SetAlias(contactUid: String, alias: String, context: NSManagedObjectContext) {
+        let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
+        if let contact = contact {
+            contact.alias = alias
+            DataController.shared.save(context: context)
+            GenerateContactDisplayLists(context: context)
+        }
+    }
     
     func ReadallContact(contactUid: String, context: NSManagedObjectContext) {
         let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
