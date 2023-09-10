@@ -407,16 +407,25 @@ struct MessageListView: View {
             var searched = false
             if message.messageBody.type == .text {
                 if let range = message.messageBody.text_data!.lowercased().range(of: trimmedKeyword.lowercased()) {
-                    cur.messageStart = String(message.messageBody.text_data![..<range.lowerBound])
-                    cur.messageSearched = String(message.messageBody.text_data![range.lowerBound..<range.upperBound])
-                    cur.messageEnd = String(message.messageBody.text_data![range.upperBound...])
-                    searched = true
+                    let lowerBoundIndex = range.lowerBound
+                    let upperBoundIndex = range.upperBound
+                    if let lowerBound = message.messageBody.text_data!.index(lowerBoundIndex, offsetBy: 0, limitedBy: lowerBoundIndex), let upperBound = message.messageBody.text_data!.index(upperBoundIndex, offsetBy: 0, limitedBy: upperBoundIndex) {
+                        cur.messageStart = String(message.messageBody.text_data![..<lowerBound])
+                        cur.messageSearched = String(message.messageBody.text_data![lowerBound..<upperBound])
+                        cur.messageEnd = String(message.messageBody.text_data![upperBound...])
+                        searched = true
+                    }
                 }
             } else if message.messageBody.type == .link {
                 if let range = message.messageBody.link_title!.lowercased().range(of: trimmedKeyword.lowercased()) {
-                    cur.messageStart = "[链接] " + String(message.messageBody.link_title![..<range.lowerBound])
-                    cur.messageSearched = String(message.messageBody.link_title![range.lowerBound..<range.upperBound])
-                    cur.messageEnd = String(message.messageBody.link_title![range.upperBound...])
+                    let lowerBoundIndex = range.lowerBound
+                    let upperBoundIndex = range.upperBound
+                    if let lowerBound = message.messageBody.link_title!.index(lowerBoundIndex, offsetBy: 0, limitedBy: lowerBoundIndex), let upperBound = message.messageBody.link_title!.index(upperBoundIndex, offsetBy: 0, limitedBy: upperBoundIndex) {
+                        cur.messageStart = "[链接] " + String(message.messageBody.link_title![..<lowerBound])
+                        cur.messageSearched = String(message.messageBody.link_title![lowerBound..<upperBound])
+                        cur.messageEnd = String(message.messageBody.link_title![upperBound...])
+                        searched = true
+                    }
                     searched = true
                 }
             }

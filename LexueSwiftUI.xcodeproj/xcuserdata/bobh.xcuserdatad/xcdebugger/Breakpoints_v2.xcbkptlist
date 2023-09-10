@@ -251,8 +251,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "496"
-            endingLineNumber = "496"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -388,49 +388,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "93F91064-4829-4100-AA82-DC1A21E6DC0C"
+            uuid = "4A1F87B9-1E13-47AA-AEB5-2F5BD45E3328"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "410"
-            endingLineNumber = "410"
+            startingLineNumber = "372"
+            endingLineNumber = "372"
             landmarkName = "DoSearchMessage()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "93F91064-4829-4100-AA82-DC1A21E6DC0C - 2ae6a8a30d06ed02"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "LexueSwiftUI.MessageListView.DoSearchMessage() -&gt; ()"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Message/MessageListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "401"
-                  endingLineNumber = "401"
-                  offsetFromSymbolStart = "3436">
-               </Location>
-               <Location
-                  uuid = "93F91064-4829-4100-AA82-DC1A21E6DC0C - 2ae6a8a30d06ed02"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "LexueSwiftUI.MessageListView.DoSearchMessage() -&gt; ()"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Message/MessageListView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "401"
-                  endingLineNumber = "401"
-                  offsetFromSymbolStart = "3448">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
