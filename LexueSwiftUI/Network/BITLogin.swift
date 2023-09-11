@@ -21,6 +21,9 @@ class BITLogin {
     
     // 因为为了能够获取到lexue的session，所以必须导航到lexue上
     let API_INDEX = "https://login.bit.edu.cn/authserver/login?service=https%3A%2F%2Flexue.bit.edu.cn%2Flogin%2Findex.php"
+    let API_CAPTCHA_GET = "https://login.bit.edu.cn/authserver/getCaptcha.htl"
+    let API_CAPTCHA_CHECK = "https://login.bit.edu.cn/authserver/checkNeedCaptcha.htl"
+    
     let headers = [
         "Referer": "https://login.bit.edu.cn/authserver/login",
         "Host": "login.bit.edu.cn",
@@ -88,24 +91,40 @@ class BITLogin {
     }
     
     func init_login_param(completion: @escaping (Result<LoginContext, Error>) -> Void ) {
-        AF.request(API_INDEX, method: .get, headers: HTTPHeaders(headers))
+        AF.requestWithoutCache(API_INDEX, method: .get, headers: HTTPHeaders(headers))
             .validate(statusCode: 200..<300)
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    if let htmlString = String(data: data, encoding: .utf8), let headers = response.response?.allHeaderFields as? [String: String]  {
-                        if !headers.keys.contains("Set-Cookie") {
+                    if let htmlString = String(data: data, encoding: .utf8), let ret_headers = response.response?.allHeaderFields as? [String: String]  {
+                        if !ret_headers.keys.contains("Set-Cookie") {
                             completion(.failure(AFError.responseValidationFailed(reason: .dataFileNil)))
                             return
                         }
                         var ret = LoginContext()
-                        ret.cookies = headers["Set-Cookie"]!.replacingOccurrences(of: "HttpOnly", with: "")
+                        ret.cookies = ret_headers["Set-Cookie"]!.replacingOccurrences(of: "HttpOnly", with: "")
                         ret.execution = self.get_html_execution(htmlString)
                         ret.encryptSalt = self.get_html_encSalt(htmlString)
                         completion(.success(ret))
                     } else {
                         completion(.failure(AFError.responseValidationFailed(reason: .dataFileNil)))
                     }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    func get_captcha_data(context: LoginContext, completion: @escaping (Result<Data, Error>) -> Void) {
+        var cur_headers = HTTPHeaders(headers)
+        cur_headers.add(name: "Cookie", value: context.cookies)
+        AF.requestWithoutCache(API_CAPTCHA_GET, method: .get, headers: HTTPHeaders(headers))
+            .validate(statusCode: 200..<300)
+            .responseData { response in
+                switch response.result {
+                case .success(let data):
+                    print(data)
+                    completion(.success(data))
                 case .failure(let error):
                     completion(.failure(error))
                 }

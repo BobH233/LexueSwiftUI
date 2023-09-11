@@ -28,6 +28,9 @@ struct DebugDataView: View {
     @State var password: String = ""
     @State var salt: String = "VWlZISuTMg4yd4aQ"
     @State var encryptPasswd: String = ""
+    @State var loginContext: LoginContext = LoginContext()
+    @State var init_login_failed: Bool = false
+    @State private var imageCaptchaData: Data? = nil
     
     @State var isPresentAlert = false
     var body: some View {
@@ -87,11 +90,44 @@ struct DebugDataView: View {
             }
             
             Section("BITLogin-2") {
+                Text("cookie: \(loginContext.cookies)")
+                Text("execution: \(loginContext.execution)")
+                    .lineLimit(2)
+                Text("encryptSalt: \(loginContext.encryptSalt)")
+                VStack {
+                    if let data = imageCaptchaData,
+                       let uiImage = UIImage(data: data) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFit()
+                    } else {
+                        Text("No captcha get")
+                    }
+                }
                 HStack {
                     Spacer()
                     Button("init_login_param") {
-                        BITLogin.shared.init_login_param {_ in
-                            
+                        BITLogin.shared.init_login_param { result in
+                            switch result {
+                            case .success(let context):
+                                loginContext = context
+                            case .failure(_):
+                                init_login_failed = true
+                            }
+                        }
+                    }
+                    Spacer()
+                }
+                HStack {
+                    Spacer()
+                    Button("get_captcha") {
+                        BITLogin.shared.get_captcha_data(context: loginContext) { result in
+                            switch result {
+                            case .success(let data):
+                                imageCaptchaData = data
+                            case .failure(_):
+                                init_login_failed = true
+                            }
                         }
                     }
                     Spacer()
@@ -99,6 +135,9 @@ struct DebugDataView: View {
             }
         }
         .alert("保存成功", isPresented: $isPresentAlert) {
+            Button("OK", role: .cancel) { }
+        }
+        .alert("操作失败", isPresented: $init_login_failed) {
             Button("OK", role: .cancel) { }
         }
     }

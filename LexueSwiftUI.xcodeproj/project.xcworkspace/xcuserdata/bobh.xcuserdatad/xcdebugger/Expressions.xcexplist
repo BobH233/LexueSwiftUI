@@ -3,10 +3,50 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in BITLogin.init_login_param(completion:):BITLogin.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "headers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MessageListView.refreshToolbar.getter:MessageListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "refreshAction">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sysColorScheme">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DataController.blurSearchMessage(keyword:context:):DataController.swift">
          <PersistentStrings>
             <PersistentString
                value = "(MessageStored)((id)0x600002171400)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "encryptAES(data:aesKey:):BITLogin.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "randomStr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LexueSwiftUIApp.getPreferredColorScheme():LexueSwiftUIApp.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sysColorScheme">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -22,22 +62,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "sysColorScheme">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MessageListView.refreshToolbar.getter:MessageListView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "refreshAction">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "closure #2 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
          <PersistentStrings>
             <PersistentString
@@ -49,10 +73,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "encryptAES(data:aesKey:):BITLogin.swift">
+         contextName = "closure #1 in BubbleImageMessageView.body.getter:MessageDetailView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "randomStr">
+               value = "message.messageBody.">
+            </PersistentString>
+            <PersistentString
+               value = "message">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -73,23 +100,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "LexueSwiftUIApp.getPreferredColorScheme():LexueSwiftUIApp.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "sysColorScheme">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in BubbleImageMessageView.body.getter:MessageDetailView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "message.messageBody.">
-            </PersistentString>
-            <PersistentString
-               value = "message">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "closure #1 in getAesString(data:key0:iv0:):BITLogin.swift">
       </ContextState>
       <ContextState
          contextName = "getAesString(data:key0:iv0:):BITLogin.swift">
