@@ -73,7 +73,7 @@ struct DebugDataView: View {
                 }
             }
             
-            Section("BITLogin") {
+            Section("BITLogin-1") {
                 TextField("password", text: $password)
                 TextField("salt", text: $salt)
                 TextField("encryptedPasswd", text: $encryptPasswd)
@@ -81,6 +81,18 @@ struct DebugDataView: View {
                     Spacer()
                     Button("CalcEncrypted") {
                         encryptPasswd = BITLogin.shared.encryptPassword(pwd0: password, key: salt)
+                    }
+                    Spacer()
+                }
+            }
+            
+            Section("BITLogin-2") {
+                HStack {
+                    Spacer()
+                    Button("init_login_param") {
+                        BITLogin.shared.init_login_param {_ in
+                            
+                        }
                     }
                     Spacer()
                 }
