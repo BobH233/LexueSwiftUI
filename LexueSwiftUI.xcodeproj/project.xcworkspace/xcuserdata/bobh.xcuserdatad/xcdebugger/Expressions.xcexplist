@@ -49,6 +49,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "encryptAES(data:aesKey:):BITLogin.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "randomStr">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
          <PersistentStrings>
             <PersistentString
@@ -80,6 +88,14 @@
             </PersistentString>
             <PersistentString
                value = "message">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "getAesString(data:key0:iv0:):BITLogin.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "keyData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

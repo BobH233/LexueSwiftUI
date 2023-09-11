@@ -25,6 +25,10 @@ struct DebugDataView: View {
     @State var pinned: Bool = false
     @State var silent: Bool = false
     
+    @State var password: String = ""
+    @State var salt: String = "VWlZISuTMg4yd4aQ"
+    @State var encryptPasswd: String = ""
+    
     @State var isPresentAlert = false
     var body: some View {
         Form {
@@ -64,6 +68,19 @@ struct DebugDataView: View {
                     Button("Submit") {
                         DataController.shared.addContactStored(contactUid: contactUid, originName: originName, pinned: pinned, silent: silent, unreadCount: 0, avatar_data: nil, context: managedObjContext)
                         isPresentAlert = true
+                    }
+                    Spacer()
+                }
+            }
+            
+            Section("BITLogin") {
+                TextField("password", text: $password)
+                TextField("salt", text: $salt)
+                TextField("encryptedPasswd", text: $encryptPasswd)
+                HStack {
+                    Spacer()
+                    Button("CalcEncrypted") {
+                        encryptPasswd = BITLogin.shared.encryptPassword(pwd0: password, key: salt)
                     }
                     Spacer()
                 }

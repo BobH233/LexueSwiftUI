@@ -340,15 +340,15 @@ struct MessageDetailView: View {
                         print("scroll to \(scrollMsgId?.uuidString ?? "nil")")
                         Task {
                             // TODO: 删除这个模拟加载时间
-                            Thread.sleep(forTimeInterval: 1)
+                            // Thread.sleep(forTimeInterval: 1)
                             // 将未读气泡消除
                             ContactsManager.shared.ReadallContact(contactUid: contactUid, context: managedObjContext)
                             let result = DataController.shared.queryMessagesByContactUid(senderUid: contactUid, context: managedObjContext)
                             let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
                             contactName = contact!.GetDisplayName()
                             withAnimation(.linear(duration: 0.5)) {
-                                loading = false
                                 messages = MessageManager.shared.InjectTimetagForMessages(messages: result)
+                                loading = false
                             }
                             // 哪种方法好？
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
