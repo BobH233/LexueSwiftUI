@@ -76,11 +76,10 @@ struct SettingView: View {
                         }
                     }
                 } else {
-                    NavigationLink(destination: {
-                        
-                    }, label: {
-                        Image(systemName: "person.fill")
-                        Text("绑定北理账号")
+                    NavigationLink(destination: LoginView(), label: {
+                        Image(systemName: "rectangle.portrait.and.arrow.forward.fill")
+                            .foregroundColor(.blue)
+                        Text("登录北理账号")
                     })
                 }
                 if globalVar.isLogin {
