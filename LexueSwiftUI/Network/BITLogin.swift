@@ -132,8 +132,8 @@ class BITLogin {
     }
     
     private func get_pour_cookie(_ cookie: String) -> String {
-        var routeValue = get_cookie_key(cookie, "route")
-        var JSESSIONIDValue = get_cookie_key(cookie, "JSESSIONID")
+        let routeValue = get_cookie_key(cookie, "route")
+        let JSESSIONIDValue = get_cookie_key(cookie, "JSESSIONID")
         return "route=\(routeValue); JSESSIONID=\(JSESSIONIDValue);"
     }
     
@@ -213,7 +213,7 @@ class BITLogin {
             "lt": "",
             "execution": context.execution
         ]
-        var request = AF.requestWithoutCache(API_INDEX, method: .post, parameters: param, encoding: URLEncoding.default, headers: cur_headers)
+        AF.requestWithoutCache(API_INDEX, method: .post, parameters: param, encoding: URLEncoding.default, headers: cur_headers)
             .validate(statusCode: 300..<500)
             .redirect(using: Redirector.doNotFollow)
             .response { response in
