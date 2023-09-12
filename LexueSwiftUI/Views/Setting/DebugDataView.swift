@@ -28,8 +28,13 @@ struct DebugDataView: View {
     @State var password: String = ""
     @State var salt: String = "VWlZISuTMg4yd4aQ"
     @State var encryptPasswd: String = ""
+    
+    
     @State var loginContext: LoginContext = LoginContext()
+    @State var username1: String = ""
+    @State var password1: String = ""
     @State var init_login_failed: Bool = false
+    @State var need_captcha: Bool = false
     @State private var imageCaptchaData: Data? = nil
     
     @State var isPresentAlert = false
@@ -94,6 +99,9 @@ struct DebugDataView: View {
                 Text("execution: \(loginContext.execution)")
                     .lineLimit(2)
                 Text("encryptSalt: \(loginContext.encryptSalt)")
+                TextField("username", text: $username1)
+                TextField("password", text: $password1)
+                Text("needCaptcha: \(need_captcha ? "true" : "false")")
                 VStack {
                     if let data = imageCaptchaData,
                        let uiImage = UIImage(data: data) {
@@ -111,6 +119,20 @@ struct DebugDataView: View {
                             switch result {
                             case .success(let context):
                                 loginContext = context
+                            case .failure(_):
+                                init_login_failed = true
+                            }
+                        }
+                    }
+                    Spacer()
+                }
+                HStack {
+                    Spacer()
+                    Button("check_captcha") {
+                        BITLogin.shared.check_need_captcha(context: loginContext, username: username1) { result in
+                            switch result {
+                            case .success(let data):
+                                need_captcha = data
                             case .failure(_):
                                 init_login_failed = true
                             }

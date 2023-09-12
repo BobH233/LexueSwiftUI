@@ -14,13 +14,14 @@ struct LoginContext {
     var encryptSalt: String = ""
 }
 
+
+
 // rewrite from https://github.com/BIT-BOBH/BITLogin-Node
 class BITLogin {
     static let shared = BITLogin()
     var cookies: String = ""
     
-    // 因为为了能够获取到lexue的session，所以必须导航到lexue上
-    let API_INDEX = "https://login.bit.edu.cn/authserver/login?service=https%3A%2F%2Flexue.bit.edu.cn%2Flogin%2Findex.php"
+    let API_INDEX = "https://login.bit.edu.cn/authserver/login"
     let API_CAPTCHA_GET = "https://login.bit.edu.cn/authserver/getCaptcha.htl"
     let API_CAPTCHA_CHECK = "https://login.bit.edu.cn/authserver/checkNeedCaptcha.htl"
     
@@ -126,6 +127,27 @@ class BITLogin {
                     print(data)
                     completion(.success(data))
                 case .failure(let error):
+                    print("获取验证码图片数据失败 \(error)")
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    func check_need_captcha(context: LoginContext, username: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        struct ResponseData: Codable {
+            let isNeed: Bool
+        }
+        var cur_headers = HTTPHeaders(headers)
+        cur_headers.add(name: "Cookie", value: context.cookies)
+        let api_url = API_CAPTCHA_CHECK + "?username=\(username)&_=\(Date().timeIntervalSince1970)"
+        AF.requestWithoutCache(api_url, method: .get, headers: cur_headers)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: ResponseData.self) { response in
+                switch response.result {
+                case .success(let responseData):
+                    completion(.success(responseData.isNeed))
+                case .failure(let error):
+                    print("获取是否需要验证码失败：\(error)")
                     completion(.failure(error))
                 }
             }

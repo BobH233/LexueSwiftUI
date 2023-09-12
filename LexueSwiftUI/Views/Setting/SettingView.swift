@@ -49,7 +49,7 @@ struct SettingView: View {
                         Toggle(isOn: $globalVar.isLogin) {
                             Text("isLogin")
                         }
-                        NavigationLink("Core Data") {
+                        NavigationLink("DebugView") {
                             DebugDataView()
                         }
                     }
