@@ -14,6 +14,20 @@ struct LoginContext {
     var encryptSalt: String = ""
 }
 
+struct LoginSuccessContext {
+    var happyVoyagePersonal: String = ""
+    var CASTGC: String = ""
+    
+}
+
+enum LoginError: Error {
+    case networkError
+    case wrongPassword
+    case wrongCaptcha
+    case stopAccount
+    case unknowError
+}
+
 
 
 // rewrite from https://github.com/BIT-BOBH/BITLogin-Node
@@ -28,6 +42,7 @@ class BITLogin {
     let headers = [
         "Referer": "https://login.bit.edu.cn/authserver/login",
         "Host": "login.bit.edu.cn",
+        "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0"
     ]
     
@@ -91,6 +106,37 @@ class BITLogin {
         }
     }
     
+    func get_html_errorTip(_ html: String) -> String {
+        do {
+            let document = try SwiftSoup.parse(html)
+            if let inputElement = try document.select("#showErrorTip").first() {
+                // 获取输入元素的 name 属性值
+                let nameAttribute = try inputElement.text()
+                return nameAttribute
+            }
+            return ""
+        } catch {
+            print("Error parsing HTML: \(error.localizedDescription)")
+            return ""
+        }
+    }
+    private func get_cookie_key(_ cookie: String, _ keyValue: String) -> String {
+        if let range = cookie.range(of: "\(keyValue)=") {
+            let routeSubstring = cookie[range.upperBound...]
+            let semicolonIndex = routeSubstring.firstIndex(of: ";") ?? routeSubstring.endIndex
+            let keyValue = String(routeSubstring[..<semicolonIndex])
+            return keyValue
+        } else {
+            return ""
+        }
+    }
+    
+    private func get_pour_cookie(_ cookie: String) -> String {
+        var routeValue = get_cookie_key(cookie, "route")
+        var JSESSIONIDValue = get_cookie_key(cookie, "JSESSIONID")
+        return "route=\(routeValue); JSESSIONID=\(JSESSIONIDValue);"
+    }
+    
     func init_login_param(completion: @escaping (Result<LoginContext, Error>) -> Void ) {
         AF.requestWithoutCache(API_INDEX, method: .get, headers: HTTPHeaders(headers))
             .validate(statusCode: 200..<300)
@@ -103,7 +149,7 @@ class BITLogin {
                             return
                         }
                         var ret = LoginContext()
-                        ret.cookies = ret_headers["Set-Cookie"]!.replacingOccurrences(of: "HttpOnly", with: "")
+                        ret.cookies = self.get_pour_cookie(ret_headers["Set-Cookie"]!.replacingOccurrences(of: "HttpOnly", with: ""))
                         ret.execution = self.get_html_execution(htmlString)
                         ret.encryptSalt = self.get_html_encSalt(htmlString)
                         completion(.success(ret))
@@ -116,15 +162,14 @@ class BITLogin {
             }
     }
     
-    func get_captcha_data(context: LoginContext, completion: @escaping (Result<Data, Error>) -> Void) {
+    func get_captcha_data( context: LoginContext, completion: @escaping (Result<Data, Error>) -> Void) {
         var cur_headers = HTTPHeaders(headers)
         cur_headers.add(name: "Cookie", value: context.cookies)
-        AF.requestWithoutCache(API_CAPTCHA_GET, method: .get, headers: HTTPHeaders(headers))
+        AF.requestWithoutCache(API_CAPTCHA_GET, method: .get, headers: cur_headers)
             .validate(statusCode: 200..<300)
             .responseData { response in
                 switch response.result {
                 case .success(let data):
-                    print(data)
                     completion(.success(data))
                 case .failure(let error):
                     print("获取验证码图片数据失败 \(error)")
@@ -149,6 +194,64 @@ class BITLogin {
                 case .failure(let error):
                     print("获取是否需要验证码失败：\(error)")
                     completion(.failure(error))
+                }
+            }
+    }
+    
+    func do_login(context: LoginContext, username: String, password: String, captcha: String = "", completion: @escaping (Result<LoginSuccessContext, LoginError>) -> Void) {
+        var cur_headers = HTTPHeaders(headers)
+        cur_headers.add(name: "Cookie", value: context.cookies)
+        let encryptedPassword = encryptPassword(pwd0: password, key: context.encryptSalt)
+        let param: [String: Any] = [
+            "username": username,
+            "password": encryptedPassword,
+            "captcha": captcha,
+            "rememberMe": "true",
+            "_eventId": "submit",
+            "cllt": "userNameLogin",
+            "dllt": "generalLogin",
+            "lt": "",
+            "execution": context.execution
+        ]
+        var request = AF.requestWithoutCache(API_INDEX, method: .post, parameters: param, encoding: URLEncoding.default, headers: cur_headers)
+            .validate(statusCode: 300..<500)
+            .redirect(using: Redirector.doNotFollow)
+            .response { response in
+                switch response.result {
+                case .success( _):
+                    if let respCode = response.response?.statusCode {
+                        if respCode == 302 {
+                            // 登录成功
+                            let respHeader = response.response?.allHeaderFields as? [String: String]
+                            let Cookie = respHeader?["Set-Cookie"] ?? ""
+                            var loginned_context = LoginSuccessContext()
+                            loginned_context.CASTGC = self.get_cookie_key(Cookie, "CASTGC")
+                            loginned_context.happyVoyagePersonal = self.get_cookie_key(Cookie, "happyVoyagePersonal")
+                            completion(.success(loginned_context))
+                        } else {
+                            // 登录失败
+                            if let data = response.data, let htmlString = String(data: data, encoding: .utf8) {
+                                let reason_cn = self.get_html_errorTip(htmlString)
+                                print("reason: \(reason_cn)")
+                                if reason_cn.contains("账号或密码错误") {
+                                    completion(.failure(.wrongPassword))
+                                } else if reason_cn.contains("验证码错误") {
+                                    completion(.failure(.wrongCaptcha))
+                                } else if reason_cn.contains("该帐号已被冻结") {
+                                    completion(.failure(.stopAccount))
+                                }
+                                else {
+                                    completion(.failure(.unknowError))
+                                }
+                            } else {
+                                completion(.failure(.unknowError))
+                            }
+                        }
+                    } else {
+                        completion(.failure(.networkError))
+                    }
+                case .failure( _):
+                    completion(.failure(.networkError))
                 }
             }
     }

@@ -11,6 +11,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
+      </ContextState>
+      <ContextState
          contextName = "MessageListView.refreshToolbar.getter:MessageListView.swift">
          <PersistentStrings>
             <PersistentString
@@ -47,6 +50,17 @@
          <PersistentStrings>
             <PersistentString
                value = "sysColorScheme">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "response.response?.allHeaderFields as? [String: String]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

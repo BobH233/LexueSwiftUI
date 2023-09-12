@@ -33,9 +33,11 @@ struct DebugDataView: View {
     @State var loginContext: LoginContext = LoginContext()
     @State var username1: String = ""
     @State var password1: String = ""
+    @State var captcha1: String = ""
     @State var init_login_failed: Bool = false
     @State var need_captcha: Bool = false
     @State private var imageCaptchaData: Data? = nil
+    @State private var loginnedContext: LoginSuccessContext = LoginSuccessContext()
     
     @State var isPresentAlert = false
     var body: some View {
@@ -101,7 +103,10 @@ struct DebugDataView: View {
                 Text("encryptSalt: \(loginContext.encryptSalt)")
                 TextField("username", text: $username1)
                 TextField("password", text: $password1)
+                TextField("captcha", text: $captcha1)
                 Text("needCaptcha: \(need_captcha ? "true" : "false")")
+                Text("cookie_happy: \(loginnedContext.happyVoyagePersonal)")
+                Text("cookie_CASTGC: \(loginnedContext.CASTGC)")
                 VStack {
                     if let data = imageCaptchaData,
                        let uiImage = UIImage(data: data) {
@@ -154,6 +159,23 @@ struct DebugDataView: View {
                     }
                     Spacer()
                 }
+                HStack {
+                    Spacer()
+                    Button("login") {
+                        BITLogin.shared.do_login(context: loginContext, username: username1, password: password1, captcha: captcha1) { result in
+                            switch result {
+                            case .success(let data):
+                                print(data)
+                                loginnedContext = data
+                            case .failure(let error):
+                                print(error)
+                                init_login_failed = true
+                            }
+                        }
+                    }
+                    Spacer()
+                }
+                
             }
         }
         .alert("保存成功", isPresented: $isPresentAlert) {
