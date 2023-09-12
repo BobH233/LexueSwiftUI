@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct LoginView: View {
+    @ObservedObject var settings = SettingStorage.shared
+    
     @State var username: String = ""
     @State var password: String = ""
     @State var captcha: String = ""
     @State var loginContext: LoginContext = LoginContext()
     @State var needCaptcha: Bool = false
     @State private var imageCaptchaData: Data? = nil
+    @State private var loginBtnDisabled = true
     @FocusState private var focusedOnPassword
     
     @State private var showErrorTipsTitle: String = ""
@@ -42,6 +45,48 @@ struct LoginView: View {
                 showErrorTipsTitle = "网络错误(检查验证码失败)"
                 showErrorTipsContent = "请检查你的网络环境，然后重试"
                 showError = true
+            }
+        }
+    }
+    
+    func doLogin() {
+        BITLogin.shared.do_login(context: loginContext, username: username, password: password, captcha: captcha) { result in
+            loginBtnDisabled = false
+            switch result {
+            case .success(let data):
+                print(data)
+                settings.savedUsername = username
+                settings.savedPassword = password
+            case .failure(let error):
+                switch error {
+                case .networkError:
+                    showErrorTipsTitle = "网络错误(登录失败)"
+                    showErrorTipsContent = "请检查你的网络环境，然后重试"
+                    showError = true
+                case .stopAccount:
+                    refreshCaptcha()
+                    showErrorTipsTitle = "账号被冻结(登录失败)"
+                    showErrorTipsContent = "可能尝试错误密码过多次，请稍等15分钟再试"
+                    showError = true
+                case .unknowError:
+                    showErrorTipsTitle = "未知错误(登录失败)"
+                    showErrorTipsContent = "请检查账号密码以及网络环境"
+                    showError = true
+                case .wrongCaptcha:
+                    refreshCaptcha()
+                    showErrorTipsTitle = "验证码错误(登录失败)"
+                    showErrorTipsContent = "请重新输入验证码"
+                    showError = true
+                case .wrongPassword:
+                    if needCaptcha {
+                        refreshCaptcha()
+                    } else {
+                        checkNeedCaptcha()
+                    }
+                    showErrorTipsTitle = "账号或密码错误(登录失败)"
+                    showErrorTipsContent = "请检查账号和密码是否错误"
+                    showError = true
+                }
             }
         }
     }
@@ -86,58 +131,30 @@ struct LoginView: View {
             }
             
             Button {
-                BITLogin.shared.do_login(context: loginContext, username: username, password: password, captcha: captcha) { result in
-                    switch result {
-                    case .success(let data):
-                        print(data)
-                    case .failure(let error):
-                        switch error {
-                        case .networkError:
-                            showErrorTipsTitle = "网络错误(登录失败)"
-                            showErrorTipsContent = "请检查你的网络环境，然后重试"
-                            showError = true
-                        case .stopAccount:
-                            refreshCaptcha()
-                            showErrorTipsTitle = "账号被冻结(登录失败)"
-                            showErrorTipsContent = "可能尝试错误密码过多次，请稍等15分钟再试"
-                            showError = true
-                        case .unknowError:
-                            showErrorTipsTitle = "未知错误(登录失败)"
-                            showErrorTipsContent = "请检查账号密码以及网络环境"
-                            showError = true
-                        case .wrongCaptcha:
-                            refreshCaptcha()
-                            showErrorTipsTitle = "验证码错误(登录失败)"
-                            showErrorTipsContent = "请重新输入验证码"
-                            showError = true
-                        case .wrongPassword:
-                            if needCaptcha {
-                                refreshCaptcha()
-                            } else {
-                                checkNeedCaptcha()
-                            }
-                            showErrorTipsTitle = "账号或密码错误(登录失败)"
-                            showErrorTipsContent = "请检查账号和密码是否错误"
-                            showError = true
-                        }
-                    }
-                }
+                loginBtnDisabled = true
+                doLogin()
             } label: {
                 Text("登录")
                     .font(.system(size: 24))
                     .frame(maxWidth: .infinity)
                     .frame(height: 40)
             }
-            .disabled(loginContext.cookies == "")
+            .disabled(loginBtnDisabled)
             .buttonStyle(.borderedProminent)
             .padding(.horizontal, 30)
             Spacer()
         }
+        .onSubmit(of: .text) {
+            doLogin()
+        }
         .onAppear {
+            username = settings.savedUsername
+            password = settings.savedPassword
             BITLogin.shared.init_login_param { result in
                 switch result {
                 case .success(let context):
                     loginContext = context
+                    loginBtnDisabled = false
                 case .failure(_):
                     showErrorTipsTitle = "网络错误(初始化登录参数失败)"
                     showErrorTipsContent = "请检查你的网络环境，然后重试"
