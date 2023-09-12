@@ -145,6 +145,9 @@ struct LoginView: View {
             Spacer()
         }
         .onSubmit(of: .text) {
+            if loginBtnDisabled {
+                return
+            }
             doLogin()
         }
         .onAppear {

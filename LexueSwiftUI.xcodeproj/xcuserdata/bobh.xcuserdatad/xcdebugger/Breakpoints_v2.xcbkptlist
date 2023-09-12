@@ -511,6 +511,38 @@
             endingLineNumber = "254"
             landmarkName = "do_login(context:username:password:captcha:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "97C3196F-91F9-4C53-9C9A-BBD8B2C5742C - b10c3f9727a471f8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in LexueSwiftUI.BITLogin.do_login(context: LexueSwiftUI.LoginContext, username: Swift.String, password: Swift.String, captcha: Swift.String, completion: (Swift.Result&lt;LexueSwiftUI.LoginSuccessContext, LexueSwiftUI.LoginError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/BITLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "254"
+                  endingLineNumber = "254"
+                  offsetFromSymbolStart = "3064">
+               </Location>
+               <Location
+                  uuid = "97C3196F-91F9-4C53-9C9A-BBD8B2C5742C - b10c3f9727a471f8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in LexueSwiftUI.BITLogin.do_login(context: LexueSwiftUI.LoginContext, username: Swift.String, password: Swift.String, captcha: Swift.String, completion: (Swift.Result&lt;LexueSwiftUI.LoginSuccessContext, LexueSwiftUI.LoginError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/BITLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "254"
+                  endingLineNumber = "254"
+                  offsetFromSymbolStart = "3104">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
