@@ -57,16 +57,27 @@ struct LoginView: View {
         globalVar.LoadingText = "登录中"
         globalVar.isLoading = true
         BITLogin.shared.do_login(context: loginContext, username: username, password: password, captcha: captcha) { result in
-            loginBtnDisabled = false
-            globalVar.isLoading = false
+            
             switch result {
             case .success(let data):
                 print(data)
                 settings.savedUsername = username
                 settings.savedPassword = password
                 settings.loginnedContext = data
-                globalVar.isLogin = true
-                dismiss()
+                LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
+                    globalVar.isLoading = false
+                    loginBtnDisabled = false
+                    switch result {
+                    case .success(let context):
+                        globalVar.isLogin = true
+                        globalVar.cur_lexue_context = context
+                        dismiss()
+                    case .failure(_):
+                        showErrorTipsTitle = "网络错误(乐学登录失败)"
+                        showErrorTipsContent = "请检查你的网络环境，然后重试"
+                        showError = true
+                    }
+                }
             case .failure(let error):
                 switch error {
                 case .networkError:

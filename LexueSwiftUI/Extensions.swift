@@ -239,3 +239,15 @@ extension Alamofire.Session{
         }
     }
 }
+
+
+func get_cookie_key(_ cookie: String, _ keyValue: String) -> String {
+    if let range = cookie.range(of: "\(keyValue)=") {
+        let routeSubstring = cookie[range.upperBound...]
+        let semicolonIndex = routeSubstring.firstIndex(of: ";") ?? routeSubstring.endIndex
+        let keyValue = String(routeSubstring[..<semicolonIndex])
+        return keyValue
+    } else {
+        return ""
+    }
+}

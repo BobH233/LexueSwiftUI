@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		472984A02AA706BB000814EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729849F2AA706BB000814EE /* Extensions.swift */; };
+		472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */; };
 		473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE7F2AA48DAA00968C3C /* LexueSwiftUIApp.swift */; };
 		473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE812AA48DAA00968C3C /* ContentView.swift */; };
 		473BAE842AA48DAA00968C3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473BAE832AA48DAA00968C3C /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		4729849F2AA706BB000814EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatusManager.swift; sourceTree = "<group>"; };
 		473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LexueSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		473BAE7F2AA48DAA00968C3C /* LexueSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueSwiftUIApp.swift; sourceTree = "<group>"; };
 		473BAE812AA48DAA00968C3C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				4799C8142AA6235C00F812D6 /* ContactsManager.swift */,
 				4799C8162AA6237500F812D6 /* CourseManager.swift */,
 				47A927842AA7836300ABDC53 /* MessageManager.swift */,
+				472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */,
 				473BAE982AA496B800968C3C /* MessageListView.swift in Sources */,
 				4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */,
+				472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */,
 				4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */,
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,

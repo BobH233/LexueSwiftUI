@@ -120,16 +120,7 @@ class BITLogin {
             return ""
         }
     }
-    private func get_cookie_key(_ cookie: String, _ keyValue: String) -> String {
-        if let range = cookie.range(of: "\(keyValue)=") {
-            let routeSubstring = cookie[range.upperBound...]
-            let semicolonIndex = routeSubstring.firstIndex(of: ";") ?? routeSubstring.endIndex
-            let keyValue = String(routeSubstring[..<semicolonIndex])
-            return keyValue
-        } else {
-            return ""
-        }
-    }
+
     
     private func get_pour_cookie(_ cookie: String) -> String {
         let routeValue = get_cookie_key(cookie, "route")
@@ -225,8 +216,8 @@ class BITLogin {
                             let respHeader = response.response?.allHeaderFields as? [String: String]
                             let Cookie = respHeader?["Set-Cookie"] ?? ""
                             var loginned_context = LoginSuccessContext()
-                            loginned_context.CASTGC = self.get_cookie_key(Cookie, "CASTGC")
-                            loginned_context.happyVoyagePersonal = self.get_cookie_key(Cookie, "happyVoyagePersonal")
+                            loginned_context.CASTGC = get_cookie_key(Cookie, "CASTGC")
+                            loginned_context.happyVoyagePersonal = get_cookie_key(Cookie, "happyVoyagePersonal")
                             completion(.success(loginned_context))
                         } else {
                             // 登录失败

@@ -14,8 +14,8 @@
             filePath = "LexueSwiftUI/Views/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -411,8 +411,8 @@
             filePath = "LexueSwiftUI/Network/BITLogin.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "init_login_param(completion:)"
             landmarkType = "7">
             <Locations>
@@ -459,8 +459,8 @@
             filePath = "LexueSwiftUI/Network/BITLogin.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "init_login_param(completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -475,8 +475,8 @@
             filePath = "LexueSwiftUI/Network/BITLogin.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "do_login(context:username:password:captcha:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -491,8 +491,8 @@
             filePath = "LexueSwiftUI/Network/BITLogin.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
             landmarkName = "do_login(context:username:password:captcha:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -507,13 +507,13 @@
             filePath = "LexueSwiftUI/Network/BITLogin.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "do_login(context:username:password:captcha:completion:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "97C3196F-91F9-4C53-9C9A-BBD8B2C5742C - b10c3f9727a471f8"
+                  uuid = "97C3196F-91F9-4C53-9C9A-BBD8B2C5742C - b10c3f9727a470d3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -523,12 +523,12 @@
                   urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/BITLogin.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "254"
-                  endingLineNumber = "254"
-                  offsetFromSymbolStart = "3064">
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
+                  offsetFromSymbolStart = "2916">
                </Location>
                <Location
-                  uuid = "97C3196F-91F9-4C53-9C9A-BBD8B2C5742C - b10c3f9727a471f8"
+                  uuid = "97C3196F-91F9-4C53-9C9A-BBD8B2C5742C - b10c3f9727a470d3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -538,9 +538,72 @@
                   urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/BITLogin.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "254"
-                  endingLineNumber = "254"
-                  offsetFromSymbolStart = "3104">
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
+                  offsetFromSymbolStart = "3056">
+               </Location>
+               <Location
+                  uuid = "97C3196F-91F9-4C53-9C9A-BBD8B2C5742C - b10c3f9727a470d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in LexueSwiftUI.BITLogin.do_login(context: LexueSwiftUI.LoginContext, username: Swift.String, password: Swift.String, captcha: Swift.String, completion: (Swift.Result&lt;LexueSwiftUI.LoginSuccessContext, LexueSwiftUI.LoginError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/BITLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "245"
+                  endingLineNumber = "245"
+                  offsetFromSymbolStart = "3096">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "98949F2B-932A-4503-8AFA-40A2B2C98F17"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "OnAppStart()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "98949F2B-932A-4503-8AFA-40A2B2C98F17 - 7fce96af9167607d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;LexueSwiftUI.LexueContext, LexueSwiftUI.LexueAPI.LexueLoginError&gt;) -&gt; () in LexueSwiftUI.AppStatusManager.OnAppStart() -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/AppStatusManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  uuid = "98949F2B-932A-4503-8AFA-40A2B2C98F17 - 7fce96af9167607d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;LexueSwiftUI.LexueContext, LexueSwiftUI.LexueAPI.LexueLoginError&gt;) -&gt; () in LexueSwiftUI.AppStatusManager.OnAppStart() -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/AppStatusManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "140">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -37,29 +37,42 @@ struct ContentView: View {
                     Text("设置")
                 }
         }
+        .alert(isPresented: $globalVar.showAlert) {
+            Alert(title: Text(globalVar.alertTitle), message: Text(globalVar.alertContent), dismissButton: .default(Text("确定")))
+        }
         .overlay {
             if globalVar.isLoading {
-                VStack {
-                    Spacer()
-                    HStack {
+                ZStack {
+                    // 禁止触摸后面的view
+                    Rectangle()
+                        .opacity(0.1)
+                    VStack {
                         Spacer()
-                        RoundedRectangle(cornerRadius: 20)
-                            .foregroundColor(.white)
-                            .opacity(0.9)
-                            .frame(width: 100, height: 100)
-                            .shadow(radius: 10)
-                            .overlay {
-                                VStack {
-                                    ProgressView()
-                                        .padding(.bottom, 10)
-                                    Text(globalVar.LoadingText)
-                                        .font(.system(size: 15))
+                        HStack {
+                            Spacer()
+                            Rectangle()
+                                .foregroundColor(.white)
+                                .opacity(0.9)
+                                .background(.ultraThickMaterial)
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(10.0)
+                                .shadow(radius: 20)
+                                .overlay {
+                                    VStack {
+                                        ProgressView()
+                                            .padding(.bottom, 10)
+                                            .tint(.black)
+                                        Text(globalVar.LoadingText)
+                                            .foregroundColor(.black)
+                                            .font(.system(size: 15))
+                                    }
                                 }
-                            }
+                            Spacer()
+                        }
                         Spacer()
                     }
-                    Spacer()
                 }
+                
             }
         }
     }

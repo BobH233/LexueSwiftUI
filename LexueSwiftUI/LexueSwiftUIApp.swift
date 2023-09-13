@@ -12,6 +12,8 @@ struct LexueSwiftUIApp: App {
     @Environment(\.colorScheme) var sysColorScheme
     @StateObject private var dataController = DataController()
     @ObservedObject var settings = SettingStorage.shared
+    @Environment(\.scenePhase) private var scenePhase
+    
     func getPreferredColorScheme() -> ColorScheme {
         switch settings.preferColorScheme {
         case 0:
@@ -38,7 +40,18 @@ struct LexueSwiftUIApp: App {
                     .environment(\.locale, Locale.init(identifier: "zh-CN"))
                     .preferredColorScheme(getPreferredColorScheme())
             }
-            
+        }
+        .onChange(of: scenePhase) { newPhase in
+            switch newPhase {
+            case .active:
+                AppStatusManager.shared.OnAppGoToForeground()
+            case .background:
+                AppStatusManager.shared.OnAppGoToBackground()
+            case .inactive:
+                AppStatusManager.shared.OnAppInactive()
+            @unknown default:
+                print("Unknow phase...")
+            }
         }
     }
 }

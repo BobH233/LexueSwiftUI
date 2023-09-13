@@ -69,6 +69,7 @@ struct SettingView: View {
                     Button(action: {
                         print("exit login")
                         settings.loginnedContext = LoginSuccessContext()
+                        globalVar.cur_lexue_context = LexueContext()
                         withAnimation {
                             globalVar.isLogin = false
                         }
