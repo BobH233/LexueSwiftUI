@@ -65,6 +65,10 @@ class AppStatusManager {
     // App从没运行，到运行的时候
     func OnAppStart() {
         print("\(#function)")
+        lastTimeToGetLexueContext = Int(Date().timeIntervalSince1970)
+        Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
+            self.OnAppTickToGetLexueContext()
+        }
         GlobalVariables.shared.LoadingText = "加载中"
         GlobalVariables.shared.isLoading = true
         // 首先检查全局是否保存了login界面的cookie，如果没有就尝试检查是否有记住密码
@@ -93,10 +97,39 @@ class AppStatusManager {
         print("recordTime: \(lastBackgroundTime)")
     }
     
+    func RefreshLexueContext(silent_refresh: Bool) {
+        GlobalVariables.shared.LoadingText = "刷新中"
+        if !silent_refresh {
+            GlobalVariables.shared.isLoading = true
+        }
+        LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
+            switch result {
+            case .success(let context):
+                GlobalVariables.shared.isLoading = false
+                GlobalVariables.shared.isLogin = true
+                GlobalVariables.shared.cur_lexue_context = context
+            case .failure(_):
+                // 直接清空，让用户重新登录
+                print("刷新lexue cookie 失败")
+                GlobalVariables.shared.alertTitle = "刷新乐学会话失败"
+                GlobalVariables.shared.alertContent = "请尝试重新登录你的账号，或者检查网络设置"
+                GlobalVariables.shared.isLoading = false
+                GlobalVariables.shared.isLogin = false
+                SettingStorage.shared.loginnedContext.CASTGC = ""
+                SettingStorage.shared.loginnedContext.happyVoyagePersonal = ""
+                GlobalVariables.shared.showAlert = true
+            }
+        }
+    }
+    
     var lastTimeToGetLexueContext: Int = 0
     
     func OnAppTickToGetLexueContext() {
-        
+        var deltaTime = Int(Date().timeIntervalSince1970) - lastTimeToGetLexueContext
+        if GlobalVariables.shared.isLogin && deltaTime > 10 * 60 {
+            lastTimeToGetLexueContext = Int(Date().timeIntervalSince1970)
+            RefreshLexueContext(silent_refresh: true)
+        }
     }
     
     // App从后台切换回前台的时候
@@ -107,29 +140,10 @@ class AppStatusManager {
         } else {
             var deltaTime = Int(Date().timeIntervalSince1970) - lastBackgroundTime
             print("deltaTime: \(deltaTime)")
-            if lastBackgroundTime != 0 && deltaTime > 10 * 60 {
+            if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 10 * 60 {
                 // 超过10分钟，需要刷新lexue的session
                 lastTimeToGetLexueContext = Int(Date().timeIntervalSince1970)
-                GlobalVariables.shared.LoadingText = "刷新中"
-                GlobalVariables.shared.isLoading = true
-                LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
-                    switch result {
-                    case .success(let context):
-                        GlobalVariables.shared.isLoading = false
-                        GlobalVariables.shared.isLogin = true
-                        GlobalVariables.shared.cur_lexue_context = context
-                    case .failure(_):
-                        // 直接清空，让用户重新登录
-                        print("刷新lexue cookie 失败")
-                        GlobalVariables.shared.alertTitle = "刷新乐学会话失败"
-                        GlobalVariables.shared.alertContent = "请尝试重新登录你的账号，或者检查网络设置"
-                        GlobalVariables.shared.isLoading = false
-                        GlobalVariables.shared.isLogin = false
-                        SettingStorage.shared.loginnedContext.CASTGC = ""
-                        SettingStorage.shared.loginnedContext.happyVoyagePersonal = ""
-                        GlobalVariables.shared.showAlert = true
-                    }
-                }
+                RefreshLexueContext(silent_refresh: false)
             }
         }
         foregroundCnt = foregroundCnt + 1
