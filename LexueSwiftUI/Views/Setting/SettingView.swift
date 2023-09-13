@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SettingView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
+    @ObservedObject var settings = SettingStorage.shared
     
     @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
     var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
@@ -67,6 +68,10 @@ struct SettingView: View {
                     })
                     Button(action: {
                         print("exit login")
+                        settings.loginnedContext = LoginSuccessContext()
+                        withAnimation {
+                            globalVar.isLogin = false
+                        }
                     }) {
                         HStack{
                             Image(systemName: "delete.right.fill")

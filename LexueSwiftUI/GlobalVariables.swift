@@ -10,7 +10,11 @@ import SwiftUI
 
 class GlobalVariables: ObservableObject {
     static let shared = GlobalVariables()
-    @Published var isLogin = true
+    @Published var isLogin = false
+    
+    @Published var isLoading = false
+    @Published var LoadingText = ""
+    
     @Published var courseList: [CourseShortInfo] = [
         CourseShortInfo(id: UUID().uuidString, shortname: UUID().uuidString, progress: 66, coursecategory: "自动化学院"),
         CourseShortInfo(id: UUID().uuidString, shortname: UUID().uuidString, progress: 66, coursecategory: "自动化学院"),

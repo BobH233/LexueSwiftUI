@@ -9,6 +9,9 @@ import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var settings = SettingStorage.shared
+    @ObservedObject var globalVar = GlobalVariables.shared
+    
+    @Environment(\.dismiss) var dismiss
     
     @State var username: String = ""
     @State var password: String = ""
@@ -50,13 +53,20 @@ struct LoginView: View {
     }
     
     func doLogin() {
+        loginBtnDisabled = true
+        globalVar.LoadingText = "登录中"
+        globalVar.isLoading = true
         BITLogin.shared.do_login(context: loginContext, username: username, password: password, captcha: captcha) { result in
             loginBtnDisabled = false
+            globalVar.isLoading = false
             switch result {
             case .success(let data):
                 print(data)
                 settings.savedUsername = username
                 settings.savedPassword = password
+                settings.loginnedContext = data
+                globalVar.isLogin = true
+                dismiss()
             case .failure(let error):
                 switch error {
                 case .networkError:
@@ -131,7 +141,6 @@ struct LoginView: View {
             }
             
             Button {
-                loginBtnDisabled = true
                 doLogin()
             } label: {
                 Text("登录")

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var tabSelection = 0
+    @ObservedObject var globalVar = GlobalVariables.shared
     var body: some View {
         TabView(selection: $tabSelection) {
             MessageListView(tabSelection: $tabSelection)
@@ -35,6 +36,31 @@ struct ContentView: View {
                     Image(systemName: "gear")
                     Text("设置")
                 }
+        }
+        .overlay {
+            if globalVar.isLoading {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        RoundedRectangle(cornerRadius: 20)
+                            .foregroundColor(.white)
+                            .opacity(0.9)
+                            .frame(width: 100, height: 100)
+                            .shadow(radius: 10)
+                            .overlay {
+                                VStack {
+                                    ProgressView()
+                                        .padding(.bottom, 10)
+                                    Text(globalVar.LoadingText)
+                                        .font(.system(size: 15))
+                                }
+                            }
+                        Spacer()
+                    }
+                    Spacer()
+                }
+            }
         }
     }
 }
