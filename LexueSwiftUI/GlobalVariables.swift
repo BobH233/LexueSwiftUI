@@ -23,6 +23,8 @@ class GlobalVariables: ObservableObject {
     
     @Published var cur_user_info = LexueAPI.SelfUserInfo()
     
+    @Published var cur_lexue_sessKey = ""
+    
     @Published var courseList: [CourseShortInfo] = [
         CourseShortInfo(id: UUID().uuidString, shortname: UUID().uuidString, progress: 66, coursecategory: "自动化学院"),
         CourseShortInfo(id: UUID().uuidString, shortname: UUID().uuidString, progress: 66, coursecategory: "自动化学院"),

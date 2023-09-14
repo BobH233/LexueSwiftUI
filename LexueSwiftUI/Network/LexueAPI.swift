@@ -98,6 +98,32 @@ class LexueAPI {
         }
     }
     
+    func ParseSessKey(_ html: String) -> String {
+        if let sesskeyRange = html.range(of: "\"sesskey\":\"") {
+            // 计算 sesskey 的起始位置
+            let startIndex = sesskeyRange.upperBound
+            
+            // 找到 sesskey 结束位置的引号
+            if let endIndex = html[startIndex...].firstIndex(of: "\"") {
+                // 提取 sesskey 后面的字符串
+                let sessKey = String(html[startIndex..<endIndex])
+                return sessKey
+            }
+        }
+        return ""
+    }
+    
+    func GetSessKey(_ lexueContext: LexueContext) async -> Result<String, Error> {
+        let response = await AF.requestWithoutCache(API_LEXUE_INDEX, method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
+        switch response.result {
+        case .success(let html):
+            let ret = ParseSessKey(html)
+            return .success(ret)
+        case .failure(let error):
+            return .failure(error)
+        }
+    }
+    
     func GetSelfUserInfo(_ lexueContext: LexueContext) async -> Result<SelfUserInfo, Error> {
         let response = await AF.requestWithoutCache(API_LEXUE_INDEX, method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
         switch response.result {

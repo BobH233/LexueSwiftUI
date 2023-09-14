@@ -16,6 +16,35 @@ class AppStatusManager {
     // 最后一次进入后台的时间
     var lastBackgroundTime: Int = 0
     
+    func action_after_get_lexue_context(_ context: LexueAPI.LexueContext) {
+        Task {
+            let result = await LexueAPI.shared.GetSessKey(context)
+            switch result {
+            case .success(let sesskey):
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                }
+            case .failure(_):
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)"
+                    GlobalVariables.shared.alertContent = "数据获取可能异常，建议重启应用再试。"
+                    GlobalVariables.shared.showAlert = true
+                }
+            }
+        }
+        Task {
+            let ret = await CoreLogicManager.shared.refreshSelfUserInfo()
+            if ret {
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.isLogin = true
+                }
+            }
+            DispatchQueue.main.async {
+                GlobalVariables.shared.isLoading = false
+            }
+        }
+    }
+    
     func auto_relogin() {
         GlobalVariables.shared.LoadingText = "登录中"
         GlobalVariables.shared.isLoading = true
@@ -43,9 +72,8 @@ class AppStatusManager {
                         LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
                             switch result {
                             case .success(let context):
-                                GlobalVariables.shared.isLoading = false
-                                GlobalVariables.shared.isLogin = true
                                 GlobalVariables.shared.cur_lexue_context = context
+                                self.action_after_get_lexue_context(context)
                             case .failure(_):
                                 // 直接清空，让用户重新登录
                                 print("尝试自动登录失败3")
@@ -77,17 +105,7 @@ class AppStatusManager {
                 switch result {
                 case .success(let context):
                     GlobalVariables.shared.cur_lexue_context = context
-                    Task {
-                        let ret = await CoreLogicManager.shared.refreshSelfUserInfo()
-                        if ret {
-                            DispatchQueue.main.async {
-                                GlobalVariables.shared.isLogin = true
-                            }
-                        }
-                        DispatchQueue.main.async {
-                            GlobalVariables.shared.isLoading = false
-                        }
-                    }
+                    self.action_after_get_lexue_context(context)
                 case .failure(_):
                     // 后续处理逻辑，重新登录
                     print("try autologin failed")
@@ -134,7 +152,23 @@ class AppStatusManager {
     var lastTimeToGetLexueContext: Int = 0
     
     func OnAppTickToGetLexueContext() {
-        var deltaTime = Int(Date().timeIntervalSince1970) - lastTimeToGetLexueContext
+        let deltaTime = Int(Date().timeIntervalSince1970) - lastTimeToGetLexueContext
+        // 刷新sesskey
+        Task {
+            let result = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
+            switch result {
+            case .success(let sesskey):
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                }
+            case .failure(_):
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)"
+                    GlobalVariables.shared.alertContent = "数据获取可能异常，建议重启应用再试。"
+                    GlobalVariables.shared.showAlert = true
+                }
+            }
+        }
         if GlobalVariables.shared.isLogin && deltaTime > 10 * 60 {
             lastTimeToGetLexueContext = Int(Date().timeIntervalSince1970)
             RefreshLexueContext(silent_refresh: true)
