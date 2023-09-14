@@ -67,15 +67,19 @@ struct LoginView: View {
                 LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
                     switch result {
                     case .success(let context):
+                        globalVar.cur_lexue_context = context
                         Task {
-                            globalVar.cur_lexue_context = context
                             let ret = await CoreLogicManager.shared.refreshSelfUserInfo()
                             if ret {
-                                globalVar.isLogin = true
+                                DispatchQueue.main.async {
+                                    globalVar.isLogin = true
+                                }
                             }
-                            globalVar.isLoading = false
-                            loginBtnDisabled = false
-                            dismiss()
+                            DispatchQueue.main.async {
+                                globalVar.isLoading = false
+                                loginBtnDisabled = false
+                                dismiss()
+                            }
                         }
                     case .failure(_):
                         showErrorTipsTitle = "网络错误(乐学登录失败)"

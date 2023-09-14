@@ -18,7 +18,7 @@ class LexueAPI {
     let API_LEXUE_TICK = "https://login.bit.edu.cn/authserver/login?service=https://lexue.bit.edu.cn/login/index.php"
     let API_LEXUE_SECOND_AUTH = "https://lexue.bit.edu.cn/login/index.php"
     let API_LEXUE_INDEX = "https://lexue.bit.edu.cn/"
-    
+    let API_LEXUE_DETAIL_INFO = "https://lexue.bit.edu.cn/user/edit.php"
     
     let headers = [
         "Referer": "https://login.bit.edu.cn/authserver/login",
@@ -53,16 +53,65 @@ class LexueAPI {
         var phone: String = ""
     }
     
-    func GetSelfUserInfo(_ lexueContext: LexueContext) async -> Result<SelfUserInfo, Error> {
+    func GetLexueHeaders(_ lexueContext: LexueContext) -> HTTPHeaders {
         var cur_headers = HTTPHeaders(headers1)
         cur_headers.add(name: "Cookie", value: "MoodleSession=\(lexueContext.MoodleSession);")
-        print(cur_headers)
-        var ret: SelfUserInfo = SelfUserInfo()
-        let response = await AF.requestWithoutCache(API_LEXUE_INDEX, method: .get, headers: cur_headers).serializingString().response
+        return cur_headers
+    }
+    
+    func ParseDetailUserInfo(_ html: String, _ ori: SelfUserInfo) -> SelfUserInfo {
+        var ret = ori
+        do {
+            let document = try SwiftSoup.parse(html)
+            let emailElement = try document.select("#id_email").first()
+            ret.email = try emailElement?.attr("value").trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let id_idnumber = try document.select("#id_idnumber").first()
+            ret.stuId = try id_idnumber?.attr("value").trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let id_phone1 = try document.select("#id_phone1").first()
+            ret.phone = try id_phone1?.attr("value").trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            return ret
+        } catch {
+            print("Error parsing HTML: \(error.localizedDescription)")
+            return ret
+        }
+    }
+    
+    func ParseBasicUserInfo(_ html: String) -> SelfUserInfo {
+        do {
+            var ret = SelfUserInfo()
+            let document = try SwiftSoup.parse(html)
+            let fullNameElement = try document.select(".myprofileitem.fullname")
+            ret.fullName = try fullNameElement.text().trimmingCharacters(in: .whitespacesAndNewlines).replacingOccurrences(of: " ", with: "")
+            
+            let firstAccessElement = try document.select(".myprofileitem.firstaccess").first()
+            ret.firstAccessTime = try firstAccessElement?.text().trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let instanceHeaderElement = try document.select("#instance-33495-header").first()
+            let parentElement = instanceHeaderElement?.parent()
+            let infoElements = try parentElement?.select(".info")
+            ret.onlineUsers = try infoElements?.text().trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let containerElement = try document.select("#nav-notification-popover-container").first()
+            ret.userId = try containerElement?.attr("data-userid") ?? ""
+            return ret
+        } catch {
+            print("Error parsing HTML: \(error.localizedDescription)")
+            return SelfUserInfo()
+        }
+    }
+    
+    func GetSelfUserInfo(_ lexueContext: LexueContext) async -> Result<SelfUserInfo, Error> {
+        let response = await AF.requestWithoutCache(API_LEXUE_INDEX, method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
         switch response.result {
         case .success(let data):
-            print(data)
-            return .success(ret)
+            var ret = ParseBasicUserInfo(data)
+            let response2 = await AF.requestWithoutCache(API_LEXUE_DETAIL_INFO, method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
+            switch response2.result {
+            case .success(let data2):
+                ret = ParseDetailUserInfo(data2, ret)
+                print(ret)
+                return .success(ret)
+            case .failure(_):
+                return .success(ret)
+            }
         case .failure(let error):
             return .failure(error)
         }
@@ -78,7 +127,6 @@ class LexueAPI {
                 switch response.result {
                 case .success( _):
                     if let ret_headers = response.response?.allHeaderFields as? [String: String], let login_url = ret_headers["Location"] {
-                        print("login_url: \(login_url)")
                         AF.requestWithoutCache(login_url, method: .get)
                             .validate(statusCode: 300..<500)
                             .redirect(using: Redirector.doNotFollow)
@@ -87,7 +135,7 @@ class LexueAPI {
                                 case .success(_):
                                     if let ret_headers = response1.response?.allHeaderFields as? [String: String], let cookie = ret_headers["Set-Cookie"] {
                                         let firstMoodle = get_cookie_key(cookie, "MoodleSession")
-                                        print("firstMoodle: \(cookie)")
+                                        // print("firstMoodle: \(cookie)")
                                         var secondHeaders = HTTPHeaders(self.headers1)
                                         secondHeaders.add(name: "Cookie", value: "MoodleSession=\(firstMoodle);")
                                         AF.requestWithoutCache(self.API_LEXUE_SECOND_AUTH, method: .get, headers: secondHeaders)

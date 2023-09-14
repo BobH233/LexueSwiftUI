@@ -76,13 +76,17 @@ class AppStatusManager {
             LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
                 switch result {
                 case .success(let context):
+                    GlobalVariables.shared.cur_lexue_context = context
                     Task {
-                        GlobalVariables.shared.cur_lexue_context = context
                         let ret = await CoreLogicManager.shared.refreshSelfUserInfo()
                         if ret {
-                            GlobalVariables.shared.isLogin = true
+                            DispatchQueue.main.async {
+                                GlobalVariables.shared.isLogin = true
+                            }
                         }
-                        GlobalVariables.shared.isLoading = false
+                        DispatchQueue.main.async {
+                            GlobalVariables.shared.isLoading = false
+                        }
                     }
                 case .failure(_):
                     // 后续处理逻辑，重新登录

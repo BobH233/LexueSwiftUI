@@ -15,12 +15,16 @@ class CoreLogicManager {
         let result = await LexueAPI.shared.GetSelfUserInfo(GlobalVariables.shared.cur_lexue_context)
         switch result {
         case .success(let data):
-            GlobalVariables.shared.cur_user_info = data
+            DispatchQueue.main.async {
+                GlobalVariables.shared.cur_user_info = data
+            }
             return true
         case .failure(_):
-            GlobalVariables.shared.alertTitle = "获取个人信息失败"
-            GlobalVariables.shared.alertContent = "请检查网络情况并重启应用重试!"
-            GlobalVariables.shared.showAlert = true
+            DispatchQueue.main.async {
+                GlobalVariables.shared.alertTitle = "获取个人信息失败"
+                GlobalVariables.shared.alertContent = "请检查网络情况并重启应用重试!"
+                GlobalVariables.shared.showAlert = true
+            }
             return false
         }
     }
