@@ -65,13 +65,18 @@ struct LoginView: View {
                 settings.savedPassword = password
                 settings.loginnedContext = data
                 LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
-                    globalVar.isLoading = false
-                    loginBtnDisabled = false
                     switch result {
                     case .success(let context):
-                        globalVar.isLogin = true
-                        globalVar.cur_lexue_context = context
-                        dismiss()
+                        Task {
+                            globalVar.cur_lexue_context = context
+                            let ret = await CoreLogicManager.shared.refreshSelfUserInfo()
+                            if ret {
+                                globalVar.isLogin = true
+                            }
+                            globalVar.isLoading = false
+                            loginBtnDisabled = false
+                            dismiss()
+                        }
                     case .failure(_):
                         showErrorTipsTitle = "网络错误(乐学登录失败)"
                         showErrorTipsContent = "请检查你的网络环境，然后重试"

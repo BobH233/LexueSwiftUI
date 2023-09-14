@@ -24,6 +24,7 @@
 		475AFEF92AAF61C900C4020F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 475AFEF82AAF61C900C4020F /* Alamofire */; };
 		475AFEFE2AAF68E100C4020F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 475AFEFD2AAF68E100C4020F /* SwiftSoup */; };
 		475AFF002AB02A0C00C4020F /* LexueAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */; };
+		47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */; };
 		4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791050E2AB0ACD4004FD26C /* LoginView.swift */; };
 		479839DB2AA9FCD40094C5E1 /* ContactDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479839DA2AA9FCD40094C5E1 /* ContactDisplayModel.swift */; };
 		479839DE2AAA2B9B0094C5E1 /* ImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 479839DD2AAA2B9B0094C5E1 /* ImageViewer */; };
@@ -69,6 +70,7 @@
 		474C9B782AA4E38D0064B5AF /* DDLListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLListView.swift; sourceTree = "<group>"; };
 		475AFEF52AAF560A00C4020F /* BITLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITLogin.swift; sourceTree = "<group>"; };
 		475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueAPI.swift; sourceTree = "<group>"; };
+		47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLogicManager.swift; sourceTree = "<group>"; };
 		4791050E2AB0ACD4004FD26C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		479839DA2AA9FCD40094C5E1 /* ContactDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDisplayModel.swift; sourceTree = "<group>"; };
 		4799C8142AA6235C00F812D6 /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				4799C8162AA6237500F812D6 /* CourseManager.swift */,
 				47A927842AA7836300ABDC53 /* MessageManager.swift */,
 				472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */,
+				47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */,
 				47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */,
 				475AFF002AB02A0C00C4020F /* LexueAPI.swift in Sources */,
+				47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */,
 				479839DB2AA9FCD40094C5E1 /* ContactDisplayModel.swift in Sources */,
 				4799C81B2AA62CDB00F812D6 /* ContactMessageModel.swift in Sources */,
 				472984A02AA706BB000814EE /* Extensions.swift in Sources */,

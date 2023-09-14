@@ -18,34 +18,36 @@ struct SettingView: View {
         NavigationView {
             Form {
                 // avatar group
-                Section(header: Text("北理账号")) {
-                    HStack{
-                        Spacer()
-                            .foregroundColor(.blue)
-                        VStack {
-                            Image(uiImage: UIImage(named: "default_avatar")!)
-                                .resizable()
-                                .frame(width:100, height: 100, alignment: .center)
-                                .shadow(radius: 26)
-                                .clipShape(Circle())
-                                .shadow(radius: 5)
-                                .padding(.top, 10)
+                if globalVar.isLogin {
+                    Section(header: Text("北理账号")) {
+                        HStack{
+                            Spacer()
+                                .foregroundColor(.blue)
+                            VStack {
+                                Image(uiImage: UIImage(named: "default_avatar")!)
+                                    .resizable()
+                                    .frame(width:100, height: 100, alignment: .center)
+                                    .shadow(radius: 26)
+                                    .clipShape(Circle())
+                                    .shadow(radius: 5)
+                                    .padding(.top, 10)
                                 
-                            Text("珐露珊")
-                                .font(.title)
-                                .bold()
-                                .padding(.top, 15)
-                                .padding(.bottom, 1)
-                            Text("1120210000")
-                                .bold()
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                                .padding(.bottom, 10)
+                                Text(globalVar.cur_user_info.fullName)
+                                    .font(.title)
+                                    .bold()
+                                    .padding(.top, 15)
+                                    .padding(.bottom, 1)
+                                Text(globalVar.cur_user_info.stuId)
+                                    .bold()
+                                    .font(.subheadline)
+                                    .foregroundColor(.gray)
+                                    .padding(.bottom, 10)
+                            }
+                            Spacer()
                         }
-                        Spacer()
                     }
                 }
-                if GlobalVariables.shared.debugMode {
+                if globalVar.debugMode {
                     Section(header: Text("Debug")) {
                         Toggle(isOn: $globalVar.isLogin) {
                             Text("isLogin")
