@@ -9,9 +9,8 @@ import Foundation
 import Alamofire
 import SwiftSoup
 
-struct LexueContext {
-    var MoodleSession: String = ""
-}
+
+
 
 class LexueAPI {
     static let shared = LexueAPI()
@@ -24,12 +23,17 @@ class LexueAPI {
         "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0"
     ]
+    
+    struct LexueContext {
+        var MoodleSession: String = ""
+    }
+    
     enum LexueLoginError: Error {
         case networkError
         case noLocationHeader
     }
     
-    func GetLexueContext(_ loginnedContext: LoginSuccessContext, completion: @escaping (Result<LexueContext, LexueLoginError>) -> Void) {
+    func GetLexueContext(_ loginnedContext: BITLogin.LoginSuccessContext, completion: @escaping (Result<LexueContext, LexueLoginError>) -> Void) {
         var cur_headers = HTTPHeaders(headers)
         cur_headers.add(name: "Cookie", value: "CASTGC=\(loginnedContext.CASTGC)")
         AF.requestWithoutCache(API_LEXUE_TICK, method: .get, headers: cur_headers)

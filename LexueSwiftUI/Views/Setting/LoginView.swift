@@ -16,7 +16,7 @@ struct LoginView: View {
     @State var username: String = ""
     @State var password: String = ""
     @State var captcha: String = ""
-    @State var loginContext: LoginContext = LoginContext()
+    @State var loginContext: BITLogin.LoginContext = BITLogin.LoginContext()
     @State var needCaptcha: Bool = false
     @State private var imageCaptchaData: Data? = nil
     @State private var loginBtnDisabled = true

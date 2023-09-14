@@ -30,14 +30,14 @@ struct DebugDataView: View {
     @State var encryptPasswd: String = ""
     
     
-    @State var loginContext: LoginContext = LoginContext()
+    @State var loginContext: BITLogin.LoginContext = BITLogin.LoginContext()
     @State var username1: String = ""
     @State var password1: String = ""
     @State var captcha1: String = ""
     @State var init_login_failed: Bool = false
     @State var need_captcha: Bool = false
     @State private var imageCaptchaData: Data? = nil
-    @State private var loginnedContext: LoginSuccessContext = LoginSuccessContext()
+    @State private var loginnedContext: BITLogin.LoginSuccessContext = BITLogin.LoginSuccessContext()
     
     @State var isPresentAlert = false
     var body: some View {

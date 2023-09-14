@@ -8,25 +8,6 @@ import Foundation
 import Alamofire
 import SwiftSoup
 
-struct LoginContext {
-    var cookies: String = ""
-    var execution: String = ""
-    var encryptSalt: String = ""
-}
-
-struct LoginSuccessContext {
-    var happyVoyagePersonal: String = ""
-    var CASTGC: String = ""
-    
-}
-
-enum LoginError: Error {
-    case networkError
-    case wrongPassword
-    case wrongCaptcha
-    case stopAccount
-    case unknowError
-}
 
 
 
@@ -45,6 +26,26 @@ class BITLogin {
         "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0"
     ]
+    
+    struct LoginContext {
+        var cookies: String = ""
+        var execution: String = ""
+        var encryptSalt: String = ""
+    }
+
+    struct LoginSuccessContext {
+        var happyVoyagePersonal: String = ""
+        var CASTGC: String = ""
+        
+    }
+
+    enum LoginError: Error {
+        case networkError
+        case wrongPassword
+        case wrongCaptcha
+        case stopAccount
+        case unknowError
+    }
     
     func encryptAES(data: String, aesKey: String) -> String? {
         if aesKey.isEmpty {

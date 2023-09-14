@@ -19,7 +19,7 @@ class GlobalVariables: ObservableObject {
     @Published var alertTitle = ""
     @Published var alertContent = ""
     
-    @Published var cur_lexue_context = LexueContext()
+    @Published var cur_lexue_context = LexueAPI.LexueContext()
     
     @Published var courseList: [CourseShortInfo] = [
         CourseShortInfo(id: UUID().uuidString, shortname: UUID().uuidString, progress: 66, coursecategory: "自动化学院"),

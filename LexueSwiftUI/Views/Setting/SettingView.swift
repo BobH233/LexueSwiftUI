@@ -68,8 +68,8 @@ struct SettingView: View {
                     })
                     Button(action: {
                         print("exit login")
-                        settings.loginnedContext = LoginSuccessContext()
-                        globalVar.cur_lexue_context = LexueContext()
+                        settings.loginnedContext = BITLogin.LoginSuccessContext()
+                        globalVar.cur_lexue_context = LexueAPI.LexueContext()
                         withAnimation {
                             globalVar.isLogin = false
                         }

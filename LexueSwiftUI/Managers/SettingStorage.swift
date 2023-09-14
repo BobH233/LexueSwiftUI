@@ -30,7 +30,7 @@ class SettingStorage: ObservableObject {
         }
     }
     
-    @Published var loginnedContext: LoginSuccessContext {
+    @Published var loginnedContext: BITLogin.LoginSuccessContext {
         didSet {
             UserDefaults.standard.set(loginnedContext.happyVoyagePersonal, forKey: "setting.login.context.happyVoyage")
             UserDefaults.standard.set(loginnedContext.CASTGC, forKey: "setting.login.context.castgc")
@@ -54,9 +54,9 @@ class SettingStorage: ObservableObject {
             savedPassword = ""
         }
         if let stored1 = UserDefaults.standard.value(forKey: "setting.login.context.happyVoyage") as? String, let stored2 = UserDefaults.standard.value(forKey: "setting.login.context.castgc") as? String {
-            loginnedContext = LoginSuccessContext(happyVoyagePersonal: stored1, CASTGC: stored2)
+            loginnedContext = BITLogin.LoginSuccessContext(happyVoyagePersonal: stored1, CASTGC: stored2)
         } else {
-            loginnedContext = LoginSuccessContext()
+            loginnedContext = BITLogin.LoginSuccessContext()
         }
     }
 }
