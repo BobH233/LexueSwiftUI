@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DebugDataView: View {
     @Environment(\.managedObjectContext) var managedObjContext
+    @ObservedObject var globalVar = GlobalVariables.shared
     
     @State var senderUid: String = ""
     var msgtype = [MessageBodyType.text, MessageBodyType.link, MessageBodyType.image]
@@ -42,6 +43,20 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     var body: some View {
         Form {
+            Section("LexueAPI") {
+                Button("serviceCall") {
+                    Task {
+                        await LexueAPI.shared.UniversalServiceCall(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, methodName: "core_course_get_enrolled_courses_by_timeline_classification", args: [
+                            "offset": 0,
+                            "limit": 0,
+                            "classification": "all",
+                            "sort": "fullname",
+                            "customfieldname": "",
+                            "customfieldvalue": ""
+                        ])
+                    }
+                }
+            }
             Section("message data") {
                 TextField("senderUid", text: $senderUid)
                 Picker("MsgType", selection: $setMsgType) {

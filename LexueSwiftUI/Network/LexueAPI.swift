@@ -11,7 +11,7 @@ import SwiftSoup
 
 
 
-
+// rewrite from https://github.com/BIT-BOBH/LexueAPI
 class LexueAPI {
     static let shared = LexueAPI()
     
@@ -19,6 +19,7 @@ class LexueAPI {
     let API_LEXUE_SECOND_AUTH = "https://lexue.bit.edu.cn/login/index.php"
     let API_LEXUE_INDEX = "https://lexue.bit.edu.cn/"
     let API_LEXUE_DETAIL_INFO = "https://lexue.bit.edu.cn/user/edit.php"
+    let API_LEXUE_SERVICE_CALL = "https://lexue.bit.edu.cn/lib/ajax/service.php"
     
     let headers = [
         "Referer": "https://login.bit.edu.cn/authserver/login",
@@ -202,5 +203,51 @@ class LexueAPI {
                 }
                 
             }
+    }
+    
+    func UniversalServiceCall(_ lexueContext: LexueContext, sesskey: String, methodName: String, args: [String: Any]) async -> [String: Any] {
+        let data: [[String: Any]] = [[
+            "index": 0,
+            "methodname": methodName,
+            "args": args
+        ]]
+        do {
+            // 将字典转换为 JSON 数据
+            let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+            
+            // 将 JSON 数据转换为字符串
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                var request = URLRequest(url: URL(string: "\(API_LEXUE_SERVICE_CALL)?sesskey=\(sesskey)")!)
+                request.cachePolicy = .reloadIgnoringCacheData
+                request.httpMethod = HTTPMethod.post.rawValue
+                request.headers = GetLexueHeaders(lexueContext)
+                request.httpBody = jsonData
+                // https://stackoverflow.com/questions/68694917/convert-alamofire-completion-handler-to-async-await-swift-5-5
+                let ret = await withCheckedContinuation { continuation in
+                    AF.request(request).response { res in
+                        switch res.result {
+                        case .success(let data):
+                            if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                                continuation.resume(returning: json)
+                            } else {
+                                print("无法将响应数据转换为字典")
+                                continuation.resume(returning: [String: Any]())
+                            }
+                        case .failure(_):
+                            print("请求servicecall 失败")
+                            continuation.resume(returning: [String: Any]())
+                        }
+                    }
+                }
+                print(ret)
+                return ret
+            } else {
+                print("无法将 JSON 数据转换为字符串")
+                return [String: Any]()
+            }
+        } catch {
+            print("转换为 JSON 数据时发生错误: \(error)")
+            return [String: Any]()
+        }
     }
 }
