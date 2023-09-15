@@ -44,6 +44,10 @@ class LexueAPI {
         case noLocationHeader
     }
     
+    enum LexueAPIError: Error {
+        case unknowError
+    }
+    
     struct SelfUserInfo {
         var userId: String = ""
         var fullName: String = ""
@@ -205,6 +209,53 @@ class LexueAPI {
             }
     }
     
+    func GetAllCourseList(_ lexueContext: LexueContext, sesskey: String) async -> Result<[CourseShortInfo],LexueAPIError> {
+        var ret = [CourseShortInfo]()
+        let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_course_get_enrolled_courses_by_timeline_classification", args: [
+            "offset": 0,
+            "limit": 0,
+            "classification": "all",
+            "sort": "fullname",
+            "customfieldname": "",
+            "customfieldvalue": ""
+        ])
+        if let data = serviceRet["data"] as? [String: Any], let courses = data["courses"] as? [[String: Any]] {
+            for course in courses {
+                if let course = course as? [String: Any] {
+                    var cur = CourseShortInfo()
+                    if let id = course["id"] as? Int {
+                        cur.id = String(id)
+                    } else {
+                        cur.id = nil
+                    }
+                    cur.fullname = course["fullname"] as? String
+                    cur.shortname = course["shortname"] as? String
+                    cur.idnumber = course["idnumber"] as? String
+                    cur.summary = course["summary"] as? String
+                    cur.summaryformat = course["summaryformat"] as? Int
+                    cur.startdate = course["startdate"] as? Int
+                    cur.enddate = course["enddate"] as? Int
+                    cur.visible = course["visible"] as? Bool
+                    cur.showactivitydates = course["showactivitydates"] as? Bool
+                    cur.showcompletionconditions = course["showcompletionconditions"] as? Bool
+                    cur.fullnamedisplay = course["fullnamedisplay"] as? String
+                    cur.viewurl = course["viewurl"] as? String
+                    cur.courseimage = course["courseimage"] as? String
+                    cur.progress = course["progress"] as? Int
+                    cur.hasprogress = course["hasprogress"] as? Bool
+                    cur.isfavourite = course["isfavourite"] as? Bool
+                    cur.hidden = course["hidden"] as? Bool
+                    cur.showshortname = course["showshortname"] as? Bool
+                    cur.coursecategory = course["coursecategory"] as? String
+                    ret.append(cur)
+                }
+            }
+        } else {
+            return .failure(.unknowError)
+        }
+        return .success(ret)
+    }
+    
     func UniversalServiceCall(_ lexueContext: LexueContext, sesskey: String, methodName: String, args: [String: Any]) async -> [String: Any] {
         let data: [[String: Any]] = [[
             "index": 0,
@@ -216,7 +267,7 @@ class LexueAPI {
             let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
             
             // 将 JSON 数据转换为字符串
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
+            if String(data: jsonData, encoding: .utf8) != nil {
                 var request = URLRequest(url: URL(string: "\(API_LEXUE_SERVICE_CALL)?sesskey=\(sesskey)")!)
                 request.cachePolicy = .reloadIgnoringCacheData
                 request.httpMethod = HTTPMethod.post.rawValue
@@ -249,4 +300,6 @@ class LexueAPI {
             return [String: Any]()
         }
     }
+    
+    
 }

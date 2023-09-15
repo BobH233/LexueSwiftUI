@@ -11,10 +11,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "getAesString(data:key0:iv0:):BITLogin.swift">
+         contextName = "closure #2 in closure #1 in ListItemView.body.getter:MessageListView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "keyData">
+               value = "contactUid">
+            </PersistentString>
+            <PersistentString
+               value = "currentViewContactUid">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -30,17 +33,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in ListItemView.body.getter:MessageListView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "contactUid">
-            </PersistentString>
-            <PersistentString
-               value = "currentViewContactUid">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "closure #2 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
          <PersistentStrings>
             <PersistentString
@@ -52,6 +44,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "getAesString(data:key0:iv0:):BITLogin.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "keyData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in LexueAPI.GetLexueContext(_:completion:):LexueAPI.swift">
       </ContextState>
       <ContextState
@@ -59,6 +59,14 @@
          <PersistentStrings>
             <PersistentString
                value = "headers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in CourseCardView.body.getter:CourseListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -93,18 +101,18 @@
          contextName = "closure #1 in getAesString(data:key0:iv0:):BITLogin.swift">
       </ContextState>
       <ContextState
-         contextName = "LexueAPI.ParseSelfUserInfo(_:):LexueAPI.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "children">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "ListView.refreshToolbar.getter:MessageListView.swift">
          <PersistentStrings>
             <PersistentString
                value = "refreshAction">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LexueAPI.ParseSelfUserInfo(_:):LexueAPI.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "children">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

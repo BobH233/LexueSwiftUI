@@ -104,30 +104,16 @@ private struct ListView: View {
         }
     }
     var body: some View {
-        if debug_use_lazy_v_stack {
-            ScrollView(.vertical) {
-                LazyVStack(spacing: 20){
-                    ForEach(courses) { item in
-                        CourseCardView(debug_use_lazy_v_stack: debug_use_lazy_v_stack, courseName: item.shortname!, courseCategory: item.coursecategory!, progress: item.progress!)
-                    }
+        ScrollView(.vertical) {
+            LazyVStack(spacing: 20){
+                ForEach(courses) { item in
+                    CourseCardView(debug_use_lazy_v_stack: debug_use_lazy_v_stack, courseName: item.fullname!, courseCategory: item.coursecategory!, progress: item.progress!)
                 }
-            }
-            .toolbar {
-                refreshToolbar
-            }
-        } else {
-            ScrollView(.vertical) {
-                LazyVStack(spacing: 20){
-                    ForEach(courses) { item in
-                        CourseCardView(debug_use_lazy_v_stack: debug_use_lazy_v_stack, courseName: item.shortname!, courseCategory: item.coursecategory!, progress: item.progress!)
-                    }
-                }
-            }
-            .toolbar {
-                refreshToolbar
             }
         }
-        
+        .toolbar {
+            refreshToolbar
+        }
     }
 }
 
