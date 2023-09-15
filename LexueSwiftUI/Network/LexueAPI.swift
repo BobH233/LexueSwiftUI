@@ -227,8 +227,8 @@ class LexueAPI {
                     AF.request(request).response { res in
                         switch res.result {
                         case .success(let data):
-                            if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
-                                continuation.resume(returning: json)
+                            if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]], json.count > 0 {
+                                continuation.resume(returning: json[0])
                             } else {
                                 print("无法将响应数据转换为字典")
                                 continuation.resume(returning: [String: Any]())
@@ -239,7 +239,6 @@ class LexueAPI {
                         }
                     }
                 }
-                print(ret)
                 return ret
             } else {
                 print("无法将 JSON 数据转换为字符串")

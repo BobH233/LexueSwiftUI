@@ -181,7 +181,7 @@ class AppStatusManager {
         if foregroundCnt == 0 {
             OnAppStart()
         } else {
-            var deltaTime = Int(Date().timeIntervalSince1970) - lastBackgroundTime
+            let deltaTime = Int(Date().timeIntervalSince1970) - lastBackgroundTime
             print("deltaTime: \(deltaTime)")
             if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 10 * 60 {
                 // 超过10分钟，需要刷新lexue的session
