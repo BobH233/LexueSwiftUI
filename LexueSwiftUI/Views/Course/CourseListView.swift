@@ -108,6 +108,9 @@ private struct ListView: View {
             LazyVStack(spacing: 20){
                 ForEach(courses) { item in
                     CourseCardView(debug_use_lazy_v_stack: debug_use_lazy_v_stack, courseName: item.fullname!, courseCategory: item.coursecategory!, progress: item.progress!)
+                        .contextMenu {
+                            Text("课程名: \(item.fullname!)")
+                        }
                 }
             }
         }
@@ -118,7 +121,8 @@ private struct ListView: View {
 }
 
 struct CourseListView: View {
-    @State private var courseList = GlobalVariables.shared.courseList
+    @ObservedObject var globalVar = GlobalVariables.shared
+    
     @State var isRefreshing: Bool = false
     @State var searchText: String = ""
     @State var debug_use_lazy_v_stack: Bool = true
@@ -134,7 +138,7 @@ struct CourseListView: View {
     var body: some View {
         NavigationView {
             VStack {
-                ListView(courses: $courseList, isRefreshing: $isRefreshing, debug_use_lazy_v_stack: debug_use_lazy_v_stack)
+                ListView(courses: $globalVar.courseList, isRefreshing: $isRefreshing, debug_use_lazy_v_stack: debug_use_lazy_v_stack)
                     .refreshable {
                         print("refresh")
                         await testRefresh()
