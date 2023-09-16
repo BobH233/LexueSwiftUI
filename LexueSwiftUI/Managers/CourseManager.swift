@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 class CourseManager: ObservableObject {
     static let shared = CourseManager()
@@ -20,10 +21,15 @@ class CourseManager: ObservableObject {
                 return course1.startdate! > course2.startdate!
             } else {
                 // 按照 local_favorite 排序
-                return course1.local_favorite && !course1.local_favorite
+                return course1.local_favorite && !course2.local_favorite
             }
         }
         CourseDisplayList = result
+    }
+    
+    func FavoriteCourse(courseId: String, isFavorite: Bool, context: NSManagedObjectContext) {
+        DataController.shared.setCourseFavorite(courseId: courseId, isFavorite: isFavorite, context: context)
+        LoadStoredCacheCourses()
     }
     
     // 对比最新获取的列表的差异，然后更新数据库的内容

@@ -101,6 +101,21 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
+    func setCourseFavorite(courseId: String, isFavorite: Bool, context: NSManagedObjectContext) {
+        let request: NSFetchRequest<CourseCacheStored> = CourseCacheStored.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", courseId)
+        do {
+            var recordsToUpdate = try context.fetch(request)
+            for i in 0..<recordsToUpdate.count {
+                recordsToUpdate[i].local_favorite = isFavorite
+            }
+            save(context: context)
+            
+        } catch {
+            print("更新课程\(courseId) 失败")
+        }
+    }
+    
     func updateCourseCacheStored(course: CourseShortInfo, context: NSManagedObjectContext) {
         let request: NSFetchRequest<CourseCacheStored> = CourseCacheStored.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", course.id)
@@ -127,7 +142,8 @@ class DataController: ObservableObject {
                 recordsToUpdate[i].hidden = course.hidden ?? false
                 recordsToUpdate[i].showshortname = course.showshortname ?? false
                 recordsToUpdate[i].coursecategory = course.coursecategory
-                recordsToUpdate[i].local_favorite = course.local_favorite
+                // 唯独这个不要更新
+                // recordsToUpdate[i].local_favorite = course.local_favorite
             }
             save(context: context)
         } catch {

@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct CourseCardView: View {
+    @Environment(\.managedObjectContext) var managedObjContext
     let cardHeight: CGFloat = 150
     let cardCornelRadius: CGFloat = 10
     let cardHorizontalPadding: CGFloat = 10
     
+    @Binding var courseId: String
     @Binding var courseName: String?
     @Binding var courseCategory: String?
+    @Binding var isFavorite: Bool
     @Binding var progress: Int?
     var body: some View {
         ZStack {
@@ -57,10 +60,12 @@ struct CourseCardView: View {
                 HStack {
                     Spacer()
                     Button(action: {
-                        
+                        withAnimation {
+                            CourseManager.shared.FavoriteCourse(courseId: courseId, isFavorite: !isFavorite, context: managedObjContext)
+                        }
                     }) {
-                        Image(systemName: "star")
-                            .foregroundColor(.white)
+                        Image(systemName: isFavorite ? "star.fill" : "star")
+                            .foregroundColor(isFavorite ? .yellow : .white)
                             .font(.system(size: 24).weight(.regular))
                     }
                     .padding(.trailing, 10)
@@ -102,7 +107,7 @@ private struct ListView: View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 20){
                 ForEach($courses) { item in
-                    CourseCardView(courseName: item.fullname, courseCategory: item.coursecategory, progress: item.progress)
+                    CourseCardView(courseId: item.id, courseName: item.fullname, courseCategory: item.coursecategory, isFavorite: item.local_favorite, progress: item.progress)
                         .contextMenu {
                             Text("课程名: \(item.fullname.wrappedValue!)")
                         }
@@ -126,7 +131,9 @@ struct CourseListView: View {
             VStack {
                 ListView(courses: $courseManager.CourseDisplayList, isRefreshing: $isRefreshing)
                     .refreshable {
-                        CoreLogicManager.shared.UpdateCourseList()
+                        isRefreshing = true
+                        await CoreLogicManager.shared.UpdateCourseList()
+                        isRefreshing = false
                     }
             }
             .searchable(text: $searchText, prompt: "搜索课程")

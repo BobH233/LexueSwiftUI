@@ -27,7 +27,9 @@ class AppStatusManager {
             case .success(let sesskey):
                 DispatchQueue.main.async {
                     GlobalVariables.shared.cur_lexue_sessKey = sesskey
-                    CoreLogicManager.shared.UpdateCourseList()
+                    Task {
+                        await CoreLogicManager.shared.UpdateCourseList()
+                    }
                 }
             case .failure(_):
                 DispatchQueue.main.async {
