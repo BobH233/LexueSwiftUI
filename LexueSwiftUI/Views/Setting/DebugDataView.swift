@@ -61,7 +61,6 @@ struct DebugDataView: View {
                         let res = await LexueAPI.shared.GetAllCourseList(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey)
                         switch res {
                         case .success(let data):
-                            print(data)
                             DispatchQueue.main.async {
                                 globalVar.courseList = data
                             }

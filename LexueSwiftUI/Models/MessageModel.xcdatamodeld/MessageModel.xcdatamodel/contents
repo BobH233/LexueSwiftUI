@@ -12,6 +12,29 @@
         <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="unreadCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
+    <entity name="CourseCacheStored" representedClassName="CourseCacheStored" syncable="YES" codeGenerationType="class">
+        <attribute name="coursecategory" optional="YES" attributeType="String"/>
+        <attribute name="courseimage" optional="YES" attributeType="String"/>
+        <attribute name="enddate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fullname" optional="YES" attributeType="String"/>
+        <attribute name="fullnamedisplay" optional="YES" attributeType="String"/>
+        <attribute name="hasprogress" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hidden" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="idnumber" optional="YES" attributeType="String"/>
+        <attribute name="isfavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="local_favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="progress" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="shortname" optional="YES" attributeType="String"/>
+        <attribute name="showactivitydates" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showcompletionconditions" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showshortname" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="startdate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String"/>
+        <attribute name="summaryformat" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="viewurl" optional="YES" attributeType="String"/>
+        <attribute name="visible" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
     <entity name="MessageStored" representedClassName="MessageStored" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>

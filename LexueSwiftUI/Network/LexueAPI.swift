@@ -226,7 +226,7 @@ class LexueAPI {
                     if let id = course["id"] as? Int {
                         cur.id = String(id)
                     } else {
-                        cur.id = nil
+                        continue
                     }
                     cur.fullname = course["fullname"] as? String
                     cur.shortname = course["shortname"] as? String

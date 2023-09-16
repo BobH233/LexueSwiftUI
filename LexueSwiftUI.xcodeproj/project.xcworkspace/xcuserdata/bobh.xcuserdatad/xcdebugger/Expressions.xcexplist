@@ -11,13 +11,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in ListItemView.body.getter:MessageListView.swift">
+         contextName = "SettingStorage.loginnedContext.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "contactUid">
-            </PersistentString>
-            <PersistentString
-               value = "currentViewContactUid">
+               value = "loginnedContext">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -33,21 +30,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
+         contextName = "closure #2 in closure #1 in ListItemView.body.getter:MessageListView.swift">
          <PersistentStrings>
             <PersistentString
                value = "contactUid">
             </PersistentString>
             <PersistentString
-               value = "self.messages">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "getAesString(data:key0:iv0:):BITLogin.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "keyData">
+               value = "currentViewContactUid">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -56,6 +45,17 @@
          <PersistentStrings>
             <PersistentString
                value = "GlobalVariables.shared.cur_user_info">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "contactUid">
+            </PersistentString>
+            <PersistentString
+               value = "self.messages">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -79,10 +79,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SettingStorage.loginnedContext.didset:SettingStorage.swift">
+         contextName = "getAesString(data:key0:iv0:):BITLogin.swift">
          <PersistentStrings>
             <PersistentString
-               value = "loginnedContext">
+               value = "keyData">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -91,6 +91,14 @@
          <PersistentStrings>
             <PersistentString
                value = "bottom_scrolled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CourseManager.DiffAndUpdateCacheCourses(_:):CourseManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "DataController.shared.container.viewContext">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

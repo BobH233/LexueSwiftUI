@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import CoreData
 
 struct CourseShortInfo: Codable, Identifiable {
-    var id: String?
+    var id: String = ""
     var fullname: String?
     var shortname: String?
     var idnumber: String?
@@ -28,5 +29,7 @@ struct CourseShortInfo: Codable, Identifiable {
     var hidden: Bool?
     var showshortname: Bool?
     var coursecategory: String?
+    var local_favorite: Bool = false
+    
 }
 

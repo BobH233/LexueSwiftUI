@@ -16,14 +16,19 @@ class AppStatusManager {
     // 最后一次进入后台的时间
     var lastBackgroundTime: Int = 0
     
+    
+    
     func action_after_get_lexue_context(_ context: LexueAPI.LexueContext) {
         print("action_after_get_lexue_context")
+        CourseManager.shared.LoadStoredCacheCourses()
         Task {
             let result = await LexueAPI.shared.GetSessKey(context)
             switch result {
             case .success(let sesskey):
                 DispatchQueue.main.async {
                     GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                    print(GlobalVariables.shared.cur_lexue_sessKey)
+                    CoreLogicManager.shared.UpdateCourseList()
                 }
             case .failure(_):
                 DispatchQueue.main.async {

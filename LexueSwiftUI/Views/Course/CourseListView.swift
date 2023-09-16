@@ -12,12 +12,9 @@ struct CourseCardView: View {
     let cardCornelRadius: CGFloat = 10
     let cardHorizontalPadding: CGFloat = 10
     
-    // TODO: remove this when release
-    @State var debug_use_lazy_v_stack: Bool
-    
-    @State var courseName = "课程名称"
-    @State var courseCategory = "学院名称"
-    @State var progress = 66
+    @Binding var courseName: String?
+    @Binding var courseCategory: String?
+    @Binding var progress: Int?
     var body: some View {
         ZStack {
             Image("default_course_bg")
@@ -34,21 +31,21 @@ struct CourseCardView: View {
             
             VStack(alignment: .leading, spacing: 2) {
                 Spacer()
-                Text(courseName)
+                Text(courseName!)
                     .bold()
                     .font(.title)
                     .foregroundColor(.white)
                     .lineLimit(1)
                     .padding(.leading, 10)
                 
-                Text(courseCategory)
+                Text(courseCategory!)
                     .bold()
                     .font(.headline)
                     .foregroundColor(.white)
                     .lineLimit(1)
                     .padding(.leading, 10)
                     .padding(.bottom, 5)
-                ProgressView(value: Double(progress) / 100.0)
+                ProgressView(value: Double(progress!) / 100.0)
                     .padding(.horizontal, 10)
                     .padding(.bottom, 10)
                     .accentColor(.white)
@@ -83,8 +80,6 @@ private struct ListView: View {
     @Binding var courses: [CourseShortInfo]
     @Binding var isRefreshing: Bool
     
-    // TODO: remove this when release
-    @State var debug_use_lazy_v_stack: Bool
     
     @Environment(\.refresh) private var refreshAction
     @ViewBuilder
@@ -106,10 +101,10 @@ private struct ListView: View {
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 20){
-                ForEach(courses) { item in
-                    CourseCardView(debug_use_lazy_v_stack: debug_use_lazy_v_stack, courseName: item.fullname!, courseCategory: item.coursecategory!, progress: item.progress!)
+                ForEach($courses) { item in
+                    CourseCardView(courseName: item.fullname, courseCategory: item.coursecategory, progress: item.progress)
                         .contextMenu {
-                            Text("课程名: \(item.fullname!)")
+                            Text("课程名: \(item.fullname.wrappedValue!)")
                         }
                 }
             }
@@ -122,26 +117,16 @@ private struct ListView: View {
 
 struct CourseListView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
+    @ObservedObject var courseManager = CourseManager.shared
     
     @State var isRefreshing: Bool = false
     @State var searchText: String = ""
-    @State var debug_use_lazy_v_stack: Bool = true
-    func testRefresh() async {
-        Task {
-            isRefreshing = true
-            Thread.sleep(forTimeInterval: 1.5)
-            withAnimation {
-                isRefreshing = false
-            }
-        }
-    }
     var body: some View {
         NavigationView {
             VStack {
-                ListView(courses: $globalVar.courseList, isRefreshing: $isRefreshing, debug_use_lazy_v_stack: debug_use_lazy_v_stack)
+                ListView(courses: $courseManager.CourseDisplayList, isRefreshing: $isRefreshing)
                     .refreshable {
-                        print("refresh")
-                        await testRefresh()
+                        CoreLogicManager.shared.UpdateCourseList()
                     }
             }
             .searchable(text: $searchText, prompt: "搜索课程")

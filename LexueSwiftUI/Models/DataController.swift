@@ -59,6 +59,111 @@ class DataController: ObservableObject {
         return ret
     }
     
+    func queryCourseCacheStoredById(id: String, context: NSManagedObjectContext) -> CourseShortInfo? {
+        let request: NSFetchRequest<CourseCacheStored> = CourseCacheStored.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id)
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                return results[0].ToCourseShortInfo()
+            } else {
+                return nil
+            }
+        } catch {
+            print("查询课程\(id) 失败")
+            return nil
+        }
+    }
+    
+    func addCourseChacheStored(course: CourseShortInfo, context: NSManagedObjectContext) {
+        var newStored = CourseCacheStored(context: context)
+        newStored.id = course.id
+        newStored.fullname = course.fullname
+        newStored.shortname = course.shortname
+        newStored.idnumber = course.idnumber
+        newStored.summary = course.summary
+        newStored.summaryformat = Int32(course.summaryformat ?? 0)
+        newStored.startdate = Int64(course.startdate ?? 0)
+        newStored.enddate = Int64(course.enddate ?? 0)
+        newStored.visible = course.visible ?? true
+        newStored.showactivitydates = course.showactivitydates ?? false
+        newStored.showcompletionconditions = course.showcompletionconditions ?? false
+        newStored.fullnamedisplay = course.fullnamedisplay
+        newStored.viewurl = course.viewurl
+        newStored.courseimage = course.courseimage
+        newStored.progress = Int32(course.progress ?? 0)
+        newStored.hasprogress = course.hasprogress ?? true
+        newStored.isfavourite = course.isfavourite ?? false
+        newStored.hidden = course.hidden ?? false
+        newStored.showshortname = course.showshortname ?? false
+        newStored.coursecategory = course.coursecategory
+        newStored.local_favorite = course.local_favorite
+        save(context: context)
+    }
+    
+    func updateCourseCacheStored(course: CourseShortInfo, context: NSManagedObjectContext) {
+        let request: NSFetchRequest<CourseCacheStored> = CourseCacheStored.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", course.id)
+        do {
+            var recordsToUpdate = try context.fetch(request)
+            for i in 0..<recordsToUpdate.count {
+                recordsToUpdate[i].id = course.id
+                recordsToUpdate[i].fullname = course.fullname
+                recordsToUpdate[i].shortname = course.shortname
+                recordsToUpdate[i].idnumber = course.idnumber
+                recordsToUpdate[i].summary = course.summary
+                recordsToUpdate[i].summaryformat = Int32(course.summaryformat ?? 0)
+                recordsToUpdate[i].startdate = Int64(course.startdate ?? 0)
+                recordsToUpdate[i].enddate = Int64(course.enddate ?? 0)
+                recordsToUpdate[i].visible = course.visible ?? true
+                recordsToUpdate[i].showactivitydates = course.showactivitydates ?? false
+                recordsToUpdate[i].showcompletionconditions = course.showcompletionconditions ?? false
+                recordsToUpdate[i].fullnamedisplay = course.fullnamedisplay
+                recordsToUpdate[i].viewurl = course.viewurl
+                recordsToUpdate[i].courseimage = course.courseimage
+                recordsToUpdate[i].progress = Int32(course.progress ?? 0)
+                recordsToUpdate[i].hasprogress = course.hasprogress ?? true
+                recordsToUpdate[i].isfavourite = course.isfavourite ?? false
+                recordsToUpdate[i].hidden = course.hidden ?? false
+                recordsToUpdate[i].showshortname = course.showshortname ?? false
+                recordsToUpdate[i].coursecategory = course.coursecategory
+                recordsToUpdate[i].local_favorite = course.local_favorite
+            }
+            save(context: context)
+        } catch {
+            print("更新课程\(course.id ?? "null") 失败")
+        }
+    }
+    
+    func deleteCourseCacheStoredById(id: String, context: NSManagedObjectContext) {
+        let request: NSFetchRequest<CourseCacheStored> = CourseCacheStored.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id)
+        do {
+            let recordsToDelete = try context.fetch(request)
+            for record in recordsToDelete {
+                context.delete(record)
+            }
+            save(context: context)
+        } catch {
+            print("删除课程\(id) 失败")
+        }
+    }
+    
+    func queryAllCourseCacheStored(context: NSManagedObjectContext) -> [CourseShortInfo] {
+        let request: NSFetchRequest<CourseCacheStored> = CourseCacheStored.fetchRequest()
+        var ret: [CourseShortInfo] = [CourseShortInfo]()
+        do {
+            let results = try context.fetch(request)
+            for result in results {
+                ret.append(result.ToCourseShortInfo())
+            }
+        } catch {
+            print("查询课程列表失败：\(error)")
+        }
+        
+        return ret
+    }
+    
     func blurSearchMessage(keyword: String, context: NSManagedObjectContext) -> [ContactMessage] {
         let request: NSFetchRequest<MessageStored> = MessageStored.fetchRequest()
         var ret: [ContactMessage] = [ContactMessage]()
@@ -163,5 +268,33 @@ extension ContactStored {
         } else {
             return alias!
         }
+    }
+}
+
+extension CourseCacheStored {
+    func ToCourseShortInfo() -> CourseShortInfo {
+        var ret: CourseShortInfo = CourseShortInfo()
+        ret.id = id ?? ""
+        ret.fullname = fullname
+        ret.shortname = shortname
+        ret.idnumber = idnumber
+        ret.summary = summary
+        ret.summaryformat = Int(summaryformat)
+        ret.startdate = Int(startdate)
+        ret.enddate = Int(enddate)
+        ret.visible = visible
+        ret.showactivitydates = showactivitydates
+        ret.showcompletionconditions = showcompletionconditions
+        ret.fullnamedisplay = fullnamedisplay
+        ret.viewurl = viewurl
+        ret.courseimage = courseimage
+        ret.progress = Int(progress)
+        ret.hasprogress = hasprogress
+        ret.isfavourite = isfavourite
+        ret.hidden = hidden
+        ret.showshortname = showshortname
+        ret.coursecategory = coursecategory
+        ret.local_favorite = local_favorite
+        return ret
     }
 }
