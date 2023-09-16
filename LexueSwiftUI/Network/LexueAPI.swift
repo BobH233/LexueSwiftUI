@@ -118,14 +118,38 @@ class LexueAPI {
         return ""
     }
     
-    func GetSessKey(_ lexueContext: LexueContext) async -> Result<String, Error> {
+    func GetSessKey(_ lexueContext: LexueContext, retry: Bool = true) async -> Result<String, Error> {
         let response = await AF.requestWithoutCache(API_LEXUE_INDEX, method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
         switch response.result {
         case .success(let html):
             let ret = ParseSessKey(html)
             return .success(ret)
         case .failure(let error):
-            return .failure(error)
+            if retry {
+                print("GetSessKey occured error, retrying...")
+                let new_lexue_context = await withCheckedContinuation { continuation in
+                    self.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
+                        switch result {
+                        case .success(let context):
+                            continuation.resume(returning: Result<LexueContext, LexueLoginError>.success(context))
+                        case .failure(let error):
+                            continuation.resume(returning: Result<LexueContext, LexueLoginError>.failure(error))
+                        }
+                    }
+                }
+                switch new_lexue_context {
+                case .success(let new_context):
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.cur_lexue_context = new_context
+                    }
+                    return await GetSessKey(new_context, retry: false)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            } else {
+                return .failure(error)
+            }
+            
         }
     }
     
