@@ -52,6 +52,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #2 in AppStatusManager.action_after_get_lexue_context(_:):AppStatusManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "GlobalVariables.shared.cur_user_info">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in LexueAPI.GetLexueContext(_:completion:):LexueAPI.swift">
       </ContextState>
       <ContextState
@@ -67,6 +75,14 @@
          <PersistentStrings>
             <PersistentString
                value = "imageData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingStorage.loginnedContext.didset:SettingStorage.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "loginnedContext">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -139,6 +155,14 @@
          contextName = "LexueAPI.GetSelfUserInfo(_:):LexueAPI.swift">
       </ContextState>
       <ContextState
+         contextName = "SettingStorage.cacheUserInfo.didset:SettingStorage.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cacheUserInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
       </ContextState>
       <ContextState
@@ -159,6 +183,9 @@
                value = "sysColorScheme">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingStorage.().init():SettingStorage.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

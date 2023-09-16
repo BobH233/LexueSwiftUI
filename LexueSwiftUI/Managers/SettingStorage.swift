@@ -37,6 +37,18 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    @Published var cacheUserInfo: LexueAPI.SelfUserInfo {
+        didSet {
+            UserDefaults.standard.set(cacheUserInfo.userId, forKey: "setting.cacheUserInfo.userId")
+            UserDefaults.standard.set(cacheUserInfo.fullName, forKey: "setting.cacheUserInfo.fullName")
+            UserDefaults.standard.set(cacheUserInfo.firstAccessTime, forKey: "setting.cacheUserInfo.firstAccessTime")
+            UserDefaults.standard.set(cacheUserInfo.onlineUsers, forKey: "setting.cacheUserInfo.onlineUsers")
+            UserDefaults.standard.set(cacheUserInfo.email, forKey: "setting.cacheUserInfo.email")
+            UserDefaults.standard.set(cacheUserInfo.stuId, forKey: "setting.cacheUserInfo.stuId")
+            UserDefaults.standard.set(cacheUserInfo.phone, forKey: "setting.cacheUserInfo.phone")
+        }
+    }
+    
     private init() {
         if let stored = UserDefaults.standard.value(forKey: "setting.preferColorScheme") as? Int {
             preferColorScheme = stored
@@ -57,6 +69,19 @@ class SettingStorage: ObservableObject {
             loginnedContext = BITLogin.LoginSuccessContext(happyVoyagePersonal: stored1, CASTGC: stored2)
         } else {
             loginnedContext = BITLogin.LoginSuccessContext()
+        }
+        if let stored1 = UserDefaults.standard.value(forKey: "setting.cacheUserInfo.userId") as? String {
+            var tmpInfo = LexueAPI.SelfUserInfo()
+            tmpInfo.userId = stored1
+            tmpInfo.fullName = UserDefaults.standard.value(forKey: "setting.cacheUserInfo.fullName") as? String ?? ""
+            tmpInfo.firstAccessTime = UserDefaults.standard.value(forKey: "setting.cacheUserInfo.firstAccessTime") as? String ?? ""
+            tmpInfo.onlineUsers = UserDefaults.standard.value(forKey: "setting.cacheUserInfo.onlineUsers") as? String ?? ""
+            tmpInfo.email = UserDefaults.standard.value(forKey: "setting.cacheUserInfo.email") as? String ?? ""
+            tmpInfo.stuId = UserDefaults.standard.value(forKey: "setting.cacheUserInfo.stuId") as? String ?? ""
+            tmpInfo.phone = UserDefaults.standard.value(forKey: "setting.cacheUserInfo.phone") as? String ?? ""
+            cacheUserInfo = tmpInfo
+        } else {
+            cacheUserInfo = LexueAPI.SelfUserInfo()
         }
     }
 }

@@ -17,6 +17,7 @@ class AppStatusManager {
     var lastBackgroundTime: Int = 0
     
     func action_after_get_lexue_context(_ context: LexueAPI.LexueContext) {
+        print("action_after_get_lexue_context")
         Task {
             let result = await LexueAPI.shared.GetSessKey(context)
             switch result {
@@ -33,14 +34,17 @@ class AppStatusManager {
             }
         }
         Task {
-            let ret = await CoreLogicManager.shared.refreshSelfUserInfo()
-            if ret {
-                DispatchQueue.main.async {
-                    GlobalVariables.shared.isLogin = true
-                }
-            }
             DispatchQueue.main.async {
+                // 优化体验，先默认用上一次存储的缓存用户信息，毕竟用户信息不会有太大变化
+                GlobalVariables.shared.cur_user_info = SettingStorage.shared.cacheUserInfo
                 GlobalVariables.shared.isLoading = false
+                GlobalVariables.shared.isLogin = true
+            }
+            let ret = await CoreLogicManager.shared.refreshSelfUserInfo()
+            if !ret {
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.isLogin = false
+                }
             }
         }
     }

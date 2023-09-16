@@ -17,6 +17,7 @@ class CoreLogicManager {
         case .success(let data):
             DispatchQueue.main.async {
                 GlobalVariables.shared.cur_user_info = data
+                SettingStorage.shared.cacheUserInfo = data
             }
             return true
         case .failure(_):
