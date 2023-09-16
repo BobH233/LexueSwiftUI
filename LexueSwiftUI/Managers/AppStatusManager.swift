@@ -27,7 +27,6 @@ class AppStatusManager {
             case .success(let sesskey):
                 DispatchQueue.main.async {
                     GlobalVariables.shared.cur_lexue_sessKey = sesskey
-                    print(GlobalVariables.shared.cur_lexue_sessKey)
                     CoreLogicManager.shared.UpdateCourseList()
                 }
             case .failure(_):
@@ -103,7 +102,7 @@ class AppStatusManager {
     func OnAppStart() {
         print("\(#function)")
         lastTimeToGetLexueContext = Int(Date().timeIntervalSince1970)
-        Timer.scheduledTimer(withTimeInterval: 20.0, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
             self.OnAppTickToGetLexueContext()
         }
         GlobalVariables.shared.LoadingText = "加载中"
@@ -165,12 +164,10 @@ class AppStatusManager {
         // 刷新sesskey
         Task {
             let result = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
-            print("refresh sesskey: ")
             switch result {
             case .success(let sesskey):
                 DispatchQueue.main.async {
                     GlobalVariables.shared.cur_lexue_sessKey = sesskey
-                    print(sesskey)
                 }
             case .failure(_):
                 DispatchQueue.main.async {

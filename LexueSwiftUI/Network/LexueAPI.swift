@@ -119,7 +119,11 @@ class LexueAPI {
     }
     
     func GetSessKey(_ lexueContext: LexueContext, retry: Bool = true) async -> Result<String, Error> {
-        let response = await AF.requestWithoutCache(API_LEXUE_INDEX, method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
+        let response = await AF.requestWithoutCache(API_LEXUE_INDEX, method: .get, headers: GetLexueHeaders(lexueContext))
+            .validate(statusCode: 200...200)
+            .redirect(using: Redirector.doNotFollow)
+            .serializingString()
+            .response
         switch response.result {
         case .success(let html):
             let ret = ParseSessKey(html)
@@ -202,7 +206,7 @@ class LexueAPI {
                                                     if let ret_headers = response2.response?.allHeaderFields as? [String: String], let cookie = ret_headers["Set-Cookie"]{
                                                         var ret = LexueContext()
                                                         ret.MoodleSession = get_cookie_key(cookie, "MoodleSession")
-                                                        print(ret)
+                                                        // print(ret)
                                                         completion(.success(ret))
                                                     } else {
                                                         print("登录lexue 失败")
