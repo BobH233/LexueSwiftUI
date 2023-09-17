@@ -69,6 +69,12 @@ struct DebugDataView: View {
                         }
                     }
                 }
+                Button("get_edit_profile_param") {
+                    Task {
+                        let res = await LexueAPI.shared.GetEditProfileParam(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey)
+                        print(res)
+                    }
+                }
             }
             Section("message data") {
                 TextField("senderUid", text: $senderUid)

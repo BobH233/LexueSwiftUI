@@ -58,9 +58,7 @@ struct SettingView: View {
                     }
                 }
                 if globalVar.isLogin {
-                    NavigationLink(destination: {
-                        
-                    }, label: {
+                    NavigationLink(destination: ProfileView(), label: {
                         HStack{
                             Image(systemName: "person.crop.rectangle.fill")
                                 .foregroundColor(.blue)

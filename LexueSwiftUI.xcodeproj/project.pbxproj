@@ -24,6 +24,7 @@
 		475AFEF92AAF61C900C4020F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 475AFEF82AAF61C900C4020F /* Alamofire */; };
 		475AFEFE2AAF68E100C4020F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 475AFEFD2AAF68E100C4020F /* SwiftSoup */; };
 		475AFF002AB02A0C00C4020F /* LexueAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */; };
+		475EDED42AB60697008486F0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475EDED32AB60697008486F0 /* ProfileView.swift */; };
 		47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */; };
 		4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791050E2AB0ACD4004FD26C /* LoginView.swift */; };
 		479839DB2AA9FCD40094C5E1 /* ContactDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479839DA2AA9FCD40094C5E1 /* ContactDisplayModel.swift */; };
@@ -70,6 +71,7 @@
 		474C9B782AA4E38D0064B5AF /* DDLListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLListView.swift; sourceTree = "<group>"; };
 		475AFEF52AAF560A00C4020F /* BITLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITLogin.swift; sourceTree = "<group>"; };
 		475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueAPI.swift; sourceTree = "<group>"; };
+		475EDED32AB60697008486F0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLogicManager.swift; sourceTree = "<group>"; };
 		4791050E2AB0ACD4004FD26C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		479839DA2AA9FCD40094C5E1 /* ContactDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDisplayModel.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				473BAE932AA4969F00968C3C /* SettingView.swift */,
 				47A927882AA786ED00ABDC53 /* DebugDataView.swift */,
 				4791050E2AB0ACD4004FD26C /* LoginView.swift */,
+				475EDED32AB60697008486F0 /* ProfileView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,
 				474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */,
+				475EDED42AB60697008486F0 /* ProfileView.swift in Sources */,
 				47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */,
 				475AFEF62AAF560A00C4020F /* BITLogin.swift in Sources */,
 				47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */,
