@@ -121,13 +121,26 @@ class LexueAPI {
     
     func GetEditProfileParam(_ lexueContext: LexueContext, sesskey: String) async -> Result<EditProfileParam, Error> {
         let response1 = await AF.requestWithoutCache(API_LEXUE_DETAIL_INFO, method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
-        let parseParam: (Document, String) -> String = { (doc, name) in
+        let parseInput: (Document, String) -> String = { (doc, name) in
             do {
                 let input = try doc.select("input[name=\(name)]").first()
                 if let input = input {
                     return try input.attr("value")
                 } else {
                     print("未找到\(name)标签！")
+                }
+                return ""
+            } catch {
+                return ""
+            }
+        }
+        let parseTextarea: (Document, String) -> String = { (doc, name) in
+            do {
+                let input = try doc.select("textarea[name=\(name)]").first()
+                if let input = input {
+                    return try input.text()
+                } else {
+                    print("未找到\(name) 编辑框！")
                 }
                 return ""
             } catch {
@@ -153,39 +166,40 @@ class LexueAPI {
             do {
                 var ret = EditProfileParam()
                 let document = try SwiftSoup.parse(data)
-                ret.course = parseParam(document, "course")
-                ret.id = parseParam(document, "id")
-                ret.returnto = parseParam(document, "returnto")
-                ret.mform_isexpanded_id_moodle_picture = parseParam(document, "mform_isexpanded_id_moodle_picture")
-                ret.sesskey = parseParam(document, "sesskey")
-                ret._qf__user_edit_form = parseParam(document, "_qf__user_edit_form")
-                ret.mform_isexpanded_id_moodle = parseParam(document, "mform_isexpanded_id_moodle")
-                ret.mform_isexpanded_id_moodle_additional_names = parseParam(document, "mform_isexpanded_id_moodle_additional_names")
-                ret.mform_isexpanded_id_moodle_optional = parseParam(document, "mform_isexpanded_id_moodle_optional")
-                ret.mform_isexpanded_id_category_1 = parseParam(document, "mform_isexpanded_id_category_1")
-                ret.email = parseParam(document, "email")
+                ret.course = parseInput(document, "course")
+                ret.id = parseInput(document, "id")
+                ret.returnto = parseInput(document, "returnto")
+                ret.mform_isexpanded_id_moodle_picture = parseInput(document, "mform_isexpanded_id_moodle_picture")
+                ret.sesskey = parseInput(document, "sesskey")
+                ret._qf__user_edit_form = parseInput(document, "_qf__user_edit_form")
+                ret.mform_isexpanded_id_moodle = parseInput(document, "mform_isexpanded_id_moodle")
+                ret.mform_isexpanded_id_moodle_additional_names = parseInput(document, "mform_isexpanded_id_moodle_additional_names")
+                ret.mform_isexpanded_id_moodle_optional = parseInput(document, "mform_isexpanded_id_moodle_optional")
+                ret.mform_isexpanded_id_category_1 = parseInput(document, "mform_isexpanded_id_category_1")
+                ret.email = parseInput(document, "email")
                 ret.maildisplay = parseSelector(document, "maildisplay")
-                ret.city = parseParam(document, "city")
+                ret.city = parseInput(document, "city")
                 ret.country = parseSelector(document, "country")
                 ret.timezone = parseSelector(document, "timezone")
                 ret.theme = parseSelector(document, "theme")
-                ret.description_editor_format_ = parseParam(document, "description_editor[format]")
-                ret.description_editor_itemid_ = parseParam(document, "description_editor[itemid]")
-                ret.firstnamephonetic = parseParam(document, "firstnamephonetic")
-                ret.lastnamephonetic = parseParam(document, "lastnamephonetic")
-                ret.middlename = parseParam(document, "middlename")
-                ret.alternatename = parseParam(document, "alternatename")
-                ret.institution = parseParam(document, "institution")
-                ret.department = parseParam(document, "department")
-                ret.phone1 = parseParam(document, "phone1")
-                ret.phone2 = parseParam(document, "phone2")
-                ret.address = parseParam(document, "address")
-                ret.profile_field_icq = parseParam(document, "profile_field_icq")
-                ret.profile_field_skype = parseParam(document, "profile_field_skype")
-                ret.profile_field_aim = parseParam(document, "profile_field_aim")
-                ret.profile_field_yahoo = parseParam(document, "profile_field_yahoo")
-                ret.profile_field_msn = parseParam(document, "profile_field_msn")
-                ret.profile_field_url = parseParam(document, "profile_field_url")
+                ret.description_editor_text_ = parseTextarea(document, "description_editor[text]")
+                ret.description_editor_format_ = parseInput(document, "description_editor[format]")
+                ret.description_editor_itemid_ = parseInput(document, "description_editor[itemid]")
+                ret.firstnamephonetic = parseInput(document, "firstnamephonetic")
+                ret.lastnamephonetic = parseInput(document, "lastnamephonetic")
+                ret.middlename = parseInput(document, "middlename")
+                ret.alternatename = parseInput(document, "alternatename")
+                ret.institution = parseInput(document, "institution")
+                ret.department = parseInput(document, "department")
+                ret.phone1 = parseInput(document, "phone1")
+                ret.phone2 = parseInput(document, "phone2")
+                ret.address = parseInput(document, "address")
+                ret.profile_field_icq = parseInput(document, "profile_field_icq")
+                ret.profile_field_skype = parseInput(document, "profile_field_skype")
+                ret.profile_field_aim = parseInput(document, "profile_field_aim")
+                ret.profile_field_yahoo = parseInput(document, "profile_field_yahoo")
+                ret.profile_field_msn = parseInput(document, "profile_field_msn")
+                ret.profile_field_url = parseInput(document, "profile_field_url")
                 return .success(ret)
             } catch {
                 return .failure(error)
