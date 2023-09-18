@@ -30,6 +30,7 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    // 保存的BIT登录信息
     @Published var loginnedContext: BITLogin.LoginSuccessContext {
         didSet {
             UserDefaults.standard.set(loginnedContext.happyVoyagePersonal, forKey: "setting.login.context.happyVoyage")
@@ -37,6 +38,7 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    // 缓存的用户信息，用于下次应用打开的懒加载
     @Published var cacheUserInfo: LexueAPI.SelfUserInfo {
         didSet {
             UserDefaults.standard.set(cacheUserInfo.userId, forKey: "setting.cacheUserInfo.userId")
@@ -46,6 +48,15 @@ class SettingStorage: ObservableObject {
             UserDefaults.standard.set(cacheUserInfo.email, forKey: "setting.cacheUserInfo.email")
             UserDefaults.standard.set(cacheUserInfo.stuId, forKey: "setting.cacheUserInfo.stuId")
             UserDefaults.standard.set(cacheUserInfo.phone, forKey: "setting.cacheUserInfo.phone")
+        }
+    }
+    
+    // 缓存的用户自己的lexue profile信息，用于判断是否是开发者权限、用户头像等等等等
+    @Published var cacheSelfLexueProfile: LexueProfile {
+        didSet {
+            UserDefaults.standard.set(cacheSelfLexueProfile.appVersion, forKey: "setting.cacheSelfLexueProfile.appVersion")
+            UserDefaults.standard.set(cacheSelfLexueProfile.avatarBase64, forKey: "setting.cacheSelfLexueProfile.avatarBase64")
+            UserDefaults.standard.set(cacheSelfLexueProfile.isDeveloperMode, forKey: "setting.cacheSelfLexueProfile.isDeveloperMode")
         }
     }
     
@@ -82,6 +93,16 @@ class SettingStorage: ObservableObject {
             cacheUserInfo = tmpInfo
         } else {
             cacheUserInfo = LexueAPI.SelfUserInfo()
+        }
+        
+        if let stored1 = UserDefaults.standard.value(forKey: "setting.cacheSelfLexueProfile.appVersion") as? String {
+            var tmpProfile = LexueProfile()
+            tmpProfile.appVersion = UserDefaults.standard.value(forKey: "setting.cacheSelfLexueProfile.appVersion") as? String ?? ""
+            tmpProfile.avatarBase64 = UserDefaults.standard.value(forKey: "setting.cacheSelfLexueProfile.avatarBase64") as? String ?? ""
+            tmpProfile.isDeveloperMode = UserDefaults.standard.value(forKey: "setting.cacheSelfLexueProfile.isDeveloperMode") as? Bool ?? false
+            cacheSelfLexueProfile = tmpProfile
+        } else {
+            cacheSelfLexueProfile = LexueProfile()
         }
     }
 }
