@@ -17,14 +17,33 @@ struct LexueProfile: Codable {
     
     // 使用的app版本
     // @Since 1.0.0
-    var appVersion: String
+    var appVersion: String?
     
     // 用户上传的头像的base64编码
     // @Since 1.0.0
-    var avatarBase64: String
+    var avatarBase64: String?
     
     
     // 该用户是否允许使用开发者模式
     // @Since 1.0.0
-    var isDeveloperMode: Bool
+    var isDeveloperMode: Bool?
+    
+    static func fromJSON(_ jsonText: String) throws -> LexueProfile {
+        let jsonData = Data(jsonText.utf8)
+        let decoder = JSONDecoder()
+        let profile = try decoder.decode(LexueProfile.self, from: jsonData)
+        return profile
+    }
+    static func getNilObject() -> LexueProfile {
+        var ret = LexueProfile()
+        ret.appVersion = nil
+        ret.avatarBase64 = nil
+        ret.isDeveloperMode = nil
+        return ret
+    }
+    
+    func toJSON() throws -> Data {
+        let encoder = JSONEncoder()
+        return try encoder.encode(self)
+    }
 }

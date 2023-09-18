@@ -120,7 +120,7 @@ class LexueAPI {
         }
     }
     
-    func UpdateProfile(_ lexueContext: LexueContext, sesskey: String, newProfile: EditProfileParam) async -> Result<EditProfileParam, Error> {
+    func UpdateProfile(_ lexueContext: LexueContext, newProfile: EditProfileParam) async -> Result<EditProfileParam, Error> {
         let param: [String: Any] = [
             "course": newProfile.course,
             "id": newProfile.id,

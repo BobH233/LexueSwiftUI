@@ -21,6 +21,7 @@ class AppStatusManager {
     func action_after_get_lexue_context(_ context: LexueAPI.LexueContext) {
         print("action_after_get_lexue_context")
         CourseManager.shared.LoadStoredCacheCourses()
+        // 获取sesskey，更新课程列表
         Task {
             let result = await LexueAPI.shared.GetSessKey(context)
             switch result {
@@ -39,6 +40,7 @@ class AppStatusManager {
                 }
             }
         }
+        // 刷新用户的信息
         Task {
             DispatchQueue.main.async {
                 // 优化体验，先默认用上一次存储的缓存用户信息，毕竟用户信息不会有太大变化
@@ -46,10 +48,25 @@ class AppStatusManager {
                 GlobalVariables.shared.isLoading = false
                 GlobalVariables.shared.isLogin = true
             }
-            let ret = await CoreLogicManager.shared.refreshSelfUserInfo()
+            let ret = await CoreLogicManager.shared.RefreshSelfUserInfo()
             if !ret {
                 DispatchQueue.main.async {
                     GlobalVariables.shared.isLogin = false
+                }
+            }
+        }
+        // 获取用户lexue profile的信息
+        Task {
+            let myProfile = await LexueAPI.shared.GetUserProfile(GlobalVariables.shared.cur_lexue_context, userId: SettingStorage.shared.cacheUserInfo.userId)
+            switch myProfile {
+            case .success(let profileHtml):
+                // 处理获取到的信息
+                let _ = await CoreLogicManager.shared.LoadSelfProfileOrUpdate(profileHtml)
+            case .failure(_):
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.alertTitle = "无法获取个人信息(LexueProfile)"
+                    GlobalVariables.shared.alertContent = "个人数据显示可能异常，建议重启应用再试。"
+                    GlobalVariables.shared.showAlert = true
                 }
             }
         }

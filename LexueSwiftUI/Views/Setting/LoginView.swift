@@ -69,7 +69,7 @@ struct LoginView: View {
                     case .success(let context):
                         globalVar.cur_lexue_context = context
                         Task {
-                            let ret = await CoreLogicManager.shared.refreshSelfUserInfo()
+                            let ret = await CoreLogicManager.shared.RefreshSelfUserInfo()
                             if ret {
                                 DispatchQueue.main.async {
                                     globalVar.isLogin = true

@@ -555,8 +555,8 @@
             filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "OnAppStart()"
             landmarkType = "7">
             <Locations>
@@ -715,9 +715,9 @@
             filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "refreshSelfUserInfo()"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "RefreshSelfUserInfo()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -906,8 +906,8 @@
             filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "action_after_get_lexue_context(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -941,6 +941,22 @@
             startingLineNumber = "48"
             endingLineNumber = "48"
             landmarkName = "DiffAndUpdateCacheCourses(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "ED94665F-448D-44BA-B025-9B289ADF8E79"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "LoadSelfProfileOrUpdate(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -83,7 +83,7 @@ struct DebugDataView: View {
                         switch res {
                         case .success(var profileParam):
                             profileParam.description_editor_text_ = "<div id=\"lexue_zhushou\">lalala</div>"
-                            let res2 = await LexueAPI.shared.UpdateProfile(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, newProfile: profileParam)
+                            let res2 = await LexueAPI.shared.UpdateProfile(globalVar.cur_lexue_context, newProfile: profileParam)
                             switch res2 {
                             case .success(_):
                                 print("edit ok!")
