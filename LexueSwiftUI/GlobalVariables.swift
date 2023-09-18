@@ -10,6 +10,8 @@ import SwiftUI
 
 class GlobalVariables: ObservableObject {
     static let shared = GlobalVariables()
+    let appVersion = "1.0.0"
+    
     @Published var isLogin = false
     
     @Published var isLoading = false

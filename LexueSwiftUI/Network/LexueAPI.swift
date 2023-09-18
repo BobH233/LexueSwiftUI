@@ -20,6 +20,7 @@ class LexueAPI {
     let API_LEXUE_INDEX = "https://lexue.bit.edu.cn/"
     let API_LEXUE_DETAIL_INFO = "https://lexue.bit.edu.cn/user/edit.php"
     let API_LEXUE_SERVICE_CALL = "https://lexue.bit.edu.cn/lib/ajax/service.php"
+    let API_LEXUE_PROFILE = "https://lexue.bit.edu.cn/user/profile.php"
     
     let headers = [
         "Referer": "https://login.bit.edu.cn/authserver/login",
@@ -119,7 +120,91 @@ class LexueAPI {
         }
     }
     
-    func GetEditProfileParam(_ lexueContext: LexueContext, sesskey: String) async -> Result<EditProfileParam, Error> {
+    func UpdateProfile(_ lexueContext: LexueContext, sesskey: String, newProfile: EditProfileParam) async -> Result<EditProfileParam, Error> {
+        let param: [String: Any] = [
+            "course": newProfile.course,
+            "id": newProfile.id,
+            "returnto": newProfile.returnto,
+            "mform_isexpanded_id_moodle_picture": newProfile.mform_isexpanded_id_moodle_picture,
+            "sesskey": newProfile.sesskey,
+            "_qf__user_edit_form": newProfile._qf__user_edit_form,
+            "mform_isexpanded_id_moodle": newProfile.mform_isexpanded_id_moodle,
+            "mform_isexpanded_id_moodle_additional_names": newProfile.mform_isexpanded_id_moodle_additional_names,
+            "mform_isexpanded_id_moodle_optional": newProfile.mform_isexpanded_id_moodle_optional,
+            "mform_isexpanded_id_category_1": newProfile.mform_isexpanded_id_category_1,
+            "email": newProfile.email,
+            "maildisplay": newProfile.maildisplay,
+            "city": newProfile.city,
+            "country": newProfile.country,
+            "timezone": newProfile.timezone,
+            "theme": newProfile.theme,
+            "description_editor[text]": newProfile.description_editor_text_,
+            "description_editor[format]": newProfile.description_editor_format_,
+            "description_editor[itemid]": newProfile.description_editor_itemid_,
+            "firstnamephonetic": newProfile.firstnamephonetic,
+            "lastnamephonetic": newProfile.lastnamephonetic,
+            "middlename": newProfile.middlename,
+            "alternatename": newProfile.alternatename,
+            "institution": newProfile.institution,
+            "department": newProfile.department,
+            "phone1": newProfile.phone1,
+            "phone2": newProfile.phone2,
+            "address": newProfile.address,
+            "profile_field_icq": newProfile.profile_field_icq,
+            "profile_field_skype": newProfile.profile_field_skype,
+            "profile_field_aim": newProfile.profile_field_aim,
+            "profile_field_yahoo": newProfile.profile_field_yahoo,
+            "profile_field_msn": newProfile.profile_field_msn,
+            "profile_field_url": newProfile.profile_field_url,
+            "submitbutton": newProfile.submitbutton
+        ]
+        print("moodle: \(lexueContext.MoodleSession)")
+        print("sesskey: \(newProfile.sesskey)")
+        let response1 = await AF.requestWithoutCache(API_LEXUE_DETAIL_INFO, method: .post, parameters: param, encoding: URLEncoding.default, headers: GetLexueHeaders(lexueContext))
+            .validate(statusCode: 300..<500)
+            .redirect(using: Redirector.doNotFollow)
+            .serializingString().response
+        switch response1.result {
+        case .success(_):
+            if response1.response?.statusCode == 303 {
+                return .success(newProfile)
+            } else {
+                return .failure(LexueAPIError.unknowError)
+            }
+        case .failure(let error):
+            return .failure(error)
+        }
+    }
+    
+    func GetProfileHtmlFromHtml(_ html: String) -> String {
+        do {
+            let document = try SwiftSoup.parse(html)
+            if let userProfileDiv = try document.select("div.userprofile").first() {
+                if let description = try userProfileDiv.select("div.description").first() {
+                    return try description.html()
+                } else {
+                    return ""
+                }
+            } else {
+                return ""
+            }
+        } catch {
+            return ""
+        }
+    }
+    
+    // 获取其他用户的Profile信息, 返回profile的html内容
+    func GetUserProfile(_ lexueContext: LexueContext, userId: String) async -> Result<String, Error> {
+        let response1 = await AF.requestWithoutCache("\(API_LEXUE_PROFILE)?id=\(userId)", method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
+        switch response1.result {
+        case .success(let html):
+            return .success(GetProfileHtmlFromHtml(html))
+        case .failure(let error):
+            return .failure(error)
+        }
+    }
+    
+    func GetEditProfileParam(_ lexueContext: LexueContext) async -> Result<EditProfileParam, Error> {
         let response1 = await AF.requestWithoutCache(API_LEXUE_DETAIL_INFO, method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
         let parseInput: (Document, String) -> String = { (doc, name) in
             do {

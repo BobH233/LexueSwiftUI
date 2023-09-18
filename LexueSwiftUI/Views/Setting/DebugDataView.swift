@@ -40,6 +40,8 @@ struct DebugDataView: View {
     @State private var imageCaptchaData: Data? = nil
     @State private var loginnedContext: BITLogin.LoginSuccessContext = BITLogin.LoginSuccessContext()
     
+    @State var userId: String = ""
+    
     @State var isPresentAlert = false
     var body: some View {
         Form {
@@ -71,8 +73,39 @@ struct DebugDataView: View {
                 }
                 Button("get_edit_profile_param") {
                     Task {
-                        let res = await LexueAPI.shared.GetEditProfileParam(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey)
+                        let res = await LexueAPI.shared.GetEditProfileParam(globalVar.cur_lexue_context)
                         print(res)
+                    }
+                }
+                Button("update_profile_test") {
+                    Task {
+                        let res = await LexueAPI.shared.GetEditProfileParam(globalVar.cur_lexue_context)
+                        switch res {
+                        case .success(var profileParam):
+                            profileParam.description_editor_text_ = "<div id=\"lexue_zhushou\">lalala</div>"
+                            let res2 = await LexueAPI.shared.UpdateProfile(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, newProfile: profileParam)
+                            switch res2 {
+                            case .success(_):
+                                print("edit ok!")
+                            case .failure(_):
+                                print("edit error!")
+                            }
+                            // print(res2)
+                        case .failure(_):
+                            print("获取profile 失败")
+                        }
+                    }
+                }
+                TextField("UserId", text: $userId)
+                Button("get_profile_html") {
+                    Task {
+                        let result = await LexueAPI.shared.GetUserProfile(globalVar.cur_lexue_context, userId: userId)
+                        switch result {
+                        case .success(let html):
+                            print(html)
+                        case .failure(_):
+                            print("获取 \(userId) profile 失败")
+                        }
                     }
                 }
             }
