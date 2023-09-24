@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftSoup
+import SwiftUI
 
 // 负责处理app的一些核心逻辑，比如登录，刷新等
 class CoreLogicManager {
@@ -50,23 +51,33 @@ class CoreLogicManager {
     // newVal中为nil的不会改变，只有不为nil的才会得到更新
     func UpdateSelfProfile(_ newVal: LexueProfile) async {
         // 先设定为合适的值，再上传
+        var toUpdate = SettingStorage.shared.cacheSelfLexueProfile
         if let appVersion = newVal.appVersion {
-            SettingStorage.shared.cacheSelfLexueProfile.appVersion = appVersion
+            toUpdate.appVersion = appVersion
+            DispatchQueue.main.async {
+                SettingStorage.shared.cacheSelfLexueProfile.appVersion = appVersion
+            }
         }
         if let avatarBase64 = newVal.avatarBase64 {
-            SettingStorage.shared.cacheSelfLexueProfile.avatarBase64 = avatarBase64
+            toUpdate.avatarBase64 = avatarBase64
+            DispatchQueue.main.async {
+                SettingStorage.shared.cacheSelfLexueProfile.avatarBase64 = avatarBase64
+            }
         }
         if let isDeveloperMode = newVal.isDeveloperMode {
-            SettingStorage.shared.cacheSelfLexueProfile.isDeveloperMode = isDeveloperMode
+            toUpdate.isDeveloperMode = isDeveloperMode
+            DispatchQueue.main.async {
+                SettingStorage.shared.cacheSelfLexueProfile.isDeveloperMode = isDeveloperMode
+            }
         }
         
         let profile1 = await LexueAPI.shared.GetEditProfileParam(GlobalVariables.shared.cur_lexue_context)
         switch profile1 {
         case .success(var editProfileParam):
             do {
-                let jsonData = try SettingStorage.shared.cacheSelfLexueProfile.toJSON()
+                let jsonData = try toUpdate.toJSON()
                 let jsonText = String(data: jsonData, encoding: .utf8)!
-                print(jsonText)
+                // print(jsonText)
                 editProfileParam.description_editor_text_ = "<div style=\"font-size:0px;\">\(jsonText)</div>"
                 let updateRes = await LexueAPI.shared.UpdateProfile(GlobalVariables.shared.cur_lexue_context, newProfile: editProfileParam)
                 switch updateRes {
@@ -93,18 +104,22 @@ class CoreLogicManager {
     
     // 加载自己的lexue profile（返回false），如果是第一次，还没有lexue profile，则会主动上传（返回true）
     func LoadSelfProfileOrUpdate(_ profileHtml: String) async -> Bool {
-        print("Loading profile html: \(profileHtml)")
+        // print("Loading profile html: \(profileHtml)")
         do {
             let document = try SwiftSoup.parse(profileHtml)
             let divsWithFontSizeZero = try document.select("div[style*=font-size:0px;]")
             if let div = divsWithFontSizeZero.first() {
                 // 找到了，解析内部的内容
                 let jsonContent = try div.text()
-                print("jsonContent: \(jsonContent)")
                 do {
-                    var tmpProfile = try LexueProfile.fromJSON(jsonContent)
-                    SettingStorage.shared.cacheSelfLexueProfile.avatarBase64 = tmpProfile.avatarBase64
-                    SettingStorage.shared.cacheSelfLexueProfile.isDeveloperMode = tmpProfile.isDeveloperMode
+                    let tmpProfile = try LexueProfile.fromJSON(jsonContent)
+                    DispatchQueue.main.async {
+                        SettingStorage.shared.cacheSelfLexueProfile.avatarBase64 = tmpProfile.avatarBase64
+                        SettingStorage.shared.cacheSelfLexueProfile.isDeveloperMode = tmpProfile.isDeveloperMode
+                        if let data = Data(base64Encoded: tmpProfile.avatarBase64 ?? ""), let image = UIImage(data: data) {
+                            GlobalVariables.shared.userAvatarUIImage = image
+                        }
+                    }
                     if tmpProfile.appVersion != GlobalVariables.shared.appVersion {
                         // 单独更新一下app的版本即可
                         print("update app version to profile!")

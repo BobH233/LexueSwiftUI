@@ -40,6 +40,19 @@
 		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
 		47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927882AA786ED00ABDC53 /* DebugDataView.swift */; };
 		47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */; };
+		47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2872AC080100047B395 /* AvatarSettingView.swift */; };
+		47F4F2992AC086A90047B395 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F28D2AC086A90047B395 /* Color+Extensions.swift */; };
+		47F4F29A2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F28E2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift */; };
+		47F4F29B2AC086A90047B395 /* ImageManipulation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F28F2AC086A90047B395 /* ImageManipulation.swift */; };
+		47F4F29C2AC086A90047B395 /* ImageAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2902AC086A90047B395 /* ImageAttributes.swift */; };
+		47F4F29D2AC086A90047B395 /* ImageMoveAndScaleSheet+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2912AC086A90047B395 /* ImageMoveAndScaleSheet+Extensions.swift */; };
+		47F4F29E2AC086A90047B395 /* ImagePane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2922AC086A90047B395 /* ImagePane.swift */; };
+		47F4F29F2AC086A90047B395 /* SystemPHPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2932AC086A90047B395 /* SystemPHPicker.swift */; };
+		47F4F2A02AC086A90047B395 /* DeviceOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2942AC086A90047B395 /* DeviceOrientation.swift */; };
+		47F4F2A12AC086A90047B395 /* Image+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2952AC086A90047B395 /* Image+Extensions.swift */; };
+		47F4F2A22AC086A90047B395 /* SystemImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2962AC086A90047B395 /* SystemImagePicker.swift */; };
+		47F4F2A32AC086A90047B395 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2972AC086A90047B395 /* ViewModifiers.swift */; };
+		47F4F2A42AC086A90047B395 /* ImageMoveAndScaleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2982AC086A90047B395 /* ImageMoveAndScaleSheet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +99,19 @@
 		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		47A927882AA786ED00ABDC53 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
 		47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseShortInfo.swift; sourceTree = "<group>"; };
+		47F4F2872AC080100047B395 /* AvatarSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSettingView.swift; sourceTree = "<group>"; };
+		47F4F28D2AC086A90047B395 /* Color+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		47F4F28E2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageMoveAndScaleSheet+ViewModel.swift"; sourceTree = "<group>"; };
+		47F4F28F2AC086A90047B395 /* ImageManipulation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManipulation.swift; sourceTree = "<group>"; };
+		47F4F2902AC086A90047B395 /* ImageAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAttributes.swift; sourceTree = "<group>"; };
+		47F4F2912AC086A90047B395 /* ImageMoveAndScaleSheet+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageMoveAndScaleSheet+Extensions.swift"; sourceTree = "<group>"; };
+		47F4F2922AC086A90047B395 /* ImagePane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePane.swift; sourceTree = "<group>"; };
+		47F4F2932AC086A90047B395 /* SystemPHPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemPHPicker.swift; sourceTree = "<group>"; };
+		47F4F2942AC086A90047B395 /* DeviceOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceOrientation.swift; sourceTree = "<group>"; };
+		47F4F2952AC086A90047B395 /* Image+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+Extensions.swift"; sourceTree = "<group>"; };
+		47F4F2962AC086A90047B395 /* SystemImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemImagePicker.swift; sourceTree = "<group>"; };
+		47F4F2972AC086A90047B395 /* ViewModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
+		47F4F2982AC086A90047B395 /* ImageMoveAndScaleSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageMoveAndScaleSheet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +148,7 @@
 		473BAE7E2AA48DAA00968C3C /* LexueSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				47F4F28C2AC086590047B395 /* PhotoSelectAndCrop */,
 				47CBA23F2AA5CE2F009F9242 /* Models */,
 				473BAE922AA48E9500968C3C /* Managers */,
 				473BAE912AA48E8200968C3C /* Network */,
@@ -180,6 +207,7 @@
 				47A927882AA786ED00ABDC53 /* DebugDataView.swift */,
 				4791050E2AB0ACD4004FD26C /* LoginView.swift */,
 				475EDED32AB60697008486F0 /* ProfileView.swift */,
+				47F4F2872AC080100047B395 /* AvatarSettingView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -225,6 +253,25 @@
 				476340302AB89F47006C24E2 /* LexueProfile.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		47F4F28C2AC086590047B395 /* PhotoSelectAndCrop */ = {
+			isa = PBXGroup;
+			children = (
+				47F4F28D2AC086A90047B395 /* Color+Extensions.swift */,
+				47F4F2942AC086A90047B395 /* DeviceOrientation.swift */,
+				47F4F2952AC086A90047B395 /* Image+Extensions.swift */,
+				47F4F2902AC086A90047B395 /* ImageAttributes.swift */,
+				47F4F28F2AC086A90047B395 /* ImageManipulation.swift */,
+				47F4F2982AC086A90047B395 /* ImageMoveAndScaleSheet.swift */,
+				47F4F2912AC086A90047B395 /* ImageMoveAndScaleSheet+Extensions.swift */,
+				47F4F28E2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift */,
+				47F4F2922AC086A90047B395 /* ImagePane.swift */,
+				47F4F2962AC086A90047B395 /* SystemImagePicker.swift */,
+				47F4F2932AC086A90047B395 /* SystemPHPicker.swift */,
+				47F4F2972AC086A90047B395 /* ViewModifiers.swift */,
+			);
+			path = PhotoSelectAndCrop;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +365,7 @@
 				473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */,
 				473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */,
 				473BAE982AA496B800968C3C /* MessageListView.swift in Sources */,
+				47F4F2A22AC086A90047B395 /* SystemImagePicker.swift in Sources */,
 				4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */,
 				472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */,
 				4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */,
@@ -328,15 +376,27 @@
 				47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */,
 				475AFEF62AAF560A00C4020F /* BITLogin.swift in Sources */,
 				47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */,
+				47F4F29A2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift in Sources */,
+				47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */,
+				47F4F2A42AC086A90047B395 /* ImageMoveAndScaleSheet.swift in Sources */,
 				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,
+				47F4F29B2AC086A90047B395 /* ImageManipulation.swift in Sources */,
 				474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */,
 				476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */,
 				47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */,
+				47F4F29D2AC086A90047B395 /* ImageMoveAndScaleSheet+Extensions.swift in Sources */,
 				475AFF002AB02A0C00C4020F /* LexueAPI.swift in Sources */,
+				47F4F29C2AC086A90047B395 /* ImageAttributes.swift in Sources */,
 				47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */,
+				47F4F2A12AC086A90047B395 /* Image+Extensions.swift in Sources */,
 				479839DB2AA9FCD40094C5E1 /* ContactDisplayModel.swift in Sources */,
+				47F4F2992AC086A90047B395 /* Color+Extensions.swift in Sources */,
+				47F4F29E2AC086A90047B395 /* ImagePane.swift in Sources */,
 				4799C81B2AA62CDB00F812D6 /* ContactMessageModel.swift in Sources */,
 				472984A02AA706BB000814EE /* Extensions.swift in Sources */,
+				47F4F2A32AC086A90047B395 /* ViewModifiers.swift in Sources */,
+				47F4F2A02AC086A90047B395 /* DeviceOrientation.swift in Sources */,
+				47F4F29F2AC086A90047B395 /* SystemPHPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

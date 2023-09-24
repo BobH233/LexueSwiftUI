@@ -24,7 +24,7 @@ struct SettingView: View {
                             Spacer()
                                 .foregroundColor(.blue)
                             VStack {
-                                Image(uiImage: UIImage(named: "default_avatar")!)
+                                Image(uiImage: globalVar.userAvatarUIImage)
                                     .resizable()
                                     .frame(width:100, height: 100, alignment: .center)
                                     .shadow(radius: 26)

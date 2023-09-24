@@ -12,6 +12,7 @@ struct ProfileView: View {
     
     var body: some View {
         Form {
+            NavigationLink("设置头像", destination: AvatarSettingView())
             HStack {
                 Text("姓名")
                     .foregroundColor(.primary)

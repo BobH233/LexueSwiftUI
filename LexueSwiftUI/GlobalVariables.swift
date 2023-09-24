@@ -29,9 +29,11 @@ class GlobalVariables: ObservableObject {
     
     @Published var courseList: [CourseShortInfo] = []
     
+    @Published var userAvatarUIImage: UIImage
+    
     var debugMode = true
 
     private init() {
-        
+        userAvatarUIImage = UIImage(named: "default_avatar")!
     }
 }

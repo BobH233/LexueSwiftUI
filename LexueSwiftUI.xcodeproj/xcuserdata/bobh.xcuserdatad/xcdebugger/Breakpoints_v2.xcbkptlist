@@ -715,8 +715,8 @@
             filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "RefreshSelfUserInfo()"
             landmarkType = "7">
             <Locations>
@@ -948,16 +948,64 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "ED94665F-448D-44BA-B025-9B289ADF8E79"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "LoadSelfProfileOrUpdate(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1E5A38B8-CC05-4D7A-B0C4-0A4519344C52"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "UpdateSelfProfile(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1E5A38B8-CC05-4D7A-B0C4-0A4519344C52 - 6a11a838e05e2588"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.CoreLogicManager.UpdateSelfProfile(LexueSwiftUI.LexueProfile) async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/CoreLogicManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "80"
+                  endingLineNumber = "80"
+                  offsetFromSymbolStart = "3656">
+               </Location>
+               <Location
+                  uuid = "1E5A38B8-CC05-4D7A-B0C4-0A4519344C52 - 6a11a838e05e3a67"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.CoreLogicManager.UpdateSelfProfile(LexueSwiftUI.LexueProfile) async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/CoreLogicManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "3636">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
