@@ -57,11 +57,11 @@ struct CourseCardView: View {
                 .frame(height: cardHeight)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, cardHorizontalPadding)
-                .contextMenu(menuItems: {
-                    Text("课程名: \(courseName!)")
-                }, preview: {
-                    CoursePreviewView(courseName: courseName!, summary: summary!)
-                })
+//                .contextMenu(menuItems: {
+//                    Text("课程名: \(courseName!)")
+//                }, preview: {
+//                    CoursePreviewView(courseName: courseName!, summary: summary!)
+//                })
             } else {
                 VStack(alignment: .leading, spacing: 2) {
                     Spacer()
