@@ -331,7 +331,7 @@ class LexueAPI {
         return ""
     }
     
-    func GetSessKey(_ lexueContext: LexueContext, retry: Bool = true) async -> Result<String, Error> {
+    func GetSessKey(_ lexueContext: LexueContext, retry: Bool = true) async -> Result<(String, LexueContext?), Error> {
         let response = await AF.requestWithoutCache(API_LEXUE_INDEX, method: .get, headers: GetLexueHeaders(lexueContext))
             .validate(statusCode: 200...200)
             .redirect(using: Redirector.doNotFollow)
@@ -340,7 +340,7 @@ class LexueAPI {
         switch response.result {
         case .success(let html):
             let ret = ParseSessKey(html)
-            return .success(ret)
+            return .success((ret, nil))
         case .failure(let error):
             if retry {
                 print("GetSessKey occured error, retrying...")
@@ -358,15 +358,21 @@ class LexueAPI {
                 case .success(let new_context):
                     DispatchQueue.main.async {
                         GlobalVariables.shared.cur_lexue_context = new_context
+                        print("new context: \(new_context.MoodleSession)")
                     }
-                    return await GetSessKey(new_context, retry: false)
+                    let retryResult = await GetSessKey(new_context, retry: false)
+                    switch retryResult {
+                    case .success(let (newSesskey, _)):
+                        return .success((newSesskey, new_context))
+                    case .failure(let error):
+                        return .failure(error)
+                    }
                 case .failure(let error):
                     return .failure(error)
                 }
             } else {
                 return .failure(error)
             }
-            
         }
     }
     
@@ -452,6 +458,11 @@ class LexueAPI {
     
     func GetAllCourseList(_ lexueContext: LexueContext, sesskey: String, retry: Bool = true) async -> Result<[CourseShortInfo],LexueAPIError> {
         var ret = [CourseShortInfo]()
+        if !retry {
+            print("retrying with \(lexueContext.MoodleSession)")
+        } else {
+            print("trying with \(lexueContext.MoodleSession)")
+        }
         let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_course_get_enrolled_courses_by_timeline_classification", args: [
             "offset": 0,
             "limit": 0,
@@ -495,11 +506,11 @@ class LexueAPI {
             if retry {
                 let result = await GetSessKey(GlobalVariables.shared.cur_lexue_context)
                 switch result {
-                case .success(let sesskey):
+                case .success(let (sesskey, new_context)):
                     DispatchQueue.main.async {
                         GlobalVariables.shared.cur_lexue_sessKey = sesskey
                     }
-                    return await GetAllCourseList(lexueContext, sesskey: sesskey, retry: false)
+                    return await GetAllCourseList(new_context == nil ? lexueContext : new_context!, sesskey: sesskey, retry: false)
                 case .failure(_):
                     return .failure(.unknowError)
                 }

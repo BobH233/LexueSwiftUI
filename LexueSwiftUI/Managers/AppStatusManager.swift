@@ -25,7 +25,7 @@ class AppStatusManager {
         Task {
             let result = await LexueAPI.shared.GetSessKey(context)
             switch result {
-            case .success(let sesskey):
+            case .success(let (sesskey, _)):
                 DispatchQueue.main.async {
                     GlobalVariables.shared.cur_lexue_sessKey = sesskey
                     Task {
@@ -184,7 +184,7 @@ class AppStatusManager {
         Task {
             let result = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
             switch result {
-            case .success(let sesskey):
+            case .success(let (sesskey, _)):
                 DispatchQueue.main.async {
                     GlobalVariables.shared.cur_lexue_sessKey = sesskey
                 }

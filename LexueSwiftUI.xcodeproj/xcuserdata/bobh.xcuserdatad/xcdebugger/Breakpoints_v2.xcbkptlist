@@ -618,8 +618,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -634,8 +634,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "416"
-            endingLineNumber = "416"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
             <Locations>
@@ -682,8 +682,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "438"
-            endingLineNumber = "438"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -698,8 +698,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "409"
-            endingLineNumber = "409"
+            startingLineNumber = "415"
+            endingLineNumber = "415"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -714,8 +714,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "417"
-            endingLineNumber = "417"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -809,8 +809,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "421"
-            endingLineNumber = "421"
+            startingLineNumber = "427"
+            endingLineNumber = "427"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -825,8 +825,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "526"
-            endingLineNumber = "526"
+            startingLineNumber = "537"
+            endingLineNumber = "537"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -841,8 +841,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "530"
-            endingLineNumber = "530"
+            startingLineNumber = "541"
+            endingLineNumber = "541"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -857,8 +857,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "531"
-            endingLineNumber = "531"
+            startingLineNumber = "542"
+            endingLineNumber = "542"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1019,6 +1019,100 @@
                   startingLineNumber = "81"
                   endingLineNumber = "81"
                   offsetFromSymbolStart = "3636">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "38962818-F4E7-4C70-86E1-638399ED9FD5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/LexueAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "506"
+            endingLineNumber = "506"
+            landmarkName = "GetAllCourseList(_:sesskey:retry:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B755BE01-70AB-4C63-BBCA-0BDBB432D9DB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/LexueAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "513"
+            endingLineNumber = "513"
+            landmarkName = "GetAllCourseList(_:sesskey:retry:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B755BE01-70AB-4C63-BBCA-0BDBB432D9DB - db84873c2c0d3037"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.LexueAPI.GetAllCourseList(_: LexueSwiftUI.LexueAPI.LexueContext, sesskey: Swift.String, retry: Swift.Bool) async -&gt; Swift.Result&lt;Swift.Array&lt;LexueSwiftUI.CourseShortInfo&gt;, LexueSwiftUI.LexueAPI.LexueAPIError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "502"
+                  endingLineNumber = "502"
+                  offsetFromSymbolStart = "596">
+               </Location>
+               <Location
+                  uuid = "B755BE01-70AB-4C63-BBCA-0BDBB432D9DB - cfe75090649dafba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) await resume partial function for LexueSwiftUI.LexueAPI.GetAllCourseList(_: LexueSwiftUI.LexueAPI.LexueContext, sesskey: Swift.String, retry: Swift.Bool) async -&gt; Swift.Result&lt;Swift.Array&lt;LexueSwiftUI.CourseShortInfo&gt;, LexueSwiftUI.LexueAPI.LexueAPIError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "502"
+                  endingLineNumber = "502"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "B755BE01-70AB-4C63-BBCA-0BDBB432D9DB - e96c04834d03cbf5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.LexueAPI.GetAllCourseList(_: LexueSwiftUI.LexueAPI.LexueContext, sesskey: Swift.String, retry: Swift.Bool) async -&gt; Swift.Result&lt;Swift.Array&lt;LexueSwiftUI.CourseShortInfo&gt;, LexueSwiftUI.LexueAPI.LexueAPIError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "498"
+                  endingLineNumber = "498"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "B755BE01-70AB-4C63-BBCA-0BDBB432D9DB - e96c04834d03f479"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.LexueAPI.GetAllCourseList(_: LexueSwiftUI.LexueAPI.LexueContext, sesskey: Swift.String, retry: Swift.Bool) async -&gt; Swift.Result&lt;Swift.Array&lt;LexueSwiftUI.CourseShortInfo&gt;, LexueSwiftUI.LexueAPI.LexueAPIError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "502"
+                  endingLineNumber = "502"
+                  offsetFromSymbolStart = "112">
                </Location>
             </Locations>
          </BreakpointContent>
