@@ -32,65 +32,30 @@ struct CourseCardView: View {
                 .padding(.horizontal, cardHorizontalPadding)
                 .frame(height: cardHeight)
                 .opacity(0.1)
-            if #available(iOS 16.0, *) {
-                VStack(alignment: .leading, spacing: 2) {
-                    Spacer()
-                    Text(courseName!)
-                        .bold()
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .lineLimit(1)
-                        .padding(.leading, 10)
-                    
-                    Text(courseCategory!)
-                        .bold()
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .lineLimit(1)
-                        .padding(.leading, 10)
-                        .padding(.bottom, 5)
-                    ProgressView(value: Double(progress!) / 100.0)
-                        .padding(.horizontal, 10)
-                        .padding(.bottom, 10)
-                        .accentColor(.white)
-                }
-                .frame(height: cardHeight)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, cardHorizontalPadding)
-//                .contextMenu(menuItems: {
-//                    Text("课程名: \(courseName!)")
-//                }, preview: {
-//                    CoursePreviewView(courseName: courseName!, summary: summary!)
-//                })
-            } else {
-                VStack(alignment: .leading, spacing: 2) {
-                    Spacer()
-                    Text(courseName!)
-                        .bold()
-                        .font(.title)
-                        .foregroundColor(.white)
-                        .lineLimit(1)
-                        .padding(.leading, 10)
-                    
-                    Text(courseCategory!)
-                        .bold()
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .lineLimit(1)
-                        .padding(.leading, 10)
-                        .padding(.bottom, 5)
-                    ProgressView(value: Double(progress!) / 100.0)
-                        .padding(.horizontal, 10)
-                        .padding(.bottom, 10)
-                        .accentColor(.white)
-                }
-                .frame(height: cardHeight)
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, cardHorizontalPadding)
-                .contextMenu {
-                    Text("课程名: \(courseName!)")
-                }
+            VStack(alignment: .leading, spacing: 2) {
+                Spacer()
+                Text(courseName!)
+                    .bold()
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                    .padding(.leading, 10)
+                
+                Text(courseCategory!)
+                    .bold()
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                    .padding(.leading, 10)
+                    .padding(.bottom, 5)
+                ProgressView(value: Double(progress!) / 100.0)
+                    .padding(.horizontal, 10)
+                    .padding(.bottom, 10)
+                    .accentColor(.white)
             }
+            .frame(height: cardHeight)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, cardHorizontalPadding)
             
             VStack {
                 HStack {
@@ -113,6 +78,9 @@ struct CourseCardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, cardHorizontalPadding)
         }
+        .contextMenu(menuItems: {
+            Text("课程名: \(courseName!)")
+        })
         .shadow(radius: 5, x: 0, y: 2)
     }
 }
