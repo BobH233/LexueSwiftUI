@@ -28,7 +28,6 @@ struct AvatarSettingView: View {
             }
             if let imageData = image.croppedImage!.jpegData(compressionQuality: 1.0) {
                 let base64String = imageData.base64EncodedString(options: [])
-                print("Base64 字符串: \(base64String)")
                 var toUpdate = LexueProfile.getNilObject()
                 toUpdate.avatarBase64 = base64String
                 await CoreLogicManager.shared.UpdateSelfProfile(toUpdate)

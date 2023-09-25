@@ -450,7 +450,7 @@ class LexueAPI {
             }
     }
     
-    func GetAllCourseList(_ lexueContext: LexueContext, sesskey: String) async -> Result<[CourseShortInfo],LexueAPIError> {
+    func GetAllCourseList(_ lexueContext: LexueContext, sesskey: String, retry: Bool = true) async -> Result<[CourseShortInfo],LexueAPIError> {
         var ret = [CourseShortInfo]()
         let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_course_get_enrolled_courses_by_timeline_classification", args: [
             "offset": 0,
@@ -492,7 +492,20 @@ class LexueAPI {
                 }
             }
         } else {
-            return .failure(.unknowError)
+            if retry {
+                let result = await GetSessKey(GlobalVariables.shared.cur_lexue_context)
+                switch result {
+                case .success(let sesskey):
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                    }
+                    return await GetAllCourseList(lexueContext, sesskey: sesskey, retry: false)
+                case .failure(_):
+                    return .failure(.unknowError)
+                }
+            } else {
+                return .failure(.unknowError)
+            }
         }
         return .success(ret)
     }
