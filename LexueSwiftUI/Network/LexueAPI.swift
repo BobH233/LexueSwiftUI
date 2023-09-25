@@ -21,6 +21,7 @@ class LexueAPI {
     let API_LEXUE_DETAIL_INFO = "https://lexue.bit.edu.cn/user/edit.php"
     let API_LEXUE_SERVICE_CALL = "https://lexue.bit.edu.cn/lib/ajax/service.php"
     let API_LEXUE_PROFILE = "https://lexue.bit.edu.cn/user/profile.php"
+    let API_LEXUE_VIEW_COURSE = "https://lexue.bit.edu.cn/course/view.php"
     
     let headers = [
         "Referer": "https://login.bit.edu.cn/authserver/login",
@@ -98,21 +99,67 @@ class LexueAPI {
     }
     
     struct CourseSectionAvtivity {
-        
+        var url: String?
+        var access: String?
+        var name: String?
+        var contentwithoutlink: String?
+        var contentafterlink: String?
     }
     
-    struct CourseSectionInfo {
+    struct CourseSectionInfo: Identifiable {
+        var id = UUID()
         var name: String?
         var url: String?
         var summary: String?
         var summaryText: String?
-        var activities: [CourseSectionAvtivity]
+        var activities: [CourseSectionAvtivity] = [CourseSectionAvtivity]()
     }
     
     func GetLexueHeaders(_ lexueContext: LexueContext) -> HTTPHeaders {
         var cur_headers = HTTPHeaders(headers1)
         cur_headers.add(name: "Cookie", value: "MoodleSession=\(lexueContext.MoodleSession);")
         return cur_headers
+    }
+    
+    func ParseViewCourseHtml2Sections(_ html: String) -> [CourseSectionInfo] {
+        var ret = [CourseSectionInfo]()
+        do {
+            let doc = try SwiftSoup.parse(html)
+            let topics = try doc.select("li")
+            for topic in topics.array() {
+                guard let classValue = try? topic.attr("class") else { continue }
+                if !classValue.contains("section") { continue }
+                print("classValue: \(classValue)")
+                var curSection = CourseSectionInfo()
+                let contentElem = try topic.select(".content")
+                let titleElem = try contentElem.select("h3")
+                let titleAElem = try titleElem.select("a")
+                
+                curSection.name = try titleElem.text().trimmingCharacters(in: .whitespacesAndNewlines)
+                if titleAElem.array().count > 0 {
+                    curSection.url = try titleAElem.attr("href")
+                }
+                let summaryNode = try contentElem.select(".summary")
+                if summaryNode.array().count > 0 {
+                    curSection.summary = try summaryNode.html()
+                }
+                ret.append(curSection)
+            }
+        } catch {
+            print(error.localizedDescription)
+            print("解析课程详情发生错误")
+        }
+        return ret
+    }
+    
+    func GetCourseSections(_ lexueContext: LexueContext, courseId: String) async -> Result<[CourseSectionInfo], Error> {
+        let response1 = await AF.requestWithoutCache("\(API_LEXUE_VIEW_COURSE)?id=\(courseId)", method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
+        switch response1.result {
+        case .success(let html):
+            return .success(ParseViewCourseHtml2Sections(html))
+        case .failure(let error):
+            return .failure(error)
+        }
     }
     
     func ParseDetailUserInfo(_ html: String, _ ori: SelfUserInfo) -> SelfUserInfo {

@@ -80,7 +80,7 @@ struct CourseCardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, cardHorizontalPadding)
             NavigationLink(destination:
-                            CourseDetailView(courseName: courseName!),
+                            CourseDetailView(courseId: courseId, courseName: courseName!),
                isActive: self.$isActive) {
                  EmptyView()
             }.hidden()

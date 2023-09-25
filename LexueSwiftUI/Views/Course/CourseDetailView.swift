@@ -10,8 +10,10 @@ import SwiftUI
 struct CourseDetailView: View {
     var courseId: String = "10001"
     
-    @State var loading = false
+    @State var loading = true
     @State var courseName: String = "这是一个超级长课程名这是一个超级长课程名这是一个超级长课程名"
+    
+    @State var sections: [LexueAPI.CourseSectionInfo] = [LexueAPI.CourseSectionInfo]()
     
     var body: some View {
         List {
@@ -49,7 +51,30 @@ struct CourseDetailView: View {
                     NavigationLink("最近ddl", destination: EmptyView())
                 }
                 Section("课程内容") {
-                    
+                    ForEach(sections) { section in
+                        NavigationLink(section.name ?? "无标题", destination: EmptyView())
+                    }
+                }
+            }
+        }
+        .onAppear {
+            loading = true
+            Task {
+                let res = await LexueAPI.shared.GetCourseSections(GlobalVariables.shared.cur_lexue_context, courseId: courseId)
+                switch res {
+                case .success(let sections):
+                    DispatchQueue.main.async {
+                        self.sections = sections
+                        withAnimation {
+                            self.loading = false
+                        }
+                    }
+                case .failure(_):
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.alertTitle = "无法获取课程的内容(CourseSections)"
+                        GlobalVariables.shared.alertContent = "请检查你的网络，然后重试"
+                        GlobalVariables.shared.showAlert = true
+                    }
                 }
             }
         }

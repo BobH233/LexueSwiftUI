@@ -46,6 +46,17 @@ struct DebugDataView: View {
     var body: some View {
         Form {
             Section("LexueAPI") {
+                Button("GetCourseSection") {
+                    Task {
+                        let res = await LexueAPI.shared.GetCourseSections(globalVar.cur_lexue_context, courseId: "13882")
+                        switch res {
+                        case .success(let ress):
+                            print(ress)
+                        case .failure(let err):
+                            print(err)
+                        }
+                    }
+                }
                 Button("serviceCall") {
                     Task {
                         await LexueAPI.shared.UniversalServiceCall(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, methodName: "core_course_get_enrolled_courses_by_timeline_classification", args: [
