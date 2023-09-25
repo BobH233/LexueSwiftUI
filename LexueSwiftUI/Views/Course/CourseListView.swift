@@ -123,28 +123,27 @@ private struct ListView: View {
 struct CourseListView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
     @ObservedObject var courseManager = CourseManager.shared
+    @Binding var tabSelection: Int
     
     @State var isRefreshing: Bool = false
     @State var searchText: String = ""
     var body: some View {
         NavigationView {
-            VStack {
-                ListView(courses: $courseManager.CourseDisplayList, isRefreshing: $isRefreshing)
-                    .refreshable {
-                        isRefreshing = true
-                        await CoreLogicManager.shared.UpdateCourseList()
-                        isRefreshing = false
-                    }
+            if globalVar.isLogin {
+                VStack {
+                    ListView(courses: $courseManager.CourseDisplayList, isRefreshing: $isRefreshing)
+                        .refreshable {
+                            isRefreshing = true
+                            await CoreLogicManager.shared.UpdateCourseList()
+                            isRefreshing = false
+                        }
+                }
+                .searchable(text: $searchText, prompt: "搜索课程")
+                .navigationTitle("课程")
+                .navigationBarTitleDisplayMode(.large)
+            } else {
+                UnloginView(tabSelection: $tabSelection)
             }
-            .searchable(text: $searchText, prompt: "搜索课程")
-            .navigationTitle("课程")
-            .navigationBarTitleDisplayMode(.large)
         }
-    }
-}
-
-struct CourseListView_Previews: PreviewProvider {
-    static var previews: some View {
-        CourseListView()
     }
 }

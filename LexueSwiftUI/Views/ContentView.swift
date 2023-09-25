@@ -18,13 +18,13 @@ struct ContentView: View {
                     Image(systemName: "message.fill")
                     Text("消息")
                 }
-            CourseListView()
+            CourseListView(tabSelection: $tabSelection)
                 .tag(2)
                 .tabItem {
                     Image(systemName: "graduationcap.fill")
                     Text("课程")
                 }
-            CourseListView()
+            CourseListView(tabSelection: $tabSelection)
                 .tag(3)
                 .tabItem {
                     Image(systemName: "calendar")
