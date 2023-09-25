@@ -25,6 +25,7 @@ struct CourseDetailView: View {
                         Text(courseName)
                             .bold()
                             .font(.system(size: 35))
+                            .multilineTextAlignment(.center)
                             .foregroundColor(.white)
                             .padding(.leading, 10)
                             .padding(.top, 150)
@@ -57,7 +58,7 @@ struct CourseDetailView: View {
                 }
             }
         }
-        .onAppear {
+        .onFirstAppear {
             loading = true
             Task {
                 let res = await LexueAPI.shared.GetCourseSections(GlobalVariables.shared.cur_lexue_context, courseId: courseId)

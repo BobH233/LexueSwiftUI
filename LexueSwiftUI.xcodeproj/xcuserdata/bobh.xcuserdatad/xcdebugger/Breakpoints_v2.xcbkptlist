@@ -1197,5 +1197,68 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BBF5503D-3BC4-4232-8522-C4B41204FC77"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/LexueAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "GetCourseSections(_:courseId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BBF5503D-3BC4-4232-8522-C4B41204FC77 - cf5b08ddf0222dcb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for LexueSwiftUI.LexueAPI.GetCourseSections(_: LexueSwiftUI.LexueAPI.LexueContext, courseId: Swift.String) async -&gt; Swift.Result&lt;Swift.Array&lt;LexueSwiftUI.LexueAPI.CourseSectionInfo&gt;, Swift.Error&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "172">
+               </Location>
+               <Location
+                  uuid = "BBF5503D-3BC4-4232-8522-C4B41204FC77 - a4ac866a3adaa5b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for LexueSwiftUI.LexueAPI.GetCourseSections(_: LexueSwiftUI.LexueAPI.LexueContext, courseId: Swift.String) async -&gt; Swift.Result&lt;Swift.Array&lt;LexueSwiftUI.LexueAPI.CourseSectionInfo&gt;, Swift.Error&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "BBF5503D-3BC4-4232-8522-C4B41204FC77 - 39c3aed63a9eec9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.LexueAPI.GetCourseSections(_: LexueSwiftUI.LexueAPI.LexueContext, courseId: Swift.String) async -&gt; Swift.Result&lt;Swift.Array&lt;LexueSwiftUI.LexueAPI.CourseSectionInfo&gt;, Swift.Error&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "112">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
