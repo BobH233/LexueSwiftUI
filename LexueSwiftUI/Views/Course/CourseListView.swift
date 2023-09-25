@@ -18,6 +18,7 @@ struct CourseCardView: View {
     @Binding var courseCategory: String?
     @Binding var isFavorite: Bool
     @Binding var progress: Int?
+    @Binding var summary: String?
     var body: some View {
         ZStack {
             Image("default_course_bg")
@@ -31,31 +32,66 @@ struct CourseCardView: View {
                 .padding(.horizontal, cardHorizontalPadding)
                 .frame(height: cardHeight)
                 .opacity(0.1)
-            
-            VStack(alignment: .leading, spacing: 2) {
-                Spacer()
-                Text(courseName!)
-                    .bold()
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .lineLimit(1)
-                    .padding(.leading, 10)
-                
-                Text(courseCategory!)
-                    .bold()
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .lineLimit(1)
-                    .padding(.leading, 10)
-                    .padding(.bottom, 5)
-                ProgressView(value: Double(progress!) / 100.0)
-                    .padding(.horizontal, 10)
-                    .padding(.bottom, 10)
-                    .accentColor(.white)
+            if #available(iOS 16.0, *) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Spacer()
+                    Text(courseName!)
+                        .bold()
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .lineLimit(1)
+                        .padding(.leading, 10)
+                    
+                    Text(courseCategory!)
+                        .bold()
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .lineLimit(1)
+                        .padding(.leading, 10)
+                        .padding(.bottom, 5)
+                    ProgressView(value: Double(progress!) / 100.0)
+                        .padding(.horizontal, 10)
+                        .padding(.bottom, 10)
+                        .accentColor(.white)
+                }
+                .frame(height: cardHeight)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, cardHorizontalPadding)
+                .contextMenu(menuItems: {
+                    Text("课程名: \(courseName!)")
+                }, preview: {
+                    CoursePreviewView(courseName: courseName!, summary: summary!)
+                })
+            } else {
+                VStack(alignment: .leading, spacing: 2) {
+                    Spacer()
+                    Text(courseName!)
+                        .bold()
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .lineLimit(1)
+                        .padding(.leading, 10)
+                    
+                    Text(courseCategory!)
+                        .bold()
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .lineLimit(1)
+                        .padding(.leading, 10)
+                        .padding(.bottom, 5)
+                    ProgressView(value: Double(progress!) / 100.0)
+                        .padding(.horizontal, 10)
+                        .padding(.bottom, 10)
+                        .accentColor(.white)
+                }
+                .frame(height: cardHeight)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, cardHorizontalPadding)
+                .contextMenu {
+                    Text("课程名: \(courseName!)")
+                }
             }
-            .frame(height: cardHeight)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, cardHorizontalPadding)
+            
             VStack {
                 HStack {
                     Spacer()
@@ -84,7 +120,8 @@ struct CourseCardView: View {
 private struct ListView: View {
     @Binding var courses: [CourseShortInfo]
     @Binding var isRefreshing: Bool
-    
+    @Environment(\.isSearching) private var isSearching
+    @Binding var searchText: String
     
     @Environment(\.refresh) private var refreshAction
     @ViewBuilder
@@ -107,10 +144,12 @@ private struct ListView: View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 20){
                 ForEach($courses) { item in
-                    CourseCardView(courseId: item.id, courseName: item.fullname, courseCategory: item.coursecategory, isFavorite: item.local_favorite, progress: item.progress)
-                        .contextMenu {
-                            Text("课程名: \(item.fullname.wrappedValue!)")
-                        }
+                    if !isSearching || searchText.isEmpty || (item.fullname.wrappedValue!.contains(searchText)) {
+                        CourseCardView(courseId: item.id, courseName: item.fullname, courseCategory: item.coursecategory, isFavorite: item.local_favorite, progress: item.progress, summary: item.summary)
+//                            .contextMenu {
+//                                Text("课程名: \(item.fullname.wrappedValue!)")
+//                            }
+                    }
                 }
             }
         }
@@ -131,7 +170,7 @@ struct CourseListView: View {
         NavigationView {
             if globalVar.isLogin {
                 VStack {
-                    ListView(courses: $courseManager.CourseDisplayList, isRefreshing: $isRefreshing)
+                    ListView(courses: $courseManager.CourseDisplayList, isRefreshing: $isRefreshing, searchText: $searchText)
                         .refreshable {
                             isRefreshing = true
                             await CoreLogicManager.shared.UpdateCourseList()

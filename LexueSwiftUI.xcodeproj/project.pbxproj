@@ -40,6 +40,7 @@
 		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
 		47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927882AA786ED00ABDC53 /* DebugDataView.swift */; };
 		47BA831F2AC1289100954129 /* UnloginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BA831E2AC1289100954129 /* UnloginView.swift */; };
+		47BA83212AC12F0200954129 /* CoursePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BA83202AC12F0200954129 /* CoursePreviewView.swift */; };
 		47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */; };
 		47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2872AC080100047B395 /* AvatarSettingView.swift */; };
 		47F4F2992AC086A90047B395 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F28D2AC086A90047B395 /* Color+Extensions.swift */; };
@@ -100,6 +101,7 @@
 		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		47A927882AA786ED00ABDC53 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
 		47BA831E2AC1289100954129 /* UnloginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloginView.swift; sourceTree = "<group>"; };
+		47BA83202AC12F0200954129 /* CoursePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursePreviewView.swift; sourceTree = "<group>"; };
 		47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseShortInfo.swift; sourceTree = "<group>"; };
 		47F4F2872AC080100047B395 /* AvatarSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSettingView.swift; sourceTree = "<group>"; };
 		47F4F28D2AC086A90047B395 /* Color+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				473BAE952AA496AE00968C3C /* CourseListView.swift */,
+				47BA83202AC12F0200954129 /* CoursePreviewView.swift */,
 			);
 			path = Course;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */,
 				472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */,
 				4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */,
+				47BA83212AC12F0200954129 /* CoursePreviewView.swift in Sources */,
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,
 				474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */,

@@ -95,6 +95,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "HTMLText.body.getter:CoursePreviewView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "html">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CourseManager.DiffAndUpdateCacheCourses(_:):CourseManager.swift">
          <PersistentStrings>
             <PersistentString
