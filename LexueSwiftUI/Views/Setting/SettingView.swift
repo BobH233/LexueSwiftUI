@@ -35,6 +35,7 @@ struct SettingView: View {
                                     .shadow(radius: 5)
                                     .padding(.top, 10)
                                     .onTapGesture {
+                                        avatar_image = Image(uiImage: globalVar.userAvatarUIImage)
                                         showImageViewer.toggle()
                                     }
                                 
@@ -132,9 +133,6 @@ struct SettingView: View {
                     })
                 }
                 
-            }
-            .onAppear {
-                avatar_image = Image(uiImage: globalVar.userAvatarUIImage)
             }
             .overlay(ImageViewer(image: self.$avatar_image, viewerShown: self.$showImageViewer))
             .navigationTitle("设置")

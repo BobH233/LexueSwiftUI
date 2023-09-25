@@ -44,7 +44,7 @@ class CourseManager: ObservableObject {
         for course in newCourseList {
             if !lastSet.contains(course.id) {
                 // 新增
-                print("new \(course.id)")
+                // print("new \(course.id)")
                 DataController.shared.addCourseChacheStored(course: course, context: DataController.shared.container.viewContext)
             } else {
                 // 更新

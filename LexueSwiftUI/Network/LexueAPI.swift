@@ -358,7 +358,7 @@ class LexueAPI {
                 case .success(let new_context):
                     DispatchQueue.main.async {
                         GlobalVariables.shared.cur_lexue_context = new_context
-                        print("new context: \(new_context.MoodleSession)")
+                        // print("new context: \(new_context.MoodleSession)")
                     }
                     let retryResult = await GetSessKey(new_context, retry: false)
                     switch retryResult {

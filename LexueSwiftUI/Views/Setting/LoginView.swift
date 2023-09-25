@@ -68,6 +68,7 @@ struct LoginView: View {
                     switch result {
                     case .success(let context):
                         globalVar.cur_lexue_context = context
+                        AppStatusManager.shared.action_after_get_lexue_context(context)
                         Task {
                             let ret = await CoreLogicManager.shared.RefreshSelfUserInfo()
                             if ret {
@@ -88,6 +89,8 @@ struct LoginView: View {
                     }
                 }
             case .failure(let error):
+                globalVar.isLoading = false
+                loginBtnDisabled = false
                 switch error {
                 case .networkError:
                     showErrorTipsTitle = "网络错误(登录失败)"
