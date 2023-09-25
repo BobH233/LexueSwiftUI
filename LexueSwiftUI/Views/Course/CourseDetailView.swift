@@ -53,7 +53,7 @@ struct CourseDetailView: View {
                 }
                 Section("课程内容") {
                     ForEach(sections) { section in
-                        NavigationLink(section.name ?? "无标题", destination: EmptyView())
+                        NavigationLink("\(section.name!) id: \(section.sectionId!)", destination: EmptyView())
                     }
                 }
             }

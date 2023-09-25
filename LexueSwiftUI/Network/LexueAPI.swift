@@ -112,6 +112,7 @@ class LexueAPI {
         var url: String?
         var summary: String?
         var summaryText: String?
+        var sectionId: String?
         var activities: [CourseSectionAvtivity] = [CourseSectionAvtivity]()
     }
     
@@ -129,8 +130,10 @@ class LexueAPI {
             for topic in topics.array() {
                 guard let classValue = try? topic.attr("class") else { continue }
                 if !classValue.contains("section") { continue }
-                print("classValue: \(classValue)")
+                guard let sectionIdValue = try? topic.attr("data-sectionid") else { continue }
+                // print("classValue: \(classValue)")
                 var curSection = CourseSectionInfo()
+                curSection.sectionId = sectionIdValue
                 let contentElem = try topic.select(".content")
                 let titleElem = try contentElem.select("h3")
                 let titleAElem = try titleElem.select("a")
