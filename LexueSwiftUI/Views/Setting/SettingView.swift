@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import ImageViewer
 
 
 struct SettingView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
     @ObservedObject var settings = SettingStorage.shared
+    @State var showImageViewer = false
+    @State var avatar_image = Image("default_avatar")
     
     @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
     var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
@@ -31,6 +34,9 @@ struct SettingView: View {
                                     .clipShape(Circle())
                                     .shadow(radius: 5)
                                     .padding(.top, 10)
+                                    .onTapGesture {
+                                        showImageViewer.toggle()
+                                    }
                                 
                                 Text(globalVar.cur_user_info.fullName)
                                     .font(.title)
@@ -127,6 +133,10 @@ struct SettingView: View {
                 }
                 
             }
+            .onAppear {
+                avatar_image = Image(uiImage: globalVar.userAvatarUIImage)
+            }
+            .overlay(ImageViewer(image: self.$avatar_image, viewerShown: self.$showImageViewer))
             .navigationTitle("设置")
         }
         

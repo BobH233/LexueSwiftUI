@@ -10,7 +10,9 @@ import SwiftUI
 let placeholderImage = ImageAttributes(withSFSymbol: "person.crop.circle.fill")
 
 struct AvatarSettingView: View {
+    @Environment(\.dismiss) var dismiss
     
+    @State var allow_swipeclose = true
     @State private var image: ImageAttributes = placeholderImage
     @State private var allow_upload = false
     @State private var renderingMode: SymbolRenderingMode = .hierarchical
@@ -20,13 +22,16 @@ struct AvatarSettingView: View {
     @State private var isEditMode: Bool = true
     @State var showSelectionPanel: Bool = false
     
+    @State var isUploading = false
+    
     func DoUploadAvatar() {
         Task {
             DispatchQueue.main.async {
-                GlobalVariables.shared.LoadingText = "上传中"
-                GlobalVariables.shared.isLoading = true
+                isUploading = true
+                allow_upload = false
+                allow_swipeclose = false
             }
-            if let imageData = image.croppedImage!.jpegData(compressionQuality: 1.0) {
+            if let imageData = image.croppedImage!.jpegData(compressionQuality: 0.5) {
                 let base64String = imageData.base64EncodedString(options: [])
                 var toUpdate = LexueProfile.getNilObject()
                 toUpdate.avatarBase64 = base64String
@@ -36,7 +41,10 @@ struct AvatarSettingView: View {
                 }
             }
             DispatchQueue.main.async {
-                GlobalVariables.shared.isLoading = false
+                allow_swipeclose = true
+                allow_upload = true
+                isUploading = false
+                dismiss()
             }
         }
     }
@@ -74,6 +82,38 @@ struct AvatarSettingView: View {
             .padding(.horizontal, 30)
             .padding(.top, 10)
         }
+        .interactiveDismissDisabled(!allow_swipeclose)
+        .overlay {
+            if isUploading {
+                ZStack {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Rectangle()
+                                .foregroundColor(.white)
+                                .opacity(0.9)
+                                .background(.ultraThickMaterial)
+                                .frame(width: 100, height: 100)
+                                .cornerRadius(10.0)
+                                .shadow(radius: 20)
+                                .overlay {
+                                    VStack {
+                                        ProgressView()
+                                            .padding(.bottom, 10)
+                                            .tint(.black)
+                                        Text("上传中...")
+                                            .foregroundColor(.black)
+                                            .font(.system(size: 15))
+                                    }
+                                }
+                            Spacer()
+                        }
+                        Spacer()
+                    }
+                }
+            }
+        }
         .onChange(of: showSelectionPanel) { newVal in
             if newVal == false && image.croppedImage != nil {
                 allow_upload = true
@@ -84,7 +124,7 @@ struct AvatarSettingView: View {
                 allow_upload = true
             }
         }
-        .navigationTitle("设置头像")
+//        .navigationTitle("设置头像")
     }
 }
 

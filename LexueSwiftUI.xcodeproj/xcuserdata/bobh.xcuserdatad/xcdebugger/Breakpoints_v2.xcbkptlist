@@ -570,8 +570,8 @@
             filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "OnAppStart()"
             landmarkType = "7">
             <Locations>
@@ -921,8 +921,8 @@
             filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "action_after_get_lexue_context(_:)"
             landmarkType = "7">
          </BreakpointContent>

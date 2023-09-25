@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class AppStatusManager {
     static let shared = AppStatusManager()
@@ -126,6 +127,9 @@ class AppStatusManager {
         }
         GlobalVariables.shared.LoadingText = "加载中"
         GlobalVariables.shared.isLoading = true
+        if let data = Data(base64Encoded: SettingStorage.shared.cacheSelfLexueProfile.avatarBase64 ?? ""), let image = UIImage(data: data) {
+            GlobalVariables.shared.userAvatarUIImage = image
+        }
         // 首先检查全局是否保存了login界面的cookie，如果没有就尝试检查是否有记住密码
         if SettingStorage.shared.loginnedContext.CASTGC != "" {
             LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
