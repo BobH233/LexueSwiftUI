@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CC59A2AC1D15900142AC5 /* CourseDetailView.swift */; };
 		472984A02AA706BB000814EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729849F2AA706BB000814EE /* Extensions.swift */; };
 		472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */; };
 		473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE7F2AA48DAA00968C3C /* LexueSwiftUIApp.swift */; };
@@ -70,6 +71,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		470CC59A2AC1D15900142AC5 /* CourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailView.swift; sourceTree = "<group>"; };
 		4729849F2AA706BB000814EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatusManager.swift; sourceTree = "<group>"; };
 		473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LexueSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				473BAE952AA496AE00968C3C /* CourseListView.swift */,
+				470CC59A2AC1D15900142AC5 /* CourseDetailView.swift */,
 			);
 			path = Course;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */,
 				473BAE942AA4969F00968C3C /* SettingView.swift in Sources */,
 				473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */,
+				470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */,
 				4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */,
 				473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */,
 				473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */,

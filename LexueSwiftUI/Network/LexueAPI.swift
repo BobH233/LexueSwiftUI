@@ -97,6 +97,18 @@ class LexueAPI {
         var submitbutton: String = ""
     }
     
+    struct CourseSectionAvtivity {
+        
+    }
+    
+    struct CourseSectionInfo {
+        var name: String?
+        var url: String?
+        var summary: String?
+        var summaryText: String?
+        var activities: [CourseSectionAvtivity]
+    }
+    
     func GetLexueHeaders(_ lexueContext: LexueContext) -> HTTPHeaders {
         var cur_headers = HTTPHeaders(headers1)
         cur_headers.add(name: "Cookie", value: "MoodleSession=\(lexueContext.MoodleSession);")

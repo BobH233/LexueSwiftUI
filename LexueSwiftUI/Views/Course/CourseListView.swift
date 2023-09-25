@@ -19,6 +19,8 @@ struct CourseCardView: View {
     @Binding var isFavorite: Bool
     @Binding var progress: Int?
     @Binding var summary: String?
+    
+    @State var isActive: Bool = false
     var body: some View {
         ZStack {
             Image("default_course_bg")
@@ -77,6 +79,14 @@ struct CourseCardView: View {
             .frame(height: cardHeight)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, cardHorizontalPadding)
+            NavigationLink(destination:
+                            CourseDetailView(courseName: courseName!),
+               isActive: self.$isActive) {
+                 EmptyView()
+            }.hidden()
+        }
+        .onTapGesture {
+            isActive = true
         }
         .contextMenu(menuItems: {
             Text("课程名: \(courseName!)")
