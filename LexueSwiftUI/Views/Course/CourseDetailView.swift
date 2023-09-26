@@ -70,7 +70,7 @@ struct CourseDetailView: View {
     
     
     // 删除前一个活动、后一个活动的标识
-    let deleteArrow = """
+    let deleteArrowJs = """
         function __remove2() {
             let __b = document.getElementsByClassName("mdl-left");
             for(let i=0;i<__b.length;i++) {__b[i].parentNode.removeChild(__b[i]);}
@@ -78,6 +78,11 @@ struct CourseDetailView: View {
             for(let i=0;i<__b.length;i++) {__b[i].parentNode.removeChild(__b[i]);}
         }
         for(let i=0;i<10;i++) __remove2();
+    """
+    
+    let fixScrollProblemJs = """
+        let __c = document.getElementById("region-main");
+        if(__c != null) __c.style="overflow: hidden;";
     """
     
     @State var courseInfo: CourseShortInfo
@@ -127,7 +132,7 @@ struct CourseDetailView: View {
                 }
                 Section("课程内容") {
                     ForEach(sections) { section in
-                        NavigationLink("\(section.name!)", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrow).navigationTitle(section.name!))
+                        NavigationLink("\(section.name!)", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs).navigationTitle(section.name!))
                     }
                 }
             }
