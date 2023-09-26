@@ -82,7 +82,7 @@ struct CourseDetailView: View {
     
     let fixScrollProblemJs = """
         let __c = document.getElementById("region-main");
-        if(__c != null) __c.style="overflow: hidden;";
+        if(__c != null) __c.style="overflow-x: visible; overflow-y: visible; white-space: nowrap";
     """
     
     @State var courseInfo: CourseShortInfo
