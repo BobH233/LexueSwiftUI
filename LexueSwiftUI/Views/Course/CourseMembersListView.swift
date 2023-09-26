@@ -55,7 +55,6 @@ struct CourseMembersListView: View {
                     ProgressView()
                         .controlSize(.large)
                         .padding(.top, 10)
-                        .tint(.black)
                     Spacer()
                 }
             } else {
