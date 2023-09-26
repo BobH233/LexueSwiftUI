@@ -155,13 +155,26 @@ class LexueAPI {
         return ret
     }
     
-    func GetCourseSections(_ lexueContext: LexueContext, courseId: String) async -> Result<[CourseSectionInfo], Error> {
+    func GetCourseSections(_ lexueContext: LexueContext, courseId: String, retry: Bool = true) async -> Result<[CourseSectionInfo], Error> {
         let response1 = await AF.requestWithoutCache("\(API_LEXUE_VIEW_COURSE)?id=\(courseId)", method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
         switch response1.result {
         case .success(let html):
             return .success(ParseViewCourseHtml2Sections(html))
         case .failure(let error):
-            return .failure(error)
+            if retry {
+                let result = await GetSessKey(GlobalVariables.shared.cur_lexue_context)
+                switch result {
+                case .success(let (sesskey, new_context)):
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                    }
+                    return await GetCourseSections(new_context == nil ? lexueContext : new_context!, courseId: courseId, retry: false)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            } else {
+                return .failure(error)
+            }
         }
     }
     
