@@ -54,6 +54,8 @@ struct CourseDetailView: View {
         function __remove() {
             let __a = document.getElementById("header");
             if(__a != null) __a.parentNode.removeChild(__a);
+            __a = document.querySelectorAll('a[data-action=\"tool_usertours/resetpagetour\"]')[0];
+            if(__a != null) __a.parentNode.removeChild(__a);
             __a = document.getElementsByClassName("header-main")[0];
             if(__a != null) __a.parentNode.removeChild(__a);
             __a = document.getElementById("page-navbar");
@@ -62,10 +64,11 @@ struct CourseDetailView: View {
             if(__a != null) __a.parentNode.removeChild(__a);
             __a = document.getElementById("nav-drawer");
             if(__a != null) __a.parentNode.removeChild(__a);
-            __a = document.getElementsByTagName("footer")
+            __a = document.getElementsByTagName("footer");
             for(let i=0;i<__a.length;i++) {__a[i].parentNode.removeChild(__a[i]);}
         }
         for(let i=0;i<10;i++) __remove();
+        setInterval(__remove, 1000);
     """
     
     
