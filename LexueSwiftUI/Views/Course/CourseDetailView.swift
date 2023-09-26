@@ -49,14 +49,35 @@ struct CourseSummaryView: View {
 struct CourseDetailView: View {
     var courseId: String = "10001"
     
+    // 删除lexue的相关的杂项
+    let deleteLexueMiscJs = """
+        function __remove() {
+            let __a = document.getElementById("header");
+            if(__a != null) __a.parentNode.removeChild(__a);
+            __a = document.getElementsByClassName("header-main")[0];
+            if(__a != null) __a.parentNode.removeChild(__a);
+            __a = document.getElementById("page-navbar");
+            if(__a != null) __a.parentNode.removeChild(__a);
+            __a = document.getElementById("nav-drawer");
+            if(__a != null) __a.parentNode.removeChild(__a);
+            __a = document.getElementById("nav-drawer");
+            if(__a != null) __a.parentNode.removeChild(__a);
+            __a = document.getElementsByTagName("footer")
+            for(let i=0;i<__a.length;i++) {__a[i].parentNode.removeChild(__a[i]);}
+        }
+        for(let i=0;i<10;i++) __remove();
+    """
     
-    let deleteHeaderJs = """
-        let __a = document.getElementById("header");
-        __a.parentNode.removeChild(__a);
-        __a = document.getElementsByClassName("header-main")[0];
-        __a.parentNode.removeChild(__a);
-        __a = document.getElementById("page-navbar");
-        __a.parentNode.removeChild(__a);
+    
+    // 删除前一个活动、后一个活动的标识
+    let deleteArrow = """
+        function __remove2() {
+            let __b = document.getElementsByClassName("mdl-left");
+            for(let i=0;i<__b.length;i++) {__b[i].parentNode.removeChild(__b[i]);}
+            __b = document.getElementsByClassName("mdl-right");
+            for(let i=0;i<__b.length;i++) {__b[i].parentNode.removeChild(__b[i]);}
+        }
+        for(let i=0;i<10;i++) __remove2();
     """
     
     @State var courseInfo: CourseShortInfo
@@ -101,12 +122,12 @@ struct CourseDetailView: View {
                         NavigationLink("课程简介", destination: CourseSummaryView(courseSummary: courseInfo.summary!))
                     }
                     NavigationLink("参与人", destination: CourseMembersListView(courseId: courseId))
-                    NavigationLink("成绩", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/grade/report/user/index.php?id=\(courseId)", execJs: deleteHeaderJs).navigationTitle("查看成绩"))
+                    NavigationLink("成绩", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/grade/report/user/index.php?id=\(courseId)", execJs: deleteLexueMiscJs).navigationTitle("查看成绩"))
                     NavigationLink("最近ddl", destination: EmptyView())
                 }
                 Section("课程内容") {
                     ForEach(sections) { section in
-                        NavigationLink("\(section.name!) id: \(section.sectionId!)", destination: EmptyView())
+                        NavigationLink("\(section.name!)", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrow).navigationTitle(section.name!))
                     }
                 }
             }
