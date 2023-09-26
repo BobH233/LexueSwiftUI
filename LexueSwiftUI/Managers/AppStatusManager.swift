@@ -35,7 +35,7 @@ class AppStatusManager {
                 }
             case .failure(_):
                 DispatchQueue.main.async {
-                    GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)"
+                    GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)(get_context)"
                     GlobalVariables.shared.alertContent = "数据获取可能异常，建议重启应用再试。"
                     GlobalVariables.shared.showAlert = true
                 }
@@ -121,7 +121,6 @@ class AppStatusManager {
     // App从没运行，到运行的时候
     func OnAppStart() {
         print("\(#function)")
-        lastTimeToGetLexueContext = Int(Date().timeIntervalSince1970)
         Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
             self.OnAppTickToGetLexueContext()
         }
@@ -180,12 +179,11 @@ class AppStatusManager {
         }
     }
     
-    var lastTimeToGetLexueContext: Int = 0
     
     func OnAppTickToGetLexueContext() {
-        let deltaTime = Int(Date().timeIntervalSince1970) - lastTimeToGetLexueContext
         // 刷新sesskey
         Task {
+            print("OnTick60s for get sesskey...")
             let result = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
             switch result {
             case .success(let (sesskey, _)):
@@ -194,15 +192,11 @@ class AppStatusManager {
                 }
             case .failure(_):
                 DispatchQueue.main.async {
-                    GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)"
+                    GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)(Tick)"
                     GlobalVariables.shared.alertContent = "数据获取可能异常，建议重启应用再试。"
                     GlobalVariables.shared.showAlert = true
                 }
             }
-        }
-        if GlobalVariables.shared.isLogin && deltaTime > 10 * 60 {
-            lastTimeToGetLexueContext = Int(Date().timeIntervalSince1970)
-            RefreshLexueContext(silent_refresh: true)
         }
     }
     
@@ -214,10 +208,30 @@ class AppStatusManager {
         } else {
             let deltaTime = Int(Date().timeIntervalSince1970) - lastBackgroundTime
             print("deltaTime: \(deltaTime)")
-            if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 10 * 60 {
+            if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 1 {
                 // 超过10分钟，需要刷新lexue的session
-                lastTimeToGetLexueContext = Int(Date().timeIntervalSince1970)
-                RefreshLexueContext(silent_refresh: false)
+                print("BackGoreground 600s for get sessKey")
+                // RefreshLexueContext(silent_refresh: false)  // 不用这个方式了，因为GetSessKey自带重试处理，所以可以直接刷新SessKey
+                GlobalVariables.shared.LoadingText = "刷新中"
+                GlobalVariables.shared.isLoading = true
+                Task {
+                    let result = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.isLoading = false
+                    }
+                    switch result {
+                    case .success(let (sesskey, _)):
+                        DispatchQueue.main.async {
+                            GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                        }
+                    case .failure(_):
+                        DispatchQueue.main.async {
+                            GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)(Background)"
+                            GlobalVariables.shared.alertContent = "数据获取可能异常，建议重启应用再试。"
+                            GlobalVariables.shared.showAlert = true
+                        }
+                    }
+                }
             }
         }
         foregroundCnt = foregroundCnt + 1
