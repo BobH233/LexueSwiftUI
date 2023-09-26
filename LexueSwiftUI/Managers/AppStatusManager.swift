@@ -209,7 +209,8 @@ class AppStatusManager {
             let deltaTime = Int(Date().timeIntervalSince1970) - lastBackgroundTime
             print("deltaTime: \(deltaTime)")
             if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 60 {
-                // 超过1分钟，需要刷新lexue的session
+                // 超过1分钟，需要刷新lexue的sesskey
+                // 切回重新刷新sesskey的阈值时间设定为60s，因为如果没被踢刷新速度会很快，所以不必担心体验问题
                 print("BackGoreground 600s for get sessKey")
                 // RefreshLexueContext(silent_refresh: false)  // 不用这个方式了，因为GetSessKey自带重试处理，所以可以直接刷新SessKey
                 GlobalVariables.shared.LoadingText = "刷新中"
