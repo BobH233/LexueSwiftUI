@@ -13,13 +13,13 @@ struct CourseCardView: View {
     let cardCornelRadius: CGFloat = 10
     let cardHorizontalPadding: CGFloat = 10
     
-    @State var courseInfo: CourseShortInfo
-    @State var courseId: String
-    @State var courseName: String?
-    @State var courseCategory: String?
-    @State var isFavorite: Bool
-    @State var progress: Int?
-    @State var summary: String?
+    @Binding var courseInfo: CourseShortInfo
+    @Binding var courseId: String
+    @Binding var courseName: String?
+    @Binding var courseCategory: String?
+    @Binding var isFavorite: Bool
+    @Binding var progress: Int?
+    @Binding var summary: String?
     
     @State var isActive: Bool = false
     var body: some View {
@@ -122,8 +122,8 @@ private struct ListView: View {
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 20){
-                ForEach(courses) { item in
-                    if !isSearching || searchText.isEmpty || (item.fullname!.contains(searchText)) {
+                ForEach($courses) { item in
+                    if !isSearching || searchText.isEmpty || (item.wrappedValue.fullname!.contains(searchText)) {
                         CourseCardView(courseInfo: item, courseId: item.id, courseName: item.fullname, courseCategory: item.coursecategory, isFavorite: item.local_favorite, progress: item.progress, summary: item.summary)
 //                            .contextMenu {
 //                                Text("课程名: \(item.fullname.wrappedValue!)")
