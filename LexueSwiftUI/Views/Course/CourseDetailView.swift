@@ -49,6 +49,16 @@ struct CourseSummaryView: View {
 struct CourseDetailView: View {
     var courseId: String = "10001"
     
+    
+    let deleteHeaderJs = """
+        let __a = document.getElementById("header");
+        __a.parentNode.removeChild(__a);
+        __a = document.getElementsByClassName("header-main")[0];
+        __a.parentNode.removeChild(__a);
+        __a = document.getElementById("page-navbar");
+        __a.parentNode.removeChild(__a);
+    """
+    
     @State var courseInfo: CourseShortInfo
     @State var loading = true
     @State var courseName: String
@@ -91,7 +101,7 @@ struct CourseDetailView: View {
                         NavigationLink("课程简介", destination: CourseSummaryView(courseSummary: courseInfo.summary!))
                     }
                     NavigationLink("参与人", destination: CourseMembersListView(courseId: courseId))
-                    NavigationLink("成绩", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/grade/report/user/index.php?id=\(courseId)").navigationTitle("查看成绩"))
+                    NavigationLink("成绩", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/grade/report/user/index.php?id=\(courseId)", execJs: deleteHeaderJs).navigationTitle("查看成绩"))
                     NavigationLink("最近ddl", destination: EmptyView())
                 }
                 Section("课程内容") {

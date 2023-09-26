@@ -11,6 +11,7 @@ import WebView
 
 struct LexueBroswerView: View {
     var url: String = "https://lexue.bit.edu.cn/"
+    var execJs: String = ""
     @StateObject var webViewStore = WebViewStore()
     var body: some View {
         ZStack {
@@ -20,6 +21,12 @@ struct LexueBroswerView: View {
                     .controlSize(.large)
             }
             
+        }
+        .onChange(of: webViewStore.webView.isLoading) { newVal in
+            if !newVal {
+                // 执行js代码
+                self.webViewStore.webView.evaluateJavaScript(execJs)
+            }
         }
         .onAppear {
             let cookie = HTTPCookie(properties: [
