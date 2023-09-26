@@ -36,11 +36,12 @@ struct CourseDetailView: View {
     
     @State var courseInfo: CourseShortInfo
     @State var loading = true
-    @State var courseName: String = "这是一个超级长课程名这是一个超级长课程名这是一个超级长课程名"
+    @State var courseName: String
     
     @State var sections: [LexueAPI.CourseSectionInfo] = [LexueAPI.CourseSectionInfo]()
     
     var body: some View {
+        
         List {
             Section.init {
                 ZStack {

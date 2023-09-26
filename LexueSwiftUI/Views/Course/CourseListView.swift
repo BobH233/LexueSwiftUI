@@ -21,7 +21,8 @@ struct CourseCardView: View {
     @Binding var progress: Int?
     @Binding var summary: String?
     
-    @State var isActive: Bool = false
+    @Binding var isActive: Bool
+    @Binding var detailViewCourse: CourseShortInfo
     var body: some View {
         ZStack {
             Image("default_course_bg")
@@ -80,13 +81,9 @@ struct CourseCardView: View {
             .frame(height: cardHeight)
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, cardHorizontalPadding)
-            NavigationLink(destination:
-                            CourseDetailView(courseId: courseId, courseInfo: courseInfo, courseName: courseName!),
-               isActive: self.$isActive) {
-                 EmptyView()
-            }.hidden()
         }
         .onTapGesture {
+            detailViewCourse = courseInfo
             isActive = true
         }
         .contextMenu(menuItems: {
@@ -101,6 +98,9 @@ private struct ListView: View {
     @Binding var isRefreshing: Bool
     @Environment(\.isSearching) private var isSearching
     @Binding var searchText: String
+    
+    @State var detailViewCourse: CourseShortInfo = CourseShortInfo()
+    @State var isActive: Bool = false
     
     @Environment(\.refresh) private var refreshAction
     @ViewBuilder
@@ -123,14 +123,16 @@ private struct ListView: View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 20){
                 ForEach($courses) { item in
-                    if !isSearching || searchText.isEmpty || (item.wrappedValue.fullname!.contains(searchText)) {
-                        CourseCardView(courseInfo: item, courseId: item.id, courseName: item.fullname, courseCategory: item.coursecategory, isFavorite: item.local_favorite, progress: item.progress, summary: item.summary)
-//                            .contextMenu {
-//                                Text("课程名: \(item.fullname.wrappedValue!)")
-//                            }
+                    if searchText.isEmpty || (item.wrappedValue.fullname!.contains(searchText)) {
+                        CourseCardView(courseInfo: item, courseId: item.id, courseName: item.fullname, courseCategory: item.coursecategory, isFavorite: item.local_favorite, progress: item.progress, summary: item.summary, isActive: $isActive, detailViewCourse: $detailViewCourse)
                     }
                 }
             }
+            NavigationLink(destination:
+                            CourseDetailView(courseId: detailViewCourse.id, courseInfo: detailViewCourse, courseName: detailViewCourse.fullname ?? ""),
+               isActive: self.$isActive) {
+                 EmptyView()
+            }.hidden()
         }
         .toolbar {
             refreshToolbar
