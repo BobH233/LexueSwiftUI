@@ -7,9 +7,33 @@
 
 import SwiftUI
 
+struct CourseSummaryView: View {
+    var courseSummary: String = ""
+    struct HTMLText: View {
+        var html = "<b>This is</b> <i>rich</i> <u>HTML</u> <span style=\"color: red;\">text</span>."
+        var body: some View {
+            if let nsAttributedString = try? NSAttributedString(data: Data(html.data(using: String.Encoding.unicode)!), options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
+               let attributedString = try? AttributedString(nsAttributedString, including: \.uiKit) {
+                Text(attributedString)
+            } else {
+                Text(html)
+            }
+        }
+    }
+    var body: some View {
+        Form {
+            HTMLText(html: courseSummary)
+                .textSelection(.enabled)
+        }
+        .navigationTitle("课程简介")
+        .navigationBarTitleDisplayMode(.large)
+    }
+}
+
 struct CourseDetailView: View {
     var courseId: String = "10001"
     
+    @Binding var courseInfo: CourseShortInfo
     @State var loading = true
     @State var courseName: String = "这是一个超级长课程名这是一个超级长课程名这是一个超级长课程名"
     
@@ -47,7 +71,9 @@ struct CourseDetailView: View {
                 }
             } else {
                 Section("课程信息") {
-                    NavigationLink("课程简介", destination: EmptyView())
+                    if courseInfo.summary != nil && !courseInfo.summary!.isEmpty {
+                        NavigationLink("课程简介", destination: CourseSummaryView(courseSummary: courseInfo.summary!))
+                    }
                     NavigationLink("参与人", destination: EmptyView())
                     NavigationLink("成绩", destination: EmptyView())
                     NavigationLink("最近ddl", destination: EmptyView())
@@ -86,6 +112,3 @@ struct CourseDetailView: View {
     }
 }
 
-#Preview {
-    CourseDetailView()
-}

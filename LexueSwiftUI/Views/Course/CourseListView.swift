@@ -13,6 +13,7 @@ struct CourseCardView: View {
     let cardCornelRadius: CGFloat = 10
     let cardHorizontalPadding: CGFloat = 10
     
+    @Binding var courseInfo: CourseShortInfo
     @Binding var courseId: String
     @Binding var courseName: String?
     @Binding var courseCategory: String?
@@ -80,7 +81,7 @@ struct CourseCardView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.horizontal, cardHorizontalPadding)
             NavigationLink(destination:
-                            CourseDetailView(courseId: courseId, courseName: courseName!),
+                            CourseDetailView(courseId: courseId, courseInfo: $courseInfo, courseName: courseName!),
                isActive: self.$isActive) {
                  EmptyView()
             }.hidden()
@@ -123,7 +124,7 @@ private struct ListView: View {
             LazyVStack(spacing: 20){
                 ForEach($courses) { item in
                     if !isSearching || searchText.isEmpty || (item.fullname.wrappedValue!.contains(searchText)) {
-                        CourseCardView(courseId: item.id, courseName: item.fullname, courseCategory: item.coursecategory, isFavorite: item.local_favorite, progress: item.progress, summary: item.summary)
+                        CourseCardView(courseInfo: item, courseId: item.id, courseName: item.fullname, courseCategory: item.coursecategory, isFavorite: item.local_favorite, progress: item.progress, summary: item.summary)
 //                            .contextMenu {
 //                                Text("课程名: \(item.fullname.wrappedValue!)")
 //                            }
