@@ -20,6 +20,7 @@
 		473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */; };
 		473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */; };
 		474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474515122AAB641700CCF24E /* ContactDetailView.swift */; };
+		47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */; };
 		474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* DDLListView.swift */; };
 		475AFEF62AAF560A00C4020F /* BITLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475AFEF52AAF560A00C4020F /* BITLogin.swift */; };
 		475AFEF92AAF61C900C4020F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 475AFEF82AAF61C900C4020F /* Alamofire */; };
@@ -85,6 +86,7 @@
 		473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStorage.swift; sourceTree = "<group>"; };
 		473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		474515122AAB641700CCF24E /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
+		47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMembersListView.swift; sourceTree = "<group>"; };
 		474C9B782AA4E38D0064B5AF /* DDLListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLListView.swift; sourceTree = "<group>"; };
 		475AFEF52AAF560A00C4020F /* BITLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITLogin.swift; sourceTree = "<group>"; };
 		475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueAPI.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			children = (
 				473BAE952AA496AE00968C3C /* CourseListView.swift */,
 				470CC59A2AC1D15900142AC5 /* CourseDetailView.swift */,
+				47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */,
 			);
 			path = Course;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				47F4F29E2AC086A90047B395 /* ImagePane.swift in Sources */,
 				4799C81B2AA62CDB00F812D6 /* ContactMessageModel.swift in Sources */,
 				472984A02AA706BB000814EE /* Extensions.swift in Sources */,
+				47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */,
 				47F4F2A32AC086A90047B395 /* ViewModifiers.swift in Sources */,
 				47F4F2A02AC086A90047B395 /* DeviceOrientation.swift in Sources */,
 				47BA831F2AC1289100954129 /* UnloginView.swift in Sources */,

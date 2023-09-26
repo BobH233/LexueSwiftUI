@@ -46,6 +46,19 @@ struct DebugDataView: View {
     var body: some View {
         Form {
             Section("LexueAPI") {
+                Button("GetCourseMembers") {
+                    Task {
+                        let res = await LexueAPI.shared.GetCourseMembersInfo(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, courseId: "12698")
+                        switch res {
+                        case .success(let ress):
+                            for a in ress {
+                                print(a.name)
+                            }
+                        case .failure(let err):
+                            print(err)
+                        }
+                    }
+                }
                 Button("GetCourseSection") {
                     Task {
                         let res = await LexueAPI.shared.GetCourseSections(globalVar.cur_lexue_context, courseId: "13882")

@@ -30,10 +30,11 @@ struct CourseSummaryView: View {
     }
 }
 
+
 struct CourseDetailView: View {
     var courseId: String = "10001"
     
-    @Binding var courseInfo: CourseShortInfo
+    @State var courseInfo: CourseShortInfo
     @State var loading = true
     @State var courseName: String = "这是一个超级长课程名这是一个超级长课程名这是一个超级长课程名"
     
@@ -74,7 +75,7 @@ struct CourseDetailView: View {
                     if courseInfo.summary != nil && !courseInfo.summary!.isEmpty {
                         NavigationLink("课程简介", destination: CourseSummaryView(courseSummary: courseInfo.summary!))
                     }
-                    NavigationLink("参与人", destination: EmptyView())
+                    NavigationLink("参与人", destination: CourseMembersListView(courseId: courseId))
                     NavigationLink("成绩", destination: EmptyView())
                     NavigationLink("最近ddl", destination: EmptyView())
                 }

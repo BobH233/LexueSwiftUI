@@ -116,6 +116,86 @@ class LexueAPI {
         var activities: [CourseSectionAvtivity] = [CourseSectionAvtivity]()
     }
     
+    struct CourseMemberInfo: Identifiable {
+        var id = UUID()
+        var role: String?
+        var href: String?
+        var name: String?
+        var group: String?
+    }
+    
+    func ParseCourseMembersHtml(_ html: String) -> [CourseMemberInfo] {
+        var ret = [CourseMemberInfo]()
+        do {
+            let doc = try SwiftSoup.parse(html)
+            let tbody = try doc.select("tbody")
+            let memberElems = try tbody.select("tr")
+            for member in memberElems {
+                var curMember = CourseMemberInfo()
+                var cnt = 0
+                let aElem = try member.select("a")
+                if aElem.count > 0 {
+                    curMember.href = try aElem.attr("href")
+                    curMember.name = try aElem.text().trimmingCharacters(in: .whitespacesAndNewlines)
+                    if !(curMember.name ?? "").isEmpty {
+                        curMember.name = curMember.name?.replacingOccurrences(of: " ", with: "")
+                        cnt += 1
+                    }
+                }
+                let tdElements = try member.select("td")
+                if tdElements.count >= 2 {
+                    curMember.role = try tdElements[0].text().trimmingCharacters(in: .whitespacesAndNewlines)
+                    curMember.group = try tdElements[1].text().trimmingCharacters(in: .whitespacesAndNewlines)
+                    if !(curMember.group ?? "").isEmpty || !(curMember.role ?? "").isEmpty {
+                        cnt += 1
+                    }
+                }
+                if cnt > 0 {
+                    ret.append(curMember)
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+            print("解析课程参与人发生错误")
+        }
+        return ret
+    }
+    
+    func GetCourseMembersInfo(_ lexueContext: LexueContext, sesskey: String, courseId: String, retry: Bool = true) async -> Result<[CourseMemberInfo], LexueAPIError> {
+        let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_table_get_dynamic_table_content", args: [
+            "component": "core_user",
+            "handler": "participants",
+            "uniqueid": "user-index-participants-\(courseId)",
+            "sortdata": [
+                [
+                    "sortby": "lastname",
+                    "sortorder": 4
+                ]
+            ],
+            "jointype": 2,
+            "filters": [
+                "courseid": [
+                    "name": "courseid",
+                    "jointype": 1,
+                    "values": [
+                        Int(courseId)
+                    ]
+                ]
+            ],
+            "firstinitial": "",
+            "lastinitial": "",
+            "pagenumber": "1",
+            "pagesize": "5000",
+            "hiddencolumns": [],
+            "resetpreferences": false
+        ])
+        if let data = serviceRet["data"] as? [String: Any], let html = data["html"] as? String {
+            return .success(ParseCourseMembersHtml(html))
+        } else {
+            return .failure(.unknowError)
+        }
+    }
+    
     func GetLexueHeaders(_ lexueContext: LexueContext) -> HTTPHeaders {
         var cur_headers = HTTPHeaders(headers1)
         cur_headers.add(name: "Cookie", value: "MoodleSession=\(lexueContext.MoodleSession);")
