@@ -192,7 +192,20 @@ class LexueAPI {
         if let data = serviceRet["data"] as? [String: Any], let html = data["html"] as? String {
             return .success(ParseCourseMembersHtml(html))
         } else {
-            return .failure(.unknowError)
+            if retry {
+                let result = await GetSessKey(GlobalVariables.shared.cur_lexue_context)
+                switch result {
+                case .success(let (sesskey, new_context)):
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                    }
+                    return await GetCourseMembersInfo(new_context == nil ? lexueContext : new_context!, sesskey: sesskey, courseId: courseId, retry: false)
+                case .failure(_):
+                    return .failure(.unknowError)
+                }
+            } else {
+                return .failure(.unknowError)
+            }
         }
     }
     
