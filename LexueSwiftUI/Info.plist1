@@ -3,9 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
-	<array>
-		<string>cn.bobh.LexueSwiftUI.BGRefresh</string>
-	</array>
+  <array>
+	  <string>com.transistorsoft.fetch</string>
+	  <string>com.transistorsoft.gusty.update</string>
+  </array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

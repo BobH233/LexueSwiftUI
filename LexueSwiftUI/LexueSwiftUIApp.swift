@@ -38,6 +38,30 @@ struct LexueSwiftUIApp: App {
     @ObservedObject var settings = SettingStorage.shared
     @Environment(\.scenePhase) private var scenePhase
     
+    init() {
+        BGTaskScheduler.shared.register(forTaskWithIdentifier: "cn.bobh.LexueSwiftUI.BGRefresh", using: DispatchQueue.main) { task in
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // 设置日期格式
+
+            let currentDate = Date()
+            let formattedDate = dateFormatter.string(from: currentDate)
+            print("In the background func!")
+            Task {
+                let res = await LexueAPI.shared.GetSelfUserInfo(GlobalVariables.shared.cur_lexue_context)
+                switch res {
+                case .success(let userInfo):
+                    LocalNotificationManager.shared.PushNotification(title: "\(formattedDate) 成功调用", body: "\(userInfo.onlineUsers)", userInfo: ["123":"1234"], image:GlobalVariables.shared.userAvatarUIImage, interval: 0.1)
+                case .failure(let error):
+                    LocalNotificationManager.shared.PushNotification(title: "\(formattedDate) 失败调用", body: "\(error.localizedDescription)", userInfo: ["123":"1234"], image:GlobalVariables.shared.userAvatarUIImage, interval: 0.1)
+                }
+                AppStatusManager.scheduleAppBackgroundRefresh()
+                DispatchQueue.main.async {
+                    task.setTaskCompleted(success: true)
+                }
+            }
+        }
+    }
+    
     func getPreferredColorScheme() -> ColorScheme {
         switch settings.preferColorScheme {
         case 0:
@@ -77,5 +101,10 @@ struct LexueSwiftUIApp: App {
                 print("Unknow phase...")
             }
         }
+//        .backgroundTask(.appRefresh("cn.bobh.LexueSwiftUI.BGRefresh")) {
+//            print("background task!")
+//            LocalNotificationManager.shared.PushNotification(title: "1234", body: "test", userInfo: ["123":"1234"], image:GlobalVariables.shared.userAvatarUIImage, interval: 0.1)
+//            AppStatusManager.scheduleAppBackgroundRefresh()
+//        }
     }
 }

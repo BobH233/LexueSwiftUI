@@ -149,10 +149,17 @@ class AppStatusManager {
     }
     
     static func scheduleAppBackgroundRefresh() {
-//        print("scheduleAppBackgroundRefresh")
-//        let request = BGAppRefreshTaskRequest(identifier: "backgroundRefresh")
-//        request.earliestBeginDate = .now.addingTimeInterval(20)
-//        try? BGTaskScheduler.shared.submit(request)
+        print("scheduleAppBackgroundRefresh")
+        let request = BGAppRefreshTaskRequest(identifier: "cn.bobh.LexueSwiftUI.BGRefresh")
+        request.earliestBeginDate = .now.addingTimeInterval(30 * 60)
+        do {
+            try BGTaskScheduler.shared.submit(request)
+            // e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"cn.bobh.LexueSwiftUI.BGRefresh"]
+            print("okok!!")
+        } catch {
+            print("error: \(error.localizedDescription)")
+        }
+        
     }
     
     // App切换到后台的时候
@@ -193,7 +200,6 @@ class AppStatusManager {
         // 刷新sesskey
         Task {
             print("OnTick60s for get sesskey...")
-            LocalNotificationManager.shared.PushNotification(title: "1234", body: "test", userInfo: ["123":"1234"])
             let result = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
             switch result {
             case .success(let (sesskey, _)):
@@ -216,6 +222,7 @@ class AppStatusManager {
         if foregroundCnt == 0 {
             OnAppStart()
         } else {
+            BGTaskScheduler.shared.cancelAllTaskRequests()
             let deltaTime = Int(Date().timeIntervalSince1970) - lastBackgroundTime
             print("deltaTime: \(deltaTime)")
             if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 60 {

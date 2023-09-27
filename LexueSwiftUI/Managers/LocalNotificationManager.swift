@@ -66,7 +66,7 @@ class LocalNotificationManager: ObservableObject {
         )
         UNUserNotificationCenter.current().add(request) { error in
             if error == nil {
-                print("消息通知已设定: \(identifier)")
+                // print("消息通知已设定: \(identifier)")
             }
         }
     }
