@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import BackgroundTasks
 
 // https://ishtiz.com/swift/how-to-show-local-notification-when-the-app-is-foreground
 class AppDelegate: NSObject, UIApplicationDelegate {

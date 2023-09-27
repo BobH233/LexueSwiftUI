@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import BackgroundTasks
 
 class AppStatusManager {
     static let shared = AppStatusManager()
@@ -147,10 +148,18 @@ class AppStatusManager {
         }
     }
     
+    static func scheduleAppBackgroundRefresh() {
+//        print("scheduleAppBackgroundRefresh")
+//        let request = BGAppRefreshTaskRequest(identifier: "backgroundRefresh")
+//        request.earliestBeginDate = .now.addingTimeInterval(20)
+//        try? BGTaskScheduler.shared.submit(request)
+    }
+    
     // App切换到后台的时候
     func OnAppGoToBackground() {
         print("\(#function)")
         lastBackgroundTime = Int(Date().timeIntervalSince1970)
+        AppStatusManager.scheduleAppBackgroundRefresh()
         print("recordTime: \(lastBackgroundTime)")
     }
     
@@ -184,6 +193,7 @@ class AppStatusManager {
         // 刷新sesskey
         Task {
             print("OnTick60s for get sesskey...")
+            LocalNotificationManager.shared.PushNotification(title: "1234", body: "test", userInfo: ["123":"1234"])
             let result = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
             switch result {
             case .success(let (sesskey, _)):
@@ -211,7 +221,7 @@ class AppStatusManager {
             if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 60 {
                 // 超过1分钟，需要刷新lexue的sesskey
                 // 切回重新刷新sesskey的阈值时间设定为60s，因为如果没被踢刷新速度会很快，所以不必担心体验问题
-                print("BackGoreground 600s for get sessKey")
+                print("BackGoreground 60s for get sessKey")
                 // RefreshLexueContext(silent_refresh: false)  // 不用这个方式了，因为GetSessKey自带重试处理，所以可以直接刷新SessKey
                 GlobalVariables.shared.LoadingText = "刷新中"
                 GlobalVariables.shared.isLoading = true
