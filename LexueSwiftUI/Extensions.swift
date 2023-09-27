@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 import CommonCrypto
 import Alamofire
+import UIKit
+import UserNotifications
 
 // reference: https://stackoverflow.com/questions/43663622/is-a-date-in-same-week-month-year-of-another-date-in-swift
 extension Date {
@@ -252,3 +254,24 @@ func get_cookie_key(_ cookie: String, _ keyValue: String) -> String {
     }
 }
 
+
+extension UNNotificationAttachment {
+
+    static func create(identifier: String, image: UIImage, options: [NSObject : AnyObject]?) -> UNNotificationAttachment? {
+        let fileManager = FileManager.default
+        let tmpSubFolderName = ProcessInfo.processInfo.globallyUniqueString
+        let tmpSubFolderURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tmpSubFolderName, isDirectory: true)
+        do {
+            try fileManager.createDirectory(at: tmpSubFolderURL, withIntermediateDirectories: true, attributes: nil)
+            let imageFileIdentifier = identifier+".png"
+            let fileURL = tmpSubFolderURL.appendingPathComponent(imageFileIdentifier)
+            let imageData = UIImage.pngData(image)
+            try imageData()?.write(to: fileURL)
+            let imageAttachment = try UNNotificationAttachment.init(identifier: imageFileIdentifier, url: fileURL, options: options)
+            return imageAttachment
+        } catch {
+            print("error creating UIImage attachments: " + error.localizedDescription)
+        }
+        return nil
+    }
+}

@@ -45,6 +45,14 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     var body: some View {
         Form {
+            Section("Notification") {
+                Button("GuardPermission") {
+                    LocalNotificationManager.shared.GuardNotificationPermission()
+                }
+                Button("Push") {
+                    LocalNotificationManager.shared.PushNotification(title: "title_test", body: "body_test", userInfo: ["userInfo1234":"1234"], image: globalVar.userAvatarUIImage, interval: 0.01)
+                }
+            }
             Section("LexueAPI") {
                 Button("GetCourseMembers") {
                     Task {

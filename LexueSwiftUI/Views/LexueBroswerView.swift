@@ -38,7 +38,7 @@ struct LexueBroswerView: View {
                 .expires: NSDate(timeIntervalSinceNow: 31556926)
             ])!
             if #available(iOS 16.4, *) {
-                self.webViewStore.webView.isInspectable = true
+                if GlobalVariables.shared.debugMode { self.webViewStore.webView.isInspectable = true }
             }
             // 添加lexue的cookie
             self.webViewStore.webView.configuration.websiteDataStore.httpCookieStore.setCookie(cookie)

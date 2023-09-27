@@ -22,6 +22,7 @@
 		474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474515122AAB641700CCF24E /* ContactDetailView.swift */; };
 		47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */; };
 		474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* DDLListView.swift */; };
+		4750EB832AC43C640071118F /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EB822AC43C640071118F /* LocalNotificationManager.swift */; };
 		475AFEF62AAF560A00C4020F /* BITLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475AFEF52AAF560A00C4020F /* BITLogin.swift */; };
 		475AFEF92AAF61C900C4020F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 475AFEF82AAF61C900C4020F /* Alamofire */; };
 		475AFEFE2AAF68E100C4020F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 475AFEFD2AAF68E100C4020F /* SwiftSoup */; };
@@ -90,6 +91,7 @@
 		474515122AAB641700CCF24E /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
 		47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMembersListView.swift; sourceTree = "<group>"; };
 		474C9B782AA4E38D0064B5AF /* DDLListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLListView.swift; sourceTree = "<group>"; };
+		4750EB822AC43C640071118F /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		475AFEF52AAF560A00C4020F /* BITLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITLogin.swift; sourceTree = "<group>"; };
 		475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueAPI.swift; sourceTree = "<group>"; };
 		475EDED32AB60697008486F0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 				47A927842AA7836300ABDC53 /* MessageManager.swift */,
 				472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */,
 				47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */,
+				4750EB822AC43C640071118F /* LocalNotificationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */,
 				47F4F2A32AC086A90047B395 /* ViewModifiers.swift in Sources */,
 				47F4F2A02AC086A90047B395 /* DeviceOrientation.swift in Sources */,
+				4750EB832AC43C640071118F /* LocalNotificationManager.swift in Sources */,
 				47BA831F2AC1289100954129 /* UnloginView.swift in Sources */,
 				47F4F29F2AC086A90047B395 /* SystemPHPicker.swift in Sources */,
 			);

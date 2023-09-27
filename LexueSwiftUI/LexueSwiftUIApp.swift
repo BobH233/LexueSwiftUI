@@ -7,8 +7,32 @@
 
 import SwiftUI
 
+
+// https://ishtiz.com/swift/how-to-show-local-notification-when-the-app-is-foreground
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // Show local notification in foreground
+        UNUserNotificationCenter.current().delegate = self
+        
+        return true
+    }
+}
+// Conform to UNUserNotificationCenterDelegate to show local notification in foreground
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        print(userInfo)
+        completionHandler()
+    }
+}
+
 @main
 struct LexueSwiftUIApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     @Environment(\.colorScheme) var sysColorScheme
     @StateObject private var dataController = DataController()
     @ObservedObject var settings = SettingStorage.shared
