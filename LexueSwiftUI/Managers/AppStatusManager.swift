@@ -122,6 +122,12 @@ class AppStatusManager {
     
     // App从没运行，到运行的时候
     func OnAppStart() {
+        // 如果还没同意隐私政策，则必须先同意隐私政策
+        if !SettingStorage.shared.agreePrivacyPolicy {
+            GlobalVariables.shared.isShowPrivacyPolicySheet = true
+            return
+        }
+        
         print("\(#function)")
         Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
             self.OnAppTickToGetLexueContext()

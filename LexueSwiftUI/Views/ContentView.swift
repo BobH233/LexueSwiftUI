@@ -40,6 +40,9 @@ struct ContentView: View {
         .alert(isPresented: $globalVar.showAlert) {
             Alert(title: Text(globalVar.alertTitle), message: Text(globalVar.alertContent), dismissButton: .default(Text("确定")))
         }
+        .sheet(isPresented: $globalVar.isShowPrivacyPolicySheet, content: {
+            PrivacyPolicyView()
+        })
         .overlay {
             if globalVar.isLoading {
                 ZStack {

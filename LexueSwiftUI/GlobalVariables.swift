@@ -14,6 +14,8 @@ class GlobalVariables: ObservableObject {
     
     @Published var isLogin = false
     
+    @Published var isShowPrivacyPolicySheet = false
+    
     @Published var isLoading = false
     @Published var LoadingText = ""
     

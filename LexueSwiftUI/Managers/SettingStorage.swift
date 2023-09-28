@@ -10,6 +10,15 @@ import Foundation
 class SettingStorage: ObservableObject {
     static let shared = SettingStorage()
     
+    // 是否同意应用隐私政策
+    @Published var agreePrivacyPolicy: Bool {
+        didSet {
+            print("set setting.agreePrivacyPolicy \(agreePrivacyPolicy)")
+            UserDefaults.standard.set(agreePrivacyPolicy, forKey: "setting.agreePrivacyPolicy")
+        }
+    }
+    
+    
     // 应用颜色选项
     @Published var preferColorScheme: Int {
         didSet {
@@ -103,6 +112,12 @@ class SettingStorage: ObservableObject {
             cacheSelfLexueProfile = tmpProfile
         } else {
             cacheSelfLexueProfile = LexueProfile()
+        }
+        print(UserDefaults.standard.value(forKey: "setting.agreePrivacyPolicy"))
+        if let stored = UserDefaults.standard.value(forKey: "setting.agreePrivacyPolicy") as? Bool {
+            agreePrivacyPolicy = stored
+        } else {
+            agreePrivacyPolicy = false
         }
     }
 }

@@ -119,6 +119,23 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "savedPassword">
+            </PersistentString>
+            <PersistentString
+               value = "savedUsername">
+            </PersistentString>
+            <PersistentString
+               value = "UserDefaults.standard">
+            </PersistentString>
+            <PersistentString
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "encryptAES(data:aesKey:):BITLogin.swift">
          <PersistentStrings>
             <PersistentString
