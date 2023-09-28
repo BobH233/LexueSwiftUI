@@ -75,10 +75,10 @@ struct CourseDetailView: View {
     // 删除前一个活动、后一个活动的标识
     let deleteArrowJs = """
         function __remove2() {
-            let __b = document.getElementsByClassName("mdl-left");
-            for(let i=0;i<__b.length;i++) {__b[i].parentNode.removeChild(__b[i]);}
-            __b = document.getElementsByClassName("mdl-right");
-            for(let i=0;i<__b.length;i++) {__b[i].parentNode.removeChild(__b[i]);}
+            let __b = document.querySelector("span.mdl-left");
+            if(__b != null) __b.parentNode.removeChild(__b);
+            __b = document.querySelector("span.mdl-right");
+            if(__b != null) __b.parentNode.removeChild(__b);
         }
         for(let i=0;i<10;i++) __remove2();
     """
