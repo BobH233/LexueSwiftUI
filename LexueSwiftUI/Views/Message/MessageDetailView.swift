@@ -144,6 +144,20 @@ struct ChatBubbleShape: Shape {
     }
 }
 
+private struct BubbleUnkowTypeMessageView: View, BubbleBaseColorConfig {
+    @Environment(\.colorScheme) var sysColorScheme
+    let type: Int
+    var body: some View {
+        ChatBubble(direction: .left) {
+            Text("[不受支持的消息类型] type = \(type)")
+                .padding(.vertical, 10)
+                .padding(.horizontal, 20)
+                .foregroundColor(.red)
+                .background(BubbleColor)
+        }
+        .padding(.leading, 10)
+    }
+}
 
 private struct BubbleTextMessageView: View, BubbleBaseColorConfig {
     @Environment(\.colorScheme) var sysColorScheme
@@ -331,6 +345,9 @@ struct MessageDetailView: View {
                                     .id(message.id)
                             } else if message.messageBody.type == .time {
                                 TimeView(message: message)
+                                    .id(message.id)
+                            } else {
+                                BubbleUnkowTypeMessageView(type: message.messageBody.type.rawValue)
                                     .id(message.id)
                             }
                         }

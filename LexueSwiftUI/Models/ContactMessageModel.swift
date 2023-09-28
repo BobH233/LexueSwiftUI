@@ -14,6 +14,22 @@ enum MessageBodyType: Int, Codable {
     
     // 只在 MessageDetailView 页面显示这个时间
     case time = 3
+    
+    // 留给未来拓展富文本消息用的，目前暂时不使用
+    case unknow1 = 4
+    case unknow2 = 5
+    case unknow3 = 6
+    case unknow4 = 7
+    case unknow5 = 8
+    case unknow6 = 9
+    case unknow7 = 10
+    case unknow8 = 11
+    case unknow9 = 12
+    case unknow10 = 13
+    case unknow11 = 14
+    case unknow12 = 15
+    case unknow13 = 16
+    case unknow14 = 17
 }
 
 struct MessageBodyItem: Codable, Equatable {
