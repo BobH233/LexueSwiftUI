@@ -15,7 +15,15 @@ struct LexueWidget: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            WidgetView(entry: entry)
+            if #available(iOS 17.0, *) {
+                WidgetView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+            } else {
+                WidgetView(entry: entry)
+                    .padding()
+                    .background()
+            }
+            
         }
         .configurationDisplayName("Test widget")
         .supportedFamilies([.systemMedium, .systemLarge])
