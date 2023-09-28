@@ -133,6 +133,7 @@ class AppStatusManager {
             self.OnAppTickToGetLexueContext()
         }
         UMengManager.shared.AppStartLogic()
+        LocalNotificationManager.shared.GuardNotificationPermission()
         GlobalVariables.shared.LoadingText = "加载中"
         GlobalVariables.shared.isLoading = true
         if let data = Data(base64Encoded: SettingStorage.shared.cacheSelfLexueProfile.avatarBase64 ?? ""), let image = UIImage(data: data) {
