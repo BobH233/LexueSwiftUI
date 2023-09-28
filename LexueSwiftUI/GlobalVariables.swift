@@ -10,7 +10,7 @@ import SwiftUI
 
 class GlobalVariables: ObservableObject {
     static let shared = GlobalVariables()
-    let appVersion = "1.0.1"
+    var appVersion = "1.0"
     
     @Published var isLogin = false
     
@@ -35,5 +35,9 @@ class GlobalVariables: ObservableObject {
 
     private init() {
         userAvatarUIImage = UIImage(named: "default_avatar")!
+        if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            appVersion = version
+            print("AppVersion: \(appVersion)")
+        }
     }
 }

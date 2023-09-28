@@ -117,9 +117,7 @@ struct SettingView: View {
                     }
                 }
                 Section(header: Text("关于")) {
-                    NavigationLink(destination: {
-                        
-                    }, label: {
+                    NavigationLink(destination: PrivacyStatement(), label: {
                         Image(systemName: "lock.circle")
                             .foregroundColor(.blue)
                         Text("应用隐私声明")

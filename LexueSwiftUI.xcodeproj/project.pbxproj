@@ -61,6 +61,7 @@
 		47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927822AA77FDA00ABDC53 /* DataController.swift */; };
 		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
 		47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927882AA786ED00ABDC53 /* DebugDataView.swift */; };
+		47B4420B2AC5C0B600EE03A9 /* PrivacyStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */; };
 		47B695952AC5703C0070D3EA /* KeyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B695942AC5703C0070D3EA /* KeyInfo.plist */; };
 		47B695972AC570FE0070D3EA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 47B695962AC570FE0070D3EA /* .gitignore */; };
 		47BA831F2AC1289100954129 /* UnloginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BA831E2AC1289100954129 /* UnloginView.swift */; };
@@ -173,6 +174,7 @@
 		47A927822AA77FDA00ABDC53 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		47A927882AA786ED00ABDC53 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
+		47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyStatement.swift; sourceTree = "<group>"; };
 		47B695942AC5703C0070D3EA /* KeyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KeyInfo.plist; sourceTree = "<group>"; };
 		47B695962AC570FE0070D3EA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		47BA831E2AC1289100954129 /* UnloginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloginView.swift; sourceTree = "<group>"; };
@@ -359,6 +361,7 @@
 		473BAE902AA48E6700968C3C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */,
 				473BAE932AA4969F00968C3C /* SettingView.swift */,
 				47A927882AA786ED00ABDC53 /* DebugDataView.swift */,
 				4791050E2AB0ACD4004FD26C /* LoginView.swift */,
@@ -584,6 +587,7 @@
 				4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */,
 				47BD51A22AC5B43F0029F9DB /* UMGameAnalyticsSwift.swift in Sources */,
 				473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */,
+				47B4420B2AC5C0B600EE03A9 /* PrivacyStatement.swift in Sources */,
 				473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */,
 				473BAE982AA496B800968C3C /* MessageListView.swift in Sources */,
 				47F4F2A22AC086A90047B395 /* SystemImagePicker.swift in Sources */,
@@ -647,7 +651,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 36YU895APH;
+				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -662,7 +666,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI1.LexueWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI.LexueWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
@@ -680,7 +684,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 36YU895APH;
+				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -695,7 +699,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI1.LexueWidget;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI.LexueWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -827,7 +831,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 36YU895APH;
+				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_PREVIEWS = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -851,9 +855,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI1;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/LexueSwiftUI/UMSwift/Bridge.h";
@@ -871,7 +875,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 36YU895APH;
+				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_PREVIEWS = YES;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -895,10 +899,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI1;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/LexueSwiftUI/UMSwift/Bridge.h";
