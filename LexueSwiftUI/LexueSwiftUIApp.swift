@@ -50,6 +50,10 @@ struct LexueSwiftUIApp: App {
             let currentDate = Date()
             let formattedDate = dateFormatter.string(from: currentDate)
             print("In the background func!")
+            task.expirationHandler = {
+                LocalNotificationManager.shared.PushNotification(title: "\(formattedDate) 成功调用", body: "我要过期了!!!", userInfo: ["123":"1234"], image:GlobalVariables.shared.userAvatarUIImage, interval: 0.1)
+                task.setTaskCompleted(success: false)
+            }
             Task {
                 let res = await LexueAPI.shared.GetSelfUserInfo(GlobalVariables.shared.cur_lexue_context)
                 switch res {

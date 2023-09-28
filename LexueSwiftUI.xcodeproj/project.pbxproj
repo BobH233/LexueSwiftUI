@@ -53,6 +53,7 @@
 		47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927822AA77FDA00ABDC53 /* DataController.swift */; };
 		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
 		47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927882AA786ED00ABDC53 /* DebugDataView.swift */; };
+		47B695952AC5703C0070D3EA /* KeyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B695942AC5703C0070D3EA /* KeyInfo.plist */; };
 		47BA831F2AC1289100954129 /* UnloginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BA831E2AC1289100954129 /* UnloginView.swift */; };
 		47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */; };
 		47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2872AC080100047B395 /* AvatarSettingView.swift */; };
@@ -148,6 +149,7 @@
 		47A927822AA77FDA00ABDC53 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		47A927882AA786ED00ABDC53 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
+		47B695942AC5703C0070D3EA /* KeyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KeyInfo.plist; sourceTree = "<group>"; };
 		47BA831E2AC1289100954129 /* UnloginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloginView.swift; sourceTree = "<group>"; };
 		47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseShortInfo.swift; sourceTree = "<group>"; };
 		47F4F2872AC080100047B395 /* AvatarSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSettingView.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				473BAE852AA48DAA00968C3C /* Preview Content */,
 				473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */,
 				4729849F2AA706BB000814EE /* Extensions.swift */,
+				47B695942AC5703C0070D3EA /* KeyInfo.plist */,
 			);
 			path = LexueSwiftUI;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				473BAE872AA48DAA00968C3C /* Preview Assets.xcassets in Resources */,
+				47B695952AC5703C0070D3EA /* KeyInfo.plist in Resources */,
 				473BAE842AA48DAA00968C3C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
