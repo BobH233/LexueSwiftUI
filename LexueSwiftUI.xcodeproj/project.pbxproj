@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CC59A2AC1D15900142AC5 /* CourseDetailView.swift */; };
+		47196FDD2AC5514F00979DFE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47196FBA2AC54C6E00979DFE /* WidgetKit.framework */; };
+		47196FDE2AC5514F00979DFE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47196FBC2AC54C6E00979DFE /* SwiftUI.framework */; };
+		47196FE12AC5514F00979DFE /* LexueWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FE02AC5514F00979DFE /* LexueWidgetBundle.swift */; };
+		47196FE52AC5515000979DFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47196FE42AC5515000979DFE /* Assets.xcassets */; };
+		47196FE92AC5515000979DFE /* LexueWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 47196FDC2AC5514F00979DFE /* LexueWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		47196FF12AC551D200979DFE /* Widget_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FED2AC551D200979DFE /* Widget_Extension.swift */; };
+		47196FF22AC551D200979DFE /* DefaultEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FEE2AC551D200979DFE /* DefaultEntry.swift */; };
+		47196FF32AC551D200979DFE /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FEF2AC551D200979DFE /* Provider.swift */; };
+		47196FF72AC5522500979DFE /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FF62AC5522500979DFE /* WidgetView.swift */; };
 		472984A02AA706BB000814EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729849F2AA706BB000814EE /* Extensions.swift */; };
 		472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */; };
 		473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE7F2AA48DAA00968C3C /* LexueSwiftUIApp.swift */; };
@@ -61,6 +70,16 @@
 		47F4F2A42AC086A90047B395 /* ImageMoveAndScaleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2982AC086A90047B395 /* ImageMoveAndScaleSheet.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		47196FE72AC5515000979DFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 473BAE742AA48DAA00968C3C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47196FDB2AC5514F00979DFE;
+			remoteInfo = LexueWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		47196FCB2AC54C7000979DFE /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -68,6 +87,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				47196FE92AC5515000979DFE /* LexueWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +108,14 @@
 		470CC59A2AC1D15900142AC5 /* CourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailView.swift; sourceTree = "<group>"; };
 		47196FBA2AC54C6E00979DFE /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		47196FBC2AC54C6E00979DFE /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		47196FDC2AC5514F00979DFE /* LexueWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LexueWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		47196FE02AC5514F00979DFE /* LexueWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueWidgetBundle.swift; sourceTree = "<group>"; };
+		47196FE42AC5515000979DFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		47196FE62AC5515000979DFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47196FED2AC551D200979DFE /* Widget_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Widget_Extension.swift; sourceTree = "<group>"; };
+		47196FEE2AC551D200979DFE /* DefaultEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultEntry.swift; sourceTree = "<group>"; };
+		47196FEF2AC551D200979DFE /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
+		47196FF62AC5522500979DFE /* WidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
 		4729849F2AA706BB000814EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatusManager.swift; sourceTree = "<group>"; };
 		473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LexueSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +166,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		47196FD92AC5514F00979DFE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47196FDE2AC5514F00979DFE /* SwiftUI.framework in Frameworks */,
+				47196FDD2AC5514F00979DFE /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		473BAE792AA48DAA00968C3C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -162,10 +199,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		47196FDF2AC5514F00979DFE /* LexueWidget */ = {
+			isa = PBXGroup;
+			children = (
+				47196FF52AC5520900979DFE /* Views */,
+				47196FEE2AC551D200979DFE /* DefaultEntry.swift */,
+				47196FEF2AC551D200979DFE /* Provider.swift */,
+				47196FED2AC551D200979DFE /* Widget_Extension.swift */,
+				47196FE02AC5514F00979DFE /* LexueWidgetBundle.swift */,
+				47196FE42AC5515000979DFE /* Assets.xcassets */,
+				47196FE62AC5515000979DFE /* Info.plist */,
+			);
+			path = LexueWidget;
+			sourceTree = "<group>";
+		};
+		47196FF52AC5520900979DFE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				47196FF62AC5522500979DFE /* WidgetView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		473BAE732AA48DAA00968C3C = {
 			isa = PBXGroup;
 			children = (
 				473BAE7E2AA48DAA00968C3C /* LexueSwiftUI */,
+				47196FDF2AC5514F00979DFE /* LexueWidget */,
 				47196FB92AC54C6E00979DFE /* Frameworks */,
 				473BAE7D2AA48DAA00968C3C /* Products */,
 			);
@@ -175,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */,
+				47196FDC2AC5514F00979DFE /* LexueWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -316,6 +377,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		47196FDB2AC5514F00979DFE /* LexueWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 47196FEA2AC5515000979DFE /* Build configuration list for PBXNativeTarget "LexueWidgetExtension" */;
+			buildPhases = (
+				47196FD82AC5514F00979DFE /* Sources */,
+				47196FD92AC5514F00979DFE /* Frameworks */,
+				47196FDA2AC5514F00979DFE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LexueWidgetExtension;
+			productName = LexueWidgetExtension;
+			productReference = 47196FDC2AC5514F00979DFE /* LexueWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		473BAE7B2AA48DAA00968C3C /* LexueSwiftUI */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 473BAE8A2AA48DAA00968C3C /* Build configuration list for PBXNativeTarget "LexueSwiftUI" */;
@@ -329,6 +407,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				47196FE82AC5515000979DFE /* PBXTargetDependency */,
 			);
 			name = LexueSwiftUI;
 			packageProductDependencies = (
@@ -352,6 +431,9 @@
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					47196FDB2AC5514F00979DFE = {
+						CreatedOnToolsVersion = 15.0;
+					};
 					473BAE7B2AA48DAA00968C3C = {
 						CreatedOnToolsVersion = 14.2;
 					};
@@ -378,11 +460,20 @@
 			projectRoot = "";
 			targets = (
 				473BAE7B2AA48DAA00968C3C /* LexueSwiftUI */,
+				47196FDB2AC5514F00979DFE /* LexueWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		47196FDA2AC5514F00979DFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47196FE52AC5515000979DFE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		473BAE7A2AA48DAA00968C3C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -395,6 +486,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		47196FD82AC5514F00979DFE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47196FF72AC5522500979DFE /* WidgetView.swift in Sources */,
+				47196FF22AC551D200979DFE /* DefaultEntry.swift in Sources */,
+				47196FE12AC5514F00979DFE /* LexueWidgetBundle.swift in Sources */,
+				47196FF32AC551D200979DFE /* Provider.swift in Sources */,
+				47196FF12AC551D200979DFE /* Widget_Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		473BAE782AA48DAA00968C3C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,7 +552,80 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		47196FE82AC5515000979DFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47196FDB2AC5514F00979DFE /* LexueWidgetExtension */;
+			targetProxy = 47196FE72AC5515000979DFE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		47196FEB2AC5515000979DFE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JH8TK4886U;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LexueWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LexueWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI.LexueWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		47196FEC2AC5515000979DFE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = JH8TK4886U;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LexueWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = LexueWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI.LexueWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		473BAE882AA48DAA00968C3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -567,6 +743,7 @@
 		473BAE8B2AA48DAA00968C3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -601,6 +778,7 @@
 		473BAE8C2AA48DAA00968C3C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -635,6 +813,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		47196FEA2AC5515000979DFE /* Build configuration list for PBXNativeTarget "LexueWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				47196FEB2AC5515000979DFE /* Debug */,
+				47196FEC2AC5515000979DFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		473BAE772AA48DAA00968C3C /* Build configuration list for PBXProject "LexueSwiftUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
