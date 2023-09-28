@@ -42,6 +42,14 @@
 		4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791050E2AB0ACD4004FD26C /* LoginView.swift */; };
 		479129C02AC309BA00F811F9 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = 479129BF2AC309BA00F811F9 /* WebView */; };
 		479129C22AC30A3A00F811F9 /* LexueBroswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */; };
+		47970AC02AC5AC7200C5BD03 /* UMDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47970ABA2AC5AC7200C5BD03 /* UMDevice.framework */; };
+		47970AC22AC5AC7200C5BD03 /* UMAPM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47970ABC2AC5AC7200C5BD03 /* UMAPM.framework */; };
+		47970AC32AC5AC7200C5BD03 /* UMCommonLog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 47970ABD2AC5AC7200C5BD03 /* UMCommonLog.bundle */; };
+		47970AC42AC5AC7200C5BD03 /* UMCommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47970ABE2AC5AC7200C5BD03 /* UMCommon.framework */; };
+		47970AC52AC5AC7200C5BD03 /* UMCommonLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47970ABF2AC5AC7200C5BD03 /* UMCommonLog.framework */; };
+		47970AC72AC5AC9800C5BD03 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47970AC62AC5AC9800C5BD03 /* CoreTelephony.framework */; };
+		47970AC92AC5ACAB00C5BD03 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 47970AC82AC5ACA500C5BD03 /* libsqlite3.tbd */; };
+		47970ACB2AC5ACBA00C5BD03 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 47970ACA2AC5ACB600C5BD03 /* libz.tbd */; };
 		479839DB2AA9FCD40094C5E1 /* ContactDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479839DA2AA9FCD40094C5E1 /* ContactDisplayModel.swift */; };
 		479839DE2AAA2B9B0094C5E1 /* ImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = 479839DD2AAA2B9B0094C5E1 /* ImageViewer */; };
 		479839E02AAA2B9B0094C5E1 /* ImageViewerRemote in Frameworks */ = {isa = PBXBuildFile; productRef = 479839DF2AAA2B9B0094C5E1 /* ImageViewerRemote */; };
@@ -56,6 +64,11 @@
 		47B695952AC5703C0070D3EA /* KeyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B695942AC5703C0070D3EA /* KeyInfo.plist */; };
 		47B695972AC570FE0070D3EA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 47B695962AC570FE0070D3EA /* .gitignore */; };
 		47BA831F2AC1289100954129 /* UnloginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BA831E2AC1289100954129 /* UnloginView.swift */; };
+		47BD51A02AC5B43F0029F9DB /* UMCommonSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BD519C2AC5B43F0029F9DB /* UMCommonSwift.swift */; };
+		47BD51A12AC5B43F0029F9DB /* UMCommonLogSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BD519D2AC5B43F0029F9DB /* UMCommonLogSwift.swift */; };
+		47BD51A22AC5B43F0029F9DB /* UMGameAnalyticsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BD519E2AC5B43F0029F9DB /* UMGameAnalyticsSwift.swift */; };
+		47BD51A32AC5B43F0029F9DB /* UMAnalyticsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BD519F2AC5B43F0029F9DB /* UMAnalyticsSwift.swift */; };
+		47BD51A52AC5B4970029F9DB /* UMAnalyticsGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BD51A42AC5B4960029F9DB /* UMAnalyticsGame.framework */; };
 		47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */; };
 		47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2872AC080100047B395 /* AvatarSettingView.swift */; };
 		47F4F2992AC086A90047B395 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F28D2AC086A90047B395 /* Color+Extensions.swift */; };
@@ -142,6 +155,14 @@
 		47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLogicManager.swift; sourceTree = "<group>"; };
 		4791050E2AB0ACD4004FD26C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueBroswerView.swift; sourceTree = "<group>"; };
+		47970ABA2AC5AC7200C5BD03 /* UMDevice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMDevice.framework; sourceTree = "<group>"; };
+		47970ABC2AC5AC7200C5BD03 /* UMAPM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAPM.framework; sourceTree = "<group>"; };
+		47970ABD2AC5AC7200C5BD03 /* UMCommonLog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMCommonLog.bundle; sourceTree = "<group>"; };
+		47970ABE2AC5AC7200C5BD03 /* UMCommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommon.framework; sourceTree = "<group>"; };
+		47970ABF2AC5AC7200C5BD03 /* UMCommonLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMCommonLog.framework; sourceTree = "<group>"; };
+		47970AC62AC5AC9800C5BD03 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		47970AC82AC5ACA500C5BD03 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		47970ACA2AC5ACB600C5BD03 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		479839DA2AA9FCD40094C5E1 /* ContactDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDisplayModel.swift; sourceTree = "<group>"; };
 		4799C8142AA6235C00F812D6 /* ContactsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsManager.swift; sourceTree = "<group>"; };
 		4799C8162AA6237500F812D6 /* CourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseManager.swift; sourceTree = "<group>"; };
@@ -154,6 +175,12 @@
 		47B695942AC5703C0070D3EA /* KeyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KeyInfo.plist; sourceTree = "<group>"; };
 		47B695962AC570FE0070D3EA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		47BA831E2AC1289100954129 /* UnloginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloginView.swift; sourceTree = "<group>"; };
+		47BD519B2AC5B3BA0029F9DB /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
+		47BD519C2AC5B43F0029F9DB /* UMCommonSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMCommonSwift.swift; sourceTree = "<group>"; };
+		47BD519D2AC5B43F0029F9DB /* UMCommonLogSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMCommonLogSwift.swift; sourceTree = "<group>"; };
+		47BD519E2AC5B43F0029F9DB /* UMGameAnalyticsSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMGameAnalyticsSwift.swift; sourceTree = "<group>"; };
+		47BD519F2AC5B43F0029F9DB /* UMAnalyticsSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMAnalyticsSwift.swift; sourceTree = "<group>"; };
+		47BD51A42AC5B4960029F9DB /* UMAnalyticsGame.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalyticsGame.framework; sourceTree = "<group>"; };
 		47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseShortInfo.swift; sourceTree = "<group>"; };
 		47F4F2872AC080100047B395 /* AvatarSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSettingView.swift; sourceTree = "<group>"; };
 		47F4F28D2AC086A90047B395 /* Color+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -187,6 +214,14 @@
 			files = (
 				475AFEF92AAF61C900C4020F /* Alamofire in Frameworks */,
 				475AFEFE2AAF68E100C4020F /* SwiftSoup in Frameworks */,
+				47970AC22AC5AC7200C5BD03 /* UMAPM.framework in Frameworks */,
+				47970AC72AC5AC9800C5BD03 /* CoreTelephony.framework in Frameworks */,
+				47970AC92AC5ACAB00C5BD03 /* libsqlite3.tbd in Frameworks */,
+				47BD51A52AC5B4970029F9DB /* UMAnalyticsGame.framework in Frameworks */,
+				47970AC02AC5AC7200C5BD03 /* UMDevice.framework in Frameworks */,
+				47970AC52AC5AC7200C5BD03 /* UMCommonLog.framework in Frameworks */,
+				47970AC42AC5AC7200C5BD03 /* UMCommon.framework in Frameworks */,
+				47970ACB2AC5ACBA00C5BD03 /* libz.tbd in Frameworks */,
 				479839E02AAA2B9B0094C5E1 /* ImageViewerRemote in Frameworks */,
 				479129C02AC309BA00F811F9 /* WebView in Frameworks */,
 				47FBC8C62AC579DD00FB1523 /* SystemConfiguration.framework in Frameworks */,
@@ -200,6 +235,15 @@
 		47196FB92AC54C6E00979DFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				47970ACA2AC5ACB600C5BD03 /* libz.tbd */,
+				47970AC82AC5ACA500C5BD03 /* libsqlite3.tbd */,
+				47BD51A42AC5B4960029F9DB /* UMAnalyticsGame.framework */,
+				47970AC62AC5AC9800C5BD03 /* CoreTelephony.framework */,
+				47970ABC2AC5AC7200C5BD03 /* UMAPM.framework */,
+				47970ABE2AC5AC7200C5BD03 /* UMCommon.framework */,
+				47970ABD2AC5AC7200C5BD03 /* UMCommonLog.bundle */,
+				47970ABF2AC5AC7200C5BD03 /* UMCommonLog.framework */,
+				47970ABA2AC5AC7200C5BD03 /* UMDevice.framework */,
 				47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */,
 				47196FBA2AC54C6E00979DFE /* WidgetKit.framework */,
 				47196FBC2AC54C6E00979DFE /* SwiftUI.framework */,
@@ -252,6 +296,7 @@
 		473BAE7E2AA48DAA00968C3C /* LexueSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				47BD519A2AC5B3AC0029F9DB /* UMSwift */,
 				47F4F28C2AC086590047B395 /* PhotoSelectAndCrop */,
 				47CBA23F2AA5CE2F009F9242 /* Models */,
 				473BAE922AA48E9500968C3C /* Managers */,
@@ -350,6 +395,18 @@
 				474C9B782AA4E38D0064B5AF /* DDLListView.swift */,
 			);
 			path = DDLList;
+			sourceTree = "<group>";
+		};
+		47BD519A2AC5B3AC0029F9DB /* UMSwift */ = {
+			isa = PBXGroup;
+			children = (
+				47BD519F2AC5B43F0029F9DB /* UMAnalyticsSwift.swift */,
+				47BD519D2AC5B43F0029F9DB /* UMCommonLogSwift.swift */,
+				47BD519C2AC5B43F0029F9DB /* UMCommonSwift.swift */,
+				47BD519E2AC5B43F0029F9DB /* UMGameAnalyticsSwift.swift */,
+				47BD519B2AC5B3BA0029F9DB /* Bridge.h */,
+			);
+			path = UMSwift;
 			sourceTree = "<group>";
 		};
 		47CBA23F2AA5CE2F009F9242 /* Models */ = {
@@ -492,6 +549,7 @@
 				473BAE872AA48DAA00968C3C /* Preview Assets.xcassets in Resources */,
 				47B695952AC5703C0070D3EA /* KeyInfo.plist in Resources */,
 				473BAE842AA48DAA00968C3C /* Assets.xcassets in Resources */,
+				47970AC32AC5AC7200C5BD03 /* UMCommonLog.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -520,6 +578,7 @@
 				473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */,
 				470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */,
 				4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */,
+				47BD51A22AC5B43F0029F9DB /* UMGameAnalyticsSwift.swift in Sources */,
 				473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */,
 				473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */,
 				473BAE982AA496B800968C3C /* MessageListView.swift in Sources */,
@@ -534,12 +593,15 @@
 				475EDED42AB60697008486F0 /* ProfileView.swift in Sources */,
 				47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */,
 				475AFEF62AAF560A00C4020F /* BITLogin.swift in Sources */,
+				47BD51A02AC5B43F0029F9DB /* UMCommonSwift.swift in Sources */,
 				47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */,
 				47F4F29A2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift in Sources */,
+				47BD51A12AC5B43F0029F9DB /* UMCommonLogSwift.swift in Sources */,
 				47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */,
 				47F4F2A42AC086A90047B395 /* ImageMoveAndScaleSheet.swift in Sources */,
 				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,
 				47F4F29B2AC086A90047B395 /* ImageManipulation.swift in Sources */,
+				47BD51A32AC5B43F0029F9DB /* UMAnalyticsSwift.swift in Sources */,
 				474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */,
 				476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */,
 				47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */,
@@ -755,7 +817,7 @@
 		473BAE8B2AA48DAA00968C3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -763,10 +825,12 @@
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_PREVIEWS = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LexueSwiftUI",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/UMFramework",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LexueSwiftUI/Info.plist;
@@ -784,10 +848,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/LexueSwiftUI/UMSwift/Bridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -796,7 +861,7 @@
 		473BAE8C2AA48DAA00968C3C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -804,10 +869,12 @@
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_PREVIEWS = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/LexueSwiftUI",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/UMFramework",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LexueSwiftUI/Info.plist;
@@ -825,10 +892,12 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				OTHER_LDFLAGS = "-ObjC";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/LexueSwiftUI/UMSwift/Bridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
