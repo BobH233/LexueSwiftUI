@@ -16,6 +16,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         return true
     }
+    // 禁止横屏
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return .portrait
+    }
 }
 // Conform to UNUserNotificationCenterDelegate to show local notification in foreground
 extension AppDelegate: UNUserNotificationCenterDelegate {
