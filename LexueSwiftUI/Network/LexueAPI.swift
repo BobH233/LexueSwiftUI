@@ -113,6 +113,7 @@ class LexueAPI {
         var summary: String?
         var summaryText: String?
         var sectionId: String?
+        var current: Bool = false
         var activities: [CourseSectionAvtivity] = [CourseSectionAvtivity]()
     }
     
@@ -227,6 +228,9 @@ class LexueAPI {
                 // print("classValue: \(classValue)")
                 var curSection = CourseSectionInfo()
                 curSection.sectionId = sectionIdValue
+                if classValue.contains("current") {
+                    curSection.current = true
+                }
                 let contentElem = try topic.select(".content")
                 let titleElem = try contentElem.select("h3")
                 let titleAElem = try titleElem.select("a")
