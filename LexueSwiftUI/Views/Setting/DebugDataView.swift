@@ -45,6 +45,14 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     var body: some View {
         Form {
+            Section("UMeng") {
+                Button("event1") {
+                    UMAnalyticsSwift.event(eventId: "test1", label: "12345")
+                }
+                Button("event2") {
+                    UMAnalyticsSwift.event(eventId: "login", label: "12345")
+                }
+            }
             Section("Notification") {
                 Button("GuardPermission") {
                     LocalNotificationManager.shared.GuardNotificationPermission()

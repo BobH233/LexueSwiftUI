@@ -63,6 +63,7 @@ struct LoginView: View {
                 print(data)
                 settings.savedUsername = username
                 settings.savedPassword = password
+                UMAnalyticsSwift.event(eventId: "login", attributes: ["username": username])
                 settings.loginnedContext = data
                 LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
                     switch result {

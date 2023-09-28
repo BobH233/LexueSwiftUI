@@ -24,7 +24,7 @@ class UMengManager {
     func AppStartLogic() {
         print("UMeng AppStartLogic")
         UMCommonLogSwift.setUpUMCommonLogManager()
-        UMCommonSwift.setLogEnabled(bFlag: false)
+        UMCommonSwift.setLogEnabled(bFlag: true)
         let app_key = GetUMengAppKey()
         // TODO: 删除这个print
         // print("app_key: \(app_key)")
