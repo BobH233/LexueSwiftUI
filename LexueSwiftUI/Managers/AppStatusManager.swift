@@ -119,9 +119,17 @@ class AppStatusManager {
         }
     }
     
+    func TestPList() {
+        guard let path = Bundle.main.path(forResource: "KeyInfo", ofType: "plist") else {return}
+        let keys = NSDictionary(contentsOfFile: path)
+        
+        print((keys?.value(forKey: "UmengApp") as! [String: Any])["app_key"] as! String)
+    }
+    
     // App从没运行，到运行的时候
     func OnAppStart() {
         print("\(#function)")
+        TestPList()
         Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
             self.OnAppTickToGetLexueContext()
         }

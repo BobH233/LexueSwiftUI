@@ -70,6 +70,7 @@
 		47F4F2A22AC086A90047B395 /* SystemImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2962AC086A90047B395 /* SystemImagePicker.swift */; };
 		47F4F2A32AC086A90047B395 /* ViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2972AC086A90047B395 /* ViewModifiers.swift */; };
 		47F4F2A42AC086A90047B395 /* ImageMoveAndScaleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2982AC086A90047B395 /* ImageMoveAndScaleSheet.swift */; };
+		47FBC8C62AC579DD00FB1523 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		47F4F2962AC086A90047B395 /* SystemImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemImagePicker.swift; sourceTree = "<group>"; };
 		47F4F2972AC086A90047B395 /* ViewModifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModifiers.swift; sourceTree = "<group>"; };
 		47F4F2982AC086A90047B395 /* ImageMoveAndScaleSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageMoveAndScaleSheet.swift; sourceTree = "<group>"; };
+		47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 				475AFEFE2AAF68E100C4020F /* SwiftSoup in Frameworks */,
 				479839E02AAA2B9B0094C5E1 /* ImageViewerRemote in Frameworks */,
 				479129C02AC309BA00F811F9 /* WebView in Frameworks */,
+				47FBC8C62AC579DD00FB1523 /* SystemConfiguration.framework in Frameworks */,
 				479839DE2AAA2B9B0094C5E1 /* ImageViewer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,6 +200,7 @@
 		47196FB92AC54C6E00979DFE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */,
 				47196FBA2AC54C6E00979DFE /* WidgetKit.framework */,
 				47196FBC2AC54C6E00979DFE /* SwiftUI.framework */,
 			);
@@ -759,6 +763,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LexueSwiftUI",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LexueSwiftUI/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "乐学助手";
@@ -775,6 +784,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -794,6 +804,11 @@
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = JH8TK4886U;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LexueSwiftUI",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LexueSwiftUI/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "乐学助手";
@@ -810,6 +825,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
