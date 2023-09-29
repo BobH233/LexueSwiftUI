@@ -6,6 +6,19 @@
 	<array>
 		<string>cn.bobh.LexueSwiftUI.BGRefresh</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>cn.bobh.LexueSwiftUI</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>um.65153a67b2f6fa00ba5c862a</string>
+			</array>
+		</dict>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

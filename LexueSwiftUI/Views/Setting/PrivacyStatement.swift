@@ -19,6 +19,48 @@ struct PrivacyStatement: View {
                         .foregroundColor(.secondary)
                         .textSelection(.enabled)
                 }
+                HStack {
+                    Text("用户名")
+                        .foregroundColor(.primary)
+                    Spacer()
+                    Text(SettingStorage.shared.cacheUserInfo.stuId)
+                        .foregroundColor(.secondary)
+                        .textSelection(.enabled)
+                }
+            }
+            Section("友盟+SDK服务的相关声明") {
+                HStack {
+                    Text("SDK名称")
+                        .foregroundColor(.primary)
+                    Spacer()
+                    Text("友盟统计分析SDK")
+                        .foregroundColor(.secondary)
+                        .textSelection(.enabled)
+                }
+                HStack {
+                    Text("SDK服务商")
+                        .foregroundColor(.primary)
+                    Spacer()
+                    Text("友盟同欣（北京）科技有限公司")
+                        .foregroundColor(.secondary)
+                        .textSelection(.enabled)
+                }
+                HStack {
+                    Text("收集个人信息")
+                        .foregroundColor(.primary)
+                    Spacer()
+                    Text("设备信息（IMEI/MAC/Android ID/IDFA/OAID/OpenUDID/GUID/SIM卡IMSI/ICCID）、位置信息、网络信息")
+                        .foregroundColor(.secondary)
+                        .textSelection(.enabled)
+                }
+                HStack {
+                    Text("隐私政策链接")
+                        .foregroundColor(.primary)
+                    Spacer()
+                    Link("点击访问", destination: URL(string: "https://www.umeng.com/page/policy")!)
+                }
+                Text("友盟SDK用于我们收集、分析app用量信息，以便更好为您提供app服务，上传的内容不涉及敏感信息")
+                    .multilineTextAlignment(.center)
             }
         }
         .navigationTitle("隐私声明")

@@ -37,6 +37,10 @@ struct ContentView: View {
                     Text("设置")
                 }
         }
+        .onOpenURL { incomingURL in
+            print("App was opened via URL: \(incomingURL)")
+            MobClick.handle(incomingURL)
+        }
         .alert(isPresented: $globalVar.showAlert) {
             Alert(title: Text(globalVar.alertTitle), message: Text(globalVar.alertContent), dismissButton: .default(Text("确定")))
         }

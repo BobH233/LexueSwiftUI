@@ -52,6 +52,9 @@ struct DebugDataView: View {
                 Button("event2") {
                     UMAnalyticsSwift.event(eventId: "login", label: "12345")
                 }
+                Button("event3") {
+                    UMAnalyticsSwift.event(eventId: "login", attributes: ["attr": "lalala", "really": "true"])
+                }
             }
             Section("Notification") {
                 Button("GuardPermission") {

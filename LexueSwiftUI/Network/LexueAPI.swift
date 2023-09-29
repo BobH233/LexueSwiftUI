@@ -125,6 +125,24 @@ class LexueAPI {
         var group: String?
     }
     
+    struct EventInfo: Identifiable {
+        var id: String = ""
+        var name: String?
+        var description: String?
+        var descriptionformat: Int?
+        var location: String?
+        var component: String?
+        var modulename: String?
+        // 如果是作业，那么这个就是作业编号
+        var instance: Int?
+        var eventtype: String?
+        // 实际上就是ddl到期时间
+        var timestart: Date?
+        var timeusermidnight: Date?
+        var course: CourseShortInfo?
+        
+    }
+    
     func ParseCourseMembersHtml(_ html: String) -> [CourseMemberInfo] {
         var ret = [CourseMemberInfo]()
         do {
