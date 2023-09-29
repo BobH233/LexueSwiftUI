@@ -63,6 +63,9 @@
 		47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927882AA786ED00ABDC53 /* DebugDataView.swift */; };
 		47B4420B2AC5C0B600EE03A9 /* PrivacyStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */; };
 		47B4420D2AC5C34100EE03A9 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B4420C2AC5C34100EE03A9 /* PrivacyPolicyView.swift */; };
+		47B442102AC6CDC400EE03A9 /* UserAgreement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B4420F2AC6CDC400EE03A9 /* UserAgreement.swift */; };
+		47B442132AC6CE6E00EE03A9 /* PrivacyAgreement.md in Resources */ = {isa = PBXBuildFile; fileRef = 47B442122AC6CE6E00EE03A9 /* PrivacyAgreement.md */; };
+		47B442162AC6D3B700EE03A9 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 47B442152AC6D3B700EE03A9 /* MarkdownUI */; };
 		47B695952AC5703C0070D3EA /* KeyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B695942AC5703C0070D3EA /* KeyInfo.plist */; };
 		47B695972AC570FE0070D3EA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 47B695962AC570FE0070D3EA /* .gitignore */; };
 		47BA831F2AC1289100954129 /* UnloginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BA831E2AC1289100954129 /* UnloginView.swift */; };
@@ -177,6 +180,8 @@
 		47A927882AA786ED00ABDC53 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
 		47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyStatement.swift; sourceTree = "<group>"; };
 		47B4420C2AC5C34100EE03A9 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
+		47B4420F2AC6CDC400EE03A9 /* UserAgreement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgreement.swift; sourceTree = "<group>"; };
+		47B442122AC6CE6E00EE03A9 /* PrivacyAgreement.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PrivacyAgreement.md; sourceTree = "<group>"; };
 		47B695942AC5703C0070D3EA /* KeyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KeyInfo.plist; sourceTree = "<group>"; };
 		47B695962AC570FE0070D3EA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		47BA831E2AC1289100954129 /* UnloginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloginView.swift; sourceTree = "<group>"; };
@@ -227,6 +232,7 @@
 				47970AC02AC5AC7200C5BD03 /* UMDevice.framework in Frameworks */,
 				47970AC52AC5AC7200C5BD03 /* UMCommonLog.framework in Frameworks */,
 				47970AC42AC5AC7200C5BD03 /* UMCommon.framework in Frameworks */,
+				47B442162AC6D3B700EE03A9 /* MarkdownUI in Frameworks */,
 				47970ACB2AC5ACBA00C5BD03 /* libz.tbd in Frameworks */,
 				479839E02AAA2B9B0094C5E1 /* ImageViewerRemote in Frameworks */,
 				479129C02AC309BA00F811F9 /* WebView in Frameworks */,
@@ -314,6 +320,7 @@
 				473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */,
 				4729849F2AA706BB000814EE /* Extensions.swift */,
 				47B695942AC5703C0070D3EA /* KeyInfo.plist */,
+				47B442122AC6CE6E00EE03A9 /* PrivacyAgreement.md */,
 			);
 			path = LexueSwiftUI;
 			sourceTree = "<group>";
@@ -329,6 +336,7 @@
 		473BAE8D2AA48E4300968C3C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				47B4420E2AC6CD9200EE03A9 /* Privacy */,
 				473BAE8E2AA48E5100968C3C /* Message */,
 				473BAE8F2AA48E6000968C3C /* Course */,
 				473BAE902AA48E6700968C3C /* Setting */,
@@ -336,7 +344,6 @@
 				473BAE812AA48DAA00968C3C /* ContentView.swift */,
 				47BA831E2AC1289100954129 /* UnloginView.swift */,
 				479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */,
-				47B4420C2AC5C34100EE03A9 /* PrivacyPolicyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -404,6 +411,15 @@
 				474C9B782AA4E38D0064B5AF /* DDLListView.swift */,
 			);
 			path = DDLList;
+			sourceTree = "<group>";
+		};
+		47B4420E2AC6CD9200EE03A9 /* Privacy */ = {
+			isa = PBXGroup;
+			children = (
+				47B4420C2AC5C34100EE03A9 /* PrivacyPolicyView.swift */,
+				47B4420F2AC6CDC400EE03A9 /* UserAgreement.swift */,
+			);
+			path = Privacy;
 			sourceTree = "<group>";
 		};
 		47BD519A2AC5B3AC0029F9DB /* UMSwift */ = {
@@ -492,6 +508,7 @@
 				475AFEF82AAF61C900C4020F /* Alamofire */,
 				475AFEFD2AAF68E100C4020F /* SwiftSoup */,
 				479129BF2AC309BA00F811F9 /* WebView */,
+				47B442152AC6D3B700EE03A9 /* MarkdownUI */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -530,6 +547,7 @@
 				475AFEF72AAF61C900C4020F /* XCRemoteSwiftPackageReference "Alamofire" */,
 				475AFEFC2AAF68E100C4020F /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				479129BE2AC309BA00F811F9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */,
+				47B442142AC6D3B700EE03A9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -556,6 +574,7 @@
 			files = (
 				47B695972AC570FE0070D3EA /* .gitignore in Resources */,
 				473BAE872AA48DAA00968C3C /* Preview Assets.xcassets in Resources */,
+				47B442132AC6CE6E00EE03A9 /* PrivacyAgreement.md in Resources */,
 				47B695952AC5703C0070D3EA /* KeyInfo.plist in Resources */,
 				473BAE842AA48DAA00968C3C /* Assets.xcassets in Resources */,
 				47970AC32AC5AC7200C5BD03 /* UMCommonLog.bundle in Resources */,
@@ -616,6 +635,7 @@
 				474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */,
 				476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */,
 				47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */,
+				47B442102AC6CDC400EE03A9 /* UserAgreement.swift in Sources */,
 				47B4420D2AC5C34100EE03A9 /* PrivacyPolicyView.swift in Sources */,
 				47F4F29D2AC086A90047B395 /* ImageMoveAndScaleSheet+Extensions.swift in Sources */,
 				475AFF002AB02A0C00C4020F /* LexueAPI.swift in Sources */,
@@ -980,6 +1000,14 @@
 				minimumVersion = 2.3.1;
 			};
 		};
+		47B442142AC6D3B700EE03A9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:gonzalezreal/swift-markdown-ui.git";
+			requirement = {
+				kind = exactVersion;
+				version = 2.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1007,6 +1035,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 479839DC2AAA2B9B0094C5E1 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
 			productName = ImageViewerRemote;
+		};
+		47B442152AC6D3B700EE03A9 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 47B442142AC6D3B700EE03A9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

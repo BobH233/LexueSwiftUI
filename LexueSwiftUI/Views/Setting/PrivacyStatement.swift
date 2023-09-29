@@ -62,6 +62,9 @@ struct PrivacyStatement: View {
                 Text("友盟SDK用于我们收集、分析app用量信息，以便更好为您提供app服务，上传的内容不涉及敏感信息")
                     .multilineTextAlignment(.center)
             }
+            Section("用户协议") {
+                UserAgreement()
+            }
         }
         .navigationTitle("隐私声明")
         .navigationBarTitleDisplayMode(.large)

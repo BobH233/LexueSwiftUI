@@ -59,6 +59,10 @@ struct PrivacyPolicyView: View {
                         .multilineTextAlignment(.center)
                 }
                 
+                Section("用户协议") {
+                    UserAgreement()
+                }
+                
                 Section {
                     Button(action: {
                         SettingStorage.shared.agreePrivacyPolicy = true

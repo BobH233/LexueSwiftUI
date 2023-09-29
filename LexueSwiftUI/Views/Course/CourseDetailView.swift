@@ -139,6 +139,7 @@ struct CourseDetailView: View {
                             NavigationLink(destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs).navigationTitle(section.name!), label: {
                                 Text("\(section.name!)")
                                     .bold()
+                                    .foregroundColor(.blue)
                             })
                         } else {
                             NavigationLink("\(section.name!)", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs).navigationTitle(section.name!))
