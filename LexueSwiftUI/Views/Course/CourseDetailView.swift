@@ -110,7 +110,7 @@ struct CourseSectionView: View {
                     }
                     if let assignment_cnt = sectionInfo.assignment_cnt {
                         HStack (spacing: 2){
-                            Image(systemName: "doc.plaintext.fill")
+                            Image(systemName: "highlighter")
                                 .foregroundColor(.secondary)
                             Text("\(assignment_cnt)")
                                 .foregroundColor(.secondary)
