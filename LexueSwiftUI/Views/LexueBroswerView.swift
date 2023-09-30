@@ -13,6 +13,7 @@ struct LexueBroswerView: View {
     var url: String = "https://lexue.bit.edu.cn/"
     var execJs: String = ""
     @StateObject var webViewStore = WebViewStore()
+    @State private var isActionSheetPresented = false
     var body: some View {
         ZStack {
             WebView(webView: webViewStore.webView)
@@ -21,6 +22,29 @@ struct LexueBroswerView: View {
                     .controlSize(.large)
             }
             
+        }
+        .navigationBarItems(trailing:
+                                Button(action: {
+            self.isActionSheetPresented.toggle()
+        }) {
+            Image(systemName: "ellipsis")
+        }
+        )
+        .actionSheet(isPresented: $isActionSheetPresented) {
+            ActionSheet(title: Text("选项"), buttons: [
+                .default(Text("在浏览器打开")) {
+                    if let url = webViewStore.webView.url {
+                        UIApplication.shared.open(url)
+                    }
+                },
+                .default(Text("复制当前链接")) {
+                    print(webViewStore.webView.url)
+                    if let url = webViewStore.webView.url {
+                        UIPasteboard.general.string = url.absoluteString
+                    }
+                },
+                .cancel()
+            ])
         }
         .onChange(of: webViewStore.webView.isLoading) { newVal in
             if !newVal {
