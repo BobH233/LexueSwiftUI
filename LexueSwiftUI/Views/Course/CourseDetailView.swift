@@ -83,6 +83,18 @@ let fixScrollProblemJs = """
     if(__c != null) __c.style="overflow-x: visible; overflow-y: visible; white-space: nowrap";
 """
 
+// 删除编程排行榜等杂七杂八东西
+let deleteSizePreJs = """
+    let __d = document.getElementById("block-region-side-pre");
+    if(__d != null) __d.parentNode.removeChild(__d);
+"""
+
+// 在进入非0小节时，删除掉前面0小节的东西
+let delete_section0_contentJs = """
+    let __e = document.querySelector('li[data-sectionid="0"]');
+    if(__e != null) __e.parentNode.removeChild(__e);
+"""
+
 struct CourseSectionView: View {
     var sectionInfo: LexueAPI.CourseSectionInfo
     
@@ -191,7 +203,7 @@ struct CourseDetailView: View {
                 }
                 Section("课程内容") {
                     ForEach(sections) { section in
-                        NavigationLink(destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs).navigationTitle(section.name!), label: {
+                        NavigationLink(destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs + deleteSizePreJs + (section.sectionId! == "0" ? "" : delete_section0_contentJs)).navigationTitle(section.name!), label: {
                             CourseSectionView(sectionInfo: section)
                         })
                     }
