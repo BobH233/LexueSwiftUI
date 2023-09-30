@@ -44,49 +44,105 @@ struct CourseSummaryView: View {
         .navigationBarTitleDisplayMode(.large)
     }
 }
+// 删除lexue的相关的杂项
+let deleteLexueMiscJs = """
+    function __remove() {
+        let __a = document.getElementById("header");
+        if(__a != null) __a.parentNode.removeChild(__a);
+        __a = document.querySelectorAll('a[data-action=\"tool_usertours/resetpagetour\"]')[0];
+        if(__a != null) __a.parentNode.removeChild(__a);
+        __a = document.getElementsByClassName("header-main")[0];
+        if(__a != null) __a.parentNode.removeChild(__a);
+        __a = document.getElementById("page-navbar");
+        if(__a != null) __a.parentNode.removeChild(__a);
+        __a = document.getElementById("nav-drawer");
+        if(__a != null) __a.parentNode.removeChild(__a);
+        __a = document.getElementById("nav-drawer");
+        if(__a != null) __a.parentNode.removeChild(__a);
+        __a = document.getElementsByTagName("footer");
+        for(let i=0;i<__a.length;i++) {__a[i].parentNode.removeChild(__a[i]);}
+    }
+    for(let i=0;i<10;i++) __remove();
+    setInterval(__remove, 1000);
+"""
+
+
+// 删除前一个活动、后一个活动的标识
+let deleteArrowJs = """
+    function __remove2() {
+        let __b = document.querySelector("span.mdl-left");
+        if(__b != null) __b.parentNode.removeChild(__b);
+        __b = document.querySelector("span.mdl-right");
+        if(__b != null) __b.parentNode.removeChild(__b);
+    }
+    for(let i=0;i<10;i++) __remove2();
+"""
+
+let fixScrollProblemJs = """
+    let __c = document.getElementById("region-main");
+    if(__c != null) __c.style="overflow-x: visible; overflow-y: visible; white-space: nowrap";
+"""
+
+struct CourseSectionView: View {
+    var sectionInfo: LexueAPI.CourseSectionInfo
+    
+    var body: some View {
+        VStack(spacing: 10) {
+            HStack {
+                if sectionInfo.current {
+                    Text(sectionInfo.name ?? "[无名字小节]")
+                        .bold()
+                        .foregroundColor(.blue)
+                } else {
+                    Text(sectionInfo.name ?? "[无名字小节]")
+                }
+                Spacer()
+            }
+            if sectionInfo.file_cnt != nil || sectionInfo.assignment_cnt != nil || sectionInfo.forum_cnt != nil || (sectionInfo.progress_finish != nil && sectionInfo.progress_total != nil) {
+                HStack() {
+                    if let file_cnt = sectionInfo.file_cnt {
+                        HStack (spacing: 2){
+                            Image(systemName: "doc.fill")
+                                .foregroundColor(.secondary)
+                            Text("\(file_cnt)")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    if let assignment_cnt = sectionInfo.assignment_cnt {
+                        HStack (spacing: 2){
+                            Image(systemName: "doc.plaintext.fill")
+                                .foregroundColor(.secondary)
+                            Text("\(assignment_cnt)")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    if let forum_cnt = sectionInfo.forum_cnt {
+                        HStack (spacing: 2){
+                            Image(systemName: "bubble.right.fill")
+                                .foregroundColor(.secondary)
+                            Text("\(forum_cnt)")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    if let progress_finish = sectionInfo.progress_finish, let progress_total = sectionInfo.progress_total {
+                        HStack (spacing: 2){
+                            Image(systemName: "timer.circle.fill")
+                                .foregroundColor(.secondary)
+                            Text("\(progress_finish)/\(progress_total)")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    Spacer()
+                }
+            }
+        }
+    }
+}
 
 
 struct CourseDetailView: View {
     var courseId: String = "10001"
     
-    // 删除lexue的相关的杂项
-    let deleteLexueMiscJs = """
-        function __remove() {
-            let __a = document.getElementById("header");
-            if(__a != null) __a.parentNode.removeChild(__a);
-            __a = document.querySelectorAll('a[data-action=\"tool_usertours/resetpagetour\"]')[0];
-            if(__a != null) __a.parentNode.removeChild(__a);
-            __a = document.getElementsByClassName("header-main")[0];
-            if(__a != null) __a.parentNode.removeChild(__a);
-            __a = document.getElementById("page-navbar");
-            if(__a != null) __a.parentNode.removeChild(__a);
-            __a = document.getElementById("nav-drawer");
-            if(__a != null) __a.parentNode.removeChild(__a);
-            __a = document.getElementById("nav-drawer");
-            if(__a != null) __a.parentNode.removeChild(__a);
-            __a = document.getElementsByTagName("footer");
-            for(let i=0;i<__a.length;i++) {__a[i].parentNode.removeChild(__a[i]);}
-        }
-        for(let i=0;i<10;i++) __remove();
-        setInterval(__remove, 1000);
-    """
-    
-    
-    // 删除前一个活动、后一个活动的标识
-    let deleteArrowJs = """
-        function __remove2() {
-            let __b = document.querySelector("span.mdl-left");
-            if(__b != null) __b.parentNode.removeChild(__b);
-            __b = document.querySelector("span.mdl-right");
-            if(__b != null) __b.parentNode.removeChild(__b);
-        }
-        for(let i=0;i<10;i++) __remove2();
-    """
-    
-    let fixScrollProblemJs = """
-        let __c = document.getElementById("region-main");
-        if(__c != null) __c.style="overflow-x: visible; overflow-y: visible; white-space: nowrap";
-    """
     
     @State var courseInfo: CourseShortInfo
     @State var loading = true
@@ -135,15 +191,9 @@ struct CourseDetailView: View {
                 }
                 Section("课程内容") {
                     ForEach(sections) { section in
-                        if section.current {
-                            NavigationLink(destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs).navigationTitle(section.name!), label: {
-                                Text("\(section.name!)")
-                                    .bold()
-                                    .foregroundColor(.blue)
-                            })
-                        } else {
-                            NavigationLink("\(section.name!)", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs).navigationTitle(section.name!))
-                        }
+                        NavigationLink(destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs).navigationTitle(section.name!), label: {
+                            CourseSectionView(sectionInfo: section)
+                        })
                     }
                 }
             }

@@ -114,7 +114,15 @@ class LexueAPI {
         var summaryText: String?
         var sectionId: String?
         var current: Bool = false
+        // 暂时没用，没加载
         var activities: [CourseSectionAvtivity] = [CourseSectionAvtivity]()
+        // 文件、作业、帖子数目
+        var file_cnt: Int?
+        var assignment_cnt: Int?
+        var forum_cnt: Int?
+        // 显示的完成进度
+        var progress_finish: Int?
+        var progress_total: Int?
     }
     
     struct CourseMemberInfo: Identifiable {
@@ -322,6 +330,39 @@ class LexueAPI {
                 let summaryNode = try contentElem.select(".summary")
                 if summaryNode.array().count > 0 {
                     curSection.summary = try summaryNode.html()
+                }
+                // 转换数量
+                let spans = try topic.select("span.activity-count")
+                for span in spans {
+                    let span_text = try span.text()
+                    var components = span_text.components(separatedBy: ":")
+                    if components.count != 2 {
+                        components = span_text.components(separatedBy: "：")
+                    }
+                    if components.count != 2 {
+                        continue
+                    }
+                    let character_text = components[0]
+                    let file_character_text = ["文件", "Files", "Файлы"]
+                    let assignment_character_text = ["作业", "Assignment", "Задание"]
+                    let forum_character_text = ["讨论区", "Forum", "Форум"]
+                    let progress_character_text = ["进度", "Progress", "Прогресс"]
+                    if file_character_text.contains(character_text) {
+                        curSection.file_cnt = Int(components[1].trimmingCharacters(in: .whitespacesAndNewlines))
+                    }
+                    if assignment_character_text.contains(character_text) {
+                        curSection.assignment_cnt = Int(components[1].trimmingCharacters(in: .whitespacesAndNewlines))
+                    }
+                    if forum_character_text.contains(character_text) {
+                        curSection.forum_cnt = Int(components[1].trimmingCharacters(in: .whitespacesAndNewlines))
+                    }
+                    if progress_character_text.contains(character_text) {
+                        let components1 = components[1].trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: "/")
+                        if components1.count == 2 {
+                            curSection.progress_finish = Int(components1[0].trimmingCharacters(in: .whitespacesAndNewlines))
+                            curSection.progress_total = Int(components1[1].trimmingCharacters(in: .whitespacesAndNewlines))
+                        }
+                    }
                 }
                 ret.append(curSection)
             }
