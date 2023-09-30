@@ -65,6 +65,17 @@ struct DebugDataView: View {
                 }
             }
             Section("LexueAPI") {
+                Button("GetEvents") {
+                    Task {
+                        let res = await LexueAPI.shared.GetEventsByDay(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, year: "2023", month: "10", day: "1")
+                        switch res {
+                        case .success(let ress):
+                            print(res)
+                        case .failure(let err):
+                            print(err)
+                        }
+                    }
+                }
                 Button("GetCourseMembers") {
                     Task {
                         let res = await LexueAPI.shared.GetCourseMembersInfo(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, courseId: "12698")

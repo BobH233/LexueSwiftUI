@@ -140,7 +140,12 @@ class LexueAPI {
         var timestart: Date?
         var timeusermidnight: Date?
         var course: CourseShortInfo?
-        
+        // 操作指向的url，目前看到的只有添加作业的选项
+        var action_url: String?
+        // 作业的链接
+        var url: String?
+        // 这是作业开启提交的时间
+        var mindaytimestamp: Date?
     }
     
     func ParseCourseMembersHtml(_ html: String) -> [CourseMemberInfo] {
@@ -178,6 +183,63 @@ class LexueAPI {
             print("解析课程参与人发生错误")
         }
         return ret
+    }
+    
+    func GetEventsByDay(_ lexueContext: LexueContext, sesskey: String, year: String, month: String, day: String, retry: Bool = true) async -> Result<[EventInfo], LexueAPIError> {
+        let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_calendar_get_calendar_day_view", args: [
+            "courseid": 1,
+            "day": day,
+            "month": month,
+            "year": year
+        ])
+        if let data = serviceRet["data"] as? [String: Any], let events = data["events"] as? [[String: Any]] {
+            var ret = [EventInfo]()
+            for event in events {
+                var curEvent = EventInfo()
+                curEvent.id = String((event["id"] as? Int) ?? -1)
+                curEvent.name = event["name"] as? String
+                curEvent.description = event["description"] as? String
+                curEvent.descriptionformat = event["descriptionformat"] as? Int
+                curEvent.location = event["location"] as? String
+                curEvent.component = event["component"] as? String
+                curEvent.modulename = event["modulename"] as? String
+                curEvent.instance = event["instance"] as? Int
+                curEvent.eventtype = event["eventtype"] as? String
+                if let timestart = event["timestart"] as? Int {
+                    curEvent.timestart = Date(timeIntervalSince1970: TimeInterval(timestart))
+                }
+                if let timeusermidnight = event["timeusermidnight"] as? Int {
+                    curEvent.timeusermidnight = Date(timeIntervalSince1970: TimeInterval(timeusermidnight))
+                }
+                if let course = event["course"] as? [String: Any] {
+                    curEvent.course = ParseCourseObject(course: course)
+                }
+                if let action = event["action"] as? [String: Any], let action_url = action["url"] as? String {
+                    curEvent.action_url = action_url
+                }
+                curEvent.url = event["url"] as? String
+                if let mindaytimestamp = event["mindaytimestamp"] as? Int {
+                    curEvent.mindaytimestamp = Date(timeIntervalSince1970: TimeInterval(mindaytimestamp))
+                }
+                ret.append(curEvent)
+            }
+            return .success(ret)
+        } else {
+            if retry {
+                let result = await GetSessKey(GlobalVariables.shared.cur_lexue_context)
+                switch result {
+                case .success(let (sesskey, new_context)):
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                    }
+                    return await GetEventsByDay(new_context == nil ? lexueContext : new_context!, sesskey: sesskey, year: year, month: month, day: day, retry: false)
+                case .failure(_):
+                    return .failure(.unknowError)
+                }
+            } else {
+                return .failure(.unknowError)
+            }
+        }
     }
     
     func GetCourseMembersInfo(_ lexueContext: LexueContext, sesskey: String, courseId: String, retry: Bool = true) async -> Result<[CourseMemberInfo], LexueAPIError> {
@@ -646,6 +708,31 @@ class LexueAPI {
             }
     }
     
+    func ParseCourseObject(course: [String: Any]) -> CourseShortInfo {
+        var cur = CourseShortInfo()
+        cur.id = String((course["id"] as? Int) ?? 0)
+        cur.fullname = course["fullname"] as? String
+        cur.shortname = course["shortname"] as? String
+        cur.idnumber = course["idnumber"] as? String
+        cur.summary = course["summary"] as? String
+        cur.summaryformat = course["summaryformat"] as? Int
+        cur.startdate = course["startdate"] as? Int
+        cur.enddate = course["enddate"] as? Int
+        cur.visible = course["visible"] as? Bool
+        cur.showactivitydates = course["showactivitydates"] as? Bool
+        cur.showcompletionconditions = course["showcompletionconditions"] as? Bool
+        cur.fullnamedisplay = course["fullnamedisplay"] as? String
+        cur.viewurl = course["viewurl"] as? String
+        cur.courseimage = course["courseimage"] as? String
+        cur.progress = course["progress"] as? Int
+        cur.hasprogress = course["hasprogress"] as? Bool
+        cur.isfavourite = course["isfavourite"] as? Bool
+        cur.hidden = course["hidden"] as? Bool
+        cur.showshortname = course["showshortname"] as? Bool
+        cur.coursecategory = course["coursecategory"] as? String
+        return cur
+    }
+    
     func GetAllCourseList(_ lexueContext: LexueContext, sesskey: String, retry: Bool = true) async -> Result<[CourseShortInfo],LexueAPIError> {
         var ret = [CourseShortInfo]()
         if !retry {
@@ -665,30 +752,10 @@ class LexueAPI {
             for course in courses {
                 if let course = course as? [String: Any] {
                     var cur = CourseShortInfo()
-                    if let id = course["id"] as? Int {
-                        cur.id = String(id)
-                    } else {
-                        continue
+                    if course["id"] as? Int == nil {
+                        continue;
                     }
-                    cur.fullname = course["fullname"] as? String
-                    cur.shortname = course["shortname"] as? String
-                    cur.idnumber = course["idnumber"] as? String
-                    cur.summary = course["summary"] as? String
-                    cur.summaryformat = course["summaryformat"] as? Int
-                    cur.startdate = course["startdate"] as? Int
-                    cur.enddate = course["enddate"] as? Int
-                    cur.visible = course["visible"] as? Bool
-                    cur.showactivitydates = course["showactivitydates"] as? Bool
-                    cur.showcompletionconditions = course["showcompletionconditions"] as? Bool
-                    cur.fullnamedisplay = course["fullnamedisplay"] as? String
-                    cur.viewurl = course["viewurl"] as? String
-                    cur.courseimage = course["courseimage"] as? String
-                    cur.progress = course["progress"] as? Int
-                    cur.hasprogress = course["hasprogress"] as? Bool
-                    cur.isfavourite = course["isfavourite"] as? Bool
-                    cur.hidden = course["hidden"] as? Bool
-                    cur.showshortname = course["showshortname"] as? Bool
-                    cur.coursecategory = course["coursecategory"] as? String
+                    cur = ParseCourseObject(course: course)
                     ret.append(cur)
                 }
             }
