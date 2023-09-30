@@ -75,6 +75,7 @@ struct SettingView: View {
                     })
                     Button(action: {
                         print("exit login")
+                        UMAnalyticsSwift.event(eventId: "unlogin", attributes: ["username": globalVar.cur_user_info.userId])
                         settings.loginnedContext = BITLogin.LoginSuccessContext()
                         globalVar.cur_lexue_context = LexueAPI.LexueContext()
                         withAnimation {
