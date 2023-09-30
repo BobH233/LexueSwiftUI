@@ -8,17 +8,12 @@
 import SwiftUI
 
 struct DDLListView: View {
+    @Binding var tabSelection: Int
     var body: some View {
         NavigationView {
             Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
                 .navigationTitle("DDL")
         }
         
-    }
-}
-
-struct DDLListView_Previews: PreviewProvider {
-    static var previews: some View {
-        DDLListView()
     }
 }

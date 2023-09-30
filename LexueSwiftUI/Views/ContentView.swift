@@ -24,7 +24,7 @@ struct ContentView: View {
                     Image(systemName: "graduationcap.fill")
                     Text("课程")
                 }
-            CourseListView(tabSelection: $tabSelection)
+            DDLListView(tabSelection: $tabSelection)
                 .tag(3)
                 .tabItem {
                     Image(systemName: "calendar")
