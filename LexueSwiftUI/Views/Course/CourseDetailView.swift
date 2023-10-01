@@ -201,11 +201,52 @@ struct CourseDetailView: View {
                     NavigationLink("成绩", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/grade/report/user/index.php?id=\(courseId)", execJs: deleteLexueMiscJs).navigationTitle("查看成绩"))
                     NavigationLink("最近ddl", destination: EmptyView())
                 }
-                Section("课程内容") {
+                Section() {
                     ForEach(sections) { section in
                         NavigationLink(destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs + deleteSizePreJs + (section.sectionId! == "0" ? "" : delete_section0_contentJs)).navigationTitle(section.name!), label: {
                             CourseSectionView(sectionInfo: section)
                         })
+                    }
+                } header: {
+                    Text("课程内容")
+                } footer: {
+                    HStack (spacing: 5){
+                        HStack (spacing: 2){
+                            Image(systemName: "highlighter")
+                                .foregroundColor(.secondary)
+                            Text("作业")
+                                .foregroundColor(.secondary)
+                        }
+                        HStack (spacing: 2){
+                            Image(systemName: "doc.fill")
+                                .foregroundColor(.secondary)
+                            Text("文件")
+                                .foregroundColor(.secondary)
+                        }
+                        HStack (spacing: 2){
+                            Image(systemName: "bubble.right.fill")
+                                .foregroundColor(.secondary)
+                            Text("讨论")
+                                .foregroundColor(.secondary)
+                        }
+                        HStack (spacing: 2){
+                            Image(systemName: "keyboard.fill")
+                                .foregroundColor(.secondary)
+                            Text("编程练习")
+                                .foregroundColor(.secondary)
+                        }
+                        HStack (spacing: 2){
+                            Image(systemName: "function")
+                                .foregroundColor(.secondary)
+                            Text("测验")
+                                .foregroundColor(.secondary)
+                        }
+                        HStack (spacing: 2){
+                            Image(systemName: "timer.circle.fill")
+                                .foregroundColor(.secondary)
+                            Text("完成进度")
+                                .foregroundColor(.secondary)
+                        }
                     }
                 }
             }
