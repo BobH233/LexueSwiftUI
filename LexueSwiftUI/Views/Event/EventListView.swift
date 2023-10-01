@@ -10,6 +10,23 @@ import SwiftSoup
 
 private struct TopCardView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
+    @State var greetingWord = "早上好，"
+    func getGreetingWord() -> String {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: Date())
+        switch hour {
+        case 6..<11:
+            return "早上好"
+        case 11..<14:
+            return "中午好"
+        case 14..<18:
+            return "下午好"
+        case 18..<23:
+            return "晚上好"
+        default:
+            return "早点睡"
+        }
+    }
     var body: some View {
         ZStack {
             Rectangle()
@@ -20,7 +37,7 @@ private struct TopCardView: View {
             VStack {
                 VStack(spacing: 5) {
                     HStack {
-                        Text("早上好，")
+                        Text(greetingWord)
                             .font(.system(size: 35))
                             .bold()
                             .foregroundColor(.white)
@@ -77,16 +94,18 @@ private struct TopCardView: View {
                 }
                 .padding(.leading, 20)
                 .padding(.bottom, 20)
-                
             }
+        }
+        .onAppear {
+            greetingWord = getGreetingWord()
         }
     }
 }
 
 private struct FunctionalButtonView: View {
     var backgroundCol: Color = .blue
-    var iconSystemName: String = "plus.circle.fill"
-    var title: String = "标题"
+    @State var iconSystemName: String = "plus.circle.fill"
+    @State var title: String = "标题"
     var body: some View {
         ZStack {
             Rectangle()
@@ -98,7 +117,8 @@ private struct FunctionalButtonView: View {
                 HStack {
                     Image(systemName: iconSystemName)
                         .resizable()
-                        .frame(width: 30, height: 30)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: 30)
                         .foregroundColor(.white)
                     Spacer()
                 }
@@ -224,6 +244,8 @@ private struct EventListItemView: View {
 struct EventListView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
     @ObservedObject var eventManager = EventManager.shared
+    
+    @State var showTodayOnly: Bool = false
     //  @Binding var tabSelection: Int
     var body: some View {
         NavigationView {
@@ -233,6 +255,27 @@ struct EventListView: View {
                 HStack(spacing: 10) {
                     FunctionalButtonView(backgroundCol: .blue, iconSystemName: "plus.circle.fill", title: "手动添加日程")
                     FunctionalButtonView(backgroundCol: .gray, iconSystemName: "gear", title: "设置规则")
+                }
+                .padding(.horizontal, 15)
+                HStack {
+                    if showTodayOnly {
+                        FunctionalButtonView(backgroundCol: .blue, iconSystemName: "eye.slash.fill", title: "当前：仅显示今天事件")
+                            .onTapGesture {
+                                print("toggle")
+                                withAnimation {
+                                    showTodayOnly.toggle()
+                                }
+                            }
+                    } else {
+                        FunctionalButtonView(backgroundCol: .blue, iconSystemName: "eye.slash", title: "当前：显示一周内事件")
+                            .onTapGesture {
+                                print("toggle")
+                                withAnimation {
+                                    showTodayOnly.toggle()
+                                }
+                            }
+                    }
+                    
                 }
                 .padding(.horizontal, 15)
                 VStack {
