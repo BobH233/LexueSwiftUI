@@ -13,6 +13,7 @@ private struct TopCardView: View {
     @State var greetingWord = "早上好，"
     @State var todayEventCount = 0
     @State var weekEventCount = 0
+    @State var dateString = ""
     func getGreetingWord() -> String {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: Date())
@@ -102,6 +103,10 @@ private struct TopCardView: View {
             greetingWord = getGreetingWord()
             todayEventCount = EventManager.shared.GetTodayEventCount(today: Date())
             weekEventCount = EventManager.shared.GetWeekEventCount(todayInWeek: Date())
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "M月d日 EEEE"
+            dateString = dateFormatter.string(from: .now)
+            
         }
     }
 }
