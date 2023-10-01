@@ -158,6 +158,10 @@ struct CourseListView: View {
                             isRefreshing = false
                         }
                 }
+                .onFirstAppear {
+                    // 显示的时候就必须要展示出来
+                    CourseManager.shared.LoadStoredCacheCourses()
+                }
                 .searchable(text: $searchText, prompt: "搜索课程")
                 .navigationTitle("课程")
                 .navigationBarTitleDisplayMode(.large)
