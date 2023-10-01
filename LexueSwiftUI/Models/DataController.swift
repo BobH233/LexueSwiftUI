@@ -274,6 +274,10 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
+    func addEventStored(context: NSManagedObjectContext) {
+        let eventStored = EventStored(context: context)
+    }
+    
 }
 
 

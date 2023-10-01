@@ -35,6 +35,23 @@
         <attribute name="viewurl" optional="YES" attributeType="String"/>
         <attribute name="visible" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
+    <entity name="EventStored" representedClassName="EventStored" syncable="YES" codeGenerationType="class">
+        <attribute name="action_url" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="course_id" optional="YES" attributeType="String"/>
+        <attribute name="course_name" optional="YES" attributeType="String"/>
+        <attribute name="event_description" optional="YES" attributeType="String"/>
+        <attribute name="event_type" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="instance" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isCustomEvent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lexue_event_id" optional="YES" attributeType="String"/>
+        <attribute name="mindaytimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="timestart" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timeusermidnight" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="MessageStored" representedClassName="MessageStored" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
