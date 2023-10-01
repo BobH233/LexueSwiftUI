@@ -52,7 +52,7 @@ class EventManager: ObservableObject {
     
     // 对比新的事件列表，如果缓存没有则加入，如果缓存有则更新
     func DiffAndUpdateCacheEvent(_ newEvents: [LexueAPI.EventInfo]) {
-        print("DiffAndUpdateCacheEvent")
+        // print("DiffAndUpdateCacheEvent")
         for newEvent in newEvents {
             let tryFind = DataController.shared.findEventStoredByLexueId(lexue_event_id: newEvent.id, context: DataController.shared.container.viewContext)
             if let found = tryFind {
@@ -75,5 +75,6 @@ class EventManager: ObservableObject {
                 DataController.shared.addEventStored(isCustomEvent: false, event_name: newEvent.name, event_description: newEvent.description, lexue_id: newEvent.id, timestart: newEvent.timestart, timeusermidnight: newEvent.timeusermidnight, mindaytimestamp: newEvent.mindaytimestamp, course_id: newEvent.course?.id, course_name: newEvent.course?.fullname, color: .green, action_url: newEvent.action_url, event_type: newEvent.eventtype, instance: Int64(newEvent.instance ?? 0), url: newEvent.url, context: DataController.shared.container.viewContext)
             }
         }
+        LoadEventList()
     }
 }

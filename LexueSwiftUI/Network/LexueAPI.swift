@@ -196,6 +196,7 @@ class LexueAPI {
     }
     
     func GetEventsByDay(_ lexueContext: LexueContext, sesskey: String, year: String, month: String, day: String, retry: Bool = true) async -> Result<[EventInfo], LexueAPIError> {
+        print("fetching \(year).\(month).\(day) events")
         let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_calendar_get_calendar_day_view", args: [
             "courseid": 1,
             "day": day,

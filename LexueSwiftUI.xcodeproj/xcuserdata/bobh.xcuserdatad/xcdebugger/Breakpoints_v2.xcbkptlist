@@ -569,8 +569,8 @@
             filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "OnAppStart()"
             landmarkType = "7">
             <Locations>
@@ -617,8 +617,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "735"
-            endingLineNumber = "735"
+            startingLineNumber = "736"
+            endingLineNumber = "736"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -633,8 +633,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "749"
-            endingLineNumber = "749"
+            startingLineNumber = "750"
+            endingLineNumber = "750"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
             <Locations>
@@ -681,8 +681,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "771"
-            endingLineNumber = "771"
+            startingLineNumber = "772"
+            endingLineNumber = "772"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -697,8 +697,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "742"
-            endingLineNumber = "742"
+            startingLineNumber = "743"
+            endingLineNumber = "743"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -713,8 +713,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "750"
-            endingLineNumber = "750"
+            startingLineNumber = "751"
+            endingLineNumber = "751"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -729,8 +729,8 @@
             filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "RefreshSelfUserInfo()"
             landmarkType = "7">
             <Locations>
@@ -808,8 +808,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "754"
-            endingLineNumber = "754"
+            startingLineNumber = "755"
+            endingLineNumber = "755"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -824,8 +824,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "869"
-            endingLineNumber = "869"
+            startingLineNumber = "870"
+            endingLineNumber = "870"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -840,8 +840,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "873"
-            endingLineNumber = "873"
+            startingLineNumber = "874"
+            endingLineNumber = "874"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -856,8 +856,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "874"
-            endingLineNumber = "874"
+            startingLineNumber = "875"
+            endingLineNumber = "875"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -920,8 +920,8 @@
             filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "action_after_get_lexue_context(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -968,8 +968,8 @@
             filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "LoadSelfProfileOrUpdate(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -984,8 +984,8 @@
             filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "UpdateSelfProfile(_:)"
             landmarkType = "7">
             <Locations>
@@ -1032,8 +1032,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "838"
-            endingLineNumber = "838"
+            startingLineNumber = "839"
+            endingLineNumber = "839"
             landmarkName = "GetAllCourseList(_:sesskey:retry:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1048,8 +1048,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "845"
-            endingLineNumber = "845"
+            startingLineNumber = "846"
+            endingLineNumber = "846"
             landmarkName = "GetAllCourseList(_:sesskey:retry:)"
             landmarkType = "7">
             <Locations>
@@ -1222,8 +1222,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
             landmarkName = "GetCourseSections(_:courseId:retry:)"
             landmarkType = "7">
             <Locations>
@@ -1411,8 +1411,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "378"
-            endingLineNumber = "378"
+            startingLineNumber = "379"
+            endingLineNumber = "379"
             landmarkName = "ParseViewCourseHtml2Sections(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1459,8 +1459,8 @@
             filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "scheduleAppBackgroundRefresh()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1475,8 +1475,8 @@
             filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "scheduleAppBackgroundRefresh()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1743,8 +1743,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "370"
-            endingLineNumber = "370"
+            startingLineNumber = "371"
+            endingLineNumber = "371"
             landmarkName = "ParseViewCourseHtml2Sections(_:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -33,6 +33,10 @@ class AppStatusManager {
                     Task {
                         await CoreLogicManager.shared.UpdateCourseList()
                     }
+                    // 获取事件列表
+                    Task {
+                        await CoreLogicManager.shared.UpdateEventList()
+                    }
                 }
             case .failure(_):
                 DispatchQueue.main.async {
@@ -234,6 +238,10 @@ class AppStatusManager {
             BGTaskScheduler.shared.cancelAllTaskRequests()
             let deltaTime = Int(Date().timeIntervalSince1970) - lastBackgroundTime
             print("deltaTime: \(deltaTime)")
+            // 从后台切回来才刷新事件
+            Task {
+                await CoreLogicManager.shared.UpdateEventList()
+            }
             if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 60 {
                 // 超过1分钟，需要刷新lexue的sesskey
                 // 切回重新刷新sesskey的阈值时间设定为60s，因为如果没被踢刷新速度会很快，所以不必担心体验问题
