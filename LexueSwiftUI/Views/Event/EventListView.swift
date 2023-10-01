@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DDLListView: View {
+struct EventListView: View {
     @Binding var tabSelection: Int
     var body: some View {
         NavigationView {

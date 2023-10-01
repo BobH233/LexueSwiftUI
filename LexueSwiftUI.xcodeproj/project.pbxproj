@@ -30,7 +30,7 @@
 		473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */; };
 		474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474515122AAB641700CCF24E /* ContactDetailView.swift */; };
 		47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */; };
-		474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* DDLListView.swift */; };
+		474C9B792AA4E38D0064B5AF /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* EventListView.swift */; };
 		4750EB832AC43C640071118F /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EB822AC43C640071118F /* LocalNotificationManager.swift */; };
 		475AFEF62AAF560A00C4020F /* BITLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475AFEF52AAF560A00C4020F /* BITLogin.swift */; };
 		475AFEF92AAF61C900C4020F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 475AFEF82AAF61C900C4020F /* Alamofire */; };
@@ -152,7 +152,7 @@
 		473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		474515122AAB641700CCF24E /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
 		47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMembersListView.swift; sourceTree = "<group>"; };
-		474C9B782AA4E38D0064B5AF /* DDLListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DDLListView.swift; sourceTree = "<group>"; };
+		474C9B782AA4E38D0064B5AF /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		4750EB822AC43C640071118F /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		475AFEF52AAF560A00C4020F /* BITLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITLogin.swift; sourceTree = "<group>"; };
 		475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueAPI.swift; sourceTree = "<group>"; };
@@ -340,7 +340,7 @@
 				473BAE8E2AA48E5100968C3C /* Message */,
 				473BAE8F2AA48E6000968C3C /* Course */,
 				473BAE902AA48E6700968C3C /* Setting */,
-				474C9B772AA4E3680064B5AF /* DDLList */,
+				474C9B772AA4E3680064B5AF /* Event */,
 				473BAE812AA48DAA00968C3C /* ContentView.swift */,
 				47BA831E2AC1289100954129 /* UnloginView.swift */,
 				479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */,
@@ -405,12 +405,12 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
-		474C9B772AA4E3680064B5AF /* DDLList */ = {
+		474C9B772AA4E3680064B5AF /* Event */ = {
 			isa = PBXGroup;
 			children = (
-				474C9B782AA4E38D0064B5AF /* DDLListView.swift */,
+				474C9B782AA4E38D0064B5AF /* EventListView.swift */,
 			);
-			path = DDLList;
+			path = Event;
 			sourceTree = "<group>";
 		};
 		47B4420E2AC6CD9200EE03A9 /* Privacy */ = {
@@ -632,7 +632,7 @@
 				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,
 				47F4F29B2AC086A90047B395 /* ImageManipulation.swift in Sources */,
 				47BD51A32AC5B43F0029F9DB /* UMAnalyticsSwift.swift in Sources */,
-				474C9B792AA4E38D0064B5AF /* DDLListView.swift in Sources */,
+				474C9B792AA4E38D0064B5AF /* EventListView.swift in Sources */,
 				476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */,
 				47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */,
 				47B442102AC6CDC400EE03A9 /* UserAgreement.swift in Sources */,
@@ -883,6 +883,10 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/LexueSwiftUI/UMSwift/Bridge.h";
 				SWIFT_VERSION = 5.0;
@@ -928,6 +932,10 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/LexueSwiftUI/UMSwift/Bridge.h";
 				SWIFT_VERSION = 5.0;
