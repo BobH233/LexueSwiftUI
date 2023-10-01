@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class DataController: ObservableObject {
     static let shared = DataController()
@@ -274,8 +275,66 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
-    func addEventStored(context: NSManagedObjectContext) {
+    func addEventStored(isCustomEvent: Bool, event_name: String?, event_description: String?, lexue_id: String?, timestart: Date?, timeusermidnight: Date?, mindaytimestamp: Date?, course_id: String?, course_name: String?, color: Color?, action_url: String?, event_type: String?, instance: Int64?, url: String?, context: NSManagedObjectContext) {
         let eventStored = EventStored(context: context)
+        eventStored.id = UUID()
+        eventStored.action_url = action_url
+        eventStored.color = (color != nil) ? color!.toHex() : Color.green.toHex()
+        eventStored.course_id = course_id
+        eventStored.course_name = course_name
+        eventStored.event_description = event_description
+        eventStored.event_type = event_type
+        eventStored.instance = instance ?? 0
+        eventStored.isCustomEvent = isCustomEvent
+        eventStored.lexue_event_id = lexue_id
+        eventStored.mindaytimestamp = mindaytimestamp
+        eventStored.name = event_name
+        eventStored.timestart = timestart
+        eventStored.timeusermidnight = timeusermidnight
+        eventStored.url = url
+        eventStored.finish = false
+        save(context: context)
+    }
+    
+    func findEventById(id: UUID, context: NSManagedObjectContext) -> EventStored? {
+        let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                return results.first
+            }
+        } catch {
+            print("查询消息列表失败：\(error)")
+        }
+        return nil
+    }
+    
+    func findEventStoredByLexueId(lexue_event_id: String, context: NSManagedObjectContext) -> EventStored? {
+        let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
+        request.predicate = NSPredicate(format: "lexue_event_id == %@", lexue_event_id)
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                return results.first
+            }
+        } catch {
+            print("查询消息列表失败：\(error)")
+        }
+        return nil
+    }
+    
+    func queryAllEventStored(context: NSManagedObjectContext) -> [EventStored] {
+        let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
+        var ret: [EventStored] = [EventStored]()
+        do {
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            print("查询事件列表失败：\(error)")
+        }
+        
+        return ret
     }
     
 }
