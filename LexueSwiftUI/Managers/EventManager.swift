@@ -16,6 +16,31 @@ class EventManager: ObservableObject {
     
     // 显示的今天之前的ddl，或者已经完成的ddl
     @Published var expiredEventDisplayList: [EventStored] = []
+    
+    // 获取今天的事件总数
+    func GetTodayEventCount(today: Date) -> Int {
+        var ret = 0
+        let today = Date()
+        for event in EventDisplayList {
+            if EventManager.IsTodayEvent(event: event, today: today) {
+                ret = ret + 1
+            }
+        }
+        return ret
+    }
+    // 获取这一周的事件总数
+    func GetWeekEventCount(todayInWeek: Date) -> Int {
+        var ret = 0
+        let calendar = Calendar.current
+        for i in 0...7 {
+            let target_date = Calendar.current.date(byAdding: .day, value: i, to: .now)!
+            if target_date.isInSameWeek(as: .now) {
+                ret = ret + GetTodayEventCount(today: target_date)
+            }
+        }
+        return ret
+    }
+    
     // 从数据库加载缓存的事件列表
     func LoadEventList(context: NSManagedObjectContext = DataController.shared.container.viewContext) {
         var result = DataController.shared.queryAllEventStored(context: context)

@@ -1759,8 +1759,8 @@
             filePath = "LexueSwiftUI/Managers/EventManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "LoadEventList(context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1775,8 +1775,8 @@
             filePath = "LexueSwiftUI/Managers/EventManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "LoadEventList(context:)"
             landmarkType = "7">
          </BreakpointContent>

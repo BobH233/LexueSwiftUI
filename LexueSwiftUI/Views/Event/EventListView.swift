@@ -11,6 +11,8 @@ import SwiftSoup
 private struct TopCardView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
     @State var greetingWord = "早上好，"
+    @State var todayEventCount = 0
+    @State var weekEventCount = 0
     func getGreetingWord() -> String {
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: Date())
@@ -60,11 +62,11 @@ private struct TopCardView: View {
                 Spacer()
                 VStack {
                     HStack(alignment: .bottom) {
-                        Text("今日有")
+                        Text("今日还有")
                             .font(.system(size: 30))
                             .bold()
                             .foregroundColor(.white)
-                        Text("5")
+                        Text("\(todayEventCount)")
                             .font(.system(size: 35))
                             .bold()
                             .foregroundColor(.yellow)
@@ -76,11 +78,11 @@ private struct TopCardView: View {
                         Spacer()
                     }
                     HStack(alignment: .bottom) {
-                        Text("本周有")
+                        Text("本周还有")
                             .font(.system(size: 30))
                             .bold()
                             .foregroundColor(.white)
-                        Text("5")
+                        Text("\(weekEventCount)")
                             .font(.system(size: 35))
                             .bold()
                             .foregroundColor(.yellow)
@@ -98,6 +100,8 @@ private struct TopCardView: View {
         }
         .onAppear {
             greetingWord = getGreetingWord()
+            todayEventCount = EventManager.shared.GetTodayEventCount(today: Date())
+            weekEventCount = EventManager.shared.GetWeekEventCount(todayInWeek: Date())
         }
     }
 }
@@ -299,7 +303,7 @@ struct EventListView: View {
                 
                 if !showTodayOnly {
                     // 已经到期或者完成的ddl
-                    VStack {
+                    LazyVStack {
                         HStack {
                             Text("已过期/已完成:")
                                 .font(.system(size: 30))
