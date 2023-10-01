@@ -110,7 +110,7 @@ struct CourseSectionView: View {
                 }
                 Spacer()
             }
-            if sectionInfo.file_cnt != nil || sectionInfo.assignment_cnt != nil || sectionInfo.forum_cnt != nil || (sectionInfo.progress_finish != nil && sectionInfo.progress_total != nil) {
+            if sectionInfo.file_cnt != nil || sectionInfo.assignment_cnt != nil || sectionInfo.forum_cnt != nil || (sectionInfo.progress_finish != nil && sectionInfo.progress_total != nil) || sectionInfo.test_cnt != nil || sectionInfo.coding_cnt != nil {
                 HStack() {
                     if let file_cnt = sectionInfo.file_cnt {
                         HStack (spacing: 2){
@@ -125,6 +125,22 @@ struct CourseSectionView: View {
                             Image(systemName: "highlighter")
                                 .foregroundColor(.secondary)
                             Text("\(assignment_cnt)")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    if let coding_cnt = sectionInfo.coding_cnt {
+                        HStack (spacing: 2){
+                            Image(systemName: "keyboard.fill")
+                                .foregroundColor(.secondary)
+                            Text("\(coding_cnt)")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    if let test_cnt = sectionInfo.test_cnt {
+                        HStack (spacing: 2){
+                            Image(systemName: "function")
+                                .foregroundColor(.secondary)
+                            Text("\(test_cnt)")
                                 .foregroundColor(.secondary)
                         }
                     }
@@ -210,42 +226,46 @@ struct CourseDetailView: View {
                 } header: {
                     Text("课程内容")
                 } footer: {
-                    HStack (spacing: 5){
-                        HStack (spacing: 2){
-                            Image(systemName: "highlighter")
-                                .foregroundColor(.secondary)
-                            Text("作业")
-                                .foregroundColor(.secondary)
+                    VStack(alignment: .leading){
+                        HStack (spacing: 5){
+                            HStack (spacing: 2){
+                                Image(systemName: "highlighter")
+                                    .foregroundColor(.secondary)
+                                Text("作业")
+                                    .foregroundColor(.secondary)
+                            }
+                            HStack (spacing: 2){
+                                Image(systemName: "doc.fill")
+                                    .foregroundColor(.secondary)
+                                Text("文件")
+                                    .foregroundColor(.secondary)
+                            }
+                            HStack (spacing: 2){
+                                Image(systemName: "bubble.right.fill")
+                                    .foregroundColor(.secondary)
+                                Text("讨论")
+                                    .foregroundColor(.secondary)
+                            }
                         }
-                        HStack (spacing: 2){
-                            Image(systemName: "doc.fill")
-                                .foregroundColor(.secondary)
-                            Text("文件")
-                                .foregroundColor(.secondary)
-                        }
-                        HStack (spacing: 2){
-                            Image(systemName: "bubble.right.fill")
-                                .foregroundColor(.secondary)
-                            Text("讨论")
-                                .foregroundColor(.secondary)
-                        }
-                        HStack (spacing: 2){
-                            Image(systemName: "keyboard.fill")
-                                .foregroundColor(.secondary)
-                            Text("编程练习")
-                                .foregroundColor(.secondary)
-                        }
-                        HStack (spacing: 2){
-                            Image(systemName: "function")
-                                .foregroundColor(.secondary)
-                            Text("测验")
-                                .foregroundColor(.secondary)
-                        }
-                        HStack (spacing: 2){
-                            Image(systemName: "timer.circle.fill")
-                                .foregroundColor(.secondary)
-                            Text("完成进度")
-                                .foregroundColor(.secondary)
+                        HStack (spacing: 5) {
+                            HStack (spacing: 2){
+                                Image(systemName: "keyboard.fill")
+                                    .foregroundColor(.secondary)
+                                Text("编程练习")
+                                    .foregroundColor(.secondary)
+                            }
+                            HStack (spacing: 2){
+                                Image(systemName: "function")
+                                    .foregroundColor(.secondary)
+                                Text("测验")
+                                    .foregroundColor(.secondary)
+                            }
+                            HStack (spacing: 2){
+                                Image(systemName: "timer.circle.fill")
+                                    .foregroundColor(.secondary)
+                                Text("完成进度")
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
                 }

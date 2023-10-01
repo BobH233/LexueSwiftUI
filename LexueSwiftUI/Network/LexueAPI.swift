@@ -116,10 +116,12 @@ class LexueAPI {
         var current: Bool = false
         // 暂时没用，没加载
         var activities: [CourseSectionAvtivity] = [CourseSectionAvtivity]()
-        // 文件、作业、帖子数目
+        // 文件、作业、帖子、编程练习、测验数目
         var file_cnt: Int?
         var assignment_cnt: Int?
         var forum_cnt: Int?
+        var coding_cnt: Int?
+        var test_cnt: Int?
         // 显示的完成进度
         var progress_finish: Int?
         var progress_total: Int?
@@ -347,6 +349,9 @@ class LexueAPI {
                     let assignment_character_text = ["作业", "Assignment", "Задание"]
                     let forum_character_text = ["讨论区", "Forum", "Форум"]
                     let progress_character_text = ["进度", "Progress", "Прогресс"]
+                    let coding_character_text = ["编程练习", "Programming Practice", "Programming Practice"]
+                    let test_character_text = ["测验", "Quizzes", "Тесты"]
+                    
                     if file_character_text.contains(character_text) {
                         curSection.file_cnt = Int(components[1].trimmingCharacters(in: .whitespacesAndNewlines))
                     }
@@ -355,6 +360,12 @@ class LexueAPI {
                     }
                     if forum_character_text.contains(character_text) {
                         curSection.forum_cnt = Int(components[1].trimmingCharacters(in: .whitespacesAndNewlines))
+                    }
+                    if coding_character_text.contains(character_text) {
+                        curSection.coding_cnt = Int(components[1].trimmingCharacters(in: .whitespacesAndNewlines))
+                    }
+                    if test_character_text.contains(character_text) {
+                        curSection.test_cnt = Int(components[1].trimmingCharacters(in: .whitespacesAndNewlines))
                     }
                     if progress_character_text.contains(character_text) {
                         let components1 = components[1].trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: "/")

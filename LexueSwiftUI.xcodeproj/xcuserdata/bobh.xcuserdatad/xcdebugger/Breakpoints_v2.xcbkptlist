@@ -617,8 +617,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "724"
-            endingLineNumber = "724"
+            startingLineNumber = "735"
+            endingLineNumber = "735"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -633,8 +633,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "738"
-            endingLineNumber = "738"
+            startingLineNumber = "749"
+            endingLineNumber = "749"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
             <Locations>
@@ -681,8 +681,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "760"
-            endingLineNumber = "760"
+            startingLineNumber = "771"
+            endingLineNumber = "771"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -697,8 +697,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "731"
-            endingLineNumber = "731"
+            startingLineNumber = "742"
+            endingLineNumber = "742"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -713,8 +713,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "739"
-            endingLineNumber = "739"
+            startingLineNumber = "750"
+            endingLineNumber = "750"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -808,8 +808,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "743"
-            endingLineNumber = "743"
+            startingLineNumber = "754"
+            endingLineNumber = "754"
             landmarkName = "GetLexueContext(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -824,8 +824,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "858"
-            endingLineNumber = "858"
+            startingLineNumber = "869"
+            endingLineNumber = "869"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -840,8 +840,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "862"
-            endingLineNumber = "862"
+            startingLineNumber = "873"
+            endingLineNumber = "873"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -856,8 +856,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "863"
-            endingLineNumber = "863"
+            startingLineNumber = "874"
+            endingLineNumber = "874"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1032,8 +1032,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "827"
-            endingLineNumber = "827"
+            startingLineNumber = "838"
+            endingLineNumber = "838"
             landmarkName = "GetAllCourseList(_:sesskey:retry:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1048,8 +1048,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "834"
-            endingLineNumber = "834"
+            startingLineNumber = "845"
+            endingLineNumber = "845"
             landmarkName = "GetAllCourseList(_:sesskey:retry:)"
             landmarkType = "7">
             <Locations>
@@ -1222,8 +1222,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
             landmarkName = "GetCourseSections(_:courseId:retry:)"
             landmarkType = "7">
             <Locations>
@@ -1285,8 +1285,8 @@
             filePath = "LexueSwiftUI/Views/Course/CourseDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1333,8 +1333,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "ParseCourseMembersHtml(_:)"
             landmarkType = "7">
             <Locations>
@@ -1411,8 +1411,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
             landmarkName = "ParseViewCourseHtml2Sections(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1427,8 +1427,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "ParseCourseMembersHtml(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1443,8 +1443,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "ParseCourseMembersHtml(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1665,8 +1665,8 @@
             filePath = "LexueSwiftUI/Views/Course/CourseDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1700,6 +1700,36 @@
                   endingLineNumber = "192"
                   offsetFromSymbolStart = "456">
                </Location>
+               <Location
+                  uuid = "BC456481-ACA7-4475-8254-326C2B8F09D7 - 7485c220b76c6c4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;LexueSwiftUI.LexueAPI.CourseSectionInfo&gt;, Foundation.UUID, SwiftUI.NavigationLink&lt;LexueSwiftUI.CourseSectionView, &lt;&lt;opaque return type of SwiftUI.View.navigationTitle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.StringProtocol&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.EmptyView, &lt;&lt;opaque return type of SwiftUI.View.listRowInsets(Swift.Optional&lt;SwiftUI.EdgeInsets&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;, SwiftUI._ConditionalContent&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;, SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.CourseSummaryView&gt;&gt;, SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.CourseMembersListView&gt;, SwiftUI.NavigationLink&lt;SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.navigationTitle(SwiftUI.LocalizedStringKey) -&gt; some&gt;&gt;.0&gt;, SwiftUI.NavigationLink&lt;SwiftUI.Text, SwiftUI.EmptyView&gt;)&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.ForEach&lt;Swift.Array&lt;LexueSwiftUI.LexueAPI.CourseSectionInfo&gt;, Foundation.UUID, SwiftUI.NavigationLink&lt;LexueSwiftUI.CourseSectionView, &lt;&lt;opaque return type of SwiftUI.View.navigationTitle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.StringProtocol&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;)&gt;&gt;)&gt;&gt;&gt;)&gt;&gt;)&gt; in LexueSwiftUI.CourseDetailView.body.getter : some"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Course/CourseDetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "221"
+                  endingLineNumber = "221"
+                  offsetFromSymbolStart = "172">
+               </Location>
+               <Location
+                  uuid = "BC456481-ACA7-4475-8254-326C2B8F09D7 - 2cc32341ae89d85"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (LexueSwiftUI.LexueAPI.CourseSectionInfo) -&gt; SwiftUI.NavigationLink&lt;LexueSwiftUI.CourseSectionView, &lt;&lt;opaque return type of SwiftUI.View.navigationTitle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.StringProtocol&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in closure #4 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;LexueSwiftUI.LexueAPI.CourseSectionInfo&gt;, Foundation.UUID, SwiftUI.NavigationLink&lt;LexueSwiftUI.CourseSectionView, &lt;&lt;opaque return type of SwiftUI.View.navigationTitle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.StringProtocol&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.EmptyView, &lt;&lt;opaque return type of SwiftUI.View.listRowInsets(Swift.Optional&lt;SwiftUI.EdgeInsets&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;, SwiftUI._ConditionalContent&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer)&gt;&gt;, SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.CourseSummaryView&gt;&gt;, SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.CourseMembersListView&gt;, SwiftUI.NavigationLink&lt;SwiftUI.Text, &lt;&lt;opaque return type of SwiftUI.View.navigationTitle(SwiftUI.LocalizedStringKey) -&gt; some&gt;&gt;.0&gt;, SwiftUI.NavigationLink&lt;SwiftUI.Text, SwiftUI.EmptyView&gt;)&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.ForEach&lt;Swift.Array&lt;LexueSwiftUI.LexueAPI.CourseSectionInfo&gt;, Foundation.UUID, SwiftUI.NavigationLink&lt;LexueSwiftUI.CourseSectionView, &lt;&lt;opaque return type of SwiftUI.View.navigationTitle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.StringProtocol&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Text)&gt;&gt;)&gt;&gt;)&gt;&gt;&gt;)&gt;&gt;)&gt; in LexueSwiftUI.CourseDetailView.body.getter : some"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Course/CourseDetailView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "222"
+                  endingLineNumber = "222"
+                  offsetFromSymbolStart = "456">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -1713,8 +1743,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
             landmarkName = "ParseViewCourseHtml2Sections(_:)"
             landmarkType = "7">
          </BreakpointContent>
