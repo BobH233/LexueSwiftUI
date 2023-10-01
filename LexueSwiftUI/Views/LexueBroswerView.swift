@@ -38,7 +38,6 @@ struct LexueBroswerView: View {
                     }
                 },
                 .default(Text("复制当前链接")) {
-                    print(webViewStore.webView.url)
                     if let url = webViewStore.webView.url {
                         UIPasteboard.general.string = url.absoluteString
                     }
@@ -53,22 +52,35 @@ struct LexueBroswerView: View {
             }
         }
         .onAppear {
-            let cookie = HTTPCookie(properties: [
-                .domain: "lexue.bit.edu.cn",
-                .path: "/",
-                .name: "MoodleSession",
-                .value: GlobalVariables.shared.cur_lexue_context.MoodleSession,
-                .secure: "TRUE",
-                .expires: NSDate(timeIntervalSinceNow: 31556926)
-            ])!
             if #available(iOS 16.4, *) {
                 if GlobalVariables.shared.debugMode { self.webViewStore.webView.isInspectable = true }
             }
-            // 添加lexue的cookie
-            self.webViewStore.webView.configuration.websiteDataStore.httpCookieStore.setCookie(cookie)
-            // 显示手机版
-            self.webViewStore.webView.configuration.defaultWebpagePreferences.preferredContentMode = .mobile
-            self.webViewStore.webView.load(URLRequest(url: URL(string: url)!))
+            Task {
+                let res = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
+                switch res {
+                case .success(let (sesskey, newContext)):
+                    let cookie = HTTPCookie(properties: [
+                        .domain: "lexue.bit.edu.cn",
+                        .path: "/",
+                        .name: "MoodleSession",
+                        .value: (newContext != nil) ? newContext!.MoodleSession : GlobalVariables.shared.cur_lexue_context.MoodleSession,
+                        .secure: "TRUE",
+                        .expires: NSDate(timeIntervalSinceNow: 31556926)
+                    ])!
+                    DispatchQueue.main.async {
+                        // 添加lexue的cookie
+                        self.webViewStore.webView.configuration.websiteDataStore.httpCookieStore.setCookie(cookie)
+                        // 显示手机版
+                        self.webViewStore.webView.configuration.defaultWebpagePreferences.preferredContentMode = .mobile
+                        self.webViewStore.webView.load(URLRequest(url: URL(string: url)!))
+                    }
+                case .failure(_):
+                    DispatchQueue.main.async {
+                        self.webViewStore.webView.configuration.defaultWebpagePreferences.preferredContentMode = .mobile
+                        self.webViewStore.webView.load(URLRequest(url: URL(string: url)!))
+                    }
+                }
+            }
         }
         
     }

@@ -688,6 +688,28 @@ class LexueAPI {
         }
     }
     
+    func GetLexueLoginTicket(_ loginnedContext: BITLogin.LoginSuccessContext, completion: @escaping (Result<String, LexueLoginError>) -> Void) {
+        var cur_headers = HTTPHeaders(headers)
+        cur_headers.add(name: "Cookie", value: "CASTGC=\(loginnedContext.CASTGC)")
+        AF.requestWithoutCache(API_LEXUE_TICK, method: .get, headers: cur_headers)
+            .validate(statusCode: 300..<500)
+            .redirect(using: Redirector.doNotFollow)
+            .response { response in
+                switch response.result {
+                case .success( _):
+                    if let ret_headers = response.response?.allHeaderFields as? [String: String], let login_url = ret_headers["Location"] {
+                        completion(.success(login_url))
+                    } else {
+                        completion(.failure(LexueLoginError.noLocationHeader))
+                    }
+                case .failure(_):
+                    print("GetLexueContext 失败")
+                    completion(.failure(LexueLoginError.networkError))
+                }
+                
+            }
+    }
+    
     func GetLexueContext(_ loginnedContext: BITLogin.LoginSuccessContext, completion: @escaping (Result<LexueContext, LexueLoginError>) -> Void) {
         var cur_headers = HTTPHeaders(headers)
         cur_headers.add(name: "Cookie", value: "CASTGC=\(loginnedContext.CASTGC)")
@@ -698,6 +720,7 @@ class LexueAPI {
                 switch response.result {
                 case .success( _):
                     if let ret_headers = response.response?.allHeaderFields as? [String: String], let login_url = ret_headers["Location"] {
+                        // print("login_url: \(login_url)")
                         AF.requestWithoutCache(login_url, method: .get)
                             .validate(statusCode: 300..<500)
                             .redirect(using: Redirector.doNotFollow)
