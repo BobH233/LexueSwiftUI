@@ -50,12 +50,27 @@ class EventManager: ObservableObject {
         LoadEventList(context: context)
     }
     
+    // 判断是否是属于今天的ddl的逻辑，注意次日的凌晨的ddl也要考虑，现在暂时先这样写
+    static func IsTodayEvent(event: EventStored, today: Date) -> Bool {
+        // TODO: 让用户可以自己设置第二天算作第一天的期限时间
+        let setting_value = 6 // 默认先认为是6点算前一天
+        let calendar = Calendar.current
+        let startOfToday = calendar.startOfDay(for: today)
+        let targetDate = event.timestart!
+        if let today6AM = calendar.date(bySettingHour: 6, minute: 0, second: 0, of: startOfToday), let nextDay6AM = calendar.date(byAdding: .day, value: 1, to: today6AM) {
+            if targetDate > today6AM && targetDate <= nextDay6AM {
+                return true
+            }
+        }
+        return false
+    }
+    
     // 对比新的事件列表，如果缓存没有则加入，如果缓存有则更新
     func DiffAndUpdateCacheEvent(_ newEvents: [LexueAPI.EventInfo]) {
         for newEvent in newEvents {
             let tryFind = DataController.shared.findEventStoredByLexueId(lexue_event_id: newEvent.id, context: DataController.shared.container.viewContext)
             if let found = tryFind {
-                print("Update event \(newEvent.id)")
+                // print("Update event \(newEvent.id)")
                 found.action_url = newEvent.action_url
                 found.course_id = newEvent.course?.id
                 found.course_name = newEvent.course?.fullname
@@ -70,7 +85,7 @@ class EventManager: ObservableObject {
                 found.url = newEvent.url
                 DataController.shared.save(context: DataController.shared.container.viewContext)
             } else {
-                print("Add event \(newEvent.id)")
+                // print("Add event \(newEvent.id)")
                 DataController.shared.addEventStored(isCustomEvent: false, event_name: newEvent.name, event_description: newEvent.description, lexue_id: newEvent.id, timestart: newEvent.timestart, timeusermidnight: newEvent.timeusermidnight, mindaytimestamp: newEvent.mindaytimestamp, course_id: newEvent.course?.id, course_name: newEvent.course?.fullname, color: .green, action_url: newEvent.action_url, event_type: newEvent.eventtype, instance: Int64(newEvent.instance ?? 0), url: newEvent.url, context: DataController.shared.container.viewContext)
             }
         }

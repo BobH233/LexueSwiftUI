@@ -262,7 +262,6 @@ struct EventListView: View {
                     if showTodayOnly {
                         FunctionalButtonView(backgroundCol: .blue, iconSystemName: "eye.slash.fill", title: "当前：仅显示今天事件")
                             .onTapGesture {
-                                print("toggle")
                                 withAnimation {
                                     showTodayOnly.toggle()
                                 }
@@ -270,7 +269,6 @@ struct EventListView: View {
                     } else {
                         FunctionalButtonView(backgroundCol: .blue, iconSystemName: "eye.slash", title: "当前：显示一周内事件")
                             .onTapGesture {
-                                print("toggle")
                                 withAnimation {
                                     showTodayOnly.toggle()
                                 }
@@ -288,12 +286,12 @@ struct EventListView: View {
                         Spacer()
                     }
                     ForEach($eventManager.EventDisplayList, id: \.id) { event in
-                        EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name)
-                            .onTapGesture {
-                                withAnimation {
-                                    EventManager.shared.FinishEvent(id: event.id!, isFinish: true, context: managedObjContext)
+                        if !showTodayOnly || EventManager.IsTodayEvent(event: event.wrappedValue, today: .now) {
+                            EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name)
+                                .onTapGesture {
+                                    
                                 }
-                            }
+                        }
                     }
                 }
                 .padding(.top, 20)
@@ -311,9 +309,7 @@ struct EventListView: View {
                         ForEach($eventManager.expiredEventDisplayList, id: \.id) { event in
                             EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name)
                                 .onTapGesture {
-                                    withAnimation {
-                                        EventManager.shared.FinishEvent(id: event.id!, isFinish: false, context: managedObjContext)
-                                    }
+                                    
                                 }
                         }
                     }
