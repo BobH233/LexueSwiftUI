@@ -119,6 +119,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "EventManager.GetTodayEventCount(today:):EventManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "event.timestart">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DataController.blurSearchMessage(keyword:context:):DataController.swift">
          <PersistentStrings>
             <PersistentString

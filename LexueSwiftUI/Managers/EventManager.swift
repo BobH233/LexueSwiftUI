@@ -20,7 +20,6 @@ class EventManager: ObservableObject {
     // 获取今天的事件总数
     func GetTodayEventCount(today: Date) -> Int {
         var ret = 0
-        let today = Date()
         for event in EventDisplayList {
             if EventManager.IsTodayEvent(event: event, today: today) {
                 ret = ret + 1
@@ -34,6 +33,7 @@ class EventManager: ObservableObject {
         let calendar = Calendar.current
         for i in 0...7 {
             let target_date = Calendar.current.date(byAdding: .day, value: i, to: .now)!
+            print(target_date)
             if target_date.isInSameWeek(as: .now) {
                 ret = ret + GetTodayEventCount(today: target_date)
             }
