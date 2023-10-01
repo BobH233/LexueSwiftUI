@@ -17,8 +17,8 @@ class EventManager: ObservableObject {
     // 显示的今天之前的ddl，或者已经完成的ddl
     @Published var expiredEventDisplayList: [EventStored] = []
     // 从数据库加载缓存的事件列表
-    func LoadEventList() {
-        var result = DataController.shared.queryAllEventStored(context: DataController.shared.container.viewContext)
+    func LoadEventList(context: NSManagedObjectContext = DataController.shared.container.viewContext) {
+        var result = DataController.shared.queryAllEventStored(context: context)
         // 排序，时间最早的在最前面
         result.sort{ (event1, event2) in
             let event1_date = event1.timestart ?? Date()
@@ -30,6 +30,7 @@ class EventManager: ObservableObject {
         // 分组，已经完成的，或者过期的都放到expired组
         for event in result {
             let midnight_today = Calendar.current.startOfDay(for: .now)
+            print(event.finish)
             if event.finish {
                 tmp2.append(event)
             } else if let startdate = event.timestart, startdate < midnight_today {
@@ -44,14 +45,16 @@ class EventManager: ObservableObject {
     }
     
     func FinishEvent(id: UUID, isFinish: Bool, context: NSManagedObjectContext) {
+        
         let event = DataController.shared.findEventById(id: id, context: context)
         event?.finish = isFinish
         DataController.shared.save(context: context)
-        LoadEventList()
+        LoadEventList(context: context)
     }
     
     // 对比新的事件列表，如果缓存没有则加入，如果缓存有则更新
     func DiffAndUpdateCacheEvent(_ newEvents: [LexueAPI.EventInfo]) {
+        return
         // print("DiffAndUpdateCacheEvent")
         for newEvent in newEvents {
             let tryFind = DataController.shared.findEventStoredByLexueId(lexue_event_id: newEvent.id, context: DataController.shared.container.viewContext)

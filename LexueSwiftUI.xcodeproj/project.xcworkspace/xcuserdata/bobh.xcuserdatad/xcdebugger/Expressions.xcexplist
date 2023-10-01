@@ -87,6 +87,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "EventManager.LoadEventList():EventManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "event.finish">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
          <PersistentStrings>
             <PersistentString
@@ -122,7 +130,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -131,7 +139,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -170,6 +178,17 @@
          <PersistentStrings>
             <PersistentString
                value = "sections">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EventManager.FinishEvent(id:isFinish:context:):EventManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "event?.finish">
+            </PersistentString>
+            <PersistentString
+               value = "event?.course_name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

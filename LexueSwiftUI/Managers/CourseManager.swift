@@ -13,8 +13,8 @@ class CourseManager: ObservableObject {
     @Published var CourseDisplayList: [CourseShortInfo] = []
     
     // 从数据库加载上次缓存的课程列表
-    func LoadStoredCacheCourses() {
-        var result = DataController.shared.queryAllCourseCacheStored(context: DataController.shared.container.viewContext)
+    func LoadStoredCacheCourses(context: NSManagedObjectContext = DataController.shared.container.viewContext) {
+        var result = DataController.shared.queryAllCourseCacheStored(context: context)
         // 排序，加星的在前面，开始时间最晚的在最前面
         result.sort { (course1, course2) in
             if course1.local_favorite == course2.local_favorite {

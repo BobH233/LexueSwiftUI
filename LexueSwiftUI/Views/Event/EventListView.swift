@@ -37,7 +37,7 @@ private struct TopCardView: View {
             VStack {
                 VStack(spacing: 5) {
                     HStack {
-                        Text(greetingWord)
+                        Text(greetingWord + "，")
                             .font(.system(size: 35))
                             .bold()
                             .foregroundColor(.white)
@@ -244,6 +244,7 @@ private struct EventListItemView: View {
 struct EventListView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
     @ObservedObject var eventManager = EventManager.shared
+    @Environment(\.managedObjectContext) var managedObjContext
     
     @State var showTodayOnly: Bool = false
     //  @Binding var tabSelection: Int
@@ -251,7 +252,7 @@ struct EventListView: View {
         NavigationView {
             ScrollView {
                 TopCardView()
-                .padding(.horizontal, 15)
+                    .padding(.horizontal, 15)
                 HStack(spacing: 10) {
                     FunctionalButtonView(backgroundCol: .blue, iconSystemName: "plus.circle.fill", title: "手动添加日程")
                     FunctionalButtonView(backgroundCol: .gray, iconSystemName: "gear", title: "设置规则")
@@ -278,15 +279,50 @@ struct EventListView: View {
                     
                 }
                 .padding(.horizontal, 15)
+                // 未完成的ddl
                 VStack {
+                    HStack {
+                        Text("未完成:")
+                            .font(.system(size: 30))
+                            .bold()
+                        Spacer()
+                    }
                     ForEach($eventManager.EventDisplayList, id: \.id) { event in
                         EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name)
+                            .onTapGesture {
+                                withAnimation {
+                                    EventManager.shared.FinishEvent(id: event.id!, isFinish: true, context: managedObjContext)
+                                }
+                            }
                     }
                 }
                 .padding(.top, 20)
                 .padding(.horizontal, 15)
+                
+                if !showTodayOnly {
+                    // 已经到期或者完成的ddl
+                    VStack {
+                        HStack {
+                            Text("已过期/已完成:")
+                                .font(.system(size: 30))
+                                .bold()
+                            Spacer()
+                        }
+                        ForEach($eventManager.expiredEventDisplayList, id: \.id) { event in
+                            EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name)
+                                .onTapGesture {
+                                    withAnimation {
+                                        EventManager.shared.FinishEvent(id: event.id!, isFinish: false, context: managedObjContext)
+                                    }
+                                }
+                        }
+                    }
+                    .padding(.top, 20)
+                    .padding(.horizontal, 15)
+                }
             }
             .navigationTitle("最近事件")
+                
         }
         .onFirstAppear {
             eventManager.LoadEventList()

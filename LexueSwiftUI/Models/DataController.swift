@@ -310,6 +310,20 @@ class DataController: ObservableObject {
         return nil
     }
     
+//    func updateEventFinish(id: UUID, isFinish: Bool, context: NSManagedObjectContext) {
+//        let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
+//        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+//        do {
+//            let results = try context.fetch(request)
+//            for i in 0..<results.count {
+//                results[i].finish = isFinish
+//            }
+//            save(context: context)
+//        } catch {
+//            print("查询消息列表失败：\(error)")
+//        }
+//    }
+    
     func findEventStoredByLexueId(lexue_event_id: String, context: NSManagedObjectContext) -> EventStored? {
         let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
         request.predicate = NSPredicate(format: "lexue_event_id == %@", lexue_event_id)
