@@ -256,6 +256,7 @@ struct EventListView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     
     @State var showTodayOnly: Bool = false
+    @State var showSettingView: Bool = false
     //  @Binding var tabSelection: Int
     var body: some View {
         NavigationView {
@@ -265,6 +266,9 @@ struct EventListView: View {
                 HStack(spacing: 10) {
                     FunctionalButtonView(backgroundCol: .blue, iconSystemName: "plus.circle.fill", title: "手动添加日程")
                     FunctionalButtonView(backgroundCol: .gray, iconSystemName: "gear", title: "设置规则")
+                        .onTapGesture {
+                            showSettingView.toggle()
+                        }
                 }
                 .padding(.horizontal, 15)
                 HStack {
@@ -303,6 +307,10 @@ struct EventListView: View {
                         }
                     }
                 }
+                .onAppear {
+                    print("EventManager.shared.LoadEventList()")
+                    EventManager.shared.LoadEventList()
+                }
                 .padding(.top, 20)
                 .padding(.horizontal, 15)
                 
@@ -325,14 +333,13 @@ struct EventListView: View {
                     .padding(.top, 20)
                     .padding(.horizontal, 15)
                 }
+                NavigationLink("", isActive: $showSettingView, destination: {
+                    EventPreferenceSettingView()
+                })
+                .hidden()
             }
             .navigationTitle("最近事件")
-                
         }
-        .onFirstAppear {
-            eventManager.LoadEventList()
-        }
-        
     }
 }
 

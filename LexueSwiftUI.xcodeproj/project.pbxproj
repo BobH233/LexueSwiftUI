@@ -62,6 +62,7 @@
 		47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927822AA77FDA00ABDC53 /* DataController.swift */; };
 		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
 		47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927882AA786ED00ABDC53 /* DebugDataView.swift */; };
+		47B2A8312AC9C9D700957DF0 /* EventPreferenceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B2A8302AC9C9D700957DF0 /* EventPreferenceSettingView.swift */; };
 		47B4420B2AC5C0B600EE03A9 /* PrivacyStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */; };
 		47B4420D2AC5C34100EE03A9 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B4420C2AC5C34100EE03A9 /* PrivacyPolicyView.swift */; };
 		47B442102AC6CDC400EE03A9 /* UserAgreement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B4420F2AC6CDC400EE03A9 /* UserAgreement.swift */; };
@@ -180,6 +181,7 @@
 		47A927822AA77FDA00ABDC53 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		47A927882AA786ED00ABDC53 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
+		47B2A8302AC9C9D700957DF0 /* EventPreferenceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPreferenceSettingView.swift; sourceTree = "<group>"; };
 		47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyStatement.swift; sourceTree = "<group>"; };
 		47B4420C2AC5C34100EE03A9 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		47B4420F2AC6CDC400EE03A9 /* UserAgreement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgreement.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				474C9B782AA4E38D0064B5AF /* EventListView.swift */,
+				47B2A8302AC9C9D700957DF0 /* EventPreferenceSettingView.swift */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -652,6 +655,7 @@
 				4799C81B2AA62CDB00F812D6 /* ContactMessageModel.swift in Sources */,
 				472984A02AA706BB000814EE /* Extensions.swift in Sources */,
 				47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */,
+				47B2A8312AC9C9D700957DF0 /* EventPreferenceSettingView.swift in Sources */,
 				47F4F2A32AC086A90047B395 /* ViewModifiers.swift in Sources */,
 				47F4F2A02AC086A90047B395 /* DeviceOrientation.swift in Sources */,
 				4750EB832AC43C640071118F /* LocalNotificationManager.swift in Sources */,

@@ -168,7 +168,7 @@ class AppStatusManager {
         do {
             try BGTaskScheduler.shared.submit(request)
             // e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"cn.bobh.LexueSwiftUI.BGRefresh"]
-            print("okok!!")
+            // print("okok!!")
         } catch {
             print("error: \(error.localizedDescription)")
         }

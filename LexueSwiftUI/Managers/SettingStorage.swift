@@ -69,6 +69,13 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    // 存储事件设置：凌晨跨越
+    @Published var midnightFixTime: Int {
+        didSet {
+            UserDefaults.standard.set(midnightFixTime, forKey: "setting.events.midnightFixTime")
+        }
+    }
+    
     private init() {
         if let stored = UserDefaults.standard.value(forKey: "setting.preferColorScheme") as? Int {
             preferColorScheme = stored
@@ -113,11 +120,15 @@ class SettingStorage: ObservableObject {
         } else {
             cacheSelfLexueProfile = LexueProfile()
         }
-        print(UserDefaults.standard.value(forKey: "setting.agreePrivacyPolicy"))
         if let stored = UserDefaults.standard.value(forKey: "setting.agreePrivacyPolicy") as? Bool {
             agreePrivacyPolicy = stored
         } else {
             agreePrivacyPolicy = false
+        }
+        if let stored = UserDefaults.standard.value(forKey: "setting.events.midnightFixTime") as? Int {
+            midnightFixTime = stored
+        } else {
+            midnightFixTime = 6
         }
     }
 }
