@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftSoup
 
 private struct TopCardView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
@@ -120,11 +121,46 @@ private struct FunctionalButtonView: View {
 }
 
 private struct EventListItemView: View {
-    var title: String = "DDL名字"
-    var description: String = "DDL描述性文本DDL描述性文本DDL描述性文本DDL描述性文本DDL描述性文本DDL描述性文本"
-    var endtime: String = "DDL结束时间"
-    var courseName: String = "课程名字"
+    @Binding var title: String?
+    @Binding var description: String?
+    @Binding var endtime: Date?
+    // var endtime: String = "DDL结束时间"
+    @Binding var courseName: String?
     var backgroundCol: Color = .green
+    func GetHtmlText(_ html: String) -> String {
+        do {
+            let document = try SwiftSoup.parse(html)
+            let text = try document.text()
+            return text
+        } catch {
+            print("解析HTML出错：\(error)")
+            return ""
+        }
+    }
+    func GetDateDescriptionText(sendDate: Date) -> String {
+        let today = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "zh-CN")
+        if sendDate.isInSameDay(as: today) {
+            dateFormatter.dateFormat = "今天 HH:mm"
+            return dateFormatter.string(from: sendDate)
+        } else if Calendar.current.isDateInYesterday(sendDate) {
+            dateFormatter.dateFormat = "昨天 HH:mm"
+            return dateFormatter.string(from: sendDate)
+        } else if Calendar.current.isDateInTomorrow(sendDate) {
+            dateFormatter.dateFormat = "明天 HH:mm"
+            return dateFormatter.string(from: sendDate)
+        } else if sendDate.isInSameWeek(as: today) {
+            dateFormatter.dateFormat = "EEEE HH:mm"
+            return dateFormatter.string(from: sendDate)
+        } else if sendDate.isInSameYear(as: today) {
+            dateFormatter.dateFormat = "MM-dd HH:mm"
+            return dateFormatter.string(from: sendDate)
+        } else {
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+            return dateFormatter.string(from: sendDate)
+        }
+    }
     var body: some View {
         ZStack {
             Rectangle()
@@ -133,7 +169,7 @@ private struct EventListItemView: View {
                 .shadow(radius: 5)
             VStack {
                 HStack {
-                    Text(title)
+                    Text(title ?? "无标题事件")
                         .foregroundColor(.white)
                         .font(.system(size: 30))
                         .bold()
@@ -142,7 +178,7 @@ private struct EventListItemView: View {
                     Spacer()
                 }
                 HStack {
-                    Text(description)
+                    Text(GetHtmlText(description ?? ""))
                         .foregroundColor(.white)
                         .font(.system(size: 20))
                         .bold()
@@ -151,23 +187,25 @@ private struct EventListItemView: View {
                     Spacer()
                 }
                 VStack(spacing: 3) {
-                    HStack(spacing: 6) {
-                        Image(systemName: "graduationcap.fill")
-                            .resizable()
-                            .frame(width: 18, height: 18)
-                            .foregroundColor(.white)
-                        Text(courseName)
-                            .foregroundColor(.white)
-                            .bold()
-                            .font(.system(size: 15))
-                        Spacer()
+                    if courseName != nil{
+                        HStack(spacing: 6) {
+                            Image(systemName: "graduationcap.fill")
+                                .resizable()
+                                .frame(width: 18, height: 18)
+                                .foregroundColor(.white)
+                            Text(courseName!)
+                                .foregroundColor(.white)
+                                .bold()
+                                .font(.system(size: 15))
+                            Spacer()
+                        }
                     }
                     HStack(spacing: 6) {
                         Image(systemName: "clock.fill")
                             .resizable()
                             .frame(width: 18, height: 18)
                             .foregroundColor(.white)
-                        Text(endtime)
+                        Text(GetDateDescriptionText(sendDate: endtime ?? Date()))
                             .foregroundColor(.white)
                             .bold()
                             .font(.system(size: 15))
@@ -185,6 +223,7 @@ private struct EventListItemView: View {
 
 struct EventListView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
+    @ObservedObject var eventManager = EventManager.shared
     //  @Binding var tabSelection: Int
     var body: some View {
         NavigationView {
@@ -197,13 +236,17 @@ struct EventListView: View {
                 }
                 .padding(.horizontal, 15)
                 VStack {
-                    EventListItemView()
-                    EventListItemView()
+                    ForEach($eventManager.EventDisplayList, id: \.id) { event in
+                        EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name)
+                    }
                 }
                 .padding(.top, 20)
                 .padding(.horizontal, 15)
             }
             .navigationTitle("最近事件")
+        }
+        .onFirstAppear {
+            eventManager.LoadEventList()
         }
         
     }
