@@ -29,11 +29,10 @@ class EventManager: ObservableObject {
         var tmp2 = [EventStored]()
         // 分组，已经完成的，或者过期的都放到expired组
         for event in result {
-            let midnight_today = Calendar.current.startOfDay(for: .now)
-            print(event.finish)
+            let now_time = Date()
             if event.finish {
                 tmp2.append(event)
-            } else if let startdate = event.timestart, startdate < midnight_today {
+            } else if let startdate = event.timestart, startdate < now_time {
                 tmp2.append(event)
             } else {
                 tmp1.append(event)
@@ -45,7 +44,6 @@ class EventManager: ObservableObject {
     }
     
     func FinishEvent(id: UUID, isFinish: Bool, context: NSManagedObjectContext) {
-        
         let event = DataController.shared.findEventById(id: id, context: context)
         event?.finish = isFinish
         DataController.shared.save(context: context)
@@ -54,8 +52,6 @@ class EventManager: ObservableObject {
     
     // 对比新的事件列表，如果缓存没有则加入，如果缓存有则更新
     func DiffAndUpdateCacheEvent(_ newEvents: [LexueAPI.EventInfo]) {
-        return
-        // print("DiffAndUpdateCacheEvent")
         for newEvent in newEvents {
             let tryFind = DataController.shared.findEventStoredByLexueId(lexue_event_id: newEvent.id, context: DataController.shared.container.viewContext)
             if let found = tryFind {
