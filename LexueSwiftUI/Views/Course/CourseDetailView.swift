@@ -7,34 +7,35 @@
 
 import SwiftUI
 
+struct HTMLText: View {
+    var html = "<b>This is</b> <i>rich</i> <u>HTML</u> <span style=\"color: red;\">text</span>."
+    @State var attributedString: AttributedString? = nil
+    @State var attributeStringDarkMode: AttributedString? = nil
+    @Environment(\.colorScheme) var colorScheme
+    var body: some View {
+        ZStack {
+            if attributedString != nil && attributeStringDarkMode != nil {
+                Text(colorScheme == .dark ? attributeStringDarkMode! : attributedString!)
+            } else {
+                Text(html)
+            }
+        }
+        .onAppear {
+            if let nsAttributedString = try? NSAttributedString(data: Data(html.data(using: String.Encoding.unicode)!), options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
+               var attributedString1 = try? AttributedString(nsAttributedString, including: \.uiKit) {
+                attributedString1.foregroundColor = .black
+                attributedString = attributedString1
+                var attributedString2 = try? AttributedString(nsAttributedString, including: \.uiKit)
+                attributedString2?.foregroundColor = .white
+                attributeStringDarkMode = attributedString2
+            }
+        }
+            
+    }
+}
+
 struct CourseSummaryView: View {
     var courseSummary: String = ""
-    struct HTMLText: View {
-        var html = "<b>This is</b> <i>rich</i> <u>HTML</u> <span style=\"color: red;\">text</span>."
-        @State var attributedString: AttributedString? = nil
-        @State var attributeStringDarkMode: AttributedString? = nil
-        @Environment(\.colorScheme) var colorScheme
-        var body: some View {
-            ZStack {
-                if attributedString != nil && attributeStringDarkMode != nil {
-                    Text(colorScheme == .dark ? attributeStringDarkMode! : attributedString!)
-                } else {
-                    Text(html)
-                }
-            }
-            .onAppear {
-                if let nsAttributedString = try? NSAttributedString(data: Data(html.data(using: String.Encoding.unicode)!), options: [.documentType: NSAttributedString.DocumentType.html], documentAttributes: nil),
-                   var attributedString1 = try? AttributedString(nsAttributedString, including: \.uiKit) {
-                    attributedString1.foregroundColor = .black
-                    attributedString = attributedString1
-                    var attributedString2 = try? AttributedString(nsAttributedString, including: \.uiKit)
-                    attributedString2?.foregroundColor = .white
-                    attributeStringDarkMode = attributedString2
-                }
-            }
-                
-        }
-    }
     var body: some View {
         Form {
             HTMLText(html: courseSummary)

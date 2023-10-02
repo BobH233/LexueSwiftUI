@@ -171,16 +171,6 @@ private struct EventListItemView: View {
     @Binding var courseName: String?
     @Binding var backgroundCol: String?
     
-    func GetHtmlText(_ html: String) -> String {
-        do {
-            let document = try SwiftSoup.parse(html)
-            let text = try document.text()
-            return text
-        } catch {
-            print("解析HTML出错：\(error)")
-            return ""
-        }
-    }
     func GetDateDescriptionText(sendDate: Date) -> String {
         let today = Date()
         let dateFormatter = DateFormatter()
@@ -380,7 +370,7 @@ struct EventListView: View {
                 })
                 .hidden()
                 NavigationLink("", isActive: $showEditEventView, destination: {
-                    EditEventView(event_uuid: curSelectEventUUID)
+                    ViewEventView(event_uuid: curSelectEventUUID)
                 })
                 .hidden()
             }

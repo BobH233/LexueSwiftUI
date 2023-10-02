@@ -337,6 +337,23 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
+    func GetEventTypeDescription(_ event_type: String) -> String {
+        switch event_type {
+        case "exam":
+            return "考试"
+        case "general":
+            return "常规"
+        case "assignment":
+            return "作业"
+        case "user":
+            return "用户自定事件"
+        case "due":
+            return "DDL"
+        default:
+            return "未知"
+        }
+    }
+    
     func findEventById(id: UUID, context: NSManagedObjectContext) -> EventStored? {
         let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id as CVarArg)

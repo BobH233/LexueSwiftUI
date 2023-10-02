@@ -11,6 +11,7 @@ import CommonCrypto
 import Alamofire
 import UIKit
 import UserNotifications
+import SwiftSoup
 
 // reference: https://stackoverflow.com/questions/43663622/is-a-date-in-same-week-month-year-of-another-date-in-swift
 extension Date {
@@ -330,5 +331,17 @@ extension Color {
         } else {
             return String(format: "%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
         }
+    }
+}
+
+
+func GetHtmlText(_ html: String) -> String {
+    do {
+        let document = try SwiftSoup.parse(html)
+        let text = try document.text()
+        return text
+    } catch {
+        print("解析HTML出错：\(error)")
+        return ""
     }
 }
