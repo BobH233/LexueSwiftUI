@@ -169,7 +169,8 @@ private struct EventListItemView: View {
     @Binding var description: String?
     @Binding var endtime: Date?
     @Binding var courseName: String?
-    var backgroundCol: Color = .green
+    @Binding var backgroundCol: String?
+    
     func GetHtmlText(_ html: String) -> String {
         do {
             let document = try SwiftSoup.parse(html)
@@ -204,25 +205,41 @@ private struct EventListItemView: View {
             return dateFormatter.string(from: sendDate)
         }
     }
+    
+    func chooseTextColor(for backgroundColor: UIColor) -> Color {
+        // 计算背景颜色的亮度
+        let red = backgroundColor.cgColor.components?[0] ?? 0
+        let green = backgroundColor.cgColor.components?[1] ?? 0
+        let blue = backgroundColor.cgColor.components?[2] ?? 0
+        let brightness = (red * 299 + green * 587 + blue * 114) / 1000
+        
+        // 根据背景颜色亮度选择前景文字颜色
+        if brightness < 0.7 {
+            return .white
+        } else {
+            return .black
+        }
+    }
+    
     var body: some View {
         ZStack {
             Rectangle()
-                .foregroundColor(backgroundCol)
+                .foregroundColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))
                 .cornerRadius(15)
                 .shadow(radius: 5)
             VStack {
                 HStack {
                     Text(title ?? "无标题事件")
-                        .foregroundColor(.white)
-                        .font(.system(size: 30))
+                        .foregroundColor(chooseTextColor(for: UIColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))))
                         .bold()
+                        .font(.system(size: 30))
                         .lineLimit(1)
                         .padding(.trailing, 20)
                     Spacer()
                 }
                 HStack {
                     Text(GetHtmlText(description ?? ""))
-                        .foregroundColor(.white)
+                        .foregroundColor(chooseTextColor(for: UIColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))))
                         .font(.system(size: 20))
                         .bold()
                         .lineLimit(1)
@@ -235,9 +252,9 @@ private struct EventListItemView: View {
                             Image(systemName: "graduationcap.fill")
                                 .resizable()
                                 .frame(width: 18, height: 18)
-                                .foregroundColor(.white)
+                                .foregroundColor(chooseTextColor(for: UIColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))))
                             Text(courseName!)
-                                .foregroundColor(.white)
+                                .foregroundColor(chooseTextColor(for: UIColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))))
                                 .bold()
                                 .font(.system(size: 15))
                             Spacer()
@@ -247,9 +264,9 @@ private struct EventListItemView: View {
                         Image(systemName: "clock.fill")
                             .resizable()
                             .frame(width: 18, height: 18)
-                            .foregroundColor(.white)
+                            .foregroundColor(chooseTextColor(for: UIColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))))
                         Text(GetDateDescriptionText(sendDate: endtime ?? Date()))
-                            .foregroundColor(.white)
+                            .foregroundColor(chooseTextColor(for: UIColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))))
                             .bold()
                             .font(.system(size: 15))
                         Spacer()
@@ -271,6 +288,7 @@ struct EventListView: View {
     
     @State var showTodayOnly: Bool = false
     @State var showSettingView: Bool = false
+    @State var showNewEventView: Bool = false
     //  @Binding var tabSelection: Int
     var body: some View {
         NavigationView {
@@ -279,6 +297,9 @@ struct EventListView: View {
                     .padding(.horizontal, 15)
                 HStack(spacing: 10) {
                     FunctionalButtonView(backgroundCol: .blue, iconSystemName: "plus.circle.fill", title: "手动添加日程")
+                        .onTapGesture {
+                            showNewEventView.toggle()
+                        }
                     FunctionalButtonView(backgroundCol: .gray, iconSystemName: "gear", title: "设置规则")
                         .onTapGesture {
                             showSettingView.toggle()
@@ -314,7 +335,7 @@ struct EventListView: View {
                     }
                     ForEach($eventManager.EventDisplayList, id: \.id) { event in
                         if !showTodayOnly || EventManager.IsTodayEvent(event: event.wrappedValue, today: .now) {
-                            EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name)
+                            EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
                                 .onTapGesture {
                                     
                                 }
@@ -338,7 +359,7 @@ struct EventListView: View {
                             Spacer()
                         }
                         ForEach($eventManager.expiredEventDisplayList, id: \.id) { event in
-                            EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name)
+                            EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
                                 .onTapGesture {
                                     
                                 }
@@ -349,6 +370,10 @@ struct EventListView: View {
                 }
                 NavigationLink("", isActive: $showSettingView, destination: {
                     EventPreferenceSettingView()
+                })
+                .hidden()
+                NavigationLink("", isActive: $showNewEventView, destination: {
+                    AddCustomEventView()
                 })
                 .hidden()
             }
