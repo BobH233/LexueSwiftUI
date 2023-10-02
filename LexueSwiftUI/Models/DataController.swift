@@ -246,6 +246,20 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
+    // 这个方法是为了方便后期可能要拓展消息类型，可以直接修改MessageBodyItem的内容
+    func addMessageStoredFromMsgBody(senderUid: String, msgBody: MessageBodyItem, date: Date?,  context: NSManagedObjectContext) {
+        let msgStored = MessageStored(context: context)
+        msgStored.id = UUID()
+        msgStored.senderUid = senderUid
+        msgStored.type = Int32(msgBody.type.rawValue)
+        msgStored.text_data = msgBody.text_data
+        msgStored.image_data = msgBody.image_data
+        msgStored.link_data = msgBody.link
+        msgStored.link_title = msgBody.link_title
+        msgStored.date = date ?? Date()
+        save(context: context)
+    }
+    
     func findContactStored(contactUid: String, context: NSManagedObjectContext) -> ContactStored? {
         let request: NSFetchRequest<ContactStored> = ContactStored.fetchRequest()
         request.predicate = NSPredicate(format: "contactUid == %@", contactUid)

@@ -33,7 +33,7 @@ class EventManager: ObservableObject {
         let calendar = Calendar.current
         for i in 0...7 {
             let target_date = Calendar.current.date(byAdding: .day, value: i, to: .now)!
-            print(target_date)
+            // print(target_date)
             if target_date.isInSameWeek(as: .now) {
                 ret = ret + GetTodayEventCount(today: target_date)
             }

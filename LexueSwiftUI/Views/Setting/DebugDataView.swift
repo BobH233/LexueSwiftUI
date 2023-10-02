@@ -45,6 +45,15 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     var body: some View {
         Form {
+            Section("push message") {
+                TextField("ContactUid", text: $senderUid)
+                TextField("originName", text: $originName)
+                Button("send") {
+                    var bodyy = MessageBodyItem(type: .text)
+                    bodyy.text_data = "测试你好你好！"
+                    MessageManager.shared.PushMessageWithContactCreation(senderUid: senderUid, contactOriginNameIfMissing: originName, contactTypeIfMissing: .course, msgBody: bodyy, date: Date(), context: managedObjContext)
+                }
+            }
             Section("UMeng") {
                 Button("event1") {
                     UMAnalyticsSwift.event(eventId: "test1", label: "12345")

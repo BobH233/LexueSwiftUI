@@ -64,10 +64,28 @@ class MessageManager {
         return ret
     }
     
+    // For debug
     func PushMessage(senderUid: String, type: MessageBodyType, text_data: String?, image_data: String?,
                           link_data: String?, link_title: String?, date: Date?, context: NSManagedObjectContext) {
         DataController.shared.addMessageStored(senderUid: senderUid, type: type, text_data: text_data, image_data: image_data, link_data: link_data, link_title: link_title, date: date, context: context)
         if let contact = DataController.shared.findContactStored(contactUid: senderUid, context: context) {
+            contact.lastMessageDate = date ?? Date()
+            contact.unreadCount = contact.unreadCount + 1
+            DataController.shared.save(context: context)
+        }
+    }
+    
+    // 推送一个消息给消息列表，如果联系人不存在则创建新联系人，存在则不创建新联系人
+    func PushMessageWithContactCreation(senderUid: String, contactOriginNameIfMissing: String, contactTypeIfMissing: ContactType, msgBody: MessageBodyItem, date: Date?, context: NSManagedObjectContext) {
+        DataController.shared.addMessageStoredFromMsgBody(senderUid: senderUid, msgBody: msgBody, date: date, context: context)
+        if let contact = DataController.shared.findContactStored(contactUid: senderUid, context: context) {
+            contact.lastMessageDate = date ?? Date()
+            contact.unreadCount = contact.unreadCount + 1
+            DataController.shared.save(context: context)
+        } else {
+            // 不存在联系人，创建
+            DataController.shared.addContactStored(contactUid: senderUid, originName: contactOriginNameIfMissing, pinned: false, silent: false, unreadCount: 0, avatar_data: "", type: contactTypeIfMissing, context: context)
+            let contact = DataController.shared.findContactStored(contactUid: senderUid, context: context)!
             contact.lastMessageDate = date ?? Date()
             contact.unreadCount = contact.unreadCount + 1
             DataController.shared.save(context: context)

@@ -134,7 +134,7 @@ class AppStatusManager {
         
         print("\(#function)")
         Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
-            self.OnAppTickToGetLexueContext()
+            self.OnAppTickEveryMinute()
         }
         UMengManager.shared.AppStartLogic()
         LocalNotificationManager.shared.GuardNotificationPermission()
@@ -209,7 +209,7 @@ class AppStatusManager {
     }
     
     
-    func OnAppTickToGetLexueContext() {
+    func OnAppTickEveryMinute() {
         // 刷新sesskey
         Task {
             print("OnTick60s for get sesskey...")

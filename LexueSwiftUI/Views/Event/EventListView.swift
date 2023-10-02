@@ -308,7 +308,7 @@ struct EventListView: View {
                     }
                 }
                 .onAppear {
-                    print("EventManager.shared.LoadEventList()")
+//                    print("EventManager.shared.LoadEventList()")
                     EventManager.shared.LoadEventList()
                 }
                 .padding(.top, 20)
