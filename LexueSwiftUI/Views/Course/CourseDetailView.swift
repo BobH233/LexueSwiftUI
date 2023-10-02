@@ -216,7 +216,6 @@ struct CourseDetailView: View {
                     }
                     NavigationLink("参与人", destination: CourseMembersListView(courseId: courseId))
                     NavigationLink("成绩", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/grade/report/user/index.php?id=\(courseId)", execJs: deleteLexueMiscJs).navigationTitle("查看成绩"))
-                    NavigationLink("最近ddl", destination: EmptyView())
                 }
                 Section() {
                     ForEach(sections) { section in
