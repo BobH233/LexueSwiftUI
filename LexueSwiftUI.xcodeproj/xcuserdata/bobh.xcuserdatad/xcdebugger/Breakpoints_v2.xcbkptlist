@@ -253,7 +253,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "197"
             endingLineNumber = "197"
-            landmarkName = "queryAllCourseCacheStored(context:)"
+            landmarkName = "blurSearchMessage(keyword:context:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -317,7 +317,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "238"
             endingLineNumber = "238"
-            landmarkName = "queryLastMessageByContactUid(senderUid:context:)"
+            landmarkName = "getAllContacts(context:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

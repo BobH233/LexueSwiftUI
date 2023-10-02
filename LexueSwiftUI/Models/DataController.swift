@@ -299,7 +299,7 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
-    func addEventStored(isCustomEvent: Bool, event_name: String?, event_description: String?, lexue_id: String?, timestart: Date?, timeusermidnight: Date?, mindaytimestamp: Date?, course_id: String?, course_name: String?, color: Color?, action_url: String?, event_type: String?, instance: Int64?, url: String?, context: NSManagedObjectContext) -> EventStored {
+    func addEventStored(isCustomEvent: Bool, event_name: String?, event_description: String?, lexue_id: String?, timestart: Date?, timeusermidnight: Date?, mindaytimestamp: Date?, course_id: String?, course_name: String?, color: Color?, action_url: String?, event_type: String?, instance: Int64?, url: String?, context: NSManagedObjectContext) {
         let eventStored = EventStored(context: context)
         eventStored.id = UUID()
         eventStored.action_url = action_url
@@ -318,7 +318,6 @@ class DataController: ObservableObject {
         eventStored.url = url
         eventStored.finish = false
         save(context: context)
-        return eventStored
     }
     
     func GetEventTypeDescription(_ event_type: String) -> String {
