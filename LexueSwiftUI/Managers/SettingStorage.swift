@@ -104,6 +104,13 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    // 存储事件设置：当有新事件时是否提醒
+    @Published var event_newEventNotification: Bool {
+        didSet {
+            UserDefaults.standard.set(event_newEventNotification, forKey: "setting.events.event_newEventNotification")
+        }
+    }
+    
     
     private init() {
         if let stored = UserDefaults.standard.value(forKey: "setting.preferColorScheme") as? Int {
@@ -178,6 +185,11 @@ class SettingStorage: ObservableObject {
             event_showTodayOnly = stored
         } else {
             event_showTodayOnly = false
+        }
+        if let stored = UserDefaults.standard.value(forKey: "setting.events.event_newEventNotification") as? Bool {
+            event_newEventNotification = stored
+        } else {
+            event_newEventNotification = true
         }
     }
 }

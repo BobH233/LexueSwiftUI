@@ -112,7 +112,6 @@ class EventManager: ObservableObject {
                 found.url = newEvent.url
                 DataController.shared.save(context: context)
             } else {
-                // print("Add event \(newEvent.id)")
                 DataController.shared.addEventStored(isCustomEvent: false, event_name: newEvent.name, event_description: newEvent.description, lexue_id: newEvent.id, timestart: newEvent.timestart, timeusermidnight: newEvent.timeusermidnight, mindaytimestamp: newEvent.mindaytimestamp, course_id: newEvent.course?.id, course_name: newEvent.course?.fullname, color: .green, action_url: newEvent.action_url, event_type: newEvent.eventtype, instance: Int64(newEvent.instance ?? 0), url: newEvent.url, context: context)
             }
         }

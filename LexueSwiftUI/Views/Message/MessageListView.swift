@@ -73,6 +73,13 @@ private struct ContactListItemView: View {
     
     @State private var isPresented = false
 
+    func GetAvatarUIImage(base64String: String) -> UIImage {
+        if let data = Data(base64Encoded: base64String), let image = UIImage(data: data) {
+            return image
+        } else {
+            return GlobalVariables.shared.defaultUIImage
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -80,7 +87,7 @@ private struct ContactListItemView: View {
                 ZStack {
                     UnreadRedPoint(count:$unreadCnt, silent: $silent)
                 }
-                Image(avatar)
+                Image(uiImage: GetAvatarUIImage(base64String: avatar))
                     .resizable()
                     .clipShape(Circle())
                     .frame(width: 45, height: 45)
@@ -360,12 +367,15 @@ struct MessageListView: View {
     
     @State var isOpenDatailView: ContactDisplayModel? = nil
     
-    func testRefresh() async {
+    func DoRefresh() async {
         isRefreshing = true
-        Task {
-            Thread.sleep(forTimeInterval: 1.5)
-            isRefreshing = false
+        await DataProviderManager.shared.DoRefreshAll()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation {
+                ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+            }
         }
+        isRefreshing = false
     }
     
     func DoSearchMessage() {
@@ -444,7 +454,7 @@ struct MessageListView: View {
         NavigationView{
             if globalVar.isLogin {
                 VStack {
-                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, submittedSearch: $submittedSearch, searchMessageResult: $searchMessageResult, searchContactResult: $searchContactResult, refreshAction: testRefresh)
+                    ListView(contacts: $contactsManager.ContactDisplayLists, isRefreshing: $isRefreshing, isOpenDatailView: $isOpenDatailView, submittedSearch: $submittedSearch, searchMessageResult: $searchMessageResult, searchContactResult: $searchContactResult, refreshAction: DoRefresh)
                         .searchable(text: $searchText, prompt: "搜索消息")
                         .onSubmit(of: .search, DoSearchMessage)
                 }

@@ -13,6 +13,8 @@ struct EventPreferenceSettingView: View {
     @State private var enableNotification = false
     @State private var selectedHour: Int = 0
     @State private var selectedMinute: Int = 0
+    
+    @State private var newEventNotification = false
     var body: some View {
         Form {
             Section() {
@@ -41,6 +43,14 @@ struct EventPreferenceSettingView: View {
             } footer: {
                 Text("当乐学助手定时刷新时，如果距离事件到期还有不到\(selectedHour)小时\(selectedMinute)分钟，那么乐学助手将通过通知提醒您")
             }
+            
+            Section() {
+                Toggle("新事件提醒", isOn: $newEventNotification)
+            } header: {
+                Text("新事件提醒")
+            } footer: {
+                Text("当乐学助手定时刷新时，如果检测到最近7日内出现了新的事件，则将通过通知提醒您")
+            }
         }
         .onChange(of: midnightFixTime) { newVal in
             SettingStorage.shared.event_midnightFixTime = newVal
@@ -54,11 +64,15 @@ struct EventPreferenceSettingView: View {
         .onChange(of: enableNotification) { newVal in
             SettingStorage.shared.event_enableNotification = newVal
         }
+        .onChange(of: newEventNotification) { newVal in
+            SettingStorage.shared.event_newEventNotification = newVal
+        }
         .onAppear {
             midnightFixTime = SettingStorage.shared.event_midnightFixTime
             enableNotification = SettingStorage.shared.event_enableNotification
             selectedHour = SettingStorage.shared.event_preHour
             selectedMinute = SettingStorage.shared.event_preMinute
+            newEventNotification = SettingStorage.shared.event_newEventNotification
         }
         .navigationTitle("设置规则")
         .navigationBarTitleDisplayMode(.inline)

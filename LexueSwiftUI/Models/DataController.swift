@@ -316,7 +316,7 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
-    func addEventStored(isCustomEvent: Bool, event_name: String?, event_description: String?, lexue_id: String?, timestart: Date?, timeusermidnight: Date?, mindaytimestamp: Date?, course_id: String?, course_name: String?, color: Color?, action_url: String?, event_type: String?, instance: Int64?, url: String?, context: NSManagedObjectContext) {
+    func addEventStored(isCustomEvent: Bool, event_name: String?, event_description: String?, lexue_id: String?, timestart: Date?, timeusermidnight: Date?, mindaytimestamp: Date?, course_id: String?, course_name: String?, color: Color?, action_url: String?, event_type: String?, instance: Int64?, url: String?, context: NSManagedObjectContext) -> EventStored {
         let eventStored = EventStored(context: context)
         eventStored.id = UUID()
         eventStored.action_url = action_url
@@ -335,6 +335,7 @@ class DataController: ObservableObject {
         eventStored.url = url
         eventStored.finish = false
         save(context: context)
+        return eventStored
     }
     
     func GetEventTypeDescription(_ event_type: String) -> String {
@@ -368,20 +369,6 @@ class DataController: ObservableObject {
         return nil
     }
     
-//    func updateEventFinish(id: UUID, isFinish: Bool, context: NSManagedObjectContext) {
-//        let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
-//        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
-//        do {
-//            let results = try context.fetch(request)
-//            for i in 0..<results.count {
-//                results[i].finish = isFinish
-//            }
-//            save(context: context)
-//        } catch {
-//            print("查询消息列表失败：\(error)")
-//        }
-//    }
-    
     func findEventStoredByLexueId(lexue_event_id: String, context: NSManagedObjectContext) -> EventStored? {
         let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
         request.predicate = NSPredicate(format: "lexue_event_id == %@", lexue_event_id)
@@ -407,6 +394,38 @@ class DataController: ObservableObject {
         }
         
         return ret
+    }
+    
+    func queryAllLexueDP_RecordEvent(context: NSManagedObjectContext) -> [LexueDP_RecordEvent] {
+        let request: NSFetchRequest<LexueDP_RecordEvent> = LexueDP_RecordEvent.fetchRequest()
+        var ret: [LexueDP_RecordEvent] = [LexueDP_RecordEvent]()
+        do {
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            print("查询LexueDP_RecordEvent失败1：\(error)")
+        }
+        return ret
+    }
+    
+    func getLexueDP_RecordEventByUUID(eventUUID: UUID, context: NSManagedObjectContext) -> LexueDP_RecordEvent? {
+        let request: NSFetchRequest<LexueDP_RecordEvent> = LexueDP_RecordEvent.fetchRequest()
+        request.predicate = NSPredicate(format: "eventUUID == %@", eventUUID as CVarArg)
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                return results.first
+            }
+        } catch {
+            print("查询LexueDP_RecordEvent失败2：\(error)")
+        }
+        return nil
+    }
+    
+    func addLexueDP_RecordEvent(eventUUID: UUID, context: NSManagedObjectContext) {
+        let record = LexueDP_RecordEvent(context: context)
+        record.eventUUID = eventUUID
+        save(context: context)
     }
     
 }
