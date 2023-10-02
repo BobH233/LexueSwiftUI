@@ -168,7 +168,6 @@ private struct EventListItemView: View {
     @Binding var title: String?
     @Binding var description: String?
     @Binding var endtime: Date?
-    // var endtime: String = "DDL结束时间"
     @Binding var courseName: String?
     var backgroundCol: Color = .green
     func GetHtmlText(_ html: String) -> String {
@@ -352,6 +351,12 @@ struct EventListView: View {
                     EventPreferenceSettingView()
                 })
                 .hidden()
+            }
+            .onChange(of: showTodayOnly) { newVal in
+                SettingStorage.shared.event_showTodayOnly = showTodayOnly
+            }
+            .onAppear {
+                showTodayOnly = SettingStorage.shared.event_showTodayOnly
             }
             .navigationTitle("最近事件")
         }

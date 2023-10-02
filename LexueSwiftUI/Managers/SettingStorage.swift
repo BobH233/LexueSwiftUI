@@ -86,14 +86,21 @@ class SettingStorage: ObservableObject {
     // 存储事件设置：提前提醒小时数
     @Published var event_preHour: Int {
         didSet {
-            UserDefaults.standard.set(event_midnightFixTime, forKey: "setting.events.event_preHour")
+            UserDefaults.standard.set(event_preHour, forKey: "setting.events.event_preHour")
         }
     }
     
     // 存储事件设置：提前提醒分钟数
     @Published var event_preMinute: Int {
         didSet {
-            UserDefaults.standard.set(event_midnightFixTime, forKey: "setting.events.event_preMinute")
+            UserDefaults.standard.set(event_preMinute, forKey: "setting.events.event_preMinute")
+        }
+    }
+    
+    // 存储事件设置：是否只显示今天事件
+    @Published var event_showTodayOnly: Bool {
+        didSet {
+            UserDefaults.standard.set(event_showTodayOnly, forKey: "setting.events.event_showTodayOnly")
         }
     }
     
@@ -166,6 +173,11 @@ class SettingStorage: ObservableObject {
             event_preMinute = stored
         } else {
             event_preMinute = 0
+        }
+        if let stored = UserDefaults.standard.value(forKey: "setting.events.event_showTodayOnly") as? Bool {
+            event_showTodayOnly = stored
+        } else {
+            event_showTodayOnly = false
         }
     }
 }
