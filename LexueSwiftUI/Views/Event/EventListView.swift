@@ -10,6 +10,7 @@ import SwiftSoup
 
 private struct TopCardView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
+    @Environment(\.scenePhase) private var scenePhase
     @State var greetingWord = "早上好，"
     @State var todayEventCount = 0
     @State var weekEventCount = 0
@@ -51,7 +52,7 @@ private struct TopCardView: View {
                         Spacer()
                     }
                     HStack {
-                        Text("10月1日 星期日")
+                        Text(dateString)
                             .font(.system(size: 25))
                             .bold()
                             .foregroundColor(.white)
@@ -101,12 +102,26 @@ private struct TopCardView: View {
         }
         .onAppear {
             greetingWord = getGreetingWord()
+            EventManager.shared.LoadEventList()
             todayEventCount = EventManager.shared.GetTodayEventCount(today: Date())
             weekEventCount = EventManager.shared.GetWeekEventCount(todayInWeek: Date())
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "M月d日 EEEE"
             dateString = dateFormatter.string(from: .now)
-            
+        }
+        .onChange(of: scenePhase) { newPhase in
+            switch newPhase {
+            case .active:
+                greetingWord = getGreetingWord()
+                EventManager.shared.LoadEventList()
+                todayEventCount = EventManager.shared.GetTodayEventCount(today: Date())
+                weekEventCount = EventManager.shared.GetWeekEventCount(todayInWeek: Date())
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "M月d日 EEEE"
+                dateString = dateFormatter.string(from: .now)
+            @unknown default:
+                print("Unknow phase...")
+            }
         }
     }
 }
