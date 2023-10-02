@@ -114,7 +114,7 @@ private struct TopCardView: View {
             switch newPhase {
             case .active:
                 greetingWord = getGreetingWord()
-                EventManager.shared.LoadEventList()
+                EventManager.shared.LoadEventList(context: managedObjContext)
                 todayEventCount = EventManager.shared.GetTodayEventCount(today: Date())
                 weekEventCount = EventManager.shared.GetWeekEventCount(todayInWeek: Date())
                 let dateFormatter = DateFormatter()

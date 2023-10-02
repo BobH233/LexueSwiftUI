@@ -109,18 +109,25 @@ struct ViewEventView: View {
                         }
                     }
                 }
-                Section("操作") {
-                    if let courseId = event_obj!.course_id, let courseInfo = GetCourseById(courseId) {
-                        NavigationLink("\(courseInfo.fullname ?? "")") {
-                            CourseDetailView(courseId: courseId, courseInfo: courseInfo, courseName: courseInfo.fullname ?? "")
+                if !event_obj!.isCustomEvent {
+                    Section("操作") {
+                        if let courseId = event_obj!.course_id, let courseInfo = GetCourseById(courseId) {
+                            NavigationLink("\(courseInfo.fullname ?? "")") {
+                                CourseDetailView(courseId: courseId, courseInfo: courseInfo, courseName: courseInfo.fullname ?? "")
+                            }
                         }
-                    }
-                    if let action_url = event_obj!.action_url {
-                        NavigationLink("打开事件链接") {
-                            LexueBroswerView(url: action_url)
+                        if let action_url = event_obj!.action_url {
+                            NavigationLink("打开事件链接") {
+                                LexueBroswerView(url: action_url)
+                            }
                         }
                     }
                 }
+            }
+        }
+        .onChange(of: showEditView) { newVal in
+            if !newVal {
+                dismiss()
             }
         }
         .onAppear {

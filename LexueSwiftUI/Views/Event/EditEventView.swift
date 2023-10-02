@@ -16,45 +16,121 @@ struct EditEventView: View {
     @State var event_uuid: UUID
     @State var event_obj: EventStored? = nil
     
-    // 是否已经是到期事件了
-    func IsExpired(event: EventStored) -> Bool {
-        return event.timestart! < Date.now
+    @State private var eventName: String = ""
+    @State private var eventDescription: String = ""
+    @State private var startDate = Date.now
+    @State private var courseList = CourseManager.shared.CourseDisplayList
+    @State private var withCourse: Bool = false
+    @State private var selectCourseId: String = ""
+    @State private var color: Color = .blue
+    
+    // 有 作业 assignment 考试 exam 常规 general
+    @State private var eventType: String = "assignment"
+    
+    func GetCourseName(_ id: String) -> String? {
+        for course in courseList {
+            if course.id == id {
+                return course.fullname
+            }
+        }
+        return "未知"
     }
+    
     var body: some View {
         Form {
             if event_obj != nil {
-                Section() {
-                    if IsExpired(event: event_obj!) {
-                        Text("事件已到期")
-                    } else {
-                        if event_obj!.finish {
-                            Button(action: {
-                                withAnimation {
-                                    EventManager.shared.FinishEvent(id: event_uuid, isFinish: false, context: managedObjContext)
+                if event_obj!.isCustomEvent {
+                    Section("基本设置") {
+                        HStack {
+                            Text("事件名称")
+                            Spacer()
+                            TextField("输入事件名称", text: $eventName)
+                        }
+                        HStack {
+                            Text("事件备注")
+                            Spacer()
+                            TextField("输入事件备注(如地点、人数等)", text: $eventDescription)
+                        }
+                        DatePicker(selection: $startDate, displayedComponents: [.date, .hourAndMinute]) {
+                            Text("时间")
+                        }
+                        ColorPicker("强调色", selection: $color)
+                        Picker("类型", selection: $eventType) {
+                            Text("常规")
+                                .tag("general")
+                            Text("作业")
+                                .tag("assignment")
+                            Text("考试")
+                                .tag("exam")
+                        }
+                    }
+                    if courseList.count > 0 {
+                        Section("关联课程") {
+                            Toggle("关联课程", isOn: $withCourse)
+                            if withCourse {
+                                Picker("课程", selection: $selectCourseId) {
+                                    ForEach(courseList) { item in
+                                        Text("\(item.fullname ?? "")")
+                                            .tag(item.id)
+                                    }
                                 }
-                                dismiss()
-                            }) {
-                                Text("设置为未完成")
-                                    .foregroundColor(.red)
-                            }
-                        } else {
-                            Button(action: {
-                                withAnimation {
-                                    EventManager.shared.FinishEvent(id: event_uuid, isFinish: true, context: managedObjContext)
-                                }
-                                dismiss()
-                            }) {
-                                Text("设置为已完成")
-                                    .foregroundColor(.green)
                             }
                         }
+                    }
+                    Button("修改日程") {
+                        if eventName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                            globalVar.alertTitle = "事件名称为空"
+                            globalVar.alertContent = "请至少指定事件名称"
+                            globalVar.showAlert = true
+                            return
+                        }
+                        let eventName = eventName.trimmingCharacters(in: .whitespacesAndNewlines)
+                        let description = eventDescription.trimmingCharacters(in: .whitespacesAndNewlines)
+                        let courseId = withCourse ? selectCourseId : nil
+                        let courseName = withCourse ? GetCourseName(selectCourseId) : nil
+                        let to_update = DataController.shared.findEventById(id: event_uuid, context: managedObjContext)
+                        to_update?.name = eventName
+                        to_update?.timestart = startDate
+                        to_update?.event_description = description
+                        to_update?.event_type = eventType
+                        to_update?.course_id = courseId
+                        to_update?.course_name = courseName
+                        to_update?.color = color.toHex()
+                        DataController.shared.save(context: managedObjContext)
+                        dismiss()
+                    }
+                } else {
+                    Section("基本设置") {
+                        ColorPicker("强调色", selection: $color)
+                    }
+                    Button("修改日程") {
+                        let to_update = DataController.shared.findEventById(id: event_uuid, context: managedObjContext)
+                        to_update?.color = color.toHex()
+                        DataController.shared.save(context: managedObjContext)
+                        dismiss()
                     }
                 }
             }
         }
+        .navigationTitle("编辑事件")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
+            if let firstCourse = courseList.first {
+                selectCourseId = firstCourse.id
+            }
             if let event = DataController.shared.findEventById(id: event_uuid, context: managedObjContext) {
                 event_obj = event
+                if let event_obj = event_obj, event_obj.isCustomEvent {
+                    eventName = event_obj.name!
+                    eventDescription = event_obj.event_description!
+                    startDate = event_obj.timestart!
+                    if let courseId = event_obj.course_id {
+                        withCourse = true
+                        selectCourseId = courseId
+                    }
+                    color = Color(hex: event_obj.color!) ?? .blue
+                    eventType = event_obj.event_type!
+                }
             } else {
                 dismiss()
                 globalVar.alertTitle = "无法找到这个事件\(event_uuid.uuidString)"
