@@ -11,6 +11,7 @@ import SwiftSoup
 private struct TopCardView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.managedObjectContext) var managedObjContext
     @State var greetingWord = "早上好，"
     @State var todayEventCount = 0
     @State var weekEventCount = 0
@@ -102,7 +103,7 @@ private struct TopCardView: View {
         }
         .onAppear {
             greetingWord = getGreetingWord()
-            EventManager.shared.LoadEventList()
+            EventManager.shared.LoadEventList(context: managedObjContext)
             todayEventCount = EventManager.shared.GetTodayEventCount(today: Date())
             weekEventCount = EventManager.shared.GetWeekEventCount(todayInWeek: Date())
             let dateFormatter = DateFormatter()
