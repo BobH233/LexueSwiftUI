@@ -20,7 +20,34 @@ class DataController: ObservableObject {
                 exit(-1)
             }
         }
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
     }
+    
+    @objc private func contextDidSave(_ notification: Notification) {
+        // 这个方法会在一个Context保存数据后被调用，我们可以在这里通知其他Context进行更新
+        container.viewContext.perform {
+            self.container.viewContext.mergeChanges(fromContextDidSave: notification)
+        }
+        context1.perform {
+            self.context1.mergeChanges(fromContextDidSave: notification)
+        }
+        context2.perform {
+            self.context2.mergeChanges(fromContextDidSave: notification)
+        }
+    }
+    
+    lazy var context1: NSManagedObjectContext = {
+        let context = container.newBackgroundContext()
+        context.automaticallyMergesChangesFromParent = true
+        return context
+    }()
+    
+    lazy var context2: NSManagedObjectContext = {
+        let context = container.newBackgroundContext()
+        context.automaticallyMergesChangesFromParent = true
+        return context
+    }()
     
     func save(context: NSManagedObjectContext) {
         do {

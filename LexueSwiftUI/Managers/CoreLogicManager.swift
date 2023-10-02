@@ -8,6 +8,7 @@
 import Foundation
 import SwiftSoup
 import SwiftUI
+import CoreData
 
 // 负责处理app的一些核心逻辑，比如登录，刷新等
 class CoreLogicManager {
@@ -38,7 +39,7 @@ class CoreLogicManager {
             switch tmpRes {
             case .success(let events):
                 DispatchQueue.main.async {
-                    EventManager.shared.DiffAndUpdateCacheEvent(events)
+                    EventManager.shared.DiffAndUpdateCacheEvent(events, context: DataController.shared.context1)
                 }
             case .failure(_):
                 print("fail to fetch \(target_date_comp)")

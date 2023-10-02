@@ -71,8 +71,10 @@ class EventManager: ObservableObject {
     func FinishEvent(id: UUID, isFinish: Bool, context: NSManagedObjectContext) {
         let event = DataController.shared.findEventById(id: id, context: context)
         event?.finish = isFinish
-        DataController.shared.save(context: context)
-        LoadEventList(context: context)
+        DispatchQueue.main.async {
+            DataController.shared.save(context: context)
+            self.LoadEventList(context: context)
+        }
     }
     
     // 判断是否是属于今天的ddl的逻辑，注意次日的凌晨的ddl也要考虑，现在暂时先这样写
@@ -91,7 +93,7 @@ class EventManager: ObservableObject {
     }
     
     // 对比新的事件列表，如果缓存没有则加入，如果缓存有则更新
-    func DiffAndUpdateCacheEvent(_ newEvents: [LexueAPI.EventInfo]) {
+    func DiffAndUpdateCacheEvent(_ newEvents: [LexueAPI.EventInfo], context: NSManagedObjectContext = DataController.shared.container.viewContext) {
         for newEvent in newEvents {
             let tryFind = DataController.shared.findEventStoredByLexueId(lexue_event_id: newEvent.id, context: DataController.shared.container.viewContext)
             if let found = tryFind {
@@ -108,10 +110,10 @@ class EventManager: ObservableObject {
                 found.timestart = newEvent.timestart
                 found.timeusermidnight = newEvent.timeusermidnight
                 found.url = newEvent.url
-                DataController.shared.save(context: DataController.shared.container.viewContext)
+                DataController.shared.save(context: context)
             } else {
                 // print("Add event \(newEvent.id)")
-                DataController.shared.addEventStored(isCustomEvent: false, event_name: newEvent.name, event_description: newEvent.description, lexue_id: newEvent.id, timestart: newEvent.timestart, timeusermidnight: newEvent.timeusermidnight, mindaytimestamp: newEvent.mindaytimestamp, course_id: newEvent.course?.id, course_name: newEvent.course?.fullname, color: .green, action_url: newEvent.action_url, event_type: newEvent.eventtype, instance: Int64(newEvent.instance ?? 0), url: newEvent.url, context: DataController.shared.container.viewContext)
+                DataController.shared.addEventStored(isCustomEvent: false, event_name: newEvent.name, event_description: newEvent.description, lexue_id: newEvent.id, timestart: newEvent.timestart, timeusermidnight: newEvent.timeusermidnight, mindaytimestamp: newEvent.mindaytimestamp, course_id: newEvent.course?.id, course_name: newEvent.course?.fullname, color: .green, action_url: newEvent.action_url, event_type: newEvent.eventtype, instance: Int64(newEvent.instance ?? 0), url: newEvent.url, context: context)
             }
         }
         LoadEventList()

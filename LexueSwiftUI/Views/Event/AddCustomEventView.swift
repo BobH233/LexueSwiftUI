@@ -92,8 +92,8 @@ struct AddCustomEventView: View {
                 dismiss()
             }
         }
-//        .navigationTitle("添加日程")
-//        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("添加日程")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

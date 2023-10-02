@@ -120,7 +120,7 @@ private struct TopCardView: View {
                 dateFormatter.dateFormat = "M月d日 EEEE"
                 dateString = dateFormatter.string(from: .now)
             @unknown default:
-                print("Unknow phase...")
+                break
             }
         }
     }
@@ -289,6 +289,8 @@ struct EventListView: View {
     @State var showTodayOnly: Bool = false
     @State var showSettingView: Bool = false
     @State var showNewEventView: Bool = false
+    @State var curSelectEventUUID: UUID = UUID()
+    @State var showEditEventView: Bool = false
     //  @Binding var tabSelection: Int
     var body: some View {
         NavigationView {
@@ -337,14 +339,14 @@ struct EventListView: View {
                         if !showTodayOnly || EventManager.IsTodayEvent(event: event.wrappedValue, today: .now) {
                             EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
                                 .onTapGesture {
-                                    
+                                    curSelectEventUUID = event.id!
+                                    showEditEventView = true
                                 }
                         }
                     }
                 }
                 .onAppear {
-//                    print("EventManager.shared.LoadEventList()")
-                    EventManager.shared.LoadEventList()
+                    EventManager.shared.LoadEventList(context: managedObjContext)
                 }
                 .padding(.top, 20)
                 .padding(.horizontal, 15)
@@ -361,7 +363,8 @@ struct EventListView: View {
                         ForEach($eventManager.expiredEventDisplayList, id: \.id) { event in
                             EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
                                 .onTapGesture {
-                                    
+                                    curSelectEventUUID = event.id!
+                                    showEditEventView = true
                                 }
                         }
                     }
@@ -374,6 +377,10 @@ struct EventListView: View {
                 .hidden()
                 NavigationLink("", isActive: $showNewEventView, destination: {
                     AddCustomEventView()
+                })
+                .hidden()
+                NavigationLink("", isActive: $showEditEventView, destination: {
+                    EditEventView(event_uuid: curSelectEventUUID)
                 })
                 .hidden()
             }
