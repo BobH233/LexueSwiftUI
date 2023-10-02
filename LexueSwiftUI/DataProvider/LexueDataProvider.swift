@@ -44,31 +44,31 @@ class LexueDataProvider: DataProvider {
             // 这样就可以推送消息了
             var msg = MessageBodyItem(type: .text)
             msg.text_data = "检测到一个新的事件\n事件名称: \(event.name!) \n截止时间: \(GetFullDisplayTime(event.timestart!))\n请注意把握时间！"
-            MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: msg, date: Date(), context: DataController.shared.context2)
+            MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: msg, date: Date(), context: DataController.shared.container.viewContext)
             if let url = event.action_url {
                 var url_msg = MessageBodyItem(type: .link)
                 url_msg.link_title = event.name!
                 url_msg.link = url
-                MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: url_msg, date: Date(), context: DataController.shared.context2)
+                MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: url_msg, date: Date(), context: DataController.shared.container.viewContext)
             }
         } else {
             // 如果不对应具体某个课程，那么就由乐学来发送
             var msg = MessageBodyItem(type: .text)
             msg.text_data = "检测到一个新的事件\n事件名称: \(event.name!) \n截止时间: \(GetFullDisplayTime(event.timestart!))\n请注意把握时间！"
-            MessageManager.shared.PushMessageWithContactCreation(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date(), context: DataController.shared.context2)
+            MessageManager.shared.PushMessageWithContactCreation(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date(), context: DataController.shared.container.viewContext)
         }
     }
     
     func CheckEventUpdate() async {
         // 检查是否有新增事件
-        let records = DataController.shared.queryAllLexueDP_RecordEvent(context: DataController.shared.context2)
-        let events = DataController.shared.queryAllEventStored(context: DataController.shared.context2)
+        let records = DataController.shared.queryAllLexueDP_RecordEvent(context: DataController.shared.container.viewContext)
+        let events = DataController.shared.queryAllEventStored(context: DataController.shared.container.viewContext)
         var recordedSet = Set<UUID>()
         if records.count == 0 {
             // 新使用的，第一次，所以直接添加进去事件即可
             for event in events {
                 print("First time: push \(event.name!)")
-                DataController.shared.addLexueDP_RecordEvent(eventUUID: event.id!, context: DataController.shared.context2)
+                DataController.shared.addLexueDP_RecordEvent(eventUUID: event.id!, context: DataController.shared.container.viewContext)
             }
         } else {
             for record in records {
@@ -79,7 +79,7 @@ class LexueDataProvider: DataProvider {
                 if !recordedSet.contains(event.id!) {
                     // 检测到新的事件
                     print("New event!:  \(event.name!)")
-                    DataController.shared.addLexueDP_RecordEvent(eventUUID: event.id!, context: DataController.shared.context2)
+                    DataController.shared.addLexueDP_RecordEvent(eventUUID: event.id!, context: DataController.shared.container.viewContext)
                     HandleNewEvent(event: event)
                 }
             }

@@ -29,25 +29,8 @@ class DataController: ObservableObject {
         container.viewContext.perform {
             self.container.viewContext.mergeChanges(fromContextDidSave: notification)
         }
-        context1.perform {
-            self.context1.mergeChanges(fromContextDidSave: notification)
-        }
-        context2.perform {
-            self.context2.mergeChanges(fromContextDidSave: notification)
-        }
     }
     
-    lazy var context1: NSManagedObjectContext = {
-        let context = container.newBackgroundContext()
-        context.automaticallyMergesChangesFromParent = true
-        return context
-    }()
-    
-    lazy var context2: NSManagedObjectContext = {
-        let context = container.newBackgroundContext()
-        context.automaticallyMergesChangesFromParent = true
-        return context
-    }()
     
     func save(context: NSManagedObjectContext) {
         do {

@@ -39,7 +39,7 @@ class CoreLogicManager {
             switch tmpRes {
             case .success(let events):
                 DispatchQueue.main.async {
-                    EventManager.shared.DiffAndUpdateCacheEvent(events, context: DataController.shared.context1)
+                    EventManager.shared.DiffAndUpdateCacheEvent(events, context: DataController.shared.container.viewContext)
                 }
             case .failure(_):
                 print("fail to fetch \(target_date_comp)")
