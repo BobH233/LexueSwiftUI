@@ -872,8 +872,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -888,8 +888,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1554,8 +1554,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1570,8 +1570,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>

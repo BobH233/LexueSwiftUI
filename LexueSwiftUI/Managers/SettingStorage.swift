@@ -70,11 +70,33 @@ class SettingStorage: ObservableObject {
     }
     
     // 存储事件设置：凌晨跨越
-    @Published var midnightFixTime: Int {
+    @Published var event_midnightFixTime: Int {
         didSet {
-            UserDefaults.standard.set(midnightFixTime, forKey: "setting.events.midnightFixTime")
+            UserDefaults.standard.set(event_midnightFixTime, forKey: "setting.events.event_midnightFixTime")
         }
     }
+    
+    // 存储事件设置：开启通知
+    @Published var event_enableNotification: Bool {
+        didSet {
+            UserDefaults.standard.set(event_enableNotification, forKey: "setting.events.event_enableNotification")
+        }
+    }
+    
+    // 存储事件设置：提前提醒小时数
+    @Published var event_preHour: Int {
+        didSet {
+            UserDefaults.standard.set(event_midnightFixTime, forKey: "setting.events.event_preHour")
+        }
+    }
+    
+    // 存储事件设置：提前提醒分钟数
+    @Published var event_preMinute: Int {
+        didSet {
+            UserDefaults.standard.set(event_midnightFixTime, forKey: "setting.events.event_preMinute")
+        }
+    }
+    
     
     private init() {
         if let stored = UserDefaults.standard.value(forKey: "setting.preferColorScheme") as? Int {
@@ -125,10 +147,25 @@ class SettingStorage: ObservableObject {
         } else {
             agreePrivacyPolicy = false
         }
-        if let stored = UserDefaults.standard.value(forKey: "setting.events.midnightFixTime") as? Int {
-            midnightFixTime = stored
+        if let stored = UserDefaults.standard.value(forKey: "setting.events.event_midnightFixTime") as? Int {
+            event_midnightFixTime = stored
         } else {
-            midnightFixTime = 6
+            event_midnightFixTime = 6
+        }
+        if let stored = UserDefaults.standard.value(forKey: "setting.events.event_enableNotification") as? Bool {
+            event_enableNotification = stored
+        } else {
+            event_enableNotification = true
+        }
+        if let stored = UserDefaults.standard.value(forKey: "setting.events.event_preHour") as? Int {
+            event_preHour = stored
+        } else {
+            event_preHour = 6
+        }
+        if let stored = UserDefaults.standard.value(forKey: "setting.events.event_preMinute") as? Int {
+            event_preMinute = stored
+        } else {
+            event_preMinute = 0
         }
     }
 }
