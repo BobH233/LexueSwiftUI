@@ -211,6 +211,9 @@ class AppStatusManager {
     
     
     func OnAppTickEveryMinute() {
+        if !GlobalVariables.shared.isLogin {
+            return
+        }
         // 刷新sesskey
         Task {
             print("OnTick60s for get sesskey...")
