@@ -396,6 +396,7 @@ struct EventListView: View {
                             Section {
                                 Button(role: .destructive, action: {
                                     EventManager.shared.DeleteAllExpiredEvent(context: managedObjContext)
+                                    EventManager.shared.LoadEventList()
                                 }) {
                                     Label("删除所有已到期事件", systemImage: "trash.fill")
                                 }
