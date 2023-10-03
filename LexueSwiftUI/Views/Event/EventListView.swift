@@ -382,6 +382,7 @@ struct EventListView: View {
                     NavigationLink("", isActive: $showDeletedEventView, destination: {
                         DeletedEventView()
                     })
+                    .isDetailLink(false)
                     .hidden()
                 }
                 .onChange(of: showTodayOnly) { newVal in
@@ -429,6 +430,7 @@ struct EventListView: View {
                         }
                     }
                 }
+                .navigationViewStyle(.stack)
                 .navigationTitle("最近事件")
                 .navigationBarTitleDisplayMode(.large)
             }
