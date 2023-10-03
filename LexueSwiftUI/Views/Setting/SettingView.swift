@@ -100,7 +100,7 @@ struct SettingView: View {
                     Section(header: Text("应用设置")) {
                         HStack{
                             NavigationLink(destination: {
-                                
+                                DataProviderSettingView()
                             }, label: {
                                 Text("消息源设定")
                             })

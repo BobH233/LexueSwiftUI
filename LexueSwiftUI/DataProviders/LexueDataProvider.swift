@@ -12,6 +12,14 @@ import Foundation
         还有
  */
 class LexueDataProvider: DataProvider {
+    var providerId: String {
+        return "lexue_service"
+    }
+    
+    func get_default_enabled() -> Bool {
+        return true
+    }
+    
     func get_default_allowMessage() -> Bool {
         return true
     }
@@ -20,6 +28,7 @@ class LexueDataProvider: DataProvider {
         return true
     }
     
+    var enabled: Bool = true
     var allowMessage: Bool = true
     var allowNotification: Bool = true
     
@@ -112,6 +121,9 @@ class LexueDataProvider: DataProvider {
     }
     
     func refresh() async {
+        if !enabled {
+            return
+        }
         await CheckEventUpdate()
     }
     

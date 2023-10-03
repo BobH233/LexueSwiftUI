@@ -1951,8 +1951,8 @@
             filePath = "LexueSwiftUI/DataProvider/LexueDataProvider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "HandleNewEvent(event:)"
             landmarkType = "7">
             <Locations>
@@ -2063,8 +2063,8 @@
             filePath = "LexueSwiftUI/DataProvider/LexueDataProvider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "HandleNewEvent(event:)"
             landmarkType = "7">
          </BreakpointContent>

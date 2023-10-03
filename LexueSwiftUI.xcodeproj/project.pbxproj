@@ -66,6 +66,7 @@
 		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
 		47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927882AA786ED00ABDC53 /* DebugDataView.swift */; };
 		47B2A8312AC9C9D700957DF0 /* EventPreferenceSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B2A8302AC9C9D700957DF0 /* EventPreferenceSettingView.swift */; };
+		47B411792ACBD96300AC0B5E /* DataProviderSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B411782ACBD96300AC0B5E /* DataProviderSettingView.swift */; };
 		47B4420B2AC5C0B600EE03A9 /* PrivacyStatement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */; };
 		47B4420D2AC5C34100EE03A9 /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B4420C2AC5C34100EE03A9 /* PrivacyPolicyView.swift */; };
 		47B442102AC6CDC400EE03A9 /* UserAgreement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B4420F2AC6CDC400EE03A9 /* UserAgreement.swift */; };
@@ -192,6 +193,7 @@
 		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
 		47A927882AA786ED00ABDC53 /* DebugDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugDataView.swift; sourceTree = "<group>"; };
 		47B2A8302AC9C9D700957DF0 /* EventPreferenceSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPreferenceSettingView.swift; sourceTree = "<group>"; };
+		47B411782ACBD96300AC0B5E /* DataProviderSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderSettingView.swift; sourceTree = "<group>"; };
 		47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyStatement.swift; sourceTree = "<group>"; };
 		47B4420C2AC5C34100EE03A9 /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 		47B4420F2AC6CDC400EE03A9 /* UserAgreement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgreement.swift; sourceTree = "<group>"; };
@@ -262,14 +264,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		470AFC642ACB15DF004C7F70 /* DataProvider */ = {
+		470AFC642ACB15DF004C7F70 /* DataProviders */ = {
 			isa = PBXGroup;
 			children = (
 				470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */,
 				470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */,
 				470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */,
 			);
-			path = DataProvider;
+			path = DataProviders;
 			sourceTree = "<group>";
 		};
 		47196FB92AC54C6E00979DFE /* Frameworks */ = {
@@ -336,7 +338,7 @@
 		473BAE7E2AA48DAA00968C3C /* LexueSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				470AFC642ACB15DF004C7F70 /* DataProvider */,
+				470AFC642ACB15DF004C7F70 /* DataProviders */,
 				47BD519A2AC5B3AC0029F9DB /* UMSwift */,
 				47F4F28C2AC086590047B395 /* PhotoSelectAndCrop */,
 				47CBA23F2AA5CE2F009F9242 /* Models */,
@@ -406,6 +408,7 @@
 				4791050E2AB0ACD4004FD26C /* LoginView.swift */,
 				475EDED32AB60697008486F0 /* ProfileView.swift */,
 				47F4F2872AC080100047B395 /* AvatarSettingView.swift */,
+				47B411782ACBD96300AC0B5E /* DataProviderSettingView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */,
 				472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */,
 				4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */,
+				47B411792ACBD96300AC0B5E /* DataProviderSettingView.swift in Sources */,
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,
 				479129C22AC30A3A00F811F9 /* LexueBroswerView.swift in Sources */,
