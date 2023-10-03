@@ -91,7 +91,9 @@ class MessageManager {
             DataController.shared.save(context: context)
         }
         if let contact = DataController.shared.findContactStored(contactUid: senderUid, context: context), notify {
-            LocalNotificationManager.shared.PushNotification(title: contact.GetDisplayName(), body: GetMessageTextDecsription(messageBody: msgBody), userInfo: ["cmd": "contactMessage", "contactUid": contact.contactUid!, "msgId": msg.id!.uuidString], interval: 0.1)
+            if !contact.silent {
+                LocalNotificationManager.shared.PushNotification(title: contact.GetDisplayName(), body: GetMessageTextDecsription(messageBody: msgBody), userInfo: ["cmd": "contactMessage", "contactUid": contact.contactUid!, "msgId": msg.id!.uuidString], interval: 0.1)
+            }
         }
     }
     
