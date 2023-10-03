@@ -16,7 +16,7 @@ enum MessageBodyType: Int, Codable {
     case time = 3
     
     // 留给未来拓展富文本消息用的，目前暂时不使用
-    case unknow1 = 4
+    case event_notification = 4
     case unknow2 = 5
     case unknow3 = 6
     case unknow4 = 7
@@ -39,6 +39,9 @@ struct MessageBodyItem: Codable, Equatable {
     var link: String?
     var link_title: String?
     var time_text: String?
+    var event_name: String?
+    var event_uuid: UUID?
+    var event_starttime: String?
 }
 
 struct ContactMessage: Codable, Identifiable, Equatable {

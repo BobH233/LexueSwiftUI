@@ -264,6 +264,73 @@ private struct TimeView: View, BubbleBaseColorConfig {
     }
 }
 
+private struct BubbleEventNotificationMessageView: View, BubbleBaseColorConfig {
+    @Environment(\.colorScheme) var sysColorScheme
+    let message: ContactMessage
+    @State var sendDate: String = ""
+    @State var showEventDetail: Bool = false
+    var body: some View {
+        ChatBubble(direction: .left) {
+            NavigationLink("", isActive: $showEventDetail, destination: {
+                ViewEventView(event_uuid: message.messageBody.event_uuid ?? UUID())
+            })
+            VStack(alignment: .leading) {
+                HStack {
+                    Text("事件提醒")
+                        .font(.title)
+                        .bold()
+                    Spacer()
+                }
+                HStack {
+                    Text("检测到新增乐学事件，请注意时间")
+                        .font(.system(size: 24))
+                        .multilineTextAlignment(.leading)
+                    Spacer()
+                }
+                
+                HStack(alignment: .top) {
+                    Text("事件名称:")
+                        .bold()
+                        .font(.system(size: 20))
+                    Text(message.messageBody.event_name ?? "无名称")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 20))
+                    Spacer()
+                }
+                HStack(alignment: .top) {
+                    Text("截止时间:")
+                        .bold()
+                        .font(.system(size: 20))
+                    Text(message.messageBody.event_starttime ?? "[错误]")
+                        .foregroundColor(.blue)
+                        .font(.system(size: 20))
+                    Spacer()
+                }
+                Button {
+                    showEventDetail.toggle()
+                } label: {
+                    Text("查看事件")
+                        .font(.system(size: 15))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 30)
+                }
+                .tint(.blue)
+                .buttonStyle(.borderedProminent)
+            }
+            .padding(.vertical, 10)
+            .padding(.horizontal, 20)
+            .background(BubbleColor)
+        }
+        .onAppear {
+            sendDate = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
+        }
+        .contextMenu(ContextMenu(menuItems: {
+            Label("发送日期: \(sendDate)", systemImage: "clock.arrow.circlepath")
+        }))
+        .padding(.leading, 10)
+    }
+}
+
 private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
     @Environment(\.colorScheme) var sysColorScheme
     let message: ContactMessage
@@ -357,7 +424,11 @@ struct MessageDetailView: View {
                             } else if message.messageBody.type == .time {
                                 TimeView(message: message)
                                     .id(message.id)
-                            } else {
+                            } else if message.messageBody.type == .event_notification {
+                                BubbleEventNotificationMessageView(message: message)
+                                    .id(message.id)
+                            }
+                            else {
                                 BubbleUnkowTypeMessageView(type: message.messageBody.type.rawValue)
                                     .id(message.id)
                             }
@@ -419,4 +490,55 @@ struct MessageDetailView: View {
             messages.removeAll()
         }
     }
+}
+
+#Preview {
+    VStack(alignment: .leading) {
+        HStack {
+            Text("事件提醒")
+                .font(.title)
+                .bold()
+            Spacer()
+        }
+        .background(.red)
+        
+        HStack {
+            Text("检测到新增乐学事件，请注意时间")
+                .font(.system(size: 24))
+                .padding(0)
+                .background(.green)
+                .lineLimit(nil)
+            Spacer()
+        }
+        
+        HStack(alignment: .top) {
+            Text("事件名称:")
+                .bold()
+                .font(.system(size: 20))
+            Text("挨饿挂翁哦爱你改翁a额哇哦噶额噶额尕娃恶搞哇哦额")
+                .font(.title3)
+            Spacer()
+        }
+        HStack {
+            Text("截止时间:")
+                .bold()
+                .font(.system(size: 20))
+            Text("aegaweawegaweaegaegaegawgwaegawegawegawegawegawegawegg")
+                .font(.title3)
+            Spacer()
+        }
+        Button {
+            
+        } label: {
+            Text("查看事件")
+                .font(.system(size: 15))
+                .frame(maxWidth: .infinity)
+                .frame(height: 30)
+        }
+        .tint(.blue)
+        .buttonStyle(.borderedProminent)
+        
+    }
+    .frame(width: 300)
+    .background(Color.red)
 }

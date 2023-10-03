@@ -59,6 +59,9 @@
     </entity>
     <entity name="MessageStored" representedClassName="MessageStored" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="event_name" optional="YES" attributeType="String"/>
+        <attribute name="event_starttime" optional="YES" attributeType="String"/>
+        <attribute name="event_uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="image_data" optional="YES" attributeType="String"/>
         <attribute name="link_data" optional="YES" attributeType="String"/>

@@ -188,8 +188,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
+            startingLineNumber = "464"
+            endingLineNumber = "464"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -251,8 +251,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "blurSearchMessage(keyword:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -315,8 +315,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "getAllContacts(context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1951,8 +1951,8 @@
             filePath = "LexueSwiftUI/DataProvider/LexueDataProvider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "HandleNewEvent(event:)"
             landmarkType = "7">
             <Locations>

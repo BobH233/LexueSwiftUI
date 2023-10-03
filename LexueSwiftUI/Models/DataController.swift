@@ -51,6 +51,9 @@ class DataController: ObservableObject {
         ret.messageBody.link_title = origin.link_title
         ret.messageBody.link = origin.link_data
         ret.messageBody.text_data = origin.text_data
+        ret.messageBody.event_name = origin.event_name
+        ret.messageBody.event_uuid = origin.event_uuid
+        ret.messageBody.event_starttime = origin.event_starttime
         return ret
     }
     
@@ -243,7 +246,7 @@ class DataController: ObservableObject {
     }
     
     func addMessageStored(senderUid: String, type: MessageBodyType, text_data: String?, image_data: String?, 
-                          link_data: String?, link_title: String?, date: Date?, context: NSManagedObjectContext) {
+                          link_data: String?, link_title: String?, date: Date?, event_name: String?, event_starttime: String?, event_uuid: UUID?, context: NSManagedObjectContext) {
         let msgStored = MessageStored(context: context)
         msgStored.id = UUID()
         msgStored.senderUid = senderUid
@@ -253,6 +256,9 @@ class DataController: ObservableObject {
         msgStored.link_data = link_data
         msgStored.link_title = link_title
         msgStored.date = date ?? Date()
+        msgStored.event_name = event_name
+        msgStored.event_starttime = event_starttime
+        msgStored.event_uuid = event_uuid
         save(context: context)
     }
     
@@ -267,6 +273,9 @@ class DataController: ObservableObject {
         msgStored.link_data = msgBody.link
         msgStored.link_title = msgBody.link_title
         msgStored.date = date ?? Date()
+        msgStored.event_name = msgBody.event_name
+        msgStored.event_uuid = msgBody.event_uuid
+        msgStored.event_starttime = msgBody.event_starttime
         save(context: context)
     }
     

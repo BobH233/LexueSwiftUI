@@ -42,8 +42,10 @@ class LexueDataProvider: DataProvider {
         }
         if let courseId = event.course_id, let courseName = event.course_name {
             // 这样就可以推送消息了
-            var msg = MessageBodyItem(type: .text)
-            msg.text_data = "检测到一个新的事件\n事件名称: \(event.name!) \n截止时间: \(GetFullDisplayTime(event.timestart!))\n请注意把握时间！"
+            var msg = MessageBodyItem(type: .event_notification)
+            msg.event_name = event.name!
+            msg.event_uuid = event.id
+            msg.event_starttime = GetFullDisplayTime(event.timestart!)
             MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: msg, date: Date(), context: DataController.shared.container.viewContext)
             if let url = event.action_url {
                 var url_msg = MessageBodyItem(type: .link)
@@ -53,8 +55,10 @@ class LexueDataProvider: DataProvider {
             }
         } else {
             // 如果不对应具体某个课程，那么就由乐学来发送
-            var msg = MessageBodyItem(type: .text)
-            msg.text_data = "检测到一个新的事件\n事件名称: \(event.name!) \n截止时间: \(GetFullDisplayTime(event.timestart!))\n请注意把握时间！"
+            var msg = MessageBodyItem(type: .event_notification)
+            msg.event_name = event.name!
+            msg.event_uuid = event.id
+            msg.event_starttime = GetFullDisplayTime(event.timestart!)
             MessageManager.shared.PushMessageWithContactCreation(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date(), context: DataController.shared.container.viewContext)
         }
     }
@@ -75,6 +79,8 @@ class LexueDataProvider: DataProvider {
                 recordedSet.insert(record.eventUUID!)
             }
             for event in events {
+                // TODO: debug delete
+                HandleNewEvent(event: event)
                 if !recordedSet.contains(event.id!) {
                     // 检测到新的事件
                     print("New event!:  \(event.name!)")

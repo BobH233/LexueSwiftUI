@@ -67,7 +67,7 @@ class MessageManager {
     // For debug
     func PushMessage(senderUid: String, type: MessageBodyType, text_data: String?, image_data: String?,
                           link_data: String?, link_title: String?, date: Date?, context: NSManagedObjectContext) {
-        DataController.shared.addMessageStored(senderUid: senderUid, type: type, text_data: text_data, image_data: image_data, link_data: link_data, link_title: link_title, date: date, context: context)
+        DataController.shared.addMessageStored(senderUid: senderUid, type: type, text_data: text_data, image_data: image_data, link_data: link_data, link_title: link_title, date: date, event_name: nil, event_starttime: nil, event_uuid: nil, context: context)
         if let contact = DataController.shared.findContactStored(contactUid: senderUid, context: context) {
             contact.lastMessageDate = date ?? Date()
             contact.unreadCount = contact.unreadCount + 1
@@ -101,6 +101,8 @@ class MessageManager {
                 return "[链接] \(message.messageBody.link_title!)"
             case .image:
                 return "[图片]"
+            case .event_notification:
+                return "[事件提醒] \(message.messageBody.event_name ?? "")"
             default:
                 return "[未知消息]"
             }
