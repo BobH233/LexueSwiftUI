@@ -272,13 +272,24 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
     var body: some View {            
         ChatBubble(direction: .left) {
             if let encodedUrl = url {
-                Link(destination: encodedUrl, label: {
-                    Text(message.messageBody.link_title!)
-                        .underline()
-                })
-                .padding(.vertical, 10)
-                .padding(.horizontal, 20)
-                .background(BubbleColor)
+                if encodedUrl.host == "lexue.bit.edu.cn" {
+                    NavigationLink(destination: LexueBroswerView(url: encodedUrl.absoluteString), label: {
+                        Text(message.messageBody.link_title!)
+                            .foregroundColor(.blue)
+                            .underline()
+                    })
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 20)
+                    .background(BubbleColor)
+                } else {
+                    Link(destination: encodedUrl, label: {
+                        Text(message.messageBody.link_title!)
+                            .underline()
+                    })
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 20)
+                    .background(BubbleColor)
+                }
             } else {
                 Text("错误的链接")
                     .underline()
@@ -356,9 +367,6 @@ struct MessageDetailView: View {
                         loading = true
                         print("scroll to \(scrollMsgId?.uuidString ?? "nil")")
                         Task {
-                            // TODO: 删除这个模拟加载时间
-                            // Thread.sleep(forTimeInterval: 1)
-                            // 将未读气泡消除
                             ContactsManager.shared.ReadallContact(contactUid: contactUid, context: managedObjContext)
                             let result = DataController.shared.queryMessagesByContactUid(senderUid: contactUid, context: managedObjContext)
                             let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
