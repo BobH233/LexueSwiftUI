@@ -35,7 +35,8 @@ class AppStatusManager {
                     }
                     // 获取事件列表
                     Task {
-                        await CoreLogicManager.shared.UpdateEventList()
+                        try? await CoreLogicManager.shared.UpdateEventList()
+                        await DataProviderManager.shared.DoRefreshAll()
                     }
                 }
             case .failure(_):
@@ -227,6 +228,16 @@ class AppStatusManager {
                 }
             }
         }
+        // 刷新消息源以及事件列表
+        Task(timeout: 50) {
+            do {
+                try? await CoreLogicManager.shared.UpdateEventList()
+                print("Refreshing data providers...")
+                await DataProviderManager.shared.DoRefreshAll()
+            } catch {
+                print("刷新消息超时!")
+            }
+        }
     }
     
     // App从后台切换回前台的时候
@@ -240,7 +251,8 @@ class AppStatusManager {
             print("deltaTime: \(deltaTime)")
             // 从后台切回来才刷新事件
             Task {
-                await CoreLogicManager.shared.UpdateEventList()
+                try? await CoreLogicManager.shared.UpdateEventList()
+                await DataProviderManager.shared.DoRefreshAll()
             }
             if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 60 {
                 // 超过1分钟，需要刷新lexue的sesskey

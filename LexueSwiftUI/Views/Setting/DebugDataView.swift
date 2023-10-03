@@ -45,6 +45,38 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     var body: some View {
         Form {
+            Section("timeout") {
+                Button("Normal") {
+                    Task(timeout: 2) {
+                        do {
+                            try await Task.sleep(nanoseconds: 1_000_000_000)
+                            print("Test after 1s")
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+                Button("Timtout") {
+                    Task(timeout: 2) {
+                        do {
+                            try await Task.sleep(nanoseconds: 5_000_000_000)
+                            print("Test after 5s")
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+                Button("Request") {
+                    Task(timeout: 2) {
+                        do {
+                            try await CoreLogicManager.shared.UpdateEventList()
+                            print("Request finished")
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            }
             Section("push message") {
                 TextField("ContactUid", text: $senderUid)
                 TextField("originName", text: $originName)
@@ -76,8 +108,8 @@ struct DebugDataView: View {
             Section("LexueAPI") {
                 Button("GetEvents") {
                     Task {
-                        let res = await LexueAPI.shared.GetEventsByDay(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, year: "2023", month: "10", day: "1")
-                        switch res {
+                        let res = try? await LexueAPI.shared.GetEventsByDay(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, year: "2023", month: "10", day: "1")
+                        switch res! {
                         case .success(let ress):
                             print(res)
                         case .failure(let err):

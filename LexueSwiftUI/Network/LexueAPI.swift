@@ -195,7 +195,7 @@ class LexueAPI {
         return ret
     }
     
-    func GetEventsByDay(_ lexueContext: LexueContext, sesskey: String, year: String, month: String, day: String, retry: Bool = true) async -> Result<[EventInfo], LexueAPIError> {
+    func GetEventsByDay(_ lexueContext: LexueContext, sesskey: String, year: String, month: String, day: String, retry: Bool = true) async throws -> Result<[EventInfo], LexueAPIError> {
         // print("fetching \(year).\(month).\(day) events")
         let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_calendar_get_calendar_day_view", args: [
             "courseid": 1,
@@ -203,6 +203,7 @@ class LexueAPI {
             "month": month,
             "year": year
         ])
+        try Task.checkCancellation()
         if let data = serviceRet["data"] as? [String: Any], let events = data["events"] as? [[String: Any]] {
             var ret = [EventInfo]()
             for event in events {
@@ -243,7 +244,7 @@ class LexueAPI {
                     DispatchQueue.main.async {
                         GlobalVariables.shared.cur_lexue_sessKey = sesskey
                     }
-                    return await GetEventsByDay(new_context == nil ? lexueContext : new_context!, sesskey: sesskey, year: year, month: month, day: day, retry: false)
+                    return try await GetEventsByDay(new_context == nil ? lexueContext : new_context!, sesskey: sesskey, year: year, month: month, day: day, retry: false)
                 case .failure(_):
                     return .failure(.unknowError)
                 }
