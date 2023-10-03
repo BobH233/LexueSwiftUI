@@ -48,9 +48,11 @@ struct DataProviderDetailView: View {
             }
             Section("设定") {
                 Toggle("启用", isOn: $enable)
-                Toggle("允许推送至消息列表", isOn: $allowMessage)
-                if allowMessage {
-                    Toggle("允许推送系统通知", isOn: $allowNotification)
+                if enable {
+                    Toggle("允许推送至消息列表", isOn: $allowMessage)
+                    if allowMessage {
+                        Toggle("允许推送系统通知", isOn: $allowNotification)
+                    }
                 }
             }
         }
