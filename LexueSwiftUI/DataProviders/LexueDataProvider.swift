@@ -94,9 +94,6 @@ class LexueDataProvider: DataProvider {
     func CheckEventUpdate(context: NSManagedObjectContext) {
         // 检查是否有新增事件
         let records = DataController.shared.queryAllLexueDP_RecordEvent(context: context)
-        for record in records {
-            print(record)
-        }
         let events = DataController.shared.queryAllEventStored(context: context)
         var recordedSet = Set<UUID>()
         if records.count == 0 {
@@ -110,8 +107,6 @@ class LexueDataProvider: DataProvider {
                 recordedSet.insert(record.eventUUID!)
             }
             for event in events {
-                // TODO: debug delete
-                HandleNewEvent(event: event)
                 if !recordedSet.contains(event.id!) {
                     // 检测到新的事件
                     print("New event!:  \(event.name!)")

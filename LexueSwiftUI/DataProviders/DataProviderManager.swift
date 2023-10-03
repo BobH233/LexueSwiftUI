@@ -41,8 +41,10 @@ class DataProviderManager {
     func DoRefreshAll() async {
         await withTaskGroup(of: Void.self) { group in
             for provider in dataProviders {
-                group.addTask(priority: provider.get_priority()) {
-                    await provider.refresh()
+                if provider.enabled {
+                    group.addTask(priority: provider.get_priority()) {
+                        await provider.refresh()
+                    }
                 }
             }
         }
