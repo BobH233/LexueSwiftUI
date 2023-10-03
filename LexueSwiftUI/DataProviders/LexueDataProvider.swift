@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 /**
         乐学数据提供，主要是乐学的铃铛通知消息
@@ -31,6 +32,8 @@ class LexueDataProvider: DataProvider {
     var enabled: Bool = true
     var allowMessage: Bool = true
     var allowNotification: Bool = true
+    
+    var msgRequestList: [PushMessageRequest] = []
     
     let lexue_service_uid = "lexue_service"
     let lexue_originName = "乐学"
@@ -69,14 +72,9 @@ class LexueDataProvider: DataProvider {
             
             // 方便被检索到
             msg.text_data = "[事件提醒] \(event.name!)"
-            MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: msg, date: Date(), context: DataController.shared.container.viewContext)
-            if let url = event.action_url {
-                var url_msg = MessageBodyItem(type: .link)
-                url_msg.link_title = event.name!
-                url_msg.link = url
-                if allowMessage {
-                    MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: url_msg, date: Date(), notify: allowNotification, context: DataController.shared.container.viewContext)
-                }
+            if allowMessage {
+                // MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: msg, date: Date(), context: DataController.shared.container.viewContext)
+                msgRequestList.append(PushMessageRequest(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: msg, date: Date()))
             }
         } else {
             // 如果不对应具体某个课程，那么就由乐学来发送
@@ -87,15 +85,19 @@ class LexueDataProvider: DataProvider {
             // 方便被检索到
             msg.text_data = "[事件提醒] \(event.name!)"
             if allowMessage {
-                MessageManager.shared.PushMessageWithContactCreation(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date(), notify: allowNotification, context: DataController.shared.container.viewContext)
+                // MessageManager.shared.PushMessageWithContactCreation(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date(), notify: allowNotification, context: DataController.shared.container.viewContext)
+                msgRequestList.append(PushMessageRequest(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date()))
             }
         }
     }
     
-    func CheckEventUpdate() async {
+    func CheckEventUpdate(context: NSManagedObjectContext) {
         // 检查是否有新增事件
-        let records = DataController.shared.queryAllLexueDP_RecordEvent(context: DataController.shared.container.viewContext)
-        let events = DataController.shared.queryAllEventStored(context: DataController.shared.container.viewContext)
+        let records = DataController.shared.queryAllLexueDP_RecordEvent(context: context)
+        for record in records {
+            print(record)
+        }
+        let events = DataController.shared.queryAllEventStored(context: context)
         var recordedSet = Set<UUID>()
         if records.count == 0 {
             // 新使用的，第一次，所以直接添加进去事件即可
@@ -124,7 +126,9 @@ class LexueDataProvider: DataProvider {
         if !enabled {
             return
         }
-        await CheckEventUpdate()
+        await DataController.shared.container.performBackgroundTask { (context) in
+            self.CheckEventUpdate(context: context)
+        }
     }
     
 }

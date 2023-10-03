@@ -36,7 +36,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -45,7 +45,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -155,6 +155,14 @@
          <PersistentStrings>
             <PersistentString
                value = "(MessageStored)((id)0x600002171400)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LexueDataProvider.CheckEventUpdate():LexueDataProvider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "record.eventUUID">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

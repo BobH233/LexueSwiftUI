@@ -369,13 +369,15 @@ struct MessageListView: View {
     
     func DoRefresh() async {
         isRefreshing = true
-        await DataProviderManager.shared.DoRefreshAll()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            withAnimation {
-                ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+        Task {
+            await DataProviderManager.shared.DoRefreshAll()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                withAnimation {
+                    ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+                }
             }
+            isRefreshing = false
         }
-        isRefreshing = false
     }
     
     func DoSearchMessage() {

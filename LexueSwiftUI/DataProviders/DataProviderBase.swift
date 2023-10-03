@@ -18,6 +18,15 @@ struct DataProviderInfo {
     var author: String = ""
 }
 
+// MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: msg, date: Date(), context: DataController.shared.container.viewContext)
+struct PushMessageRequest {
+    var senderUid: String = ""
+    var contactOriginNameIfMissing: String = ""
+    var contactTypeIfMissing: ContactType = .not_spec
+    var msgBody: MessageBodyItem
+    var date: Date
+}
+
 protocol DataProvider {
     // 消息提供者id
     var providerId: String { get }
@@ -30,10 +39,13 @@ protocol DataProvider {
     // 是否允许发送通知栏消息(Notification) 只有允许发送消息时，这个值才有效 由设置中用户自己控制
     var allowNotification: Bool { get set }
     
+    var msgRequestList: [PushMessageRequest] { get set }
+    
     // 消息提供者希望的默认值
     func get_default_enabled() -> Bool
     func get_default_allowMessage() -> Bool
     func get_default_allowNotification() -> Bool
+    
     
     
     func get_priority() -> TaskPriority
