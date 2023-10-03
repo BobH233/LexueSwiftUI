@@ -729,8 +729,8 @@
             filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "RefreshSelfUserInfo()"
             landmarkType = "7">
             <Locations>
@@ -968,8 +968,8 @@
             filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "LoadSelfProfileOrUpdate(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -984,8 +984,8 @@
             filePath = "LexueSwiftUI/Managers/CoreLogicManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "UpdateSelfProfile(_:)"
             landmarkType = "7">
             <Locations>

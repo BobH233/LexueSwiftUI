@@ -75,7 +75,6 @@ class LexueDataProvider: DataProvider {
                 recordedSet.insert(record.eventUUID!)
             }
             for event in events {
-                HandleNewEvent(event: event)
                 if !recordedSet.contains(event.id!) {
                     // 检测到新的事件
                     print("New event!:  \(event.name!)")

@@ -31,6 +31,7 @@ class CoreLogicManager {
     }
     
     func UpdateEventList() async {
+        var recent_events:[LexueAPI.EventInfo] = []
         for i in -3 ... 7 {
             let currentDate = Date()
             let target_date = Calendar.current.date(byAdding: .day, value: i, to: currentDate)
@@ -38,14 +39,14 @@ class CoreLogicManager {
             let tmpRes = await LexueAPI.shared.GetEventsByDay(GlobalVariables.shared.cur_lexue_context, sesskey: GlobalVariables.shared.cur_lexue_sessKey, year: String(target_date_comp.year!), month: String(target_date_comp.month!), day: String(target_date_comp.day!))
             switch tmpRes {
             case .success(let events):
-                DispatchQueue.main.async {
-                    EventManager.shared.DiffAndUpdateCacheEvent(events, context: DataController.shared.container.viewContext)
-                }
+                recent_events.append(contentsOf: events)
             case .failure(_):
                 print("fail to fetch \(target_date_comp)")
             }
         }
-        
+        await DataController.shared.container.performBackgroundTask { (context) in
+            EventManager.shared.DiffAndUpdateCacheEvent(recent_events, context: context)
+        }
     }
     
     func RefreshSelfUserInfo() async -> Bool {
