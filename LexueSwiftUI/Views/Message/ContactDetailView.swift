@@ -29,8 +29,13 @@ struct ContactDetailView: View {
     @State var pinned: Bool = false
     @State var silent: Bool = false
     @State var contactType: Int = 0
+    @State var showUploadSheet = false
+    
     var body: some View {
         Form {
+            Button("设置头像") {
+                showUploadSheet.toggle()
+            }
             HStack {
                 Text("联系人ID")
                     .foregroundColor(.primary)
@@ -69,6 +74,9 @@ struct ContactDetailView: View {
             }
             Toggle("置顶", isOn: $pinned)
             Toggle("消息免打扰", isOn: $silent)
+        }
+        .sheet(isPresented: $showUploadSheet) {
+            ContactAvatarSettingView(targetContactUid: contactUid)
         }
         .onFirstAppear {
             let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)

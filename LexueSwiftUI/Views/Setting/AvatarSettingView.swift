@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-let placeholderImage = ImageAttributes(withSFSymbol: "person.crop.circle.fill")
+private let placeholderImage = ImageAttributes(withSFSymbol: "person.crop.circle.fill")
 
 struct AvatarSettingView: View {
     @Environment(\.dismiss) var dismiss

@@ -11,6 +11,7 @@
 		470AFC682ACB16D6004C7F70 /* DataProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */; };
 		470AFC6A2ACB194D004C7F70 /* LexueDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */; };
 		470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CC59A2AC1D15900142AC5 /* CourseDetailView.swift */; };
+		4715BE862ACC49F600163DA9 /* ContactAvatarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715BE852ACC49F600163DA9 /* ContactAvatarSettingView.swift */; };
 		47196FDD2AC5514F00979DFE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47196FBA2AC54C6E00979DFE /* WidgetKit.framework */; };
 		47196FDE2AC5514F00979DFE /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47196FBC2AC54C6E00979DFE /* SwiftUI.framework */; };
 		47196FE12AC5514F00979DFE /* LexueWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FE02AC5514F00979DFE /* LexueWidgetBundle.swift */; };
@@ -141,6 +142,7 @@
 		470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderManager.swift; sourceTree = "<group>"; };
 		470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueDataProvider.swift; sourceTree = "<group>"; };
 		470CC59A2AC1D15900142AC5 /* CourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailView.swift; sourceTree = "<group>"; };
+		4715BE852ACC49F600163DA9 /* ContactAvatarSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAvatarSettingView.swift; sourceTree = "<group>"; };
 		47196FBA2AC54C6E00979DFE /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		47196FBC2AC54C6E00979DFE /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		47196FDC2AC5514F00979DFE /* LexueWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = LexueWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -385,6 +387,7 @@
 				473BAE972AA496B800968C3C /* MessageListView.swift */,
 				4799C8182AA6239800F812D6 /* MessageDetailView.swift */,
 				474515122AAB641700CCF24E /* ContactDetailView.swift */,
+				4715BE852ACC49F600163DA9 /* ContactAvatarSettingView.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				47F4F29A2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift in Sources */,
 				47BD51A12AC5B43F0029F9DB /* UMCommonLogSwift.swift in Sources */,
 				47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */,
+				4715BE862ACC49F600163DA9 /* ContactAvatarSettingView.swift in Sources */,
 				47CE0FF72ACADED400C68CA3 /* AddCustomEventView.swift in Sources */,
 				47EC987A2ACBB6BF009CE125 /* DeletedEventView.swift in Sources */,
 				470AFC662ACB15FB004C7F70 /* DataProviderBase.swift in Sources */,
