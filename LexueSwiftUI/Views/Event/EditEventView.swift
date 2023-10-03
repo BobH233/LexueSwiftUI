@@ -128,7 +128,7 @@ struct EditEventView: View {
                         withCourse = true
                         selectCourseId = courseId
                     }
-                    color = Color(hex: event_obj.color!) ?? .blue
+                    color = Color(hex: event_obj.color!) ?? .green
                     eventType = event_obj.event_type!
                 }
             } else {

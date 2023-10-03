@@ -14,6 +14,8 @@ class EventManager: ObservableObject {
     // 显示的待完成的ddl
     @Published var EventDisplayList: [EventStored] = []
     
+    @Published var DeletedEventDisplayList: [EventStored] = []
+    
     // 显示的今天之前的ddl，或者已经完成的ddl
     @Published var expiredEventDisplayList: [EventStored] = []
     
@@ -41,9 +43,32 @@ class EventManager: ObservableObject {
         return ret
     }
     
+    // 删除所有过期了的事件
+    func DeleteAllExpiredEvent(context: NSManagedObjectContext = DataController.shared.container.viewContext) {
+        var result = DataController.shared.queryAllEventStored(isDeleted: false, context: context)
+        for event in result {
+            let now_time = Date()
+            if let startdate = event.timestart, startdate < now_time {
+                event.user_deleted = true
+            }
+        }
+        DataController.shared.save(context: context)
+    }
+    
+    func LoadDeletedEventList(context: NSManagedObjectContext = DataController.shared.container.viewContext) {
+        var result = DataController.shared.queryAllEventStored(isDeleted: true, context: context)
+        // 排序，时间最晚的在最前面
+        result.sort{ (event1, event2) in
+            let event1_date = event1.timestart ?? Date()
+            let event2_date = event2.timestart ?? Date()
+            return event1_date > event2_date
+        }
+        DeletedEventDisplayList = result
+    }
+    
     // 从数据库加载缓存的事件列表
     func LoadEventList(context: NSManagedObjectContext = DataController.shared.container.viewContext) {
-        var result = DataController.shared.queryAllEventStored(context: context)
+        var result = DataController.shared.queryAllEventStored(isDeleted: false, context: context)
         // 排序，时间最早的在最前面
         result.sort{ (event1, event2) in
             let event1_date = event1.timestart ?? Date()

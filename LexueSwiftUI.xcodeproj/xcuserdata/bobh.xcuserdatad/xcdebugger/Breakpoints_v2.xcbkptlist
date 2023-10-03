@@ -1759,8 +1759,8 @@
             filePath = "LexueSwiftUI/Managers/EventManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "LoadEventList(context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1775,8 +1775,8 @@
             filePath = "LexueSwiftUI/Managers/EventManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "LoadEventList(context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1791,8 +1791,8 @@
             filePath = "LexueSwiftUI/Managers/EventManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "GetWeekEventCount(todayInWeek:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1807,8 +1807,8 @@
             filePath = "LexueSwiftUI/Managers/EventManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "GetTodayEventCount(today:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1903,8 +1903,8 @@
             filePath = "LexueSwiftUI/Views/Event/ViewEventView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>

@@ -165,7 +165,7 @@ private struct FunctionalButtonView: View {
     }
 }
 
-private struct EventListItemView: View {
+struct EventListItemView: View {
     @Binding var title: String?
     @Binding var description: String?
     @Binding var endtime: Date?
@@ -282,6 +282,9 @@ struct EventListView: View {
     @State var showNewEventView: Bool = false
     @State var curSelectEventUUID: UUID = UUID()
     @State var showEditEventView: Bool = false
+    @State var showDeletedEventView: Bool = false
+    
+    @State var refreshingEvents: Bool = false
     //  @Binding var tabSelection: Int
     var body: some View {
         NavigationView {
@@ -374,6 +377,10 @@ struct EventListView: View {
                     ViewEventView(event_uuid: curSelectEventUUID)
                 })
                 .hidden()
+                NavigationLink("", isActive: $showDeletedEventView, destination: {
+                    DeletedEventView()
+                })
+                .hidden()
             }
             .onChange(of: showTodayOnly) { newVal in
                 SettingStorage.shared.event_showTodayOnly = showTodayOnly
@@ -381,7 +388,46 @@ struct EventListView: View {
             .onAppear {
                 showTodayOnly = SettingStorage.shared.event_showTodayOnly
             }
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Menu {
+                        Section {
+                            Button(role: .destructive, action: {
+                                EventManager.shared.DeleteAllExpiredEvent(context: managedObjContext)
+                            }) {
+                                Label("删除所有已到期事件", systemImage: "trash.fill")
+                            }
+                            Button(action: {
+                                showDeletedEventView.toggle()
+                            }) {
+                                Label("查看已删除的到期事件", systemImage: "list.bullet")
+                            }
+                        }
+                    }
+                    label: {
+                        Label("Add", systemImage: "square.and.pencil")
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    if refreshingEvents {
+                        ProgressView()
+                    } else {
+                        Button(action: {
+                            refreshingEvents = true
+                            Task {
+                                await CoreLogicManager.shared.UpdateEventList()
+                                DispatchQueue.main.async {
+                                    refreshingEvents = false
+                                }
+                            }
+                        }) {
+                            Image(systemName: "arrow.clockwise")
+                        }
+                    }
+                }
+            }
             .navigationTitle("最近事件")
+            .navigationBarTitleDisplayMode(.large)
         }
     }
 }

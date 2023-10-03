@@ -16,6 +16,8 @@ struct ViewEventView: View {
     
     @State var showEditView: Bool = false
     
+    @State var editable: Bool = true
+    
     // 是否已经是到期事件了
     func IsExpired(event: EventStored) -> Bool {
         return event.timestart! < Date.now
@@ -109,7 +111,7 @@ struct ViewEventView: View {
                         }
                     }
                 }
-                if !event_obj!.isCustomEvent {
+                if event_obj!.course_id != nil {
                     Section("操作") {
                         if let courseId = event_obj!.course_id, let courseInfo = GetCourseById(courseId) {
                             NavigationLink("\(courseInfo.fullname ?? "")") {
@@ -146,6 +148,7 @@ struct ViewEventView: View {
         }) {
             Image(systemName: "square.and.pencil")
         }
+            .disabled(!editable)
         )
         .navigationTitle("浏览事件")
         .navigationBarTitleDisplayMode(.inline)

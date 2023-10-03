@@ -317,6 +317,7 @@ class DataController: ObservableObject {
         eventStored.timeusermidnight = timeusermidnight
         eventStored.url = url
         eventStored.finish = false
+        eventStored.user_deleted = false
         save(context: context)
     }
     
@@ -365,9 +366,10 @@ class DataController: ObservableObject {
         return nil
     }
     
-    func queryAllEventStored(context: NSManagedObjectContext) -> [EventStored] {
+    func queryAllEventStored(isDeleted: Bool = false, context: NSManagedObjectContext) -> [EventStored] {
         let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
-        var ret: [EventStored] = [EventStored]()
+        let predicate = NSPredicate(format: "user_deleted == %@", NSNumber(value: isDeleted))
+        request.predicate = predicate
         do {
             let results = try context.fetch(request)
             return results
@@ -375,7 +377,7 @@ class DataController: ObservableObject {
             print("查询事件列表失败：\(error)")
         }
         
-        return ret
+        return [EventStored]()
     }
     
     func queryAllLexueDP_RecordEvent(context: NSManagedObjectContext) -> [LexueDP_RecordEvent] {

@@ -52,6 +52,7 @@
         <attribute name="timestart" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="timeusermidnight" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="url" optional="YES" attributeType="String"/>
+        <attribute name="user_deleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
     </entity>
     <entity name="LexueDP_RecordEvent" representedClassName="LexueDP_RecordEvent" syncable="YES" codeGenerationType="class">
         <attribute name="eventUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
