@@ -27,8 +27,6 @@ private struct CourseMemberItemView: View {
                             Text("\(memberInfo.role ?? "")")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.secondary)
                         }
                     }
                     Text("\(memberInfo.group ?? "")")
