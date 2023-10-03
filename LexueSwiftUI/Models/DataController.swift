@@ -422,6 +422,37 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
+    func queryAllLexueDP_RecordNotification(context: NSManagedObjectContext) -> [LexueDP_RecordNotification] {
+        let request: NSFetchRequest<LexueDP_RecordNotification> = LexueDP_RecordNotification.fetchRequest()
+        var ret: [LexueDP_RecordNotification] = [LexueDP_RecordNotification]()
+        do {
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            print("查询LexueDP_RecordNotification失败1：\(error)")
+        }
+        return ret
+    }
+    
+    func getLexueDP_RecordNotificationByID(id: String, context: NSManagedObjectContext) -> LexueDP_RecordNotification? {
+        let request: NSFetchRequest<LexueDP_RecordNotification> = LexueDP_RecordNotification.fetchRequest()
+        request.predicate = NSPredicate(format: "notificationID == %@", id)
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                return results.first
+            }
+        } catch {
+            print("查询LexueDP_RecordNotification失败2：\(error)")
+        }
+        return nil
+    }
+    
+    func addLexueDP_RecordNotification(id: String, context: NSManagedObjectContext) {
+        let record = LexueDP_RecordNotification(context: context)
+        record.notificationID = id
+        save(context: context)
+    }
 }
 
 

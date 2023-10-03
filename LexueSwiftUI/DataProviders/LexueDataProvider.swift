@@ -100,7 +100,7 @@ class LexueDataProvider: DataProvider {
             // 新使用的，第一次，所以直接添加进去事件即可
             for event in events {
                 print("First time: push \(event.name!)")
-                DataController.shared.addLexueDP_RecordEvent(eventUUID: event.id!, context: DataController.shared.container.viewContext)
+                DataController.shared.addLexueDP_RecordEvent(eventUUID: event.id!, context: context)
             }
         } else {
             for record in records {
@@ -110,8 +110,45 @@ class LexueDataProvider: DataProvider {
                 if !recordedSet.contains(event.id!) {
                     // 检测到新的事件
                     print("New event!:  \(event.name!)")
-                    DataController.shared.addLexueDP_RecordEvent(eventUUID: event.id!, context: DataController.shared.container.viewContext)
+                    DataController.shared.addLexueDP_RecordEvent(eventUUID: event.id!, context: context)
                     HandleNewEvent(event: event)
+                }
+            }
+        }
+    }
+    
+    func HandleNewNotification(notification: LexueAPI.LexueNotification) {
+        var msg = MessageBodyItem(type: .text)
+        msg.text_data = "\(notification.subject ?? "")\n (\(GetFullDisplayTime(notification.timecreated ?? Date()))) "
+        msgRequestList.append(PushMessageRequest(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date()))
+    }
+    
+    var curPopupNotifications = [LexueAPI.LexueNotification]()
+    
+    // 检查乐学的站内小铃铛消息
+    func CheckNotificationUpdate(context: NSManagedObjectContext) {
+        let records = DataController.shared.queryAllLexueDP_RecordNotification(context: context)
+        var recordedSet = Set<String>()
+        if records.count == 0 {
+            // 新使用的，第一次，所以直接添加进去事件即可
+            for notification in curPopupNotifications {
+                print("First time: push \(notification.subject!)")
+                DataController.shared.addLexueDP_RecordNotification(id: notification.id, context: context)
+            }
+        } else {
+            for record in records {
+                recordedSet.insert(record.notificationID!)
+            }
+            for notification in curPopupNotifications {
+                if let read = notification.read, read {
+                    // 已读消息不用处理
+                    continue
+                }
+                if !recordedSet.contains(notification.id) {
+                    // 检测到新的事件
+                    print("New notification!:  \(notification.subject!)")
+                    DataController.shared.addLexueDP_RecordNotification(id: notification.id, context: context)
+                    HandleNewNotification(notification: notification)
                 }
             }
         }
@@ -123,6 +160,16 @@ class LexueDataProvider: DataProvider {
         }
         await DataController.shared.container.performBackgroundTask { (context) in
             self.CheckEventUpdate(context: context)
+        }
+        let getNotificationResult = await LexueAPI.shared.GetPopupNotifications(GlobalVariables.shared.cur_lexue_context, sesskey: GlobalVariables.shared.cur_lexue_sessKey, selfUserId: GlobalVariables.shared.cur_user_info.userId)
+        switch getNotificationResult {
+        case .success(let result):
+            curPopupNotifications = result
+            await DataController.shared.container.performBackgroundTask { (context) in
+                self.CheckNotificationUpdate(context: context)
+            }
+        case .failure(_):
+            print("获取站内消息失败!")
         }
     }
     
