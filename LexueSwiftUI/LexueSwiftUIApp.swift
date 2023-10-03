@@ -49,28 +49,25 @@ struct LexueSwiftUIApp: App {
     
     init() {
         BGTaskScheduler.shared.register(forTaskWithIdentifier: "cn.bobh.LexueSwiftUI.BGRefresh", using: DispatchQueue.main) { task in
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss" // 设置日期格式
-
-            let currentDate = Date()
-            let formattedDate = dateFormatter.string(from: currentDate)
-            print("In the background func!")
             task.expirationHandler = {
-                LocalNotificationManager.shared.PushNotification(title: "\(formattedDate) 成功调用", body: "我要过期了!!!", userInfo: ["123":"1234"], image:GlobalVariables.shared.userAvatarUIImage, interval: 0.1)
                 task.setTaskCompleted(success: false)
             }
-            Task {
-                let res = await LexueAPI.shared.GetSelfUserInfo(GlobalVariables.shared.cur_lexue_context)
-                switch res {
-                case .success(let userInfo):
-                    LocalNotificationManager.shared.PushNotification(title: "\(formattedDate) 成功调用", body: "\(userInfo.onlineUsers)", userInfo: ["123":"1234"], image:GlobalVariables.shared.userAvatarUIImage, interval: 0.1)
-                case .failure(let error):
-                    LocalNotificationManager.shared.PushNotification(title: "\(formattedDate) 失败调用", body: "\(error.localizedDescription)", userInfo: ["123":"1234"], image:GlobalVariables.shared.userAvatarUIImage, interval: 0.1)
+            // 后台刷新相关逻辑
+            if GlobalVariables.shared.isLogin {
+                print("background task executing...")
+                Task(timeout: 50) {
+                    do {
+                        try? await CoreLogicManager.shared.UpdateEventList()
+                        print("Refreshing data providers...")
+                        await DataProviderManager.shared.DoRefreshAll()
+                    } catch {
+                        print("刷新消息超时!")
+                    }
                 }
-                AppStatusManager.scheduleAppBackgroundRefresh()
-                DispatchQueue.main.async {
-                    task.setTaskCompleted(success: true)
-                }
+            }
+            AppStatusManager.scheduleAppBackgroundRefresh()
+            DispatchQueue.main.async {
+                task.setTaskCompleted(success: true)
             }
         }
     }
