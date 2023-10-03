@@ -106,12 +106,23 @@ struct DebugDataView: View {
                 }
             }
             Section("LexueAPI") {
+                Button("GetNotification") {
+                    Task {
+                        let res = await LexueAPI.shared.GetPopupNotifications(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, selfUserId: GlobalVariables.shared.cur_user_info.userId)
+                        switch res {
+                        case .success(let ress):
+                            print(ress)
+                        case .failure(let err):
+                            print(err)
+                        }
+                    }
+                }
                 Button("GetEvents") {
                     Task {
                         let res = try? await LexueAPI.shared.GetEventsByDay(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, year: "2023", month: "10", day: "1")
                         switch res! {
                         case .success(let ress):
-                            print(res)
+                            print(ress)
                         case .failure(let err):
                             print(err)
                         }

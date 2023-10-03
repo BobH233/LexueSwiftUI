@@ -158,6 +158,79 @@ class LexueAPI {
         var mindaytimestamp: Date?
     }
     
+    struct LexueNotification: Identifiable {
+        var id: String = ""
+        var useridfrom: String = ""
+        var useridto: String = ""
+        var subject: String?
+        var shortenedsubject: String?
+        var text: String?
+        var fullmessage: String?
+        var fullmessagehtml: String?
+        var smallmessage: String?
+        // 如果是作业，指向作业链接
+        var contexturl: String?
+        var contexturlname: String?
+        var timecreated: Date?
+        var timeread: Date?
+        var read: Bool?
+        var component: String?
+        var eventtype: String?
+        var customdata: String?
+    }
+    
+    func GetPopupNotifications(_ lexueContext: LexueContext, sesskey: String, selfUserId: String, retry: Bool = true) async -> Result<[LexueNotification], LexueAPIError> {
+        let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "message_popup_get_popup_notifications", args: [
+            "limit": 20,
+            "offset": 0,
+            "useridto": selfUserId,
+        ])
+        if let data = serviceRet["data"] as? [String: Any], let notifications = data["notifications"] as? [[String: Any]] {
+            var ret = [LexueNotification]()
+            for notification in notifications {
+                var curNotification = LexueNotification()
+                curNotification.id = String((notification["id"] as? Int) ?? -1)
+                curNotification.useridfrom = String((notification["useridfrom"] as? Int) ?? -1)
+                curNotification.useridto = String((notification["useridto"] as? Int) ?? -1)
+                curNotification.subject = notification["subject"] as? String
+                curNotification.shortenedsubject = notification["shortenedsubject"] as? String
+                curNotification.text = notification["text"] as? String
+                curNotification.fullmessage = notification["fullmessage"] as? String
+                curNotification.fullmessagehtml = notification["fullmessagehtml"] as? String
+                curNotification.smallmessage = notification["smallmessage"] as? String
+                curNotification.contexturl = notification["contexturl"] as? String
+                curNotification.contexturlname = notification["contexturlname"] as? String
+                if let timecreated = notification["timecreated"] as? Int {
+                    curNotification.timecreated = Date(timeIntervalSince1970: TimeInterval(timecreated))
+                }
+                if let timeread = notification["timeread"] as? Int {
+                    curNotification.timeread = Date(timeIntervalSince1970: TimeInterval(timeread))
+                }
+                curNotification.read = notification["read"] as? Bool
+                curNotification.component = notification["component"] as? String
+                curNotification.eventtype = notification["eventtype"] as? String
+                curNotification.customdata = notification["customdata"] as? String
+                ret.append(curNotification)
+            }
+            return .success(ret)
+        } else {
+            if retry {
+                let result = await GetSessKey(GlobalVariables.shared.cur_lexue_context)
+                switch result {
+                case .success(let (sesskey, new_context)):
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                    }
+                    return await GetPopupNotifications(new_context == nil ? lexueContext : new_context!, sesskey: sesskey, selfUserId: selfUserId, retry: false)
+                case .failure(_):
+                    return .failure(.unknowError)
+                }
+            } else {
+                return .failure(.unknowError)
+            }
+        }
+    }
+    
     func ParseCourseMembersHtml(_ html: String) -> [CourseMemberInfo] {
         var ret = [CourseMemberInfo]()
         do {
