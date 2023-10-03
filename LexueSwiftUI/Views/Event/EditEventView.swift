@@ -120,16 +120,20 @@ struct EditEventView: View {
             }
             if let event = DataController.shared.findEventById(id: event_uuid, context: managedObjContext) {
                 event_obj = event
-                if let event_obj = event_obj, event_obj.isCustomEvent {
-                    eventName = event_obj.name!
-                    eventDescription = event_obj.event_description!
-                    startDate = event_obj.timestart!
-                    if let courseId = event_obj.course_id {
-                        withCourse = true
-                        selectCourseId = courseId
+                if let event_obj = event_obj {
+                    if event_obj.isCustomEvent {
+                        eventName = event_obj.name!
+                        eventDescription = event_obj.event_description!
+                        startDate = event_obj.timestart!
+                        if let courseId = event_obj.course_id {
+                            withCourse = true
+                            selectCourseId = courseId
+                        }
+                        color = Color(hex: event_obj.color!) ?? .green
+                        eventType = event_obj.event_type!
+                    } else {
+                        color = Color(hex: event_obj.color!) ?? .green
                     }
-                    color = Color(hex: event_obj.color!) ?? .green
-                    eventType = event_obj.event_type!
                 }
             } else {
                 dismiss()
