@@ -168,8 +168,8 @@ class LexueDataProvider: DataProvider {
         } else {
             print("Unknow error when check nearby event...")
         }
-        print(now)
-        print(futureDate)
+        // print(now)
+        // print(futureDate)
         
         
         
@@ -221,11 +221,6 @@ class LexueDataProvider: DataProvider {
             return
         }
         
-        // 刷新乐学新的事件
-        await DataController.shared.container.performBackgroundTask { (context) in
-            self.CheckEventUpdate(context: context)
-        }
-        
         // 刷新站内消息
         let getNotificationResult = await LexueAPI.shared.GetPopupNotifications(GlobalVariables.shared.cur_lexue_context, sesskey: GlobalVariables.shared.cur_lexue_sessKey, selfUserId: GlobalVariables.shared.cur_user_info.userId)
         switch getNotificationResult {
@@ -236,6 +231,12 @@ class LexueDataProvider: DataProvider {
             }
         case .failure(_):
             print("获取站内消息失败!")
+        }
+        
+        
+        // 刷新乐学新的事件
+        await DataController.shared.container.performBackgroundTask { (context) in
+            self.CheckEventUpdate(context: context)
         }
         
         // 刷新到期提醒事件
