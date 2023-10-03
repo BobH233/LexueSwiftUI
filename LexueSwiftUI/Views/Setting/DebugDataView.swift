@@ -106,6 +106,12 @@ struct DebugDataView: View {
                 }
             }
             Section("LexueAPI") {
+                Button("event_DB") {
+                    let events = DataController.shared.queryAllEventStored(isDeleted: false, context: DataController.shared.container.viewContext)
+                    for event in events {
+                        print(event.id!.uuidString)
+                    }
+                }
                 Button("GetNotification") {
                     Task {
                         let res = await LexueAPI.shared.GetPopupNotifications(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, selfUserId: GlobalVariables.shared.cur_user_info.userId)

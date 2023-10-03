@@ -276,13 +276,14 @@ private struct BubbleEventNotificationMessageView: View, BubbleBaseColorConfig {
             })
             VStack(alignment: .leading) {
                 HStack {
-                    Text("事件提醒")
+                    Text(message.messageBody.type == .new_event_notification ? "事件提醒" : "事件到期提醒")
+                        .foregroundColor(message.messageBody.type == .new_event_notification ? BubbleTextColor : .red)
                         .font(.title)
                         .bold()
                     Spacer()
                 }
                 HStack {
-                    Text("检测到新增乐学事件，请注意时间")
+                    Text(message.messageBody.type == .new_event_notification ? "检测到新增乐学事件，请注意时间" : "这个事件马上要到期了，请注意及时完成!")
                         .font(.system(size: 24))
                         .multilineTextAlignment(.leading)
                     Spacer()
@@ -424,7 +425,7 @@ struct MessageDetailView: View {
                             } else if message.messageBody.type == .time {
                                 TimeView(message: message)
                                     .id(message.id)
-                            } else if message.messageBody.type == .event_notification {
+                            } else if message.messageBody.type == .new_event_notification || message.messageBody.type == .due_event_notification {
                                 BubbleEventNotificationMessageView(message: message)
                                     .id(message.id)
                             }

@@ -60,6 +60,10 @@
     <entity name="LexueDP_RecordNotification" representedClassName="LexueDP_RecordNotification" syncable="YES" codeGenerationType="class">
         <attribute name="notificationID" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="LexueDP_RecordNotifiedEvent" representedClassName="LexueDP_RecordNotifiedEvent" syncable="YES" codeGenerationType="class">
+        <attribute name="eventUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="notifiedTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
     <entity name="MessageStored" representedClassName="MessageStored" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="event_name" optional="YES" attributeType="String"/>

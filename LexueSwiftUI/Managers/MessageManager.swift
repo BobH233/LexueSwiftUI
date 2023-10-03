@@ -104,8 +104,10 @@ class MessageManager {
                 return "[链接] \(messagebody.link_title!)"
             case .image:
                 return "[图片]"
-            case .event_notification:
-                return "[事件提醒] \(messagebody.event_name ?? "")"
+            case .new_event_notification:
+                return "[新事件提醒] \(messagebody.event_name ?? "")"
+            case .due_event_notification:
+                return "[事件到期提醒] \(messagebody.event_name ?? "")"
             default:
                 return "[未知消息]"
             }

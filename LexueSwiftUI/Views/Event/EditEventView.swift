@@ -97,6 +97,13 @@ struct EditEventView: View {
                         to_update?.course_name = courseName
                         to_update?.color = color.toHex()
                         DataController.shared.save(context: managedObjContext)
+                        // 事件经过编辑过后，也应该重新通知，所以我在编辑事件的时候需要把已经通知的记录全部删了
+                        print("eventid: \(event_uuid)")
+                        let notifiedRecords = DataController.shared.getLexueDP_RecordNotifiedEvent(eventUUID: event_uuid, context: managedObjContext)
+                        for notifiedRecord in notifiedRecords {
+                            managedObjContext.delete(notifiedRecord)
+                        }
+                        DataController.shared.save(context: managedObjContext)
                         dismiss()
                     }
                 } else {

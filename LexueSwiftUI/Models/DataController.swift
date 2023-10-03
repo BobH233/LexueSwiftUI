@@ -453,6 +453,37 @@ class DataController: ObservableObject {
         record.notificationID = id
         save(context: context)
     }
+    
+    func queryAllLexueDP_RecordNotifiedEvent(context: NSManagedObjectContext) -> [LexueDP_RecordNotifiedEvent] {
+        let request: NSFetchRequest<LexueDP_RecordNotifiedEvent> = LexueDP_RecordNotifiedEvent.fetchRequest()
+        var ret: [LexueDP_RecordNotifiedEvent] = [LexueDP_RecordNotifiedEvent]()
+        do {
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            print("查询LexueDP_RecordNotifiedEvent失败1：\(error)")
+        }
+        return ret
+    }
+    
+    func getLexueDP_RecordNotifiedEvent(eventUUID: UUID, context: NSManagedObjectContext) -> [LexueDP_RecordNotifiedEvent] {
+        let request: NSFetchRequest<LexueDP_RecordNotifiedEvent> = LexueDP_RecordNotifiedEvent.fetchRequest()
+        request.predicate = NSPredicate(format: "eventUUID == %@", eventUUID as CVarArg)
+        do {
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            print("查询LexueDP_RecordNotifiedEvent失败2：\(error)")
+        }
+        return []
+    }
+    
+    func addLexueDP_RecordNotifiedEvent(eventUUID: UUID, notifiedDate: Date, context: NSManagedObjectContext) {
+        let record = LexueDP_RecordNotifiedEvent(context: context)
+        record.eventUUID = eventUUID
+        record.notifiedTime = notifiedDate
+        save(context: context)
+    }
 }
 
 
