@@ -76,8 +76,8 @@ class MessageManager {
     }
     
     // 推送一个消息给消息列表，如果联系人不存在则创建新联系人，存在则不创建新联系人
-    func PushMessageWithContactCreation(senderUid: String, contactOriginNameIfMissing: String, contactTypeIfMissing: ContactType, msgBody: MessageBodyItem, date: Date?, context: NSManagedObjectContext) {
-        DataController.shared.addMessageStoredFromMsgBody(senderUid: senderUid, msgBody: msgBody, date: date, context: context)
+    func PushMessageWithContactCreation(senderUid: String, contactOriginNameIfMissing: String, contactTypeIfMissing: ContactType, msgBody: MessageBodyItem, date: Date?, notify: Bool = false, context: NSManagedObjectContext) {
+        let msg = DataController.shared.addMessageStoredFromMsgBody(senderUid: senderUid, msgBody: msgBody, date: date, context: context)
         if let contact = DataController.shared.findContactStored(contactUid: senderUid, context: context) {
             contact.lastMessageDate = date ?? Date()
             contact.unreadCount = contact.unreadCount + 1
@@ -90,22 +90,33 @@ class MessageManager {
             contact.unreadCount = contact.unreadCount + 1
             DataController.shared.save(context: context)
         }
+        if let contact = DataController.shared.findContactStored(contactUid: senderUid, context: context), notify {
+            LocalNotificationManager.shared.PushNotification(title: contact.GetDisplayName(), body: GetMessageTextDecsription(messageBody: msgBody), userInfo: ["cmd": "contactMessage", "contactUid": contact.contactUid!, "msgId": msg.id!.uuidString], interval: 0.1)
+        }
+    }
+    
+    func GetMessageTextDecsription(messageBody: MessageBodyItem?) -> String {
+        if let messagebody = messageBody {
+            switch(messagebody.type) {
+            case .text:
+                return messagebody.text_data ?? ""
+            case .link:
+                return "[链接] \(messagebody.link_title!)"
+            case .image:
+                return "[图片]"
+            case .event_notification:
+                return "[事件提醒] \(messagebody.event_name ?? "")"
+            default:
+                return "[未知消息]"
+            }
+        } else {
+            return ""
+        }
     }
     
     func GetMessageTextDescription(message: ContactMessage?) -> String {
         if let message = message {
-            switch(message.messageBody.type) {
-            case .text:
-                return message.messageBody.text_data ?? ""
-            case .link:
-                return "[链接] \(message.messageBody.link_title!)"
-            case .image:
-                return "[图片]"
-            case .event_notification:
-                return "[事件提醒] \(message.messageBody.event_name ?? "")"
-            default:
-                return "[未知消息]"
-            }
+            return GetMessageTextDecsription(messageBody: message.messageBody)
         } else {
             return ""
         }

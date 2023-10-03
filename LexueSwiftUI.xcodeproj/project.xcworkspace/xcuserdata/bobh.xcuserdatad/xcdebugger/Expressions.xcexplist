@@ -36,7 +36,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -45,7 +45,15 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MessageManager.PushMessageWithContactCreation(senderUid:contactOriginNameIfMissing:contactTypeIfMissing:msgBody:date:notify:context:):MessageManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "allowNotification">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

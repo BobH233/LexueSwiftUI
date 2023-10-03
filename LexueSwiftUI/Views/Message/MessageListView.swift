@@ -466,6 +466,15 @@ struct MessageListView: View {
         }
         .badge(unreadBadge)
         .onAppear {
+            GlobalVariables.shared.handleNotificationMsg = { param in
+                if let contactUid = param["contactUid"] as? String, let msgId = param["msgId"] as? String {
+                    tabSelection = 1
+                    var tmp = ContactDisplayModel()
+                    tmp.contactUid = contactUid
+                    tmp.scrollToMsgId = UUID(uuidString: msgId)
+                    isOpenDatailView = tmp
+                }
+            }
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 withAnimation {
                     ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)

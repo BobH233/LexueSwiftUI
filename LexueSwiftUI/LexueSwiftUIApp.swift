@@ -28,6 +28,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
+        if let cmd = userInfo["cmd"] as? String {
+            if cmd == "contactMessage" && GlobalVariables.shared.handleNotificationMsg != nil{
+                GlobalVariables.shared.handleNotificationMsg!(userInfo)
+            }
+        }
         print(userInfo)
         completionHandler()
     }

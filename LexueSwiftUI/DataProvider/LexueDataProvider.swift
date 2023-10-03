@@ -12,6 +12,17 @@ import Foundation
         还有
  */
 class LexueDataProvider: DataProvider {
+    func get_default_allowMessage() -> Bool {
+        return true
+    }
+    
+    func get_default_allowNotification() -> Bool {
+        return true
+    }
+    
+    var allowMessage: Bool = true
+    var allowNotification: Bool = true
+    
     let lexue_service_uid = "lexue_service"
     let lexue_originName = "乐学"
     func get_priority() -> TaskPriority {
@@ -19,7 +30,7 @@ class LexueDataProvider: DataProvider {
     }
     
     func info() -> DataProviderInfo {
-        return DataProviderInfo(providerId: "provider.lexue", providerName: "乐学数据", usage: "提供乐学通知提醒、新增事件提醒以及临期事件提醒等功能", author: "BobH")
+        return DataProviderInfo(providerId: "provider.lexue", providerName: "乐学数据", description: "提供乐学通知提醒、新增事件提醒以及临期事件提醒等功能", author: "BobH")
     }
     
     func GetCourseContactId(_ courseId: String) -> String {
@@ -54,7 +65,9 @@ class LexueDataProvider: DataProvider {
                 var url_msg = MessageBodyItem(type: .link)
                 url_msg.link_title = event.name!
                 url_msg.link = url
-                MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: url_msg, date: Date(), context: DataController.shared.container.viewContext)
+                if allowMessage {
+                    MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: url_msg, date: Date(), notify: allowNotification, context: DataController.shared.container.viewContext)
+                }
             }
         } else {
             // 如果不对应具体某个课程，那么就由乐学来发送
@@ -64,7 +77,9 @@ class LexueDataProvider: DataProvider {
             msg.event_starttime = GetFullDisplayTime(event.timestart!)
             // 方便被检索到
             msg.text_data = "[事件提醒] \(event.name!)"
-            MessageManager.shared.PushMessageWithContactCreation(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date(), context: DataController.shared.container.viewContext)
+            if allowMessage {
+                MessageManager.shared.PushMessageWithContactCreation(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date(), notify: allowNotification, context: DataController.shared.container.viewContext)
+            }
         }
     }
     

@@ -35,6 +35,8 @@ class GlobalVariables: ObservableObject {
     
     @Published var defaultUIImage: UIImage
     
+    var handleNotificationMsg: (([AnyHashable : Any]) -> Void)?
+    
     var debugMode = true
 
     private init() {

@@ -13,12 +13,23 @@ struct DataProviderInfo {
     // 中文名称
     var providerName: String
     // 用途
-    var usage: String
+    var description: String
     // 作者
     var author: String
 }
 
 protocol DataProvider {
+    
+    // 是否允许发送消息 由设置中用户自己控制
+    var allowMessage: Bool { get set }
+    
+    // 是否允许发送通知栏消息(Notification) 由设置中用户自己控制
+    var allowNotification: Bool { get set }
+    
+    // 消息提供者希望的默认值
+    func get_default_allowMessage() -> Bool
+    func get_default_allowNotification() -> Bool
+    
     
     func get_priority() -> TaskPriority
     

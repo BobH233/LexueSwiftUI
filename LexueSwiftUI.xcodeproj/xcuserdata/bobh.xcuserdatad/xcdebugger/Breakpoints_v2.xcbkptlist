@@ -1951,8 +1951,8 @@
             filePath = "LexueSwiftUI/DataProvider/LexueDataProvider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "HandleNewEvent(event:)"
             landmarkType = "7">
             <Locations>
@@ -1987,6 +1987,86 @@
                   offsetFromSymbolStart = "2824">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF35AAB6-9EE6-491D-81D8-EDA05C103D16"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/MessageManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "PushMessageWithContactCreation(senderUid:contactOriginNameIfMissing:contactTypeIfMissing:msgBody:date:notify:context:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "75EF4A5E-D1E7-4567-8AB2-9E734139E727"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/MessageManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "PushMessageWithContactCreation(senderUid:contactOriginNameIfMissing:contactTypeIfMissing:msgBody:date:notify:context:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "75EF4A5E-D1E7-4567-8AB2-9E734139E727 - 86a522242702348d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.MessageManager.PushMessageWithContactCreation(senderUid: Swift.String, contactOriginNameIfMissing: Swift.String, contactTypeIfMissing: LexueSwiftUI.ContactType, msgBody: LexueSwiftUI.MessageBodyItem, date: Swift.Optional&lt;Foundation.Date&gt;, notify: Swift.Bool, context: __C.NSManagedObjectContext) -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/MessageManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "2240">
+               </Location>
+               <Location
+                  uuid = "75EF4A5E-D1E7-4567-8AB2-9E734139E727 - 86a522242702348d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.MessageManager.PushMessageWithContactCreation(senderUid: Swift.String, contactOriginNameIfMissing: Swift.String, contactTypeIfMissing: LexueSwiftUI.ContactType, msgBody: LexueSwiftUI.MessageBodyItem, date: Swift.Optional&lt;Foundation.Date&gt;, notify: Swift.Bool, context: __C.NSManagedObjectContext) -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/MessageManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "2388">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7575FDB3-29FB-48C8-865B-3AA1DE0F1715"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/DataProvider/LexueDataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "HandleNewEvent(event:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

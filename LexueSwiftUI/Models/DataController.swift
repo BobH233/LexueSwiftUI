@@ -263,7 +263,7 @@ class DataController: ObservableObject {
     }
     
     // 这个方法是为了方便后期可能要拓展消息类型，可以直接修改MessageBodyItem的内容
-    func addMessageStoredFromMsgBody(senderUid: String, msgBody: MessageBodyItem, date: Date?,  context: NSManagedObjectContext) {
+    func addMessageStoredFromMsgBody(senderUid: String, msgBody: MessageBodyItem, date: Date?,  context: NSManagedObjectContext) -> MessageStored {
         let msgStored = MessageStored(context: context)
         msgStored.id = UUID()
         msgStored.senderUid = senderUid
@@ -277,6 +277,7 @@ class DataController: ObservableObject {
         msgStored.event_uuid = msgBody.event_uuid
         msgStored.event_starttime = msgBody.event_starttime
         save(context: context)
+        return msgStored
     }
     
     func findContactStored(contactUid: String, context: NSManagedObjectContext) -> ContactStored? {
