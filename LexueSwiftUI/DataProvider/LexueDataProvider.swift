@@ -46,6 +46,9 @@ class LexueDataProvider: DataProvider {
             msg.event_name = event.name!
             msg.event_uuid = event.id
             msg.event_starttime = GetFullDisplayTime(event.timestart!)
+            
+            // 方便被检索到
+            msg.text_data = "[事件提醒] \(event.name!)"
             MessageManager.shared.PushMessageWithContactCreation(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: msg, date: Date(), context: DataController.shared.container.viewContext)
             if let url = event.action_url {
                 var url_msg = MessageBodyItem(type: .link)
@@ -59,6 +62,8 @@ class LexueDataProvider: DataProvider {
             msg.event_name = event.name!
             msg.event_uuid = event.id
             msg.event_starttime = GetFullDisplayTime(event.timestart!)
+            // 方便被检索到
+            msg.text_data = "[事件提醒] \(event.name!)"
             MessageManager.shared.PushMessageWithContactCreation(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date(), context: DataController.shared.container.viewContext)
         }
     }

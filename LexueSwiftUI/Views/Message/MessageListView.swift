@@ -415,7 +415,7 @@ struct MessageListView: View {
             cur.sendTimeStr = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
             cur.messageUUID = message.id
             var searched = false
-            if message.messageBody.type == .text {
+            if message.messageBody.type == .text || message.messageBody.type == .event_notification {
                 if let range = message.messageBody.text_data!.lowercased().range(of: trimmedKeyword.lowercased()) {
                     let lowerBoundIndex = range.lowerBound
                     let upperBoundIndex = range.upperBound
