@@ -38,7 +38,7 @@ struct LexueSwiftUIApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     @Environment(\.colorScheme) var sysColorScheme
-    @StateObject private var dataController = DataController()
+    @StateObject private var dataController = DataController.shared
     @ObservedObject var settings = SettingStorage.shared
     @Environment(\.scenePhase) private var scenePhase
     
