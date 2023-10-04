@@ -11,9 +11,16 @@ import SwiftUI
 
 class DataController: ObservableObject {
     static let shared = DataController()
-    let container = NSPersistentContainer(name: "MessageModel")
+    let container: NSPersistentContainer
+    
+    
     
     init() {
+        container = NSPersistentContainer(name: "MessageModel")
+        let url = URL.storeURL(for: "group.cn.bobh.LexueSwiftUI", databaseName: "MessageModel")
+        let storeDescription = NSPersistentStoreDescription(url: url)
+        container.persistentStoreDescriptions = [storeDescription]
+        
         container.loadPersistentStores { description, error in
             if let error = error {
                 print("fatal: Failed to load core data! \(error.localizedDescription)")

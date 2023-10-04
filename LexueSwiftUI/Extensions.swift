@@ -373,3 +373,14 @@ extension Task where Failure == Error {
 private struct TimeoutError: LocalizedError {
     var errorDescription: String? = "Task timed out before completion"
 }
+
+
+// https://www.youtube.com/watch?v=FV_3kiRF90g&ab_channel=FlowritesCode
+public extension URL {
+    static func storeURL(for appGroup: String, databaseName: String) -> URL {
+        guard let fileContainer = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: appGroup) else {
+            fatalError("无法创建 \(appGroup) 的URL")
+        }
+        return fileContainer.appendingPathComponent("\(databaseName).sqlite")
+    }
+}
