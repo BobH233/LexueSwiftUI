@@ -78,7 +78,7 @@ struct SettingView: View {
                         UMAnalyticsSwift.event(eventId: "unlogin", attributes: ["username": globalVar.cur_user_info.userId])
                         settings.loginnedContext = BITLogin.LoginSuccessContext()
                         globalVar.cur_lexue_context = LexueAPI.LexueContext()
-                        SettingStorage.shared.widget_shared_LexueContext = LexueAPI.LexueContext()
+                        SettingStorage.shared.set_widget_shared_LexueContext(LexueAPI.LexueContext())
                         
                         withAnimation {
                             globalVar.isLogin = false

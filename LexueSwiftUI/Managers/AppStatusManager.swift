@@ -260,6 +260,10 @@ class AppStatusManager {
             BGTaskScheduler.shared.cancelAllTaskRequests()
             let deltaTime = Int(Date().timeIntervalSince1970) - lastBackgroundTime
             print("deltaTime: \(deltaTime)")
+            // 刷新这个sesskey，因为可能小组件已经动过了
+            GlobalVariables.shared.cur_lexue_sessKey = SettingStorage.shared.get_widget_shared_sesskey()
+            GlobalVariables.shared.cur_lexue_context = SettingStorage.shared.get_widget_shared_LexueContext()
+            // print(GlobalVariables.shared.cur_lexue_context)
             // 从后台切回来才刷新事件
             Task {
                 try? await CoreLogicManager.shared.UpdateEventList()

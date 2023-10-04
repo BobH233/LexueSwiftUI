@@ -632,10 +632,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "815"
-            endingLineNumber = "815"
+            startingLineNumber = "811"
+            endingLineNumber = "811"
             landmarkName = "GetLexueContext(_:completion:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -648,10 +648,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "829"
-            endingLineNumber = "829"
+            startingLineNumber = "825"
+            endingLineNumber = "825"
             landmarkName = "GetLexueContext(_:completion:)"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "9B405722-66C4-4210-9B9E-2731ECE94033 - 651e7715d4afaf40"
@@ -696,10 +696,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "854"
-            endingLineNumber = "854"
+            startingLineNumber = "848"
+            endingLineNumber = "848"
             landmarkName = "GetLexueContext(_:completion:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -712,10 +712,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "822"
-            endingLineNumber = "822"
+            startingLineNumber = "818"
+            endingLineNumber = "818"
             landmarkName = "GetLexueContext(_:completion:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -728,10 +728,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "830"
-            endingLineNumber = "830"
+            startingLineNumber = "826"
+            endingLineNumber = "826"
             landmarkName = "GetLexueContext(_:completion:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -823,10 +823,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "834"
-            endingLineNumber = "834"
+            startingLineNumber = "830"
+            endingLineNumber = "830"
             landmarkName = "GetLexueContext(_:completion:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -839,10 +839,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "952"
-            endingLineNumber = "952"
+            startingLineNumber = "946"
+            endingLineNumber = "946"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -855,10 +855,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "956"
-            endingLineNumber = "956"
+            startingLineNumber = "950"
+            endingLineNumber = "950"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -871,10 +871,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "957"
-            endingLineNumber = "957"
+            startingLineNumber = "951"
+            endingLineNumber = "951"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -887,8 +887,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -903,8 +903,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1047,10 +1047,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "921"
-            endingLineNumber = "921"
+            startingLineNumber = "915"
+            endingLineNumber = "915"
             landmarkName = "GetAllCourseList(_:sesskey:retry:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1063,10 +1063,10 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "928"
-            endingLineNumber = "928"
+            startingLineNumber = "922"
+            endingLineNumber = "922"
             landmarkName = "GetAllCourseList(_:sesskey:retry:)"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "B755BE01-70AB-4C63-BBCA-0BDBB432D9DB - db84873c2c0d3037"
@@ -1569,8 +1569,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1585,8 +1585,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2867,8 +2867,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "init()"
             landmarkType = "7">
             <Locations>

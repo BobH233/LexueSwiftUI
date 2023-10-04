@@ -114,29 +114,30 @@ class SettingStorage: ObservableObject {
     // 为了使小组件和app能够互通一些cookie之类的东西，因此把 sesskey 和 lexue_context 也存在这里
     // 对于app，在app从后台被重新唤醒的时候，需要从这里加载sesskey到GlobalVarible，当自己刷新sesskey成功的时候，需要写入到这里
     // 对于小组件，每次小组件gettimeline之前从这里加载到自己的GlobalVarible，当自己刷新sesskey成功的时候，也会写入到这里
-    @Published var widget_shared_sesskey: String {
-        didSet {
-            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(widget_shared_sesskey, forKey: "shared.widget_shared_sesskey")
-        }
+    func set_widget_shared_sesskey(_ val: String) {
+        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(val, forKey: "shared.widget_shared_sesskey")
     }
-    @Published var widget_shared_LexueContext: LexueAPI.LexueContext {
-        didSet {
-            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(widget_shared_LexueContext.MoodleSession, forKey: "shared.widget_shared_LexueContext")
+    func get_widget_shared_sesskey() -> String {
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "shared.widget_shared_sesskey") as? String {
+            return stored
+        } else {
+            return ""
         }
     }
     
-    func LoadWidgetSharedVaribles() {
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "shared.widget_shared_sesskey") as? String {
-            widget_shared_sesskey = stored
-        } else {
-            widget_shared_sesskey = ""
-        }
+    func set_widget_shared_LexueContext(_ val: LexueAPI.LexueContext) {
+        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(val.MoodleSession, forKey: "shared.widget_shared_LexueContext")
+    }
+    func get_widget_shared_LexueContext() -> LexueAPI.LexueContext {
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "shared.widget_shared_LexueContext") as? String {
-            widget_shared_LexueContext.MoodleSession = stored
+            var ret = LexueAPI.LexueContext()
+            ret.MoodleSession = stored
+            return ret
         } else {
-            widget_shared_LexueContext = LexueAPI.LexueContext()
+            return LexueAPI.LexueContext()
         }
     }
+    
     
     private init() {
         
@@ -218,8 +219,5 @@ class SettingStorage: ObservableObject {
         } else {
             event_newEventNotification = true
         }
-        widget_shared_sesskey = ""
-        widget_shared_LexueContext = LexueAPI.LexueContext()
-        LoadWidgetSharedVaribles()
     }
 }
