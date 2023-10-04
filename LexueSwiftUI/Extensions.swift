@@ -384,3 +384,29 @@ public extension URL {
         return fileContainer.appendingPathComponent("\(databaseName).sqlite")
     }
 }
+
+
+func GetDateDescriptionText(sendDate: Date) -> String {
+    let today = Date()
+    let dateFormatter = DateFormatter()
+    dateFormatter.locale = Locale(identifier: "zh-CN")
+    if sendDate.isInSameDay(as: today) {
+        dateFormatter.dateFormat = "今天 HH:mm"
+        return dateFormatter.string(from: sendDate)
+    } else if Calendar.current.isDateInYesterday(sendDate) {
+        dateFormatter.dateFormat = "昨天 HH:mm"
+        return dateFormatter.string(from: sendDate)
+    } else if Calendar.current.isDateInTomorrow(sendDate) {
+        dateFormatter.dateFormat = "明天 HH:mm"
+        return dateFormatter.string(from: sendDate)
+    } else if sendDate.isInSameWeek(as: today) {
+        dateFormatter.dateFormat = "EEEE HH:mm"
+        return dateFormatter.string(from: sendDate)
+    } else if sendDate.isInSameYear(as: today) {
+        dateFormatter.dateFormat = "MM-dd HH:mm"
+        return dateFormatter.string(from: sendDate)
+    } else {
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        return dateFormatter.string(from: sendDate)
+    }
+}

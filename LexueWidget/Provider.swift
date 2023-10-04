@@ -11,45 +11,45 @@ import UserNotifications
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> DefaultEntry {
         // print("placeholder")
-        return DefaultEntry(date: Date(), str: "placeholder")
+        return DefaultEntry()
     }
 
     func getSnapshot(in context: Context, completion: @escaping (DefaultEntry) -> ()) {
         // print("getSnapshot")
-        let entry = DefaultEntry(date: .now, str: "lalallala")
+        let entry = DefaultEntry()
         completion(entry)
+    }
+    
+    // 获取今天的事件总数
+    func GetTodayEventCount(today: Date, events: [EventStored]) -> Int {
+        var ret = 0
+        for event in events {
+            if EventManager.IsTodayEvent(event: event, today: today) {
+                ret = ret + 1
+            }
+        }
+        return ret
+    }
+    // 获取这一周的事件总数
+    func GetWeekEventCount(todayInWeek: Date, events: [EventStored]) -> Int {
+        var ret = 0
+        for i in 0...7 {
+            let target_date = Calendar.current.date(byAdding: .day, value: i, to: .now)!
+            if target_date.isInSameWeek(as: .now) {
+                ret = ret + GetTodayEventCount(today: target_date, events: events)
+            }
+        }
+        return ret
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DefaultEntry>) -> ()) {
         print("getTimeline")
-        let res = DataController.shared.getAllContacts(context: DataController.shared.container.viewContext)
-        for contact in res {
-            print(contact.GetDisplayName())
-        }
         
-        let entry = DefaultEntry(date: .now, str: "lalallala2")
+        var entry = DefaultEntry()
+        entry.events = EventManager.shared.Widget_GetEventList()
+        entry.day_event_count = GetTodayEventCount(today: Date(), events: entry.events)
+        entry.week_event_count = GetWeekEventCount(todayInWeek: Date(), events: entry.events)
         let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60)))
         completion(timeline)
-//        let identifier = UUID().uuidString
-//        let content = UNMutableNotificationContent()
-//        content.title = "\(Date.now)"
-//        content.body = "widget info!"
-//        content.userInfo = ["123":"1234"]
-//        content.sound = .default
-//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(0.01), repeats: false)
-//        let request = UNNotificationRequest(
-//            identifier: identifier,
-//            content: content,
-//            trigger: trigger
-//        )
-//        UNUserNotificationCenter.current().add(request) { error in
-//            if error == nil {
-//                // print("消息通知已设定: \(identifier)")
-//            }
-//        }
-//        
-//        let entry = DefaultEntry(date: .now, str: "lalallala2")
-//        let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60)))
-//        completion(timeline)
     }
 }

@@ -32,7 +32,6 @@ class EventManager: ObservableObject {
     // 获取这一周的事件总数
     func GetWeekEventCount(todayInWeek: Date) -> Int {
         var ret = 0
-        let calendar = Calendar.current
         for i in 0...7 {
             let target_date = Calendar.current.date(byAdding: .day, value: i, to: .now)!
             // print(target_date)
@@ -42,6 +41,7 @@ class EventManager: ObservableObject {
         }
         return ret
     }
+    
     
     // 删除所有过期了的事件
     func DeleteAllExpiredEvent(context: NSManagedObjectContext = DataController.shared.container.viewContext) {
@@ -77,9 +77,10 @@ class EventManager: ObservableObject {
         }
         var tmp1 = [EventStored]()
         var tmp2 = [EventStored]()
+        
+        let now_time = Date()
         // 分组，已经完成的，或者过期的都放到expired组
         for event in result {
-            let now_time = Date()
             if event.finish {
                 tmp2.append(event)
             } else if let startdate = event.timestart, startdate < now_time {
@@ -91,6 +92,25 @@ class EventManager: ObservableObject {
         EventDisplayList = tmp1
         // 从最近到早排序
         expiredEventDisplayList = tmp2.reversed()
+    }
+    
+    // 小组件专用的获取事件列表
+    func Widget_GetEventList(context: NSManagedObjectContext = DataController.shared.container.viewContext) -> [EventStored] {
+        var result = DataController.shared.queryAllEventStored(isDeleted: false, context: context)
+        // 排序，时间最早的在最前面
+        result.sort{ (event1, event2) in
+            let event1_date = event1.timestart ?? Date()
+            let event2_date = event2.timestart ?? Date()
+            return event1_date < event2_date
+        }
+        var tmp1 = [EventStored]()
+        let now_time = Date()
+        for event in result {
+            if let startdate = event.timestart, startdate >= now_time, !event.finish {
+                tmp1.append(event)
+            }
+        }
+        return tmp1
     }
     
     func FinishEvent(id: UUID, isFinish: Bool, context: NSManagedObjectContext) {

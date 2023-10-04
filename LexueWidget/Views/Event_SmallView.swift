@@ -13,9 +13,9 @@ struct Event_SmallView: View {
     var body: some View {
         VStack(spacing: 10) {
             HStack {
-                Text("10.4")
+                Text(entry.GetDayText())
                 Text("|")
-                Text("周三")
+                Text(entry.GetWeekdayText())
                     .foregroundColor(.red)
                 Spacer()
             }
@@ -29,10 +29,10 @@ struct Event_SmallView: View {
                     .foregroundColor(.blue)
                     .cornerRadius(2)
                 Text("今日")
-                Text("2")
+                Text("\(entry.day_event_count)")
                     .font(.system(size: 25))
                     .bold()
-                    .foregroundColor(.red)
+                    .foregroundColor(.blue)
                 Text("个")
                 Spacer()
             }
@@ -42,10 +42,10 @@ struct Event_SmallView: View {
                     .foregroundColor(.orange)
                     .cornerRadius(2)
                 Text("本周")
-                Text("2")
+                Text("\(entry.week_event_count)")
                     .font(.system(size: 25))
                     .bold()
-                    .foregroundColor(.red)
+                    .foregroundColor(.orange)
                 Text("个")
                 Spacer()
             }

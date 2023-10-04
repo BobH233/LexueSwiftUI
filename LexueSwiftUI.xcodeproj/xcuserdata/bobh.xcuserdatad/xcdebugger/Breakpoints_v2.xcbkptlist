@@ -1774,8 +1774,8 @@
             filePath = "LexueSwiftUI/Managers/EventManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "LoadEventList(context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1790,8 +1790,8 @@
             filePath = "LexueSwiftUI/Managers/EventManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "LoadEventList(context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1806,8 +1806,8 @@
             filePath = "LexueSwiftUI/Managers/EventManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "GetWeekEventCount(todayInWeek:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2648,8 +2648,8 @@
             filePath = "LexueSwiftUI/Views/Event/EventListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -2696,8 +2696,8 @@
             filePath = "LexueSwiftUI/Views/Event/EventListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -2744,8 +2744,8 @@
             filePath = "LexueSwiftUI/Views/Event/EventListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
