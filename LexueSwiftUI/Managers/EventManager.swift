@@ -124,13 +124,15 @@ class EventManager: ObservableObject {
     
     // 判断是否是属于今天的ddl的逻辑，注意次日的凌晨的ddl也要考虑，现在暂时先这样写
     static func IsTodayEvent(event: EventStored, today: Date) -> Bool {
-        // TODO: 让用户可以自己设置第二天算作第一天的期限时间
+        
+        
         let setting_value = SettingStorage.shared.event_midnightFixTime
         let calendar = Calendar.current
         let startOfToday = calendar.startOfDay(for: today)
         let targetDate = event.timestart!
         if let todayAM = calendar.date(bySettingHour: setting_value, minute: 0, second: 0, of: startOfToday), let nextDayAM = calendar.date(byAdding: .day, value: 1, to: todayAM) {
-            if targetDate > todayAM && targetDate <= nextDayAM {
+            // 如果本来就是今天，也得算今天，比如我现在0点了，但是还要赶5点的ddl，这个不能算到昨天里面
+            if targetDate > startOfToday && targetDate <= nextDayAM {
                 return true
             }
         }

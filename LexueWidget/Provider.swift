@@ -74,7 +74,7 @@ struct Provider: TimelineProvider {
         // 完成app的事件刷新
         Task(timeout: 50) {
             do {
-                try? await UpdateEventList()
+                try await UpdateEventList()
                 print("Refreshing data providers...")
                 await DataProviderManager.shared.DoRefreshAll(param: ["userId": SettingStorage.shared.cacheUserInfo.userId])
             } catch {
