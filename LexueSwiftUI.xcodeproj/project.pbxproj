@@ -118,6 +118,7 @@
 		47F4FD262ACDA64500C6C144 /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */; };
 		47F4FD282ACDADCA00C6C144 /* Event_MediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4FD272ACDADCA00C6C144 /* Event_MediumView.swift */; };
 		47F4FD292ACDB4EE00C6C144 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A1D182AC9932C00A3D847 /* EventManager.swift */; };
+		47F4FD2B2ACDB9CF00C6C144 /* Event_LargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4FD2A2ACDB9CF00C6C144 /* Event_LargeView.swift */; };
 		47FBC8C62AC579DD00FB1523 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -252,6 +253,7 @@
 		47F4FD202ACDA01700C6C144 /* LexueWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LexueWidgetExtension.entitlements; sourceTree = "<group>"; };
 		47F4FD212ACDA06700C6C144 /* LexueSwiftUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LexueSwiftUI.entitlements; sourceTree = "<group>"; };
 		47F4FD272ACDADCA00C6C144 /* Event_MediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event_MediumView.swift; sourceTree = "<group>"; };
+		47F4FD2A2ACDB9CF00C6C144 /* Event_LargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event_LargeView.swift; sourceTree = "<group>"; };
 		47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -341,6 +343,7 @@
 				47196FF62AC5522500979DFE /* WidgetView.swift */,
 				47F4FD132ACD966C00C6C144 /* Event_SmallView.swift */,
 				47F4FD272ACDADCA00C6C144 /* Event_MediumView.swift */,
+				47F4FD2A2ACDB9CF00C6C144 /* Event_LargeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				47F4FD252ACDA63A00C6C144 /* ContactDisplayModel.swift in Sources */,
 				47F4FD282ACDADCA00C6C144 /* Event_MediumView.swift in Sources */,
 				47196FF32AC551D200979DFE /* Provider.swift in Sources */,
+				47F4FD2B2ACDB9CF00C6C144 /* Event_LargeView.swift in Sources */,
 				47F4FD232ACDA62400C6C144 /* DataController.swift in Sources */,
 				47196FF12AC551D200979DFE /* Widget_Extension.swift in Sources */,
 				47F4FD142ACD966C00C6C144 /* Event_SmallView.swift in Sources */,

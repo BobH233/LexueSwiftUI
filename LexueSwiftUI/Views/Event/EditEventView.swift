@@ -121,6 +121,7 @@ struct EditEventView: View {
                                     if let to_delete = to_delete {
                                         managedObjContext.delete(to_delete)
                                     }
+                                    DataController.shared.save(context: managedObjContext)
                                     dismiss()
                                 },
                                 secondaryButton: .cancel()

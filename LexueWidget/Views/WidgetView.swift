@@ -19,7 +19,7 @@ struct WidgetView: View {
         case .systemMedium:
             Event_MediumView(entry: entry)
         case .systemLarge:
-            Event_SmallView()
+            Event_LargeView(entry: entry)
         default:
             EmptyView()
         }

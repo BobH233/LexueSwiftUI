@@ -41,8 +41,9 @@ struct EventItemView: View {
 struct Event_MediumView: View {
     var entry: DefaultEntry = DefaultEntry()
     @State var limited_event: [EventStored] = []
-    let firstLineSize: CGFloat = 14
-    let secondLineSize: CGFloat = 16
+    var firstLineSize: CGFloat = 14
+    var secondLineSize: CGFloat = 16
+    var limitCount: Int = 2
     var body: some View {
         VStack(spacing: 2) {
             HStack {
@@ -87,11 +88,9 @@ struct Event_MediumView: View {
             Spacer()
         }
         .onAppear {
-            if entry.events.count >= 2 {
-                limited_event.append(entry.events[0])
-                limited_event.append(entry.events[1])
-            } else if entry.events.count == 1 {
-                limited_event.append(entry.events[0])
+            // 最多显示 2 个
+            for i in 0 ..< min(entry.events.count, limitCount) {
+                limited_event.append(entry.events[i])
             }
         }
     }

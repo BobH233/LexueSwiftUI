@@ -10,12 +10,10 @@ import UserNotifications
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> DefaultEntry {
-        // print("placeholder")
         return DefaultEntry()
     }
 
     func getSnapshot(in context: Context, completion: @escaping (DefaultEntry) -> ()) {
-        // print("getSnapshot")
         let entry = DefaultEntry()
         completion(entry)
     }
