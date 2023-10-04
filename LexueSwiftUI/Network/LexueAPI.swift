@@ -719,6 +719,9 @@ class LexueAPI {
         switch response.result {
         case .success(let html):
             let ret = ParseSessKey(html)
+            DispatchQueue.main.async {
+                SettingStorage.shared.widget_shared_sesskey = ret
+            }
             return .success((ret, nil))
         case .failure(let error):
             if retry {
@@ -737,11 +740,13 @@ class LexueAPI {
                 case .success(let new_context):
                     DispatchQueue.main.async {
                         GlobalVariables.shared.cur_lexue_context = new_context
-                        // print("new context: \(new_context.MoodleSession)")
                     }
                     let retryResult = await GetSessKey(new_context, retry: false)
                     switch retryResult {
                     case .success(let (newSesskey, _)):
+                        DispatchQueue.main.async {
+                            SettingStorage.shared.widget_shared_sesskey = newSesskey
+                        }
                         return .success((newSesskey, new_context))
                     case .failure(let error):
                         return .failure(error)
@@ -827,6 +832,9 @@ class LexueAPI {
                                                     if let ret_headers = response2.response?.allHeaderFields as? [String: String], let cookie = ret_headers["Set-Cookie"]{
                                                         var ret = LexueContext()
                                                         ret.MoodleSession = get_cookie_key(cookie, "MoodleSession")
+                                                        DispatchQueue.main.async {
+                                                            SettingStorage.shared.widget_shared_LexueContext = ret
+                                                        }
                                                         // print(ret)
                                                         completion(.success(ret))
                                                     } else {

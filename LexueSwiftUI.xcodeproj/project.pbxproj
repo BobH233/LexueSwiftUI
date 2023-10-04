@@ -112,6 +112,10 @@
 		47F4FD1B2ACD9D4000C6C144 /* LexueProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476340302AB89F47006C24E2 /* LexueProfile.swift */; };
 		47F4FD1D2ACD9ECA00C6C144 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 47F4FD1C2ACD9ECA00C6C144 /* Alamofire */; };
 		47F4FD1F2ACD9EED00C6C144 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 47F4FD1E2ACD9EED00C6C144 /* SwiftSoup */; };
+		47F4FD232ACDA62400C6C144 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927822AA77FDA00ABDC53 /* DataController.swift */; };
+		47F4FD242ACDA62E00C6C144 /* ContactMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C81A2AA62CDB00F812D6 /* ContactMessageModel.swift */; };
+		47F4FD252ACDA63A00C6C144 /* ContactDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479839DA2AA9FCD40094C5E1 /* ContactDisplayModel.swift */; };
+		47F4FD262ACDA64500C6C144 /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */; };
 		47FBC8C62AC579DD00FB1523 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -660,10 +664,14 @@
 				47196FF72AC5522500979DFE /* WidgetView.swift in Sources */,
 				47F4FD172ACD9CD700C6C144 /* LexueAPI.swift in Sources */,
 				47F4FD162ACD9CD500C6C144 /* BITLogin.swift in Sources */,
+				47F4FD262ACDA64500C6C144 /* MessageModel.xcdatamodeld in Sources */,
+				47F4FD242ACDA62E00C6C144 /* ContactMessageModel.swift in Sources */,
 				47196FF22AC551D200979DFE /* DefaultEntry.swift in Sources */,
 				47F4FD182ACD9CE200C6C144 /* GlobalVariables.swift in Sources */,
 				47196FE12AC5514F00979DFE /* LexueWidgetBundle.swift in Sources */,
+				47F4FD252ACDA63A00C6C144 /* ContactDisplayModel.swift in Sources */,
 				47196FF32AC551D200979DFE /* Provider.swift in Sources */,
+				47F4FD232ACDA62400C6C144 /* DataController.swift in Sources */,
 				47196FF12AC551D200979DFE /* Widget_Extension.swift in Sources */,
 				47F4FD142ACD966C00C6C144 /* Event_SmallView.swift in Sources */,
 				47F4FD1A2ACD9D3500C6C144 /* CourseShortInfo.swift in Sources */,

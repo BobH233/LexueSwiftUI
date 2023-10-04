@@ -22,8 +22,11 @@ struct Provider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DefaultEntry>) -> ()) {
         print("getTimeline")
-        print(SettingStorage.shared.loginnedContext)
-        print(SettingStorage.shared.cacheUserInfo)
+        let res = DataController.shared.getAllContacts(context: DataController.shared.container.viewContext)
+        for contact in res {
+            print(contact.GetDisplayName())
+        }
+        
         let entry = DefaultEntry(date: .now, str: "lalallala2")
         let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60)))
         completion(timeline)
