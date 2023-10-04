@@ -1,0 +1,83 @@
+//
+//  PackageDeclarationView.swift
+//  LexueSwiftUI
+//
+//  Created by bobh on 2023/10/4.
+//
+
+import SwiftUI
+
+private struct PackageUsingDeclarationInfo: Hashable {
+    var packageName: String = ""
+    var packageDescription: String = ""
+    var license: String = ""
+    var URL: URL?
+    var ourPurpose: String = ""
+}
+
+private var packages: [PackageUsingDeclarationInfo] = [
+    PackageUsingDeclarationInfo(packageName: "Alamofire", packageDescription: "Elegant HTTP Networking in Swift", license: "MIT license", URL: URL(string: "https://github.com/Alamofire/Alamofire"), ourPurpose: "用于进行网络请求"),
+    PackageUsingDeclarationInfo(packageName: "SwiftSoup", packageDescription: "Pure Swift HTML Parser, with best of DOM, CSS, and jquery (Supports Linux, iOS, Mac, tvOS, watchOS)", license: "MIT license", URL: URL(string: "https://github.com/scinfu/SwiftSoup"), ourPurpose: "用于进行网页内容的解析，提供乐学API相关服务"),
+    PackageUsingDeclarationInfo(packageName: "SwiftUI Image Viewer", packageDescription: "An image viewer built using SwiftUI.", license: "MIT license", URL: URL(string: "https://github.com/Jake-Short/swiftui-image-viewer/"), ourPurpose: "用于查看消息中的图片，预览用户的头像"),
+    PackageUsingDeclarationInfo(packageName: "swift-markdown-ui", packageDescription: "Display and customize Markdown text in SwiftUI", license: "MIT license", URL: URL(string: "https://github.com/gonzalezreal/swift-markdown-ui"), ourPurpose: "用于app内显示markdown格式的文本"),
+    PackageUsingDeclarationInfo(packageName: "WebView", packageDescription: "A SwiftUI component View that contains a WKWebView ", license: "Unlicense license", URL: URL(string: "https://github.com/kylehickinson/SwiftUI-WebView"), ourPurpose: "用于构建内置浏览器功能"),
+]
+
+struct PackageDeclarationView: View {
+    var body: some View {
+        Form {
+            Section {
+                ForEach(packages, id: \.self) { package in
+                    NavigationLink(package.packageName, destination: {
+                        Form {
+                            HStack {
+                                Text("包名")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Text(package.packageName)
+                                    .foregroundColor(.secondary)
+                            }
+                            HStack {
+                                Text("描述")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Text(package.packageDescription)
+                                    .foregroundColor(.secondary)
+                            }
+                            HStack {
+                                Text("开源协议")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Text(package.license)
+                                    .foregroundColor(.secondary)
+                            }
+                            if let url = package.URL {
+                                HStack {
+                                    Text("网址")
+                                        .foregroundColor(.primary)
+                                    Spacer()
+                                    Link(url.absoluteString, destination: url)
+                                }
+                            }
+                            HStack {
+                                Text("用途")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Text(package.ourPurpose)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    })
+                }
+            } header: {
+                Text("乐学助手引用了下面的一些开源包，并已经标注其出处和开源许可协议")
+            }
+        }
+        .navigationTitle("开源包引用声明")
+        .navigationBarTitleDisplayMode(.large)
+    }
+}
+
+#Preview {
+    PackageDeclarationView()
+}

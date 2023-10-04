@@ -76,6 +76,7 @@
 		47B695952AC5703C0070D3EA /* KeyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47B695942AC5703C0070D3EA /* KeyInfo.plist */; };
 		47B695972AC570FE0070D3EA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 47B695962AC570FE0070D3EA /* .gitignore */; };
 		47BA831F2AC1289100954129 /* UnloginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BA831E2AC1289100954129 /* UnloginView.swift */; };
+		47BCFB962ACD6A6200320CFD /* PackageDeclarationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BCFB952ACD6A6200320CFD /* PackageDeclarationView.swift */; };
 		47BD51A02AC5B43F0029F9DB /* UMCommonSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BD519C2AC5B43F0029F9DB /* UMCommonSwift.swift */; };
 		47BD51A12AC5B43F0029F9DB /* UMCommonLogSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BD519D2AC5B43F0029F9DB /* UMCommonLogSwift.swift */; };
 		47BD51A22AC5B43F0029F9DB /* UMGameAnalyticsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BD519E2AC5B43F0029F9DB /* UMGameAnalyticsSwift.swift */; };
@@ -203,6 +204,7 @@
 		47B695942AC5703C0070D3EA /* KeyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KeyInfo.plist; sourceTree = "<group>"; };
 		47B695962AC570FE0070D3EA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		47BA831E2AC1289100954129 /* UnloginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloginView.swift; sourceTree = "<group>"; };
+		47BCFB952ACD6A6200320CFD /* PackageDeclarationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageDeclarationView.swift; sourceTree = "<group>"; };
 		47BD519B2AC5B3BA0029F9DB /* Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridge.h; sourceTree = "<group>"; };
 		47BD519C2AC5B43F0029F9DB /* UMCommonSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMCommonSwift.swift; sourceTree = "<group>"; };
 		47BD519D2AC5B43F0029F9DB /* UMCommonLogSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMCommonLogSwift.swift; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 				475EDED32AB60697008486F0 /* ProfileView.swift */,
 				47F4F2872AC080100047B395 /* AvatarSettingView.swift */,
 				47B411782ACBD96300AC0B5E /* DataProviderSettingView.swift */,
+				47BCFB952ACD6A6200320CFD /* PackageDeclarationView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				47BD51A32AC5B43F0029F9DB /* UMAnalyticsSwift.swift in Sources */,
 				474C9B792AA4E38D0064B5AF /* EventListView.swift in Sources */,
 				476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */,
+				47BCFB962ACD6A6200320CFD /* PackageDeclarationView.swift in Sources */,
 				47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */,
 				47B442102AC6CDC400EE03A9 /* UserAgreement.swift in Sources */,
 				471A1D192AC9932C00A3D847 /* EventManager.swift in Sources */,
