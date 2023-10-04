@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import BackgroundTasks
+import WidgetKit
 
 class AppStatusManager {
     static let shared = AppStatusManager()
@@ -184,6 +185,7 @@ class AppStatusManager {
         print("\(#function)")
         lastBackgroundTime = Int(Date().timeIntervalSince1970)
         AppStatusManager.scheduleAppBackgroundRefresh()
+        WidgetCenter.shared.reloadAllTimelines()
         print("recordTime: \(lastBackgroundTime)")
     }
     
