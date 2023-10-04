@@ -54,6 +54,7 @@ struct LexueSwiftUIApp: App {
             }
             // 后台刷新相关逻辑
             if GlobalVariables.shared.isLogin {
+                UMAnalyticsSwift.event(eventId: "background_refresh", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId])
                 print("background task executing...")
                 Task(timeout: 50) {
                     do {

@@ -288,6 +288,7 @@ struct CourseDetailView: View {
                         GlobalVariables.shared.alertTitle = "无法获取课程的内容(CourseSections)"
                         GlobalVariables.shared.alertContent = "请检查你的网络，然后重试"
                         GlobalVariables.shared.showAlert = true
+                        UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "无法获取课程的内容(CourseSections)"])
                     }
                 }
             }

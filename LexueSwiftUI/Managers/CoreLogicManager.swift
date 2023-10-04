@@ -26,6 +26,7 @@ class CoreLogicManager {
                 GlobalVariables.shared.alertTitle = "刷新乐学课程列表失败"
                 GlobalVariables.shared.alertContent = "请检查网络连接并尝试重启app"
                 GlobalVariables.shared.showAlert = true
+                UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "刷新乐学课程列表失败"])
             }
         }
     }
@@ -63,6 +64,7 @@ class CoreLogicManager {
                 GlobalVariables.shared.alertTitle = "获取个人信息失败"
                 GlobalVariables.shared.alertContent = "请检查网络情况并重启应用重试!"
                 GlobalVariables.shared.showAlert = true
+                UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "获取个人信息失败"])
             }
             return false
         }
@@ -108,6 +110,7 @@ class CoreLogicManager {
                         GlobalVariables.shared.alertTitle = "无法上传用户配置信息到乐学"
                         GlobalVariables.shared.alertContent = "头像设置功能等可能异常，请app退出重试"
                         GlobalVariables.shared.showAlert = true
+                        UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "无法上传用户配置信息到乐学1"])
                     }
                 }
             } catch {
@@ -118,6 +121,7 @@ class CoreLogicManager {
                 GlobalVariables.shared.alertTitle = "无法上传用户配置信息到乐学"
                 GlobalVariables.shared.alertContent = "头像设置功能等可能异常，请app退出重试"
                 GlobalVariables.shared.showAlert = true
+                UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "无法上传用户配置信息到乐学2"])
             }
         }
     }

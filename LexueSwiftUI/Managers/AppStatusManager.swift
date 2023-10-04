@@ -44,6 +44,7 @@ class AppStatusManager {
                     GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)(get_context)"
                     GlobalVariables.shared.alertContent = "数据获取可能异常，建议重启应用再试。"
                     GlobalVariables.shared.showAlert = true
+                    UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "无法刷新乐学会话(sessKey)(get_context)"])
                 }
             }
         }
@@ -74,6 +75,7 @@ class AppStatusManager {
                     GlobalVariables.shared.alertTitle = "无法获取个人信息(LexueProfile)"
                     GlobalVariables.shared.alertContent = "个人数据显示可能异常，建议重启应用再试。"
                     GlobalVariables.shared.showAlert = true
+                    UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "无法获取个人信息(LexueProfile)"])
                 }
             }
         }
@@ -90,6 +92,7 @@ class AppStatusManager {
             SettingStorage.shared.loginnedContext.CASTGC = ""
             SettingStorage.shared.loginnedContext.happyVoyagePersonal = ""
             GlobalVariables.shared.showAlert = true
+            UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "自动登录失败"])
         }
         BITLogin.shared.init_login_param() { result in
             switch result {
@@ -205,6 +208,7 @@ class AppStatusManager {
                 SettingStorage.shared.loginnedContext.CASTGC = ""
                 SettingStorage.shared.loginnedContext.happyVoyagePersonal = ""
                 GlobalVariables.shared.showAlert = true
+                UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "刷新乐学会话失败"])
             }
         }
     }
@@ -224,11 +228,15 @@ class AppStatusManager {
                     GlobalVariables.shared.cur_lexue_sessKey = sesskey
                 }
             case .failure(_):
-                DispatchQueue.main.async {
-                    GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)(Tick)"
-                    GlobalVariables.shared.alertContent = "数据获取可能异常，建议重启应用再试。"
-                    GlobalVariables.shared.showAlert = true
-                }
+//                DispatchQueue.main.async {
+//                    GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)(Tick)"
+//                    GlobalVariables.shared.alertContent = "数据获取可能异常，建议重启应用再试。"
+//                    GlobalVariables.shared.showAlert = true
+//                }
+                // 不显示弹窗了，用户看见不舒服，直接记录下来，应该不会影响其他功能
+                print("error: sesskey_fail_tick")
+                UMAnalyticsSwift.event(eventId: "sesskey_fail_tick", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId])
+                break
             }
         }
         // 刷新消息源以及事件列表
@@ -275,11 +283,15 @@ class AppStatusManager {
                             GlobalVariables.shared.cur_lexue_sessKey = sesskey
                         }
                     case .failure(_):
-                        DispatchQueue.main.async {
-                            GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)(Background)"
-                            GlobalVariables.shared.alertContent = "数据获取可能异常，建议重启应用再试。"
-                            GlobalVariables.shared.showAlert = true
-                        }
+//                        DispatchQueue.main.async {
+//                            GlobalVariables.shared.alertTitle = "无法刷新乐学会话(sessKey)(Background)"
+//                            GlobalVariables.shared.alertContent = "数据获取可能异常，建议重启应用再试。"
+//                            GlobalVariables.shared.showAlert = true
+//                        }
+                        // 不显示弹窗了，用户看见不舒服，直接记录下来，应该不会影响其他功能
+                        print("error: sesskey_fail_background")
+                        UMAnalyticsSwift.event(eventId: "sesskey_fail_background", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId])
+                        break
                     }
                 }
             }
