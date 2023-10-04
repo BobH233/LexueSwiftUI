@@ -15,7 +15,7 @@
 			<string>cn.bobh.LexueSwiftUI</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>um.65153a67b2f6fa00ba5c862a</string>
+				<string>lexuehelper</string>
 			</array>
 		</dict>
 	</array>

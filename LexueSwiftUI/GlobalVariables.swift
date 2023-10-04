@@ -37,7 +37,8 @@ class GlobalVariables: ObservableObject {
     
     var handleNotificationMsg: (([AnyHashable : Any]) -> Void)?
     
-    var debugMode = true
+    // 默认是false
+    @Published var debugMode = false
 
     private init() {
         userAvatarUIImage = UIImage(named: "default_avatar")!

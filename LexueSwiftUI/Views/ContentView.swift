@@ -38,8 +38,26 @@ struct ContentView: View {
                 }
         }
         .onOpenURL { incomingURL in
-            print("App was opened via URL: \(incomingURL)")
-            MobClick.handle(incomingURL)
+            // debug
+            if incomingURL.scheme == "um.65153a67b2f6fa00ba5c862a" {
+                print("App was opened via URL: \(incomingURL)")
+                MobClick.handle(incomingURL)
+            } else if incomingURL.scheme == "lexuehelper" {
+                guard let components = URLComponents(url: incomingURL, resolvingAgainstBaseURL: true) else {
+                    print("Invalid URL")
+                    return
+                }
+                if let action = components.host, action == "enable_debug_mode" {
+                    print("开启调试模式")
+                    GlobalVariables.shared.debugMode = true
+                    return
+                }
+                if let action = components.host, action == "disable_debug_mode" {
+                    print("关闭调试模式")
+                    GlobalVariables.shared.debugMode = false
+                    return
+                }
+            }
         }
         .alert(isPresented: $globalVar.showAlert) {
             Alert(title: Text(globalVar.alertTitle), message: Text(globalVar.alertContent), dismissButton: .default(Text("确定")))
