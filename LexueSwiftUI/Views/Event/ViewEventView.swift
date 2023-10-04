@@ -125,6 +125,9 @@ struct ViewEventView: View {
                         }
                     }
                 }
+            } else {
+                Text("没有找到该事件，可能你已经将其删除")
+                    .foregroundColor(.red)
             }
         }
         .onChange(of: showEditView) { newVal in
@@ -136,10 +139,7 @@ struct ViewEventView: View {
             if let event = DataController.shared.findEventById(id: event_uuid, context: managedObjContext) {
                 event_obj = event
             } else {
-                dismiss()
-                globalVar.alertTitle = "无法找到这个事件\(event_uuid.uuidString)"
-                globalVar.alertContent = "按理来说这不应该发生...请反馈bug"
-                globalVar.showAlert = true
+                editable = false
             }
         }
         .navigationBarItems(trailing:

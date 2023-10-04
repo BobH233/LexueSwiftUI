@@ -1887,8 +1887,8 @@
             filePath = "LexueSwiftUI/Views/Event/EditEventView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1903,8 +1903,8 @@
             filePath = "LexueSwiftUI/Views/Event/ViewEventView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -2095,8 +2095,8 @@
             filePath = "LexueSwiftUI/Views/Event/EditEventView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -2207,8 +2207,8 @@
             filePath = "LexueSwiftUI/Views/Event/EditEventView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2483,16 +2483,48 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C815A6CF-ED9F-4D27-B078-B026A10D3046"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LexueSwiftUI/Views/Event/ViewEventView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "body"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "C815A6CF-ED9F-4D27-B078-B026A10D3046 - e1a955967fc1f32a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in LexueSwiftUI.ViewEventView.body.getter : some"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Event/ViewEventView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "132"
+                  endingLineNumber = "132"
+                  offsetFromSymbolStart = "224">
+               </Location>
+               <Location
+                  uuid = "C815A6CF-ED9F-4D27-B078-B026A10D3046 - e1a955967fc1f38d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in LexueSwiftUI.ViewEventView.body.getter : some"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Event/ViewEventView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "224">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2509,6 +2541,38 @@
             endingLineNumber = "49"
             landmarkName = "body"
             landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "5420E218-CF96-48F9-9932-C5C6DEC719E7 - 7ee70708f1c5080a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI.Text, SwiftUI._ConditionalContent&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;&gt; in closure #1 () -&gt; Swift.Optional&lt;SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI._ConditionalContent&lt;SwiftUI.Text, SwiftUI._ConditionalContent&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;, Swift.Optional&lt;SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.CourseDetailView&gt;&gt;, Swift.Optional&lt;SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.LexueBroswerView&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;&gt;)&gt;&gt; in LexueSwiftUI.ViewEventView.body.getter : some"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Event/ViewEventView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "352">
+               </Location>
+               <Location
+                  uuid = "5420E218-CF96-48F9-9932-C5C6DEC719E7 - 63e756f6090ef406"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI.Text, SwiftUI._ConditionalContent&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;&gt; in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI._ConditionalContent&lt;SwiftUI.Text, SwiftUI._ConditionalContent&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;, Swift.Optional&lt;SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.CourseDetailView&gt;&gt;, Swift.Optional&lt;SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.LexueBroswerView&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;&gt;)&gt;, SwiftUI.Text&gt; in LexueSwiftUI.ViewEventView.body.getter : some"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Event/ViewEventView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "352">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2525,22 +2589,38 @@
             endingLineNumber = "59"
             landmarkName = "body"
             landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AC746E35-7655-4E9F-AF0B-D336132BC8CA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LexueSwiftUI/Views/Event/ViewEventView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "body"
-            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "0D0EE3BC-A436-4F87-A510-4F232BB5CF06 - 988ff9933d57daa2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI.Text, SwiftUI._ConditionalContent&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;&gt; in closure #1 () -&gt; Swift.Optional&lt;SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI._ConditionalContent&lt;SwiftUI.Text, SwiftUI._ConditionalContent&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;, Swift.Optional&lt;SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.CourseDetailView&gt;&gt;, Swift.Optional&lt;SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.LexueBroswerView&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;&gt;)&gt;&gt; in LexueSwiftUI.ViewEventView.body.getter : some"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Event/ViewEventView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "352">
+               </Location>
+               <Location
+                  uuid = "0D0EE3BC-A436-4F87-A510-4F232BB5CF06 - 1f425beda61f9eb6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI.Text, SwiftUI._ConditionalContent&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;&gt; in closure #1 () -&gt; SwiftUI._ConditionalContent&lt;SwiftUI.TupleView&lt;(SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI._ConditionalContent&lt;SwiftUI.Text, SwiftUI._ConditionalContent&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;, SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;&gt;, SwiftUI.EmptyView&gt;, SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(SwiftUI.Text, SwiftUI.Spacer, SwiftUI.Text)&gt;&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;, Swift.Optional&lt;SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.CourseDetailView&gt;&gt;, Swift.Optional&lt;SwiftUI.NavigationLink&lt;SwiftUI.Text, LexueSwiftUI.LexueBroswerView&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;&gt;)&gt;, SwiftUI.Text&gt; in LexueSwiftUI.ViewEventView.body.getter : some"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Event/ViewEventView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "352">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

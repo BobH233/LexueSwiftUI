@@ -23,6 +23,7 @@ struct EditEventView: View {
     @State private var withCourse: Bool = false
     @State private var selectCourseId: String = ""
     @State private var color: Color = .blue
+    @State private var showDeleteAlert: Bool = false
     
     // 有 作业 assignment 考试 exam 常规 general
     @State private var eventType: String = "assignment"
@@ -77,34 +78,54 @@ struct EditEventView: View {
                             }
                         }
                     }
-                    Button("修改日程") {
-                        if eventName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                            globalVar.alertTitle = "事件名称为空"
-                            globalVar.alertContent = "请至少指定事件名称"
-                            globalVar.showAlert = true
-                            return
+                    Section("操作") {
+                        Button("修改日程") {
+                            if eventName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                                globalVar.alertTitle = "事件名称为空"
+                                globalVar.alertContent = "请至少指定事件名称"
+                                globalVar.showAlert = true
+                                return
+                            }
+                            let eventName = eventName.trimmingCharacters(in: .whitespacesAndNewlines)
+                            let description = eventDescription.trimmingCharacters(in: .whitespacesAndNewlines)
+                            let courseId = withCourse ? selectCourseId : nil
+                            let courseName = withCourse ? GetCourseName(selectCourseId) : nil
+                            let to_update = DataController.shared.findEventById(id: event_uuid, context: managedObjContext)
+                            to_update?.name = eventName
+                            to_update?.timestart = startDate
+                            to_update?.event_description = description
+                            to_update?.event_type = eventType
+                            to_update?.course_id = courseId
+                            to_update?.course_name = courseName
+                            to_update?.color = color.toHex()
+                            DataController.shared.save(context: managedObjContext)
+                            // 事件经过编辑过后，也应该重新通知，所以我在编辑事件的时候需要把已经通知的记录全部删了
+                            print("eventid: \(event_uuid)")
+                            let notifiedRecords = DataController.shared.getLexueDP_RecordNotifiedEvent(eventUUID: event_uuid, context: managedObjContext)
+                            for notifiedRecord in notifiedRecords {
+                                managedObjContext.delete(notifiedRecord)
+                            }
+                            DataController.shared.save(context: managedObjContext)
+                            dismiss()
                         }
-                        let eventName = eventName.trimmingCharacters(in: .whitespacesAndNewlines)
-                        let description = eventDescription.trimmingCharacters(in: .whitespacesAndNewlines)
-                        let courseId = withCourse ? selectCourseId : nil
-                        let courseName = withCourse ? GetCourseName(selectCourseId) : nil
-                        let to_update = DataController.shared.findEventById(id: event_uuid, context: managedObjContext)
-                        to_update?.name = eventName
-                        to_update?.timestart = startDate
-                        to_update?.event_description = description
-                        to_update?.event_type = eventType
-                        to_update?.course_id = courseId
-                        to_update?.course_name = courseName
-                        to_update?.color = color.toHex()
-                        DataController.shared.save(context: managedObjContext)
-                        // 事件经过编辑过后，也应该重新通知，所以我在编辑事件的时候需要把已经通知的记录全部删了
-                        print("eventid: \(event_uuid)")
-                        let notifiedRecords = DataController.shared.getLexueDP_RecordNotifiedEvent(eventUUID: event_uuid, context: managedObjContext)
-                        for notifiedRecord in notifiedRecords {
-                            managedObjContext.delete(notifiedRecord)
+                        Button("删除日程") {
+                            showDeleteAlert = true
                         }
-                        DataController.shared.save(context: managedObjContext)
-                        dismiss()
+                        .foregroundColor(.red)
+                        .alert(isPresented: $showDeleteAlert) {
+                            Alert(
+                                title: Text("删除确认"),
+                                message: Text("删除这个事件后，你将不再能够收到这则事件的到期提醒，也无法再查看这个事件，确认删除吗？"),
+                                primaryButton: .destructive(Text("确定").foregroundColor(.red)) {
+                                    let to_delete = DataController.shared.findEventById(id: event_uuid, context: managedObjContext)
+                                    if let to_delete = to_delete {
+                                        managedObjContext.delete(to_delete)
+                                    }
+                                    dismiss()
+                                },
+                                secondaryButton: .cancel()
+                            )
+                        }
                     }
                 } else {
                     Section("基本设置") {
@@ -142,11 +163,6 @@ struct EditEventView: View {
                         color = Color(hex: event_obj.color!) ?? .green
                     }
                 }
-            } else {
-                dismiss()
-                globalVar.alertTitle = "无法找到这个事件\(event_uuid.uuidString)"
-                globalVar.alertContent = "按理来说这不应该发生...请反馈bug"
-                globalVar.showAlert = true
             }
         }
     }
