@@ -22,18 +22,21 @@ struct EventItemView: View {
                 HStack {
                     Text(eventName)
                         .font(.system(size: 17))
+                        .lineLimit(1)
                     Spacer()
                 }
                 .padding(.top, 1)
                 HStack {
                     Text(GetDateDescriptionText(sendDate: starttime))
                         .font(.system(size: 15))
+                        .lineLimit(1)
                     Spacer()
                 }
                 .padding(.bottom, 1)
             }
             Spacer()
         }
+        .frame(maxHeight: 60)
         .background(color.opacity(0.1))
     }
 }
