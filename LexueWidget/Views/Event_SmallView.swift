@@ -1,0 +1,69 @@
+//
+//  Event_SmallView.swift
+//  LexueWidgetExtension
+//
+//  Created by bobh on 2023/10/4.
+//
+
+import WidgetKit
+import SwiftUI
+
+struct Event_SmallView: View {
+    var entry: DefaultEntry = DefaultEntry()
+    var body: some View {
+        VStack(spacing: 10) {
+            HStack {
+                Text("10.4")
+                Text("|")
+                Text("周三")
+                    .foregroundColor(.red)
+                Spacer()
+            }
+            HStack {
+                Text("乐学助手")
+                Spacer()
+            }
+            HStack(alignment: .bottom) {
+                Rectangle()
+                    .frame(width: 4)
+                    .foregroundColor(.blue)
+                    .cornerRadius(2)
+                Text("今日")
+                Text("2")
+                    .font(.system(size: 25))
+                    .bold()
+                    .foregroundColor(.red)
+                Text("个")
+                Spacer()
+            }
+            HStack(alignment: .bottom) {
+                Rectangle()
+                    .frame(width: 4)
+                    .foregroundColor(.orange)
+                    .cornerRadius(2)
+                Text("本周")
+                Text("2")
+                    .font(.system(size: 25))
+                    .bold()
+                    .foregroundColor(.red)
+                Text("个")
+                Spacer()
+            }
+            .padding(.bottom, 5)
+        }
+    }
+}
+
+struct Event_SmallView_Previews: PreviewProvider {
+    static var previews: some View {
+        if #available(iOS 17.0, *) {
+            Event_SmallView()
+                .containerBackground(.fill.tertiary, for: .widget)
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+        } else {
+            Event_SmallView()
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+        }
+        
+    }
+}

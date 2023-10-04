@@ -27,7 +27,7 @@ struct SettingView: View {
                             Spacer()
                                 .foregroundColor(.blue)
                             VStack {
-                                Image(uiImage: globalVar.userAvatarUIImage)
+                                Image(uiImage: globalVar.userAvatarUIImage!)
                                     .resizable()
                                     .frame(width:100, height: 100, alignment: .center)
                                     .shadow(radius: 26)
@@ -35,7 +35,7 @@ struct SettingView: View {
                                     .shadow(radius: 5)
                                     .padding(.top, 10)
                                     .onTapGesture {
-                                        avatar_image = Image(uiImage: globalVar.userAvatarUIImage)
+                                        avatar_image = Image(uiImage: globalVar.userAvatarUIImage!)
                                         showImageViewer.toggle()
                                     }
                                 
@@ -123,9 +123,7 @@ struct SettingView: View {
                             .foregroundColor(.blue)
                         Text("应用隐私声明")
                     })
-                    NavigationLink(destination: {
-                        
-                    }, label: {
+                    NavigationLink(destination: AboutView(), label: {
                         Image(systemName: "info.circle")
                             .foregroundColor(.blue)
                         Text("关于")

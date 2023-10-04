@@ -77,7 +77,7 @@ private struct ContactListItemView: View {
         if let data = Data(base64Encoded: base64String), let image = UIImage(data: data) {
             return image
         } else {
-            return GlobalVariables.shared.defaultUIImage
+            return GlobalVariables.shared.defaultUIImage!
         }
     }
     

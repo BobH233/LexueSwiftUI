@@ -31,9 +31,9 @@ class GlobalVariables: ObservableObject {
     
     @Published var courseList: [CourseShortInfo] = []
     
-    @Published var userAvatarUIImage: UIImage
+    @Published var userAvatarUIImage: UIImage?
     
-    @Published var defaultUIImage: UIImage
+    @Published var defaultUIImage: UIImage?
     
     var handleNotificationMsg: (([AnyHashable : Any]) -> Void)?
     
@@ -41,8 +41,8 @@ class GlobalVariables: ObservableObject {
     @Published var debugMode = false
 
     private init() {
-        userAvatarUIImage = UIImage(named: "default_avatar")!
-        defaultUIImage = UIImage(named: "default_avatar")!
+        userAvatarUIImage = UIImage(named: "default_avatar")
+        defaultUIImage = UIImage(named: "default_avatar")
         if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
             appVersion = version
             print("AppVersion: \(appVersion)")

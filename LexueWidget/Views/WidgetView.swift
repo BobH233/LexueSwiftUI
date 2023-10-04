@@ -13,9 +13,15 @@ struct WidgetView: View {
     let entry: DefaultEntry
     
     var body: some View {
-        VStack {
-            Text("\(entry.date)")
-            Text("\(entry.str)")
+        switch widgetFamily {
+        case .systemSmall:
+            Event_SmallView(entry: entry)
+        case .systemMedium:
+            Event_SmallView()
+        case .systemLarge:
+            Event_SmallView()
+        default:
+            EmptyView()
         }
     }
 }

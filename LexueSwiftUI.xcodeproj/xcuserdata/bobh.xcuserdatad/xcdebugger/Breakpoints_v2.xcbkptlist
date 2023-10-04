@@ -556,6 +556,21 @@
                   endingLineNumber = "246"
                   offsetFromSymbolStart = "3816">
                </Location>
+               <Location
+                  uuid = "97C3196F-91F9-4C53-9C9A-BBD8B2C5742C - e43c50603e7b9e61"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in LexueWidgetExtension.BITLogin.do_login(context: LexueWidgetExtension.BITLogin.LoginContext, username: Swift.String, password: Swift.String, captcha: Swift.String, completion: (Swift.Result&lt;LexueWidgetExtension.BITLogin.LoginSuccessContext, LexueWidgetExtension.BITLogin.LoginError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "LexueWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/BITLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "246"
+                  endingLineNumber = "246"
+                  offsetFromSymbolStart = "3096">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -872,8 +887,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -888,8 +903,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1554,8 +1569,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1570,8 +1585,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2838,6 +2853,54 @@
                   startingLineNumber = "459"
                   endingLineNumber = "459"
                   offsetFromSymbolStart = "148">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B8327376-CF5E-4710-A8FE-15B567430458"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "init()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B8327376-CF5E-4710-A8FE-15B567430458 - 5653d93d7f99e6d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueWidgetExtension.SettingStorage.() -&gt; LexueWidgetExtension.SettingStorage.init() -&gt; LexueWidgetExtension.SettingStorage"
+                  moduleName = "LexueWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/SettingStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
+                  offsetFromSymbolStart = "3508">
+               </Location>
+               <Location
+                  uuid = "B8327376-CF5E-4710-A8FE-15B567430458 - fec672290da252eb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.SettingStorage.() -&gt; LexueSwiftUI.SettingStorage.init() -&gt; LexueSwiftUI.SettingStorage"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/SettingStorage.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "4184">
                </Location>
             </Locations>
          </BreakpointContent>

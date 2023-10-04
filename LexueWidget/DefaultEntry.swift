@@ -9,6 +9,6 @@
 import WidgetKit
 
 struct DefaultEntry: TimelineEntry {
-    let date: Date
-    let str: String
+    var date: Date = Date()
+    var str: String = ""
 }

@@ -25,8 +25,8 @@ struct LexueWidget: Widget {
             }
             
         }
-        .configurationDisplayName("Test widget")
-        .supportedFamilies([.systemMedium, .systemLarge])
-        .description("This is test description")
+        .configurationDisplayName("乐学助手-事件列表")
+        .supportedFamilies([.systemMedium, .systemLarge, .systemSmall])
+        .description("按时间顺序显示待完成的事项")
     }
 }
