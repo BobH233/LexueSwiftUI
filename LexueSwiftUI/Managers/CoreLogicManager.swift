@@ -140,6 +140,7 @@ class CoreLogicManager {
                     DispatchQueue.main.async {
                         SettingStorage.shared.cacheSelfLexueProfile.avatarBase64 = tmpProfile.avatarBase64
                         SettingStorage.shared.cacheSelfLexueProfile.isDeveloperMode = tmpProfile.isDeveloperMode
+                        GlobalVariables.shared.debugMode = tmpProfile.isDeveloperMode ?? false
                         if let data = Data(base64Encoded: tmpProfile.avatarBase64 ?? ""), let image = UIImage(data: data) {
                             GlobalVariables.shared.userAvatarUIImage = image
                         }
