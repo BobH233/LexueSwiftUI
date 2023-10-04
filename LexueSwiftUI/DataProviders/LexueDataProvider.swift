@@ -216,13 +216,13 @@ class LexueDataProvider: DataProvider {
         }
     }
     
-    func refresh() async {
+    func refresh(param: [String: Any]) async {
         if !enabled {
             return
         }
-        
+        let userId = param["userId"] as? String
         // 刷新站内消息
-        let getNotificationResult = await LexueAPI.shared.GetPopupNotifications(GlobalVariables.shared.cur_lexue_context, sesskey: GlobalVariables.shared.cur_lexue_sessKey, selfUserId: GlobalVariables.shared.cur_user_info.userId)
+        let getNotificationResult = await LexueAPI.shared.GetPopupNotifications(GlobalVariables.shared.cur_lexue_context, sesskey: GlobalVariables.shared.cur_lexue_sessKey, selfUserId: userId ?? GlobalVariables.shared.cur_user_info.userId)
         switch getNotificationResult {
         case .success(let result):
             curPopupNotifications = result

@@ -38,12 +38,12 @@ class DataProviderManager {
         loadSettingStorage()
     }
     
-    func DoRefreshAll() async {
+    func DoRefreshAll(param: [String: Any] = [:]) async {
         await withTaskGroup(of: Void.self) { group in
             for provider in dataProviders {
                 if provider.enabled {
                     group.addTask(priority: provider.get_priority()) {
-                        await provider.refresh()
+                        await provider.refresh(param: param)
                     }
                 }
             }

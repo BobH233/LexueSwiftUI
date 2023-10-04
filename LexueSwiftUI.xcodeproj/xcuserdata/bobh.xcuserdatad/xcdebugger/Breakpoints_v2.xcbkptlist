@@ -839,8 +839,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "946"
-            endingLineNumber = "946"
+            startingLineNumber = "941"
+            endingLineNumber = "941"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -855,8 +855,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "950"
-            endingLineNumber = "950"
+            startingLineNumber = "945"
+            endingLineNumber = "945"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -871,8 +871,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "951"
-            endingLineNumber = "951"
+            startingLineNumber = "946"
+            endingLineNumber = "946"
             landmarkName = "UniversalServiceCall(_:sesskey:methodName:args:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1047,8 +1047,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "915"
-            endingLineNumber = "915"
+            startingLineNumber = "910"
+            endingLineNumber = "910"
             landmarkName = "GetAllCourseList(_:sesskey:retry:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1063,8 +1063,8 @@
             filePath = "LexueSwiftUI/Network/LexueAPI.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "922"
-            endingLineNumber = "922"
+            startingLineNumber = "917"
+            endingLineNumber = "917"
             landmarkName = "GetAllCourseList(_:sesskey:retry:)"
             landmarkType = "7">
             <Locations>
@@ -2319,7 +2319,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
             endingLineNumber = "42"
-            landmarkName = "DoRefreshAll()"
+            landmarkName = "DoRefreshAll(isWidget:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -2901,6 +2901,69 @@
                   startingLineNumber = "137"
                   endingLineNumber = "137"
                   offsetFromSymbolStart = "4184">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4606DBB2-1979-4A99-9153-E6C796C376C8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/LexueAPI.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "GetPopupNotifications(_:sesskey:selfUserId:retry:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4606DBB2-1979-4A99-9153-E6C796C376C8 - f5bcdedb3bc11562"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for LexueWidgetExtension.LexueAPI.GetPopupNotifications(_: LexueWidgetExtension.LexueAPI.LexueContext, sesskey: Swift.String, selfUserId: Swift.String, retry: Swift.Bool) async -&gt; Swift.Result&lt;Swift.Array&lt;LexueWidgetExtension.LexueAPI.LexueNotification&gt;, LexueWidgetExtension.LexueAPI.LexueAPIError&gt;"
+                  moduleName = "LexueWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "183"
+                  endingLineNumber = "183"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "4606DBB2-1979-4A99-9153-E6C796C376C8 - c5fb4cac3d58da70"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for LexueWidgetExtension.LexueAPI.GetPopupNotifications(_: LexueWidgetExtension.LexueAPI.LexueContext, sesskey: Swift.String, selfUserId: Swift.String, retry: Swift.Bool) async -&gt; Swift.Result&lt;Swift.Array&lt;LexueWidgetExtension.LexueAPI.LexueNotification&gt;, LexueWidgetExtension.LexueAPI.LexueAPIError&gt;"
+                  moduleName = "LexueWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "183"
+                  endingLineNumber = "183"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "4606DBB2-1979-4A99-9153-E6C796C376C8 - f132195f219516c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueWidgetExtension.LexueAPI.GetPopupNotifications(_: LexueWidgetExtension.LexueAPI.LexueContext, sesskey: Swift.String, selfUserId: Swift.String, retry: Swift.Bool) async -&gt; Swift.Result&lt;Swift.Array&lt;LexueWidgetExtension.LexueAPI.LexueNotification&gt;, LexueWidgetExtension.LexueAPI.LexueAPIError&gt;"
+                  moduleName = "LexueWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueAPI.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "183"
+                  endingLineNumber = "183"
+                  offsetFromSymbolStart = "652">
                </Location>
             </Locations>
          </BreakpointContent>

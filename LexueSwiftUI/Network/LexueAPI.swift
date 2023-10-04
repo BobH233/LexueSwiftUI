@@ -887,11 +887,6 @@ class LexueAPI {
     
     func GetAllCourseList(_ lexueContext: LexueContext, sesskey: String, retry: Bool = true) async -> Result<[CourseShortInfo],LexueAPIError> {
         var ret = [CourseShortInfo]()
-        if !retry {
-            print("retrying with \(lexueContext.MoodleSession)")
-        } else {
-            print("trying with \(lexueContext.MoodleSession)")
-        }
         let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_course_get_enrolled_courses_by_timeline_classification", args: [
             "offset": 0,
             "limit": 0,

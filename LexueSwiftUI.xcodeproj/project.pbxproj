@@ -119,6 +119,12 @@
 		47F4FD282ACDADCA00C6C144 /* Event_MediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4FD272ACDADCA00C6C144 /* Event_MediumView.swift */; };
 		47F4FD292ACDB4EE00C6C144 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A1D182AC9932C00A3D847 /* EventManager.swift */; };
 		47F4FD2B2ACDB9CF00C6C144 /* Event_LargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4FD2A2ACDB9CF00C6C144 /* Event_LargeView.swift */; };
+		47F4FD2C2ACDBF3F00C6C144 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EB822AC43C640071118F /* LocalNotificationManager.swift */; };
+		47F4FD2E2ACDC07900C6C144 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8162AA6237500F812D6 /* CourseManager.swift */; };
+		47F4FD302ACDC1D600C6C144 /* DataProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */; };
+		47F4FD312ACDC1D800C6C144 /* DataProviderBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */; };
+		47F4FD322ACDC1DA00C6C144 /* LexueDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */; };
+		47F4FD332ACDC1E600C6C144 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
 		47FBC8C62AC579DD00FB1523 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -668,6 +674,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47F4FD2C2ACDBF3F00C6C144 /* LocalNotificationManager.swift in Sources */,
+				47F4FD312ACDC1D800C6C144 /* DataProviderBase.swift in Sources */,
 				47196FF72AC5522500979DFE /* WidgetView.swift in Sources */,
 				47F4FD172ACD9CD700C6C144 /* LexueAPI.swift in Sources */,
 				47F4FD162ACD9CD500C6C144 /* BITLogin.swift in Sources */,
@@ -675,6 +683,8 @@
 				47F4FD242ACDA62E00C6C144 /* ContactMessageModel.swift in Sources */,
 				47196FF22AC551D200979DFE /* DefaultEntry.swift in Sources */,
 				47F4FD182ACD9CE200C6C144 /* GlobalVariables.swift in Sources */,
+				47F4FD2E2ACDC07900C6C144 /* CourseManager.swift in Sources */,
+				47F4FD322ACDC1DA00C6C144 /* LexueDataProvider.swift in Sources */,
 				47196FE12AC5514F00979DFE /* LexueWidgetBundle.swift in Sources */,
 				47F4FD252ACDA63A00C6C144 /* ContactDisplayModel.swift in Sources */,
 				47F4FD282ACDADCA00C6C144 /* Event_MediumView.swift in Sources */,
@@ -682,6 +692,8 @@
 				47F4FD2B2ACDB9CF00C6C144 /* Event_LargeView.swift in Sources */,
 				47F4FD232ACDA62400C6C144 /* DataController.swift in Sources */,
 				47196FF12AC551D200979DFE /* Widget_Extension.swift in Sources */,
+				47F4FD302ACDC1D600C6C144 /* DataProviderManager.swift in Sources */,
+				47F4FD332ACDC1E600C6C144 /* MessageManager.swift in Sources */,
 				47F4FD142ACD966C00C6C144 /* Event_SmallView.swift in Sources */,
 				47F4FD292ACDB4EE00C6C144 /* EventManager.swift in Sources */,
 				47F4FD1A2ACD9D3500C6C144 /* CourseShortInfo.swift in Sources */,

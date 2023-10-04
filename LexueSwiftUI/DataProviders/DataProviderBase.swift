@@ -53,5 +53,5 @@ protocol DataProvider {
     func info() -> DataProviderInfo
     
     // 实现刷新数据，内部推送消息的方法
-    func refresh() async
+    func refresh(param: [String: Any]) async
 }
