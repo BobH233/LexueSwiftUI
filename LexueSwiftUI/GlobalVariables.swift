@@ -10,6 +10,12 @@ import SwiftUI
 
 class GlobalVariables: ObservableObject {
     static let shared = GlobalVariables()
+    
+    // 如果是true，则表示为本机调试，使用友盟的develop的key，同时显示debug build的标志，否则为发布版本，使用友盟的release的key
+    let DEBUG_BUILD = true
+    // TODO: 上架app store的时候改为app store
+    let CURRENT_CHANNEL = "ipa"
+    
     var appVersion = "1.0"
     
     @Published var isLogin = false

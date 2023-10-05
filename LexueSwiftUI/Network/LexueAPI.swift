@@ -573,13 +573,26 @@ class LexueAPI {
     }
     
     // 获取其他用户的Profile信息, 返回profile的html内容
-    func GetUserProfile(_ lexueContext: LexueContext, userId: String) async -> Result<String, Error> {
+    func GetUserProfile(_ lexueContext: LexueContext, userId: String, retry: Bool = true) async -> Result<String, Error> {
         let response1 = await AF.requestWithoutCache("\(API_LEXUE_PROFILE)?id=\(userId)", method: .get, headers: GetLexueHeaders(lexueContext)).serializingString().response
         switch response1.result {
         case .success(let html):
             return .success(GetProfileHtmlFromHtml(html))
         case .failure(let error):
-            return .failure(error)
+            if retry {
+                let result = await GetSessKey(GlobalVariables.shared.cur_lexue_context)
+                switch result {
+                case .success(let (sesskey, new_context)):
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                    }
+                    return await GetUserProfile(new_context == nil ? lexueContext : new_context!, userId: userId, retry: false)
+                case .failure(_):
+                    return .failure(error)
+                }
+            } else {
+                return .failure(error)
+            }
         }
     }
     

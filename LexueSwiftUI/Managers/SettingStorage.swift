@@ -139,6 +139,18 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    func set_widget_shared_AppActiveDate(_ val: TimeInterval) {
+        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(val, forKey: "shared.widget_shared_AppActiveDate")
+    }
+    
+    func get_widget_shared_AppActiveDate() -> TimeInterval {
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "shared.widget_shared_AppActiveDate") as? TimeInterval {
+            return stored
+        } else {
+            return Date.now.timeIntervalSince1970
+        }
+    }
+    
     
     private init() {
         

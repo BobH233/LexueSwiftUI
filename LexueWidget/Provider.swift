@@ -87,8 +87,11 @@ struct Provider: TimelineProvider {
         }
         // 预计10分钟再刷新一次
         let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 10 * 60)))
-        // 完成app的事件刷新
-        if entry.isLogin {
+        let nowTime = Date.now.timeIntervalSince1970
+        let lastAppRefresh = SettingStorage.shared.get_widget_shared_AppActiveDate()
+        if entry.isLogin && nowTime - lastAppRefresh > 60 * 2 {
+            // 完成app的事件刷新
+            // 只在app在前台不响应超过2分钟才刷新
             Task(timeout: 50) {
                 do {
                     try await UpdateEventList()

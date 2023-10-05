@@ -130,6 +130,10 @@ struct SettingView: View {
                         Text("关于")
                     })
                 }
+                if globalVar.DEBUG_BUILD {
+                    Text("DEBUG_BUILD_VERSION")
+                    Text("channel: \(globalVar.CURRENT_CHANNEL)")
+                }
                 
             }
             .overlay(ImageViewer(image: self.$avatar_image, viewerShown: self.$showImageViewer))

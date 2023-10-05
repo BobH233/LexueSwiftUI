@@ -217,6 +217,7 @@ class AppStatusManager {
     
     
     func OnAppTickEveryMinute() {
+        SettingStorage.shared.set_widget_shared_AppActiveDate(Date.now.timeIntervalSince1970)
         if !GlobalVariables.shared.isLogin {
             return
         }
@@ -255,6 +256,7 @@ class AppStatusManager {
     
     // App从后台切换回前台的时候
     func OnAppGoToForeground() {
+        SettingStorage.shared.set_widget_shared_AppActiveDate(Date.now.timeIntervalSince1970)
         print("\(#function)")
         if foregroundCnt == 0 {
             OnAppStart()
