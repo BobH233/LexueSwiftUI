@@ -14,10 +14,16 @@ class UMengManager {
     func GetUMengAppKey() -> String {
         guard let path = Bundle.main.path(forResource: "KeyInfo", ofType: "plist") else { return "" }
         let keys = NSDictionary(contentsOfFile: path)
-        if let umengapp = keys?.value(forKey: "UmengApp") as? [String: Any], let ret = umengapp["app_key"] as? String {
+        var keyName = ""
+        if GlobalVariables.shared.DEBUG_BUILD {
+            keyName = "app_key_dev"
+        } else {
+            keyName = "app_key_release"
+        }
+        if let umengapp = keys?.value(forKey: "UmengApp") as? [String: Any], let ret = umengapp[keyName] as? String {
             return ret
         } else {
-            return ""
+            fatalError("无法载入友盟key")
         }
     }
     
@@ -28,6 +34,6 @@ class UMengManager {
         let app_key = GetUMengAppKey()
         // TODO: 删除这个print
         // print("app_key: \(app_key)")
-        UMCommonSwift.initWithAppkey(appKey: app_key, channel: "App Store")
+        UMCommonSwift.initWithAppkey(appKey: app_key, channel: GlobalVariables.shared.CURRENT_CHANNEL)
     }
 }
