@@ -223,7 +223,7 @@ class LexueDataProvider: DataProvider {
             msg.event_uuid = event.id
             msg.event_starttime = GetFullDisplayTime(event.timestart!)
             if let courseId = event.course_id, let courseName = event.course_name {
-                msgRequestList.append(PushMessageRequest(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseId, contactTypeIfMissing: .course, msgBody: msg, date: Date()))
+                msgRequestList.append(PushMessageRequest(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: courseName, contactTypeIfMissing: .course, msgBody: msg, date: Date()))
                 DataController.shared.addLexueDP_RecordNotifiedEvent(eventUUID: event.id!, notifiedDate: .now, context: context)
             } else {
                 msgRequestList.append(PushMessageRequest(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date()))
