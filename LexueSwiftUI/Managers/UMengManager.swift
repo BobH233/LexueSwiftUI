@@ -30,12 +30,4 @@ class UMengManager {
         // print("app_key: \(app_key)")
         UMCommonSwift.initWithAppkey(appKey: app_key, channel: "App Store")
     }
-    
-    func UserLoginLogic() {
-        
-    }
-    
-    func UserExitLogic() {
-        
-    }
 }

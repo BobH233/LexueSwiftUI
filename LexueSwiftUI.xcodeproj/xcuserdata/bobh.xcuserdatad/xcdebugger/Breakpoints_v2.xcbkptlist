@@ -2962,8 +2962,8 @@
             filePath = "LexueSwiftUI/Managers/EventManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "IsTodayEvent(event:today:)"
             landmarkType = "7">
             <Locations>

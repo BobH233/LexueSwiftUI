@@ -68,7 +68,6 @@ struct Provider: TimelineProvider {
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<DefaultEntry>) -> ()) {
         print("getTimeline")
-        LocalNotificationManager.shared.PushNotification(title: "小组件刷新", body: "\(GetDateDescriptionText(sendDate: Date()))", userInfo: ["123":"123"])
         var entry = DefaultEntry()
         entry.events = EventManager.shared.Widget_GetEventList()
         entry.day_event_count = GetTodayEventCount(today: Date(), events: entry.events)

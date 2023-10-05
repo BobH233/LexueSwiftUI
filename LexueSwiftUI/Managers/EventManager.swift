@@ -94,7 +94,6 @@ class EventManager: ObservableObject {
                 tmp1.append(event)
             }
         }
-        print(tmp1)
         EventDisplayList = tmp1
         // 从最近到早排序
         expiredEventDisplayList = tmp2.reversed()
