@@ -32,11 +32,16 @@ class EventManager: ObservableObject {
     // 获取这一周的事件总数
     func GetWeekEventCount(todayInWeek: Date) -> Int {
         var ret = 0
-        for i in 0...7 {
-            let target_date = Calendar.current.date(byAdding: .day, value: i, to: .now)!
-            // print(target_date)
-            if target_date.isInSameWeek(as: .now) {
-                ret = ret + GetTodayEventCount(today: target_date)
+        for event in EventDisplayList {
+            for i in 0...7 {
+                let target_date = Calendar.current.date(byAdding: .day, value: i, to: .now)!
+                if !target_date.isInSameWeek(as: .now) {
+                    continue
+                }
+                if EventManager.IsTodayEvent(event: event, today: target_date) {
+                    ret = ret + 1
+                    break
+                }
             }
         }
         return ret
@@ -89,6 +94,7 @@ class EventManager: ObservableObject {
                 tmp1.append(event)
             }
         }
+        print(tmp1)
         EventDisplayList = tmp1
         // 从最近到早排序
         expiredEventDisplayList = tmp2.reversed()
