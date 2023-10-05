@@ -72,7 +72,8 @@ struct Provider: TimelineProvider {
         entry.events = EventManager.shared.Widget_GetEventList()
         entry.day_event_count = GetTodayEventCount(today: Date(), events: entry.events)
         entry.week_event_count = GetWeekEventCount(todayInWeek: Date(), events: entry.events)
-        let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 60)))
+        // 预计10分钟再刷新一次
+        let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 10 * 60)))
         // 从app读入正确的令牌
         GlobalVariables.shared.cur_lexue_context = SettingStorage.shared.get_widget_shared_LexueContext()
         GlobalVariables.shared.cur_lexue_sessKey = SettingStorage.shared.get_widget_shared_sesskey()
