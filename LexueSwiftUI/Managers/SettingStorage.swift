@@ -127,6 +127,7 @@ class SettingStorage: ObservableObject {
     
     func set_widget_shared_LexueContext(_ val: LexueAPI.LexueContext) {
         UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(val.MoodleSession, forKey: "shared.widget_shared_LexueContext")
+        
     }
     func get_widget_shared_LexueContext() -> LexueAPI.LexueContext {
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "shared.widget_shared_LexueContext") as? String {

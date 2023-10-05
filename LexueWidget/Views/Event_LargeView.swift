@@ -27,10 +27,10 @@ struct Event_LargeView_Previews: PreviewProvider {
         if #available(iOS 17.0, *) {
             Event_LargeView()
                 .containerBackground(.fill.tertiary, for: .widget)
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
         } else {
             Event_LargeView()
-                .previewContext(WidgetPreviewContext(family: .systemMedium))
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
         }
         
     }

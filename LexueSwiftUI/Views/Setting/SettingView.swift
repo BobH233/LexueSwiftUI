@@ -79,7 +79,6 @@ struct SettingView: View {
                         settings.loginnedContext = BITLogin.LoginSuccessContext()
                         globalVar.cur_lexue_context = LexueAPI.LexueContext()
                         SettingStorage.shared.set_widget_shared_LexueContext(LexueAPI.LexueContext())
-                        
                         withAnimation {
                             globalVar.isLogin = false
                         }

@@ -10,11 +10,14 @@ import UserNotifications
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> DefaultEntry {
-        return DefaultEntry()
+        var ret = DefaultEntry()
+        ret.isLogin = true
+        return ret
     }
 
     func getSnapshot(in context: Context, completion: @escaping (DefaultEntry) -> ()) {
-        let entry = DefaultEntry()
+        var entry = DefaultEntry()
+        entry.isLogin = true
         completion(entry)
     }
     
@@ -72,20 +75,31 @@ struct Provider: TimelineProvider {
         entry.events = EventManager.shared.Widget_GetEventList()
         entry.day_event_count = GetTodayEventCount(today: Date(), events: entry.events)
         entry.week_event_count = GetWeekEventCount(todayInWeek: Date(), events: entry.events)
-        // 预计10分钟再刷新一次
-        let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 10 * 60)))
+        
         // 从app读入正确的令牌
         GlobalVariables.shared.cur_lexue_context = SettingStorage.shared.get_widget_shared_LexueContext()
         GlobalVariables.shared.cur_lexue_sessKey = SettingStorage.shared.get_widget_shared_sesskey()
+        print(SettingStorage.shared.get_widget_shared_LexueContext().MoodleSession)
+        if GlobalVariables.shared.cur_lexue_context.MoodleSession ==  "" {
+            entry.isLogin = false
+        } else {
+            entry.isLogin = true
+        }
+        // 预计10分钟再刷新一次
+        let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 10 * 60)))
         // 完成app的事件刷新
-        Task(timeout: 50) {
-            do {
-                try await UpdateEventList()
-                print("Refreshing data providers...")
-                await DataProviderManager.shared.DoRefreshAll(param: ["userId": SettingStorage.shared.cacheUserInfo.userId])
-            } catch {
-                print("刷新消息超时!")
+        if entry.isLogin {
+            Task(timeout: 50) {
+                do {
+                    try await UpdateEventList()
+                    print("Refreshing data providers...")
+                    await DataProviderManager.shared.DoRefreshAll(param: ["userId": SettingStorage.shared.cacheUserInfo.userId])
+                } catch {
+                    print("刷新消息超时!")
+                }
+                completion(timeline)
             }
+        } else {
             completion(timeline)
         }
     }
