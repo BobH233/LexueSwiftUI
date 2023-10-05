@@ -188,6 +188,10 @@ class LexueDataProvider: DataProvider {
             if event.timestart == nil {
                 continue
             }
+            if event.user_deleted {
+                // 被删除的事件，不管
+                continue
+            }
             if let date = event.timestart, date < now {
                 // 过期事件，不管
                 continue
