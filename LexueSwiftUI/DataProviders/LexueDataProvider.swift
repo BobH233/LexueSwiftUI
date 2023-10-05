@@ -117,10 +117,21 @@ class LexueDataProvider: DataProvider {
         }
     }
     
-    func HandleNewNotification(notification: LexueAPI.LexueNotification) {
+    func HandleNewNotification(notification: LexueAPI.LexueNotification, context: NSManagedObjectContext) {
         var msg = MessageBodyItem(type: .text)
         msg.text_data = "\(notification.subject ?? "")\n (\(GetFullDisplayTime(notification.timecreated ?? Date()))) "
-        msgRequestList.append(PushMessageRequest(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date()))
+        if let url = notification.contexturl {
+            msg.type = .link
+            msg.link_title = msg.text_data
+            msg.link = url
+        }
+        // 判断是否有课程id
+        if let customdata = notification.customdata, let data = customdata.data(using: .utf8), let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any], let courseId = json["courseid"] as? String {
+            let course = DataController.shared.queryCourseCacheStoredById(id: courseId, context: context)
+            msgRequestList.append(PushMessageRequest(senderUid: GetCourseContactId(courseId), contactOriginNameIfMissing: course?.fullname ?? "未知课程", contactTypeIfMissing: .course, msgBody: msg, date: Date()))
+        } else {
+            msgRequestList.append(PushMessageRequest(senderUid: lexue_service_uid, contactOriginNameIfMissing: lexue_originName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date()))
+        }
     }
     
     var curPopupNotifications = [LexueAPI.LexueNotification]()
@@ -148,7 +159,7 @@ class LexueDataProvider: DataProvider {
                     // 检测到新的事件
                     print("New notification!:  \(notification.subject!)")
                     DataController.shared.addLexueDP_RecordNotification(id: notification.id, context: context)
-                    HandleNewNotification(notification: notification)
+                    HandleNewNotification(notification: notification, context: context)
                 }
             }
         }

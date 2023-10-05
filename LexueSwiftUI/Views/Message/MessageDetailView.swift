@@ -345,6 +345,7 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
                         Text(message.messageBody.link_title!)
                             .foregroundColor(.blue)
                             .underline()
+                            .frame(alignment: .leading)
                     })
                     .padding(.vertical, 10)
                     .padding(.horizontal, 20)
