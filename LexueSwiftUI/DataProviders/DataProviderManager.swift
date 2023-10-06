@@ -7,12 +7,13 @@
 
 import Foundation
 
-class DataProviderManager {
+class DataProviderManager: ObservableObject {
     static let shared = DataProviderManager()
     var dataProviders: [DataProvider] = []
     
     init() {
         dataProviders.append(LexueDataProvider())
+        dataProviders.append(InfoMergingDataProvider())
         loadSettingStorage()
     }
     
@@ -25,18 +26,37 @@ class DataProviderManager {
     }
     
     func loadSettingStorage() {
+        // 加载默认的一些选项
         for i in 0 ..< dataProviders.count {
             let curId = dataProviders[i].info().providerId
             dataProviders[i].enabled = loadKeyOrWithDefault(key: "dataprovider.setting.\(curId).enable", defaultVal: dataProviders[i].get_default_enabled())
             dataProviders[i].allowMessage = loadKeyOrWithDefault(key: "dataprovider.setting.\(curId).allowMessage", defaultVal: dataProviders[i].get_default_allowMessage())
             dataProviders[i].allowNotification = loadKeyOrWithDefault(key: "dataprovider.setting.\(curId).allowNotification", defaultVal: dataProviders[i].get_default_allowNotification())
         }
+        // 加载用户自定义的一些选项
+        for i in 0 ..< dataProviders.count {
+            let curId = dataProviders[i].info().providerId
+            dataProviders[i].customOptions = dataProviders[i].get_custom_options()
+            for var option in dataProviders[i].customOptions {
+                if option.optionType == .bool {
+                    option.optionValueBool = loadKeyOrWithDefault(key: "dataprovider.customsetting.\(curId).\(option.optionName)", defaultVal: option.optionValueBool)
+                } else if option.optionType == .string {
+                    option.optionValueString = loadKeyOrWithDefault(key: "dataprovider.customsetting.\(curId).\(option.optionName)", defaultVal: option.optionValueString)
+                }
+            }
+        }
+    }
+    
+    func saveProviderCustomSettings(providerId: String, newOptionValue: [ProviderCustomOption]) {
+        
     }
     
     func setProviderSetting<T>(attribute: String, providerId: String, val: T) {
         UserDefaults.standard.set(val, forKey: "dataprovider.setting.\(providerId).\(attribute)")
         loadSettingStorage()
     }
+    
+
     
     func DoRefreshAll(param: [String: Any] = [:]) async {
         await withTaskGroup(of: Void.self) { group in

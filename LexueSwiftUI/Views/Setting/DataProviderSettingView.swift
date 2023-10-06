@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DataProviderDetailView: View {
     var provider: DataProvider
+    @State var currentOptions: [ProviderCustomOption] = []
     @State var info: DataProviderInfo = DataProviderInfo()
     
     @State var enable: Bool = false
@@ -46,12 +47,21 @@ struct DataProviderDetailView: View {
                         .foregroundColor(.secondary)
                 }
             }
-            Section("设定") {
+            Section("系统设定") {
                 Toggle("启用", isOn: $enable)
                 if enable {
                     Toggle("允许推送至消息列表", isOn: $allowMessage)
                     if allowMessage {
                         Toggle("允许推送系统通知", isOn: $allowNotification)
+                    }
+                }
+            }
+            if provider.customOptions.count > 0 {
+                Section("消息源内容设定") {
+                    ForEach($currentOptions, id:\.optionName.wrappedValue) { option in
+                        if option.optionType.wrappedValue == .bool {
+                            Toggle(option.displayName.wrappedValue, isOn: option.optionValueBool)
+                        }
                     }
                 }
             }
@@ -65,21 +75,26 @@ struct DataProviderDetailView: View {
         .onChange(of: allowNotification) { newVal in
             DataProviderManager.shared.setProviderSetting(attribute: "allowNotification", providerId: info.providerId, val: newVal)
         }
+        .onDisappear {
+            DataProviderManager.shared.saveProviderCustomSettings(providerId: info.providerId, newOptionValue: currentOptions)
+        }
         .onAppear {
             info = provider.info()
             enable = provider.enabled
             allowMessage = provider.allowMessage
             allowNotification = provider.allowNotification
+            currentOptions = provider.customOptions
         }
         .navigationTitle(info.providerName)
     }
 }
 
 struct DataProviderSettingView: View {
+    @ObservedObject var providerManager = DataProviderManager.shared
     var body: some View {
         Form {
             Section("消息源") {
-                ForEach(DataProviderManager.shared.dataProviders, id: \.providerId) { provider in
+                ForEach(providerManager.dataProviders, id: \.providerIdForEach) { provider in
                     NavigationLink(provider.info().providerName , destination: {
                         DataProviderDetailView(provider: provider)
                     })

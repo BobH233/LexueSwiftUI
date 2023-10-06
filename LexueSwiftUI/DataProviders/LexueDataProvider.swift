@@ -10,11 +10,17 @@ import CoreData
 
 /**
         乐学数据提供，主要是乐学的铃铛通知消息
-        还有
+        还有临期事件提醒，新事件提醒功能
  */
 class LexueDataProvider: DataProvider {
-    var providerId: String {
-        return "lexue_service"
+    var customOptions: [ProviderCustomOption] = []
+    
+    var providerIdForEach: String {
+        return "provider.lexue"
+    }
+    
+    func get_custom_options() -> [ProviderCustomOption] {
+        return []
     }
     
     func get_default_enabled() -> Bool {
