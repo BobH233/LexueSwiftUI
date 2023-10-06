@@ -92,6 +92,11 @@ struct AddCustomEventView: View {
                 dismiss()
             }
         }
+        .onAppear {
+            if let after_1h_time = Calendar.current.date(byAdding: .hour, value: 1, to: startDate) {
+                startDate = after_1h_time
+            }
+        }
         .navigationTitle("添加日程")
         .navigationBarTitleDisplayMode(.inline)
     }
