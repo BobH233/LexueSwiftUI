@@ -6,6 +6,56 @@
 //
 
 import SwiftUI
+import EventKitUI
+
+// https://betterprogramming.pub/eventkitui-in-ios-17-c83868464a8f
+struct SystemEventEditViewController: UIViewControllerRepresentable {
+    @Binding var event_name: String
+    @Binding var start_date: Date
+    @Binding var end_date: Date
+    @Binding var notes: String?
+    @Binding var location: String?
+    private let store = EKEventStore()
+    @Environment(\.presentationMode) var presentationMode
+    private var event: EKEvent {
+        let event = EKEvent(eventStore: store)
+        event.title = event_name
+        event.startDate = start_date
+        event.endDate = end_date
+        if let notes = notes {
+            event.notes = notes
+        }
+        if let location = location {
+            event.location = location
+        }
+        return event
+    }
+    func makeUIViewController(context: Context) -> EKEventEditViewController {
+        let eventEditViewController = EKEventEditViewController()
+        eventEditViewController.event = event
+        eventEditViewController.eventStore = store
+        eventEditViewController.editViewDelegate = context.coordinator
+        return eventEditViewController
+    }
+    
+    func updateUIViewController(_ uiViewController: EKEventEditViewController, context: Context) {}
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator(self)
+    }
+    
+    class Coordinator: NSObject, EKEventEditViewDelegate {
+        var parent: SystemEventEditViewController
+        
+        init(_ controller: SystemEventEditViewController) {
+            self.parent = controller
+        }
+        
+        func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+            parent.presentationMode.wrappedValue.dismiss()
+        }
+    }
+}
 
 struct ViewEventView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
@@ -17,6 +67,14 @@ struct ViewEventView: View {
     @State var showEditView: Bool = false
     
     @State var editable: Bool = true
+    
+    @State var showAddSystemEvent: Bool = false
+    @State var addSystemEventTitle: String = ""
+    @State var addSystemEventNote: String?
+    @State var addSystemEventStartDate: Date = .now
+    @State var addSystemEventEndDate: Date = .now
+    @State var addSystemEventLocation: String?
+    
     
     // 是否已经是到期事件了
     func IsExpired(event: EventStored) -> Bool {
@@ -52,6 +110,24 @@ struct ViewEventView: View {
                                     .foregroundColor(.red)
                             }
                         } else {
+                            Button(action: {
+                                guard let time_start = event_obj!.timestart else {
+                                    return
+                                }
+                                addSystemEventTitle = event_obj!.name ?? ""
+                                addSystemEventNote = event_obj!.event_description ?? ""
+                                addSystemEventEndDate = time_start
+                                if let tmp1 = Calendar.current.date(byAdding: .hour, value: -SettingStorage.shared.event_preHour, to: time_start), let tmp2 = Calendar.current.date(byAdding: .minute, value: -SettingStorage.shared.event_preMinute, to: tmp1) {
+                                    addSystemEventStartDate = tmp2
+                                } else {
+                                    print("Unknow error when adding event to system event...")
+                                    addSystemEventEndDate = time_start
+                                }
+                                addSystemEventLocation = event_obj!.course_name ?? ""
+                                showAddSystemEvent = true
+                            }) {
+                                Text("添加到我的日历")
+                            }
                             Button(action: {
                                 withAnimation {
                                     EventManager.shared.FinishEvent(id: event_uuid, isFinish: true, context: managedObjContext)
@@ -130,6 +206,9 @@ struct ViewEventView: View {
                     .foregroundColor(.red)
             }
         }
+        .sheet(isPresented: $showAddSystemEvent, content: {
+            SystemEventEditViewController(event_name: $addSystemEventTitle, start_date: $addSystemEventStartDate, end_date: $addSystemEventEndDate, notes: $addSystemEventNote, location: $addSystemEventLocation)
+        })
         .onChange(of: showEditView) { newVal in
             if !newVal {
                 dismiss()

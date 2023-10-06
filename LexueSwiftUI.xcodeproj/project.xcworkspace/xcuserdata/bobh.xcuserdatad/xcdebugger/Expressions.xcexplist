@@ -55,7 +55,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -64,7 +64,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -173,13 +173,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
+               value = "event.name">
+            </PersistentString>
+            <PersistentString
                value = "event.id">
             </PersistentString>
             <PersistentString
                value = "event.timestart">
-            </PersistentString>
-            <PersistentString
-               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -257,6 +257,14 @@
       </ContextState>
       <ContextState
          contextName = "BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
+      </ContextState>
+      <ContextState
+         contextName = "SystemEventEditViewController.event.getter:ViewEventView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "event_name">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "getAesString(data:key0:iv0:):BITLogin.swift">
