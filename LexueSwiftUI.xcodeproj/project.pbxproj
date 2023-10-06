@@ -90,6 +90,7 @@
 		47CE0FF72ACADED400C68CA3 /* AddCustomEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FF62ACADED400C68CA3 /* AddCustomEventView.swift */; };
 		47CE0FF92ACAF04700C68CA3 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FF82ACAF04700C68CA3 /* EditEventView.swift */; };
 		47CE0FFB2ACAFB8600C68CA3 /* ViewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FFA2ACAFB8600C68CA3 /* ViewEventView.swift */; };
+		47D230412AD028D1000DB15C /* HaoBIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */; };
 		47E1D6A42AD01FDF007A0D75 /* HaoBIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */; };
 		47EC987A2ACBB6BF009CE125 /* DeletedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC98792ACBB6BF009CE125 /* DeletedEventView.swift */; };
 		47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2872AC080100047B395 /* AvatarSettingView.swift */; };
@@ -708,6 +709,7 @@
 				47F4FD192ACD9CFE00C6C144 /* Extensions.swift in Sources */,
 				47F4FD1B2ACD9D4000C6C144 /* LexueProfile.swift in Sources */,
 				47F4FD152ACD9CAC00C6C144 /* SettingStorage.swift in Sources */,
+				47D230412AD028D1000DB15C /* HaoBIT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

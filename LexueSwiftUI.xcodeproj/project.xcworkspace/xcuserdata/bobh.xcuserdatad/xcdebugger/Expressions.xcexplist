@@ -14,10 +14,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in DebugDataView.body.getter:DebugDataView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "InfoMergingDataProvider.loadPushedMessage():InfoMergingDataProvider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pushedMessage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "LexueAPI.ParseSelfUserInfo(_:):LexueAPI.swift">
          <PersistentStrings>
             <PersistentString
                value = "children">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InfoMergingDataProvider.savePushedMessage():InfoMergingDataProvider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pushedMessage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -36,7 +55,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -45,7 +64,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -154,13 +173,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
-               value = "event.name">
+               value = "event.id">
             </PersistentString>
             <PersistentString
                value = "event.timestart">
             </PersistentString>
             <PersistentString
-               value = "event.id">
+               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -266,6 +285,14 @@
          <PersistentStrings>
             <PersistentString
                value = "cacheUserInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InfoMergingDataProvider.refresh(param:):InfoMergingDataProvider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pushedMessage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

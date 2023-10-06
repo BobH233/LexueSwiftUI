@@ -342,7 +342,7 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
             if let encodedUrl = url {
                 if encodedUrl.host == "lexue.bit.edu.cn" {
                     NavigationLink(destination: LexueBroswerView(url: encodedUrl.absoluteString), label: {
-                        Text(message.messageBody.link_title!)
+                        Text(message.messageBody.link_title ?? "")
                             .foregroundColor(.blue)
                             .underline()
                             .multilineTextAlignment(.leading)
@@ -370,17 +370,17 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
         }
         .onAppear {
             sendDate = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
-            url = URL(string: message.messageBody.link!)
+            url = URL(string: message.messageBody.link ?? "")
         }
         .contextMenu(ContextMenu(menuItems: {
             Label("发送日期: \(sendDate)", systemImage: "clock.arrow.circlepath")
             Button {
-                UIPasteboard.general.string = message.messageBody.link!
+                UIPasteboard.general.string = message.messageBody.link ?? ""
             } label: {
                 Label("复制链接", systemImage: "link")
             }
             Button {
-                UIPasteboard.general.string = message.messageBody.link_title!
+                UIPasteboard.general.string = message.messageBody.link_title ?? ""
             } label: {
                 Label("复制标题", systemImage: "doc.on.doc")
             }

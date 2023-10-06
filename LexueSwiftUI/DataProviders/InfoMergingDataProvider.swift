@@ -103,7 +103,7 @@ class InfoMergingDataProvider: DataProvider {
         return true
     }
     
-    func get_custom_option_item(_ optionName: String) -> ProviderCustomOption? {
+    func get_custom_option_item(optionName: String) -> ProviderCustomOption? {
         for option in customOptions {
             if option.optionName == optionName {
                 return option
@@ -132,8 +132,62 @@ class InfoMergingDataProvider: DataProvider {
         return DataProviderInfo(providerId: "provider.info_merging", providerName: "消息聚合服务", description: "聚合教务处、各学院等发布的消息，并发送通知", author: "HaoBIT\nYDX-2147483647/bulletin-issues-transferred", author_url: "https://haobit.top/dev/site/")
     }
     
+    // 用于将已经判断过的消息放入本地，防止重复推送
+    var pushedMessage = [String: Bool]()
+    
+    func loadPushedMessage() {
+        pushedMessage = (UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "dataprovider.HaoBIT.pushedMessage") as? [String: Bool]) ?? [String: Bool]()
+    }
+    
+    func savePushedMessage() {
+        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(pushedMessage, forKey: "dataprovider.HaoBIT.pushedMessage")
+    }
+    
+    func handleNewNotice(notice: HaoBIT.Notice) {
+        // 判断是否是需要处理的来源
+        guard let source = notice.source else {
+            return
+        }
+        guard let msgSource = messageSourceMap[source] else {
+            return
+        }
+        guard let user_option = get_custom_option_item(optionName: msgSource.optionName) else {
+            return
+        }
+        // 判断用户是否开启了这个方面消息的接收
+        if !user_option.optionValueBool {
+            // 如果没开启接收这个方面消息
+            return
+        }
+        // 推送消息
+        var msg = MessageBodyItem(type: .link)
+        msg.link_title = notice.title ?? "无标题消息"
+        msg.link = notice.link ?? ""
+        msgRequestList.append(PushMessageRequest(senderUid: source, contactOriginNameIfMissing: msgSource.fullName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date()))
+    }
+    
     func refresh(param: [String : Any]) async {
-        return
+        print("refresh HaoBIT")
+        let notices = await HaoBIT.shared.GetNotices()
+        loadPushedMessage()
+        if pushedMessage.count == 0 {
+            // 表明是第一次，则不推送，直接将现有的先全部放进去
+            print("first time, push all notice...")
+            for notice in notices {
+                pushedMessage[notice.get_descriptor()] = true
+            }
+            savePushedMessage()
+            return
+        }
+        // 不是第一次，检查新消息
+        for notice in notices {
+            if pushedMessage[notice.get_descriptor()] == nil || pushedMessage[notice.get_descriptor()] == false {
+                print("new notice! \(notice.title)")
+                handleNewNotice(notice: notice)
+                pushedMessage[notice.get_descriptor()] = true
+            }
+        }
+        savePushedMessage()
     }
     
     

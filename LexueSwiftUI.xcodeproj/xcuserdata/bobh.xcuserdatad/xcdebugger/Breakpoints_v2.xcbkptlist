@@ -20,5 +20,117 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D3AB0037-AEE4-489A-810E-63C5C2B0A274"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/DataProviders/InfoMergingDataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "savePushedMessage()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E2ADB82F-BCDC-417D-A553-9145A106D1B6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/DataProviders/InfoMergingDataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "refresh(param:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E2ADB82F-BCDC-417D-A553-9145A106D1B6 - 9f299e0d776d9e69"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.InfoMergingDataProvider.refresh(param: Swift.Dictionary&lt;Swift.String, Any&gt;) async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/DataProviders/InfoMergingDataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "185"
+                  endingLineNumber = "185"
+                  offsetFromSymbolStart = "2528">
+               </Location>
+               <Location
+                  uuid = "E2ADB82F-BCDC-417D-A553-9145A106D1B6 - 9f299e0d776d9e69"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.InfoMergingDataProvider.refresh(param: Swift.Dictionary&lt;Swift.String, Any&gt;) async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/DataProviders/InfoMergingDataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "185"
+                  endingLineNumber = "185"
+                  offsetFromSymbolStart = "2004">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0A35E597-0C3D-4151-91A4-BE4777868B6C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/DataProviders/InfoMergingDataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "handleNewNotice(notice:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0A35E597-0C3D-4151-91A4-BE4777868B6C - b038dd690ea0c919"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.InfoMergingDataProvider.handleNewNotice(notice: LexueSwiftUI.HaoBIT.Notice) -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/DataProviders/InfoMergingDataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "148"
+                  endingLineNumber = "148"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "0A35E597-0C3D-4151-91A4-BE4777868B6C - b038dd690ea0c919"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.InfoMergingDataProvider.handleNewNotice(notice: LexueSwiftUI.HaoBIT.Notice) -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/DataProviders/InfoMergingDataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "148"
+                  endingLineNumber = "148"
+                  offsetFromSymbolStart = "424">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
