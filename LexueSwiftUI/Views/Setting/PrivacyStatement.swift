@@ -10,22 +10,24 @@ import SwiftUI
 struct PrivacyStatement: View {
     var body: some View {
         Form {
-            Section("您的以下信息被收集") {
-                HStack {
-                    Text("设备标识(umid)")
-                        .foregroundColor(.primary)
-                    Spacer()
-                    Text(UMCommonSwift.umidString())
-                        .foregroundColor(.secondary)
-                        .textSelection(.enabled)
-                }
-                HStack {
-                    Text("用户名")
-                        .foregroundColor(.primary)
-                    Spacer()
-                    Text(SettingStorage.shared.cacheUserInfo.stuId)
-                        .foregroundColor(.secondary)
-                        .textSelection(.enabled)
+            if GlobalVariables.shared.isLogin {
+                Section("您的以下信息被收集") {
+                    HStack {
+                        Text("设备标识(umid)")
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Text(UMCommonSwift.umidString())
+                            .foregroundColor(.secondary)
+                            .textSelection(.enabled)
+                    }
+                    HStack {
+                        Text("用户名")
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Text(SettingStorage.shared.cacheUserInfo.stuId)
+                            .foregroundColor(.secondary)
+                            .textSelection(.enabled)
+                    }
                 }
             }
             Section("友盟+SDK服务的相关声明") {
