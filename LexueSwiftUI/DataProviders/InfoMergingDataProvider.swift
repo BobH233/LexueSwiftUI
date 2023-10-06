@@ -37,7 +37,8 @@ class InfoMergingDataProvider: DataProvider {
     func get_custom_options() -> [ProviderCustomOption] {
         return [
             .init(optionName: "test_prop1", displayName: "测试属性1", optionType: .bool, optionValueBool: false),
-            .init(optionName: "test_prop2", displayName:"测试属性2", optionType: .bool, optionValueBool: true)
+            .init(optionName: "test_prop2", displayName:"测试属性2", optionType: .bool, optionValueBool: true),
+            .init(optionName: "test_prop3", displayName:"测试属性3", optionType: .string, optionValueString: "allala")
         ]
     }
     

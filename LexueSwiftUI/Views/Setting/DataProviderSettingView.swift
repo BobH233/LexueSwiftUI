@@ -61,6 +61,8 @@ struct DataProviderDetailView: View {
                     ForEach($currentOptions, id:\.optionName.wrappedValue) { option in
                         if option.optionType.wrappedValue == .bool {
                             Toggle(option.displayName.wrappedValue, isOn: option.optionValueBool)
+                        } else if option.optionType.wrappedValue == .string {
+                            TextField(option.displayName.wrappedValue, text: option.optionValueString)
                         }
                     }
                 }

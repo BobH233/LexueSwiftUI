@@ -18,7 +18,7 @@ class DataProviderManager: ObservableObject {
     }
     
     func loadKeyOrWithDefault<T>(key: String, defaultVal: T) -> T {
-        if let result = UserDefaults.standard.value(forKey: key) as? T {
+        if let result = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: key) as? T {
             return result
         } else {
             return defaultVal
@@ -37,22 +37,35 @@ class DataProviderManager: ObservableObject {
         for i in 0 ..< dataProviders.count {
             let curId = dataProviders[i].info().providerId
             dataProviders[i].customOptions = dataProviders[i].get_custom_options()
-            for var option in dataProviders[i].customOptions {
+            for (index, option) in dataProviders[i].customOptions.enumerated() {
                 if option.optionType == .bool {
-                    option.optionValueBool = loadKeyOrWithDefault(key: "dataprovider.customsetting.\(curId).\(option.optionName)", defaultVal: option.optionValueBool)
+                    dataProviders[i].customOptions[index].optionValueBool = loadKeyOrWithDefault(key: "dataprovider.customsetting.\(curId).\(option.optionName)", defaultVal: option.optionValueBool)
                 } else if option.optionType == .string {
-                    option.optionValueString = loadKeyOrWithDefault(key: "dataprovider.customsetting.\(curId).\(option.optionName)", defaultVal: option.optionValueString)
+                    dataProviders[i].customOptions[index].optionValueString = loadKeyOrWithDefault(key: "dataprovider.customsetting.\(curId).\(option.optionName)", defaultVal: option.optionValueString)
                 }
             }
         }
     }
     
     func saveProviderCustomSettings(providerId: String, newOptionValue: [ProviderCustomOption]) {
-        
+        for i in 0 ..< dataProviders.count {
+            let curId = dataProviders[i].info().providerId
+            if curId == providerId {
+                dataProviders[i].customOptions = newOptionValue
+                for option in newOptionValue {
+                    if option.optionType == .bool {
+                        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(option.optionValueBool, forKey: "dataprovider.customsetting.\(curId).\(option.optionName)")
+                    } else if option.optionType == .string {
+                        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(option.optionValueString, forKey: "dataprovider.customsetting.\(curId).\(option.optionName)")
+                    }
+                }
+                break
+            }
+        }
     }
     
     func setProviderSetting<T>(attribute: String, providerId: String, val: T) {
-        UserDefaults.standard.set(val, forKey: "dataprovider.setting.\(providerId).\(attribute)")
+        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(val, forKey: "dataprovider.setting.\(providerId).\(attribute)")
         loadSettingStorage()
     }
     
