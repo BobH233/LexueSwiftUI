@@ -45,6 +45,14 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     var body: some View {
         Form {
+            Section("HaoBIT") {
+                Button("GetNotices") {
+                    Task {
+                        let res = await HaoBIT.shared.GetNotices()
+                        print(res)
+                    }
+                }
+            }
             Section("timeout") {
                 Button("Normal") {
                     Task(timeout: 2) {

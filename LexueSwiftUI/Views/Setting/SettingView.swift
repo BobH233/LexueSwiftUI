@@ -54,7 +54,7 @@ struct SettingView: View {
                         }
                     }
                 }
-                if globalVar.debugMode {
+                if globalVar.debugMode || globalVar.DEBUG_BUILD {
                     Section(header: Text("Debug")) {
                         Toggle(isOn: $globalVar.isLogin) {
                             Text("isLogin")

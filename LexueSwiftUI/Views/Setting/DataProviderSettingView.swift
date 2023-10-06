@@ -39,6 +39,7 @@ struct DataProviderDetailView: View {
                     Spacer()
                     Text(info.author)
                         .foregroundColor(.secondary)
+                        .multilineTextAlignment(.trailing)
                 }
                 if let author_url = info.author_url, let url = URL(string: author_url) {
                     HStack {
@@ -108,13 +109,18 @@ struct DataProviderSettingView: View {
     @ObservedObject var providerManager = DataProviderManager.shared
     var body: some View {
         Form {
-            Section("消息源") {
+            Section() {
                 ForEach(providerManager.dataProviders, id: \.providerIdForEach) { provider in
                     NavigationLink(provider.info().providerName , destination: {
                         DataProviderDetailView(provider: provider)
                     })
                 }
+            } header: {
+                Text("消息源")
+            } footer: {
+                Text("这些是乐学助手内置的可以向您发送消息的消息源，您可以点击进行更详细的设置，包括是否启用，是否发送通知等等")
             }
+            
         }
         .navigationTitle("消息源设定")
         .navigationBarTitleDisplayMode(.large)

@@ -90,6 +90,7 @@
 		47CE0FF72ACADED400C68CA3 /* AddCustomEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FF62ACADED400C68CA3 /* AddCustomEventView.swift */; };
 		47CE0FF92ACAF04700C68CA3 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FF82ACAF04700C68CA3 /* EditEventView.swift */; };
 		47CE0FFB2ACAFB8600C68CA3 /* ViewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FFA2ACAFB8600C68CA3 /* ViewEventView.swift */; };
+		47E1D6A42AD01FDF007A0D75 /* HaoBIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */; };
 		47EC987A2ACBB6BF009CE125 /* DeletedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC98792ACBB6BF009CE125 /* DeletedEventView.swift */; };
 		47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F2872AC080100047B395 /* AvatarSettingView.swift */; };
 		47F4F2992AC086A90047B395 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F4F28D2AC086A90047B395 /* Color+Extensions.swift */; };
@@ -244,6 +245,7 @@
 		47CE0FF62ACADED400C68CA3 /* AddCustomEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomEventView.swift; sourceTree = "<group>"; };
 		47CE0FF82ACAF04700C68CA3 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
 		47CE0FFA2ACAFB8600C68CA3 /* ViewEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEventView.swift; sourceTree = "<group>"; };
+		47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "\bHaoBIT.swift"; sourceTree = "<group>"; };
 		47EC98792ACBB6BF009CE125 /* DeletedEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedEventView.swift; sourceTree = "<group>"; };
 		47F4F2872AC080100047B395 /* AvatarSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarSettingView.swift; sourceTree = "<group>"; };
 		47F4F28D2AC086A90047B395 /* Color+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 			children = (
 				475AFEF52AAF560A00C4020F /* BITLogin.swift */,
 				475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */,
+				47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -735,6 +738,7 @@
 				474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */,
 				475EDED42AB60697008486F0 /* ProfileView.swift in Sources */,
 				47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */,
+				47E1D6A42AD01FDF007A0D75 /* HaoBIT.swift in Sources */,
 				475AFEF62AAF560A00C4020F /* BITLogin.swift in Sources */,
 				47BD51A02AC5B43F0029F9DB /* UMCommonSwift.swift in Sources */,
 				475E22AF2ACFB4C800FE8679 /* InfoMergingDataProvider.swift in Sources */,
