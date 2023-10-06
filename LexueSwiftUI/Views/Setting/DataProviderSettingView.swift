@@ -31,6 +31,7 @@ struct DataProviderDetailView: View {
                     Spacer()
                     Text(info.description)
                         .foregroundColor(.secondary)
+                        .multilineTextAlignment(.trailing)
                 }
                 HStack {
                     Text("作者")
@@ -38,6 +39,14 @@ struct DataProviderDetailView: View {
                     Spacer()
                     Text(info.author)
                         .foregroundColor(.secondary)
+                }
+                if let author_url = info.author_url, let url = URL(string: author_url) {
+                    HStack {
+                        Text("作者链接")
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Link(author_url, destination: url)
+                    }
                 }
                 HStack {
                     Text("ID")

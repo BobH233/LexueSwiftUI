@@ -16,6 +16,7 @@ struct DataProviderInfo {
     var description: String = ""
     // 作者
     var author: String = ""
+    var author_url: String?
 }
 
 struct PushMessageRequest {
