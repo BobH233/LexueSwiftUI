@@ -75,7 +75,8 @@ struct Provider: TimelineProvider {
         entry.events = EventManager.shared.Widget_GetEventList()
         entry.day_event_count = GetTodayEventCount(today: Date(), events: entry.events)
         entry.week_event_count = GetWeekEventCount(todayInWeek: Date(), events: entry.events)
-        
+        print(context.displaySize)
+        entry.size = context.displaySize
         // 从app读入正确的令牌
         GlobalVariables.shared.cur_lexue_context = SettingStorage.shared.get_widget_shared_LexueContext()
         GlobalVariables.shared.cur_lexue_sessKey = SettingStorage.shared.get_widget_shared_sesskey()

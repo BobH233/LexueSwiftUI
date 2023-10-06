@@ -10,6 +10,7 @@ import WidgetKit
 
 struct DefaultEntry: TimelineEntry {
     var date: Date = Date()
+    var size: CGSize = CGSize()
     var isLogin: Bool = false
     var day_event_count: Int = 0
     var week_event_count: Int = 0

@@ -571,6 +571,21 @@
                   endingLineNumber = "246"
                   offsetFromSymbolStart = "3096">
                </Location>
+               <Location
+                  uuid = "97C3196F-91F9-4C53-9C9A-BBD8B2C5742C - e43c50603e7b9e61"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in LexueWidgetExtension.BITLogin.do_login(context: LexueWidgetExtension.BITLogin.LoginContext, username: Swift.String, password: Swift.String, captcha: Swift.String, completion: (Swift.Result&lt;LexueWidgetExtension.BITLogin.LoginSuccessContext, LexueWidgetExtension.BITLogin.LoginError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "LexueWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/BITLogin.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "246"
+                  endingLineNumber = "246"
+                  offsetFromSymbolStart = "3816">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -3058,8 +3073,8 @@
             filePath = "LexueWidget/Provider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "getTimeline(in:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3090,8 +3105,8 @@
             filePath = "LexueWidget/Provider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "getTimeline(in:completion:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -69,11 +69,11 @@ struct Event_SmallView: View {
 struct Event_SmallView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 17.0, *) {
-            Event_SmallView()
+            Event_SmallView(entry: DefaultEntry(isLogin: true))
                 .containerBackground(.fill.tertiary, for: .widget)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
         } else {
-            Event_SmallView()
+            Event_SmallView(entry: DefaultEntry(isLogin: true))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
         }
         
