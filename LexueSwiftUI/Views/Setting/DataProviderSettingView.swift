@@ -62,7 +62,11 @@ struct DataProviderDetailView: View {
                         if option.optionType.wrappedValue == .bool {
                             Toggle(option.displayName.wrappedValue, isOn: option.optionValueBool)
                         } else if option.optionType.wrappedValue == .string {
-                            TextField(option.displayName.wrappedValue, text: option.optionValueString)
+                            HStack {
+                                Text(option.displayName.wrappedValue)
+                                Spacer()
+                                TextField(option.displayName.wrappedValue, text: option.optionValueString)
+                            }
                         }
                     }
                 }
