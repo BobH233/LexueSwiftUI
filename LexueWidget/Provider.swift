@@ -80,7 +80,6 @@ struct Provider: TimelineProvider {
         // 从app读入正确的令牌
         GlobalVariables.shared.cur_lexue_context = SettingStorage.shared.get_widget_shared_LexueContext()
         GlobalVariables.shared.cur_lexue_sessKey = SettingStorage.shared.get_widget_shared_sesskey()
-        print(SettingStorage.shared.get_widget_shared_LexueContext().MoodleSession)
         if GlobalVariables.shared.cur_lexue_context.MoodleSession ==  "" {
             entry.isLogin = false
         } else {
@@ -93,6 +92,7 @@ struct Provider: TimelineProvider {
         if entry.isLogin && nowTime - lastAppRefresh > 60 * 2 {
             // 完成app的事件刷新
             // 只在app在前台不响应超过2分钟才刷新
+            SettingStorage.shared.set_widget_shared_AppActiveDate(nowTime)
             Task(timeout: 50) {
                 do {
                     try await UpdateEventList()
