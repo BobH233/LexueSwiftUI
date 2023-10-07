@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WebView
 
 struct HTMLText: View {
     var html = "<b>This is</b> <i>rich</i> <u>HTML</u> <span style=\"color: red;\">text</span>."
@@ -179,6 +180,11 @@ struct CourseDetailView: View {
     
     @State var sections: [LexueAPI.CourseSectionInfo] = [LexueAPI.CourseSectionInfo]()
     
+    func ProcessFavoriteURL(webviewStore: WebViewStore) {
+        print(webviewStore.url)
+        print(webviewStore.webView.title)
+    }
+    
     var body: some View {
         
         List {
@@ -215,11 +221,11 @@ struct CourseDetailView: View {
                         NavigationLink("课程简介", destination: CourseSummaryView(courseSummary: courseInfo.summary!))
                     }
                     NavigationLink("参与人", destination: CourseMembersListView(courseId: courseId))
-                    NavigationLink("成绩", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/grade/report/user/index.php?id=\(courseId)", execJs: deleteLexueMiscJs).navigationTitle("查看成绩"))
+                    NavigationLink("成绩", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/grade/report/user/index.php?id=\(courseId)", execJs: deleteLexueMiscJs, customActions: []).navigationTitle("查看成绩"))
                 }
                 Section() {
                     ForEach(sections) { section in
-                        NavigationLink(destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs + deleteSizePreJs + (section.sectionId! == "0" ? "" : delete_section0_contentJs)).navigationTitle(section.name!), label: {
+                        NavigationLink(destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs + deleteSizePreJs + (section.sectionId! == "0" ? "" : delete_section0_contentJs), customActions: [("收藏页面", ProcessFavoriteURL)]).navigationTitle(section.name!), label: {
                             CourseSectionView(sectionInfo: section)
                         })
                     }

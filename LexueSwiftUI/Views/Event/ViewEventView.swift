@@ -226,7 +226,7 @@ struct ViewEventView: View {
                         }
                         if let action_url = event_obj!.action_url {
                             NavigationLink("打开事件链接") {
-                                LexueBroswerView(url: action_url)
+                                LexueBroswerView(url: action_url, customActions: [])
                             }
                         }
                     }

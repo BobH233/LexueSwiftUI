@@ -341,7 +341,7 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
         ChatBubble(direction: .left) {
             if let encodedUrl = url {
                 if encodedUrl.host == "lexue.bit.edu.cn" {
-                    NavigationLink(destination: LexueBroswerView(url: encodedUrl.absoluteString), label: {
+                    NavigationLink(destination: LexueBroswerView(url: encodedUrl.absoluteString, customActions: []), label: {
                         Text(message.messageBody.link_title ?? "")
                             .foregroundColor(.blue)
                             .underline()
