@@ -125,11 +125,13 @@ struct SettingView: View {
                             .foregroundColor(.blue)
                         Text("应用隐私声明")
                     })
+                    .isDetailLink(false)
                     NavigationLink(destination: AboutView(), label: {
                         Image(systemName: "info.circle")
                             .foregroundColor(.blue)
                         Text("关于")
                     })
+                    .isDetailLink(false)
                 }
                 if globalVar.DEBUG_BUILD {
                     Text("DEBUG_BUILD_VERSION")
