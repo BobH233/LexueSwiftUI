@@ -105,6 +105,7 @@ struct SettingView: View {
                             }, label: {
                                 Text("消息源设定")
                             })
+                            .isDetailLink(false)
                         }
                         HStack{
                             Picker(selection: $colorSchemeIndex, label: Text("外观")) {
@@ -136,6 +137,7 @@ struct SettingView: View {
                 }
                 
             }
+            .navigationViewStyle(.stack)
             .overlay(ImageViewer(image: self.$avatar_image, viewerShown: self.$showImageViewer))
             .navigationTitle("设置")
         }

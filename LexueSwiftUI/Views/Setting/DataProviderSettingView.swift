@@ -114,6 +114,7 @@ struct DataProviderSettingView: View {
                     NavigationLink(provider.info().providerName , destination: {
                         DataProviderDetailView(provider: provider)
                     })
+                    .isDetailLink(false)
                 }
             } header: {
                 Text("消息源")
@@ -122,6 +123,7 @@ struct DataProviderSettingView: View {
             }
             
         }
+        .navigationViewStyle(.stack)
         .navigationTitle("消息源设定")
         .navigationBarTitleDisplayMode(.large)
     }
