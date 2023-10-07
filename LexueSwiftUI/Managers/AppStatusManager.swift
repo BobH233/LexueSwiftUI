@@ -25,7 +25,7 @@ class AppStatusManager {
         print("action_after_get_lexue_context")
         CourseManager.shared.LoadStoredCacheCourses()
         // 显示小组件欢迎使用界面
-        if true || !SettingStorage.shared.welcomWidgetShown {
+        if !SettingStorage.shared.welcomWidgetShown {
             DispatchQueue.main.async {
                 GlobalVariables.shared.isShowWelcomUseWidgetSheet = true
             }

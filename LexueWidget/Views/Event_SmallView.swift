@@ -23,7 +23,7 @@ struct Event_SmallView: View {
         if entry.size.height <= 148 {
             return 5
         } else if entry.size.height <= 158 {
-            return 7	
+            return 7
         } else {
             return 10
         }
