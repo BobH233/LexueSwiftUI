@@ -46,7 +46,7 @@ struct AddCustomEventView: View {
                     TextField("输入事件备注(如地点、人数等)", text: $eventDescription)
                 }
                 DatePicker(selection: $startDate, in: Date.now..., displayedComponents: [.date, .hourAndMinute]) {
-                    Text("时间")
+                    Text("到期时间")
                 }
                 ColorPicker("强调色", selection: $color)
                 Picker("类型", selection: $eventType) {
