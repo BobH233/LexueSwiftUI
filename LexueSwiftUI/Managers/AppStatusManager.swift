@@ -270,6 +270,9 @@ class AppStatusManager {
             // print(GlobalVariables.shared.cur_lexue_context)
             // 从后台切回来才刷新事件
             Task {
+                if !GlobalVariables.shared.isLogin {
+                    return
+                }
                 try? await CoreLogicManager.shared.UpdateEventList()
                 await DataProviderManager.shared.DoRefreshAll()
             }

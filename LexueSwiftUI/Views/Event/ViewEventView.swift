@@ -15,7 +15,7 @@ struct SystemEventEditViewController: UIViewControllerRepresentable {
     @Binding var end_date: Date
     @Binding var notes: String?
     @Binding var location: String?
-    private let store = EKEventStore()
+    @Binding var store: EKEventStore
     @Environment(\.presentationMode) var presentationMode
     private var event: EKEvent {
         let event = EKEvent(eventStore: store)
@@ -75,6 +75,8 @@ struct ViewEventView: View {
     @State var addSystemEventEndDate: Date = .now
     @State var addSystemEventLocation: String?
     
+    @State var eventStore = EKEventStore()
+    
     
     // 是否已经是到期事件了
     func IsExpired(event: EventStored) -> Bool {
@@ -124,7 +126,35 @@ struct ViewEventView: View {
                                     addSystemEventEndDate = time_start
                                 }
                                 addSystemEventLocation = event_obj!.course_name ?? ""
-                                showAddSystemEvent = true
+                                
+                                if #available(iOS 17.0, *) {
+                                    // 17.0 用这个获取权限
+                                    // 实际上wwdc23说17.0调用EventKitUI不用询问权限...不过还是加上吧
+                                    eventStore.requestWriteOnlyAccessToEvents { granted, error in
+                                        if let error = error {
+                                            print(error.localizedDescription)
+                                            return
+                                        }
+                                        if granted {
+                                            DispatchQueue.main.async {
+                                                showAddSystemEvent = true
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    // 17.0 以下用这个获取权限
+                                    eventStore.requestAccess(to: .event) { granted, error in
+                                        if let error = error {
+                                            print(error.localizedDescription)
+                                            return
+                                        }
+                                        if granted {
+                                            DispatchQueue.main.async {
+                                                showAddSystemEvent = true
+                                            }
+                                        }
+                                    }
+                                }
                             }) {
                                 Text("添加到我的日历")
                             }
@@ -207,7 +237,7 @@ struct ViewEventView: View {
             }
         }
         .sheet(isPresented: $showAddSystemEvent, content: {
-            SystemEventEditViewController(event_name: $addSystemEventTitle, start_date: $addSystemEventStartDate, end_date: $addSystemEventEndDate, notes: $addSystemEventNote, location: $addSystemEventLocation)
+            SystemEventEditViewController(event_name: $addSystemEventTitle, start_date: $addSystemEventStartDate, end_date: $addSystemEventEndDate, notes: $addSystemEventNote, location: $addSystemEventLocation, store: $eventStore)
         })
         .onChange(of: showEditView) { newVal in
             if !newVal {
