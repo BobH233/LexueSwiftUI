@@ -58,6 +58,7 @@ struct WelcomeUseWidget: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 40)
             }
+            .padding(.bottom, 20)
             .buttonStyle(.borderedProminent)
             .padding(.horizontal, 30)
             
