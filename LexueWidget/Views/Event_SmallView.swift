@@ -13,6 +13,8 @@ struct Event_SmallView: View {
     func GetFontSize() -> CGFloat {
         if entry.size.height <= 148 {
             return 15
+        } else if entry.size.height <= 158 {
+            return 17
         } else {
             return 20
         }
@@ -20,6 +22,8 @@ struct Event_SmallView: View {
     func GetVSpacing() -> CGFloat {
         if entry.size.height <= 148 {
             return 5
+        } else if entry.size.height <= 158 {
+            return 7	
         } else {
             return 10
         }
