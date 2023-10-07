@@ -24,6 +24,13 @@ class AppStatusManager {
     func action_after_get_lexue_context(_ context: LexueAPI.LexueContext) {
         print("action_after_get_lexue_context")
         CourseManager.shared.LoadStoredCacheCourses()
+        // 显示小组件欢迎使用界面
+        if !SettingStorage.shared.welcomWidgetShown {
+            DispatchQueue.main.async {
+                GlobalVariables.shared.isShowWelcomUseWidgetSheet = true
+            }
+            SettingStorage.shared.welcomWidgetShown = true
+        }
         // 获取sesskey，更新课程列表
         Task {
             let result = await LexueAPI.shared.GetSessKey(context)

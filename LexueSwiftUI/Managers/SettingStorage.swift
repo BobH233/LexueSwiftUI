@@ -18,6 +18,13 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    // 是否已经展示过推荐使用小组件的提示框了
+    @Published var welcomWidgetShown: Bool {
+        didSet {
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(welcomWidgetShown, forKey: "setting.welcomWidgetShown")
+        }
+    }
+    
     
     // 应用颜色选项
     @Published var preferColorScheme: Int {
@@ -232,5 +239,12 @@ class SettingStorage: ObservableObject {
         } else {
             event_newEventNotification = true
         }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.welcomWidgetShown") as? Bool {
+            welcomWidgetShown = stored
+        } else {
+            welcomWidgetShown = false
+        }
+        
     }
 }

@@ -34,6 +34,7 @@
 		473BAE982AA496B800968C3C /* MessageListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE972AA496B800968C3C /* MessageListView.swift */; };
 		473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */; };
 		473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */; };
+		473D88972AD126DD00E7EB63 /* WelcomeUseWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D88962AD126DD00E7EB63 /* WelcomeUseWidget.swift */; };
 		474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474515122AAB641700CCF24E /* ContactDetailView.swift */; };
 		47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */; };
 		474C9B792AA4E38D0064B5AF /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* EventListView.swift */; };
@@ -197,6 +198,7 @@
 		473BAE9B2AA4C13B00968C3C /* SettingStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingStorage.swift; sourceTree = "<group>"; };
 		473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		473D88952AD1195A00E7EB63 /* AboutApp.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = AboutApp.md; sourceTree = "<group>"; };
+		473D88962AD126DD00E7EB63 /* WelcomeUseWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeUseWidget.swift; sourceTree = "<group>"; };
 		474515122AAB641700CCF24E /* ContactDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailView.swift; sourceTree = "<group>"; };
 		47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseMembersListView.swift; sourceTree = "<group>"; };
 		474C9B782AA4E38D0064B5AF /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				473BAE812AA48DAA00968C3C /* ContentView.swift */,
 				47BA831E2AC1289100954129 /* UnloginView.swift */,
 				479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */,
+				473D88962AD126DD00E7EB63 /* WelcomeUseWidget.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -783,6 +786,7 @@
 				47B2A8312AC9C9D700957DF0 /* EventPreferenceSettingView.swift in Sources */,
 				47F4F2A32AC086A90047B395 /* ViewModifiers.swift in Sources */,
 				47F4F2A02AC086A90047B395 /* DeviceOrientation.swift in Sources */,
+				473D88972AD126DD00E7EB63 /* WelcomeUseWidget.swift in Sources */,
 				4750EB832AC43C640071118F /* LocalNotificationManager.swift in Sources */,
 				47BA831F2AC1289100954129 /* UnloginView.swift in Sources */,
 				47F4F29F2AC086A90047B395 /* SystemPHPicker.swift in Sources */,

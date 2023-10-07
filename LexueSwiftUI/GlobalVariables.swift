@@ -22,6 +22,8 @@ class GlobalVariables: ObservableObject {
     
     @Published var isShowPrivacyPolicySheet = false
     
+    @Published var isShowWelcomUseWidgetSheet = false
+    
     @Published var isLoading = false
     @Published var LoadingText = ""
     
