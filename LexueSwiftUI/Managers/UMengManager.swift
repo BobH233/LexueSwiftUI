@@ -32,8 +32,6 @@ class UMengManager {
         UMCommonLogSwift.setUpUMCommonLogManager()
         UMCommonSwift.setLogEnabled(bFlag: false)
         let app_key = GetUMengAppKey()
-        // TODO: 删除这个print
-        // print("app_key: \(app_key)")
         UMCommonSwift.initWithAppkey(appKey: app_key, channel: GlobalVariables.shared.CURRENT_CHANNEL)
     }
 }

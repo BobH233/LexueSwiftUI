@@ -45,6 +45,22 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     var body: some View {
         Form {
+            Section("GPT") {
+                Button("Ask") {
+                    Task {
+                        let result = await GPTApiFree.shared.RequestGPT(param: GPTApiFree.GPTRequestParam(messages: [
+                            GPTApiFree.GPTMessage(role: "system", content: "你现在是一个json格式文本生成器，输出json供程序去解析，用户给你的指令是设置一个提醒事项。你输出的json对象文本需要包含一下几个内容：（1）提醒事项名称（event_name），这个可以你根据用户的指令自行决定（2）提醒事项的发生时间(event_time)，这是一个文本，格式为“年-月-日 时:分:秒”，我会告诉你现在的时间，然后你自己根据用户的指令决定输出的时间文本（3）提醒事项的备注（event_description）这个你根据用户的指令自行决定，比如事件发生的地点，参加人等等（4）错误信息（error），假如用户输入了其他无关的东西，或者给你的指令你无法理解，请你在这里以字符串输出错误信息，如果没有错误，这里请输出null。（5）给用户说的话（comment），这里输出你为顾客安排了事件过后，想对顾客说的话，可以自由发挥，如果没有可以保持null。"),
+                            GPTApiFree.GPTMessage(role: "user", content: "现在的时间是2023年10月7日20：53分星期六，用户给你的指令是：“提醒我明天晚上吃牛肉面”，直接输出json内容，不要有多余的话和补充")
+                        ]))
+                        switch result {
+                        case .success(let success_res):
+                            print(success_res)
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            }
             Section("HaoBIT") {
                 Button("GetNotices") {
                     Task {

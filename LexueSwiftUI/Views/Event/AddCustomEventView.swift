@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct AddCustomEventView: View {
+    let GPTInstruction = """
+    你现在是一个json格式文本生成器，输出json供程序去解析，用户给你的指令是设置一个提醒事项。你输出的json对象文本需要包含一下几个内容：（1）提醒事项名称（event_name），这个可以你根据用户的指令自行决定（2）提醒事项的发生时间(event_time)，这是一个文本，格式为“年-月-日 时:分:秒”，我会告诉你现在的时间，然后你自己根据用户的指令决定输出的时间文本（3）提醒事项的备注（event_description）这个你根据用户的指令自行决定，比如事件发生的地点，参加人等等（4）错误信息（error），假如用户输入了其他无关的东西，或者给你的指令你无法理解，请你在这里以字符串输出错误信息，如果没有错误，这里请输出null。（5）给用户说的话（comment），这里输出你为顾客安排了事件过后，想对顾客说的话，可以自由发挥，如果没有可以保持null。
+    """
+    
     @ObservedObject var globalVar = GlobalVariables.shared
     @Environment(\.managedObjectContext) var managedObjContext
     @Environment(\.dismiss) var dismiss
@@ -21,6 +25,12 @@ struct AddCustomEventView: View {
     @State private var selectCourseId: String = ""
     @State private var color: Color = .blue
     
+    @State private var useGpt: Bool = false
+    @State private var gptAskContent: String = ""
+    @State private var gptThinking: Bool = false
+    @State private var gptComment: String = ""
+    @State private var gptError: String = ""
+    
     // 有 作业 assignment 考试 exam 常规 general
     @State private var eventType: String = "assignment"
     
@@ -32,8 +42,124 @@ struct AddCustomEventView: View {
         }
         return "未知"
     }
+    
+    func AskGpt() {
+        if gptAskContent.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            globalVar.alertTitle = "文字描述不能为空"
+            globalVar.alertContent = "请给定指令比如：明天下午六点提醒我吃北理烤鹅"
+            globalVar.showAlert = true
+            return
+        }
+        gptThinking = true
+        gptError = ""
+        gptComment = ""
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy年MM月dd日HH:mm分 EEEE"
+        let formattedTime = dateFormatter.string(from: .now)
+        let askContent = "现在的时间是\(formattedTime)，用户给你的指令是：“\(gptAskContent)”，直接输出json内容，不要有多余的话和补充"
+        print(askContent)
+        gptAskContent = ""
+        UMAnalyticsSwift.event(eventId: "use_gpt", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId])
+        Task {
+            let result = await GPTApiFree.shared.RequestGPT(param: GPTApiFree.GPTRequestParam(messages: [
+                GPTApiFree.GPTMessage(role: "system", content: GPTInstruction),
+                GPTApiFree.GPTMessage(role: "user", content: askContent)
+            ]))
+            switch result {
+            case .success(let success_res):
+                // 解析返回的内容
+                if success_res.choices.count == 0 {
+                    DispatchQueue.main.async {
+                        gptThinking = false
+                        globalVar.alertTitle = "请求GPT接口出错"
+                        globalVar.alertContent = "可能是网络问题，您可以尝试再试一次..."
+                        globalVar.showAlert = true
+                    }
+                }
+                let retJson = success_res.choices[0].message.content
+                print(retJson)
+                if let jsonData = retJson.data(using: .utf8), let jsonObj = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+                    DispatchQueue.main.async {
+                        withAnimation {
+                            if let event_name = jsonObj["event_name"] as? String {
+                                eventName = event_name
+                            }
+                            if let event_description = jsonObj["event_description"] as? String {
+                                eventDescription = event_description
+                            }
+                            if let error = jsonObj["error"] as? String {
+                                gptError = error
+                            }
+                            if let comment = jsonObj["comment"] as? String {
+                                gptComment = comment
+                            }
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                            if let dateString = jsonObj["event_time"] as? String, let date = dateFormatter.date(from: dateString) {
+                                startDate = date
+                            }
+                            gptThinking = false
+                        }
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        gptThinking = false
+                        globalVar.alertTitle = "GPT返回值错误!"
+                        globalVar.alertContent = "可能是网络问题，您可以尝试再试一次..."
+                        globalVar.showAlert = true
+                    }
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    gptThinking = false
+                    globalVar.alertTitle = "请求GPT接口出错"
+                    globalVar.alertContent = "可能是网络问题，您可以尝试再试一次..."
+                    globalVar.showAlert = true
+                }
+            }
+        }
+    }
     var body: some View {
         Form {
+            Section {
+                if !useGpt {
+                    Button("使用文字描述录入") {
+                        withAnimation {
+                            useGpt = true
+                        }
+                    }
+                } else {
+                    if !gptThinking {
+                        if !gptComment.isEmpty {
+                            Text(gptComment)
+                                .foregroundColor(.green)
+                        }
+                        if !gptError.isEmpty {
+                            Text(gptError)
+                                .foregroundColor(.red)
+                        }
+                        if #available(iOS 16.0, *) {
+                            TextField("示例：明天下午六点提醒我吃北理烤鹅", text: $gptAskContent, axis: .vertical)
+                        } else {
+                            TextField("示例：明天下午六点提醒我吃北理烤鹅", text: $gptAskContent)
+                        }
+                        Button("发送") {
+                            AskGpt()
+                        }
+                    } else {
+                        HStack {
+                            Spacer()
+                            Text("请稍后...")
+                            Spacer()
+                        }
+                    }
+                    
+                }
+            } header: {
+                Text("AI录入(实验性)")
+            } footer: {
+                Text("目前使用的gpt的api接口非常的慢，因此最终这个功能是否保留待定...")
+            }
             Section("基本设置") {
                 HStack {
                     Text("事件名称")

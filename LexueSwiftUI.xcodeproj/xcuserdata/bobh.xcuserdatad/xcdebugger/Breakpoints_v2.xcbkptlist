@@ -14,8 +14,8 @@
             filePath = "LexueSwiftUI/Views/Setting/DebugDataView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -193,6 +193,70 @@
             startingLineNumber = "76"
             endingLineNumber = "76"
             landmarkName = "getTimeline(in:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F51D9A67-BB52-4626-A802-D46BDD66430F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/GPTApiFree.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "RequestGPT(param:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F51D9A67-BB52-4626-A802-D46BDD66430F - 78db89cddfcaf5e9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for LexueSwiftUI.GPTApiFree.RequestGPT(param: LexueSwiftUI.GPTApiFree.GPTRequestParam) async -&gt; Swift.Result&lt;LexueSwiftUI.GPTApiFree.GPTResponse, LexueSwiftUI.GPTApiFree.GPTRequestError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/GPTApiFree.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "880">
+               </Location>
+               <Location
+                  uuid = "F51D9A67-BB52-4626-A802-D46BDD66430F - 7a0e5ce825f3b9eb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.GPTApiFree.RequestGPT(param: LexueSwiftUI.GPTApiFree.GPTRequestParam) async -&gt; Swift.Result&lt;LexueSwiftUI.GPTApiFree.GPTResponse, LexueSwiftUI.GPTApiFree.GPTRequestError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/GPTApiFree.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "101"
+                  endingLineNumber = "101"
+                  offsetFromSymbolStart = "768">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "470A40FA-F171-4B47-B4AA-5B8743B90422"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Views/Event/AddCustomEventView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "AskGpt()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
