@@ -82,7 +82,7 @@ struct FavoriteURLView: View {
                 Text("还没有收藏链接哦~")
             } else {
                 ForEach(favoriteUrls) { favoriteUrl in
-                    NavigationLink(destination: LexueBroswerView(url: favoriteUrl.url ?? "", customActions: []).navigationTitle(favoriteUrl.title ?? "未命名").navigationBarTitleDisplayMode(.inline), label: {
+                    NavigationLink(destination: LexueBroswerView(url: favoriteUrl.url ?? "", execJs: fixScrollProblemJs, customActions: []).navigationTitle(favoriteUrl.title ?? "未命名").navigationBarTitleDisplayMode(.inline), label: {
                         VStack {
                             HStack {
                                 Text(favoriteUrl.title ?? "未命名")
