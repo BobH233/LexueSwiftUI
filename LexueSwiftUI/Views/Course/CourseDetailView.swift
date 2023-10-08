@@ -171,6 +171,8 @@ struct CourseSectionView: View {
 
 
 struct CourseDetailView: View {
+    @Environment(\.managedObjectContext) var managedObjContext
+    
     var courseId: String = "10001"
     
     
@@ -181,8 +183,21 @@ struct CourseDetailView: View {
     @State var sections: [LexueAPI.CourseSectionInfo] = [LexueAPI.CourseSectionInfo]()
     
     func ProcessFavoriteURL(webviewStore: WebViewStore) {
-        print(webviewStore.url)
+        var title: String = ""
+        if let curTitle = webviewStore.webView.title, !curTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            title = curTitle
+        } else {
+            title = "来自 \(courseName) 的收藏"
+        }
+        guard let url = webviewStore.url else {
+            print("收藏失败，未知url")
+            return
+        }
         print(webviewStore.webView.title)
+        DataController.shared.addFavoriteURL(title: title, url: url.absoluteString, from_course_id: courseInfo.id, from_course_name: courseName, context: managedObjContext)
+        GlobalVariables.shared.alertTitle = "收藏成功"
+        GlobalVariables.shared.alertContent = "您稍后可在课程列表的左上角查看收藏的链接"
+        GlobalVariables.shared.showAlert = true
     }
     
     var body: some View {

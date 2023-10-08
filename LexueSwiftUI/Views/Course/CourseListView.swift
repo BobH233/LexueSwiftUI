@@ -103,22 +103,7 @@ private struct ListView: View {
     @State var isActive: Bool = false
     
     @Environment(\.refresh) private var refreshAction
-    @ViewBuilder
-    var refreshToolbar: some View {
-        if let doRefresh = refreshAction {
-            if isRefreshing {
-                ProgressView()
-            } else {
-                Button(action: {
-                    Task{
-                        await doRefresh()
-                    }
-                }) {
-                    Image(systemName: "arrow.clockwise")
-                }
-            }
-        }
-    }
+    
     var body: some View {
         ScrollView(.vertical) {
             LazyVStack(spacing: 20){
@@ -135,7 +120,25 @@ private struct ListView: View {
             }.hidden()
         }
         .toolbar {
-            refreshToolbar
+            ToolbarItem(placement: .navigationBarTrailing) {
+                if isRefreshing {
+                    ProgressView()
+                } else {
+                    Button(action: {
+                        Task{
+                            await refreshAction?()
+                        }
+                    }) {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                }
+            }
+            ToolbarItem(placement: .navigationBarLeading) {
+                NavigationLink(destination: FavoriteURLView(), label: {
+                    Image(systemName: "star")
+                })
+                .isDetailLink(false)
+            }
         }
     }
 }
@@ -162,6 +165,7 @@ struct CourseListView: View {
                     // 显示的时候就必须要展示出来
                     CourseManager.shared.LoadStoredCacheCourses()
                 }
+                .navigationViewStyle(.stack)
                 .searchable(text: $searchText, prompt: "搜索课程")
                 .navigationTitle("课程")
                 .navigationBarTitleDisplayMode(.large)

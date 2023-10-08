@@ -491,8 +491,52 @@ class DataController: ObservableObject {
         record.notifiedTime = notifiedDate
         save(context: context)
     }
+    
+    func addFavoriteURL(title: String, url: String, from_course_id: String?, from_course_name: String?, context: NSManagedObjectContext) {
+        let favoriteUrlStore = FavoriteURLStored(context: context)
+        favoriteUrlStore.id = UUID()
+        favoriteUrlStore.title = title
+        favoriteUrlStore.url = url
+        favoriteUrlStore.favorite_date = .now
+        favoriteUrlStore.from_course_id = from_course_id
+        favoriteUrlStore.from_course_name = from_course_name
+        save(context: context)
+    }
+    
+    func getFavoriteURLs(context: NSManagedObjectContext) -> [FavoriteURLStored] {
+        let request: NSFetchRequest<FavoriteURLStored> = FavoriteURLStored.fetchRequest()
+        do {
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            
+        }
+        return []
+    }
+    
+    func queryFavoriteURLByID(uuid: UUID, context: NSManagedObjectContext) -> FavoriteURLStored? {
+        let request: NSFetchRequest<FavoriteURLStored> = FavoriteURLStored.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", uuid as CVarArg)
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                return results.first
+            } else {
+                return nil
+            }
+        } catch {
+            print("查询queryFavoriteURLByID失败：\(error)")
+        }
+        return nil
+    }
 }
 
+
+extension FavoriteURLStored {
+    func GetDisplayName() -> String {
+        return title ?? "未命名"
+    }
+}
 
 extension ContactStored {
     func GetDisplayName() -> String {

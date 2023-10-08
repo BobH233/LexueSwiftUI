@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "DataController.getFavoriteURLs(context:):DataController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "results[0].title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
          <PersistentStrings>
             <PersistentString
@@ -21,6 +29,14 @@
          <PersistentStrings>
             <PersistentString
                value = "pushedMessage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in EditFavoriteURLView.body.getter:FavoriteURLView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "url.absoluteString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -55,7 +71,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -64,7 +80,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -173,13 +189,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
-               value = "event.name">
+               value = "event.timestart">
             </PersistentString>
             <PersistentString
                value = "event.id">
             </PersistentString>
             <PersistentString
-               value = "event.timestart">
+               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -232,10 +248,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #4 in closure #1 in CourseDetailView.body.getter:CourseDetailView.swift">
+         contextName = "SystemEventEditViewController.event.getter:ViewEventView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "sections">
+               value = "event_name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -244,6 +260,14 @@
          <PersistentStrings>
             <PersistentString
                value = "GlobalVariables.shared.cur_user_info">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #4 in closure #1 in CourseDetailView.body.getter:CourseDetailView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sections">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -257,14 +281,6 @@
       </ContextState>
       <ContextState
          contextName = "BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
-      </ContextState>
-      <ContextState
-         contextName = "SystemEventEditViewController.event.getter:ViewEventView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "event_name">
-            </PersistentString>
-         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "getAesString(data:key0:iv0:):BITLogin.swift">
@@ -301,6 +317,14 @@
          <PersistentStrings>
             <PersistentString
                value = "pushedMessage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FavoriteURLView.favoriteUrls.setter:FavoriteURLView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "favoriteUrls">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

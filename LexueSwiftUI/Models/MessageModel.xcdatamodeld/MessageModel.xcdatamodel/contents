@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22221.1" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="ContactStored" representedClassName="ContactStored" syncable="YES" codeGenerationType="class">
         <attribute name="alias" optional="YES" attributeType="String"/>
         <attribute name="avatar_data" optional="YES" attributeType="String"/>
@@ -53,6 +53,14 @@
         <attribute name="timeusermidnight" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="url" optional="YES" attributeType="String"/>
         <attribute name="user_deleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="FavoriteURLStored" representedClassName="FavoriteURLStored" syncable="YES" codeGenerationType="class">
+        <attribute name="favorite_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="from_course_id" optional="YES" attributeType="String"/>
+        <attribute name="from_course_name" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
     </entity>
     <entity name="LexueDP_RecordEvent" representedClassName="LexueDP_RecordEvent" syncable="YES" codeGenerationType="class">
         <attribute name="eventUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
