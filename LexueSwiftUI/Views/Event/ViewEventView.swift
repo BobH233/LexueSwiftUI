@@ -217,7 +217,7 @@ struct ViewEventView: View {
                         }
                     }
                 }
-                if event_obj!.course_id != nil {
+                if event_obj!.course_id != nil || event_obj!.action_url != nil {
                     Section("操作") {
                         if let courseId = event_obj!.course_id, let courseInfo = GetCourseById(courseId) {
                             NavigationLink("\(courseInfo.fullname ?? "")") {
@@ -226,7 +226,7 @@ struct ViewEventView: View {
                         }
                         if let action_url = event_obj!.action_url {
                             NavigationLink("打开事件链接") {
-                                LexueBroswerView(url: action_url, customActions: [])
+                                LexueBroswerView(url: action_url, execJs: fixScrollProblemJs, customActions: [])
                             }
                         }
                     }

@@ -18,6 +18,7 @@ struct EditEventView: View {
     
     @State private var eventName: String = ""
     @State private var eventDescription: String = ""
+    @State private var eventUrl: String = ""
     @State private var startDate = Date.now
     @State private var courseList = CourseManager.shared.CourseDisplayList
     @State private var withCourse: Bool = false
@@ -45,12 +46,17 @@ struct EditEventView: View {
                         HStack {
                             Text("事件名称")
                             Spacer()
-                            TextField("输入事件名称", text: $eventName)
+                            TextField("必填，输入事件名称", text: $eventName)
                         }
                         HStack {
                             Text("事件备注")
                             Spacer()
-                            TextField("输入事件备注(如地点、人数等)", text: $eventDescription)
+                            TextField("选填，输入事件备注(如地点、人数等)", text: $eventDescription)
+                        }
+                        HStack {
+                            Text("事件链接")
+                            Spacer()
+                            TextField("选填，事件相关的链接", text: $eventUrl)
                         }
                         DatePicker(selection: $startDate, displayedComponents: [.date, .hourAndMinute]) {
                             Text("时间")
@@ -98,6 +104,10 @@ struct EditEventView: View {
                             to_update?.course_id = courseId
                             to_update?.course_name = courseName
                             to_update?.color = color.toHex()
+                            if !eventUrl.isEmpty && !eventUrl.hasPrefix("http://") && !eventUrl.hasPrefix("https://") {
+                                eventUrl = "https://" + eventUrl
+                            }
+                            to_update?.action_url = eventUrl
                             DataController.shared.save(context: managedObjContext)
                             // 事件经过编辑过后，也应该重新通知，所以我在编辑事件的时候需要把已经通知的记录全部删了
                             print("eventid: \(event_uuid)")
@@ -157,6 +167,9 @@ struct EditEventView: View {
                         if let courseId = event_obj.course_id {
                             withCourse = true
                             selectCourseId = courseId
+                        }
+                        if let url = event_obj.action_url {
+                            eventUrl = url
                         }
                         color = Color(hex: event_obj.color!) ?? .green
                         eventType = event_obj.event_type!

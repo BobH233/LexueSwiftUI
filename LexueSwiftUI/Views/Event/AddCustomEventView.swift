@@ -19,6 +19,7 @@ struct AddCustomEventView: View {
     
     @State private var eventName: String = ""
     @State private var eventDescription: String = ""
+    @State private var eventUrl: String = ""
     @State private var startDate = Date.now
     @State private var courseList = CourseManager.shared.CourseDisplayList
     @State private var withCourse: Bool = false
@@ -164,12 +165,17 @@ struct AddCustomEventView: View {
                 HStack {
                     Text("事件名称")
                     Spacer()
-                    TextField("输入事件名称", text: $eventName)
+                    TextField("必填，输入事件名称", text: $eventName)
                 }
                 HStack {
                     Text("事件备注")
                     Spacer()
-                    TextField("输入事件备注(如地点、人数等)", text: $eventDescription)
+                    TextField("选填，输入事件备注(如地点、人数等)", text: $eventDescription)
+                }
+                HStack {
+                    Text("事件链接")
+                    Spacer()
+                    TextField("选填，事件相关的链接", text: $eventUrl)
                 }
                 DatePicker(selection: $startDate, in: Date.now..., displayedComponents: [.date, .hourAndMinute]) {
                     Text("到期时间")
@@ -210,11 +216,21 @@ struct AddCustomEventView: View {
                     globalVar.showAlert = true
                     return
                 }
+                if URL(string: eventUrl) == nil {
+                    globalVar.alertTitle = "事件链接不合法"
+                    globalVar.alertContent = "请输入合法的事件链接"
+                    globalVar.showAlert = true
+                    return
+                } else {
+                    if !eventUrl.isEmpty && !eventUrl.hasPrefix("http://") && !eventUrl.hasPrefix("https://") {
+                        eventUrl = "https://" + eventUrl
+                    }
+                }
                 let eventName = eventName.trimmingCharacters(in: .whitespacesAndNewlines)
                 let description = eventDescription.trimmingCharacters(in: .whitespacesAndNewlines)
                 let courseId = withCourse ? selectCourseId : nil
                 let courseName = withCourse ? GetCourseName(selectCourseId) : nil
-                DataController.shared.addEventStored(isCustomEvent: true, event_name: eventName, event_description: description, lexue_id: nil, timestart: startDate, timeusermidnight: nil, mindaytimestamp: .now, course_id: courseId, course_name: courseName, color: color, action_url: nil, event_type: eventType, instance: nil, url: nil, context: managedObjContext)
+                DataController.shared.addEventStored(isCustomEvent: true, event_name: eventName, event_description: description, lexue_id: nil, timestart: startDate, timeusermidnight: nil, mindaytimestamp: .now, course_id: courseId, course_name: courseName, color: color, action_url: eventUrl, event_type: eventType, instance: nil, url: nil, context: managedObjContext)
                 dismiss()
             }
         }
