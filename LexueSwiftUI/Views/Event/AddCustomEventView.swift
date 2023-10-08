@@ -216,7 +216,7 @@ struct AddCustomEventView: View {
                     globalVar.showAlert = true
                     return
                 }
-                if URL(string: eventUrl) == nil {
+                if !eventUrl.isEmpty && URL(string: eventUrl) == nil {
                     globalVar.alertTitle = "事件链接不合法"
                     globalVar.alertContent = "请输入合法的事件链接"
                     globalVar.showAlert = true
