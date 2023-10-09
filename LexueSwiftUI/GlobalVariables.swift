@@ -13,9 +13,9 @@ class GlobalVariables: ObservableObject {
     
     // 如果是true，则表示为本机调试，使用友盟的develop的key，同时显示debug build的标志，否则为发布版本，使用友盟的release的key
     // TODO: release 时改成 false!!!!!
-    let DEBUG_BUILD = true
+    let DEBUG_BUILD = false
     // TODO: 上架app store的时候改为app store
-    let CURRENT_CHANNEL = "ipa"
+    let CURRENT_CHANNEL = "app_store"
     
     var appVersion = "1.0"
     
