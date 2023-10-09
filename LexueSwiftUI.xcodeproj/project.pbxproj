@@ -49,6 +49,7 @@
 		475EDED42AB60697008486F0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475EDED32AB60697008486F0 /* ProfileView.swift */; };
 		476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476340302AB89F47006C24E2 /* LexueProfile.swift */; };
 		47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */; };
+		478B70562AD445190008865A /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
 		4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791050E2AB0ACD4004FD26C /* LoginView.swift */; };
 		479129C02AC309BA00F811F9 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = 479129BF2AC309BA00F811F9 /* WebView */; };
 		479129C22AC30A3A00F811F9 /* LexueBroswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */; };
@@ -212,6 +213,7 @@
 		475EDED32AB60697008486F0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		476340302AB89F47006C24E2 /* LexueProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueProfile.swift; sourceTree = "<group>"; };
 		47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLogicManager.swift; sourceTree = "<group>"; };
+		478B70552AD445190008865A /* Webvpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webvpn.swift; sourceTree = "<group>"; };
 		4791050E2AB0ACD4004FD26C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueBroswerView.swift; sourceTree = "<group>"; };
 		47970ABA2AC5AC7200C5BD03 /* UMDevice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMDevice.framework; sourceTree = "<group>"; };
@@ -481,6 +483,7 @@
 				475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */,
 				47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */,
 				473D88982AD1955800E7EB63 /* GPTApiFree.swift */,
+				478B70552AD445190008865A /* Webvpn.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -737,6 +740,7 @@
 				470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */,
 				4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */,
 				47BD51A22AC5B43F0029F9DB /* UMGameAnalyticsSwift.swift in Sources */,
+				478B70562AD445190008865A /* Webvpn.swift in Sources */,
 				473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */,
 				47B4420B2AC5C0B600EE03A9 /* PrivacyStatement.swift in Sources */,
 				473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */,

@@ -45,6 +45,13 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     var body: some View {
         Form {
+            Section("Webvpn") {
+                Button("loginWebvpn") {
+                    Task {
+                        let result = await Webvpn.shared.GetWebvpnContext(SettingStorage.shared.loginnedContext)
+                    }
+                }
+            }
             Section("GPT") {
                 Button("Ask") {
                     Task {
