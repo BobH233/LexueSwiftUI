@@ -33,6 +33,7 @@
 * 开一：提供Logo上的建议
 * F_picacho：提供Logo上的建议
 * [HaoBIT](https://haobit.top/dev/site/)：授权使用其数据作为消息聚合的消息源
+* [BIT101](https://bit101.cn/#/)：授权使用其成绩查询接口
 
 ## 合作事宜
 

@@ -48,7 +48,8 @@ struct DebugDataView: View {
             Section("Webvpn") {
                 Button("loginWebvpn") {
                     Task {
-                        let result = await Webvpn.shared.GetWebvpnContext(SettingStorage.shared.loginnedContext)
+                        let result = await Webvpn.shared.GetWebvpnContext(username: SettingStorage.shared.savedUsername, password: SettingStorage.shared.savedPassword)
+                        print(result)
                     }
                 }
             }
