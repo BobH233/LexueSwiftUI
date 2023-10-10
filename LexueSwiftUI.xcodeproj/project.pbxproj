@@ -68,6 +68,9 @@
 		4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8162AA6237500F812D6 /* CourseManager.swift */; };
 		4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8182AA6239800F812D6 /* MessageDetailView.swift */; };
 		4799C81B2AA62CDB00F812D6 /* ContactMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C81A2AA62CDB00F812D6 /* ContactMessageModel.swift */; };
+		479B22E12AD571C400A7DCC7 /* ViewScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */; };
+		479B22E42AD57B0300A7DCC7 /* Tabler in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E32AD57B0300A7DCC7 /* Tabler */; };
+		479B22E72AD57D8100A7DCC7 /* Sideways in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E62AD57D8100A7DCC7 /* Sideways */; };
 		47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */; };
 		47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927822AA77FDA00ABDC53 /* DataController.swift */; };
 		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
@@ -229,6 +232,7 @@
 		4799C8162AA6237500F812D6 /* CourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseManager.swift; sourceTree = "<group>"; };
 		4799C8182AA6239800F812D6 /* MessageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailView.swift; sourceTree = "<group>"; };
 		4799C81A2AA62CDB00F812D6 /* ContactMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageModel.swift; sourceTree = "<group>"; };
+		479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScoreView.swift; sourceTree = "<group>"; };
 		47A927802AA77E6500ABDC53 /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
 		47A927822AA77FDA00ABDC53 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
@@ -294,6 +298,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				479B22E42AD57B0300A7DCC7 /* Tabler in Frameworks */,
 				475AFEF92AAF61C900C4020F /* Alamofire in Frameworks */,
 				475AFEFE2AAF68E100C4020F /* SwiftSoup in Frameworks */,
 				47970AC22AC5AC7200C5BD03 /* UMAPM.framework in Frameworks */,
@@ -301,6 +306,7 @@
 				47970AC92AC5ACAB00C5BD03 /* libsqlite3.tbd in Frameworks */,
 				47BD51A52AC5B4970029F9DB /* UMAnalyticsGame.framework in Frameworks */,
 				47970AC02AC5AC7200C5BD03 /* UMDevice.framework in Frameworks */,
+				479B22E72AD57D8100A7DCC7 /* Sideways in Frameworks */,
 				47970AC52AC5AC7200C5BD03 /* UMCommonLog.framework in Frameworks */,
 				47970AC42AC5AC7200C5BD03 /* UMCommon.framework in Frameworks */,
 				47B442162AC6D3B700EE03A9 /* MarkdownUI in Frameworks */,
@@ -425,6 +431,7 @@
 		473BAE8D2AA48E4300968C3C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				479B22DF2AD5719F00A7DCC7 /* Misc */,
 				47B4420E2AC6CD9200EE03A9 /* Privacy */,
 				473BAE8E2AA48E5100968C3C /* Message */,
 				473BAE8F2AA48E6000968C3C /* Course */,
@@ -515,6 +522,14 @@
 				47EC98792ACBB6BF009CE125 /* DeletedEventView.swift */,
 			);
 			path = Event;
+			sourceTree = "<group>";
+		};
+		479B22DF2AD5719F00A7DCC7 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		47B4420E2AC6CD9200EE03A9 /* Privacy */ = {
@@ -617,6 +632,8 @@
 				475AFEFD2AAF68E100C4020F /* SwiftSoup */,
 				479129BF2AC309BA00F811F9 /* WebView */,
 				47B442152AC6D3B700EE03A9 /* MarkdownUI */,
+				479B22E32AD57B0300A7DCC7 /* Tabler */,
+				479B22E62AD57D8100A7DCC7 /* Sideways */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -656,6 +673,8 @@
 				475AFEFC2AAF68E100C4020F /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				479129BE2AC309BA00F811F9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */,
 				47B442142AC6D3B700EE03A9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				479B22E22AD57B0300A7DCC7 /* XCRemoteSwiftPackageReference "SwiftTabler" */,
+				479B22E52AD57D8100A7DCC7 /* XCRemoteSwiftPackageReference "SwiftSideways" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -746,6 +765,7 @@
 				473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */,
 				473BAE982AA496B800968C3C /* MessageListView.swift in Sources */,
 				47F4F2A22AC086A90047B395 /* SystemImagePicker.swift in Sources */,
+				479B22E12AD571C400A7DCC7 /* ViewScoreView.swift in Sources */,
 				4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */,
 				472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */,
 				4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */,
@@ -1168,6 +1188,22 @@
 				minimumVersion = 2.3.1;
 			};
 		};
+		479B22E22AD57B0300A7DCC7 /* XCRemoteSwiftPackageReference "SwiftTabler" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:openalloc/SwiftTabler.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.7;
+			};
+		};
+		479B22E52AD57D8100A7DCC7 /* XCRemoteSwiftPackageReference "SwiftSideways" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:openalloc/SwiftSideways.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.4;
+			};
+		};
 		47B442142AC6D3B700EE03A9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:gonzalezreal/swift-markdown-ui.git";
@@ -1203,6 +1239,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 479839DC2AAA2B9B0094C5E1 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
 			productName = ImageViewerRemote;
+		};
+		479B22E32AD57B0300A7DCC7 /* Tabler */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 479B22E22AD57B0300A7DCC7 /* XCRemoteSwiftPackageReference "SwiftTabler" */;
+			productName = Tabler;
+		};
+		479B22E62AD57D8100A7DCC7 /* Sideways */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 479B22E52AD57D8100A7DCC7 /* XCRemoteSwiftPackageReference "SwiftSideways" */;
+			productName = Sideways;
 		};
 		47B442152AC6D3B700EE03A9 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

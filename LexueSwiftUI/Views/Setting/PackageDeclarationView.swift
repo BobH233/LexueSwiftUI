@@ -21,6 +21,8 @@ private var packages: [PackageUsingDeclarationInfo] = [
     PackageUsingDeclarationInfo(packageName: "SwiftUI Image Viewer", packageDescription: "An image viewer built using SwiftUI.", license: "MIT license", URL: URL(string: "https://github.com/Jake-Short/swiftui-image-viewer/"), ourPurpose: "用于查看消息中的图片，预览用户的头像"),
     PackageUsingDeclarationInfo(packageName: "swift-markdown-ui", packageDescription: "Display and customize Markdown text in SwiftUI", license: "MIT license", URL: URL(string: "https://github.com/gonzalezreal/swift-markdown-ui"), ourPurpose: "用于app内显示markdown格式的文本"),
     PackageUsingDeclarationInfo(packageName: "WebView", packageDescription: "A SwiftUI component View that contains a WKWebView ", license: "Unlicense license", URL: URL(string: "https://github.com/kylehickinson/SwiftUI-WebView"), ourPurpose: "用于构建内置浏览器功能"),
+    PackageUsingDeclarationInfo(packageName: "SwiftTabler", packageDescription: "A multi-platform SwiftUI component for tabular data", license: "Apache-2.0 license", URL: URL(string: "https://github.com/openalloc/SwiftTabler"), ourPurpose: "用于程序内显示表格"),
+    PackageUsingDeclarationInfo(packageName: "SwiftSideways", packageDescription: "A multi-platform SwiftUI component for the horizontal scrolling of tabular data in compact areas", license: "Apache-2.0 license", URL: URL(string: "https://github.com/openalloc/SwiftSideways"), ourPurpose: "用于程序内表格的左右拖动效果"),
 ]
 
 struct PackageDeclarationView: View {

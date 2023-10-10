@@ -28,12 +28,30 @@
       }
     },
     {
+      "identity" : "swiftsideways",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:openalloc/SwiftSideways.git",
+      "state" : {
+        "revision" : "794cd1b87d64b62fa844e1ac8dc3f4af9f24c30a",
+        "version" : "0.5.4"
+      }
+    },
+    {
       "identity" : "swiftsoup",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup",
       "state" : {
         "revision" : "8b6cf29eead8841a1fa7822481cb3af4ddaadba6",
         "version" : "2.6.1"
+      }
+    },
+    {
+      "identity" : "swifttabler",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:openalloc/SwiftTabler.git",
+      "state" : {
+        "revision" : "863e1be58e49a68ae84184e471f400ff4d760bda",
+        "version" : "0.9.7"
       }
     },
     {
