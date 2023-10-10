@@ -28,6 +28,9 @@ struct PrivacyStatement: View {
                             .foregroundColor(.secondary)
                             .textSelection(.enabled)
                     }
+                    if !GlobalVariables.shared.enableTracking {
+                        Text("因为你要求app不进行跟踪，因此上述的设备标识和用户名将不用作跟踪目的，也不会与你个人信息绑定。")
+                    }
                 }
             }
             Section("友盟+SDK服务的相关声明") {

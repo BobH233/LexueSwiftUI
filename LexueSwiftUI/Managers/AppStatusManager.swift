@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import BackgroundTasks
 import WidgetKit
+import AppTrackingTransparency
 
 class AppStatusManager {
     static let shared = AppStatusManager()
@@ -142,6 +143,25 @@ class AppStatusManager {
         if !SettingStorage.shared.agreePrivacyPolicy {
             GlobalVariables.shared.isShowPrivacyPolicySheet = true
             return
+        }
+        ATTrackingManager.requestTrackingAuthorization { status in
+            switch status {
+            case .authorized:
+                print("允许追踪")
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.enableTracking = true
+                }
+            case .denied:
+                print("拒绝跟踪")
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.enableTracking = false
+                }
+            default:
+                print("拒绝跟踪")
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.enableTracking = false
+                }
+            }
         }
         
         print("\(#function)")

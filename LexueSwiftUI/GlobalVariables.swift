@@ -44,6 +44,9 @@ class GlobalVariables: ObservableObject {
     
     @Published var defaultUIImage: UIImage?
     
+    // 是否允许app进行跟踪
+    @Published var enableTracking: Bool = false
+    
     var handleNotificationMsg: (([AnyHashable : Any]) -> Void)?
     
     // 默认是false
