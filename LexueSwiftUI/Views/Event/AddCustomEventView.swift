@@ -102,7 +102,7 @@ struct AddCustomEventView: View {
                             }
                             gptThinking = false
                         }
-                        AudioServicesPlaySystemSound(1102)
+                        VibrateTwice()
                     }
                 } else {
                     DispatchQueue.main.async {

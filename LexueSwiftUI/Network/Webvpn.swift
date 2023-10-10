@@ -48,6 +48,8 @@ class Webvpn {
             return courseId
         }
         
+        // 序号
+        var index: String = ""
         // 开课学期
         var semester: String = ""
         // 课程编号
@@ -110,7 +112,7 @@ class Webvpn {
                 attriMap[data[0][i]] = i
             }
             // 确保每一个想要的属性都存在了
-            let wantedAttri = ["开课学期", "课程名称", "课程编号", "成绩", "学分", "总学时", "课程性质", "本人成绩在专业中占", "本人成绩在班级中占", "本人成绩在所有学生中占", "班级人数", "学习人数", "专业人数", "平均分", "最高分"]
+            let wantedAttri = ["开课学期", "课程名称", "课程编号", "成绩", "学分", "总学时", "课程性质", "本人成绩在专业中占", "本人成绩在班级中占", "本人成绩在所有学生中占", "班级人数", "学习人数", "专业人数", "平均分", "最高分", "序号"]
             for attri in wantedAttri {
                 if attriMap[attri] == nil {
                     // 没有返回全部需要的属性
@@ -119,6 +121,7 @@ class Webvpn {
             }
             for i in 1 ..< data.count {
                 var currentCourse = ScoreInfo()
+                currentCourse.index = data[i][attriMap["序号"]!]
                 currentCourse.semester = data[i][attriMap["开课学期"]!]
                 currentCourse.courseId = data[i][attriMap["课程编号"]!]
                 currentCourse.courseName = data[i][attriMap["课程名称"]!]

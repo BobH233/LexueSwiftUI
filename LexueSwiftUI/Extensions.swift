@@ -12,6 +12,7 @@ import Alamofire
 import UIKit
 import UserNotifications
 import SwiftSoup
+import AudioToolbox
 
 // reference: https://stackoverflow.com/questions/43663622/is-a-date-in-same-week-month-year-of-another-date-in-swift
 extension Date {
@@ -419,4 +420,13 @@ extension String {
         CC_SHA256(utf8, CC_LONG(utf8!.count - 1), &digest)
         return digest.reduce("") { $0 + String(format:"%02x", $1) }
     }
+}
+
+
+func VibrateOnce() {
+    AudioServicesPlaySystemSound(1519)
+}
+
+func VibrateTwice() {
+    AudioServicesPlaySystemSound(1102)
 }

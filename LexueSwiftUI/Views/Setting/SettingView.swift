@@ -14,7 +14,7 @@ struct SettingView: View {
     @ObservedObject var settings = SettingStorage.shared
     @State var showImageViewer = false
     @State var avatar_image = Image("default_avatar")
-    
+    @State var openViewScoreNavigation = false
     @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
     var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
     var body: some View {
@@ -59,18 +59,23 @@ struct SettingView: View {
                         ZStack {
                             Rectangle()
                                 .foregroundColor(.blue)
-                            NavigationLink(destination: ViewScoreView()) {
-                                HStack {
-                                    Text("查成绩")
-                                        .bold()
-                                        .font(.system(size: 35))
-                                        .foregroundColor(.white)
-                                        .padding(.horizontal, 10)
-                                        .padding(.top, 40)
-                                        .padding(.bottom, 10)
-                                    Spacer()
-                                }
+                            HStack {
+                                Spacer()
+                                Text("查成绩")
+                                    .bold()
+                                    .font(.system(size: 35))
+                                    .foregroundColor(.white)
+                                    .padding(.top, 20)
+                                    .padding(.bottom, 20)
+                                Spacer()
                             }
+                            NavigationLink("", destination: ViewScoreView(), isActive: $openViewScoreNavigation)
+                                .isDetailLink(true)
+                                .hidden()
+                        }
+                        .onTapGesture {
+                            VibrateOnce()
+                            openViewScoreNavigation = true
                         }
                         .listRowInsets(EdgeInsets())
                     }

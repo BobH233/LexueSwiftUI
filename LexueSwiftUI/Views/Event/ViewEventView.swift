@@ -108,7 +108,7 @@ struct ViewEventView: View {
                                     EventManager.shared.FinishEvent(id: event_uuid, isFinish: false, context: managedObjContext)
                                 }
                                 // 短震动
-                                AudioServicesPlaySystemSound(1519)
+                                VibrateOnce()
                                 dismiss()
                             }) {
                                 Text("设置为未完成")
@@ -166,7 +166,7 @@ struct ViewEventView: View {
                                     EventManager.shared.FinishEvent(id: event_uuid, isFinish: true, context: managedObjContext)
                                 }
                                 // 短震动
-                                AudioServicesPlaySystemSound(1519)
+                                VibrateOnce()
                                 dismiss()
                             }) {
                                 Text("设置为已完成")

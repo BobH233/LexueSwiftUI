@@ -16,6 +16,8 @@ struct ViewScoreView: View {
     @State var loadingData = true
     @State var errorLoading = false
     private var gridItems: [GridItem] = [
+        // 序号
+        GridItem(.fixed(70), alignment: .leading),
         // 课程名
         GridItem(.fixed(150), alignment: .leading),
         // 我的成绩
@@ -40,6 +42,14 @@ struct ViewScoreView: View {
     
     private func header(ctx: Binding<Context>) -> some View {
         LazyVGrid(columns: gridItems) {
+            Sort.columnTitle("序号", ctx, \.index)
+                .onTapGesture {
+                    tablerSort(ctx, &scoreInfo, \.index) {
+                        let index1: Int = Int($0.index) ?? 0
+                        let index2: Int = Int($1.index) ?? 0
+                        return index1 < index2
+                    }
+                }
             Sort.columnTitle("课程名称", ctx, \.courseName)
                 .onTapGesture {
                     tablerSort(ctx, &scoreInfo, \.courseName) {
@@ -119,16 +129,24 @@ struct ViewScoreView: View {
         }
     }
     private func row(course: Webvpn.ScoreInfo) -> some View {
-        LazyVGrid(columns: gridItems) {
-            Text(course.courseName)
-            Text(course.my_score)
-            Text(course.credit)
-            Text(course.avg_score)
-            Text(course.max_score)
-            Text(course.my_grade_in_all)
-            Text(course.my_grade_in_major)
-            Text(course.semester)
-            Text(course.course_type)
+        ZStack {
+            LazyVGrid(columns: gridItems) {
+                Text(course.index)
+                Text(course.courseName)
+                Text(course.my_score)
+                Text(course.credit)
+                Text(course.avg_score)
+                Text(course.max_score)
+                Text(course.my_grade_in_all)
+                Text(course.my_grade_in_major)
+                Text(course.semester)
+                Text(course.course_type)
+            }
+            Rectangle()
+                .foregroundColor(.white.opacity(0.01))
+        }
+        .onTapGesture {
+            print(course)
         }
     }
     var body: some View {
@@ -183,7 +201,7 @@ struct ViewScoreView: View {
             TablerList(header: header,
                        row: row,
                        results: scoreInfo)
-            .sideways(minWidth: 1000, showIndicators: true)
+            .sideways(minWidth: 1200, showIndicators: true)
             .background(Color.secondarySystemBackground)
             .navigationTitle("成绩查询")
         }
