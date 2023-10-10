@@ -26,21 +26,10 @@ class Webvpn {
     
     let BIT101_WEBVPN_INIT = "https://bit101.flwfdd.xyz/user/webvpn_verify_init"
     let BIT101_WEBVPN_VERIFY = "https://bit101.flwfdd.xyz/user/webvpn_verify"
+    let BIT101_QUERY_SCORE = "https://bit101.flwfdd.xyz/score?detail=true"
     
     let WEBVPN_ORIGIN_DOMAIN = "webvpn.bit.edu.cn"
     let PROXY_WEBVPN_DOMAIN = "lexue.zendee.cn"
-
-    
-    let headers = [
-        "User-Agent": "LexueHelper"
-    ]
-    
-    let login_headers = [
-        "Referer": "https://login.bit.edu.cn/authserver/login",
-        "Host": "login.bit.edu.cn",
-        "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0"
-    ]
     
     struct WebvpnContext {
         var wengine_vpn_ticketwebvpn_bit_edu_cn: String = ""
@@ -52,6 +41,105 @@ class Webvpn {
         case CannotGetTicket
         case NeedCaptcha
         case JsonConvertError
+    }
+    
+    struct ScoreInfo: Identifiable, Hashable {
+        var id: String {
+            return courseId
+        }
+        
+        // 开课学期
+        var semester: String = ""
+        // 课程编号
+        var courseId: String = ""
+        // 课程名称
+        var courseName: String = ""
+        // 学分
+        var credit: String = ""
+        // 总学时
+        var study_hours: String = ""
+        // 课程性质
+        var course_type: String = ""
+        // 本人成绩
+        var my_score: String = ""
+        // 专业排名
+        var my_grade_in_major: String = ""
+        // 班级排名
+        var my_grade_in_class: String = ""
+        // 全部排名
+        var my_grade_in_all: String = ""
+        // 班级人数
+        var class_study_count: String = ""
+        // 学习人数
+        var all_study_count: String = ""
+        // 专业人数
+        var major_study_count: String = ""
+        // 平均分
+        var avg_score: String = ""
+        // 最高分
+        var max_score: String = ""
+    }
+    
+    func QueryScoreInfo(webvpn_context: WebvpnContext) async -> Result<[ScoreInfo], WebvpnError> {
+        let header = [
+            "Webvpn-Cookie": "wengine_vpn_ticketwebvpn_bit_edu_cn=\(webvpn_context.wengine_vpn_ticketwebvpn_bit_edu_cn); Path=/; Domain=webvpn.bit.edu.cn; HttpOnly",
+            "User-Agent": "LexueHelper"
+        ]
+        var request = URLRequest(url: URL(string: BIT101_QUERY_SCORE)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.headers = HTTPHeaders(header)
+        let ret = await withCheckedContinuation { continuation in
+            AF.request(request).response { res in
+                switch res.result {
+                case .success(let data):
+                    continuation.resume(returning: data)
+                case .failure(_):
+                    print("请求 bit101 失败")
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+        if ret == nil {
+            return .failure(.NetworkError)
+        }
+        var ret_scores = [ScoreInfo]()
+        if let json = try? JSONSerialization.jsonObject(with: ret!, options: []) as? [String: Any], let data = json["data"] as? [[String]], data.count >= 1 {
+            var attriMap = [String: Int]()
+            for i in 0 ..< data[0].count {
+                attriMap[data[0][i]] = i
+            }
+            // 确保每一个想要的属性都存在了
+            let wantedAttri = ["开课学期", "课程名称", "课程编号", "成绩", "学分", "总学时", "课程性质", "本人成绩在专业中占", "本人成绩在班级中占", "本人成绩在所有学生中占", "班级人数", "学习人数", "专业人数", "平均分", "最高分"]
+            for attri in wantedAttri {
+                if attriMap[attri] == nil {
+                    // 没有返回全部需要的属性
+                    return .failure(.NetworkError)
+                }
+            }
+            for i in 1 ..< data.count {
+                var currentCourse = ScoreInfo()
+                currentCourse.semester = data[i][attriMap["开课学期"]!]
+                currentCourse.courseId = data[i][attriMap["课程编号"]!]
+                currentCourse.courseName = data[i][attriMap["课程名称"]!]
+                currentCourse.credit = data[i][attriMap["学分"]!]
+                currentCourse.study_hours = data[i][attriMap["总学时"]!]
+                currentCourse.course_type = data[i][attriMap["课程性质"]!]
+                currentCourse.my_score = data[i][attriMap["成绩"]!]
+                currentCourse.my_grade_in_major = data[i][attriMap["本人成绩在专业中占"]!]
+                currentCourse.my_grade_in_class = data[i][attriMap["本人成绩在班级中占"]!]
+                currentCourse.my_grade_in_all = data[i][attriMap["本人成绩在所有学生中占"]!]
+                currentCourse.class_study_count = data[i][attriMap["班级人数"]!]
+                currentCourse.all_study_count = data[i][attriMap["学习人数"]!]
+                currentCourse.major_study_count = data[i][attriMap["专业人数"]!]
+                currentCourse.avg_score = data[i][attriMap["平均分"]!]
+                currentCourse.max_score = data[i][attriMap["最高分"]!]
+                ret_scores.append(currentCourse)
+            }
+            return .success(ret_scores)
+        } else {
+            return .failure(.JsonConvertError)
+        }
     }
     
     func GetWebvpnContext(username: String, password: String) async -> Result<WebvpnContext, WebvpnError> {
@@ -144,5 +232,7 @@ class Webvpn {
             return .failure(.UnknowError)
         }
     }
+    
+    
     
 }

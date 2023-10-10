@@ -54,6 +54,27 @@ struct SettingView: View {
                         }
                     }
                 }
+                if globalVar.isLogin {
+                    Section {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.blue)
+                            NavigationLink(destination: ViewScoreView()) {
+                                HStack {
+                                    Text("查成绩")
+                                        .bold()
+                                        .font(.system(size: 35))
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 10)
+                                        .padding(.top, 40)
+                                        .padding(.bottom, 10)
+                                    Spacer()
+                                }
+                            }
+                        }
+                        .listRowInsets(EdgeInsets())
+                    }
+                }
                 if globalVar.debugMode || globalVar.DEBUG_BUILD {
                     Section(header: Text("Debug")) {
                         Toggle(isOn: $globalVar.isLogin) {

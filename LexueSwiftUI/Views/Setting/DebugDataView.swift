@@ -46,10 +46,17 @@ struct DebugDataView: View {
     var body: some View {
         Form {
             Section("Webvpn") {
-                Button("loginWebvpn") {
+                Button("loginWebvpn_queryScore") {
                     Task {
                         let result = await Webvpn.shared.GetWebvpnContext(username: SettingStorage.shared.savedUsername, password: SettingStorage.shared.savedPassword)
                         print(result)
+                        switch result {
+                        case .success(let context):
+                            let res2 = await Webvpn.shared.QueryScoreInfo(webvpn_context: context)
+                            print(res2)
+                        case .failure(_):
+                            print("无法登录webvpn")
+                        }
                     }
                 }
             }
