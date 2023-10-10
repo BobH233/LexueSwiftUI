@@ -7,6 +7,8 @@
 
 import SwiftUI
 import SwiftSoup
+import SwiftUI
+import AudioToolbox
 
 private struct TopCardView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
@@ -287,6 +289,7 @@ struct EventListView: View {
                                     withAnimation {
                                         showTodayOnly.toggle()
                                     }
+                                    AudioServicesPlaySystemSound(1519)
                                 }
                         } else {
                             FunctionalButtonView(backgroundCol: .blue, iconSystemName: "eye.slash", title: "当前：显示一周内事件")
@@ -294,6 +297,7 @@ struct EventListView: View {
                                     withAnimation {
                                         showTodayOnly.toggle()
                                     }
+                                    AudioServicesPlaySystemSound(1519)
                                 }
                         }
                         

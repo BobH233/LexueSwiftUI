@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AudioToolbox
 
 struct AddCustomEventView: View {
     let GPTInstruction = """
@@ -101,6 +102,7 @@ struct AddCustomEventView: View {
                             }
                             gptThinking = false
                         }
+                        AudioServicesPlaySystemSound(1102)
                     }
                 } else {
                     DispatchQueue.main.async {

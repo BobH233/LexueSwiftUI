@@ -7,6 +7,7 @@
 
 import SwiftUI
 import EventKitUI
+import AudioToolbox
 
 // https://betterprogramming.pub/eventkitui-in-ios-17-c83868464a8f
 struct SystemEventEditViewController: UIViewControllerRepresentable {
@@ -106,6 +107,8 @@ struct ViewEventView: View {
                                 withAnimation {
                                     EventManager.shared.FinishEvent(id: event_uuid, isFinish: false, context: managedObjContext)
                                 }
+                                // 短震动
+                                AudioServicesPlaySystemSound(1519)
                                 dismiss()
                             }) {
                                 Text("设置为未完成")
@@ -162,6 +165,8 @@ struct ViewEventView: View {
                                 withAnimation {
                                     EventManager.shared.FinishEvent(id: event_uuid, isFinish: true, context: managedObjContext)
                                 }
+                                // 短震动
+                                AudioServicesPlaySystemSound(1519)
                                 dismiss()
                             }) {
                                 Text("设置为已完成")
