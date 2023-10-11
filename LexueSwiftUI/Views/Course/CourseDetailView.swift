@@ -234,15 +234,19 @@ struct CourseDetailView: View {
                 Section("课程信息") {
                     if courseInfo.summary != nil && !courseInfo.summary!.isEmpty {
                         NavigationLink("课程简介", destination: CourseSummaryView(courseSummary: courseInfo.summary!))
+                            .isDetailLink(false)
                     }
                     NavigationLink("参与人", destination: CourseMembersListView(courseId: courseId))
+                        .isDetailLink(false)
                     NavigationLink("成绩", destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/grade/report/user/index.php?id=\(courseId)", execJs: deleteLexueMiscJs, customActions: []).navigationTitle("查看成绩"))
+                        .isDetailLink(false)
                 }
                 Section() {
                     ForEach(sections) { section in
                         NavigationLink(destination: LexueBroswerView(url: "https://lexue.bit.edu.cn/course/view.php?id=\(courseId)&section=\(section.sectionId ?? "0")", execJs: deleteLexueMiscJs + deleteArrowJs + fixScrollProblemJs + deleteSizePreJs + (section.sectionId! == "0" ? "" : delete_section0_contentJs), customActions: [("收藏页面", ProcessFavoriteURL)]).navigationTitle(section.name!), label: {
                             CourseSectionView(sectionInfo: section)
                         })
+                        .isDetailLink(false)
                     }
                 } header: {
                     Text("课程内容")

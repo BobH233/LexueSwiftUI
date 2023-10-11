@@ -228,11 +228,13 @@ struct ViewEventView: View {
                             NavigationLink("\(courseInfo.fullname ?? "")") {
                                 CourseDetailView(courseId: courseId, courseInfo: courseInfo, courseName: courseInfo.fullname ?? "")
                             }
+                            .isDetailLink(false)
                         }
                         if let action_url = event_obj!.url {
                             NavigationLink("打开事件链接") {
                                 LexueBroswerView(url: action_url, execJs: fixScrollProblemJs, customActions: [])
                             }
+                            .isDetailLink(false)
                         }
                     }
                 }
@@ -264,6 +266,7 @@ struct ViewEventView: View {
         }
             .disabled(!editable)
         )
+        .navigationViewStyle(.stack)
         .navigationTitle("浏览事件")
         .navigationBarTitleDisplayMode(.inline)
         
