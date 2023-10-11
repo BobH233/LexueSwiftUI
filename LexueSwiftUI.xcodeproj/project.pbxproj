@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4700A8042AD6ED8000F75386 /* GeneralScoreAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4700A8032AD6ED8000F75386 /* GeneralScoreAnalyze.swift */; };
 		470AFC662ACB15FB004C7F70 /* DataProviderBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */; };
 		470AFC682ACB16D6004C7F70 /* DataProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */; };
 		470AFC6A2ACB194D004C7F70 /* LexueDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */; };
@@ -176,6 +177,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4700A8032AD6ED8000F75386 /* GeneralScoreAnalyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralScoreAnalyze.swift; sourceTree = "<group>"; };
 		470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderBase.swift; sourceTree = "<group>"; };
 		470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderManager.swift; sourceTree = "<group>"; };
 		470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueDataProvider.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 			children = (
 				479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */,
 				479B22EB2AD641FB00A7DCC7 /* ViewCourseScoreView.swift */,
+				4700A8032AD6ED8000F75386 /* GeneralScoreAnalyze.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -821,6 +824,7 @@
 				47F30A612AD2E201001A0F2F /* FavoriteURLView.swift in Sources */,
 				4799C81B2AA62CDB00F812D6 /* ContactMessageModel.swift in Sources */,
 				472984A02AA706BB000814EE /* Extensions.swift in Sources */,
+				4700A8042AD6ED8000F75386 /* GeneralScoreAnalyze.swift in Sources */,
 				47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */,
 				47B2A8312AC9C9D700957DF0 /* EventPreferenceSettingView.swift in Sources */,
 				47F4F2A32AC086A90047B395 /* ViewModifiers.swift in Sources */,

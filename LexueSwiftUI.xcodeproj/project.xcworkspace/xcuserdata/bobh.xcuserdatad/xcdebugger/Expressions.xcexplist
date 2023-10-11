@@ -3,10 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "DataController.getFavoriteURLs(context:):DataController.swift">
+         contextName = "closure #1 in BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
          <PersistentStrings>
             <PersistentString
-               value = "results[0].title">
+               value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "response.response?.allHeaderFields as? [String: String]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -33,10 +36,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #2 in EditFavoriteURLView.body.getter:FavoriteURLView.swift">
+         contextName = "CoreLogicManager.refreshSelfUserInfo():CoreLogicManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "url.absoluteString">
+               value = "GlobalVariables.shared.cur_lexue_context">
+            </PersistentString>
+            <PersistentString
+               value = "refreshSelfUserInfo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -71,7 +77,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -80,7 +86,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -189,13 +195,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
+               value = "event.name">
+            </PersistentString>
+            <PersistentString
                value = "event.timestart">
             </PersistentString>
             <PersistentString
                value = "event.id">
-            </PersistentString>
-            <PersistentString
-               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -236,6 +242,14 @@
          <PersistentStrings>
             <PersistentString
                value = "record.eventUUID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in GeneralScoreAnalyze.body.getter:GeneralScoreAnalyze.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "avg_total">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -345,6 +359,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DataController.getFavoriteURLs(context:):DataController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "results[0].title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "EventManager.LoadEventList():EventManager.swift">
          <PersistentStrings>
             <PersistentString
@@ -361,24 +383,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
+         contextName = "closure #1 in closure #1 in closure #2 in EditFavoriteURLView.body.getter:FavoriteURLView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "response.response?.statusCode">
-            </PersistentString>
-            <PersistentString
-               value = "response.response?.allHeaderFields as? [String: String]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CoreLogicManager.refreshSelfUserInfo():CoreLogicManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "GlobalVariables.shared.cur_lexue_context">
-            </PersistentString>
-            <PersistentString
-               value = "refreshSelfUserInfo">
+               value = "url.absoluteString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

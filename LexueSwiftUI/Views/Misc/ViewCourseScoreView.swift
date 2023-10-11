@@ -105,6 +105,38 @@ struct SimpleCardView: View {
     }
 }
 
+struct ContentCardView<Content: View>: View {
+    let title: String
+    let content: () -> Content
+    let color: Color
+    init(title0: String, color0: Color, @ViewBuilder content: @escaping () -> Content) {
+        self.title = title0
+        self.color = color0
+        self.content = content
+    }
+    var body: some View {
+        ZStack{
+            Rectangle()
+                .foregroundColor(.white)
+            VStack {
+                HStack {
+                    Text(title)
+                        .foregroundColor(.white)
+                        .bold()
+                        .font(.system(size: 30))
+                        .padding(.vertical, 20)
+                        .padding(.leading, 20)
+                    Spacer()
+                }
+                .background(color)
+                content()
+            }
+        }
+        .cornerRadius(15)
+        .shadow(radius: 5)
+    }
+}
+
 struct ViewCourseScoreView: View {
     @Binding var currentCourse: Webvpn.ScoreInfo
     @Binding var allCourses: [Webvpn.ScoreInfo]
@@ -181,57 +213,25 @@ struct ViewCourseScoreView: View {
                     SimpleCardView(image_name: "flag.fill", title: "最高分", content: "\(currentCourse.max_score) 分")
                         .padding(.bottom, 0)
                 }
-                if evaluateDiff != 0 {
+                if abs(evaluateDiff) > 0.01 {
                     SimpleCardView(color: evaluateDiff > 0 ? .green : .red, image_name: evaluateDiff > 0 ? "hand.thumbsup.fill" : "hand.thumbsdown.fill", title: evaluateDiff > 0 ? "这门课拉高了平均分" : "这门课拉低了平均分", content: "\(String(format: "%.2f", abs(evaluateDiff))) 分")
                         .padding(.bottom, 0)
                 }
                 if !currentCourse.my_grade_in_all.isEmpty && !currentCourse.all_study_count.isEmpty {
-                    ZStack{
-                        Rectangle()
-                            .foregroundColor(.white)
-                        VStack {
-                            HStack {
-                                Text("全部同学中(前\(currentCourse.my_grade_in_all))")
-                                    .foregroundColor(.white)
-                                    .bold()
-                                    .font(.system(size: 30))
-                                    .padding(.vertical, 20)
-                                    .padding(.leading, 20)
-                                Spacer()
-                            }
-                            .background(.blue)
-                            ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_all) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).1)")
-                                .padding(.horizontal, 10)
-                                .padding(.top, 10)
-                                .padding(.bottom, 90)
-                        }
+                    ContentCardView(title0: "全部同学中(前\(currentCourse.my_grade_in_all))", color0: .blue) {
+                        ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_all) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).1)")
+                            .padding(.horizontal, 10)
+                            .padding(.top, 10)
+                            .padding(.bottom, 90)
                     }
-                    .cornerRadius(15)
-                    .shadow(radius: 5)
                 }
                 if !currentCourse.my_grade_in_major.isEmpty && !currentCourse.major_study_count.isEmpty {
-                    ZStack{
-                        Rectangle()
-                            .foregroundColor(.white)
-                        VStack {
-                            HStack {
-                                Text("同专业同学中(前\(currentCourse.my_grade_in_major))")
-                                    .foregroundColor(.white)
-                                    .bold()
-                                    .font(.system(size: 30))
-                                    .padding(.vertical, 20)
-                                    .padding(.leading, 20)
-                                Spacer()
-                            }
-                            .background(.blue)
-                            ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_major) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).1)")
-                                .padding(.horizontal, 10)
-                                .padding(.top, 10)
-                                .padding(.bottom, 90)
-                        }
+                    ContentCardView(title0: "同专业同学中(前\(currentCourse.my_grade_in_major))", color0: .blue) {
+                        ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_major) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).1)")
+                            .padding(.horizontal, 10)
+                            .padding(.top, 10)
+                            .padding(.bottom, 90)
                     }
-                    .cornerRadius(15)
-                    .shadow(radius: 5)
                 }
             }
             .padding(.horizontal)

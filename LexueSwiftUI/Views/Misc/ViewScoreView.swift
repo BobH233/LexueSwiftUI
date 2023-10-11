@@ -44,6 +44,8 @@ struct ViewScoreView: View {
     
     private func header(ctx: Binding<Context>) -> some View {
         Group {
+            NavigationLink("成绩分析", destination: GeneralScoreAnalyze(allCourses: $scoreInfo))
+                .isDetailLink(false)
             LazyVGrid(columns: gridItems) {
                 Sort.columnTitle("序号", ctx, \.index)
                     .onTapGesture {
