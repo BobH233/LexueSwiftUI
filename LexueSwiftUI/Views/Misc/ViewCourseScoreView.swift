@@ -155,6 +155,7 @@ struct ViewCourseScoreView: View {
                         VStack {
                             HStack {
                                 Text("全部同学中:")
+                                    .foregroundColor(.black)
                                     .bold()
                                     .font(.system(size: 30))
                                     .padding(.top, 20)
@@ -177,6 +178,7 @@ struct ViewCourseScoreView: View {
                         VStack {
                             HStack {
                                 Text("同专业同学中:")
+                                    .foregroundColor(.black)
                                     .bold()
                                     .font(.system(size: 30))
                                     .padding(.top, 20)
