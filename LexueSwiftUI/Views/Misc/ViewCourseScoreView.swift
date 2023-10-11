@@ -150,12 +150,12 @@ struct ViewCourseScoreView: View {
                 if !currentCourse.my_grade_in_all.isEmpty && !currentCourse.all_study_count.isEmpty {
                     ZStack{
                         Rectangle()
-                            .foregroundColor(.white)
+                            .foregroundColor(.blue)
                             .cornerRadius(15)
                         VStack {
                             HStack {
                                 Text("全部同学中:")
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.white)
                                     .bold()
                                     .font(.system(size: 30))
                                     .padding(.top, 20)
@@ -173,12 +173,12 @@ struct ViewCourseScoreView: View {
                 if !currentCourse.my_grade_in_major.isEmpty && !currentCourse.major_study_count.isEmpty {
                     ZStack{
                         Rectangle()
-                            .foregroundColor(.white)
+                            .foregroundColor(.blue)
                             .cornerRadius(15)
                         VStack {
                             HStack {
                                 Text("同专业同学中:")
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.white)
                                     .bold()
                                     .font(.system(size: 30))
                                     .padding(.top, 20)
