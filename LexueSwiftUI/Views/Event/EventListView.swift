@@ -350,14 +350,17 @@ struct EventListView: View {
                     NavigationLink("", isActive: $showSettingView, destination: {
                         EventPreferenceSettingView()
                     })
+                    .isDetailLink(false)
                     .hidden()
                     NavigationLink("", isActive: $showNewEventView, destination: {
                         AddCustomEventView()
                     })
+                    .isDetailLink(false)
                     .hidden()
                     NavigationLink("", isActive: $showEditEventView, destination: {
                         ViewEventView(event_uuid: curSelectEventUUID)
                     })
+                    .isDetailLink(false)
                     .hidden()
                     NavigationLink("", isActive: $showDeletedEventView, destination: {
                         DeletedEventView()
