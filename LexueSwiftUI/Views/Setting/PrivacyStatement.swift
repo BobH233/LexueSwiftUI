@@ -16,7 +16,7 @@ struct PrivacyStatement: View {
                         Text("设备标识(umid)")
                             .foregroundColor(.primary)
                         Spacer()
-                        Text(UMCommonSwift.umidString())
+                        Text(UMCommonSwift.umidString() ?? "暂时无法获取")
                             .foregroundColor(.secondary)
                             .textSelection(.enabled)
                     }

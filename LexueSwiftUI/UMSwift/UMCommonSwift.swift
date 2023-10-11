@@ -32,8 +32,12 @@ class UMCommonSwift: NSObject {
         UMConfigure.setEncryptEnabled(value);
     }
     
-    static func umidString() -> String{
-        return UMConfigure.umidString();
+    static func umidString() -> String? {
+        if let umid = UMConfigure.umidString() {
+            return umid
+        } else {
+            return nil
+        }
     }
     
     /**
