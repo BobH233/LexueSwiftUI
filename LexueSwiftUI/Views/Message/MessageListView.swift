@@ -370,7 +370,7 @@ struct MessageListView: View {
     func DoRefresh() async {
         isRefreshing = true
         Task {
-            await DataProviderManager.shared.DoRefreshAll()
+            await DataProviderManager.shared.DoRefreshAll(manually: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 withAnimation {
                     ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)

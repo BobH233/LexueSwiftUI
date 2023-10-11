@@ -31,7 +31,15 @@ class CoreLogicManager {
         }
     }
     
-    func UpdateEventList() async throws {
+    var lastUpdateEventListTime: Double = 0
+    
+    func UpdateEventList(manually: Bool = false) async throws {
+        let currentTimestamp = Date.now.timeIntervalSince1970
+        if !manually && currentTimestamp - lastUpdateEventListTime < 60 {
+            print("自动更新事件列表太频繁，拒绝")
+            return
+        }
+        lastUpdateEventListTime = currentTimestamp
         var recent_events:[LexueAPI.EventInfo] = []
         for i in -3 ... 7 {
             let currentDate = Date()

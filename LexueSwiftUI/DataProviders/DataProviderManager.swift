@@ -69,9 +69,15 @@ class DataProviderManager: ObservableObject {
         loadSettingStorage()
     }
     
-
+    var lastRefresh: Double = 0
     
-    func DoRefreshAll(param: [String: Any] = [:]) async {
+    func DoRefreshAll(param: [String: Any] = [:], manually: Bool = false) async {
+        let currentTimeStamp = Date.now.timeIntervalSince1970
+        if !manually && currentTimeStamp - lastRefresh < 60 {
+            print("自动刷新太频繁，自动忽略")
+            return
+        }
+        lastRefresh = currentTimeStamp
         await withTaskGroup(of: Void.self) { group in
             for provider in dataProviders {
                 if provider.enabled {

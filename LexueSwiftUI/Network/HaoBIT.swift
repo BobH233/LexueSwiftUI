@@ -31,6 +31,7 @@ class HaoBIT {
         }
     }
     func GetNotices() async -> [Notice] {
+        print("HaobitGetNotice")
         var ret = [Notice]()
         
         let retJson = await withCheckedContinuation { continuation in

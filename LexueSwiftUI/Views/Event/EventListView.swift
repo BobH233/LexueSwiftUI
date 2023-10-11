@@ -399,7 +399,7 @@ struct EventListView: View {
                             Button(action: {
                                 refreshingEvents = true
                                 Task {
-                                    try? await CoreLogicManager.shared.UpdateEventList()
+                                    try? await CoreLogicManager.shared.UpdateEventList(manually: true)
                                     DispatchQueue.main.async {
                                         refreshingEvents = false
                                     }
