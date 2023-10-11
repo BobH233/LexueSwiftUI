@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "lightchart",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:pichukov/LightChart.git",
+      "state" : {
+        "revision" : "aa3d69ff883d4caa535586f5ce3b565b1bf14e4f",
+        "version" : "1.0.4"
+      }
+    },
+    {
       "identity" : "networkimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/NetworkImage",

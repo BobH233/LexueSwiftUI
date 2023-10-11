@@ -71,6 +71,8 @@
 		479B22E12AD571C400A7DCC7 /* ViewScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */; };
 		479B22E42AD57B0300A7DCC7 /* Tabler in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E32AD57B0300A7DCC7 /* Tabler */; };
 		479B22E72AD57D8100A7DCC7 /* Sideways in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E62AD57D8100A7DCC7 /* Sideways */; };
+		479B22EA2AD641E100A7DCC7 /* LightChart in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E92AD641E100A7DCC7 /* LightChart */; };
+		479B22EC2AD641FB00A7DCC7 /* ViewCourseScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B22EB2AD641FB00A7DCC7 /* ViewCourseScoreView.swift */; };
 		47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */; };
 		47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927822AA77FDA00ABDC53 /* DataController.swift */; };
 		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
@@ -233,6 +235,7 @@
 		4799C8182AA6239800F812D6 /* MessageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailView.swift; sourceTree = "<group>"; };
 		4799C81A2AA62CDB00F812D6 /* ContactMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageModel.swift; sourceTree = "<group>"; };
 		479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScoreView.swift; sourceTree = "<group>"; };
+		479B22EB2AD641FB00A7DCC7 /* ViewCourseScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCourseScoreView.swift; sourceTree = "<group>"; };
 		47A927802AA77E6500ABDC53 /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
 		47A927822AA77FDA00ABDC53 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
@@ -310,6 +313,7 @@
 				47970AC52AC5AC7200C5BD03 /* UMCommonLog.framework in Frameworks */,
 				47970AC42AC5AC7200C5BD03 /* UMCommon.framework in Frameworks */,
 				47B442162AC6D3B700EE03A9 /* MarkdownUI in Frameworks */,
+				479B22EA2AD641E100A7DCC7 /* LightChart in Frameworks */,
 				47970ACB2AC5ACBA00C5BD03 /* libz.tbd in Frameworks */,
 				479839E02AAA2B9B0094C5E1 /* ImageViewerRemote in Frameworks */,
 				479129C02AC309BA00F811F9 /* WebView in Frameworks */,
@@ -528,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */,
+				479B22EB2AD641FB00A7DCC7 /* ViewCourseScoreView.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -634,6 +639,7 @@
 				47B442152AC6D3B700EE03A9 /* MarkdownUI */,
 				479B22E32AD57B0300A7DCC7 /* Tabler */,
 				479B22E62AD57D8100A7DCC7 /* Sideways */,
+				479B22E92AD641E100A7DCC7 /* LightChart */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -675,6 +681,7 @@
 				47B442142AC6D3B700EE03A9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				479B22E22AD57B0300A7DCC7 /* XCRemoteSwiftPackageReference "SwiftTabler" */,
 				479B22E52AD57D8100A7DCC7 /* XCRemoteSwiftPackageReference "SwiftSideways" */,
+				479B22E82AD641E100A7DCC7 /* XCRemoteSwiftPackageReference "LightChart" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -817,6 +824,7 @@
 				47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */,
 				47B2A8312AC9C9D700957DF0 /* EventPreferenceSettingView.swift in Sources */,
 				47F4F2A32AC086A90047B395 /* ViewModifiers.swift in Sources */,
+				479B22EC2AD641FB00A7DCC7 /* ViewCourseScoreView.swift in Sources */,
 				47F4F2A02AC086A90047B395 /* DeviceOrientation.swift in Sources */,
 				473D88972AD126DD00E7EB63 /* WelcomeUseWidget.swift in Sources */,
 				4750EB832AC43C640071118F /* LocalNotificationManager.swift in Sources */,
@@ -1204,6 +1212,14 @@
 				minimumVersion = 0.5.4;
 			};
 		};
+		479B22E82AD641E100A7DCC7 /* XCRemoteSwiftPackageReference "LightChart" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:pichukov/LightChart.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 		47B442142AC6D3B700EE03A9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:gonzalezreal/swift-markdown-ui.git";
@@ -1249,6 +1265,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 479B22E52AD57D8100A7DCC7 /* XCRemoteSwiftPackageReference "SwiftSideways" */;
 			productName = Sideways;
+		};
+		479B22E92AD641E100A7DCC7 /* LightChart */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 479B22E82AD641E100A7DCC7 /* XCRemoteSwiftPackageReference "LightChart" */;
+			productName = LightChart;
 		};
 		47B442152AC6D3B700EE03A9 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;

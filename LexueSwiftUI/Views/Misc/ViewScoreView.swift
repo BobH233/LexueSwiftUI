@@ -174,7 +174,7 @@ struct ViewScoreView: View {
                             switch score_res {
                             case .success(let ret_scoreInfo):
                                 DispatchQueue.main.async {
-                                    scoreInfo = ret_scoreInfo
+                                    scoreInfo = ret_scoreInfo.reversed()
                                     loadingData = false
                                 }
                             case .failure(_):
