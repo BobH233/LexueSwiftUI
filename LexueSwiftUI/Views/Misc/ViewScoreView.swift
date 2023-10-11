@@ -210,7 +210,7 @@ struct ViewScoreView: View {
             .sideways(minWidth: 1200, showIndicators: true)
             .background(Color.secondarySystemBackground)
             .navigationTitle("成绩查询")
-            NavigationLink("", destination: ViewCourseScoreView(currentCourse: $showDetailCourse), isActive: $showDetailView)
+            NavigationLink("", destination: ViewCourseScoreView(currentCourse: $showDetailCourse, allCourses: $scoreInfo), isActive: $showDetailView)
                 .isDetailLink(false)
                 .hidden()
             
