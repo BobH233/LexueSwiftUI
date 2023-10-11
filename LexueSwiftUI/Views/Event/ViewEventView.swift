@@ -229,7 +229,7 @@ struct ViewEventView: View {
                                 CourseDetailView(courseId: courseId, courseInfo: courseInfo, courseName: courseInfo.fullname ?? "")
                             }
                         }
-                        if let action_url = event_obj!.action_url {
+                        if let action_url = event_obj!.url {
                             NavigationLink("打开事件链接") {
                                 LexueBroswerView(url: action_url, execJs: fixScrollProblemJs, customActions: [])
                             }
