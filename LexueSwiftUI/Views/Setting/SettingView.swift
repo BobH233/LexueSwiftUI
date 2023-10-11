@@ -70,7 +70,7 @@ struct SettingView: View {
                                 Spacer()
                             }
                             NavigationLink("", destination: ViewScoreView(), isActive: $openViewScoreNavigation)
-                                .isDetailLink(true)
+                                .isDetailLink(false)
                                 .hidden()
                         }
                         .onTapGesture {

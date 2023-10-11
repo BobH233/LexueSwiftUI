@@ -15,6 +15,8 @@ struct ViewScoreView: View {
     @State var scoreInfo = [Webvpn.ScoreInfo]()
     @State var loadingData = true
     @State var errorLoading = false
+    @State var showDetailView: Bool = false
+    @State var showDetailCourse = Webvpn.ScoreInfo()
     private var gridItems: [GridItem] = [
         // 序号
         GridItem(.fixed(70), alignment: .leading),
@@ -41,91 +43,93 @@ struct ViewScoreView: View {
     private typealias Sort = TablerSort<Webvpn.ScoreInfo>
     
     private func header(ctx: Binding<Context>) -> some View {
-        LazyVGrid(columns: gridItems) {
-            Sort.columnTitle("序号", ctx, \.index)
-                .onTapGesture {
-                    tablerSort(ctx, &scoreInfo, \.index) {
-                        let index1: Int = Int($0.index) ?? 0
-                        let index2: Int = Int($1.index) ?? 0
-                        return index1 < index2
-                    }
-                }
-            Sort.columnTitle("课程名称", ctx, \.courseName)
-                .onTapGesture {
-                    tablerSort(ctx, &scoreInfo, \.courseName) {
-                        return $0.courseName < $1.courseName
-                    }
-                }
-            Sort.columnTitle("我的成绩", ctx, \.my_score)
-                .onTapGesture {
-                    tablerSort(ctx, &scoreInfo, \.my_score) {
-                        let score1: Float = Float($0.my_score) ?? 0
-                        let score2: Float = Float($1.my_score) ?? 0
-                        return score1 < score2
-                    }
-                }
-            Sort.columnTitle("学分", ctx, \.credit)
-                .onTapGesture {
-                    tablerSort(ctx, &scoreInfo, \.credit) {
-                        let credit1: Float = Float($0.credit) ?? 0
-                        let credit2: Float = Float($1.credit) ?? 0
-                        return credit1 < credit2
-                    }
-                }
-            Sort.columnTitle("平均分", ctx, \.avg_score)
-                .onTapGesture {
-                    tablerSort(ctx, &scoreInfo, \.avg_score) {
-                        let avg1: Float = Float($0.avg_score) ?? 0
-                        let avg2: Float = Float($1.avg_score) ?? 0
-                        return avg1 < avg2
-                    }
-                }
-            Sort.columnTitle("最高分", ctx, \.max_score)
-                .onTapGesture {
-                    tablerSort(ctx, &scoreInfo, \.max_score) {
-                        let max1: Float = Float($0.max_score) ?? 0
-                        let max2: Float = Float($1.max_score) ?? 0
-                        return max1 < max2
-                    }
-                }
-            Sort.columnTitle("全部排名", ctx, \.my_grade_in_all)
-                .onTapGesture {
-                    tablerSort(ctx, &scoreInfo, \.my_grade_in_all) {
-                        let num1: Float = Float($0.my_grade_in_all.filter { "0123456789".contains($0) }) ?? 0
-                        let num2: Float = Float($1.my_grade_in_all.filter { "0123456789".contains($0) }) ?? 0
-                        return num1 < num2
-                    }
-                }
-            Sort.columnTitle("专业排名", ctx, \.my_grade_in_major)
-                .onTapGesture {
-                    tablerSort(ctx, &scoreInfo, \.my_grade_in_major) {
-                        let num1: Float = Float($0.my_grade_in_major.filter { "0123456789".contains($0) }) ?? 0
-                        let num2: Float = Float($1.my_grade_in_major.filter { "0123456789".contains($0) }) ?? 0
-                        return num1 < num2
-                    }
-                }
-            Sort.columnTitle("开课学期", ctx, \.semester)
-                .onTapGesture {
-                    tablerSort(ctx, &scoreInfo, \.semester) {
-                        let convertSemester: (String) -> Int = { semeStr in
-                            let segments = semeStr.split(separator: "-")
-                            if segments.count != 3 {
-                                return 0
-                            }
-                            let first: Int = Int(segments[0]) ?? 0
-                            let second: Int = Int(segments[1]) ?? 0
-                            let third: Int = Int(segments[2]) ?? 0
-                            return first * 100000 + second * 10 + third
+        Group {
+            LazyVGrid(columns: gridItems) {
+                Sort.columnTitle("序号", ctx, \.index)
+                    .onTapGesture {
+                        tablerSort(ctx, &scoreInfo, \.index) {
+                            let index1: Int = Int($0.index) ?? 0
+                            let index2: Int = Int($1.index) ?? 0
+                            return index1 < index2
                         }
-                        return convertSemester($0.semester) < convertSemester($1.semester)
                     }
-                }
-            Sort.columnTitle("课程性质", ctx, \.course_type)
-                .onTapGesture {
-                    tablerSort(ctx, &scoreInfo, \.course_type) {
-                        return $0.course_type < $1.course_type
+                Sort.columnTitle("课程名称", ctx, \.courseName)
+                    .onTapGesture {
+                        tablerSort(ctx, &scoreInfo, \.courseName) {
+                            return $0.courseName < $1.courseName
+                        }
                     }
-                }
+                Sort.columnTitle("我的成绩", ctx, \.my_score)
+                    .onTapGesture {
+                        tablerSort(ctx, &scoreInfo, \.my_score) {
+                            let score1: Float = Float($0.my_score) ?? 0
+                            let score2: Float = Float($1.my_score) ?? 0
+                            return score1 < score2
+                        }
+                    }
+                Sort.columnTitle("学分", ctx, \.credit)
+                    .onTapGesture {
+                        tablerSort(ctx, &scoreInfo, \.credit) {
+                            let credit1: Float = Float($0.credit) ?? 0
+                            let credit2: Float = Float($1.credit) ?? 0
+                            return credit1 < credit2
+                        }
+                    }
+                Sort.columnTitle("平均分", ctx, \.avg_score)
+                    .onTapGesture {
+                        tablerSort(ctx, &scoreInfo, \.avg_score) {
+                            let avg1: Float = Float($0.avg_score) ?? 0
+                            let avg2: Float = Float($1.avg_score) ?? 0
+                            return avg1 < avg2
+                        }
+                    }
+                Sort.columnTitle("最高分", ctx, \.max_score)
+                    .onTapGesture {
+                        tablerSort(ctx, &scoreInfo, \.max_score) {
+                            let max1: Float = Float($0.max_score) ?? 0
+                            let max2: Float = Float($1.max_score) ?? 0
+                            return max1 < max2
+                        }
+                    }
+                Sort.columnTitle("全部排名", ctx, \.my_grade_in_all)
+                    .onTapGesture {
+                        tablerSort(ctx, &scoreInfo, \.my_grade_in_all) {
+                            let num1: Float = Float($0.my_grade_in_all.filter { "0123456789".contains($0) }) ?? 0
+                            let num2: Float = Float($1.my_grade_in_all.filter { "0123456789".contains($0) }) ?? 0
+                            return num1 < num2
+                        }
+                    }
+                Sort.columnTitle("专业排名", ctx, \.my_grade_in_major)
+                    .onTapGesture {
+                        tablerSort(ctx, &scoreInfo, \.my_grade_in_major) {
+                            let num1: Float = Float($0.my_grade_in_major.filter { "0123456789".contains($0) }) ?? 0
+                            let num2: Float = Float($1.my_grade_in_major.filter { "0123456789".contains($0) }) ?? 0
+                            return num1 < num2
+                        }
+                    }
+                Sort.columnTitle("开课学期", ctx, \.semester)
+                    .onTapGesture {
+                        tablerSort(ctx, &scoreInfo, \.semester) {
+                            let convertSemester: (String) -> Int = { semeStr in
+                                let segments = semeStr.split(separator: "-")
+                                if segments.count != 3 {
+                                    return 0
+                                }
+                                let first: Int = Int(segments[0]) ?? 0
+                                let second: Int = Int(segments[1]) ?? 0
+                                let third: Int = Int(segments[2]) ?? 0
+                                return first * 100000 + second * 10 + third
+                            }
+                            return convertSemester($0.semester) < convertSemester($1.semester)
+                        }
+                    }
+                Sort.columnTitle("课程性质", ctx, \.course_type)
+                    .onTapGesture {
+                        tablerSort(ctx, &scoreInfo, \.course_type) {
+                            return $0.course_type < $1.course_type
+                        }
+                    }
+            }
         }
     }
     private func row(course: Webvpn.ScoreInfo) -> some View {
@@ -147,6 +151,8 @@ struct ViewScoreView: View {
         }
         .onTapGesture {
             print(course)
+            showDetailCourse = course
+            showDetailView = true
         }
     }
     var body: some View {
@@ -204,6 +210,10 @@ struct ViewScoreView: View {
             .sideways(minWidth: 1200, showIndicators: true)
             .background(Color.secondarySystemBackground)
             .navigationTitle("成绩查询")
+            NavigationLink("", destination: ViewCourseScoreView(currentCourse: $showDetailCourse), isActive: $showDetailView)
+                .isDetailLink(false)
+                .hidden()
+            
         }
     }
 }
