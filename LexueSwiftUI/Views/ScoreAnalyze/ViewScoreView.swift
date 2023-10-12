@@ -160,11 +160,12 @@ struct ViewScoreView: View {
         }
     }
     
-    func LoadScoresInfo() {
-        Task {
-            let login_res = await Webvpn.shared.GetWebvpnContext(username: SettingStorage.shared.savedUsername, password: SettingStorage.shared.savedPassword)
-            switch login_res {
-            case .success(let context):
+    func LoadScoresInfo(tryCache: Bool = true) {
+        if tryCache && SettingStorage.shared.cache_webvpn_context != "" {
+            // 有缓存，先尝试缓存
+            print("Hit Cache, try cache loading score...")
+            Task {
+                var context = Webvpn.WebvpnContext(wengine_vpn_ticketwebvpn_bit_edu_cn: SettingStorage.shared.cache_webvpn_context)
                 let score_res = await Webvpn.shared.QueryScoreInfo(webvpn_context: context)
                 switch score_res {
                 case .success(let ret_scoreInfo):
@@ -174,21 +175,42 @@ struct ViewScoreView: View {
                         loadingData = false
                     }
                 case .failure(_):
+                    LoadScoresInfo(tryCache: false)
+                }
+            }
+        } else {
+            Task {
+                let login_res = await Webvpn.shared.GetWebvpnContext(username: SettingStorage.shared.savedUsername, password: SettingStorage.shared.savedPassword)
+                switch login_res {
+                case .success(let context):
+                    DispatchQueue.main.async {
+                        SettingStorage.shared.cache_webvpn_context = context.wengine_vpn_ticketwebvpn_bit_edu_cn
+                    }
+                    let score_res = await Webvpn.shared.QueryScoreInfo(webvpn_context: context)
+                    switch score_res {
+                    case .success(let ret_scoreInfo):
+                        DispatchQueue.main.async {
+                            scoreInfo = ret_scoreInfo.reversed()
+                            LoadFilterOptions()
+                            loadingData = false
+                        }
+                    case .failure(_):
+                        DispatchQueue.main.async {
+                            errorLoading = true
+                            loadingData = false
+                            GlobalVariables.shared.alertTitle = "获取成绩失败"
+                            GlobalVariables.shared.alertContent = "这可能是网络问题，请确保你的账户目前能够正常登录"
+                            GlobalVariables.shared.showAlert = true
+                        }
+                    }
+                case .failure(_):
                     DispatchQueue.main.async {
                         errorLoading = true
                         loadingData = false
-                        GlobalVariables.shared.alertTitle = "获取成绩失败"
+                        GlobalVariables.shared.alertTitle = "自动登录Webvpn失败"
                         GlobalVariables.shared.alertContent = "这可能是网络问题，请确保你的账户目前能够正常登录"
                         GlobalVariables.shared.showAlert = true
                     }
-                }
-            case .failure(_):
-                DispatchQueue.main.async {
-                    errorLoading = true
-                    loadingData = false
-                    GlobalVariables.shared.alertTitle = "自动登录Webvpn失败"
-                    GlobalVariables.shared.alertContent = "这可能是网络问题，请确保你的账户目前能够正常登录"
-                    GlobalVariables.shared.showAlert = true
                 }
             }
         }

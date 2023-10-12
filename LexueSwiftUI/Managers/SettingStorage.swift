@@ -118,6 +118,13 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    // 缓存webvpn的cookie
+    @Published var cache_webvpn_context: String {
+        didSet {
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(cache_webvpn_context, forKey: "setting.cache_webvpn_context")
+        }
+    }
+    
     // 为了使小组件和app能够互通一些cookie之类的东西，因此把 sesskey 和 lexue_context 也存在这里
     // 对于app，在app从后台被重新唤醒的时候，需要从这里加载sesskey到GlobalVarible，当自己刷新sesskey成功的时候，需要写入到这里
     // 对于小组件，每次小组件gettimeline之前从这里加载到自己的GlobalVarible，当自己刷新sesskey成功的时候，也会写入到这里
@@ -244,6 +251,12 @@ class SettingStorage: ObservableObject {
             welcomWidgetShown = stored
         } else {
             welcomWidgetShown = false
+        }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cache_webvpn_context") as? String {
+            cache_webvpn_context = stored
+        } else {
+            cache_webvpn_context = ""
         }
         
     }
