@@ -249,6 +249,9 @@
          contextName = "closure #2 in GeneralScoreAnalyze.body.getter:GeneralScoreAnalyze.swift">
          <PersistentStrings>
             <PersistentString
+               value = "gpa_total">
+            </PersistentString>
+            <PersistentString
                value = "avg_total">
             </PersistentString>
          </PersistentStrings>
