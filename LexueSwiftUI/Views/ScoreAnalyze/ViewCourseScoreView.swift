@@ -141,6 +141,12 @@ struct ViewCourseScoreView: View {
     @Binding var currentCourse: Webvpn.ScoreInfo
     @Binding var allCourses: [Webvpn.ScoreInfo]
     @State var evaluateDiff: Float = 0
+    @State private var isActionSheetPresented = false
+    @Environment(\.colorScheme) var sysColorScheme
+    
+    @State var shareMode: Bool = false
+    
+    @State var displayView: (any View)? = nil
     
     func StringToFloat(str: String) -> Float {
         return Float(str.filter { "0123456789".contains($0) }) ?? 0
@@ -190,6 +196,7 @@ struct ViewCourseScoreView: View {
             Text(currentCourse.courseName)
                 .bold()
                 .multilineTextAlignment(.leading)
+                .foregroundColor(shareMode ? .black : (sysColorScheme == .dark ? .white : .black))
                 .font(.system(size: 40))
                 .padding(.bottom, 10)
             VStack(spacing: 10) {
@@ -235,6 +242,26 @@ struct ViewCourseScoreView: View {
                 }
             }
             .padding(.horizontal)
+        }
+        .background(shareMode ? .white : .clear)
+        .navigationBarItems(trailing:
+                                Button(action: {
+            self.isActionSheetPresented.toggle()
+        }) {
+            Image(systemName: "square.and.arrow.up")
+        }
+        )
+        .actionSheet(isPresented: $isActionSheetPresented) {
+            ActionSheet(title: Text("选项"), buttons: [
+                .default(Text("分享成绩单")) {
+                    shareMode = true
+                    let result = self.body.snapshot()
+                    shareMode = false
+                    let activityVC = UIActivityViewController(activityItems: [result], applicationActivities: nil)
+                    UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+                },
+                .cancel(Text("取消"))
+            ])
         }
         .onAppear {
             evaluateDiff = GetEvaluateResult()
