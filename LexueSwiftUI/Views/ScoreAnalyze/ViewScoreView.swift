@@ -17,6 +17,11 @@ struct ViewScoreView: View {
     @State var errorLoading = false
     @State var showDetailView: Bool = false
     @State var showDetailCourse = Webvpn.ScoreInfo()
+    @State var showFilterSheet: Bool = false
+    
+    @State var couse_type_choices: [FilterOptionBool] = []
+    @State var semester_type_choices: [FilterOptionBool] = []
+    
     private var gridItems: [GridItem] = [
         // 序号
         GridItem(.fixed(70), alignment: .leading),
@@ -44,8 +49,6 @@ struct ViewScoreView: View {
     
     private func header(ctx: Binding<Context>) -> some View {
         Group {
-            NavigationLink("成绩分析", destination: GeneralScoreAnalyze(allCourses: $scoreInfo))
-                .isDetailLink(false)
             LazyVGrid(columns: gridItems) {
                 Sort.columnTitle("序号", ctx, \.index)
                     .onTapGesture {
@@ -134,6 +137,79 @@ struct ViewScoreView: View {
             }
         }
     }
+    
+    func LoadFilterOptions() {
+        var courseTypeSet = Set<String>()
+        var semesterSet = Set<String>()
+        for courseInfo in scoreInfo {
+            if !courseInfo.course_type.isEmpty {
+                courseTypeSet.insert(courseInfo.course_type)
+            }
+            if !courseInfo.semester.isEmpty {
+                semesterSet.insert(courseInfo.semester)
+            }
+        }
+        for courseType in courseTypeSet {
+            couse_type_choices.append(.init(title: courseType, choose: true))
+        }
+        for semester in semesterSet {
+            semester_type_choices.append(.init(title: semester, choose: true))
+        }
+        semester_type_choices.sort { option1, option2 in
+            return Webvpn.ScoreInfo.SemesterInt(semesterStr: option1.title) > Webvpn.ScoreInfo.SemesterInt(semesterStr: option2.title)
+        }
+    }
+    
+    func LoadScoresInfo() {
+        Task {
+            let login_res = await Webvpn.shared.GetWebvpnContext(username: SettingStorage.shared.savedUsername, password: SettingStorage.shared.savedPassword)
+            switch login_res {
+            case .success(let context):
+                let score_res = await Webvpn.shared.QueryScoreInfo(webvpn_context: context)
+                switch score_res {
+                case .success(let ret_scoreInfo):
+                    DispatchQueue.main.async {
+                        scoreInfo = ret_scoreInfo.reversed()
+                        LoadFilterOptions()
+                        loadingData = false
+                    }
+                case .failure(_):
+                    DispatchQueue.main.async {
+                        errorLoading = true
+                        loadingData = false
+                        GlobalVariables.shared.alertTitle = "获取成绩失败"
+                        GlobalVariables.shared.alertContent = "这可能是网络问题，请确保你的账户目前能够正常登录"
+                        GlobalVariables.shared.showAlert = true
+                    }
+                }
+            case .failure(_):
+                DispatchQueue.main.async {
+                    errorLoading = true
+                    loadingData = false
+                    GlobalVariables.shared.alertTitle = "自动登录Webvpn失败"
+                    GlobalVariables.shared.alertContent = "这可能是网络问题，请确保你的账户目前能够正常登录"
+                    GlobalVariables.shared.showAlert = true
+                }
+            }
+        }
+    }
+    
+    func FilterScoreInfo(current: Webvpn.ScoreInfo) -> Bool {
+        // 过滤学期
+        for semester_type_choice in semester_type_choices {
+            if semester_type_choice.title == current.semester && !semester_type_choice.choose {
+                return false
+            }
+        }
+        // 过滤课程类型
+        for couse_type_choice in couse_type_choices {
+            if couse_type_choice.title == current.course_type && !couse_type_choice.choose {
+                return false
+            }
+        }
+        return true
+    }
+    
     private func row(course: Webvpn.ScoreInfo) -> some View {
         ZStack {
             LazyVGrid(columns: gridItems) {
@@ -174,39 +250,34 @@ struct ViewScoreView: View {
             ProgressView()
                 .scaleEffect(2)
                 .onAppear {
-                    Task {
-                        let login_res = await Webvpn.shared.GetWebvpnContext(username: SettingStorage.shared.savedUsername, password: SettingStorage.shared.savedPassword)
-                        switch login_res {
-                        case .success(let context):
-                            let score_res = await Webvpn.shared.QueryScoreInfo(webvpn_context: context)
-                            switch score_res {
-                            case .success(let ret_scoreInfo):
-                                DispatchQueue.main.async {
-                                    scoreInfo = ret_scoreInfo.reversed()
-                                    loadingData = false
-                                }
-                            case .failure(_):
-                                DispatchQueue.main.async {
-                                    errorLoading = true
-                                    loadingData = false
-                                    GlobalVariables.shared.alertTitle = "获取成绩失败"
-                                    GlobalVariables.shared.alertContent = "这可能是网络问题，请确保你的账户目前能够正常登录"
-                                    GlobalVariables.shared.showAlert = true
-                                }
-                            }
-                        case .failure(_):
-                            DispatchQueue.main.async {
-                                errorLoading = true
-                                loadingData = false
-                                GlobalVariables.shared.alertTitle = "自动登录Webvpn失败"
-                                GlobalVariables.shared.alertContent = "这可能是网络问题，请确保你的账户目前能够正常登录"
-                                GlobalVariables.shared.showAlert = true
-                            }
-                        }
-                    }
+                    LoadScoresInfo()
                 }
+        } else if scoreInfo.count == 0 {
+            Text("你还没有成绩信息哦~")
         } else {
-            TablerList(header: header,
+            HStack {
+                NavigationLink(destination: GeneralScoreAnalyze(allCourses: $scoreInfo)) {
+                    Text("详细成绩分析")
+                        .padding(.top, 10)
+                        .padding(.leading, 20)
+                }
+                .isDetailLink(false)
+                Spacer()
+            }
+            HStack {
+                Button(action: {
+                    showFilterSheet = true
+                }, label: {
+                    Text("显示过滤")
+                        .padding(.top, 10)
+                        .padding(.leading, 20)
+                })
+                Spacer()
+            }
+            .sheet(isPresented: $showFilterSheet, content: {
+                FilterScoreView(couse_type_choices: $couse_type_choices, semester_type_choices: $semester_type_choices)
+            })
+            TablerList(.init(filter: FilterScoreInfo),header: header,
                        row: row,
                        results: scoreInfo)
             .sideways(minWidth: 1200, showIndicators: true)

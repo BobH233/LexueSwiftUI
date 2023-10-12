@@ -100,6 +100,7 @@
 		47CE0FF92ACAF04700C68CA3 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FF82ACAF04700C68CA3 /* EditEventView.swift */; };
 		47CE0FFB2ACAFB8600C68CA3 /* ViewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FFA2ACAFB8600C68CA3 /* ViewEventView.swift */; };
 		47D230412AD028D1000DB15C /* HaoBIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */; };
+		47DAD9B02AD7E9F100B4950D /* FilterScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DAD9AF2AD7E9F100B4950D /* FilterScoreView.swift */; };
 		47E1D6A42AD01FDF007A0D75 /* HaoBIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */; };
 		47EC987A2ACBB6BF009CE125 /* DeletedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC98792ACBB6BF009CE125 /* DeletedEventView.swift */; };
 		47F30A612AD2E201001A0F2F /* FavoriteURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F30A602AD2E201001A0F2F /* FavoriteURLView.swift */; };
@@ -263,6 +264,7 @@
 		47CE0FF62ACADED400C68CA3 /* AddCustomEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomEventView.swift; sourceTree = "<group>"; };
 		47CE0FF82ACAF04700C68CA3 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
 		47CE0FFA2ACAFB8600C68CA3 /* ViewEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEventView.swift; sourceTree = "<group>"; };
+		47DAD9AF2AD7E9F100B4950D /* FilterScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScoreView.swift; sourceTree = "<group>"; };
 		47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "\bHaoBIT.swift"; sourceTree = "<group>"; };
 		47EC98792ACBB6BF009CE125 /* DeletedEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedEventView.swift; sourceTree = "<group>"; };
 		47F30A602AD2E201001A0F2F /* FavoriteURLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteURLView.swift; sourceTree = "<group>"; };
@@ -437,7 +439,7 @@
 		473BAE8D2AA48E4300968C3C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				479B22DF2AD5719F00A7DCC7 /* Misc */,
+				479B22DF2AD5719F00A7DCC7 /* ScoreAnalyze */,
 				47B4420E2AC6CD9200EE03A9 /* Privacy */,
 				473BAE8E2AA48E5100968C3C /* Message */,
 				473BAE8F2AA48E6000968C3C /* Course */,
@@ -530,14 +532,15 @@
 			path = Event;
 			sourceTree = "<group>";
 		};
-		479B22DF2AD5719F00A7DCC7 /* Misc */ = {
+		479B22DF2AD5719F00A7DCC7 /* ScoreAnalyze */ = {
 			isa = PBXGroup;
 			children = (
 				479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */,
 				479B22EB2AD641FB00A7DCC7 /* ViewCourseScoreView.swift */,
 				4700A8032AD6ED8000F75386 /* GeneralScoreAnalyze.swift */,
+				47DAD9AF2AD7E9F100B4950D /* FilterScoreView.swift */,
 			);
-			path = Misc;
+			path = ScoreAnalyze;
 			sourceTree = "<group>";
 		};
 		47B4420E2AC6CD9200EE03A9 /* Privacy */ = {
@@ -797,6 +800,7 @@
 				4715BE862ACC49F600163DA9 /* ContactAvatarSettingView.swift in Sources */,
 				47CE0FF72ACADED400C68CA3 /* AddCustomEventView.swift in Sources */,
 				47EC987A2ACBB6BF009CE125 /* DeletedEventView.swift in Sources */,
+				47DAD9B02AD7E9F100B4950D /* FilterScoreView.swift in Sources */,
 				470AFC662ACB15FB004C7F70 /* DataProviderBase.swift in Sources */,
 				47F4F2A42AC086A90047B395 /* ImageMoveAndScaleSheet.swift in Sources */,
 				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,

@@ -80,6 +80,17 @@ class Webvpn {
         var avg_score: String = ""
         // 最高分
         var max_score: String = ""
+        
+        static func SemesterInt(semesterStr: String) -> Int {
+            let segments = semesterStr.split(separator: "-")
+            if segments.count != 3 {
+                return 0
+            }
+            let first: Int = Int(segments[0]) ?? 0
+            let second: Int = Int(segments[1]) ?? 0
+            let third: Int = Int(segments[2]) ?? 0
+            return first * 100000 + second * 10 + third
+        }
     }
     
     func QueryScoreInfo(webvpn_context: WebvpnContext) async -> Result<[ScoreInfo], WebvpnError> {
