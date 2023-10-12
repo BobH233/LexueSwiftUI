@@ -49,6 +49,7 @@
 		475E22B02ACFB66700FE8679 /* InfoMergingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */; };
 		475EDED42AB60697008486F0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475EDED32AB60697008486F0 /* ProfileView.swift */; };
 		476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476340302AB89F47006C24E2 /* LexueProfile.swift */; };
+		476448412AD84B7700952A22 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 476448402AD84B7700952A22 /* WrappingHStack */; };
 		47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */; };
 		478B70562AD445190008865A /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
 		4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791050E2AB0ACD4004FD26C /* LoginView.swift */; };
@@ -311,6 +312,7 @@
 				47970AC22AC5AC7200C5BD03 /* UMAPM.framework in Frameworks */,
 				47970AC72AC5AC9800C5BD03 /* CoreTelephony.framework in Frameworks */,
 				47970AC92AC5ACAB00C5BD03 /* libsqlite3.tbd in Frameworks */,
+				476448412AD84B7700952A22 /* WrappingHStack in Frameworks */,
 				47BD51A52AC5B4970029F9DB /* UMAnalyticsGame.framework in Frameworks */,
 				47970AC02AC5AC7200C5BD03 /* UMDevice.framework in Frameworks */,
 				479B22E72AD57D8100A7DCC7 /* Sideways in Frameworks */,
@@ -646,6 +648,7 @@
 				479B22E32AD57B0300A7DCC7 /* Tabler */,
 				479B22E62AD57D8100A7DCC7 /* Sideways */,
 				479B22E92AD641E100A7DCC7 /* LightChart */,
+				476448402AD84B7700952A22 /* WrappingHStack */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -688,6 +691,7 @@
 				479B22E22AD57B0300A7DCC7 /* XCRemoteSwiftPackageReference "SwiftTabler" */,
 				479B22E52AD57D8100A7DCC7 /* XCRemoteSwiftPackageReference "SwiftSideways" */,
 				479B22E82AD641E100A7DCC7 /* XCRemoteSwiftPackageReference "LightChart" */,
+				4764483F2AD84B7700952A22 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -1188,6 +1192,14 @@
 				minimumVersion = 2.6.1;
 			};
 		};
+		4764483F2AD84B7700952A22 /* XCRemoteSwiftPackageReference "WrappingHStack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:dkk/WrappingHStack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.11;
+			};
+		};
 		479129BE2AC309BA00F811F9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:kylehickinson/SwiftUI-WebView.git";
@@ -1248,6 +1260,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 475AFEFC2AAF68E100C4020F /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		476448402AD84B7700952A22 /* WrappingHStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4764483F2AD84B7700952A22 /* XCRemoteSwiftPackageReference "WrappingHStack" */;
+			productName = WrappingHStack;
 		};
 		479129BF2AC309BA00F811F9 /* WebView */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -98,6 +98,7 @@ struct GeneralScoreAnalyze: View {
                     HStack {
                         Text("\(String(format: "%.2f", avg_total)) 分")
                             .bold()
+                            .foregroundColor(.black)
                             .font(.system(size: 30))
                             .padding(.bottom, 10)
                             .padding(.leading, 20)
@@ -108,6 +109,7 @@ struct GeneralScoreAnalyze: View {
                     HStack {
                         Text("\(String(format: "%.2f", gpa_total)) 分")
                             .bold()
+                            .foregroundColor(.black)
                             .font(.system(size: 30))
                             .padding(.bottom, 10)
                             .padding(.leading, 20)
@@ -125,6 +127,7 @@ struct GeneralScoreAnalyze: View {
                                         .foregroundColor(.green)
                                         .frame(width: 15, height: 15)
                                     Text("90-100: \(score_90_cnt)门(\(score_90_cnt * 100 / GetTotalCountedCourseCnt())%)")
+                                        .foregroundColor(.black)
                                 }
                             }
                             if score_80_cnt > 0 {
@@ -133,6 +136,7 @@ struct GeneralScoreAnalyze: View {
                                         .foregroundColor(.blue)
                                         .frame(width: 15, height: 15)
                                     Text("80-89: \(score_80_cnt)门(\(score_80_cnt * 100 / GetTotalCountedCourseCnt())%)")
+                                        .foregroundColor(.black)
                                 }
                             }
                             if score_70_cnt > 0 {
@@ -141,6 +145,7 @@ struct GeneralScoreAnalyze: View {
                                         .foregroundColor(.orange)
                                         .frame(width: 15, height: 15)
                                     Text("70-79: \(score_70_cnt)门(\(score_70_cnt * 100 / GetTotalCountedCourseCnt())%)")
+                                        .foregroundColor(.black)
                                 }
                             }
                             if score_60_cnt > 0 {
@@ -149,6 +154,7 @@ struct GeneralScoreAnalyze: View {
                                         .foregroundColor(.yellow)
                                         .frame(width: 15, height: 15)
                                     Text("60-69: \(score_60_cnt)门(\(score_60_cnt * 100 / GetTotalCountedCourseCnt())%)")
+                                        .foregroundColor(.black)
                                 }
                             }
                             if score_lower_60_cnt > 0 {
@@ -157,6 +163,7 @@ struct GeneralScoreAnalyze: View {
                                         .foregroundColor(.red)
                                         .frame(width: 15, height: 15)
                                     Text("0-59: \(score_lower_60_cnt)门(\(score_lower_60_cnt * 100 / GetTotalCountedCourseCnt())%)")
+                                        .foregroundColor(.black)
                                 }
                             }
                         }

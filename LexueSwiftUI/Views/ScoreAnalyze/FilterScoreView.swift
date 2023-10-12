@@ -6,69 +6,63 @@
 //
 
 import SwiftUI
+import WrappingHStack
 
 struct FilterOptionBool {
     var title: String = ""
     var choose: Bool = true
 }
 
+
 struct FilterScoreView: View {
     @Binding var couse_type_choices: [FilterOptionBool]
     @Binding var semester_type_choices: [FilterOptionBool]
+    @Environment(\.colorScheme) var sysColorScheme
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 ContentCardView(title0: "过滤课程类型", color0: .blue) {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach($couse_type_choices, id: \.title) { choice in
-                                ZStack {
-                                    Rectangle()
-                                        .foregroundColor(choice.choose.wrappedValue ? .blue : .secondarySystemBackground)
-                                        .cornerRadius(10)
-                                    Text(choice.title.wrappedValue)
-                                        .bold()
-                                        .foregroundColor(choice.choose.wrappedValue ? .white : .black)
-                                        .padding()
-                                }
-                                .onTapGesture {
-                                    withAnimation {
-                                        choice.choose.wrappedValue.toggle()
-                                    }
-                                }
-                                
+                    WrappingHStack($couse_type_choices, id: \.self) { choice in
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(choice.choose.wrappedValue ? .blue : .secondarySystemBackground)
+                                .cornerRadius(10)
+                            Text(choice.title.wrappedValue)
+                                .bold()
+                                .foregroundColor(choice.choose.wrappedValue ? .white : (sysColorScheme == .light ? .black : .white))
+                                .padding()
+                        }
+                        .padding(.top, 10)
+                        .onTapGesture {
+                            withAnimation {
+                                choice.choose.wrappedValue.toggle()
                             }
                         }
-                        .padding(.leading, 10)
+                        
                     }
-                    .padding(.top, 10)
-                    .padding(.bottom, 20)
+                    .padding(10)
                 }
                 ContentCardView(title0: "过滤学期", color0: .blue) {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach($semester_type_choices, id: \.title) { choice in
-                                ZStack {
-                                    Rectangle()
-                                        .foregroundColor(choice.choose.wrappedValue ? .blue : .secondarySystemBackground)
-                                        .cornerRadius(10)
-                                    Text(choice.title.wrappedValue)
-                                        .bold()
-                                        .foregroundColor(choice.choose.wrappedValue ? .white : .black)
-                                        .padding()
-                                }
-                                .onTapGesture {
-                                    withAnimation {
-                                        choice.choose.wrappedValue.toggle()
-                                    }
-                                }
-                                
+                    WrappingHStack($semester_type_choices, id: \.self) { choice in
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(choice.choose.wrappedValue ? .blue : .secondarySystemBackground)
+                                .cornerRadius(10)
+                            Text(choice.title.wrappedValue)
+                                .bold()
+                                .foregroundColor(choice.choose.wrappedValue ? .white : (sysColorScheme == .light ? .black : .white))
+                                .padding()
+                        }
+                        .padding(.top, 10)
+                        .onTapGesture {
+                            withAnimation {
+                                choice.choose.wrappedValue.toggle()
                             }
                         }
-                        .padding(.leading, 10)
+                        
                     }
-                    .padding(.top, 10)
-                    .padding(.bottom, 20)
+                    .padding(10)
                 }
             }
             .padding(.horizontal, 10)

@@ -161,7 +161,7 @@ struct ViewScoreView: View {
     }
     
     func LoadScoresInfo(tryCache: Bool = true) {
-        if tryCache && SettingStorage.shared.cache_webvpn_context != "" {
+        if tryCache && SettingStorage.shared.cache_webvpn_context != "" && SettingStorage.shared.cache_webvpn_context_for_user == GlobalVariables.shared.cur_user_info.stuId {
             // 有缓存，先尝试缓存
             print("Hit Cache, try cache loading score...")
             Task {
@@ -185,6 +185,7 @@ struct ViewScoreView: View {
                 case .success(let context):
                     DispatchQueue.main.async {
                         SettingStorage.shared.cache_webvpn_context = context.wengine_vpn_ticketwebvpn_bit_edu_cn
+                        SettingStorage.shared.cache_webvpn_context_for_user = GlobalVariables.shared.cur_user_info.stuId
                     }
                     let score_res = await Webvpn.shared.QueryScoreInfo(webvpn_context: context)
                     switch score_res {
