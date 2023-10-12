@@ -144,9 +144,10 @@ struct ViewCourseScoreView: View {
     @State private var isActionSheetPresented = false
     @Environment(\.colorScheme) var sysColorScheme
     
+    
     @State var shareMode: Bool = false
     
-    @State var displayView: (any View)? = nil
+    @State var displaySize: CGSize = CGSize()
     
     func StringToFloat(str: String) -> Float {
         return Float(str.filter { "0123456789".contains($0) }) ?? 0
@@ -193,53 +194,66 @@ struct ViewCourseScoreView: View {
     
     var body: some View {
         ScrollView() {
-            Text(currentCourse.courseName)
-                .bold()
-                .multilineTextAlignment(.leading)
-                .foregroundColor(shareMode ? .black : (sysColorScheme == .dark ? .white : .black))
-                .font(.system(size: 40))
-                .padding(.bottom, 10)
-            VStack(spacing: 10) {
-                if !currentCourse.course_type.isEmpty {
-                    SimpleCardView(image_name: "square.split.2x2.fill", title: "课程性质", content: "\(currentCourse.course_type)")
-                        .padding(.bottom, 0)
-                }
-                if !currentCourse.my_score.isEmpty {
-                    SimpleCardView(image_name: "star.fill", title: "我的成绩", content: "\(currentCourse.my_score) 分")
-                        .padding(.bottom, 0)
-                }
-                if !currentCourse.credit.isEmpty {
-                    SimpleCardView(image_name: "graduationcap.fill", title: "学分", content: "\(currentCourse.credit)")
-                        .padding(.bottom, 0)
-                }
-                if !currentCourse.avg_score.isEmpty {
-                    SimpleCardView(image_name: "alternatingcurrent", title: "平均分", content: "\(currentCourse.avg_score) 分")
-                        .padding(.bottom, 0)
-                }
-                if !currentCourse.max_score.isEmpty {
-                    SimpleCardView(image_name: "flag.fill", title: "最高分", content: "\(currentCourse.max_score) 分")
-                        .padding(.bottom, 0)
-                }
-                if abs(evaluateDiff) > 0.01 {
-                    SimpleCardView(color: evaluateDiff > 0 ? .green : .red, image_name: evaluateDiff > 0 ? "hand.thumbsup.fill" : "hand.thumbsdown.fill", title: evaluateDiff > 0 ? "这门课拉高了平均分" : "这门课拉低了平均分", content: "\(String(format: "%.2f", abs(evaluateDiff))) 分")
-                        .padding(.bottom, 0)
-                }
-                if !currentCourse.my_grade_in_all.isEmpty && !currentCourse.all_study_count.isEmpty {
-                    ContentCardView(title0: "全部同学中(前\(currentCourse.my_grade_in_all))", color0: .blue) {
-                        ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_all) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).1)")
-                            .padding(.horizontal, 10)
-                            .padding(.top, 10)
-                            .padding(.bottom, 90)
+            ZStack {
+                
+                VStack(spacing: 10) {
+                    Text(currentCourse.courseName)
+                        .bold()
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(shareMode ? .black : (sysColorScheme == .dark ? .white : .black))
+                        .font(.system(size: 40))
+                        .padding(.bottom, 10)
+                    if !currentCourse.course_type.isEmpty {
+                        SimpleCardView(image_name: "square.split.2x2.fill", title: "课程性质", content: "\(currentCourse.course_type)")
+                            .padding(.bottom, 0)
+                    }
+                    if !currentCourse.my_score.isEmpty {
+                        SimpleCardView(image_name: "star.fill", title: "我的成绩", content: "\(currentCourse.my_score) 分")
+                            .padding(.bottom, 0)
+                    }
+                    if !currentCourse.credit.isEmpty {
+                        SimpleCardView(image_name: "graduationcap.fill", title: "学分", content: "\(currentCourse.credit)")
+                            .padding(.bottom, 0)
+                    }
+                    if !currentCourse.avg_score.isEmpty {
+                        SimpleCardView(image_name: "alternatingcurrent", title: "平均分", content: "\(currentCourse.avg_score) 分")
+                            .padding(.bottom, 0)
+                    }
+                    if !currentCourse.max_score.isEmpty {
+                        SimpleCardView(image_name: "flag.fill", title: "最高分", content: "\(currentCourse.max_score) 分")
+                            .padding(.bottom, 0)
+                    }
+                    if abs(evaluateDiff) > 0.01 {
+                        SimpleCardView(color: evaluateDiff > 0 ? .green : .red, image_name: evaluateDiff > 0 ? "hand.thumbsup.fill" : "hand.thumbsdown.fill", title: evaluateDiff > 0 ? "这门课拉高了平均分" : "这门课拉低了平均分", content: "\(String(format: "%.2f", abs(evaluateDiff))) 分")
+                            .padding(.bottom, 0)
+                    }
+                    if !currentCourse.my_grade_in_all.isEmpty && !currentCourse.all_study_count.isEmpty {
+                        ContentCardView(title0: "全部同学中(前\(currentCourse.my_grade_in_all))", color0: .blue) {
+                            ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_all) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).1)")
+                                .padding(.horizontal, 10)
+                                .padding(.top, 10)
+                                .padding(.bottom, 90)
+                        }
+                    }
+                    if !currentCourse.my_grade_in_major.isEmpty && !currentCourse.major_study_count.isEmpty {
+                        ContentCardView(title0: "同专业同学中(前\(currentCourse.my_grade_in_major))", color0: .blue) {
+                            ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_major) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).1)")
+                                .padding(.horizontal, 10)
+                                .padding(.top, 10)
+                                .padding(.bottom, 90)
+                        }
+                        .padding(.bottom, 20)
                     }
                 }
-                if !currentCourse.my_grade_in_major.isEmpty && !currentCourse.major_study_count.isEmpty {
-                    ContentCardView(title0: "同专业同学中(前\(currentCourse.my_grade_in_major))", color0: .blue) {
-                        ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_major) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).1)")
-                            .padding(.horizontal, 10)
-                            .padding(.top, 10)
-                            .padding(.bottom, 90)
+                .background(
+                    GeometryReader { proxy in
+                        Color.clear.onAppear { 
+                            print(proxy.size.height)
+                            displaySize = proxy.size
+                            displaySize.height += 300
+                        }
                     }
-                }
+                )
             }
             .padding(.horizontal)
         }
@@ -255,10 +269,10 @@ struct ViewCourseScoreView: View {
             ActionSheet(title: Text("选项"), buttons: [
                 .default(Text("分享成绩单")) {
                     shareMode = true
-                    let result = self.body.snapshot()
+                    print(displaySize)
+                    let result = self.body.snapshot(size: displaySize)
                     shareMode = false
-                    let activityVC = UIActivityViewController(activityItems: [result], applicationActivities: nil)
-                    UIApplication.shared.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+                    UIImageWriteToSavedPhotosAlbum(result, nil, nil, nil)
                 },
                 .cancel(Text("取消"))
             ])

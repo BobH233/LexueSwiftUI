@@ -62,42 +62,10 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewCourseScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "45AD8167-AB48-4986-8470-FE20C0B8B67A - 5c7ba7c3d06e886a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #5 () -&gt; () in LexueSwiftUI.ViewCourseScoreView.body.getter : some"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/ScoreAnalyze/ViewCourseScoreView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "260"
-                  endingLineNumber = "260"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  uuid = "45AD8167-AB48-4986-8470-FE20C0B8B67A - 6ef875071e79ff2b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #4 () -&gt; SwiftUI.ActionSheet in LexueSwiftUI.ViewCourseScoreView.body.getter : some"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/ScoreAnalyze/ViewCourseScoreView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "260"
-                  endingLineNumber = "260"
-                  offsetFromSymbolStart = "488">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
