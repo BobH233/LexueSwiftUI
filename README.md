@@ -1,4 +1,4 @@
-<img src="./Images/logo.png" alt="logo" style="zoom: 25%;" />
+<img src="./Images/logo.png" alt="logo" width="300" />
 
 <div align="center">
 <h1>i乐学助手</h1>
@@ -10,31 +10,31 @@
 
 自动导入最近7天的乐学ddl事件（如作业提交、讨论截止等），可从app内快捷进入作业提交界面，不让你错过每个乐学的DDL。支持手动添加ddl(你可以使用文字描述来调用gpt帮你自动添加)，你还可以直接将每个事件的数据导入ios系统日历。
 
-<img src="./Images/preview1.png" alt="8 plus" style="zoom: 25%; box-shadow: 0px 0px 20px #888888;" />
+<img src="./Images/preview1.png" alt="8 plus" width="400" style="box-shadow: 0px 0px 20px #888888;" />
 
 ## ※ 消息聚合，运筹帷幄
 
 登录i乐学助手，在消息源选择订阅多达50多种通知种类，全校消息通知任你掌握，不错过每一次机遇，做更好的自己。
 
-<img src="./Images/preview2.png" alt="8 plus" style="zoom:25%; box-shadow: 0px 0px 20px #888888;" />
+<img src="./Images/preview2.png" alt="8 plus" width="400" style="box-shadow: 0px 0px 20px #888888;" />
 
 ## ※ 精美组件，随时在线
 
 放置i乐学助手小组件，随时随刻提醒你今日代办事项，并随时保持最新状态。
 
-<img src="./Images/preview3.png" alt="8 plus" style="zoom:25%; box-shadow: 0px 0px 20px #888888;" />
+<img src="./Images/preview3.png" alt="8 plus" width="400" style="box-shadow: 0px 0px 20px #888888;" />
 
 ## ※ 聊天逻辑，直观清晰
 
 每一个消息源，每一门课程都是你的联系人，向你发送对你重要的消息，这种社交逻辑更方便你接收信息。
 
-<img src="./Images/preview4.png" alt="8 plus" style="zoom:25%; box-shadow: 0px 0px 20px #888888;" />
+<img src="./Images/preview4.png" alt="8 plus" width="400" style="box-shadow: 0px 0px 20px #888888;" />
 
 ## ※ 课程列表，极速直达
 
 带有缓存优化的课程列表，让你极速直达想要的课程，你可以收藏需要的课程课件链接，然后随时从收藏列表中打开。
 
-<img src="./Images/preview5.png" alt="8 plus" style="zoom:25%; box-shadow: 0px 0px 20px #888888;" />
+<img src="./Images/preview5.png" alt="8 plus" width="400" style="box-shadow: 0px 0px 20px #888888;" />
 
 # 二、更新日志
 
