@@ -1,6 +1,5 @@
-<img src="./Images/logo.png" alt="logo" width="300" />
-
 <div align="center">
+<img src="./Images/logo.png" alt="logo" width="300" />
 <h1>i乐学助手</h1>
 <h2>一款让你在ios上更方便使用乐学的app</h2>
 </div>
