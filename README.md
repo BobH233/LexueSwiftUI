@@ -2,6 +2,9 @@
 <img src="./Images/logo.png" alt="logo" width="300" />
 <h1>i乐学助手</h1>
 <h2>一款让你在ios上更方便使用乐学的app</h2>
+<a href="https://apps.apple.com/cn/app/i%E4%B9%90%E5%AD%A6%E5%8A%A9%E6%89%8B/id6468846337">
+    <img src="./Images/app_store.svg" alt="8 plus" hight="100" />
+  </a>
 </div>
 
 # 一、特性
