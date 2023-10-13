@@ -150,6 +150,9 @@ struct ViewCourseScoreView: View {
     @State var displaySize: CGSize = CGSize()
     @State var geometryProxy: GeometryProxy?
     
+    @State var showShareSheet: Bool = false
+    @State var showImage: UIImage? = nil
+    
     func StringToFloat(str: String) -> Float {
         return Float(str.filter { "0123456789".contains($0) }) ?? 0
     }
@@ -262,6 +265,9 @@ struct ViewCourseScoreView: View {
             }
             .padding(.horizontal)
         }
+        .sheet(isPresented: $showShareSheet) {
+            ShareSheet(photo: showImage!, text: "\(currentCourse.courseName) 课程的成绩单")
+        }
         .background(shareMode ? .white : .clear)
         .navigationBarItems(trailing:
                                 Button(action: {
@@ -288,6 +294,21 @@ struct ViewCourseScoreView: View {
                     GlobalVariables.shared.alertTitle = "成功导出成绩单"
                     GlobalVariables.shared.alertContent = "请在你的照片中查看"
                     GlobalVariables.shared.showAlert = true
+                },
+                .default(Text("分享成绩单图片")) {
+                    if geometryProxy == nil {
+                        GlobalVariables.shared.alertTitle = "无法导出成绩单"
+                        GlobalVariables.shared.alertContent = "无法读取页面大小，请重试"
+                        GlobalVariables.shared.showAlert = true
+                        return
+                    }
+                    shareMode = true
+                    var currentSize = geometryProxy!.size
+                    currentSize.height += 60
+                    let result = self.body.snapshot(size: currentSize)
+                    shareMode = false
+                    showImage = result
+                    showShareSheet = true
                 },
                 .cancel(Text("取消"))
             ])

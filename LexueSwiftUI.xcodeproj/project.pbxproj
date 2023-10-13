@@ -50,6 +50,7 @@
 		475EDED42AB60697008486F0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475EDED32AB60697008486F0 /* ProfileView.swift */; };
 		476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476340302AB89F47006C24E2 /* LexueProfile.swift */; };
 		476448412AD84B7700952A22 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 476448402AD84B7700952A22 /* WrappingHStack */; };
+		476448432AD8E37D00952A22 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476448422AD8E37D00952A22 /* ShareSheet.swift */; };
 		47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */; };
 		478B70562AD445190008865A /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
 		4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791050E2AB0ACD4004FD26C /* LoginView.swift */; };
@@ -221,6 +222,7 @@
 		475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoMergingDataProvider.swift; sourceTree = "<group>"; };
 		475EDED32AB60697008486F0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		476340302AB89F47006C24E2 /* LexueProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueProfile.swift; sourceTree = "<group>"; };
+		476448422AD8E37D00952A22 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLogicManager.swift; sourceTree = "<group>"; };
 		478B70552AD445190008865A /* Webvpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webvpn.swift; sourceTree = "<group>"; };
 		4791050E2AB0ACD4004FD26C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				47BA831E2AC1289100954129 /* UnloginView.swift */,
 				479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */,
 				473D88962AD126DD00E7EB63 /* WelcomeUseWidget.swift */,
+				476448422AD8E37D00952A22 /* ShareSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				47BA831F2AC1289100954129 /* UnloginView.swift in Sources */,
 				47F4F29F2AC086A90047B395 /* SystemPHPicker.swift in Sources */,
 				47CE0FF92ACAF04700C68CA3 /* EditEventView.swift in Sources */,
+				476448432AD8E37D00952A22 /* ShareSheet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
