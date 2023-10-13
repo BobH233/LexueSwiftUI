@@ -148,6 +148,7 @@ struct ViewCourseScoreView: View {
     @State var shareMode: Bool = false
     
     @State var displaySize: CGSize = CGSize()
+    @State var geometryProxy: GeometryProxy?
     
     func StringToFloat(str: String) -> Float {
         return Float(str.filter { "0123456789".contains($0) }) ?? 0
@@ -242,15 +243,19 @@ struct ViewCourseScoreView: View {
                                 .padding(.top, 10)
                                 .padding(.bottom, 90)
                         }
-                        .padding(.bottom, 20)
                     }
+                    // 补齐底部
+                    Color
+                        .clear
+                        .padding(.bottom, 20)
                 }
                 .background(
                     GeometryReader { proxy in
-                        Color.clear.onAppear { 
+                        Color.clear.onAppear {
+                            geometryProxy = proxy
                             print(proxy.size.height)
                             displaySize = proxy.size
-                            displaySize.height += 300
+                            // displaySize.height += 300
                         }
                     }
                 )
@@ -267,17 +272,27 @@ struct ViewCourseScoreView: View {
         )
         .actionSheet(isPresented: $isActionSheetPresented) {
             ActionSheet(title: Text("选项"), buttons: [
-                .default(Text("分享成绩单")) {
+                .default(Text("保存成绩单图片")) {
+                    if geometryProxy == nil {
+                        GlobalVariables.shared.alertTitle = "无法导出成绩单"
+                        GlobalVariables.shared.alertContent = "无法读取页面大小，请重试"
+                        GlobalVariables.shared.showAlert = true
+                        return
+                    }
                     shareMode = true
-                    print(displaySize)
-                    let result = self.body.snapshot(size: displaySize)
+                    var currentSize = geometryProxy!.size
+                    currentSize.height += 60
+                    let result = self.body.snapshot(size: currentSize)
                     shareMode = false
                     UIImageWriteToSavedPhotosAlbum(result, nil, nil, nil)
+                    GlobalVariables.shared.alertTitle = "成功导出成绩单"
+                    GlobalVariables.shared.alertContent = "请在你的照片中查看"
+                    GlobalVariables.shared.showAlert = true
                 },
                 .cancel(Text("取消"))
             ])
         }
-        .onAppear {
+        .onFirstAppear {
             evaluateDiff = GetEvaluateResult()
         }
     }
