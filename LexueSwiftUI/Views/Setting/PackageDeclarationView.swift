@@ -23,6 +23,7 @@ private var packages: [PackageUsingDeclarationInfo] = [
     PackageUsingDeclarationInfo(packageName: "WebView", packageDescription: "A SwiftUI component View that contains a WKWebView ", license: "Unlicense license", URL: URL(string: "https://github.com/kylehickinson/SwiftUI-WebView"), ourPurpose: "用于构建内置浏览器功能"),
     PackageUsingDeclarationInfo(packageName: "SwiftTabler", packageDescription: "A multi-platform SwiftUI component for tabular data", license: "Apache-2.0 license", URL: URL(string: "https://github.com/openalloc/SwiftTabler"), ourPurpose: "用于程序内显示表格"),
     PackageUsingDeclarationInfo(packageName: "SwiftSideways", packageDescription: "A multi-platform SwiftUI component for the horizontal scrolling of tabular data in compact areas", license: "Apache-2.0 license", URL: URL(string: "https://github.com/openalloc/SwiftSideways"), ourPurpose: "用于程序内表格的左右拖动效果"),
+    PackageUsingDeclarationInfo(packageName: "WrappingHStack", packageDescription: "A SwiftUI HStack with the ability to wrap contained elements", license: "MIT license", URL: URL(string: "https://github.com/dkk/WrappingHStack"), ourPurpose: "用于自动换行的水平布局"),
 ]
 
 struct PackageDeclarationView: View {

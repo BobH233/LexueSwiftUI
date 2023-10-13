@@ -35,7 +35,7 @@ struct FilterScoreView: View {
                         }
                         .padding(.top, 10)
                         .onTapGesture {
-                            withAnimation {
+                            withAnimation(.spring(duration: 0.1)) {
                                 choice.choose.wrappedValue.toggle()
                             }
                         }
@@ -56,7 +56,7 @@ struct FilterScoreView: View {
                         }
                         .padding(.top, 10)
                         .onTapGesture {
-                            withAnimation {
+                            withAnimation(.spring(duration: 0.1)) {
                                 choice.choose.wrappedValue.toggle()
                             }
                         }
