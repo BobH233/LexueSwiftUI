@@ -207,6 +207,11 @@ struct ViewCourseScoreView: View {
                         .foregroundColor(shareMode ? .black : (sysColorScheme == .dark ? .white : .black))
                         .font(.system(size: 40))
                         .padding(.bottom, 10)
+                    
+                    if !currentCourse.semester.isEmpty {
+                        SimpleCardView(image_name: "microbe.fill", title: "开课学期", content: "\(currentCourse.semester)")
+                            .padding(.bottom, 0)
+                    }
                     if !currentCourse.course_type.isEmpty {
                         SimpleCardView(image_name: "square.split.2x2.fill", title: "课程性质", content: "\(currentCourse.course_type)")
                             .padding(.bottom, 0)
