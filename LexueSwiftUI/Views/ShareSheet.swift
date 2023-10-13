@@ -9,7 +9,7 @@ import SwiftUI
 import LinkPresentation
 
 struct ShareSheet: UIViewControllerRepresentable {
-    let photo: UIImage
+    let photo: UIImage?
     let text: String
     func makeUIViewController(context: Context) -> UIActivityViewController {
         let text = self.text
@@ -31,10 +31,10 @@ struct ShareSheet: UIViewControllerRepresentable {
 class ShareActivityItemSource: NSObject, UIActivityItemSource {
     
     var shareText: String
-    var shareImage: UIImage
+    var shareImage: UIImage?
     var linkMetaData = LPLinkMetadata()
     
-    init(shareText: String, shareImage: UIImage) {
+    init(shareText: String, shareImage: UIImage?) {
         self.shareText = shareText
         self.shareImage = shareImage
         linkMetaData.title = shareText

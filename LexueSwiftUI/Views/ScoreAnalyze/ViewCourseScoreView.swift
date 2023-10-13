@@ -271,7 +271,7 @@ struct ViewCourseScoreView: View {
             .padding(.horizontal)
         }
         .sheet(isPresented: $showShareSheet) {
-            ShareSheet(photo: showImage!, text: "\(currentCourse.courseName) 课程的成绩单")
+            ShareSheet(photo: showImage, text: "\(currentCourse.courseName) 课程的成绩单")
         }
         .background(shareMode ? .white : .clear)
         .navigationBarItems(trailing:
@@ -313,7 +313,9 @@ struct ViewCourseScoreView: View {
                     let result = self.body.snapshot(size: currentSize)
                     shareMode = false
                     showImage = result
-                    showShareSheet = true
+                    DispatchQueue.main.async {
+                        showShareSheet = true
+                    }
                 },
                 .cancel(Text("取消"))
             ])
