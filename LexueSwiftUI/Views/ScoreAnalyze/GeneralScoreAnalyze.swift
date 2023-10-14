@@ -210,10 +210,23 @@ struct GeneralScoreAnalyze: View {
         return MultiLineChartData(dataSets: multi_data, metadata: ChartMetadata(title: "学期平均绩历史"), xAxisLabels: xAxisLabels, chartStyle: LineChartStyle(infoBoxPlacement: .floating, markerType: .full(attachment: .point), yAxisTitle: "平均分", baseline: .minimumWithMaximum(of: max(Double(minGrade - 5), 0)), topLine: .maximum(of: min(Double(maxGrade + 5), 100))))
     }
     
+    func initAllParam() {
+        score_90_cnt = 0
+        score_80_cnt = 0
+        score_70_cnt = 0
+        score_60_cnt = 0
+        score_lower_60_cnt = 0
+        semestersMap = [:]
+        semesterArray = []
+        showImage = nil
+        totalSemesterData = SemesterData()
+    }
+    
     func CalcScoreData() {
         if shareMode {
             return
         }
+        initAllParam()
         for course in allCourses {
             if let score = Float(course.my_score) {
                 if score > 100 {
@@ -428,7 +441,7 @@ struct GeneralScoreAnalyze: View {
                     shareMode = true
                     var currentSize = geometryProxy!.size
                     currentSize.height += 60
-                    let result = self.body.snapshot(size: currentSize)
+                    let result = self.body.takeScreenshot(origin: geometryProxy!.frame(in: .global).origin, size: geometryProxy!.size)
                     shareMode = false
                     UIImageWriteToSavedPhotosAlbum(result, nil, nil, nil)
                     GlobalVariables.shared.alertTitle = "成功导出成绩单"

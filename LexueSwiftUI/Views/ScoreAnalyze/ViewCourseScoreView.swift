@@ -199,7 +199,6 @@ struct ViewCourseScoreView: View {
     var body: some View {
         ScrollView() {
             ZStack {
-                
                 VStack(spacing: 10) {
                     Text(currentCourse.courseName)
                         .bold()
