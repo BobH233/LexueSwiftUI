@@ -146,7 +146,8 @@ struct GeneralScoreAnalyze: View {
     @State var semestersMap: [String: SemesterData] = [:]
     @State var semesterArray: [SemesterData] = []
     @State var totalSemesterData = SemesterData()
-    @State var lineChartData: MultiLineChartData = MultiLineChartData(dataSets: MultiLineDataSet(dataSets: []))
+    @State var lineChartAvgScoreData: MultiLineChartData = MultiLineChartData(dataSets: MultiLineDataSet(dataSets: []))
+    @State var lineChartAvgGpaData: MultiLineChartData = MultiLineChartData(dataSets: MultiLineDataSet(dataSets: []))
     
     func GetTotalCountedCourseCnt() -> Int {
         if score_90_cnt + score_80_cnt + score_70_cnt + score_60_cnt + score_lower_60_cnt == 0 {
@@ -154,6 +155,28 @@ struct GeneralScoreAnalyze: View {
         } else {
             return score_90_cnt + score_80_cnt + score_70_cnt + score_60_cnt + score_lower_60_cnt
         }
+    }
+    
+    func generateAvgGpaData(semesterArray: [SemesterData]) -> MultiLineChartData {
+        var points1: [LineChartDataPoint] = []
+        var points2: [LineChartDataPoint] = []
+        var xAxisLabels: [String] = []
+        var minGrade: Float = 100000
+        var maxGrade: Float = 0
+        for semester in semesterArray {
+            xAxisLabels.append(semester.semesterName)
+            points1.append(.init(value: Double(semester.GetMyGpaTotal()), xAxisLabel: semester.semesterName, description: semester.semesterName))
+            points2.append(.init(value: Double(semester.GetAllGpaTotal()), xAxisLabel: semester.semesterName, description: semester.semesterName))
+            minGrade = min(minGrade, semester.GetMyGpaTotal())
+            minGrade = min(minGrade, semester.GetAllGpaTotal())
+            maxGrade = max(maxGrade, semester.GetMyGpaTotal())
+            maxGrade = max(maxGrade, semester.GetAllGpaTotal())
+        }
+        let deltaGrade = maxGrade - minGrade
+        let dataset1 = LineDataSet(dataPoints: points1, legendTitle: "我的Gpa", pointStyle: PointStyle(borderColour: .black, pointType: .outline, pointShape: .circle), style: LineStyle(lineColour: ColourStyle(colours: [Color.red.opacity(0.90),                                        Color.red.opacity(0.60)],startPoint: .top,endPoint: .bottom)))
+        let dataset2 = LineDataSet(dataPoints: points2, legendTitle: "平均Gpa", pointStyle: PointStyle(borderColour: .black, pointType: .outline, pointShape: .square), style: LineStyle(lineColour: ColourStyle(colours: [Color.blue.opacity(0.90),                                        Color.blue.opacity(0.60)],startPoint: .top,endPoint: .bottom)))
+        let multi_data = MultiLineDataSet(dataSets: [dataset1, dataset2])
+        return MultiLineChartData(dataSets: multi_data, metadata: ChartMetadata(title: "学期Gpa历史"), xAxisLabels: xAxisLabels, chartStyle: LineChartStyle(infoBoxPlacement: .floating, markerType: .full(attachment: .point), yAxisTitle: "平均分", baseline: .minimumWithMaximum(of: max(Double(minGrade - deltaGrade * 0.1), 0)), topLine: .maximum(of: Double(maxGrade + deltaGrade * 0.1))))
     }
     
     func generateAvgScoreData(semesterArray: [SemesterData]) -> MultiLineChartData {
@@ -171,10 +194,11 @@ struct GeneralScoreAnalyze: View {
             maxGrade = max(maxGrade, semester.GetMyAvgTotal())
             maxGrade = max(maxGrade, semester.GetAllAvgTotal())
         }
-        let dataset1 = LineDataSet(dataPoints: points1, legendTitle: "我的成绩", pointStyle: PointStyle(pointType: .outline, pointShape: .circle), style: LineStyle(lineColour: ColourStyle(colours: [Color.red.opacity(0.50),                                        Color.red.opacity(0.00)],startPoint: .top,endPoint: .bottom)))
-        let dataset2 = LineDataSet(dataPoints: points2, legendTitle: "平均成绩", pointStyle: PointStyle(pointType: .outline, pointShape: .square), style: LineStyle(lineColour: ColourStyle(colours: [Color.blue.opacity(0.50),                                        Color.blue.opacity(0.00)],startPoint: .top,endPoint: .bottom)))
+        
+        let dataset1 = LineDataSet(dataPoints: points1, legendTitle: "我的成绩", pointStyle: PointStyle(borderColour: .black, pointType: .outline, pointShape: .circle), style: LineStyle(lineColour: ColourStyle(colours: [Color.red.opacity(0.90),                                        Color.red.opacity(0.60)],startPoint: .top,endPoint: .bottom)))
+        let dataset2 = LineDataSet(dataPoints: points2, legendTitle: "平均成绩", pointStyle: PointStyle(borderColour: .black, pointType: .outline, pointShape: .square), style: LineStyle(lineColour: ColourStyle(colours: [Color.blue.opacity(0.90),                                        Color.blue.opacity(0.60)],startPoint: .top,endPoint: .bottom)))
         let multi_data = MultiLineDataSet(dataSets: [dataset1, dataset2])
-        return MultiLineChartData(dataSets: multi_data, metadata: ChartMetadata(title: "学期成绩历史"), xAxisLabels: xAxisLabels, chartStyle: LineChartStyle(infoBoxPlacement: .floating, markerType: .full(attachment: .point), yAxisTitle: "平均分", baseline: .minimumWithMaximum(of: max(Double(minGrade - 5), 0)), topLine: .maximum(of: min(Double(maxGrade + 5), 100))))
+        return MultiLineChartData(dataSets: multi_data, metadata: ChartMetadata(title: "学期平均绩历史"), xAxisLabels: xAxisLabels, chartStyle: LineChartStyle(infoBoxPlacement: .floating, markerType: .full(attachment: .point), yAxisTitle: "平均分", baseline: .minimumWithMaximum(of: max(Double(minGrade - 5), 0)), topLine: .maximum(of: min(Double(maxGrade + 5), 100))))
     }
     
     func CalcScoreData() {
@@ -225,7 +249,8 @@ struct GeneralScoreAnalyze: View {
             return Webvpn.ScoreInfo.SemesterInt(semesterStr: sem1.semesterName) > Webvpn.ScoreInfo.SemesterInt(semesterStr: sem2.semesterName)
         }
         
-        lineChartData = generateAvgScoreData(semesterArray: semesterArray.reversed())
+        lineChartAvgScoreData = generateAvgScoreData(semesterArray: semesterArray.reversed())
+        lineChartAvgGpaData = generateAvgGpaData(semesterArray: semesterArray.reversed())
     }
     
     @State var PieviewData: [(Double, Color)] = []
@@ -319,24 +344,45 @@ struct GeneralScoreAnalyze: View {
                         .padding(.bottom, 15)
                     }
                 }
-                ContentCardView(title0: "各学期成绩", color0: .blue) {
-                    MultiLineChart(chartData: lineChartData)
-                        .touchOverlay(chartData: lineChartData, unit: .suffix(of: " 分"))
-                        .pointMarkers(chartData: lineChartData)
-                        .xAxisGrid(chartData: lineChartData)
-                        .yAxisGrid(chartData: lineChartData)
-                        .xAxisLabels(chartData: lineChartData)
-                        .yAxisLabels(chartData: lineChartData)
-                        .floatingInfoBox(chartData: lineChartData)
-                        .headerBox(chartData: lineChartData)
-                        .legends(chartData: lineChartData, columns: [GridItem(.flexible()), GridItem(.flexible())])
-                        .id(lineChartData.id)
+                ContentCardView(title0: "各学期平均绩", color0: .blue) {
+                    MultiLineChart(chartData: lineChartAvgScoreData)
+                        .touchOverlay(chartData: lineChartAvgScoreData, specifier: "%.02f", unit: .suffix(of: " 分"))
+                        .pointMarkers(chartData: lineChartAvgScoreData)
+                        .xAxisGrid(chartData: lineChartAvgScoreData)
+                        .yAxisGrid(chartData: lineChartAvgScoreData)
+                        .xAxisLabels(chartData: lineChartAvgScoreData)
+                        .yAxisLabels(chartData: lineChartAvgScoreData)
+                        .floatingInfoBox(chartData: lineChartAvgScoreData)
+                        .headerBox(chartData: lineChartAvgScoreData)
+                        .legends(chartData: lineChartAvgScoreData, columns: [GridItem(.flexible()), GridItem(.flexible())])
+                        .id(lineChartAvgScoreData.id)
                         .frame(height: 400)
                         .padding(.bottom, 20)
                         .padding(.horizontal)
-                        .preferredColorScheme(.light)
+                        .colorScheme(.light)
                 }
-                
+                .colorScheme(.light)
+                ContentCardView(title0: "各学期gpa绩", color0: .blue) {
+                    MultiLineChart(chartData: lineChartAvgGpaData)
+                        .touchOverlay(chartData: lineChartAvgGpaData, specifier: "%.03f", unit: .suffix(of: ""))
+                        .pointMarkers(chartData: lineChartAvgGpaData)
+                        .xAxisGrid(chartData: lineChartAvgGpaData)
+                        .yAxisGrid(chartData: lineChartAvgGpaData)
+                        .xAxisLabels(chartData: lineChartAvgGpaData)
+                        .yAxisLabels(chartData: lineChartAvgGpaData)
+                        .floatingInfoBox(chartData: lineChartAvgGpaData)
+                        .headerBox(chartData: lineChartAvgGpaData)
+                        .legends(chartData: lineChartAvgGpaData, columns: [GridItem(.flexible()), GridItem(.flexible())])
+                        .id(lineChartAvgGpaData.id)
+                        .frame(height: 400)
+                        .padding(.bottom, 20)
+                        .padding(.horizontal)
+                        .colorScheme(.light)
+                }
+                .colorScheme(.light)
+                Color
+                    .clear
+                    .padding(.bottom, 20)
             }
             .padding(.horizontal)
         }
