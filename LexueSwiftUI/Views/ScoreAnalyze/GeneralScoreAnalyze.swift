@@ -211,6 +211,9 @@ struct GeneralScoreAnalyze: View {
     }
     
     func CalcScoreData() {
+        if shareMode {
+            return
+        }
         for course in allCourses {
             if let score = Float(course.my_score) {
                 if score > 100 {
@@ -266,6 +269,14 @@ struct GeneralScoreAnalyze: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
+                if shareMode {
+                    Text("成绩分析")
+                        .bold()
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(.black)
+                        .font(.system(size: 40))
+                        .padding(.bottom, 10)
+                }
                 ContentCardView(title0: "我的总平均分", color0: .blue) {
                     HStack {
                         Text("\(String(format: "%.2f", totalSemesterData.GetMyAvgTotal())) 分")
@@ -444,7 +455,6 @@ struct GeneralScoreAnalyze: View {
                 .cancel(Text("取消"))
             ])
         }
-        .preferredColorScheme(shareMode ? .light : sysColorScheme)
         .navigationBarItems(trailing:
                                 Button(action: {
             self.isActionSheetPresented.toggle()
