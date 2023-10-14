@@ -26,6 +26,7 @@
 		47223A612AD053E4000D8B9C /* KeyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47223A602AD053E4000D8B9C /* KeyInfo.plist */; };
 		472984A02AA706BB000814EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729849F2AA706BB000814EE /* Extensions.swift */; };
 		472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */; };
+		472E44312ADAE98400230FC4 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472E44302ADAE98400230FC4 /* Feedback.swift */; };
 		473BAE802AA48DAA00968C3C /* LexueSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE7F2AA48DAA00968C3C /* LexueSwiftUIApp.swift */; };
 		473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE812AA48DAA00968C3C /* ContentView.swift */; };
 		473BAE842AA48DAA00968C3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 473BAE832AA48DAA00968C3C /* Assets.xcassets */; };
@@ -200,6 +201,7 @@
 		47223A602AD053E4000D8B9C /* KeyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KeyInfo.plist; sourceTree = "<group>"; };
 		4729849F2AA706BB000814EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatusManager.swift; sourceTree = "<group>"; };
+		472E44302ADAE98400230FC4 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LexueSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		473BAE7F2AA48DAA00968C3C /* LexueSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueSwiftUIApp.swift; sourceTree = "<group>"; };
 		473BAE812AA48DAA00968C3C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 				47B411782ACBD96300AC0B5E /* DataProviderSettingView.swift */,
 				47BCFB952ACD6A6200320CFD /* PackageDeclarationView.swift */,
 				47BCFB982ACD6FD800320CFD /* AboutView.swift */,
+				472E44302ADAE98400230FC4 /* Feedback.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -772,6 +775,7 @@
 			files = (
 				473D88992AD1955800E7EB63 /* GPTApiFree.swift in Sources */,
 				47BD51A72AC5B5A40029F9DB /* UMengManager.swift in Sources */,
+				472E44312ADAE98400230FC4 /* Feedback.swift in Sources */,
 				473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */,
 				4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */,
 				473BAE942AA4969F00968C3C /* SettingView.swift in Sources */,

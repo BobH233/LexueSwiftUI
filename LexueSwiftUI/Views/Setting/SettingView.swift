@@ -146,6 +146,12 @@ struct SettingView: View {
                     }
                 }
                 Section(header: Text("关于")) {
+                    NavigationLink(destination: Feedback(), label: {
+                        Image(systemName: "archivebox.fill")
+                            .foregroundColor(.blue)
+                        Text("反馈意见")
+                    })
+                    .isDetailLink(false)
                     NavigationLink(destination: PrivacyStatement(), label: {
                         Image(systemName: "lock.circle")
                             .foregroundColor(.blue)
