@@ -136,6 +136,150 @@ class SemesterData {
     }
 }
 
+struct ScreenshotView: View {
+    var originView: GeneralScoreAnalyze
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("成绩分析")
+                .bold()
+                .multilineTextAlignment(.leading)
+                .foregroundColor(.black)
+                .font(.system(size: 40))
+                .padding(.bottom, 10)
+                .padding(.top, 20)
+            
+            ContentCardView(title0: "我的总平均分", color0: .blue) {
+                HStack {
+                    Text("\(String(format: "%.2f", originView.totalSemesterData.GetMyAvgTotal())) 分")
+                        .bold()
+                        .foregroundColor(.black)
+                        .font(.system(size: 30))
+                        .padding(.bottom, 10)
+                        .padding(.leading, 20)
+                    Spacer()
+                }
+            }
+            ContentCardView(title0: "我的总绩点", color0: .blue) {
+                HStack {
+                    Text("\(String(format: "%.2f", originView.totalSemesterData.GetMyGpaTotal())) 分")
+                        .bold()
+                        .foregroundColor(.black)
+                        .font(.system(size: 30))
+                        .padding(.bottom, 10)
+                        .padding(.leading, 20)
+                    Spacer()
+                }
+            }
+            ContentCardView(title0: "已获得总学分", color0: .blue) {
+                HStack {
+                    Text("\(String(format: "%.2f", originView.totalSemesterData.totCredit)) 分")
+                        .bold()
+                        .foregroundColor(.black)
+                        .font(.system(size: 30))
+                        .padding(.bottom, 10)
+                        .padding(.leading, 20)
+                    Spacer()
+                }
+            }
+            ContentCardView(title0: "总体概览", color0: .blue) {
+                VStack {
+                    PieView(slices: originView.$PieviewData)
+                        .padding(.horizontal, 20)
+                    VStack {
+                        if originView.score_90_cnt > 0 {
+                            HStack {
+                                Circle()
+                                    .foregroundColor(.green)
+                                    .frame(width: 15, height: 15)
+                                Text("90-100: \(originView.score_90_cnt)门(\(originView.score_90_cnt * 100 / originView.GetTotalCountedCourseCnt())%)")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        if originView.score_80_cnt > 0 {
+                            HStack {
+                                Circle()
+                                    .foregroundColor(.blue)
+                                    .frame(width: 15, height: 15)
+                                Text("80-89: \(originView.score_80_cnt)门(\(originView.score_80_cnt * 100 / originView.GetTotalCountedCourseCnt())%)")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        if originView.score_70_cnt > 0 {
+                            HStack {
+                                Circle()
+                                    .foregroundColor(.orange)
+                                    .frame(width: 15, height: 15)
+                                Text("70-79: \(originView.score_70_cnt)门(\(originView.score_70_cnt * 100 / originView.GetTotalCountedCourseCnt())%)")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        if originView.score_60_cnt > 0 {
+                            HStack {
+                                Circle()
+                                    .foregroundColor(.yellow)
+                                    .frame(width: 15, height: 15)
+                                Text("60-69: \(originView.score_60_cnt)门(\(originView.score_60_cnt * 100 / originView.GetTotalCountedCourseCnt())%)")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                        if originView.score_lower_60_cnt > 0 {
+                            HStack {
+                                Circle()
+                                    .foregroundColor(.red)
+                                    .frame(width: 15, height: 15)
+                                Text("0-59: \(originView.score_lower_60_cnt)门(\(originView.score_lower_60_cnt * 100 / originView.GetTotalCountedCourseCnt())%)")
+                                    .foregroundColor(.black)
+                            }
+                        }
+                    }
+                    .padding(.bottom, 15)
+                }
+            }
+            ContentCardView(title0: "各学期平均绩", color0: .blue) {
+                MultiLineChart(chartData: originView.lineChartAvgScoreData)
+                    .touchOverlay(chartData: originView.lineChartAvgScoreData, specifier: "%.02f", unit: .suffix(of: " 分"))
+                    .pointMarkers(chartData: originView.lineChartAvgScoreData)
+                    .xAxisGrid(chartData: originView.lineChartAvgScoreData)
+                    .yAxisGrid(chartData: originView.lineChartAvgScoreData)
+                    .xAxisLabels(chartData: originView.lineChartAvgScoreData)
+                    .yAxisLabels(chartData: originView.lineChartAvgScoreData)
+                    .floatingInfoBox(chartData: originView.lineChartAvgScoreData)
+                    .headerBox(chartData: originView.lineChartAvgScoreData)
+                    .legends(chartData: originView.lineChartAvgScoreData, columns: [GridItem(.flexible()), GridItem(.flexible())])
+                    .id(originView.lineChartAvgScoreData.id)
+                    .frame(height: 400)
+                    .padding(.bottom, 20)
+                    .padding(.horizontal)
+                    .colorScheme(.light)
+            }
+            .colorScheme(.light)
+            ContentCardView(title0: "各学期gpa绩", color0: .blue) {
+                MultiLineChart(chartData: originView.lineChartAvgGpaData)
+                    .touchOverlay(chartData: originView.lineChartAvgGpaData, specifier: "%.03f", unit: .suffix(of: ""))
+                    .pointMarkers(chartData: originView.lineChartAvgGpaData)
+                    .xAxisGrid(chartData: originView.lineChartAvgGpaData)
+                    .yAxisGrid(chartData: originView.lineChartAvgGpaData)
+                    .xAxisLabels(chartData: originView.lineChartAvgGpaData)
+                    .yAxisLabels(chartData: originView.lineChartAvgGpaData)
+                    .floatingInfoBox(chartData: originView.lineChartAvgGpaData)
+                    .headerBox(chartData: originView.lineChartAvgGpaData)
+                    .legends(chartData: originView.lineChartAvgGpaData, columns: [GridItem(.flexible()), GridItem(.flexible())])
+                    .id(originView.lineChartAvgGpaData.id)
+                    .frame(height: 400)
+                    .padding(.bottom, 20)
+                    .padding(.horizontal)
+                    .colorScheme(.light)
+            }
+            .colorScheme(.light)
+            Color
+                .clear
+                .padding(.bottom, 20)
+        }
+        .padding(.horizontal)
+        .background(.white)
+    }
+}
+
 struct GeneralScoreAnalyze: View {
     @State var shareMode: Bool = false
     @Binding var allCourses: [Webvpn.ScoreInfo]
@@ -154,7 +298,6 @@ struct GeneralScoreAnalyze: View {
     
     @State var isActionSheetPresented = false
     @State var displaySize: CGSize = CGSize()
-    @State var geometryProxy: GeometryProxy?
     @State var showShareSheet: Bool = false
     @State var showImage: UIImage? = nil
     
@@ -218,8 +361,8 @@ struct GeneralScoreAnalyze: View {
         score_lower_60_cnt = 0
         semestersMap = [:]
         semesterArray = []
-        showImage = nil
         totalSemesterData = SemesterData()
+        PieviewData = []
     }
     
     func CalcScoreData() {
@@ -417,52 +560,56 @@ struct GeneralScoreAnalyze: View {
                     .clear
                     .padding(.bottom, 20)
             }
-            .background(
-                GeometryReader { proxy in
-                    Color.clear.onAppear {
-                        geometryProxy = proxy
-                        print(proxy.size.height)
-                        displaySize = proxy.size
-                    }
-                }
-            )
             .padding(.horizontal)
+        }
+        .sheet(isPresented: $showShareSheet) {
+            ShareSheet(photo: showImage, text: "\(GlobalVariables.shared.cur_user_info.fullName) 的成绩分析")
         }
         .background(shareMode ? .white : .clear)
         .actionSheet(isPresented: $isActionSheetPresented) {
             ActionSheet(title: Text("选项"), buttons: [
                 .default(Text("保存成绩单图片")) {
-                    if geometryProxy == nil {
-                        GlobalVariables.shared.alertTitle = "无法导出成绩单"
-                        GlobalVariables.shared.alertContent = "无法读取页面大小，请重试"
+                    if #available(iOS 16.0, *) {
+                        let renderer = ImageRenderer(content: ScreenshotView(originView: self))
+                        renderer.scale = UIScreen.main.scale
+                        if let uiImage = renderer.uiImage, let data = uiImage.pngData(), let fullImage = UIImage(data: data) {
+                            UIImageWriteToSavedPhotosAlbum(fullImage, nil, nil, nil)
+                            GlobalVariables.shared.alertTitle = "成功导出成绩分析"
+                            GlobalVariables.shared.alertContent = "请在你的照片中查看"
+                            GlobalVariables.shared.showAlert = true
+                            return
+                        } else {
+                            GlobalVariables.shared.alertTitle = "无法导出成绩单"
+                            GlobalVariables.shared.alertContent = "出现了异常错误..."
+                            GlobalVariables.shared.showAlert = true
+                        }
+                    } else {
+                        GlobalVariables.shared.alertTitle = "不支持ios16以下的系统导出截图"
+                        GlobalVariables.shared.alertContent = "由于图表渲染限制问题，请手动截图"
                         GlobalVariables.shared.showAlert = true
                         return
                     }
-                    shareMode = true
-                    var currentSize = geometryProxy!.size
-                    currentSize.height += 60
-                    let result = self.body.takeScreenshot(origin: geometryProxy!.frame(in: .global).origin, size: geometryProxy!.size)
-                    shareMode = false
-                    UIImageWriteToSavedPhotosAlbum(result, nil, nil, nil)
-                    GlobalVariables.shared.alertTitle = "成功导出成绩单"
-                    GlobalVariables.shared.alertContent = "请在你的照片中查看"
-                    GlobalVariables.shared.showAlert = true
                 },
                 .default(Text("分享成绩单图片")) {
-                    if geometryProxy == nil {
-                        GlobalVariables.shared.alertTitle = "无法导出成绩单"
-                        GlobalVariables.shared.alertContent = "无法读取页面大小，请重试"
+                    if #available(iOS 16.0, *) {
+                        let renderer = ImageRenderer(content: ScreenshotView(originView: self))
+                        renderer.scale = UIScreen.main.scale
+                        if let uiImage = renderer.uiImage, let data = uiImage.pngData(), let fullImage = UIImage(data: data) {
+                            showImage = fullImage
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                showShareSheet = true
+                            }
+                            return
+                        } else {
+                            GlobalVariables.shared.alertTitle = "无法导出成绩单"
+                            GlobalVariables.shared.alertContent = "出现了异常错误..."
+                            GlobalVariables.shared.showAlert = true
+                        }
+                    } else {
+                        GlobalVariables.shared.alertTitle = "不支持ios16以下的系统导出截图"
+                        GlobalVariables.shared.alertContent = "由于图表渲染限制问题，请手动截图"
                         GlobalVariables.shared.showAlert = true
                         return
-                    }
-                    shareMode = true
-                    var currentSize = geometryProxy!.size
-                    currentSize.height += 60
-                    let result = self.body.snapshot(size: currentSize)
-                    shareMode = false
-                    showImage = result
-                    DispatchQueue.main.async {
-                        showShareSheet = true
                     }
                 },
                 .cancel(Text("取消"))

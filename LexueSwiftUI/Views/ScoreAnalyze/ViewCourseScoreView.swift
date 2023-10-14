@@ -312,7 +312,7 @@ struct ViewCourseScoreView: View {
                     let result = self.body.snapshot(size: currentSize)
                     shareMode = false
                     showImage = result
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         showShareSheet = true
                     }
                 },
