@@ -150,6 +150,8 @@ struct GeneralScoreAnalyze: View {
     @State var lineChartAvgScoreData: MultiLineChartData = MultiLineChartData(dataSets: MultiLineDataSet(dataSets: []))
     @State var lineChartAvgGpaData: MultiLineChartData = MultiLineChartData(dataSets: MultiLineDataSet(dataSets: []))
     
+    @Environment(\.colorScheme) var sysColorScheme
+    
     @State var isActionSheetPresented = false
     @State var displaySize: CGSize = CGSize()
     @State var geometryProxy: GeometryProxy?
@@ -391,17 +393,18 @@ struct GeneralScoreAnalyze: View {
                     .clear
                     .padding(.bottom, 20)
             }
+            .background(
+                GeometryReader { proxy in
+                    Color.clear.onAppear {
+                        geometryProxy = proxy
+                        print(proxy.size.height)
+                        displaySize = proxy.size
+                    }
+                }
+            )
             .padding(.horizontal)
         }
-        .background(
-            GeometryReader { proxy in
-                Color.clear.onAppear {
-                    geometryProxy = proxy
-                    print(proxy.size.height)
-                    displaySize = proxy.size
-                }
-            }
-        )
+        .background(shareMode ? .white : .clear)
         .actionSheet(isPresented: $isActionSheetPresented) {
             ActionSheet(title: Text("选项"), buttons: [
                 .default(Text("保存成绩单图片")) {
@@ -441,6 +444,7 @@ struct GeneralScoreAnalyze: View {
                 .cancel(Text("取消"))
             ])
         }
+        .preferredColorScheme(shareMode ? .light : sysColorScheme)
         .navigationBarItems(trailing:
                                 Button(action: {
             self.isActionSheetPresented.toggle()
