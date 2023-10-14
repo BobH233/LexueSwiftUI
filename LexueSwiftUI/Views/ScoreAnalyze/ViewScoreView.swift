@@ -300,6 +300,13 @@ struct ViewScoreView: View {
             .sheet(isPresented: $showFilterSheet, content: {
                 FilterScoreView(couse_type_choices: $couse_type_choices, semester_type_choices: $semester_type_choices)
             })
+            HStack {
+                Text("左右拖动列表可以查看更多信息")
+                    .foregroundColor(.secondary)
+                    .padding(.top, 20)
+                    .padding(.leading, 20)
+                Spacer()
+            }
             TablerList(.init(filter: FilterScoreInfo),header: header,
                        row: row,
                        results: scoreInfo)

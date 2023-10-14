@@ -162,7 +162,18 @@ struct DebugDataView: View {
                         }
                     }
                 }
-                Button("GetEvents") {
+                Button("GetEventsMonth") {
+                    Task {
+                        let res = try? await LexueAPI.shared.GetEventsByMonth(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, year: "2023", month: "10")
+                        switch res! {
+                        case .success(let ress):
+                            print(ress)
+                        case .failure(let err):
+                            print(err)
+                        }
+                    }
+                }
+                Button("GetEventsDay") {
                     Task {
                         let res = try? await LexueAPI.shared.GetEventsByDay(globalVar.cur_lexue_context, sesskey: globalVar.cur_lexue_sessKey, year: "2023", month: "10", day: "1")
                         switch res! {

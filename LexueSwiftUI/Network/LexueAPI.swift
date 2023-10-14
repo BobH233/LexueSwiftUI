@@ -268,6 +268,73 @@ class LexueAPI {
         return ret
     }
     
+    // 优化请求次数
+    func GetEventsByMonth(_ lexueContext: LexueContext, sesskey: String, year: String, month: String, retry: Bool = true) async throws -> Result<[EventInfo], LexueAPIError> {
+        let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_calendar_get_calendar_monthly_view", args: [
+            "courseid": 1,
+            "day": 1,
+            "month": month,
+            "year": year
+        ])
+        var ret = [EventInfo]()
+        try Task.checkCancellation()
+        if let data = serviceRet["data"] as? [String: Any], let weeks = data["weeks"] as? [[String: Any]] {
+            for week in weeks {
+                if let days = week["days"] as? [[String: Any]] {
+                    for day in days {
+                        if let events = day["events"] as? [[String: Any]] {
+                            for event in events {
+                                var curEvent = EventInfo()
+                                curEvent.id = String((event["id"] as? Int) ?? -1)
+                                curEvent.name = event["name"] as? String
+                                curEvent.description = event["description"] as? String
+                                curEvent.descriptionformat = event["descriptionformat"] as? Int
+                                curEvent.location = event["location"] as? String
+                                curEvent.component = event["component"] as? String
+                                curEvent.modulename = event["modulename"] as? String
+                                curEvent.instance = event["instance"] as? Int
+                                curEvent.eventtype = event["eventtype"] as? String
+                                if let timestart = event["timestart"] as? Int {
+                                    curEvent.timestart = Date(timeIntervalSince1970: TimeInterval(timestart))
+                                }
+                                if let timeusermidnight = event["timeusermidnight"] as? Int {
+                                    curEvent.timeusermidnight = Date(timeIntervalSince1970: TimeInterval(timeusermidnight))
+                                }
+                                if let course = event["course"] as? [String: Any] {
+                                    curEvent.course = ParseCourseObject(course: course)
+                                }
+                                if let action = event["action"] as? [String: Any], let action_url = action["url"] as? String {
+                                    curEvent.action_url = action_url
+                                }
+                                curEvent.url = event["url"] as? String
+                                if let mindaytimestamp = event["mindaytimestamp"] as? Int {
+                                    curEvent.mindaytimestamp = Date(timeIntervalSince1970: TimeInterval(mindaytimestamp))
+                                }
+                                ret.append(curEvent)
+                            }
+                        }
+                    }
+                }
+            }
+            return .success(ret)
+        } else {
+            if retry {
+                let result = await GetSessKey(GlobalVariables.shared.cur_lexue_context)
+                switch result {
+                case .success(let (sesskey, new_context)):
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.cur_lexue_sessKey = sesskey
+                    }
+                    return try await GetEventsByMonth(new_context == nil ? lexueContext : new_context!, sesskey: sesskey, year: year, month: month, retry: false)
+                case .failure(_):
+                    return .failure(.unknowError)
+                }
+            } else {
+                return .failure(.unknowError)
+            }
+        }
+    }
+    
     func GetEventsByDay(_ lexueContext: LexueContext, sesskey: String, year: String, month: String, day: String, retry: Bool = true) async throws -> Result<[EventInfo], LexueAPIError> {
         // print("fetching \(year).\(month).\(day) events")
         let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_calendar_get_calendar_day_view", args: [
