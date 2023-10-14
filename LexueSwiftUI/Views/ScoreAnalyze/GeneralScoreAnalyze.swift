@@ -184,6 +184,7 @@ struct ScreenshotView: View {
             ContentCardView(title0: "总体概览", color0: .blue) {
                 VStack {
                     PieView(slices: originView.$PieviewData)
+                        .frame(height: 400)
                         .padding(.horizontal, 20)
                     VStack {
                         if originView.score_90_cnt > 0 {
