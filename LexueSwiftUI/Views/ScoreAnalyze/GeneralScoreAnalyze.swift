@@ -49,6 +49,7 @@ struct PieView: View {
 
 // 一学期内的数据
 class SemesterData {
+    var semesterName: String = ""
     var totCredit: Float = 0
     var totScoreTimesCredit: Float = 0
     var gpaCredit: Float = 0
@@ -114,6 +115,7 @@ struct GeneralScoreAnalyze: View {
     @State var score_60_cnt: Int = 0
     @State var score_lower_60_cnt: Int = 0
     @State var semestersMap: [String: SemesterData] = [:]
+    @State var semesterArray: [SemesterData] = []
     @State var totalSemesterData = SemesterData()
     
     func GetTotalCountedCourseCnt() -> Int {
@@ -181,14 +183,20 @@ struct GeneralScoreAnalyze: View {
             }
             if semestersMap[course.semester] == nil {
                 semestersMap[course.semester] = SemesterData()
+                semestersMap[course.semester]?.semesterName = course.semester
             }
             semestersMap[course.semester]?.AddCourseScore(course: course)
         }
         
         for semester in semestersMap {
+            totalSemesterData.semesterName = "所有学期"
             totalSemesterData.MergeOthers(others: semester.value)
         }
-        
+        semesterArray = Array(semestersMap.values)
+        // 按照最近的学期进行排序
+        semesterArray.sort { sem1, sem2 in
+            return Webvpn.ScoreInfo.SemesterInt(semesterStr: sem1.semesterName) > Webvpn.ScoreInfo.SemesterInt(semesterStr: sem2.semesterName)
+        }
     }
     
     @State var data: [(Double, Color)] = []
