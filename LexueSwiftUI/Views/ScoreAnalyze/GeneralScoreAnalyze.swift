@@ -47,6 +47,65 @@ struct PieView: View {
     }
 }
 
+// 一学期内的数据
+class SemesterData {
+    var totCredit: Float = 0
+    var totScoreTimesCredit: Float = 0
+    var gpaCredit: Float = 0
+    var sumGpaTimesCredit: Float = 0
+    
+    func GetAvgTotal() -> Float {
+        return totCredit < 0.01 ? 0 : totScoreTimesCredit / totCredit
+    }
+    
+    func GetGpaTotal() -> Float {
+        return gpaCredit < 0.01 ? 0 : sumGpaTimesCredit / gpaCredit
+    }
+    
+    func MergeOthers(others: SemesterData) {
+        totCredit += others.totCredit
+        totScoreTimesCredit += others.totScoreTimesCredit
+        gpaCredit += others.gpaCredit
+        sumGpaTimesCredit += others.sumGpaTimesCredit
+    }
+    
+    func ConvertToGpa(score: String) -> (Bool, Float) {
+        let mp: [String: Float] = [
+            "优秀": 4,
+            "良好": 3.6,
+            "中等": 2.8,
+            "及格": 1.7,
+            "不及格": 0
+        ]
+        if let ret = mp[score] {
+            return (true, ret)
+        }
+        if var X = Float(score) {
+            if X < 60 {
+                X = 0
+            }
+            if X > 100 {
+                return (false, 0)
+            }
+            return (true, 4 - 3 * (100 - X) * (100 - X) / 1600.0)
+        } else {
+            return (false, 0)
+        }
+    }
+    
+    func AddCourseScore(course: Webvpn.ScoreInfo) {
+        if let credit = Float(course.credit), let score = Float(course.my_score) {
+            totCredit = totCredit + credit
+            totScoreTimesCredit = totScoreTimesCredit + credit * score
+        }
+        let (success, gpa) = ConvertToGpa(score: course.my_score)
+        if let credit = Float(course.credit), success {
+            gpaCredit = gpaCredit + credit
+            sumGpaTimesCredit = sumGpaTimesCredit + gpa * credit
+        }
+    }
+}
+
 struct GeneralScoreAnalyze: View {
     @Binding var allCourses: [Webvpn.ScoreInfo]
     @State var score_90_cnt: Int = 0
@@ -54,9 +113,8 @@ struct GeneralScoreAnalyze: View {
     @State var score_70_cnt: Int = 0
     @State var score_60_cnt: Int = 0
     @State var score_lower_60_cnt: Int = 0
-    
-    @State var avg_total: Float = 0
-    @State var gpa_total: Float = 0
+    @State var semestersMap: [String: SemesterData] = [:]
+    @State var totalSemesterData = SemesterData()
     
     func GetTotalCountedCourseCnt() -> Int {
         if score_90_cnt + score_80_cnt + score_70_cnt + score_60_cnt + score_lower_60_cnt == 0 {
@@ -90,13 +148,56 @@ struct GeneralScoreAnalyze: View {
         }
     }
     
+    func CalcScoreData() {
+        for course in allCourses {
+            if let score = Float(course.my_score) {
+                if score > 100 {
+                    continue
+                }
+                if score >= 90 {
+                    score_90_cnt = score_90_cnt + 1
+                } else if score >= 80 {
+                    score_80_cnt = score_80_cnt + 1
+                } else if score >= 70 {
+                    score_70_cnt = score_70_cnt + 1
+                } else if score >= 60 {
+                    score_60_cnt = score_60_cnt + 1
+                } else {
+                    score_lower_60_cnt = score_lower_60_cnt + 1
+                }
+            }
+        }
+        data.append(contentsOf: [
+            (Double(score_90_cnt), Color.green),
+            (Double(score_80_cnt), Color.blue),
+            (Double(score_70_cnt), Color.orange),
+            (Double(score_60_cnt), Color.yellow),
+            (Double(score_lower_60_cnt), Color.red),
+        ])
+        
+        for course in allCourses {
+            if course.semester.isEmpty {
+                continue
+            }
+            if semestersMap[course.semester] == nil {
+                semestersMap[course.semester] = SemesterData()
+            }
+            semestersMap[course.semester]?.AddCourseScore(course: course)
+        }
+        
+        for semester in semestersMap {
+            totalSemesterData.MergeOthers(others: semester.value)
+        }
+        
+    }
+    
     @State var data: [(Double, Color)] = []
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 ContentCardView(title0: "我的总平均分", color0: .blue) {
                     HStack {
-                        Text("\(String(format: "%.2f", avg_total)) 分")
+                        Text("\(String(format: "%.2f", totalSemesterData.GetAvgTotal())) 分")
                             .bold()
                             .foregroundColor(.black)
                             .font(.system(size: 30))
@@ -107,7 +208,18 @@ struct GeneralScoreAnalyze: View {
                 }
                 ContentCardView(title0: "我的总绩点", color0: .blue) {
                     HStack {
-                        Text("\(String(format: "%.2f", gpa_total)) 分")
+                        Text("\(String(format: "%.2f", totalSemesterData.GetGpaTotal())) 分")
+                            .bold()
+                            .foregroundColor(.black)
+                            .font(.system(size: 30))
+                            .padding(.bottom, 10)
+                            .padding(.leading, 20)
+                        Spacer()
+                    }
+                }
+                ContentCardView(title0: "已获得总学分", color0: .blue) {
+                    HStack {
+                        Text("\(String(format: "%.2f", totalSemesterData.totCredit)) 分")
                             .bold()
                             .foregroundColor(.black)
                             .font(.system(size: 30))
@@ -173,54 +285,8 @@ struct GeneralScoreAnalyze: View {
             }
             .padding(.horizontal)
         }
-        .onAppear {
-            for course in allCourses {
-                if let score = Float(course.my_score) {
-                    if score > 100 {
-                        continue
-                    }
-                    if score >= 90 {
-                        score_90_cnt = score_90_cnt + 1
-                    } else if score >= 80 {
-                        score_80_cnt = score_80_cnt + 1
-                    } else if score >= 70 {
-                        score_70_cnt = score_70_cnt + 1
-                    } else if score >= 60 {
-                        score_60_cnt = score_60_cnt + 1
-                    } else {
-                        score_lower_60_cnt = score_lower_60_cnt + 1
-                    }
-                }
-            }
-            data.append(contentsOf: [
-                (Double(score_90_cnt), Color.green),
-                (Double(score_80_cnt), Color.blue),
-                (Double(score_70_cnt), Color.orange),
-                (Double(score_60_cnt), Color.yellow),
-                (Double(score_lower_60_cnt), Color.red),
-            ])
-            var totCredit: Float = 0
-            var totScoreTimesCredit: Float = 0
-            
-            var gpaCredit: Float = 0
-            var sumGpaTimesCredit: Float = 0
-            for course in allCourses {
-                if let credit = Float(course.credit), let score = Float(course.my_score) {
-                    totCredit = totCredit + credit
-                    totScoreTimesCredit = totScoreTimesCredit + credit * score
-                }
-                let (success, gpa) = ConvertToGpa(score: course.my_score)
-                if let credit = Float(course.credit), success {
-                    gpaCredit = gpaCredit + credit
-                    sumGpaTimesCredit = sumGpaTimesCredit + gpa * credit
-                }
-            }
-            if totCredit != 0 {
-                avg_total = totScoreTimesCredit / totCredit
-            }
-            if gpaCredit != 0 {
-                gpa_total = sumGpaTimesCredit / gpaCredit
-            }
+        .onFirstAppear {
+            CalcScoreData()
         }
         .navigationTitle("成绩分析")
     }
