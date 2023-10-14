@@ -270,6 +270,7 @@ class LexueAPI {
     
     // 优化请求次数
     func GetEventsByMonth(_ lexueContext: LexueContext, sesskey: String, year: String, month: String, retry: Bool = true) async throws -> Result<[EventInfo], LexueAPIError> {
+        print("fetching \(year).\(month) events")
         let serviceRet = await UniversalServiceCall(lexueContext, sesskey: sesskey, methodName: "core_calendar_get_calendar_monthly_view", args: [
             "courseid": 1,
             "day": 1,
