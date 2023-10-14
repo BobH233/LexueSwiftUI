@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import SwiftUICharts
+
 // https://medium.com/@iOSchandra0/how-to-create-a-pie-chart-in-swiftui-c7f056d54c81
 struct PieView: View {
     @Binding var slices: [(Double, Color)]
@@ -52,15 +54,29 @@ class SemesterData {
     var semesterName: String = ""
     var totCredit: Float = 0
     var totScoreTimesCredit: Float = 0
+    // 这是预估的所有人的平均成绩
+    var totAvgCredit: Float = 0
+    var totAvgScoreTimesCredit: Float = 0
     var gpaCredit: Float = 0
     var sumGpaTimesCredit: Float = 0
+    // 预估所有人的平均gpt
+    var gpaAvgCredit: Float = 0
+    var sumAvgGpaTimesCredit: Float = 0
     
-    func GetAvgTotal() -> Float {
+    func GetMyAvgTotal() -> Float {
         return totCredit < 0.01 ? 0 : totScoreTimesCredit / totCredit
     }
     
-    func GetGpaTotal() -> Float {
+    func GetAllAvgTotal() -> Float {
+        return totAvgCredit < 0.01 ? 0 : totAvgScoreTimesCredit / totAvgCredit
+    }
+    
+    func GetMyGpaTotal() -> Float {
         return gpaCredit < 0.01 ? 0 : sumGpaTimesCredit / gpaCredit
+    }
+    
+    func GetAllGpaTotal() -> Float {
+        return gpaAvgCredit < 0.01 ? 0 : sumAvgGpaTimesCredit / gpaAvgCredit
     }
     
     func MergeOthers(others: SemesterData) {
@@ -68,6 +84,10 @@ class SemesterData {
         totScoreTimesCredit += others.totScoreTimesCredit
         gpaCredit += others.gpaCredit
         sumGpaTimesCredit += others.sumGpaTimesCredit
+        totAvgCredit += others.totAvgCredit
+        totAvgScoreTimesCredit += others.totAvgScoreTimesCredit
+        gpaAvgCredit += others.gpaAvgCredit
+        sumAvgGpaTimesCredit += others.sumAvgGpaTimesCredit
     }
     
     func ConvertToGpa(score: String) -> (Bool, Float) {
@@ -81,9 +101,9 @@ class SemesterData {
         if let ret = mp[score] {
             return (true, ret)
         }
-        if var X = Float(score) {
+        if let X = Float(score) {
             if X < 60 {
-                X = 0
+                return (true, 0)
             }
             if X > 100 {
                 return (false, 0)
@@ -99,10 +119,19 @@ class SemesterData {
             totCredit = totCredit + credit
             totScoreTimesCredit = totScoreTimesCredit + credit * score
         }
+        if let credit = Float(course.credit), let avg_score = Float(course.avg_score) {
+            totAvgCredit = totAvgCredit + credit
+            totAvgScoreTimesCredit = totAvgScoreTimesCredit + credit * avg_score
+        }
         let (success, gpa) = ConvertToGpa(score: course.my_score)
         if let credit = Float(course.credit), success {
             gpaCredit = gpaCredit + credit
             sumGpaTimesCredit = sumGpaTimesCredit + gpa * credit
+        }
+        let (success1, gpa1) = ConvertToGpa(score: course.avg_score)
+        if let credit = Float(course.credit), success1 {
+            gpaAvgCredit = gpaAvgCredit + credit
+            sumAvgGpaTimesCredit = sumAvgGpaTimesCredit + gpa1 * credit
         }
     }
 }
@@ -117,6 +146,7 @@ struct GeneralScoreAnalyze: View {
     @State var semestersMap: [String: SemesterData] = [:]
     @State var semesterArray: [SemesterData] = []
     @State var totalSemesterData = SemesterData()
+    @State var lineChartData: MultiLineChartData = MultiLineChartData(dataSets: MultiLineDataSet(dataSets: []))
     
     func GetTotalCountedCourseCnt() -> Int {
         if score_90_cnt + score_80_cnt + score_70_cnt + score_60_cnt + score_lower_60_cnt == 0 {
@@ -126,28 +156,25 @@ struct GeneralScoreAnalyze: View {
         }
     }
     
-    func ConvertToGpa(score: String) -> (Bool, Float) {
-        let mp: [String: Float] = [
-            "优秀": 4,
-            "良好": 3.6,
-            "中等": 2.8,
-            "及格": 1.7,
-            "不及格": 0
-        ]
-        if let ret = mp[score] {
-            return (true, ret)
+    func generateAvgScoreData(semesterArray: [SemesterData]) -> MultiLineChartData {
+        var points1: [LineChartDataPoint] = []
+        var points2: [LineChartDataPoint] = []
+        var xAxisLabels: [String] = []
+        var minGrade: Float = 100000
+        var maxGrade: Float = 0
+        for semester in semesterArray {
+            xAxisLabels.append(semester.semesterName)
+            points1.append(.init(value: Double(semester.GetMyAvgTotal()), xAxisLabel: semester.semesterName, description: semester.semesterName))
+            points2.append(.init(value: Double(semester.GetAllAvgTotal()), xAxisLabel: semester.semesterName, description: semester.semesterName))
+            minGrade = min(minGrade, semester.GetMyAvgTotal())
+            minGrade = min(minGrade, semester.GetAllAvgTotal())
+            maxGrade = max(maxGrade, semester.GetMyAvgTotal())
+            maxGrade = max(maxGrade, semester.GetAllAvgTotal())
         }
-        if var X = Float(score) {
-            if X < 60 {
-                X = 0
-            }
-            if X > 100 {
-                return (false, 0)
-            }
-            return (true, 4 - 3 * (100 - X) * (100 - X) / 1600.0)
-        } else {
-            return (false, 0)
-        }
+        let dataset1 = LineDataSet(dataPoints: points1, legendTitle: "我的成绩", pointStyle: PointStyle(pointType: .outline, pointShape: .circle), style: LineStyle(lineColour: ColourStyle(colours: [Color.red.opacity(0.50),                                        Color.red.opacity(0.00)],startPoint: .top,endPoint: .bottom)))
+        let dataset2 = LineDataSet(dataPoints: points2, legendTitle: "平均成绩", pointStyle: PointStyle(pointType: .outline, pointShape: .square), style: LineStyle(lineColour: ColourStyle(colours: [Color.blue.opacity(0.50),                                        Color.blue.opacity(0.00)],startPoint: .top,endPoint: .bottom)))
+        let multi_data = MultiLineDataSet(dataSets: [dataset1, dataset2])
+        return MultiLineChartData(dataSets: multi_data, metadata: ChartMetadata(title: "学期成绩历史"), xAxisLabels: xAxisLabels, chartStyle: LineChartStyle(infoBoxPlacement: .floating, markerType: .full(attachment: .point), yAxisTitle: "平均分", baseline: .minimumWithMaximum(of: max(Double(minGrade - 5), 0)), topLine: .maximum(of: min(Double(maxGrade + 5), 100))))
     }
     
     func CalcScoreData() {
@@ -169,7 +196,7 @@ struct GeneralScoreAnalyze: View {
                 }
             }
         }
-        data.append(contentsOf: [
+        PieviewData.append(contentsOf: [
             (Double(score_90_cnt), Color.green),
             (Double(score_80_cnt), Color.blue),
             (Double(score_70_cnt), Color.orange),
@@ -197,15 +224,17 @@ struct GeneralScoreAnalyze: View {
         semesterArray.sort { sem1, sem2 in
             return Webvpn.ScoreInfo.SemesterInt(semesterStr: sem1.semesterName) > Webvpn.ScoreInfo.SemesterInt(semesterStr: sem2.semesterName)
         }
+        
+        lineChartData = generateAvgScoreData(semesterArray: semesterArray.reversed())
     }
     
-    @State var data: [(Double, Color)] = []
+    @State var PieviewData: [(Double, Color)] = []
     var body: some View {
         ScrollView {
             VStack(spacing: 20) {
                 ContentCardView(title0: "我的总平均分", color0: .blue) {
                     HStack {
-                        Text("\(String(format: "%.2f", totalSemesterData.GetAvgTotal())) 分")
+                        Text("\(String(format: "%.2f", totalSemesterData.GetMyAvgTotal())) 分")
                             .bold()
                             .foregroundColor(.black)
                             .font(.system(size: 30))
@@ -216,7 +245,7 @@ struct GeneralScoreAnalyze: View {
                 }
                 ContentCardView(title0: "我的总绩点", color0: .blue) {
                     HStack {
-                        Text("\(String(format: "%.2f", totalSemesterData.GetGpaTotal())) 分")
+                        Text("\(String(format: "%.2f", totalSemesterData.GetMyGpaTotal())) 分")
                             .bold()
                             .foregroundColor(.black)
                             .font(.system(size: 30))
@@ -238,7 +267,7 @@ struct GeneralScoreAnalyze: View {
                 }
                 ContentCardView(title0: "总体概览", color0: .blue) {
                     VStack {
-                        PieView(slices: $data)
+                        PieView(slices: $PieviewData)
                             .padding(.horizontal, 20)
                         VStack {
                             if score_90_cnt > 0 {
@@ -290,6 +319,24 @@ struct GeneralScoreAnalyze: View {
                         .padding(.bottom, 15)
                     }
                 }
+                ContentCardView(title0: "各学期成绩", color0: .blue) {
+                    MultiLineChart(chartData: lineChartData)
+                        .touchOverlay(chartData: lineChartData, unit: .suffix(of: " 分"))
+                        .pointMarkers(chartData: lineChartData)
+                        .xAxisGrid(chartData: lineChartData)
+                        .yAxisGrid(chartData: lineChartData)
+                        .xAxisLabels(chartData: lineChartData)
+                        .yAxisLabels(chartData: lineChartData)
+                        .floatingInfoBox(chartData: lineChartData)
+                        .headerBox(chartData: lineChartData)
+                        .legends(chartData: lineChartData, columns: [GridItem(.flexible()), GridItem(.flexible())])
+                        .id(lineChartData.id)
+                        .frame(height: 400)
+                        .padding(.bottom, 20)
+                        .padding(.horizontal)
+                        .preferredColorScheme(.light)
+                }
+                
             }
             .padding(.horizontal)
         }
@@ -302,8 +349,11 @@ struct GeneralScoreAnalyze: View {
 
 #Preview {
     GeneralScoreAnalyze(allCourses: .constant([
-        Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用I", credit: "3", my_score: "81", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
-        Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用II", credit: "3", my_score: "90", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
-        Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用III", credit: "3", my_score: "93", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100")
+        Webvpn.ScoreInfo(semester: "2013-2014-1", courseName: "控制科学基本原理与应用I", credit: "3", my_score: "81", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
+        Webvpn.ScoreInfo(semester: "2013-2014-1", courseName: "控制科学基本原理与应用II", credit: "3", my_score: "90", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
+        Webvpn.ScoreInfo(semester: "2013-2014-1", courseName: "控制科学基本原理与应用III", credit: "3", my_score: "93", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
+        Webvpn.ScoreInfo(semester: "2013-2014-2", courseName: "控制科学基本原理与应用I", credit: "3", my_score: "81", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
+        Webvpn.ScoreInfo(semester: "2013-2014-2", courseName: "控制科学基本原理与应用II", credit: "3", my_score: "89", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
+        Webvpn.ScoreInfo(semester: "2013-2014-2", courseName: "控制科学基本原理与应用III", credit: "3", my_score: "79", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100")
     ]))
 }

@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "lightchart",
-      "kind" : "remoteSourceControl",
-      "location" : "git@github.com:pichukov/LightChart.git",
-      "state" : {
-        "revision" : "aa3d69ff883d4caa535586f5ce3b565b1bf14e4f",
-        "version" : "1.0.4"
-      }
-    },
-    {
       "identity" : "networkimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/NetworkImage",
@@ -79,6 +70,15 @@
       "state" : {
         "revision" : "a67dcaff2377573a51f75761bb6e768b78931909",
         "version" : "0.3.0"
+      }
+    },
+    {
+      "identity" : "swiftuicharts",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:willdale/SwiftUICharts.git",
+      "state" : {
+        "revision" : "53a3a2f16730af6709283f83a9dc75a3dde252ff",
+        "version" : "2.10.2"
       }
     },
     {

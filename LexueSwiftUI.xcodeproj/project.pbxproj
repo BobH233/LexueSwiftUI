@@ -37,6 +37,7 @@
 		473BAE9E2AA4C16D00968C3C /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473BAE9D2AA4C16D00968C3C /* GlobalVariables.swift */; };
 		473D88972AD126DD00E7EB63 /* WelcomeUseWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D88962AD126DD00E7EB63 /* WelcomeUseWidget.swift */; };
 		473D88992AD1955800E7EB63 /* GPTApiFree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473D88982AD1955800E7EB63 /* GPTApiFree.swift */; };
+		474304C42ADAAC3900EB2073 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 474304C32ADAAC3900EB2073 /* SwiftUICharts */; };
 		474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474515122AAB641700CCF24E /* ContactDetailView.swift */; };
 		47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */; };
 		474C9B792AA4E38D0064B5AF /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* EventListView.swift */; };
@@ -74,7 +75,6 @@
 		479B22E12AD571C400A7DCC7 /* ViewScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */; };
 		479B22E42AD57B0300A7DCC7 /* Tabler in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E32AD57B0300A7DCC7 /* Tabler */; };
 		479B22E72AD57D8100A7DCC7 /* Sideways in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E62AD57D8100A7DCC7 /* Sideways */; };
-		479B22EA2AD641E100A7DCC7 /* LightChart in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E92AD641E100A7DCC7 /* LightChart */; };
 		479B22EC2AD641FB00A7DCC7 /* ViewCourseScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B22EB2AD641FB00A7DCC7 /* ViewCourseScoreView.swift */; };
 		47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */; };
 		47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927822AA77FDA00ABDC53 /* DataController.swift */; };
@@ -321,9 +321,9 @@
 				47970AC52AC5AC7200C5BD03 /* UMCommonLog.framework in Frameworks */,
 				47970AC42AC5AC7200C5BD03 /* UMCommon.framework in Frameworks */,
 				47B442162AC6D3B700EE03A9 /* MarkdownUI in Frameworks */,
-				479B22EA2AD641E100A7DCC7 /* LightChart in Frameworks */,
 				47970ACB2AC5ACBA00C5BD03 /* libz.tbd in Frameworks */,
 				479839E02AAA2B9B0094C5E1 /* ImageViewerRemote in Frameworks */,
+				474304C42ADAAC3900EB2073 /* SwiftUICharts in Frameworks */,
 				479129C02AC309BA00F811F9 /* WebView in Frameworks */,
 				47FBC8C62AC579DD00FB1523 /* SystemConfiguration.framework in Frameworks */,
 				479839DE2AAA2B9B0094C5E1 /* ImageViewer in Frameworks */,
@@ -650,8 +650,8 @@
 				47B442152AC6D3B700EE03A9 /* MarkdownUI */,
 				479B22E32AD57B0300A7DCC7 /* Tabler */,
 				479B22E62AD57D8100A7DCC7 /* Sideways */,
-				479B22E92AD641E100A7DCC7 /* LightChart */,
 				476448402AD84B7700952A22 /* WrappingHStack */,
+				474304C32ADAAC3900EB2073 /* SwiftUICharts */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -693,8 +693,8 @@
 				47B442142AC6D3B700EE03A9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				479B22E22AD57B0300A7DCC7 /* XCRemoteSwiftPackageReference "SwiftTabler" */,
 				479B22E52AD57D8100A7DCC7 /* XCRemoteSwiftPackageReference "SwiftSideways" */,
-				479B22E82AD641E100A7DCC7 /* XCRemoteSwiftPackageReference "LightChart" */,
 				4764483F2AD84B7700952A22 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
+				474304C22ADAAC3900EB2073 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -1180,6 +1180,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		474304C22ADAAC3900EB2073 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:willdale/SwiftUICharts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.10.2;
+			};
+		};
 		475AFEF72AAF61C900C4020F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1236,14 +1244,6 @@
 				minimumVersion = 0.5.4;
 			};
 		};
-		479B22E82AD641E100A7DCC7 /* XCRemoteSwiftPackageReference "LightChart" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:pichukov/LightChart.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.4;
-			};
-		};
 		47B442142AC6D3B700EE03A9 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:gonzalezreal/swift-markdown-ui.git";
@@ -1255,6 +1255,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		474304C32ADAAC3900EB2073 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 474304C22ADAAC3900EB2073 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
+		};
 		475AFEF82AAF61C900C4020F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 475AFEF72AAF61C900C4020F /* XCRemoteSwiftPackageReference "Alamofire" */;
@@ -1294,11 +1299,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 479B22E52AD57D8100A7DCC7 /* XCRemoteSwiftPackageReference "SwiftSideways" */;
 			productName = Sideways;
-		};
-		479B22E92AD641E100A7DCC7 /* LightChart */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 479B22E82AD641E100A7DCC7 /* XCRemoteSwiftPackageReference "LightChart" */;
-			productName = LightChart;
 		};
 		47B442152AC6D3B700EE03A9 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
