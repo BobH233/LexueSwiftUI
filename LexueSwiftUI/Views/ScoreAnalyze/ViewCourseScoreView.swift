@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import LightChart
 
 private struct Triangle: Shape {
     func path(in rect: CGRect) -> Path {
