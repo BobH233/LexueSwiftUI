@@ -45,6 +45,13 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     var body: some View {
         Form {
+            Section("JXZX") {
+                Button("get_Context") {
+                    Task {
+                        let result = await JXZXehall.shared.GetJXZXContext(loginnedContext: SettingStorage.shared.loginnedContext)
+                    }
+                }
+            }
             Section("Webvpn") {
                 Button("loginWebvpn_queryScore") {
                     Task {

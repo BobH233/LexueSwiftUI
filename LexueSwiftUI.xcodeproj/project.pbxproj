@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4700A8042AD6ED8000F75386 /* GeneralScoreAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4700A8032AD6ED8000F75386 /* GeneralScoreAnalyze.swift */; };
+		47066F602ADC32200092F891 /* JXZXehall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47066F5F2ADC32200092F891 /* JXZXehall.swift */; };
 		470AFC662ACB15FB004C7F70 /* DataProviderBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */; };
 		470AFC682ACB16D6004C7F70 /* DataProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */; };
 		470AFC6A2ACB194D004C7F70 /* LexueDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */; };
@@ -182,6 +183,7 @@
 
 /* Begin PBXFileReference section */
 		4700A8032AD6ED8000F75386 /* GeneralScoreAnalyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralScoreAnalyze.swift; sourceTree = "<group>"; };
+		47066F5F2ADC32200092F891 /* JXZXehall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXZXehall.swift; sourceTree = "<group>"; };
 		470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderBase.swift; sourceTree = "<group>"; };
 		470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderManager.swift; sourceTree = "<group>"; };
 		470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueDataProvider.swift; sourceTree = "<group>"; };
@@ -507,6 +509,7 @@
 				47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */,
 				473D88982AD1955800E7EB63 /* GPTApiFree.swift */,
 				478B70552AD445190008865A /* Webvpn.swift */,
+				47066F5F2ADC32200092F891 /* JXZXehall.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -824,6 +827,7 @@
 				47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */,
 				47B442102AC6CDC400EE03A9 /* UserAgreement.swift in Sources */,
 				471A1D192AC9932C00A3D847 /* EventManager.swift in Sources */,
+				47066F602ADC32200092F891 /* JXZXehall.swift in Sources */,
 				47B4420D2AC5C34100EE03A9 /* PrivacyPolicyView.swift in Sources */,
 				47F4F29D2AC086A90047B395 /* ImageMoveAndScaleSheet+Extensions.swift in Sources */,
 				47BCFB992ACD6FD800320CFD /* AboutView.swift in Sources */,
