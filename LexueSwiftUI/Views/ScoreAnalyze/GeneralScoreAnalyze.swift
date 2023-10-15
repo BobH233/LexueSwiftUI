@@ -272,6 +272,7 @@ struct ScreenshotView: View {
                     .colorScheme(.light)
             }
             .colorScheme(.light)
+            LogoAdView()
             Color
                 .clear
                 .padding(.bottom, 20)

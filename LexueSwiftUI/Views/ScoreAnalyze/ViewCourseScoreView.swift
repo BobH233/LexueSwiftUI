@@ -136,6 +136,25 @@ struct ContentCardView<Content: View>: View {
     }
 }
 
+struct LogoAdView: View {
+    var body: some View {
+        VStack {
+            HStack {
+                Spacer()
+                Image("app_download_code")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height: 70)
+                    .border(.black)
+                Text("使用 \"i乐学助手\" 生成")
+                    .bold()
+                    .foregroundColor(.black)
+                Spacer()
+            }
+        }
+    }
+}
+
 struct ViewCourseScoreView: View {
     @Binding var currentCourse: Webvpn.ScoreInfo
     @Binding var allCourses: [Webvpn.ScoreInfo]
@@ -250,6 +269,10 @@ struct ViewCourseScoreView: View {
                                 .padding(.bottom, 90)
                         }
                     }
+                    if shareMode {
+                        Divider()
+                        LogoAdView()
+                    }
                     // 补齐底部
                     Color
                         .clear
@@ -290,7 +313,7 @@ struct ViewCourseScoreView: View {
                     }
                     shareMode = true
                     var currentSize = geometryProxy!.size
-                    currentSize.height += 60
+                    currentSize.height += 130
                     let result = self.body.snapshot(size: currentSize)
                     shareMode = false
                     UIImageWriteToSavedPhotosAlbum(result, nil, nil, nil)
@@ -326,9 +349,10 @@ struct ViewCourseScoreView: View {
 
 
 #Preview {
-    ViewCourseScoreView(currentCourse: .constant(Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用I", credit: "3", my_score: "81", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100")), allCourses: .constant([
-        Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用I", credit: "3", my_score: "81", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
-        Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用II", credit: "3", my_score: "90", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
-        Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用III", credit: "3", my_score: "93", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100")
-    ]))
+    LogoAdView()
+//    ViewCourseScoreView(currentCourse: .constant(Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用I", credit: "3", my_score: "81", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100")), allCourses: .constant([
+//        Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用I", credit: "3", my_score: "81", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
+//        Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用II", credit: "3", my_score: "90", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100"),
+//        Webvpn.ScoreInfo(courseName: "控制科学基本原理与应用III", credit: "3", my_score: "93", my_grade_in_major: "80%", my_grade_in_all: "83%", all_study_count: "80", major_study_count: "44", avg_score: "87.9", max_score: "100")
+//    ]))
 }
