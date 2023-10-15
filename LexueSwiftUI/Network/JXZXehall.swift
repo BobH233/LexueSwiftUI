@@ -19,6 +19,18 @@ class JXZXehall {
     // post
     let API_JXZX_APP_CONFIG = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/mobilepub/getAppConfig/wdksapMobile.do"
     
+    // 查询当前学期的信息, get
+    let API_JXZX_GET_CURRENT_SEMESTER = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/cxdqxnxq.do"
+    // 查询所有过往学期信息, get
+    // https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/xnxqcx.do?XH=学号&*order=-DM
+    let API_JXZX_GET_ALL_SEMESTERS = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/xnxqcx.do"
+    // 查询某学期的已排考试信息, post
+    // 表单 XNXQDM=2023-2024-1&*order=-KSRQ
+    let API_JXZX_GET_ARRANGED_EXAM = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/cxxsksap.do"
+    // 查询某学期未安排考试信息, post
+    // 表单 XNXQDM=2023-2024-1
+    let API_JXZX_GET_UNSCHEDULED_EXAM = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/cxwapdksrw.do"
+    
     let bit_login_header = [
         "Referer": "https://login.bit.edu.cn/authserver/login",
         "Host": "login.bit.edu.cn",
@@ -33,6 +45,33 @@ class JXZXehall {
     struct JXZXContext {
         var GS_SESSIONID: String = ""
         var _WEU: String = ""
+    }
+    
+    struct SemesterInfo {
+        // 形如 2023-2024-1
+        var semesterId: String = ""
+        // 形如 2023-2024学年 1学期
+        var semesterDescription: String = ""
+    }
+    
+    // 考试信息
+    struct ExamInfo {
+        // 考试地点 JASMC
+        var examLocation: String = ""
+        // 考试时间 KSSJMS
+        var examTime: String = ""
+        // 考试类型 KSMC, 分散考试/考试周集中考试 等
+        var examType: String = ""
+        // 座位号 ZWH
+        var seatIndex: String = ""
+        // 课程名称 KCH
+        var courseName: String = ""
+        // 老师名称 ZJJSXM
+        var teacherName: String = ""
+        // 课程号 KCH
+        var courseId: String = ""
+        // 考试日期凌晨 KSRQ 格式 2023-06-20 00:00:00 用于判断考试是否已完成
+        var examTimeMidnight: String = ""
     }
     
     enum JXZXError: Error {

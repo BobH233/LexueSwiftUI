@@ -348,8 +348,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "GetJXZXContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -396,8 +396,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "GetJXZXContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -412,8 +412,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "GetJXZXContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -428,8 +428,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "GetJXZXContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -444,8 +444,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
             landmarkName = "GetJXZXContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -460,8 +460,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "GetJXZXContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -476,8 +476,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "GetJXZXContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -492,72 +492,10 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "GetJXZXContext(loginnedContext:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "708F68E5-6258-4068-A43B-8E86445C3465 - 7201a7c4f1a860dc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "176">
-               </Location>
-               <Location
-                  uuid = "708F68E5-6258-4068-A43B-8E86445C3465 - a4f926ba10afa41a"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "260">
-               </Location>
-               <Location
-                  uuid = "708F68E5-6258-4068-A43B-8E86445C3465 - d752a12bb3adf858"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(6) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "356">
-               </Location>
-               <Location
-                  uuid = "708F68E5-6258-4068-A43B-8E86445C3465 - 5a730e17ef4813d0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(10) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "153"
-                  endingLineNumber = "153"
-                  offsetFromSymbolStart = "244">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -570,8 +508,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "GetJXZXContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -586,9 +524,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
-            landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:)"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:method:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -649,9 +587,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:)"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:method:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -697,9 +635,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:)"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:method:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -713,57 +651,10 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "GetJXZXContext(loginnedContext:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "10196A9A-8858-48CE-B0FC-46F34080A3DA - 9ca2198d2a33ba1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(8) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "216">
-               </Location>
-               <Location
-                  uuid = "10196A9A-8858-48CE-B0FC-46F34080A3DA - 1fa451b40a64782c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(9) await resume partial function for LexueSwiftUI.JXZXehall.GetJXZXContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "10196A9A-8858-48CE-B0FC-46F34080A3DA - 5a730e17ef4813f7"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(10) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
-                  moduleName = "LexueSwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "60">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
