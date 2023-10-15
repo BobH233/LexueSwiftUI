@@ -272,6 +272,7 @@ struct ScreenshotView: View {
                     .colorScheme(.light)
             }
             .colorScheme(.light)
+            Divider()
             LogoAdView()
             Color
                 .clear
