@@ -316,7 +316,7 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
-    func addEventStored(isCustomEvent: Bool, event_name: String?, event_description: String?, lexue_id: String?, timestart: Date?, timeusermidnight: Date?, mindaytimestamp: Date?, course_id: String?, course_name: String?, color: Color?, action_url: String?, event_type: String?, instance: Int64?, url: String?, context: NSManagedObjectContext) {
+    func addEventStored(isCustomEvent: Bool, event_name: String?, event_description: String?, lexue_id: String?, timestart: Date?, timeusermidnight: Date?, mindaytimestamp: Date?, course_id: String?, course_name: String?, color: Color?, action_url: String?, event_type: String?, instance: Int64?, url: String?, examCourseId: String? = nil, context: NSManagedObjectContext) {
         let eventStored = EventStored(context: context)
         eventStored.id = UUID()
         eventStored.action_url = action_url
@@ -335,6 +335,7 @@ class DataController: ObservableObject {
         eventStored.url = url
         eventStored.finish = false
         eventStored.user_deleted = false
+        eventStored.examCourseId = examCourseId
         save(context: context)
     }
     
@@ -355,6 +356,20 @@ class DataController: ObservableObject {
         }
     }
     
+    func findEventByExamCourseId(examCourseId: String, context: NSManagedObjectContext) -> EventStored? {
+        let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
+        request.predicate = NSPredicate(format: "examCourseId == %@", examCourseId)
+        do {
+            let results = try context.fetch(request)
+            if results.count > 0 {
+                return results.first
+            }
+        } catch {
+            print("findEventByExamCourseId失败：\(error)")
+        }
+        return nil
+    }
+    
     func findEventById(id: UUID, context: NSManagedObjectContext) -> EventStored? {
         let request: NSFetchRequest<EventStored> = EventStored.fetchRequest()
         request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
@@ -364,7 +379,7 @@ class DataController: ObservableObject {
                 return results.first
             }
         } catch {
-            print("查询消息列表失败：\(error)")
+            print("查询事件列表失败：\(error)")
         }
         return nil
     }

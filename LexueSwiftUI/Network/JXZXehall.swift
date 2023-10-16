@@ -84,6 +84,32 @@ class JXZXehall {
         // 考试日期凌晨 KSRQ 格式 2023-06-20 00:00:00 用于判断考试是否已完成
         var examTimeMidnight: String = ""
         
+        func GetExamStartDate() -> Date {
+            let components = examTime.components(separatedBy: "-")
+            if components.count >= 1 {
+                let datePart = components[0]
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                if let date = dateFormatter.date(from: datePart) {
+                    return date
+                } else {
+                    return GetMidNightDate()
+                }
+            } else {
+                return GetMidNightDate()
+            }
+        }
+        
+        func GetMidNightDate() -> Date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            if let date = dateFormatter.date(from: examTimeMidnight) {
+                return date
+            } else {
+                return .now
+            }
+        }
+        
         // 判断考试是否是已完成的考试
         func IsFinished() -> Bool {
             let dateFormatter = DateFormatter()

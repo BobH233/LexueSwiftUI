@@ -158,6 +158,8 @@ struct ExamInfoView: View {
     @State var finishedExam: [JXZXehall.ExamInfo] = []
     @State var unscheduledExam: [JXZXehall.UnscheduledExamInfo] = []
     
+    @Environment(\.managedObjectContext) var managedObjContext
+    
     func FetchSemesterInfo(semesterId: String) {
         withAnimation {
             loadingNew = true
@@ -209,6 +211,50 @@ struct ExamInfoView: View {
                     loadingNew = false
                 }
             }
+        }
+    }
+    
+    func GetDescriptionOfExam(_ exam: JXZXehall.ExamInfo) -> String {
+        var ret = ""
+        if !exam.examLocation.isEmpty {
+            ret += "地点: \(exam.examLocation); "
+        }
+        if !exam.examTime.isEmpty {
+            ret += "时间: \(exam.examTime); "
+        }
+        if !exam.seatIndex.isEmpty {
+            ret += "座位号: \(exam.seatIndex); "
+        }
+        return ret
+    }
+    
+    // 导入考试到事件，对于已经存在的事件，则是更新
+    func ImportOrUpdateExam() {
+        var import_cnt = 0
+        var update_cnt = 0
+        for exam in arrangedExam {
+            print(exam.courseName)
+            if let found = DataController.shared.findEventByExamCourseId(examCourseId: exam.courseId, context: managedObjContext) {
+                // 更新信息即可
+                print("-> Update")
+                found.isCustomEvent = true
+                found.name = "考试: \(exam.courseName)"
+                found.event_description = GetDescriptionOfExam(exam)
+                found.timestart = exam.GetExamStartDate()
+                found.event_type = "exam"
+                DataController.shared.save(context: managedObjContext)
+                update_cnt += 1
+            } else {
+                print("-> New")
+                // 新建考试项
+                DataController.shared.addEventStored(isCustomEvent: true, event_name: "考试: \(exam.courseName)", event_description: GetDescriptionOfExam(exam), lexue_id: nil, timestart: exam.GetExamStartDate(), timeusermidnight: nil, mindaytimestamp: nil, course_id: nil, course_name: nil, color: .orange, action_url: nil, event_type: "exam", instance: nil, url: nil, context: managedObjContext)
+                import_cnt += 1
+            }
+        }
+        DispatchQueue.main.async {
+            GlobalVariables.shared.alertTitle = "成功导入考试信息"
+            GlobalVariables.shared.alertContent = "新增了\(import_cnt)个考试事件，更新了\(update_cnt)个考试事件"
+            GlobalVariables.shared.showAlert = true
         }
     }
     
@@ -401,6 +447,22 @@ struct ExamInfoView: View {
                     }
                 }
                 .padding(.horizontal, 10)
+                .toolbar {
+                    ToolbarItem(placement: .primaryAction) {
+                        Menu {
+                            Section {
+                                Button(role: .destructive, action: {
+                                    ImportOrUpdateExam()
+                                }) {
+                                    Label("导入考试到最近事件", systemImage: "square.and.arrow.down")
+                                }
+                            }
+                        }
+                    label: {
+                        Label("Add", systemImage: "square.and.arrow.down")
+                    }
+                    }
+                }
             } else {
                 ProgressView()
                     .controlSize(.large)
