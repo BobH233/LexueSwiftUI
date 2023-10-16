@@ -83,6 +83,21 @@ class JXZXehall {
         var courseId: String = ""
         // 考试日期凌晨 KSRQ 格式 2023-06-20 00:00:00 用于判断考试是否已完成
         var examTimeMidnight: String = ""
+        
+        // 判断考试是否是已完成的考试
+        func IsFinished() -> Bool {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            if let date = dateFormatter.date(from: examTimeMidnight) {
+                if let oneDayLater = Calendar.current.date(byAdding: .day, value: 1, to: date) {
+                    return oneDayLater < Date.now
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        }
     }
     
     enum JXZXError: Error {

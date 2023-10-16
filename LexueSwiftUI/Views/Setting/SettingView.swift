@@ -15,6 +15,7 @@ struct SettingView: View {
     @State var showImageViewer = false
     @State var avatar_image = Image("default_avatar")
     @State var openViewScoreNavigation = false
+    @State var openExamInfoNavigation = false
     @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
     var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
     var body: some View {
@@ -93,13 +94,13 @@ struct SettingView: View {
                                     .padding(.bottom, 20)
                                 Spacer()
                             }
-                            NavigationLink("", destination: ViewScoreView(), isActive: $openViewScoreNavigation)
+                            NavigationLink("", destination: ExamInfoView(), isActive: $openExamInfoNavigation)
                                 .isDetailLink(false)
                                 .hidden()
                         }
                         .onTapGesture {
                             VibrateOnce()
-                            openViewScoreNavigation = true
+                            openExamInfoNavigation = true
                         }
                         .listRowInsets(EdgeInsets())
                     }

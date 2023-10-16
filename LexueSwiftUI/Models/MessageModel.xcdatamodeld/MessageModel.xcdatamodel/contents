@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="22G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="22G120" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="ContactStored" representedClassName="ContactStored" syncable="YES" codeGenerationType="class">
         <attribute name="alias" optional="YES" attributeType="String"/>
         <attribute name="avatar_data" optional="YES" attributeType="String"/>
@@ -42,6 +42,7 @@
         <attribute name="course_name" optional="YES" attributeType="String"/>
         <attribute name="event_description" optional="YES" attributeType="String"/>
         <attribute name="event_type" optional="YES" attributeType="String"/>
+        <attribute name="examCourseId" optional="YES" attributeType="String"/>
         <attribute name="finish" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="instance" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

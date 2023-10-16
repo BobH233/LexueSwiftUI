@@ -271,7 +271,7 @@ struct ViewScoreView: View {
             }
         } else if loadingData {
             ProgressView()
-                .scaleEffect(2)
+                .controlSize(.large)
                 .onAppear {
                     LoadScoresInfo()
                 }

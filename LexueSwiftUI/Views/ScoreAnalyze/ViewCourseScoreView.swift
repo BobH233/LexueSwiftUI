@@ -105,6 +105,7 @@ struct SimpleCardView: View {
 }
 
 struct ContentCardView<Content: View>: View {
+    @Environment(\.colorScheme) var sysColorScheme
     let title: String
     let content: () -> Content
     let color: Color
@@ -116,7 +117,7 @@ struct ContentCardView<Content: View>: View {
     var body: some View {
         ZStack{
             Rectangle()
-                .foregroundColor(.white)
+                .foregroundColor(sysColorScheme == .light ? .white : .secondarySystemBackground)
             VStack {
                 HStack {
                     Text(title)

@@ -451,3 +451,13 @@ extension View {
         }
     }
 }
+
+extension String {
+    func GuardNotEmpty() -> String {
+        if self.isEmpty {
+            return "无"
+        } else {
+            return self
+        }
+    }
+}
