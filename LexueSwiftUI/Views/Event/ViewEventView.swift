@@ -222,7 +222,7 @@ struct ViewEventView: View {
                         }
                     }
                 }
-                if event_obj!.course_id != nil || event_obj!.action_url != nil {
+                if (event_obj!.course_id != nil && !event_obj!.course_id!.isEmpty) || (event_obj!.action_url != nil && !event_obj!.action_url!.isEmpty) {
                     Section("操作") {
                         if let courseId = event_obj!.course_id, let courseInfo = GetCourseById(courseId) {
                             NavigationLink("\(courseInfo.fullname ?? "")") {
