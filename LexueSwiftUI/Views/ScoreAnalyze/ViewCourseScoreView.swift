@@ -109,6 +109,7 @@ struct ContentCardView<Content: View>: View {
     let title: String
     let content: () -> Content
     let color: Color
+    var forceWhite: Bool = false
     init(title0: String, color0: Color, @ViewBuilder content: @escaping () -> Content) {
         self.title = title0
         self.color = color0
@@ -117,7 +118,7 @@ struct ContentCardView<Content: View>: View {
     var body: some View {
         ZStack{
             Rectangle()
-                .foregroundColor(sysColorScheme == .light ? .white : .secondarySystemBackground)
+                .foregroundColor(forceWhite ? .white : (sysColorScheme == .light ? .white : .secondarySystemBackground))
             VStack {
                 HStack {
                     Text(title)
@@ -255,7 +256,7 @@ struct ViewCourseScoreView: View {
                             .padding(.bottom, 0)
                     }
                     if !currentCourse.my_grade_in_all.isEmpty && !currentCourse.all_study_count.isEmpty {
-                        ContentCardView(title0: "全部同学中(前\(currentCourse.my_grade_in_all))", color0: .blue) {
+                        ContentCardView(title0: "全部同学中(前\(currentCourse.my_grade_in_all))", color0: .blue, forceWhite: true) {
                             ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_all) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).1)")
                                 .padding(.horizontal, 10)
                                 .padding(.top, 10)
@@ -263,7 +264,7 @@ struct ViewCourseScoreView: View {
                         }
                     }
                     if !currentCourse.my_grade_in_major.isEmpty && !currentCourse.major_study_count.isEmpty {
-                        ContentCardView(title0: "同专业同学中(前\(currentCourse.my_grade_in_major))", color0: .blue) {
+                        ContentCardView(title0: "同专业同学中(前\(currentCourse.my_grade_in_major))", color0: .blue, forceWhite: true) {
                             ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_major) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).1)")
                                 .padding(.horizontal, 10)
                                 .padding(.top, 10)

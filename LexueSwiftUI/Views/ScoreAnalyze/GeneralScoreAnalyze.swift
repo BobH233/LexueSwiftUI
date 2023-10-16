@@ -148,7 +148,7 @@ struct ScreenshotView: View {
                 .padding(.bottom, 10)
                 .padding(.top, 20)
             
-            ContentCardView(title0: "我的总平均分", color0: .blue) {
+            ContentCardView(title0: "我的总平均分", color0: .blue, forceWhite: true) {
                 HStack {
                     Text("\(String(format: "%.2f", originView.totalSemesterData.GetMyAvgTotal())) 分")
                         .bold()
@@ -159,7 +159,7 @@ struct ScreenshotView: View {
                     Spacer()
                 }
             }
-            ContentCardView(title0: "我的总绩点", color0: .blue) {
+            ContentCardView(title0: "我的总绩点", color0: .blue, forceWhite: true) {
                 HStack {
                     Text("\(String(format: "%.2f", originView.totalSemesterData.GetMyGpaTotal())) 分")
                         .bold()
@@ -170,7 +170,7 @@ struct ScreenshotView: View {
                     Spacer()
                 }
             }
-            ContentCardView(title0: "已获得总学分", color0: .blue) {
+            ContentCardView(title0: "已获得总学分", color0: .blue, forceWhite: true) {
                 HStack {
                     Text("\(String(format: "%.2f", originView.totalSemesterData.totCredit)) 分")
                         .bold()
@@ -181,7 +181,7 @@ struct ScreenshotView: View {
                     Spacer()
                 }
             }
-            ContentCardView(title0: "总体概览", color0: .blue) {
+            ContentCardView(title0: "总体概览", color0: .blue, forceWhite: true) {
                 VStack {
                     PieView(slices: originView.$PieviewData)
                         .frame(height: 400)
@@ -236,7 +236,7 @@ struct ScreenshotView: View {
                     .padding(.bottom, 15)
                 }
             }
-            ContentCardView(title0: "各学期平均绩", color0: .blue) {
+            ContentCardView(title0: "各学期平均绩", color0: .blue, forceWhite: true) {
                 MultiLineChart(chartData: originView.lineChartAvgScoreData)
                     .touchOverlay(chartData: originView.lineChartAvgScoreData, specifier: "%.02f", unit: .suffix(of: " 分"))
                     .pointMarkers(chartData: originView.lineChartAvgScoreData)
@@ -254,7 +254,7 @@ struct ScreenshotView: View {
                     .colorScheme(.light)
             }
             .colorScheme(.light)
-            ContentCardView(title0: "各学期gpa绩", color0: .blue) {
+            ContentCardView(title0: "各学期gpa绩", color0: .blue, forceWhite: true) {
                 MultiLineChart(chartData: originView.lineChartAvgGpaData)
                     .touchOverlay(chartData: originView.lineChartAvgGpaData, specifier: "%.03f", unit: .suffix(of: ""))
                     .pointMarkers(chartData: originView.lineChartAvgGpaData)
