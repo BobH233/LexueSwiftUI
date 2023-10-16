@@ -110,10 +110,11 @@ struct ContentCardView<Content: View>: View {
     let content: () -> Content
     let color: Color
     var forceWhite: Bool = false
-    init(title0: String, color0: Color, @ViewBuilder content: @escaping () -> Content) {
+    init(title0: String, color0: Color, forceWhite: Bool = false, @ViewBuilder content: @escaping () -> Content) {
         self.title = title0
         self.color = color0
         self.content = content
+        self.forceWhite = forceWhite
     }
     var body: some View {
         ZStack{
