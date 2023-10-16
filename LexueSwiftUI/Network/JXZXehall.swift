@@ -86,8 +86,8 @@ class JXZXehall {
         
         func GetExamStartDate() -> Date {
             let components = examTime.components(separatedBy: "-")
-            if components.count >= 1 {
-                let datePart = components[0]
+            if components.count == 4 {
+                let datePart = "\(components[0])-\(components[1])-\(components[2])"
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
                 if let date = dateFormatter.date(from: datePart) {

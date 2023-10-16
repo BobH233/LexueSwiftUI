@@ -197,7 +197,7 @@ struct ExamInfoView: View {
                 DispatchQueue.main.async {
                     unscheduledExam = success
                 }
-            case .failure(let failure):
+            case .failure(_):
                 DispatchQueue.main.async {
                     GlobalVariables.shared.alertTitle = "无法拉取当前学期未安排的考试"
                     GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
@@ -351,7 +351,7 @@ struct ExamInfoView: View {
                         return a_prio > b_prio
                     }
                 }
-            case .failure(let failure):
+            case .failure(_):
                 DispatchQueue.main.async {
                     GlobalVariables.shared.alertTitle = "无法拉取当前学期未安排的考试"
                     GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
@@ -451,7 +451,7 @@ struct ExamInfoView: View {
                     ToolbarItem(placement: .primaryAction) {
                         Menu {
                             Section {
-                                Button(role: .destructive, action: {
+                                Button(action: {
                                     ImportOrUpdateExam()
                                 }) {
                                     Label("导入考试到最近事件", systemImage: "square.and.arrow.down")
