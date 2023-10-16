@@ -63,7 +63,8 @@ struct AddCustomEventView: View {
         gptAskContent = ""
         UMAnalyticsSwift.event(eventId: "use_gpt", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId])
         Task {
-            let result = await GPTApiFree.shared.RequestGPT(param: GPTApiFree.GPTRequestParam(messages: [
+            let result = await GPTApiFree.shared.RequestGPT(param: GPTApiFree.GPTRequestParam(modle: "gpt-3.5-turbo-16k",
+                                                                                              messages: [
                 GPTApiFree.GPTMessage(role: "system", content: GPTInstruction),
                 GPTApiFree.GPTMessage(role: "user", content: askContent)
             ]))
@@ -77,8 +78,15 @@ struct AddCustomEventView: View {
                         globalVar.alertContent = "可能是网络问题，您可以尝试再试一次..."
                         globalVar.showAlert = true
                     }
+                    return
                 }
-                let retJson = success_res.choices[0].message.content
+                var retJson = success_res.choices[0].message.content
+                // 只取出json部分内容，不要gpt的废话
+                if let startRange = retJson.range(of: "{"), let endRange = retJson.range(of: "}", options: .backwards) {
+                    let startIndex = startRange.upperBound
+                    let endIndex = endRange.lowerBound
+                    retJson = "{\(String(retJson[startIndex..<endIndex]))}"
+                }
                 print(retJson)
                 if let jsonData = retJson.data(using: .utf8), let jsonObj = try? JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
                     DispatchQueue.main.async {
@@ -108,9 +116,10 @@ struct AddCustomEventView: View {
                     DispatchQueue.main.async {
                         gptThinking = false
                         globalVar.alertTitle = "GPT返回值错误!"
-                        globalVar.alertContent = "可能是网络问题，您可以尝试再试一次..."
+                        globalVar.alertContent = "无法解析GPT返回的请求，请尝试重试"
                         globalVar.showAlert = true
                     }
+                    return
                 }
             case .failure(let error):
                 DispatchQueue.main.async {
@@ -119,6 +128,7 @@ struct AddCustomEventView: View {
                     globalVar.alertContent = "可能是网络问题，您可以尝试再试一次..."
                     globalVar.showAlert = true
                 }
+                return
             }
         }
     }
