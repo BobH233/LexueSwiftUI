@@ -16,6 +16,9 @@ class GlobalVariables: ObservableObject {
     let DEBUG_BUILD = true
     // TODO: 上架app store的时候改为app store
     let CURRENT_CHANNEL = "app_store"
+    // TODO: 上架app store的时候改成false!!! 分发Test flight的时候裁成true!!!
+    let TEST_FLIGHT_BUILD = false
+    
     
     var appVersion = "1.0"
     
