@@ -42,6 +42,8 @@ struct DebugDataView: View {
     
     @State var userId: String = ""
     
+    @State var JXZX_context: JXZXehall.JXZXContext = JXZXehall.JXZXContext()
+    
     @State var isPresentAlert = false
     var body: some View {
         Form {
@@ -49,6 +51,36 @@ struct DebugDataView: View {
                 Button("get_Context") {
                     Task {
                         let result = await JXZXehall.shared.GetJXZXContext(loginnedContext: SettingStorage.shared.loginnedContext)
+                        switch result {
+                        case .success(let context):
+                            JXZX_context = context
+                        case .failure(_):
+                            print("failed to get jxzx context!")
+                        }
+                    }
+                }
+                Button("get_current_semester") {
+                    Task {
+                        let result = await JXZXehall.shared.GetCurrentSemesterInfo(context: JXZX_context)
+                        print(result)
+                    }
+                }
+                Button("get_all_semester") {
+                    Task {
+                        let result = await JXZXehall.shared.GetAllSemesterInfo(context: JXZX_context)
+                        print(result)
+                    }
+                }
+                Button("get_unscheduled_exam") {
+                    Task {
+                        let result = await JXZXehall.shared.GetUnscheduledExam(context: JXZX_context, semesterId: "2023-2024-1")
+                        print(result)
+                    }
+                }
+                Button("get_arranged_exam") {
+                    Task {
+                        let result = await JXZXehall.shared.GetArrangedExam(context: JXZX_context, semesterId: "2022-2023-2")
+                        print(result)
                     }
                 }
             }

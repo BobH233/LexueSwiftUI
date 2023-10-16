@@ -22,8 +22,7 @@ class JXZXehall {
     // 查询当前学期的信息, get
     let API_JXZX_GET_CURRENT_SEMESTER = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/cxdqxnxq.do"
     // 查询所有过往学期信息, get
-    // https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/xnxqcx.do?XH=学号&*order=-DM
-    let API_JXZX_GET_ALL_SEMESTERS = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/xnxqcx.do"
+    let API_JXZX_GET_ALL_SEMESTERS = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/xnxqcx.do?*order=-DM"
     // 查询某学期的已排考试信息, post
     // 表单 XNXQDM=2023-2024-1&*order=-KSRQ
     let API_JXZX_GET_ARRANGED_EXAM = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/cxxsksap.do"
@@ -54,6 +53,18 @@ class JXZXehall {
         var semesterDescription: String = ""
     }
     
+    // 未安排的考试信息
+    struct UnscheduledExamInfo {
+        // 课程名 KCM
+        var courseName: String = ""
+        // 课程号 KCH
+        var courseId: String = ""
+        // 老师名字 ZJJSXM
+        var teacherName: String = ""
+        // 考试类型 KHFSDM_DISPLAY  考查 考试之类的
+        var examType: String = ""
+    }
+    
     // 考试信息
     struct ExamInfo {
         // 考试地点 JASMC
@@ -64,7 +75,7 @@ class JXZXehall {
         var examType: String = ""
         // 座位号 ZWH
         var seatIndex: String = ""
-        // 课程名称 KCH
+        // 课程名称 KCM
         var courseName: String = ""
         // 老师名称 ZJJSXM
         var teacherName: String = ""
@@ -79,6 +90,187 @@ class JXZXehall {
         case UnknowError
         case CannotGetTicket
         case JsonConvertError
+    }
+    
+    func GetUnscheduledExam(context: JXZXContext, semesterId: String) async -> Result<[UnscheduledExamInfo], JXZXError> {
+        var cur_headers = HTTPHeaders(jxzx_header)
+        cur_headers.add(name: "Referer", value: "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/*default/index.do")
+        cur_headers.add(name: "Cookie", value: "GS_SESSIONID=\(context.GS_SESSIONID); _WEU=\(context._WEU)")
+        let submitForm = [
+            "XNXQDM": semesterId
+        ]
+        let retJson = await withCheckedContinuation { continuation in
+            AF.requestWithoutCache(API_JXZX_GET_UNSCHEDULED_EXAM, method: .post, parameters: submitForm, encoding: URLEncoding.default, headers: cur_headers)
+                .response { result in
+                    switch result.result {
+                    case .success(let data):
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                            continuation.resume(returning: json)
+                        } else {
+                            print("无法将响应数据转换为字典")
+                            continuation.resume(returning: [String: Any]())
+                        }
+                    case .failure(_):
+                        print("请求 GetUnscheduledExam 失败")
+                        continuation.resume(returning: [String: Any]())
+                    }
+                }
+        }
+        if let datas = retJson["datas"] as? [String: Any], let cxwapdksrw = datas["cxwapdksrw"] as? [String: Any], let rows = cxwapdksrw["rows"] as? [[String: Any]], rows.count > 0 {
+            var ret: [UnscheduledExamInfo] = []
+            for row in rows {
+                var currentRow = UnscheduledExamInfo()
+                if let KHFSDM_DISPLAY = row["KHFSDM_DISPLAY"] as? String {
+                    currentRow.examType = KHFSDM_DISPLAY
+                }
+                if let ZJJSXM = row["ZJJSXM"] as? String {
+                    currentRow.teacherName = ZJJSXM
+                }
+                if let KCH = row["KCH"] as? String {
+                    currentRow.courseId = KCH
+                }
+                if let KCM = row["KCM"] as? String {
+                    currentRow.courseName = KCM
+                }
+                ret.append(currentRow)
+            }
+            return .success(ret)
+        } else {
+            return .failure(.JsonConvertError)
+        }
+    }
+    
+    func GetArrangedExam(context: JXZXContext, semesterId: String) async -> Result<[ExamInfo], JXZXError> {
+        var cur_headers = HTTPHeaders(jxzx_header)
+        cur_headers.add(name: "Referer", value: "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/*default/index.do")
+        cur_headers.add(name: "Cookie", value: "GS_SESSIONID=\(context.GS_SESSIONID); _WEU=\(context._WEU)")
+        let submitForm = [
+            "XNXQDM": semesterId,
+            "*order": "-KSRQ"
+        ]
+        let retJson = await withCheckedContinuation { continuation in
+            AF.requestWithoutCache(API_JXZX_GET_ARRANGED_EXAM, method: .post, parameters: submitForm, encoding: URLEncoding.default, headers: cur_headers)
+                .response { result in
+                    switch result.result {
+                    case .success(let data):
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                            continuation.resume(returning: json)
+                        } else {
+                            print("无法将响应数据转换为字典")
+                            continuation.resume(returning: [String: Any]())
+                        }
+                    case .failure(_):
+                        print("请求 GetArrangedExam 失败")
+                        continuation.resume(returning: [String: Any]())
+                    }
+                }
+        }
+        if let datas = retJson["datas"] as? [String: Any], let cxxsksap = datas["cxxsksap"] as? [String: Any], let rows = cxxsksap["rows"] as? [[String: Any]], rows.count > 0 {
+            var ret: [ExamInfo] = []
+            for row in rows {
+                var currentRow = ExamInfo()
+                if let JASMC = row["JASMC"] as? String {
+                    currentRow.examLocation = JASMC
+                }
+                if let KSSJMS = row["KSSJMS"] as? String {
+                    currentRow.examTime = KSSJMS
+                }
+                if let KSMC = row["KSMC"] as? String {
+                    currentRow.examType = KSMC
+                }
+                if let ZWH = row["ZWH"] as? String {
+                    currentRow.seatIndex = ZWH
+                }
+                if let KCM = row["KCM"] as? String {
+                    currentRow.courseName = KCM
+                }
+                if let ZJJSXM = row["ZJJSXM"] as? String {
+                    currentRow.teacherName = ZJJSXM
+                }
+                if let KCH = row["KCH"] as? String {
+                    currentRow.courseId = KCH
+                }
+                if let KSRQ = row["KSRQ"] as? String {
+                    currentRow.examTimeMidnight = KSRQ
+                }
+                ret.append(currentRow)
+            }
+            return .success(ret)
+        } else {
+            return .failure(.JsonConvertError)
+        }
+    }
+    
+    func GetAllSemesterInfo(context: JXZXContext) async -> Result<[SemesterInfo], JXZXError> {
+        var cur_headers = HTTPHeaders(jxzx_header)
+        cur_headers.add(name: "Referer", value: "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/*default/index.do")
+        cur_headers.add(name: "Cookie", value: "GS_SESSIONID=\(context.GS_SESSIONID); _WEU=\(context._WEU)")
+        let retJson = await withCheckedContinuation { continuation in
+            AF.requestWithoutCache(API_JXZX_GET_ALL_SEMESTERS, method: .get, headers: cur_headers).response { res in
+                switch res.result {
+                case .success(let data):
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                        continuation.resume(returning: json)
+                    } else {
+                        print("无法将响应数据转换为字典")
+                        continuation.resume(returning: [String: Any]())
+                    }
+                case .failure(_):
+                    print("GetAllSemesterInfo 失败")
+                    continuation.resume(returning: [String: Any]())
+                }
+            }
+        }
+        if let datas = retJson["datas"] as? [String: Any], let xnxqcx = datas["xnxqcx"] as? [String: Any], let rows = xnxqcx["rows"] as? [[String: Any]], rows.count > 0 {
+            var ret: [SemesterInfo] = []
+            for row in rows {
+                var currentRow = SemesterInfo()
+                if let DM = row["DM"] as? String {
+                    currentRow.semesterId = DM
+                }
+                if let MC = row["MC"] as? String {
+                    currentRow.semesterDescription = MC
+                }
+                ret.append(currentRow)
+            }
+            return .success(ret)
+        } else {
+            return .failure(.JsonConvertError)
+        }
+    }
+    
+    func GetCurrentSemesterInfo(context: JXZXContext) async -> Result<SemesterInfo, JXZXError> {
+        var cur_headers = HTTPHeaders(jxzx_header)
+        cur_headers.add(name: "Referer", value: "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/*default/index.do")
+        cur_headers.add(name: "Cookie", value: "GS_SESSIONID=\(context.GS_SESSIONID); _WEU=\(context._WEU)")
+        let retJson = await withCheckedContinuation { continuation in
+            AF.requestWithoutCache(API_JXZX_GET_CURRENT_SEMESTER, method: .get, headers: cur_headers).response { res in
+                switch res.result {
+                case .success(let data):
+                    if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                        continuation.resume(returning: json)
+                    } else {
+                        print("无法将响应数据转换为字典")
+                        continuation.resume(returning: [String: Any]())
+                    }
+                case .failure(_):
+                    print("GetCurrentSemesterInfo 失败")
+                    continuation.resume(returning: [String: Any]())
+                }
+            }
+        }
+        if let datas = retJson["datas"] as? [String: Any], let cxdqxnxq = datas["cxdqxnxq"] as? [String: Any], let rows = cxdqxnxq["rows"] as? [[String: Any]], rows.count > 0 {
+            var ret = SemesterInfo()
+            if let semesterId = rows[0]["DM"] as? String {
+                ret.semesterId = semesterId
+            }
+            if let semesterDescription = rows[0]["MC"] as? String {
+                ret.semesterDescription = semesterDescription
+            }
+            return .success(ret)
+        } else {
+            return .failure(.JsonConvertError)
+        }
     }
     
     private func GetTicketLoginUrl(loginnedContext: BITLogin.LoginSuccessContext) async -> String {

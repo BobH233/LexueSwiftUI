@@ -61,7 +61,31 @@ struct SettingView: View {
                                 .foregroundColor(.blue)
                             HStack {
                                 Spacer()
-                                Text("查成绩")
+                                Text("查课程成绩")
+                                    .bold()
+                                    .font(.system(size: 35))
+                                    .foregroundColor(.white)
+                                    .padding(.top, 20)
+                                    .padding(.bottom, 20)
+                                Spacer()
+                            }
+                            NavigationLink("", destination: ViewScoreView(), isActive: $openViewScoreNavigation)
+                                .isDetailLink(false)
+                                .hidden()
+                        }
+                        .onTapGesture {
+                            VibrateOnce()
+                            openViewScoreNavigation = true
+                        }
+                        .listRowInsets(EdgeInsets())
+                    }
+                    Section {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.blue)
+                            HStack {
+                                Spacer()
+                                Text("看考试安排")
                                     .bold()
                                     .font(.system(size: 35))
                                     .foregroundColor(.white)

@@ -34,7 +34,7 @@ struct ContentView: View {
                 .tag(4)
                 .tabItem {
                     Image(systemName: "gear")
-                    Text("设置")
+                    Text("个人中心")
                 }
         }
         .onOpenURL { incomingURL in
