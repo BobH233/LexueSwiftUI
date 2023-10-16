@@ -1074,6 +1074,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "i乐学助手";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "需要访问你的日历来自动导入事件提醒";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要访问你的摄像头来进行应用内作业拍摄等功能";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要访问你的相册以存储照片";
 				INFOPLIST_KEY_NSRemindersUsageDescription = "需要访问你的提醒事项来自动导入事件提醒";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "i乐学助手仅将此功能用于app用量统计与用户来源分析，如果你不同意跟踪，乐学助手将不对你进行跟踪";
@@ -1126,6 +1127,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "i乐学助手";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "需要访问你的日历来自动导入事件提醒";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要访问你的摄像头来进行应用内作业拍摄等功能";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "需要访问你的相册以存储照片";
 				INFOPLIST_KEY_NSRemindersUsageDescription = "需要访问你的提醒事项来自动导入事件提醒";
 				INFOPLIST_KEY_NSUserTrackingUsageDescription = "i乐学助手仅将此功能用于app用量统计与用户来源分析，如果你不同意跟踪，乐学助手将不对你进行跟踪";
