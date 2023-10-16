@@ -436,7 +436,7 @@ struct GeneralScoreAnalyze: View {
                         .font(.system(size: 40))
                         .padding(.bottom, 10)
                 }
-                ContentCardView(title0: "我的总平均分", color0: .blue) {
+                ContentCardView(title0: "我的总平均分", color0: .blue, forceWhite: true) {
                     HStack {
                         Text("\(String(format: "%.2f", totalSemesterData.GetMyAvgTotal())) 分")
                             .bold()
@@ -447,7 +447,7 @@ struct GeneralScoreAnalyze: View {
                         Spacer()
                     }
                 }
-                ContentCardView(title0: "我的总绩点", color0: .blue) {
+                ContentCardView(title0: "我的总绩点", color0: .blue, forceWhite: true) {
                     HStack {
                         Text("\(String(format: "%.2f", totalSemesterData.GetMyGpaTotal())) 分")
                             .bold()
@@ -458,7 +458,7 @@ struct GeneralScoreAnalyze: View {
                         Spacer()
                     }
                 }
-                ContentCardView(title0: "已获得总学分", color0: .blue) {
+                ContentCardView(title0: "已获得总学分", color0: .blue, forceWhite: true) {
                     HStack {
                         Text("\(String(format: "%.2f", totalSemesterData.totCredit)) 分")
                             .bold()
@@ -469,7 +469,7 @@ struct GeneralScoreAnalyze: View {
                         Spacer()
                     }
                 }
-                ContentCardView(title0: "总体概览", color0: .blue) {
+                ContentCardView(title0: "总体概览", color0: .blue, forceWhite: true) {
                     VStack {
                         PieView(slices: $PieviewData)
                             .padding(.horizontal, 20)
@@ -523,7 +523,7 @@ struct GeneralScoreAnalyze: View {
                         .padding(.bottom, 15)
                     }
                 }
-                ContentCardView(title0: "各学期平均绩", color0: .blue) {
+                ContentCardView(title0: "各学期平均绩", color0: .blue, forceWhite: true) {
                     MultiLineChart(chartData: lineChartAvgScoreData)
                         .touchOverlay(chartData: lineChartAvgScoreData, specifier: "%.02f", unit: .suffix(of: " 分"))
                         .pointMarkers(chartData: lineChartAvgScoreData)
@@ -541,7 +541,7 @@ struct GeneralScoreAnalyze: View {
                         .colorScheme(.light)
                 }
                 .colorScheme(.light)
-                ContentCardView(title0: "各学期gpa绩", color0: .blue) {
+                ContentCardView(title0: "各学期gpa绩", color0: .blue, forceWhite: true) {
                     MultiLineChart(chartData: lineChartAvgGpaData)
                         .touchOverlay(chartData: lineChartAvgGpaData, specifier: "%.03f", unit: .suffix(of: ""))
                         .pointMarkers(chartData: lineChartAvgGpaData)

@@ -3,10 +3,171 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "EventManager.GetTodayEventCount(today:):EventManager.swift">
+         contextName = "closure #1 in closure #2 in JXZXehall.GetJXZXContext(loginnedContext:):JXZXehall.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataController.getFavoriteURLs(context:):DataController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "event.timestart">
+               value = "results[0].title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EventManager.LoadEventList():EventManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "event.finish">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InfoMergingDataProvider.loadPushedMessage():InfoMergingDataProvider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pushedMessage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "JXZXehall.GetArrangedExam(context:semesterId:):JXZXehall.swift">
+      </ContextState>
+      <ContextState
+         contextName = "getAesString(data:key0:iv0:):BITLogin.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "keyData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InfoMergingDataProvider.savePushedMessage():InfoMergingDataProvider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pushedMessage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingStorage.set_widget_shared_LexueContext(_:):SettingStorage.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Provider.getTimeline(in:completion:):Provider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "GlobalVariables.shared.cur_lexue_context">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ViewEventView.body.getter:ViewEventView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "event_obj">
+            </PersistentString>
+            <PersistentString
+               value = "event_obj.name">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LexueSwiftUIApp.getPreferredColorScheme():LexueSwiftUIApp.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sysColorScheme">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in LexueAPI.GetLexueContext(_:completion:):LexueAPI.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataController.blurSearchMessage(keyword:context:):DataController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "(MessageStored)((id)0x600002171400)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in CourseCardView.body.getter:CourseListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "imageData">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingStorage.cacheUserInfo.didset:SettingStorage.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cacheUserInfo">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HTMLText.body.getter:CoursePreviewView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "html">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+            </PersistentString>
+            <PersistentString
+               value = "savedUsername">
+            </PersistentString>
+            <PersistentString
+               value = "UserDefaults.standard">
+            </PersistentString>
+            <PersistentString
+               value = "savedPassword">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "bottom_scrolled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #2 in AppStatusManager.action_after_get_lexue_context(_:):AppStatusManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "GlobalVariables.shared.cur_user_info">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in GeneralScoreAnalyze.body.getter:GeneralScoreAnalyze.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "gpa_total">
+            </PersistentString>
+            <PersistentString
+               value = "avg_total">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in getAesString(data:key0:iv0:):BITLogin.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "response.response?.allHeaderFields as? [String: String]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -25,23 +186,45 @@
          contextName = "closure #1 in closure #1 in closure #1 in closure #1 in DebugDataView.body.getter:DebugDataView.swift">
       </ContextState>
       <ContextState
-         contextName = "InfoMergingDataProvider.loadPushedMessage():InfoMergingDataProvider.swift">
+         contextName = "BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FavoriteURLView.favoriteUrls.setter:FavoriteURLView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "pushedMessage">
+               value = "favoriteUrls">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #2 in EditFavoriteURLView.body.getter:FavoriteURLView.swift">
+         contextName = "SettingStorage.().init():SettingStorage.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CoreLogicManager.refreshSelfUserInfo():CoreLogicManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "url.absoluteString">
+               value = "GlobalVariables.shared.cur_lexue_context">
+            </PersistentString>
+            <PersistentString
+               value = "refreshSelfUserInfo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #2 in JXZXehall.GetJXZXContext(loginnedContext:):JXZXehall.swift">
+         contextName = "ListView.refreshToolbar.getter:MessageListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "refreshAction">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SystemEventEditViewController.event.getter:ViewEventView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "event_name">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "LexueAPI.ParseSelfUserInfo(_:):LexueAPI.swift">
@@ -52,10 +235,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "InfoMergingDataProvider.savePushedMessage():InfoMergingDataProvider.swift">
+         contextName = "closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "pushedMessage">
+               value = "sysColorScheme">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in JXZXehall.GetJXZXContext(loginnedContext:):JXZXehall.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tmpWEU">
+            </PersistentString>
+            <PersistentString
+               value = "second_cookie">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in BubbleImageMessageView.body.getter:MessageDetailView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "message.messageBody.">
+            </PersistentString>
+            <PersistentString
+               value = "message">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -77,68 +282,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "EventManager.FinishEvent(id:isFinish:context:):EventManager.swift">
+         contextName = "closure #4 in closure #1 in CourseDetailView.body.getter:CourseDetailView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "event?.finish">
-            </PersistentString>
-            <PersistentString
-               value = "event?.course_name">
+               value = "sections">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
+         contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedPassword">
+               value = "event.name">
             </PersistentString>
-            <PersistentString
-               value = "savedUsername">
-            </PersistentString>
-            <PersistentString
-               value = "UserDefaults.standard">
-            </PersistentString>
-            <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "MessageManager.PushMessageWithContactCreation(senderUid:contactOriginNameIfMissing:contactTypeIfMissing:msgBody:date:notify:context:):MessageManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "allowNotification">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LexueAPI.GetSelfUserInfo(_:):LexueAPI.swift">
-      </ContextState>
-      <ContextState
-         contextName = "static EventManager.IsTodayEvent(event:today:):EventManager.swift">
-         <PersistentStrings>
             <PersistentString
                value = "event.id">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in LexueAPI.GetLexueContext(_:completion:):LexueAPI.swift">
-      </ContextState>
-      <ContextState
-         contextName = "SettingStorage.().init():SettingStorage.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in BubbleImageMessageView.body.getter:MessageDetailView.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "message.messageBody.">
-            </PersistentString>
-            <PersistentString
-               value = "message">
+               value = "event.timestart">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in AddCustomEventView.AskGpt():AddCustomEventView.swift">
       </ContextState>
       <ContextState
          contextName = "CourseManager.DiffAndUpdateCacheCourses(_:):CourseManager.swift">
@@ -149,18 +315,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UMengManager.AppStartLogic():UMengManager.swift">
+         contextName = "MessageListView.refreshToolbar.getter:MessageListView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "GlobalVariables.shared.CURRENT_CHANNEL">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "Provider.getTimeline(in:completion:):Provider.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "GlobalVariables.shared.cur_lexue_context">
+               value = "refreshAction">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -176,48 +334,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in ViewEventView.body.getter:ViewEventView.swift">
+         contextName = "UMengManager.AppStartLogic():UMengManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "event_obj">
+               value = "GlobalVariables.shared.CURRENT_CHANNEL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "EventManager.FinishEvent(id:isFinish:context:):EventManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "event?.finish">
             </PersistentString>
             <PersistentString
-               value = "event_obj.name">
+               value = "event?.course_name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in LexueAPI.GetLexueContext(_:completion:):LexueAPI.swift">
-      </ContextState>
-      <ContextState
-         contextName = "MessageListView.refreshToolbar.getter:MessageListView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "refreshAction">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ListView.refreshToolbar.getter:MessageListView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "refreshAction">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "event.id">
-            </PersistentString>
-            <PersistentString
-               value = "event.timestart">
-            </PersistentString>
-            <PersistentString
-               value = "event.name">
-            </PersistentString>
-         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "SettingStorage.loginnedContext.didset:SettingStorage.swift">
@@ -228,10 +364,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in BITLogin.init_login_param(completion:):BITLogin.swift">
+         contextName = "LexueAPI.GetSelfUserInfo(_:):LexueAPI.swift">
+      </ContextState>
+      <ContextState
+         contextName = "LexueDataProvider.CheckEventUpdate():LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
-               value = "headers">
+               value = "record.eventUUID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ContentCardView.body.getter:ViewCourseScoreView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "forceWhite">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #2 in EditFavoriteURLView.body.getter:FavoriteURLView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "url.absoluteString">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -244,113 +399,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DataController.blurSearchMessage(keyword:context:):DataController.swift">
+         contextName = "EventManager.GetTodayEventCount(today:):EventManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "(MessageStored)((id)0x600002171400)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in GeneralScoreAnalyze.body.getter:GeneralScoreAnalyze.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "gpa_total">
-            </PersistentString>
-            <PersistentString
-               value = "avg_total">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LexueDataProvider.CheckEventUpdate():LexueDataProvider.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "record.eventUUID">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in closure #1 in closure #1 in closure #1 in MessageDetailView.body.getter:MessageDetailView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "bottom_scrolled">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SystemEventEditViewController.event.getter:ViewEventView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "event_name">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #2 in AppStatusManager.action_after_get_lexue_context(_:):AppStatusManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "GlobalVariables.shared.cur_user_info">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #4 in closure #1 in CourseDetailView.body.getter:CourseDetailView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "sections">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LexueSwiftUIApp.getPreferredColorScheme():LexueSwiftUIApp.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "sysColorScheme">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
-      </ContextState>
-      <ContextState
-         contextName = "getAesString(data:key0:iv0:):BITLogin.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "keyData">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in getAesString(data:key0:iv0:):BITLogin.swift">
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in JXZXehall.GetJXZXContext(loginnedContext:):JXZXehall.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "tmpWEU">
-            </PersistentString>
-            <PersistentString
-               value = "second_cookie">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HTMLText.body.getter:CoursePreviewView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "html">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SettingStorage.set_widget_shared_LexueContext(_:):SettingStorage.swift">
-      </ContextState>
-      <ContextState
-         contextName = "SettingStorage.cacheUserInfo.didset:SettingStorage.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "cacheUserInfo">
+               value = "event.timestart">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -363,64 +415,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FavoriteURLView.favoriteUrls.setter:FavoriteURLView.swift">
+         contextName = "closure #1 in BITLogin.init_login_param(completion:):BITLogin.swift">
          <PersistentStrings>
             <PersistentString
-               value = "favoriteUrls">
+               value = "headers">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
+         contextName = "MessageManager.PushMessageWithContactCreation(senderUid:contactOriginNameIfMissing:contactTypeIfMissing:msgBody:date:notify:context:):MessageManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "sysColorScheme">
+               value = "allowNotification">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CoreLogicManager.refreshSelfUserInfo():CoreLogicManager.swift">
+         contextName = "static EventManager.IsTodayEvent(event:today:):EventManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "GlobalVariables.shared.cur_lexue_context">
-            </PersistentString>
-            <PersistentString
-               value = "refreshSelfUserInfo">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #2 in CourseCardView.body.getter:CourseListView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "imageData">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DataController.getFavoriteURLs(context:):DataController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "results[0].title">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.response?.statusCode">
-            </PersistentString>
-            <PersistentString
-               value = "response.response?.allHeaderFields as? [String: String]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "EventManager.LoadEventList():EventManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "event.finish">
+               value = "event.id">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -109,7 +109,7 @@ struct ContentCardView<Content: View>: View {
     let title: String
     let content: () -> Content
     let color: Color
-    var forceWhite: Bool = false
+    let forceWhite: Bool
     init(title0: String, color0: Color, forceWhite: Bool = false, @ViewBuilder content: @escaping () -> Content) {
         self.title = title0
         self.color = color0
@@ -118,8 +118,14 @@ struct ContentCardView<Content: View>: View {
     }
     var body: some View {
         ZStack{
-            Rectangle()
-                .foregroundColor(forceWhite ? .white : (sysColorScheme == .light ? .white : .secondarySystemBackground))
+            if forceWhite {
+                Rectangle()
+                    .foregroundColor(.white)
+            } else {
+                Rectangle()
+                    .foregroundColor(sysColorScheme == .light ? .white : .secondarySystemBackground)
+            }
+            
             VStack {
                 HStack {
                     Text(title)
