@@ -10,7 +10,6 @@ import UserNotifications
 import Foundation
 import SwiftUI
 
-
 class LocalNotificationManager: ObservableObject {
     static let shared = LocalNotificationManager()
     
@@ -31,12 +30,14 @@ class LocalNotificationManager: ObservableObject {
             }
     }
     
-    func GuardNotificationPermission() {
+    func GuardNotificationPermission(authorizedCB: @escaping () -> Void = {}) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .authorized:
                 print("已授权，用户允许通知")
                 self.isAllowNotification = true
+                // 注册远程通知，获取设备deviceId
+                authorizedCB()
             case .notDetermined:
                 self.RequestPermission()
             case .denied:

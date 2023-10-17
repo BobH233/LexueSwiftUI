@@ -47,6 +47,9 @@ class GlobalVariables: ObservableObject {
     
     @Published var defaultUIImage: UIImage?
     
+    // 用于消息推送用
+    @Published var deviceToken: String? = nil
+    
     // 是否允许app进行跟踪
     @Published var enableTracking: Bool = false
     

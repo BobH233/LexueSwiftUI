@@ -13,9 +13,26 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Show local notification in foreground
         UNUserNotificationCenter.current().delegate = self
-        
+        // 确保消息权限，获取推送用的deviceID
+        LocalNotificationManager.shared.GuardNotificationPermission() {
+            // 如果允许通知，则尝试获取deviceId
+            DispatchQueue.main.async {
+                application.registerForRemoteNotifications()
+            }
+        }
         return true
     }
+    
+    // 接收到了deviceId
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+        print("Device Token: \(token)")
+        DispatchQueue.main.async {
+            GlobalVariables.shared.deviceToken = token
+        }
+    }
+    
     // 禁止横屏
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         return .portrait

@@ -1,0 +1,8 @@
+{
+  "name": "LexueAPIBackend",
+  "version": "1.0.0",
+  "description": "Provide cloud service for LexueHelper",
+  "main": "index.js",
+  "author": "BobH",
+  "license": "MIT"
+}
