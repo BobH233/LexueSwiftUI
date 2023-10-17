@@ -1,6 +1,7 @@
 // 用于添加用户的deviceToken，群发apns消息等
 const express = require("express");
 const data_storage = require("../data_storage/data_storage");
+const Logger = require("../utils/Logger");
 
 const registerDevice = async (req, res, next) => {
   try {
@@ -36,6 +37,7 @@ const registerDevice = async (req, res, next) => {
       error: "Set device token successfully",
       qaq: "杂鱼❤杂鱼~~",
     });
+    Logger.LogInfo(`用户${userId} 注册了消息接口 dtoken=${deviceToken}`)
   } catch (err) {
     next(err);
   }

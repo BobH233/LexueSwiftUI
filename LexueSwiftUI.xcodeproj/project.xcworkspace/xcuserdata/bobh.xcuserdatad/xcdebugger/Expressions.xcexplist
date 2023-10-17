@@ -98,6 +98,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "LexueHelperBackend.RegisterDeviceTokenForServer(userId:deviceToken:):LexueHelperBackend.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "API_REGISTER_DEVICE_TOKEN">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "SettingStorage.cacheUserInfo.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
@@ -120,7 +128,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -129,7 +137,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -304,13 +312,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
+               value = "event.name">
+            </PersistentString>
+            <PersistentString
                value = "event.timestart">
             </PersistentString>
             <PersistentString
                value = "event.id">
-            </PersistentString>
-            <PersistentString
-               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -378,6 +386,17 @@
          contextName = "LexueAPI.GetSelfUserInfo(_:):LexueAPI.swift">
       </ContextState>
       <ContextState
+         contextName = "specialized closure #1 in MessageListView.RecalcUnread():MessageListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tmpTotal">
+            </PersistentString>
+            <PersistentString
+               value = "totalUnread">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in ContentCardView.body.getter:ViewCourseScoreView.swift">
          <PersistentStrings>
             <PersistentString
@@ -390,17 +409,6 @@
          <PersistentStrings>
             <PersistentString
                value = "record.eventUUID">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "specialized closure #1 in MessageListView.RecalcUnread():MessageListView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "tmpTotal">
-            </PersistentString>
-            <PersistentString
-               value = "totalUnread">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

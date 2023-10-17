@@ -43,7 +43,7 @@ const save_data = () => {
 
 module.exports = {
   getRegisteredDevices: () => RegisteredDevices,
-  FetchedMessages,
+  getFetchedMessages: () => FetchedMessages,
   load_data,
   save_data
 }

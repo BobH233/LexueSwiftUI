@@ -47,6 +47,13 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     var body: some View {
         Form {
+            Section("Backend") {
+                Button("UploadDeviceToken") {
+                    Task {
+                        let res = await LexueHelperBackend.shared.RegisterDeviceTokenForServer(userId: "12345", deviceToken: "23333")
+                    }
+                }
+            }
             Section("JXZX") {
                 Button("get_Context") {
                     Task {
