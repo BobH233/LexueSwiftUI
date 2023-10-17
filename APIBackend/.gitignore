@@ -1,5 +1,8 @@
 private/
 
+# 服务器数据目录
+server_data/
+
 # Logs
 logs
 *.log

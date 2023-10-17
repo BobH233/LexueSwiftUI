@@ -16,6 +16,11 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.0"
   },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "devDependencies": {
     "nodemon": "^2.0.19"
   }
