@@ -172,6 +172,12 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    // 是否禁用本地的后台拉取, 而使用apns服务
+    @Published var prefer_disable_background_fetch: Bool {
+        didSet {
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(prefer_disable_background_fetch, forKey: "setting.prefer_disable_background_fetch")
+        }
+    }
     
     private init() {
         
@@ -270,6 +276,12 @@ class SettingStorage: ObservableObject {
             cache_webvpn_context_for_user = stored
         } else {
             cache_webvpn_context_for_user = ""
+        }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.prefer_disable_background_fetch") as? Bool {
+            prefer_disable_background_fetch = stored
+        } else {
+            prefer_disable_background_fetch = true
         }
         
     }

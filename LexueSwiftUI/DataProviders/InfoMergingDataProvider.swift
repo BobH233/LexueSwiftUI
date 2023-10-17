@@ -168,6 +168,11 @@ class InfoMergingDataProvider: DataProvider {
     
     func refresh(param: [String : Any], manually: Bool) async {
         print("refresh HaoBIT")
+        if SettingStorage.shared.prefer_disable_background_fetch && !manually {
+            // 如果使用了apple云推送，则不用本地请求后台刷新了，但是如果是手动刷新的，则必须刷新
+            print("使用云推送，默认后台不刷新HaoBIT")
+            return
+        }
         let notices = await HaoBIT.shared.GetNotices()
         loadPushedMessage()
         if pushedMessage.count == 0 {

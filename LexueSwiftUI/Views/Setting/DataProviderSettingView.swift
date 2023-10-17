@@ -107,8 +107,16 @@ struct DataProviderDetailView: View {
 
 struct DataProviderSettingView: View {
     @ObservedObject var providerManager = DataProviderManager.shared
+    @State var use_apns = false
     var body: some View {
         Form {
+            Section() {
+                Toggle("使用云推送方式", isOn: $use_apns)
+            } header: {
+                Text("拉取方式")
+            } footer: {
+                Text("默认采用Apple的消息推送方式刷新新消息，节省您的流量，如果您发现有遗漏消息，请关闭这个功能，以确保消息接收的完整性")
+            }
             Section() {
                 ForEach(providerManager.dataProviders, id: \.providerIdForEach) { provider in
                     NavigationLink(provider.info().providerName , destination: {
@@ -122,6 +130,12 @@ struct DataProviderSettingView: View {
                 Text("这些是乐学助手内置的可以向您发送消息的消息源，您可以点击进行更详细的设置，包括是否启用，是否发送通知等等")
             }
             
+        }
+        .onAppear {
+            use_apns = SettingStorage.shared.prefer_disable_background_fetch
+        }
+        .onChange(of: use_apns) { newVal in
+            SettingStorage.shared.prefer_disable_background_fetch = newVal
         }
         .navigationViewStyle(.stack)
         .navigationTitle("消息源设定")
