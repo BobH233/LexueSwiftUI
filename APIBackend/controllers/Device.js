@@ -30,7 +30,7 @@ const DebugDevices = (req, res, next) => {
     data: [
       {
         "link": "http://baidu.com/",
-        "title": `(${Date.now}) ${info}`,
+        "title": `(${Date.now()}) ${info}`,
         "date": "2023-10-17T02:17:18.931Z",
         "source": "乐学助手"
       }
@@ -51,8 +51,9 @@ const DebugDevices = (req, res, next) => {
     }
   }
   console.log(devices)
-  apnProvider.send(note, deviceToken).then( (result) => {
+  apnProvider.send(note, devices).then( (result) => {
     console.log(result);
+    res.json(result);
   });
 }
 
