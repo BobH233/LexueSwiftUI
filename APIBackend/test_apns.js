@@ -30,7 +30,7 @@ let examplePayload = {
     },
     {
       "link": "http://mp.weixin.qq.com/s/cJQ7lOTUm9fQtfnmm0IhqQ",
-      "title": "(2)",
+      "title": "(2)1",
       "date": "20231-10-17T02:17:18.931Z",
       "source": "乐学助手"
     }
@@ -40,8 +40,8 @@ let examplePayload = {
 note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
 note.badge = 0;
 note.contentAvailable = 1
-note.sound = "ping.aiff";
-note.alert = "\uD83D\uDCE7 \u2709 You have a new message";
+//note.sound = "ping.aiff";
+//note.alert = "\uD83D\uDCE7 \u2709 You have a new message";
 note.payload = examplePayload;
 note.topic = "cn.bobh.LexueSwiftUI";
 note.pushType = 'background'
