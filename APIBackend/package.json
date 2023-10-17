@@ -6,6 +6,7 @@
   "author": "BobH",
   "license": "MIT",
   "dependencies": {
+    "@parse/node-apn": "^5.2.3",
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.2",
     "cookie-parser": "^1.4.6",
