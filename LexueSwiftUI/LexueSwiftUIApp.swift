@@ -44,6 +44,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
         let token = tokenParts.joined()
         print("Device Token: \(token)")
+        if !GlobalVariables.shared.cur_user_info.stuId.isEmpty {
+            // 如果不是空的，则注册本机的deviceToken
+            Task {
+                await LexueHelperBackend.shared.RegisterDeviceTokenForServer(userId: GlobalVariables.shared.cur_user_info.stuId, deviceToken: token)
+            }
+        }
         DispatchQueue.main.async {
             GlobalVariables.shared.deviceToken = token
         }

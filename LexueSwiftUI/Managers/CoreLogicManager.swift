@@ -77,6 +77,12 @@ class CoreLogicManager {
             DispatchQueue.main.async {
                 GlobalVariables.shared.cur_user_info = data
                 SettingStorage.shared.cacheUserInfo = data
+                // 刷新完了，更新用户的id
+                if GlobalVariables.shared.deviceToken != nil {
+                    Task {
+                        await LexueHelperBackend.shared.RegisterDeviceTokenForServer(userId: data.stuId, deviceToken: GlobalVariables.shared.deviceToken!)
+                    }
+                }
             }
             return true
         case .failure(_):
