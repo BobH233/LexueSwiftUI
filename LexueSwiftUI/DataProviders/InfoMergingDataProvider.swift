@@ -175,13 +175,16 @@ class InfoMergingDataProvider: DataProvider {
         }
         let notices = await HaoBIT.shared.GetNotices()
         loadPushedMessage()
-        if pushedMessage.count == 0 {
+        if SettingStorage.shared.HaoBITFirstFetch {
             // 表明是第一次，则不推送，直接将现有的先全部放进去
             print("first time, push all notice...")
             for notice in notices {
                 pushedMessage[notice.get_descriptor()] = true
             }
             savePushedMessage()
+            DispatchQueue.main.async {
+                SettingStorage.shared.HaoBITFirstFetch = false
+            }
             return
         }
         // 不是第一次，检查新消息

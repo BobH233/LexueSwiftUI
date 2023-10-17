@@ -179,6 +179,13 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    // 是否是HaoBIT的第一次拉取，如果是，则不要推送给用户，因为是历史消息
+    @Published var HaoBITFirstFetch: Bool {
+        didSet {
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(HaoBITFirstFetch, forKey: "setting.HaoBITFirstFetch")
+        }
+    }
+    
     private init() {
         
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.preferColorScheme") as? Int {
@@ -282,6 +289,12 @@ class SettingStorage: ObservableObject {
             prefer_disable_background_fetch = stored
         } else {
             prefer_disable_background_fetch = true
+        }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.HaoBITFirstFetch") as? Bool {
+            HaoBITFirstFetch = stored
+        } else {
+            HaoBITFirstFetch = true
         }
         
     }
