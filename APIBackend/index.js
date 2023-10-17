@@ -4,6 +4,8 @@ const Logger = require("./utils/Logger");
 const crypto = require("crypto");
 const http = require("http");
 const cookieParser = require('cookie-parser');
+const fs = require('fs');
+const data_storage = require("./data_storage/data_storage")
 
 // init express config
 const expressPort = process.env.BACKENDPORT || 3000;
@@ -25,8 +27,19 @@ app.use(require("./middleware/Logger"));
 app.use(require("body-parser").urlencoded({ extended: true }));
 app.use(express.json());
 
+const directoryPath = './server_data'; // 存放服务器数据的目录
+
+if (!fs.existsSync(directoryPath)) {
+  // 如果目录不存在，创建它
+  fs.mkdirSync(directoryPath);
+  Logger.LogInfo('server_data 目录已创建');
+} else {
+  Logger.LogInfo('server_data 目录已经存在');
+}
+
+data_storage.load_data()
+
 // set routers
-app.use("/api/test", require("./routers/TestRouter"));
 app.use("/api/device", require("./routers/DeviceRouter"));
 
 // set static routers

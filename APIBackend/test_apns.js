@@ -30,7 +30,7 @@ let examplePayload = {
     },
     {
       "link": "http://mp.weixin.qq.com/s/cJQ7lOTUm9fQtfnmm0IhqQ",
-      "title": "你好啊1",
+      "title": "(2)",
       "date": "20231-10-17T02:17:18.931Z",
       "source": "乐学助手"
     }

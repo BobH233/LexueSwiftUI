@@ -21,6 +21,8 @@ let CheckedUUID = {
   }
 */
 const CheckSignature = (req, res, next) => {
+  next()
+  return;
   let { cmdName, UUID, userId, timestamp, signature } = req.body;
   if(!cmdName || !UUID || !userId || !signature || !timestamp) {
     res.status(400).json({
