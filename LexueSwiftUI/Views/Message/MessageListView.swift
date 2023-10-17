@@ -368,15 +368,15 @@ struct MessageListView: View {
     @State var isOpenDatailView: ContactDisplayModel? = nil
     
     func RecalcUnread() {
-        var tmpTotal = 0
-        ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
-        for contact in ContactsManager.shared.ContactDisplayLists {
-            if contact.silent {
-                continue
-            }
-            tmpTotal = tmpTotal + contact.unreadCount
-        }
         DispatchQueue.main.async {
+            var tmpTotal = 0
+            ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+            for contact in ContactsManager.shared.ContactDisplayLists {
+                if contact.silent {
+                    continue
+                }
+                tmpTotal = tmpTotal + contact.unreadCount
+            }
             totalUnread = tmpTotal
         }
     }
