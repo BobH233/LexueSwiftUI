@@ -114,10 +114,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "InfoMergingDataProvider.handleApns(data:):InfoMergingDataProvider.swift">
+      </ContextState>
+      <ContextState
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -126,7 +129,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -184,6 +187,14 @@
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in closure #1 in DebugDataView.body.getter:DebugDataView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in DataProviderManager.DoRefreshAll(param:manually:):DataProviderManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "provider.msgRequestList">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
@@ -254,17 +265,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in BubbleImageMessageView.body.getter:MessageDetailView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "message.messageBody.">
-            </PersistentString>
-            <PersistentString
-               value = "message">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "closure #1 in closure #1 in JXZXehall.GetRealWEU(fakeWEU:GS_SESSIONID:):JXZXehall.swift">
          <PersistentStrings>
             <PersistentString
@@ -282,6 +282,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in BubbleImageMessageView.body.getter:MessageDetailView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "message.messageBody.">
+            </PersistentString>
+            <PersistentString
+               value = "message">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #4 in closure #1 in CourseDetailView.body.getter:CourseDetailView.swift">
          <PersistentStrings>
             <PersistentString
@@ -293,13 +304,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
-               value = "event.name">
+               value = "event.timestart">
             </PersistentString>
             <PersistentString
                value = "event.id">
             </PersistentString>
             <PersistentString
-               value = "event.timestart">
+               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -367,6 +378,14 @@
          contextName = "LexueAPI.GetSelfUserInfo(_:):LexueAPI.swift">
       </ContextState>
       <ContextState
+         contextName = "closure #1 in ContentCardView.body.getter:ViewCourseScoreView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "forceWhite">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "LexueDataProvider.CheckEventUpdate():LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
@@ -375,10 +394,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in ContentCardView.body.getter:ViewCourseScoreView.swift">
+         contextName = "specialized closure #1 in MessageListView.RecalcUnread():MessageListView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "forceWhite">
+               value = "tmpTotal">
+            </PersistentString>
+            <PersistentString
+               value = "totalUnread">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

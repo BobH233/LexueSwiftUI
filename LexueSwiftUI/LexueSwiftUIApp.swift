@@ -23,11 +23,21 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
     
-    // 接收到了apns服务器发送的消息
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print(userInfo)
-        completionHandler(.newData)
+    // 接收到了apns服务器后台发送的消息, 处理这些信息
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
+        if let userInfo = userInfo as? [String: Any] {
+            print(userInfo)
+            if let command = userInfo["command"] as? String {
+                // 给消息提供者发送的消息
+                if command == "provider_new_message", let forProvider = userInfo["for"] as? String, let data = userInfo["data"] {
+                    await DataProviderManager.shared.DispatchApnsMessage(providerId: forProvider, data: data)
+                    return .noData
+                }
+            }
+        }
+        return .noData
     }
+    
     
     // 接收到了deviceId
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -46,9 +56,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 }
 // Conform to UNUserNotificationCenterDelegate to show local notification in foreground
 extension AppDelegate: UNUserNotificationCenterDelegate {
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        completionHandler([.alert, .badge, .sound])
-//    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         if let cmd = userInfo["cmd"] as? String {

@@ -18,12 +18,35 @@ let deviceToken = debug.myDeviceId;
 
 var note = new apn.Notification();
 
+let examplePayload = {
+  command: "provider_new_message",
+  for: "provider.info_merging",
+  data: [
+    {
+      "link": "http://mp.weixin.qq.com/s/cJQ7lOTUm9fQtfnmm0IhqQ",
+      "title": "114510一带一aegaeg接受北京电视台专访",
+      "date": "2023-10-17T02:17:18.931Z",
+      "source": "留学生"
+    },
+    {
+      "link": "http://mp.weixin.qq.com/s/cJQ7lOTUm9fQtfnmm0IhqQ",
+      "title": "1421",
+      "date": "20231-10-17T02:17:18.931Z",
+      "source": "留学生"
+    }
+  ]
+}
+
 note.expiry = Math.floor(Date.now() / 1000) + 3600; // Expires 1 hour from now.
 note.badge = 0;
+note.contentAvailable = 1
 note.sound = "ping.aiff";
 note.alert = "\uD83D\uDCE7 \u2709 You have a new message";
-note.payload = {'messageFrom': 'John Appleseed'};
+note.payload = examplePayload;
 note.topic = "cn.bobh.LexueSwiftUI";
+note.pushType = 'background'
+
+
 
 apnProvider.send(note, deviceToken).then( (result) => {
   console.log(result);

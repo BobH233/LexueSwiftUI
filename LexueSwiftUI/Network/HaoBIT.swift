@@ -29,6 +29,24 @@ class HaoBIT {
         func get_descriptor() -> String {
             return "\(link ?? "")_\(title ?? "")_\(source ?? "")".sha256
         }
+        init() {
+            link = nil
+            title = nil
+            date = nil
+            source = nil
+        }
+        init(dic: [String: Any]) {
+            link = dic["link"] as? String
+            title = dic["title"] as? String
+            source = dic["source"] as? String
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            if let dateString = dic["date"] as? String, let date = dateFormatter.date(from: dateString) {
+                self.date = date
+            } else {
+                date = nil
+            }
+        }
     }
     func GetNotices() async -> [Notice] {
         print("HaobitGetNotice")

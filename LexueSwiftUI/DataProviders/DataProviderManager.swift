@@ -71,6 +71,25 @@ class DataProviderManager: ObservableObject {
     
     var lastRefresh: Double = 0
     
+    // 分发apns端发来的消息
+    func DispatchApnsMessage(providerId: String, data: Any) async {
+        for provider in dataProviders {
+            if provider.info().providerId == providerId {
+                provider.handleApns(data: data)
+            }
+        }
+        for var provider in dataProviders {
+            if provider.allowMessage {
+                for msg in provider.msgRequestList {
+                    await DataController.shared.container.performBackgroundTask { (bgContext) in
+                        MessageManager.shared.PushMessageWithContactCreation(senderUid: msg.senderUid, contactOriginNameIfMissing: msg.contactOriginNameIfMissing, contactTypeIfMissing: msg.contactTypeIfMissing, msgBody: msg.msgBody, date: msg.date, notify: provider.allowNotification, context: bgContext)
+                    }
+                }
+            }
+            provider.msgRequestList.removeAll()
+        }
+    }
+    
     func DoRefreshAll(param: [String: Any] = [:], manually: Bool = false) async {
         let currentTimeStamp = Date.now.timeIntervalSince1970
         if !manually && currentTimeStamp - lastRefresh < 60 {
@@ -82,7 +101,7 @@ class DataProviderManager: ObservableObject {
             for provider in dataProviders {
                 if provider.enabled {
                     group.addTask(priority: provider.get_priority()) {
-                        await provider.refresh(param: param)
+                        await provider.refresh(param: param, manually: manually)
                     }
                 }
             }

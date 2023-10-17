@@ -54,6 +54,7 @@ class GlobalVariables: ObservableObject {
     @Published var enableTracking: Bool = false
     
     var handleNotificationMsg: (([AnyHashable : Any]) -> Void)?
+    var refreshUnreadMsgCallback: (() -> Void)?
     
     // 默认是false
     @Published var debugMode = false

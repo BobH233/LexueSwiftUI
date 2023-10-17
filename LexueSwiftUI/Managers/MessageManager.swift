@@ -95,6 +95,7 @@ class MessageManager {
                 LocalNotificationManager.shared.PushNotification(title: contact.GetDisplayName(), body: GetMessageTextDecsription(messageBody: msgBody), userInfo: ["cmd": "contactMessage", "contactUid": contact.contactUid!, "msgId": msg.id!.uuidString], interval: 0.1)
             }
         }
+        GlobalVariables.shared.refreshUnreadMsgCallback?()
     }
     
     func GetMessageTextDecsription(messageBody: MessageBodyItem?) -> String {

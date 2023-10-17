@@ -60,6 +60,10 @@ class LexueDataProvider: DataProvider {
         return dateFormatter.string(from: date)
     }
     
+    func handleApns(data: Any) {
+        
+    }
+    
     func HandleNewEvent(event: EventStored) {
         if event.isCustomEvent {
             // 自己添加的事件，不处理
@@ -243,7 +247,7 @@ class LexueDataProvider: DataProvider {
         }
     }
     
-    func refresh(param: [String: Any]) async {
+    func refresh(param: [String: Any], manually: Bool) async {
         if !enabled {
             return
         }

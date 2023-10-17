@@ -166,7 +166,7 @@ class InfoMergingDataProvider: DataProvider {
         msgRequestList.append(PushMessageRequest(senderUid: source, contactOriginNameIfMissing: msgSource.fullName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date()))
     }
     
-    func refresh(param: [String : Any]) async {
+    func refresh(param: [String : Any], manually: Bool) async {
         print("refresh HaoBIT")
         let notices = await HaoBIT.shared.GetNotices()
         loadPushedMessage()
@@ -190,5 +190,17 @@ class InfoMergingDataProvider: DataProvider {
         savePushedMessage()
     }
     
-    
+    func handleApns(data: Any) {
+        loadPushedMessage()
+        if let new_notifies = data as? [[String: String]] {
+            for new_notify in new_notifies {
+                let curNotice = HaoBIT.Notice(dic: new_notify)
+                if pushedMessage[curNotice.get_descriptor()] == nil || pushedMessage[curNotice.get_descriptor()] == false {
+                    handleNewNotice(notice: curNotice)
+                    pushedMessage[curNotice.get_descriptor()] = true
+                }
+            }
+        }
+        savePushedMessage()
+    }
 }

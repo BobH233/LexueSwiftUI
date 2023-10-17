@@ -367,6 +367,20 @@ struct MessageListView: View {
     
     @State var isOpenDatailView: ContactDisplayModel? = nil
     
+    func RecalcUnread() {
+        var tmpTotal = 0
+        ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+        for contact in ContactsManager.shared.ContactDisplayLists {
+            if contact.silent {
+                continue
+            }
+            tmpTotal = tmpTotal + contact.unreadCount
+        }
+        DispatchQueue.main.async {
+            totalUnread = tmpTotal
+        }
+    }
+    
     func DoRefresh() async {
         isRefreshing = true
         Task {
@@ -468,6 +482,7 @@ struct MessageListView: View {
         }
         .badge(unreadBadge)
         .onAppear {
+            GlobalVariables.shared.refreshUnreadMsgCallback = RecalcUnread
             GlobalVariables.shared.handleNotificationMsg = { param in
                 if let contactUid = param["contactUid"] as? String, let msgId = param["msgId"] as? String {
                     tabSelection = 1
@@ -488,14 +503,7 @@ struct MessageListView: View {
         }
         .onChange(of: contactsManager.ContactDisplayLists) { _ in
             // print("recalc totalUnread")
-            var tmpTotal = 0
-            for contact in ContactsManager.shared.ContactDisplayLists {
-                if contact.silent {
-                    continue
-                }
-                tmpTotal = tmpTotal + contact.unreadCount
-            }
-            totalUnread = tmpTotal
+            RecalcUnread()
         }
         .onChange(of: totalUnread) { newVal in
             if newVal == 0 {

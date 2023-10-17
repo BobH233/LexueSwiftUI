@@ -28,6 +28,14 @@ struct PrivacyStatement: View {
                             .foregroundColor(.secondary)
                             .textSelection(.enabled)
                     }
+                    HStack {
+                        Text("消息推送标识")
+                            .foregroundColor(.primary)
+                        Spacer()
+                        Text(GlobalVariables.shared.deviceToken ?? "无法获取")
+                            .foregroundColor(.secondary)
+                            .textSelection(.enabled)
+                    }
                     if !GlobalVariables.shared.enableTracking {
                         Text("因为你要求app不进行跟踪，因此上述的设备标识和用户名将不用作跟踪目的，也不会与你个人信息绑定。")
                     }
