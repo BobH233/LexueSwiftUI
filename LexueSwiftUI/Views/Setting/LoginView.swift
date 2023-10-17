@@ -184,6 +184,8 @@ struct LoginView: View {
             doLogin()
         }
         .onAppear {
+            // 确保已经获取到了消息
+            UIApplication.shared.registerForRemoteNotifications()
             username = settings.savedUsername
             password = settings.savedPassword
             BITLogin.shared.init_login_param { result in
