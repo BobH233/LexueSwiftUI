@@ -18,6 +18,7 @@ class InfoMergingDataProvider: DataProvider {
         var shortName: String
         var fullName: String
         var optionName: String
+        var default_option: Bool = false
     }
     
     var enabled: Bool = true
@@ -85,7 +86,7 @@ class InfoMergingDataProvider: DataProvider {
             .init(shortName: "自动化", fullName: "自动化学院", optionName: "option_45"),
             .init(shortName: "人文", fullName: "人文与社会科学学院", optionName: "option_46"),
             .init(shortName: "人文素质", fullName: "人文素质教研部", optionName: "option_47"),
-            .init(shortName: "乐学助手", fullName: "乐学助手", optionName: "ilexue_helper")
+            .init(shortName: "乐学助手", fullName: "乐学助手", optionName: "ilexue_helper", default_option: true)
         ]
         for messageSource in messageSources {
             messageSourceMap[messageSource.shortName] = messageSource
@@ -116,7 +117,7 @@ class InfoMergingDataProvider: DataProvider {
     func get_custom_options() -> [ProviderCustomOption] {
         var ret = [ProviderCustomOption]()
         for messageSource in messageSources {
-            ret.append(.init(optionName: messageSource.optionName, displayName: messageSource.fullName, optionType: .bool, optionValueBool: false))
+            ret.append(.init(optionName: messageSource.optionName, displayName: messageSource.fullName, optionType: .bool, optionValueBool: messageSource.default_option))
         }
         return ret
     }
