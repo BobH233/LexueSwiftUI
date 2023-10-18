@@ -37,7 +37,6 @@ if (!fs.existsSync(directoryPath)) {
   Logger.LogInfo('server_data 目录已经存在');
 }
 
-data_storage.load_data()
 
 // set routers
 app.use("/api/device", require("./routers/DeviceRouter"));

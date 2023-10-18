@@ -6,6 +6,6 @@ const DeviceController = require("../controllers/Device")
 
 router.post("/register", require("../middleware/SignatureCheck"), DeviceController.registerDevice)
 
-router.post("/debug", DeviceController.DebugDevices)
+router.post("/debug", require("../middleware/AntiTimingAtk"), DeviceController.DebugDevices)
 
 module.exports = router;
