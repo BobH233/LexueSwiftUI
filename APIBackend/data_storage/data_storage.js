@@ -63,8 +63,32 @@ const _GetAllRegisteredDevices = (CB) => {
   })
 }
 
+const _AddHaoBITNotificationIfNew = (hash, curNotification, CB) => {
+  db.serialize(() => {
+    db.all("SELECT * FROM HaoBITMessage WHERE messageHash = ?",
+    hash, (err, rows) => {
+      if(err) {
+        CB(err)
+        return
+      }
+      
+      if(rows.length == 0) {
+        // 只有不存在的才添加
+        let jsonStr = JSON.stringify(curNotification)
+        db.run("INSERT INTO HaoBITMessage (messageHash, updateDate, jsonStr) VALUES (?, ?, ?)", hash, new Date().toISOString(), jsonStr, (err) => {
+          CB(err)
+          return
+        })
+      } else {
+        CB(null)
+      }
+    })
+  })
+}
+
 module.exports = {
   getDB: () => db,
   _RegisterDevice,
   _GetAllRegisteredDevices,
+  _AddHaoBITNotificationIfNew,
 };

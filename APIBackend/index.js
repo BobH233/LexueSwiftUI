@@ -6,6 +6,7 @@ const http = require("http");
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const data_storage = require("./data_storage/data_storage")
+const HaoBIT = require("./utils/HaoBIT")
 
 // init express config
 const expressPort = process.env.BACKENDPORT || 3000;
@@ -37,6 +38,7 @@ if (!fs.existsSync(directoryPath)) {
   Logger.LogInfo('server_data 目录已经存在');
 }
 
+HaoBIT.SetIntervalForRefresh()
 
 // set routers
 app.use("/api/device", require("./routers/DeviceRouter"));
