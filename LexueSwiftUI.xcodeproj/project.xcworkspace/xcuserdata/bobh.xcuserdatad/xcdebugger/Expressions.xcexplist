@@ -82,6 +82,14 @@
          contextName = "closure #1 in closure #1 in LexueAPI.GetLexueContext(_:completion:):LexueAPI.swift">
       </ContextState>
       <ContextState
+         contextName = "LexueHelperBackend.RegisterDeviceTokenForServer(userId:deviceToken:):LexueHelperBackend.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "API_REGISTER_DEVICE_TOKEN">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DataController.blurSearchMessage(keyword:context:):DataController.swift">
          <PersistentStrings>
             <PersistentString
@@ -94,14 +102,6 @@
          <PersistentStrings>
             <PersistentString
                value = "imageData">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LexueHelperBackend.RegisterDeviceTokenForServer(userId:deviceToken:):LexueHelperBackend.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "API_REGISTER_DEVICE_TOKEN">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -123,6 +123,11 @@
       </ContextState>
       <ContextState
          contextName = "InfoMergingDataProvider.handleApns(data:):InfoMergingDataProvider.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "curNotice.get_descriptor()">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
@@ -315,15 +320,23 @@
                value = "event.name">
             </PersistentString>
             <PersistentString
-               value = "event.timestart">
+               value = "event.id">
             </PersistentString>
             <PersistentString
-               value = "event.id">
+               value = "event.timestart">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in AddCustomEventView.AskGpt():AddCustomEventView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DataController.save(context:):DataController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pushedMessage">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "CourseManager.DiffAndUpdateCacheCourses(_:):CourseManager.swift">

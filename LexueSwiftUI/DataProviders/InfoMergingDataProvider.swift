@@ -199,17 +199,23 @@ class InfoMergingDataProvider: DataProvider {
         savePushedMessage()
     }
     
+    let handleApnsLock = NSLock()
     func handleApns(data: Any) {
+        handleApnsLock.lock()
         loadPushedMessage()
         if let new_notifies = data as? [[String: String]] {
             for new_notify in new_notifies {
                 let curNotice = HaoBIT.Notice(dic: new_notify)
+                print("pushedMessage[\(curNotice.get_descriptor())] = \(pushedMessage[curNotice.get_descriptor()])")
                 if pushedMessage[curNotice.get_descriptor()] == nil || pushedMessage[curNotice.get_descriptor()] == false {
                     handleNewNotice(notice: curNotice)
                     pushedMessage[curNotice.get_descriptor()] = true
+                    print("pushedMessage[\(curNotice.get_descriptor())] = true")
+                    
                 }
             }
         }
         savePushedMessage()
+        handleApnsLock.unlock()
     }
 }
