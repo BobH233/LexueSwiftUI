@@ -63,6 +63,40 @@ const _GetAllRegisteredDevices = (CB) => {
   })
 }
 
+const _DeleteBatchRegisteredDevices = (deletedList, CB) => {
+  if(deletedList.length == 0) {
+    CB(null);
+    return;
+  }
+  const deviceTokenValues = deletedList.map(token => `'${token}'`).join(',');
+  db.serialize(() => {
+    db.run(`DELETE FROM RegisteredDevices WHERE DeviceToken IN (${deviceTokenValues})`, (err) => {
+      CB(err);
+    });
+  })
+}
+
+const _ResetBatchDeviceFailedCount = (deviceList, CB) => {
+  if(deviceList.length == 0) {
+    CB(null);
+    return;
+  }
+  const deviceTokenValues = deviceList.map(token => `'${token}'`).join(',');
+  db.serialize(() => {
+    db.run(`UPDATE RegisteredDevices SET FailCount = 0 WHERE DeviceToken IN (${deviceTokenValues})`, (err) => {
+      CB(err);
+    });
+  });
+}
+
+const _UpdateDeviceFailCount = (deviceToken, failCount, CB) => {
+  db.serialize(() => {
+    db.run(`UPDATE RegisteredDevices SET FailCount = ? WHERE DeviceToken = ?`, failCount, deviceToken, (err) => {
+      CB(err);
+    });
+  });
+}
+
 const _AddHaoBITNotificationIfNew = (hash, curNotification, CB) => {
   db.serialize(() => {
     db.all("SELECT * FROM HaoBITMessage WHERE messageHash = ?",
@@ -91,4 +125,8 @@ module.exports = {
   _RegisterDevice,
   _GetAllRegisteredDevices,
   _AddHaoBITNotificationIfNew,
+  _DeleteBatchRegisteredDevices,
+  _ResetBatchDeviceFailedCount,
+  _UpdateDeviceFailCount,
+
 };
