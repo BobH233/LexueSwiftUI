@@ -26,11 +26,16 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     // 接收到了apns服务器后台发送的消息, 处理这些信息
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
         if let userInfo = userInfo as? [String: Any] {
-            print(userInfo)
+            // print(userInfo)
             if let command = userInfo["command"] as? String {
-                // 给消息提供者发送的消息
+                UMAnalyticsSwift.event(eventId: "apns_command", attributes: ["commandName": command])
                 if command == "provider_new_message", let forProvider = userInfo["for"] as? String, let data = userInfo["data"] {
+                    // 给消息源提供消息的请求
                     await DataProviderManager.shared.DispatchApnsMessage(providerId: forProvider, data: data)
+                    return .noData
+                } else if command == "refresh_data_provider" {
+                    // 后台刷新app的请求
+                    await DataProviderManager.shared.DoRefreshAll()
                     return .noData
                 }
             }
