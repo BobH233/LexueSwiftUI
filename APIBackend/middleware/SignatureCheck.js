@@ -21,8 +21,11 @@ let CheckedUUID = {
   }
 */
 const CheckSignature = (req, res, next) => {
-  next();
-  return;
+  if(process.env.LOCALDEV) {
+    console.log("LocalDev Skip Checksignature")
+    next();
+    return;
+  }
   let { cmdName, UUID, userId, timestamp, signature } = req.body;
   if(!cmdName || !UUID || !userId || !signature || !timestamp) {
     res.status(400).json({
