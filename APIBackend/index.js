@@ -7,13 +7,15 @@ const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const data_storage = require("./data_storage/data_storage")
 const HaoBIT = require("./utils/HaoBIT")
-// const AppBackgroundRefresh = require("./utils/AppBackgroundRefresh")
+const AppBackgroundRefresh = require("./utils/AppBackgroundRefresh")
 
 // init express config
 const expressPort = process.env.BACKENDPORT || 3000;
-const hostname = process.env.DOMAIN || "localhost";
-if(hostname == "localhost"){
-    process.env.LOCALDEV = true;
+const production_mode = process.env.PRODUCTION_MODE || false
+if(production_mode == "true" || production_mode == true){
+  process.env.LOCALDEV = false;
+} else {
+  process.env.LOCALDEV = true;
 }
 
 // init jwt token
@@ -55,9 +57,9 @@ app.use(require("./routers/404Router"));
 app.use(require("./routers/ErrorRouter"));
 
 const server = http.createServer(app).listen(expressPort,async()=>{
-    if(process.env.LOCALDEV){
-        Logger.LogInfo(`Starting server_DEV on port ${expressPort}`);
+    if(JSON.parse(process.env.LOCALDEV) == true){
+      Logger.LogInfo(`Starting server_DEV on port ${expressPort}`);
     }else{
-        Logger.LogInfo(`Starting server_PROD on port ${expressPort}`);
+      Logger.LogInfo(`Starting server_PROD on port ${expressPort}`);
     }
 });

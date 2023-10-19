@@ -28,6 +28,7 @@ const SendRefreshCommand = () => {
 };
 
 const SetIntervalForRefresh = () => {
+  Logger.LogInfo("设定发送App定时更新定时器...")
   setInterval(() => {
     SendRefreshCommand();
   }, 60 * 60 * 1000); // 一小时刷新一次app

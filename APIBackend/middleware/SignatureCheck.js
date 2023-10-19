@@ -21,7 +21,7 @@ let CheckedUUID = {
   }
 */
 const CheckSignature = (req, res, next) => {
-  if(process.env.LOCALDEV) {
+  if(JSON.parse(process.env.LOCALDEV)) {
     console.log("LocalDev Skip Checksignature")
     next();
     return;

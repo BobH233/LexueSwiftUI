@@ -8,7 +8,7 @@ const AddSecurityHeader = (req, res, next) => {
     "X-XSS-Protection": "1; mode=block",
     "X-Powered-By": "BobHEngine",
   });
-  if (!process.env.LOCALDEV) {
+  if (!JSON.parse(process.env.LOCALDEV)) {
     res.set({
       "Access-Control-Allow-Origin": process.env.FRONTDOMAIN,
       "Access-Control-Allow-Methods": "GET, POST",

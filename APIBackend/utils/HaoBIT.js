@@ -41,6 +41,7 @@ const RefreshNotification = async() => {
 }
 
 const SetIntervalForRefresh = () => {
+  Logger.LogInfo("设定自动刷新HaoBIT定时器...")
   setInterval(()=> {
     RefreshNotification()
   }, 10 * 60 * 1000); // 十分钟刷新一次HaoBIT
