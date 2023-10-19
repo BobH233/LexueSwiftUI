@@ -13,6 +13,7 @@ var options = {
     keyId: core_info.keyId,
     teamId: core_info.teamId
   },
+  connectionRetryLimit: 8,
   production: process.env.APN_PRODUCTION == "true",
 };
 var apnProvider = new apn.Provider(options);
