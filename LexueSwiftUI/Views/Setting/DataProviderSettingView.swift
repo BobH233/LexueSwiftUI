@@ -115,7 +115,7 @@ struct DataProviderSettingView: View {
             } header: {
                 Text("拉取方式")
             } footer: {
-                Text("默认采用Apple的消息推送方式刷新新消息，节省您的流量，如果您发现有遗漏消息，请关闭这个功能，以确保消息接收的完整性")
+                Text("默认采用的消息推送方式，打开后，将更节省流量，接收消息更及时。如果您发现有遗漏消息，请关闭这个功能，以确保消息接收的完整性")
             }
             Section() {
                 ForEach(providerManager.dataProviders, id: \.providerIdForEach) { provider in

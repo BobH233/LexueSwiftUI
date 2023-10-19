@@ -35,6 +35,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                     return .noData
                 } else if command == "refresh_data_provider" {
                     // 后台刷新app的请求
+                    print("background refresh request...")
                     await DataProviderManager.shared.DoRefreshAll()
                     return .noData
                 }
