@@ -841,8 +841,8 @@
             filePath = "LexueSwiftUI/DataProviders/InfoMergingDataProvider.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "handleApns(data:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1001,8 +1001,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
             <Locations>
@@ -1094,8 +1094,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
             <Locations>
@@ -1142,8 +1142,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1152,22 +1152,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "5D408B60-97C0-4DA2-8F09-3C06FEE2468E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
-            landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5AB9FDA4-09B6-4197-9520-AABE85F31E17"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -1183,23 +1167,23 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "03F85F6B-2A77-4EC9-8B1E-E32F4D07EEE6"
+            uuid = "5AB9FDA4-09B6-4197-9520-AABE85F31E17"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LexueSwiftUI/DataProviders/InfoMergingDataProvider.swift"
+            filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
-            landmarkName = "handleApns(data:)"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
+            landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "212CE5CE-D56E-497D-A7C7-51537DB1CFCA"
+            uuid = "03F85F6B-2A77-4EC9-8B1E-E32F4D07EEE6"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -1215,7 +1199,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "86852E35-EF37-4FDE-BC54-1F10DB51CD18"
+            uuid = "212CE5CE-D56E-497D-A7C7-51537DB1CFCA"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -1224,6 +1208,22 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "217"
             endingLineNumber = "217"
+            landmarkName = "handleApns(data:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "86852E35-EF37-4FDE-BC54-1F10DB51CD18"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/DataProviders/InfoMergingDataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "handleApns(data:)"
             landmarkType = "7">
          </BreakpointContent>

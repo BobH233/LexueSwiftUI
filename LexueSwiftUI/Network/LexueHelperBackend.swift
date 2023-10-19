@@ -15,7 +15,7 @@ class LexueHelperBackend {
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "backend.lastFetchNotificationHash") as? String {
             lastFetchNotificationHash = stored
         } else {
-            lastFetchNotificationHash = "2fa2181e84284ee2a33b609ddd2484346eeecca820940ce028129a90321b2771"
+            lastFetchNotificationHash = ""
         }
     }
     
@@ -67,6 +67,7 @@ class LexueHelperBackend {
     
     // 请求i乐学助手维护的HaoBIT消息
     func FetchHaoBITMessage(userId: String) async -> [HaoBIT.Notice] {
+        print("lastFetchNotificationHash: \(lastFetchNotificationHash)")
         var packageHeader = PackageWithSignature()
         packageHeader.cmdName = "FetchHaoBIT"
         packageHeader.userId = userId
@@ -127,6 +128,7 @@ class LexueHelperBackend {
                         }
                         retNotices.append(currentNotice)
                     }
+                    print(retNotices)
                     return retNotices
                 } else {
                     return []
