@@ -120,6 +120,44 @@ const _AddHaoBITNotificationIfNew = (hash, curNotification, CB) => {
   })
 }
 
+const _GetLatestHaoBITNotificationHash = (CB) => {
+  db.serialize(() => {
+    db.get('SELECT messageHash FROM HaoBITMessage WHERE id = (SELECT MAX(id) FROM HaoBITMessage)', (err, row) => {
+      if (err) {
+        CB(null, err);
+      } else {
+        const messageHash = row.messageHash;
+        CB(messageHash, null)
+      }
+    });
+  });
+}
+
+const _QueryHaoBITNotificationByHash = (hash, CB) => {
+  db.serialize(() => {
+    db.all("SELECT * FROM HaoBITMessage WHERE messageHash = ?",
+    hash, (err, rows) => {
+      if(err) {
+        CB(null, err)
+        return
+      }
+      CB(rows, null);
+    })
+  })
+}
+
+const _QueryHaoBITNotificationsAfterId = (id, CB) => {
+  db.serialize(() => {
+    db.all('SELECT * FROM HaoBITMessage WHERE id > ?', id, (err, rows) => {
+      if (err) {
+        CB(null, err)
+      } else {
+        CB(rows, null)
+      }
+    });
+  });
+}
+
 module.exports = {
   getDB: () => db,
   _RegisterDevice,
@@ -128,5 +166,7 @@ module.exports = {
   _DeleteBatchRegisteredDevices,
   _ResetBatchDeviceFailedCount,
   _UpdateDeviceFailCount,
-
+  _GetLatestHaoBITNotificationHash,
+  _QueryHaoBITNotificationByHash,
+  _QueryHaoBITNotificationsAfterId
 };
