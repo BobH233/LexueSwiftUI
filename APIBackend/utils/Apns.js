@@ -1,16 +1,19 @@
 
 const data_storage = require("../data_storage/data_storage");
 const core_info = require("../private/core_info");
-var apn = require("@parse/node-apn");
+var apn = require("apn");
 const Logger = require("../utils/Logger");
 
+
+
+console.log("apns production: " + !process.env.APN_PRODUCTION)
 var options = {
   token: {
-    key: "./private/AuthKey_apns.p8",
+    key: "./private/AuthKey_new.p8",
     keyId: core_info.keyId,
-    teamId: core_info.teamId,
+    teamId: core_info.teamId
   },
-  production: !process.env.LOCALDEV,
+  production: process.env.APN_PRODUCTION == "true",
 };
 var apnProvider = new apn.Provider(options);
 
@@ -28,6 +31,7 @@ const SendToAllDevices = (notification, CB) => {
     }
     // console.log(failedCountMap)
     apnProvider.send(notification, devices).then((result) => {
+      
       // 判断失败的设备，增加1；成功的设备置零；如果失败次数已经超过了5次，则删除该设备不再推送
       let failedDevice = result.failed;
       let successDevice = result.sent;

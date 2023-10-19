@@ -4,7 +4,7 @@ const data_storage = require("../data_storage/data_storage");
 const core_info = require("../private/core_info");
 const Logger = require("../utils/Logger");
 const Apns = require("../utils/Apns")
-var apn = require("@parse/node-apn");
+var apn = require("apn");
 
 const DebugDevices = (req, res, next) => {
   try {
