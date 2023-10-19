@@ -32,12 +32,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                 if command == "provider_new_message", let forProvider = userInfo["for"] as? String, let data = userInfo["data"] {
                     // 给消息源提供消息的请求
                     await DataProviderManager.shared.DispatchApnsMessage(providerId: forProvider, data: data)
-                    return .noData
+                    return .newData
                 } else if command == "refresh_data_provider" {
                     // 后台刷新app的请求
                     print("background refresh request...")
                     await DataProviderManager.shared.DoRefreshAll()
-                    return .noData
+                    return .newData
                 }
             }
         }
