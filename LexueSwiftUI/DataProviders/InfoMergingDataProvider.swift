@@ -170,12 +170,15 @@ class InfoMergingDataProvider: DataProvider {
     
     func refresh(param: [String : Any], manually: Bool) async {
         print("refresh HaoBIT")
+        var notices: [HaoBIT.Notice] = []
         if SettingStorage.shared.prefer_disable_background_fetch && !manually {
             // 如果使用了apple云推送，则不用本地请求后台刷新了，但是如果是手动刷新的，则必须刷新
-            print("使用云推送，默认后台不刷新HaoBIT")
-            return
+            print("使用云推送，从后端拉取")
+            notices = await LexueHelperBackend.shared.FetchHaoBITMessage(userId: GlobalVariables.shared.cur_user_info.stuId)
+        } else {
+            print("使用本地推送，从HaoBIT拉取")
+            notices = await HaoBIT.shared.GetNotices()
         }
-        let notices = await HaoBIT.shared.GetNotices()
         loadPushedMessage()
         if SettingStorage.shared.HaoBITFirstFetch {
             // 表明是第一次，则不推送，直接将现有的先全部放进去

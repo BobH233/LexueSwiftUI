@@ -146,6 +146,7 @@
 		47F4FD312ACDC1D800C6C144 /* DataProviderBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */; };
 		47F4FD322ACDC1DA00C6C144 /* LexueDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */; };
 		47F4FD332ACDC1E600C6C144 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
+		47F5F6EF2AE10EA1009A2B7B /* LexueHelperBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */; };
 		47FBC8C62AC579DD00FB1523 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -760,6 +761,7 @@
 				47196FF72AC5522500979DFE /* WidgetView.swift in Sources */,
 				47F4FD172ACD9CD700C6C144 /* LexueAPI.swift in Sources */,
 				47F4FD162ACD9CD500C6C144 /* BITLogin.swift in Sources */,
+				47F5F6EF2AE10EA1009A2B7B /* LexueHelperBackend.swift in Sources */,
 				47F4FD262ACDA64500C6C144 /* MessageModel.xcdatamodeld in Sources */,
 				47F4FD242ACDA62E00C6C144 /* ContactMessageModel.swift in Sources */,
 				47196FF22AC551D200979DFE /* DefaultEntry.swift in Sources */,

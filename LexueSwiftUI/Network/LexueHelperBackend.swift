@@ -66,7 +66,7 @@ class LexueHelperBackend {
     }
     
     // 请求i乐学助手维护的HaoBIT消息
-    func FetchHaoBITMessage(userId: String) async -> Result<[HaoBIT.Notice], LexueHelperBackendError> {
+    func FetchHaoBITMessage(userId: String) async -> [HaoBIT.Notice] {
         var packageHeader = PackageWithSignature()
         packageHeader.cmdName = "FetchHaoBIT"
         packageHeader.userId = userId
@@ -112,7 +112,7 @@ class LexueHelperBackend {
                 var retNotices = [HaoBIT.Notice]()
                 if let latestHash = ret["latestHash"] as? String {
                     print("latestHash: \(latestHash)")
-                    // lastFetchNotificationHash = latestHash
+                    lastFetchNotificationHash = latestHash
                 }
                 if let data = ret["data"] as? [[String: Any]] {
                     for notice in data {
@@ -127,17 +127,17 @@ class LexueHelperBackend {
                         }
                         retNotices.append(currentNotice)
                     }
-                    return .success(retNotices)
+                    return retNotices
                 } else {
-                    return .failure(.networkError)
+                    return []
                 }
             } else {
                 print("转换为 JSON 数据时发生错误")
-                return .failure(.jsonConvertError)
+                return []
             }
         } catch {
             print("转换为 JSON 数据时发生错误: \(error)")
-            return .failure(.jsonConvertError)
+            return []
         }
     }
     
