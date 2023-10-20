@@ -468,6 +468,7 @@ struct ExamInfoView: View {
                     .controlSize(.large)
             }
         }
+        .frame(maxWidth: 800)
         .onFirstAppear {
             initExamInfo()
         }
