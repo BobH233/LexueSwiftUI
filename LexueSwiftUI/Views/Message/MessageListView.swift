@@ -70,6 +70,7 @@ private struct ContactListItemView: View {
     @Binding var silent: Bool
     @Binding var isOpenDatailView: ContactDisplayModel?
     @Binding var currentViewContact: ContactDisplayModel
+    @State var isOpenNavigationView: Bool = false
     
     @State private var isPresented = false
 
@@ -112,9 +113,17 @@ private struct ContactListItemView: View {
                         .frame(minHeight: 30)
                 }
             }
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                NavigationLink("", destination: MessageDetailView(contactUid: currentViewContact.contactUid, scrollMsgId: nil), isActive: $isOpenNavigationView)
+                    .hidden()
+            }
             Button(action: {
-                currentViewContact.scrollToMsgId = nil
-                isOpenDatailView = currentViewContact
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    currentViewContact.scrollToMsgId = nil
+                    isOpenDatailView = currentViewContact
+                } else {
+                    isOpenNavigationView = true
+                }
             }, label: {
                 EmptyView()
             })

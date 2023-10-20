@@ -404,7 +404,7 @@ struct MessageDetailView: View {
     @State private var messages: [ContactMessage] = []
     @State var loading: Bool = true
     var body: some View {
-        NavigationView {
+//        NavigationView {
             ScrollViewReader { proxy in
                 ScrollView {
                     LazyVStack {
@@ -469,10 +469,14 @@ struct MessageDetailView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Image(systemName: "chevron.left")
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        Button(action: {
+                            dismiss()
+                        }) {
+                            Image(systemName: "chevron.left")
+                        }
+                    } else {
+                        EmptyView()
                     }
                 }
             }
@@ -488,11 +492,7 @@ struct MessageDetailView: View {
             }
             .navigationTitle(contactName)
             .navigationBarTitleDisplayMode(.inline)
-        }
-        .onDisappear {
-            loading = true
-            messages.removeAll()
-        }
+//        }
     }
 }
 
