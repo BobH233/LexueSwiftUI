@@ -339,7 +339,7 @@ struct ViewCourseScoreView: View {
                     }
                     shareMode = true
                     var currentSize = geometryProxy!.size
-                    currentSize.height += 60
+                    currentSize.height += 130
                     let result = self.body.snapshot(size: currentSize)
                     shareMode = false
                     showImage = result
