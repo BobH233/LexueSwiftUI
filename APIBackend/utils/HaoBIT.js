@@ -52,6 +52,9 @@ const SetIntervalForRefresh = () => {
   }, 10 * 60 * 1000); // 十分钟刷新一次HaoBIT
 }
 
+// 启动就立即更新一次
+RefreshNotification();
+
 module.exports = {
   SetIntervalForRefresh,
 }
