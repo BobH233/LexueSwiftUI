@@ -393,6 +393,20 @@ private struct BubbleLinkMessageView: View, BubbleBaseColorConfig {
 }
 
 struct MessageDetailView: View {
+    let contactUid: String
+    let scrollMsgId: UUID?
+    var body: some View {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            NavigationView {
+                MessageDetailViewInternal(contactUid: contactUid, scrollMsgId: scrollMsgId)
+            }
+        } else {
+            MessageDetailViewInternal(contactUid: contactUid, scrollMsgId: scrollMsgId)
+        }
+    }
+}
+
+struct MessageDetailViewInternal: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var managedObjContext
     @State var showImageViewer: Bool = false
