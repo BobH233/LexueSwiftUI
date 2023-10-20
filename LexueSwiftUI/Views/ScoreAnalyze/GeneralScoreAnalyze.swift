@@ -564,8 +564,8 @@ struct GeneralScoreAnalyze: View {
                     .padding(.bottom, 20)
             }
             .padding(.horizontal)
-            .frame(maxWidth: 500)
         }
+        .frame(maxWidth: 500)
         .sheet(isPresented: $showShareSheet) {
             ShareSheet(photo: showImage, text: "\(GlobalVariables.shared.cur_user_info.fullName) 的成绩分析")
         }
