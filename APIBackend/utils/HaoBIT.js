@@ -9,7 +9,11 @@ const axiosInstance = axios.create({
   headers: {
     'Cache-Control': 'no-cache', // 禁用缓存
     'Pragma': 'no-cache',
-  }
+    'Expires': '0',
+  },
+  params: {
+    'random': new Date().getTime(),
+  },
 })
 
 
