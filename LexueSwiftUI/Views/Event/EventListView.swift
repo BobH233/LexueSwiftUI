@@ -268,105 +268,112 @@ struct EventListView: View {
     var body: some View {
         if globalVar.isLogin {
             NavigationView {
-                ScrollView {
-                    TopCardView()
-                        .padding(.horizontal, 15)
-                    HStack(spacing: 10) {
-                        FunctionalButtonView(backgroundCol: .blue, iconSystemName: "plus.circle.fill", title: "手动添加日程")
-                            .onTapGesture {
-                                showNewEventView.toggle()
-                            }
-                        FunctionalButtonView(backgroundCol: .gray, iconSystemName: "gear", title: "设置规则")
-                            .onTapGesture {
-                                showSettingView.toggle()
-                            }
-                    }
-                    .padding(.horizontal, 15)
+                ScrollView(showsIndicators: false) {
                     HStack {
-                        if showTodayOnly {
-                            FunctionalButtonView(backgroundCol: .blue, iconSystemName: "eye.slash.fill", title: "当前：仅显示今天事件")
-                                .onTapGesture {
-                                    withAnimation {
-                                        showTodayOnly.toggle()
-                                    }
-                                    VibrateOnce()
-                                }
-                        } else {
-                            FunctionalButtonView(backgroundCol: .blue, iconSystemName: "eye.slash", title: "当前：显示一周内事件")
-                                .onTapGesture {
-                                    withAnimation {
-                                        showTodayOnly.toggle()
-                                    }
-                                    VibrateOnce()
-                                }
-                        }
-                        
-                    }
-                    .padding(.horizontal, 15)
-                    // 未完成的ddl
-                    VStack {
-                        HStack {
-                            Text("未完成:")
-                                .font(.system(size: 30))
-                                .bold()
-                            Spacer()
-                        }
-                        ForEach($eventManager.EventDisplayList, id: \.id) { event in
-                            if !showTodayOnly || EventManager.IsTodayEvent(event: event.wrappedValue, today: .now) {
-                                EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
+                        Spacer()
+                        VStack {
+                            TopCardView()
+                                .padding(.horizontal, 15)
+                            HStack(spacing: 10) {
+                                FunctionalButtonView(backgroundCol: .blue, iconSystemName: "plus.circle.fill", title: "手动添加日程")
                                     .onTapGesture {
-                                        curSelectEventUUID = event.id!
-                                        showEditEventView = true
+                                        showNewEventView.toggle()
+                                    }
+                                FunctionalButtonView(backgroundCol: .gray, iconSystemName: "gear", title: "设置规则")
+                                    .onTapGesture {
+                                        showSettingView.toggle()
                                     }
                             }
-                        }
-                    }
-                    .onAppear {
-                        EventManager.shared.LoadEventList(context: managedObjContext)
-                    }
-                    .padding(.top, 20)
-                    .padding(.horizontal, 15)
-                    
-                    if !showTodayOnly {
-                        // 已经到期或者完成的ddl
-                        LazyVStack {
+                            .padding(.horizontal, 15)
                             HStack {
-                                Text("已过期/已完成:")
-                                    .font(.system(size: 30))
-                                    .bold()
-                                Spacer()
+                                if showTodayOnly {
+                                    FunctionalButtonView(backgroundCol: .blue, iconSystemName: "eye.slash.fill", title: "当前：仅显示今天事件")
+                                        .onTapGesture {
+                                            withAnimation {
+                                                showTodayOnly.toggle()
+                                            }
+                                            VibrateOnce()
+                                        }
+                                } else {
+                                    FunctionalButtonView(backgroundCol: .blue, iconSystemName: "eye.slash", title: "当前：显示一周内事件")
+                                        .onTapGesture {
+                                            withAnimation {
+                                                showTodayOnly.toggle()
+                                            }
+                                            VibrateOnce()
+                                        }
+                                }
+                                
                             }
-                            ForEach($eventManager.expiredEventDisplayList, id: \.id) { event in
-                                EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
-                                    .onTapGesture {
-                                        curSelectEventUUID = event.id!
-                                        showEditEventView = true
+                            .padding(.horizontal, 15)
+                            // 未完成的ddl
+                            VStack {
+                                HStack {
+                                    Text("未完成:")
+                                        .font(.system(size: 30))
+                                        .bold()
+                                    Spacer()
+                                }
+                                ForEach($eventManager.EventDisplayList, id: \.id) { event in
+                                    if !showTodayOnly || EventManager.IsTodayEvent(event: event.wrappedValue, today: .now) {
+                                        EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
+                                            .onTapGesture {
+                                                curSelectEventUUID = event.id!
+                                                showEditEventView = true
+                                            }
                                     }
+                                }
                             }
+                            .onAppear {
+                                EventManager.shared.LoadEventList(context: managedObjContext)
+                            }
+                            .padding(.top, 20)
+                            .padding(.horizontal, 15)
+                            
+                            if !showTodayOnly {
+                                // 已经到期或者完成的ddl
+                                LazyVStack {
+                                    HStack {
+                                        Text("已过期/已完成:")
+                                            .font(.system(size: 30))
+                                            .bold()
+                                        Spacer()
+                                    }
+                                    ForEach($eventManager.expiredEventDisplayList, id: \.id) { event in
+                                        EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
+                                            .onTapGesture {
+                                                curSelectEventUUID = event.id!
+                                                showEditEventView = true
+                                            }
+                                    }
+                                }
+                                .padding(.top, 20)
+                                .padding(.horizontal, 15)
+                            }
+                            NavigationLink("", isActive: $showSettingView, destination: {
+                                EventPreferenceSettingView()
+                            })
+                            .isDetailLink(false)
+                            .hidden()
+                            NavigationLink("", isActive: $showNewEventView, destination: {
+                                AddCustomEventView()
+                            })
+                            .isDetailLink(false)
+                            .hidden()
+                            NavigationLink("", isActive: $showEditEventView, destination: {
+                                ViewEventView(event_uuid: curSelectEventUUID)
+                            })
+                            .isDetailLink(false)
+                            .hidden()
+                            NavigationLink("", isActive: $showDeletedEventView, destination: {
+                                DeletedEventView()
+                            })
+                            .isDetailLink(false)
+                            .hidden()
                         }
-                        .padding(.top, 20)
-                        .padding(.horizontal, 15)
+                        .frame(maxWidth: 800)
+                        Spacer()
                     }
-                    NavigationLink("", isActive: $showSettingView, destination: {
-                        EventPreferenceSettingView()
-                    })
-                    .isDetailLink(false)
-                    .hidden()
-                    NavigationLink("", isActive: $showNewEventView, destination: {
-                        AddCustomEventView()
-                    })
-                    .isDetailLink(false)
-                    .hidden()
-                    NavigationLink("", isActive: $showEditEventView, destination: {
-                        ViewEventView(event_uuid: curSelectEventUUID)
-                    })
-                    .isDetailLink(false)
-                    .hidden()
-                    NavigationLink("", isActive: $showDeletedEventView, destination: {
-                        DeletedEventView()
-                    })
-                    .isDetailLink(false)
-                    .hidden()
                 }
                 .onChange(of: showTodayOnly) { newVal in
                     SettingStorage.shared.event_showTodayOnly = showTodayOnly
@@ -417,6 +424,7 @@ struct EventListView: View {
                 .navigationTitle("最近事件")
                 .navigationBarTitleDisplayMode(.large)
             }
+            .navigationViewStyle(StackNavigationViewStyle())
         } else {
             UnloginView(tabSelection: $tabSelection)
         }

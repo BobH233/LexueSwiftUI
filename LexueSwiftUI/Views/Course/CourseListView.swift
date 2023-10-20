@@ -83,8 +83,11 @@ struct CourseCardView: View {
             .padding(.horizontal, cardHorizontalPadding)
         }
         .onTapGesture {
-            detailViewCourse = courseInfo
-            isActive = true
+            isActive = false
+            DispatchQueue.main.async {
+                detailViewCourse = courseInfo
+                isActive = true
+            }
         }
         .contextMenu(menuItems: {
             Text("课程名: \(courseName!)")

@@ -23,6 +23,7 @@ struct DeletedEventView: View {
                             curSelectEventUUID = event.id!
                             showViewEventView = true
                         }
+                        .frame(maxWidth: 800)
                 }
             }
             .padding(.top, 20)
