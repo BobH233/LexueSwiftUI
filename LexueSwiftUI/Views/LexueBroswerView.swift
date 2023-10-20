@@ -55,10 +55,10 @@ struct LexueBroswerView: View {
         }) {
             Image(systemName: "ellipsis")
         }
+            .actionSheet(isPresented: $isActionSheetPresented) {
+                ActionSheet(title: Text("选项"), buttons: GetButtons())
+            }
         )
-        .actionSheet(isPresented: $isActionSheetPresented) {
-            ActionSheet(title: Text("选项"), buttons: GetButtons())
-        }
         .onChange(of: webViewStore.webView.isLoading) { newVal in
             if !newVal {
                 // 执行js代码
