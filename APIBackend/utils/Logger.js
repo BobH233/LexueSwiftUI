@@ -23,8 +23,12 @@ Date.prototype.format = function(fmt) {
    return fmt; 
 }
 
-const LogFileName = new Date().format("yyyy-MM-dd") + ".txt";
-const LogErrFileName = new Date().format("yyyy-MM-dd") + "_err.txt";
+const LogFileName = () => {
+  return new Date().format("yyyy-MM-dd") + ".txt";
+}
+const LogErrFileName = () => {
+  return new Date().format("yyyy-MM-dd") + "_err.txt";
+}
 
 if(!fs.existsSync("logs")){
     fs.mkdirSync("logs");
@@ -32,18 +36,18 @@ if(!fs.existsSync("logs")){
 
 function LogError(str){
     console.log(chalk.redBright("[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Error] ") + str);
-    fs.appendFileSync(path.join(__dirname,"../logs/" + LogFileName), "[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Error] " + str + "\n");
-    fs.appendFileSync(path.join(__dirname,"../logs/" + LogErrFileName), "[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Error] " + str + "\n");
+    fs.appendFileSync(path.join(__dirname,"../logs/" + LogFileName()), "[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Error] " + str + "\n");
+    fs.appendFileSync(path.join(__dirname,"../logs/" + LogErrFileName()), "[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Error] " + str + "\n");
 }
 
 function LogInfo(str){
     console.log(chalk.green("[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Info] ") + str);
-    fs.appendFileSync(path.join(__dirname,"../logs/" + LogFileName), "[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Info] " + str + "\n");
+    fs.appendFileSync(path.join(__dirname,"../logs/" + LogFileName()), "[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Info] " + str + "\n");
 }
 
 function LogWarn(str){
     console.log(chalk.yellow("[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Warn] ") + str);
-    fs.appendFileSync(path.join(__dirname,"../logs/" + LogFileName), "[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Warn] " + str + "\n");
+    fs.appendFileSync(path.join(__dirname,"../logs/" + LogFileName()), "[" + new Date().format("yyyy-MM-dd hh:mm:ss") + "][Warn] " + str + "\n");
 }
 
 module.exports = { LogInfo,LogWarn,LogError };
