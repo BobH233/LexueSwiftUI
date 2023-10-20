@@ -196,11 +196,12 @@ struct SettingView: View {
                 }
                 
             }
+            .frame(maxWidth: 500)
             .navigationViewStyle(.stack)
             .overlay(ImageViewer(image: self.$avatar_image, viewerShown: self.$showImageViewer))
             .navigationTitle("设置")
         }
-        
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

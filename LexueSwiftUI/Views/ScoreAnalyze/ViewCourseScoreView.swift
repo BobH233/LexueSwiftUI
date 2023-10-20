@@ -291,12 +291,11 @@ struct ViewCourseScoreView: View {
                     GeometryReader { proxy in
                         Color.clear.onAppear {
                             geometryProxy = proxy
-                            print(proxy.size.height)
                             displaySize = proxy.size
-                            // displaySize.height += 300
                         }
                     }
                 )
+                .frame(maxWidth: 500)
             }
             .padding(.horizontal)
         }
@@ -310,46 +309,46 @@ struct ViewCourseScoreView: View {
         }) {
             Image(systemName: "square.and.arrow.up")
         }
+            .actionSheet(isPresented: $isActionSheetPresented) {
+                ActionSheet(title: Text("选项"), buttons: [
+                    .default(Text("保存成绩单图片")) {
+                        if geometryProxy == nil {
+                            GlobalVariables.shared.alertTitle = "无法导出成绩单"
+                            GlobalVariables.shared.alertContent = "无法读取页面大小，请重试"
+                            GlobalVariables.shared.showAlert = true
+                            return
+                        }
+                        shareMode = true
+                        var currentSize = geometryProxy!.size
+                        currentSize.height += 130
+                        let result = self.body.snapshot(size: currentSize)
+                        shareMode = false
+                        UIImageWriteToSavedPhotosAlbum(result, nil, nil, nil)
+                        GlobalVariables.shared.alertTitle = "成功导出成绩单"
+                        GlobalVariables.shared.alertContent = "请在你的照片中查看"
+                        GlobalVariables.shared.showAlert = true
+                    },
+                    .default(Text("分享成绩单图片")) {
+                        if geometryProxy == nil {
+                            GlobalVariables.shared.alertTitle = "无法导出成绩单"
+                            GlobalVariables.shared.alertContent = "无法读取页面大小，请重试"
+                            GlobalVariables.shared.showAlert = true
+                            return
+                        }
+                        shareMode = true
+                        var currentSize = geometryProxy!.size
+                        currentSize.height += 130
+                        let result = self.body.snapshot(size: currentSize)
+                        shareMode = false
+                        showImage = result
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            showShareSheet = true
+                        }
+                    },
+                    .cancel(Text("取消"))
+                ])
+            }
         )
-        .actionSheet(isPresented: $isActionSheetPresented) {
-            ActionSheet(title: Text("选项"), buttons: [
-                .default(Text("保存成绩单图片")) {
-                    if geometryProxy == nil {
-                        GlobalVariables.shared.alertTitle = "无法导出成绩单"
-                        GlobalVariables.shared.alertContent = "无法读取页面大小，请重试"
-                        GlobalVariables.shared.showAlert = true
-                        return
-                    }
-                    shareMode = true
-                    var currentSize = geometryProxy!.size
-                    currentSize.height += 130
-                    let result = self.body.snapshot(size: currentSize)
-                    shareMode = false
-                    UIImageWriteToSavedPhotosAlbum(result, nil, nil, nil)
-                    GlobalVariables.shared.alertTitle = "成功导出成绩单"
-                    GlobalVariables.shared.alertContent = "请在你的照片中查看"
-                    GlobalVariables.shared.showAlert = true
-                },
-                .default(Text("分享成绩单图片")) {
-                    if geometryProxy == nil {
-                        GlobalVariables.shared.alertTitle = "无法导出成绩单"
-                        GlobalVariables.shared.alertContent = "无法读取页面大小，请重试"
-                        GlobalVariables.shared.showAlert = true
-                        return
-                    }
-                    shareMode = true
-                    var currentSize = geometryProxy!.size
-                    currentSize.height += 130
-                    let result = self.body.snapshot(size: currentSize)
-                    shareMode = false
-                    showImage = result
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        showShareSheet = true
-                    }
-                },
-                .cancel(Text("取消"))
-            ])
-        }
         .onFirstAppear {
             evaluateDiff = GetEvaluateResult()
         }

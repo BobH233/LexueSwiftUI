@@ -564,66 +564,67 @@ struct GeneralScoreAnalyze: View {
                     .padding(.bottom, 20)
             }
             .padding(.horizontal)
+            .frame(maxWidth: 500)
         }
         .sheet(isPresented: $showShareSheet) {
             ShareSheet(photo: showImage, text: "\(GlobalVariables.shared.cur_user_info.fullName) 的成绩分析")
         }
         .background(shareMode ? .white : .clear)
-        .actionSheet(isPresented: $isActionSheetPresented) {
-            ActionSheet(title: Text("选项"), buttons: [
-                .default(Text("保存成绩单图片")) {
-                    if #available(iOS 16.0, *) {
-                        let renderer = ImageRenderer(content: ScreenshotView(originView: self))
-                        renderer.scale = UIScreen.main.scale
-                        if let uiImage = renderer.uiImage, let data = uiImage.pngData(), let fullImage = UIImage(data: data) {
-                            UIImageWriteToSavedPhotosAlbum(fullImage, nil, nil, nil)
-                            GlobalVariables.shared.alertTitle = "成功导出成绩分析"
-                            GlobalVariables.shared.alertContent = "请在你的照片中查看"
-                            GlobalVariables.shared.showAlert = true
-                            return
-                        } else {
-                            GlobalVariables.shared.alertTitle = "无法导出成绩单"
-                            GlobalVariables.shared.alertContent = "出现了异常错误..."
-                            GlobalVariables.shared.showAlert = true
-                        }
-                    } else {
-                        GlobalVariables.shared.alertTitle = "不支持ios16以下的系统导出截图"
-                        GlobalVariables.shared.alertContent = "由于图表渲染限制问题，请手动截图"
-                        GlobalVariables.shared.showAlert = true
-                        return
-                    }
-                },
-                .default(Text("分享成绩单图片")) {
-                    if #available(iOS 16.0, *) {
-                        let renderer = ImageRenderer(content: ScreenshotView(originView: self))
-                        renderer.scale = UIScreen.main.scale
-                        if let uiImage = renderer.uiImage, let data = uiImage.pngData(), let fullImage = UIImage(data: data) {
-                            showImage = fullImage
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                showShareSheet = true
-                            }
-                            return
-                        } else {
-                            GlobalVariables.shared.alertTitle = "无法导出成绩单"
-                            GlobalVariables.shared.alertContent = "出现了异常错误..."
-                            GlobalVariables.shared.showAlert = true
-                        }
-                    } else {
-                        GlobalVariables.shared.alertTitle = "不支持ios16以下的系统导出截图"
-                        GlobalVariables.shared.alertContent = "由于图表渲染限制问题，请手动截图"
-                        GlobalVariables.shared.showAlert = true
-                        return
-                    }
-                },
-                .cancel(Text("取消"))
-            ])
-        }
         .navigationBarItems(trailing:
                                 Button(action: {
             self.isActionSheetPresented.toggle()
         }) {
             Image(systemName: "square.and.arrow.up")
         }
+            .actionSheet(isPresented: $isActionSheetPresented) {
+                ActionSheet(title: Text("选项"), buttons: [
+                    .default(Text("保存成绩单图片")) {
+                        if #available(iOS 16.0, *) {
+                            let renderer = ImageRenderer(content: ScreenshotView(originView: self))
+                            renderer.scale = UIScreen.main.scale
+                            if let uiImage = renderer.uiImage, let data = uiImage.pngData(), let fullImage = UIImage(data: data) {
+                                UIImageWriteToSavedPhotosAlbum(fullImage, nil, nil, nil)
+                                GlobalVariables.shared.alertTitle = "成功导出成绩分析"
+                                GlobalVariables.shared.alertContent = "请在你的照片中查看"
+                                GlobalVariables.shared.showAlert = true
+                                return
+                            } else {
+                                GlobalVariables.shared.alertTitle = "无法导出成绩单"
+                                GlobalVariables.shared.alertContent = "出现了异常错误..."
+                                GlobalVariables.shared.showAlert = true
+                            }
+                        } else {
+                            GlobalVariables.shared.alertTitle = "不支持ios16以下的系统导出截图"
+                            GlobalVariables.shared.alertContent = "由于图表渲染限制问题，请手动截图"
+                            GlobalVariables.shared.showAlert = true
+                            return
+                        }
+                    },
+                    .default(Text("分享成绩单图片")) {
+                        if #available(iOS 16.0, *) {
+                            let renderer = ImageRenderer(content: ScreenshotView(originView: self))
+                            renderer.scale = UIScreen.main.scale
+                            if let uiImage = renderer.uiImage, let data = uiImage.pngData(), let fullImage = UIImage(data: data) {
+                                showImage = fullImage
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                    showShareSheet = true
+                                }
+                                return
+                            } else {
+                                GlobalVariables.shared.alertTitle = "无法导出成绩单"
+                                GlobalVariables.shared.alertContent = "出现了异常错误..."
+                                GlobalVariables.shared.showAlert = true
+                            }
+                        } else {
+                            GlobalVariables.shared.alertTitle = "不支持ios16以下的系统导出截图"
+                            GlobalVariables.shared.alertContent = "由于图表渲染限制问题，请手动截图"
+                            GlobalVariables.shared.showAlert = true
+                            return
+                        }
+                    },
+                    .cancel(Text("取消"))
+                ])
+            }
         )
         .onFirstAppear {
             CalcScoreData()
