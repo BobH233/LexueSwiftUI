@@ -304,6 +304,8 @@ struct GeneralScoreAnalyze: View {
     @State var showShareSheet: Bool = false
     @State var showImage: UIImage? = nil
     
+    @State var geometryProxy: GeometryProxy?
+    
     func GetTotalCountedCourseCnt() -> Int {
         if score_90_cnt + score_80_cnt + score_70_cnt + score_60_cnt + score_lower_60_cnt == 0 {
             return 1
@@ -535,7 +537,7 @@ struct GeneralScoreAnalyze: View {
                         .headerBox(chartData: lineChartAvgScoreData)
                         .legends(chartData: lineChartAvgScoreData, columns: [GridItem(.flexible()), GridItem(.flexible())])
                         .id(lineChartAvgScoreData.id)
-                        .frame(height: 400)
+                        .frame(width: geometryProxy != nil ? displaySize.width - 40 : 200)
                         .padding(.bottom, 20)
                         .padding(.horizontal)
                         .colorScheme(.light)
@@ -553,7 +555,7 @@ struct GeneralScoreAnalyze: View {
                         .headerBox(chartData: lineChartAvgGpaData)
                         .legends(chartData: lineChartAvgGpaData, columns: [GridItem(.flexible()), GridItem(.flexible())])
                         .id(lineChartAvgGpaData.id)
-                        .frame(height: 400)
+                        .frame(width: geometryProxy != nil ? displaySize.width - 40 : 200)
                         .padding(.bottom, 20)
                         .padding(.horizontal)
                         .colorScheme(.light)
@@ -563,6 +565,17 @@ struct GeneralScoreAnalyze: View {
                     .clear
                     .padding(.bottom, 20)
             }
+            .background(
+                GeometryReader { proxy in
+                    Color.clear.onAppear {
+                        geometryProxy = proxy
+                        displaySize = proxy.size
+                    }
+                    .onChange(of: proxy.size) { newVal in
+                        displaySize = newVal
+                    }
+                }
+            )
             .padding(.horizontal)
         }
         .frame(maxWidth: 500)
