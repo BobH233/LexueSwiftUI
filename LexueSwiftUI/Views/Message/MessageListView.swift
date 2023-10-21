@@ -122,7 +122,10 @@ private struct ContactListItemView: View {
                     currentViewContact.scrollToMsgId = nil
                     isOpenDatailView = currentViewContact
                 } else {
-                    isOpenNavigationView = true
+                    isOpenNavigationView = false
+                    DispatchQueue.main.async {
+                        isOpenNavigationView = true
+                    }
                 }
             }, label: {
                 EmptyView()
