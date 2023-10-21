@@ -216,32 +216,6 @@ class AppStatusManager {
         print("recordTime: \(lastBackgroundTime)")
     }
     
-    func RefreshLexueContext(silent_refresh: Bool) {
-        GlobalVariables.shared.LoadingText = "刷新中"
-        if !silent_refresh {
-            GlobalVariables.shared.isLoading = true
-        }
-        LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
-            switch result {
-            case .success(let context):
-                GlobalVariables.shared.isLoading = false
-                GlobalVariables.shared.isLogin = true
-                GlobalVariables.shared.cur_lexue_context = context
-            case .failure(_):
-                // 直接清空，让用户重新登录
-                print("刷新lexue cookie 失败")
-                GlobalVariables.shared.alertTitle = "刷新乐学会话失败"
-                GlobalVariables.shared.alertContent = "请尝试重新登录你的账号，或者检查网络设置"
-                GlobalVariables.shared.isLoading = false
-                GlobalVariables.shared.isLogin = false
-                SettingStorage.shared.loginnedContext.CASTGC = ""
-                SettingStorage.shared.loginnedContext.happyVoyagePersonal = ""
-                GlobalVariables.shared.showAlert = true
-                UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "刷新乐学会话失败"])
-            }
-        }
-    }
-    
     
     func OnAppTickEveryMinute() {
         SettingStorage.shared.set_widget_shared_AppActiveDate(Date.now.timeIntervalSince1970)
@@ -281,6 +255,19 @@ class AppStatusManager {
         }
     }
     
+    // 防止刷新过于频繁造成不好的体验，两次刷新至少间隔60s以上
+    var lastShowRefreshTime: Double = 0
+    func CanRefresh() -> Bool {
+        let currentTime = Date.now.timeIntervalSince1970
+        if (currentTime - lastShowRefreshTime > 60) {
+            lastShowRefreshTime = currentTime
+            return true
+        } else {
+            print("显示刷新窗口太频繁，忽略")
+            return false
+        }
+    }
+    
     // App从后台切换回前台的时候
     func OnAppGoToForeground() {
         SettingStorage.shared.set_widget_shared_AppActiveDate(Date.now.timeIntervalSince1970)
@@ -303,7 +290,7 @@ class AppStatusManager {
                 try? await CoreLogicManager.shared.UpdateEventList()
                 await DataProviderManager.shared.DoRefreshAll()
             }
-            if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 60 {
+            if GlobalVariables.shared.isLogin && lastBackgroundTime != 0 && deltaTime > 60 && CanRefresh() {
                 // 超过1分钟，需要刷新lexue的sesskey
                 // 切回重新刷新sesskey的阈值时间设定为60s，因为如果没被踢刷新速度会很快，所以不必担心体验问题
                 print("BackGoreground 60s for get sessKey")
