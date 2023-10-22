@@ -132,18 +132,10 @@ struct LexueSwiftUIApp: App {
     }
     var body: some Scene {
         WindowGroup {
-            if settings.preferColorScheme == 2 {
-                ContentView()
-                    .environment(\.managedObjectContext,
-                                  dataController.container.viewContext)
-                    .environment(\.locale, Locale.init(identifier: "zh-CN"))
-            }else{
-                ContentView()
-                    .environment(\.managedObjectContext,
-                                  dataController.container.viewContext)
-                    .environment(\.locale, Locale.init(identifier: "zh-CN"))
-                    .preferredColorScheme(getPreferredColorScheme())
-            }
+            ContentView()
+                .environment(\.managedObjectContext,
+                              dataController.container.viewContext)
+                .environment(\.locale, Locale.init(identifier: "zh-CN"))
         }
         .onChange(of: scenePhase) { newPhase in
             switch newPhase {

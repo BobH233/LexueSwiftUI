@@ -166,7 +166,9 @@ struct SettingView: View {
                             }
                         }
                         .onChange(of: colorSchemeIndex) { newValue in
-                            SettingStorage.shared.preferColorScheme = newValue
+                            withAnimation {
+                                SettingStorage.shared.preferColorScheme = newValue
+                            }
                         }
                     }
                 }

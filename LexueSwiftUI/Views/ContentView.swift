@@ -7,8 +7,19 @@
 
 import SwiftUI
 
+extension View {
+    @ViewBuilder func optionalColorScheme(preferColorScheme: Int, colorScheme: ColorScheme) -> some View {
+        if preferColorScheme == 2 {
+            self
+        } else {
+            self.preferredColorScheme(colorScheme)
+        }
+    }
+}
+
 struct ContentView: View {
     @State private var tabSelection = 0
+    @ObservedObject var settings = SettingStorage.shared
     @ObservedObject var globalVar = GlobalVariables.shared
     var body: some View {
         TabView(selection: $tabSelection) {
@@ -18,25 +29,30 @@ struct ContentView: View {
                     Image(systemName: "message.fill")
                     Text("消息")
                 }
+                .optionalColorScheme(preferColorScheme: settings.preferColorScheme, colorScheme: settings.preferColorScheme == 0 ? .dark : .light)
             CourseListView(tabSelection: $tabSelection)
                 .tag(2)
                 .tabItem {
                     Image(systemName: "graduationcap.fill")
                     Text("课程")
                 }
+                .optionalColorScheme(preferColorScheme: settings.preferColorScheme, colorScheme: settings.preferColorScheme == 0 ? .dark : .light)
             EventListView(tabSelection: $tabSelection)
                 .tag(3)
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("最近事件")
                 }
+                .optionalColorScheme(preferColorScheme: settings.preferColorScheme, colorScheme: settings.preferColorScheme == 0 ? .dark : .light)
             SettingView()
                 .tag(4)
                 .tabItem {
                     Image(systemName: "gear")
                     Text("个人中心")
                 }
+                .optionalColorScheme(preferColorScheme: settings.preferColorScheme, colorScheme: settings.preferColorScheme == 0 ? .dark : .light)
         }
+        
         .onOpenURL { incomingURL in
             // debug
             if incomingURL.scheme == "um.65153a67b2f6fa00ba5c862a" {
