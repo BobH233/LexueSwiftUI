@@ -122,11 +122,16 @@ struct ViewEventView: View {
                                 addSystemEventTitle = event_obj!.name ?? ""
                                 addSystemEventNote = event_obj!.event_description ?? ""
                                 addSystemEventEndDate = time_start
-                                if let tmp1 = Calendar.current.date(byAdding: .hour, value: -SettingStorage.shared.event_preHour, to: time_start), let tmp2 = Calendar.current.date(byAdding: .minute, value: -SettingStorage.shared.event_preMinute, to: tmp1) {
-                                    addSystemEventStartDate = tmp2
-                                } else {
-                                    print("Unknow error when adding event to system event...")
-                                    addSystemEventEndDate = time_start
+                                if event_obj!.is_period_event {
+                                    addSystemEventStartDate = event_obj!.timeend ?? Date()
+                                }
+                                else {
+                                    if let tmp1 = Calendar.current.date(byAdding: .hour, value: -SettingStorage.shared.event_preHour, to: time_start), let tmp2 = Calendar.current.date(byAdding: .minute, value: -SettingStorage.shared.event_preMinute, to: tmp1) {
+                                        addSystemEventStartDate = tmp2
+                                    } else {
+                                        print("Unknow error when adding event to system event...")
+                                        addSystemEventEndDate = time_start
+                                    }
                                 }
                                 addSystemEventLocation = event_obj!.course_name ?? ""
                                 
@@ -203,13 +208,32 @@ struct ViewEventView: View {
                                 .foregroundColor(.secondary)
                         }
                     }
-                    if let timestart = event_obj!.timestart {
+                    if event_obj!.is_period_event {
+                        let timestart = event_obj!.timestart ?? Date()
+                        let timeend = event_obj!.timeend ?? Date()
                         HStack {
-                            Text("到期时间")
+                            Text("起始时间")
                                 .foregroundColor(.primary)
                             Spacer()
                             Text(GetFullDisplayTime(timestart))
                                 .foregroundColor(.secondary)
+                        }
+                        HStack {
+                            Text("结束时间")
+                                .foregroundColor(.primary)
+                            Spacer()
+                            Text(GetFullDisplayTime(timeend))
+                                .foregroundColor(.secondary)
+                        }
+                    } else {
+                        if let timestart = event_obj!.timestart {
+                            HStack {
+                                Text("到期时间")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Text(GetFullDisplayTime(timestart))
+                                    .foregroundColor(.secondary)
+                            }
                         }
                     }
                     if let event_type = event_obj!.event_type {
