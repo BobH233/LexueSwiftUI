@@ -12,6 +12,8 @@ struct EventItemView: View {
     @State var color: Color
     @State var eventName: String
     @State var starttime: Date
+    @State var isPeriodEvent: Bool
+    @State var endtime: Date
     var body: some View {
         HStack {
             Rectangle()
@@ -27,9 +29,15 @@ struct EventItemView: View {
                 }
                 .padding(.top, 1)
                 HStack {
-                    Text(GetDateDescriptionText(sendDate: starttime))
-                        .font(.system(size: 15))
-                        .lineLimit(1)
+                    if !isPeriodEvent {
+                        Text(GetDateDescriptionText(sendDate: starttime))
+                            .font(.system(size: 15))
+                            .lineLimit(1)
+                    } else {
+                        Text(GetDatePeriodDescriptionText(starttime:starttime, endtime: endtime))
+                            .font(.system(size: 15))
+                            .lineLimit(1)
+                    }
                     Spacer()
                 }
                 .padding(.bottom, 1)
@@ -87,7 +95,7 @@ struct Event_MediumView: View {
                 }
                 .padding(.bottom, 3)
                 ForEach(limited_event) { event in
-                    EventItemView(color: Color(hex: event.color ?? "") ?? .blue, eventName: event.name ?? "", starttime: event.timestart ?? Date())
+                    EventItemView(color: Color(hex: event.color ?? "") ?? .blue, eventName: event.name ?? "", starttime: event.timestart ?? Date(), isPeriodEvent: event.is_period_event, endtime: event.timeend ?? Date())
                 }
                 Spacer()
             } else {
