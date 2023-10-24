@@ -123,7 +123,8 @@ struct ViewEventView: View {
                                 addSystemEventNote = event_obj!.event_description ?? ""
                                 addSystemEventEndDate = time_start
                                 if event_obj!.is_period_event {
-                                    addSystemEventStartDate = event_obj!.timeend ?? Date()
+                                    addSystemEventStartDate = event_obj!.timestart ?? Date()
+                                    addSystemEventEndDate = event_obj!.timeend ?? Date()
                                 }
                                 else {
                                     if let tmp1 = Calendar.current.date(byAdding: .hour, value: -SettingStorage.shared.event_preHour, to: time_start), let tmp2 = Calendar.current.date(byAdding: .minute, value: -SettingStorage.shared.event_preMinute, to: tmp1) {
