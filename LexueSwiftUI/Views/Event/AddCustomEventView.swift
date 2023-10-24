@@ -10,7 +10,7 @@ import AudioToolbox
 
 struct AddCustomEventView: View {
     let GPTInstruction = """
-    你现在是一个json格式文本生成器，输出json供程序去解析，用户给你的指令是设置一个提醒事项。你输出的json对象文本需要包含一下几个内容：（1）提醒事项名称（event_name），这个可以你根据用户的指令自行决定（2）提醒事项的发生时间(event_time)，这是一个文本，格式为“年-月-日 时:分:秒”，我会告诉你现在的时间，然后你自己根据用户的指令决定输出的时间文本（3）提醒事项的备注（event_description）这个你根据用户的指令自行决定，比如事件发生的地点，参加人等等（4）错误信息（error），假如用户输入了其他无关的东西，或者给你的指令你无法理解，请你在这里以字符串输出错误信息，如果没有错误，这里请输出null。（5）给用户说的话（comment），这里输出你为顾客安排了事件过后，想对顾客说的话，可以自由发挥，如果没有可以保持null。
+    你现在是一个json格式文本生成器，输出json供程序去解析，用户给你的指令是设置一个提醒事项。你输出的json对象文本需要包含一下几个内容：（1）提醒事项名称（event_name），这个可以你根据用户的指令自行决定（2）提醒事项的开始发生时间(event_time_start)，这是一个文本，格式为“年-月-日 时:分:秒”，我会告诉你现在的时间，然后你自己根据用户的指令决定输出的时间文本（3）提醒事项的结束时间(event_time_end)，这是一个文本，格式为“年-月-日 时:分:秒”，如果用户不是想在一段时间内进行事件，则这一项为null即可，如果是就输出这一项，记得将is_period_event设置为true（4）提醒事项的备注（event_description）这个你根据用户的指令自行决定，比如事件发生的地点，参加人等等（5）错误信息（error），假如用户输入了其他无关的东西，或者给你的指令你无法理解，请你在这里以字符串输出错误信息，如果没有错误，这里请输出null。（6）给用户说的话（comment），这里输出你为顾客安排了事件过后，想对顾客说的话，可以自由发挥，如果没有可以保持null。（7）是否是持续事件"is_period_event"，这一项在你认为用户设定的是一段时间内进行的事件的时候设定为true，同时要给定event_time_end，否则设定为false。
     """
     
     @ObservedObject var globalVar = GlobalVariables.shared
@@ -60,7 +60,7 @@ struct AddCustomEventView: View {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy年MM月dd日HH:mm分 EEEE"
         let formattedTime = dateFormatter.string(from: .now)
-        let askContent = "现在的时间是\(formattedTime)，用户给你的指令是：“\(gptAskContent)”，直接输出json内容，不要有多余的话和补充"
+        let askContent = "现在的时间是\(formattedTime)，每周第一天是星期一。用户给你的指令是：“\(gptAskContent)”，直接输出json内容，不要有多余的话和补充"
         print(askContent)
         gptAskContent = ""
         UMAnalyticsSwift.event(eventId: "use_gpt", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId])
@@ -107,8 +107,14 @@ struct AddCustomEventView: View {
                             }
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                            if let dateString = jsonObj["event_time"] as? String, let date = dateFormatter.date(from: dateString) {
+                            if let dateString = jsonObj["event_time_start"] as? String, let date = dateFormatter.date(from: dateString) {
                                 startDate = date
+                            }
+                            if let dateString = jsonObj["event_time_end"] as? String, let date = dateFormatter.date(from: dateString) {
+                                endDate = date
+                            }
+                            if let is_period_event = jsonObj["is_period_event"] as? Bool, is_period_event {
+                                isPeriodEvent = is_period_event
                             }
                             gptThinking = false
                         }
@@ -173,7 +179,7 @@ struct AddCustomEventView: View {
             } header: {
                 Text("AI录入(实验性)")
             } footer: {
-                Text("目前使用的gpt的api接口非常的慢，因此最终这个功能是否保留待定...")
+                // Text("目前使用的gpt的api接口非常的慢，因此最终这个功能是否保留待定...")
             }
             Section("基本设置") {
                 HStack {
