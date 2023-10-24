@@ -100,6 +100,25 @@ class JXZXehall {
             }
         }
         
+        func GetExamEndDate() -> Date {
+            let components = examTime.components(separatedBy: "-")
+            if components.count == 4 {
+                let datePart = "\(components[0])-\(components[1])-\(components[2])"
+                let onlyDayDate = datePart.components(separatedBy: " ")[0]
+                let onlyEndTimeDate = components[3].components(separatedBy: "(")[0]
+                let endTimeFull = "\(onlyDayDate) \(onlyEndTimeDate)"
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                if let date = dateFormatter.date(from: endTimeFull) {
+                    return date
+                } else {
+                    return GetMidNightDate()
+                }
+            } else {
+                return GetMidNightDate()
+            }
+        }
+        
         func GetMidNightDate() -> Date {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

@@ -412,6 +412,19 @@ func GetDateDescriptionText(sendDate: Date) -> String {
     }
 }
 
+func GetDatePeriodDescriptionText(starttime: Date, endtime: Date) -> String {
+    if starttime.isInSameDay(as: endtime) {
+        // 如果是同一天，后面部分不必带上是哪一天
+        let begin_text = GetDateDescriptionText(sendDate: starttime)
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "zh-CN")
+        dateFormatter.dateFormat = "HH:mm"
+        return begin_text + " ~ " + dateFormatter.string(from: endtime)
+    } else {
+        return GetDateDescriptionText(sendDate: starttime) + " ~ " + GetDateDescriptionText(sendDate: endtime)
+    }
+}
+
 
 extension String {
     var sha256: String {

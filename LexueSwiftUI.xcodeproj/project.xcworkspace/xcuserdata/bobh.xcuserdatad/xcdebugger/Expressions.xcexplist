@@ -133,7 +133,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -142,7 +142,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -317,13 +317,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
-               value = "event.name">
+               value = "event.timestart">
             </PersistentString>
             <PersistentString
                value = "event.id">
             </PersistentString>
             <PersistentString
-               value = "event.timestart">
+               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -355,6 +355,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #2 in closure #3 in closure #1 in closure #1 in EventListItemView.body.getter:EventListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "endtime">
+            </PersistentString>
+            <PersistentString
+               value = "starttime">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in closure #1 in ListItemView.body.getter:MessageListView.swift">
          <PersistentStrings>
             <PersistentString
@@ -362,6 +373,14 @@
             </PersistentString>
             <PersistentString
                value = "currentViewContactUid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in closure #5 in closure #1 in closure #1 in closure #1 in closure #1 in EventListView.body.getter:EventListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "event.timeend">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

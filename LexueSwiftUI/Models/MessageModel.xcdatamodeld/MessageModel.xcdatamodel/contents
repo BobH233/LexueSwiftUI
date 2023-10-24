@@ -46,10 +46,12 @@
         <attribute name="finish" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="instance" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="is_period_event" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="isCustomEvent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lexue_event_id" optional="YES" attributeType="String"/>
         <attribute name="mindaytimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="timeend" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="timestart" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="timeusermidnight" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="url" optional="YES" attributeType="String"/>

@@ -18,7 +18,7 @@ struct DeletedEventView: View {
         ScrollView {
             LazyVStack{
                 ForEach($eventManager.DeletedEventDisplayList, id: \.id) { event in
-                    EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
+                    EventListItemView(title: event.name, description: event.event_description, isPeriodEvent: event.is_period_event, starttime: event.timestart,endtime: event.timeend, courseName: event.course_name, backgroundCol: event.color)
                         .onTapGesture {
                             curSelectEventUUID = event.id!
                             showViewEventView = true

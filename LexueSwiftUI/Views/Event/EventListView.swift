@@ -170,6 +170,8 @@ private struct FunctionalButtonView: View {
 struct EventListItemView: View {
     @Binding var title: String?
     @Binding var description: String?
+    @Binding var isPeriodEvent: Bool
+    @Binding var starttime: Date?
     @Binding var endtime: Date?
     @Binding var courseName: String?
     @Binding var backgroundCol: String?
@@ -234,10 +236,17 @@ struct EventListItemView: View {
                             .resizable()
                             .frame(width: 18, height: 18)
                             .foregroundColor(chooseTextColor(for: UIColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))))
-                        Text(GetDateDescriptionText(sendDate: endtime ?? Date()))
-                            .foregroundColor(chooseTextColor(for: UIColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))))
-                            .bold()
-                            .font(.system(size: 15))
+                        if !isPeriodEvent {
+                            Text(GetDateDescriptionText(sendDate: starttime ?? Date()))
+                                .foregroundColor(chooseTextColor(for: UIColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))))
+                                .bold()
+                                .font(.system(size: 15))
+                        } else {
+                            Text(GetDatePeriodDescriptionText(starttime: starttime ?? Date(), endtime: endtime ?? Date()))
+                                .foregroundColor(chooseTextColor(for: UIColor(backgroundCol == nil ? .green : (Color(hex: backgroundCol!) ?? .green))))
+                                .bold()
+                                .font(.system(size: 15))
+                        }
                         Spacer()
                     }
                 }
@@ -316,7 +325,7 @@ struct EventListView: View {
                                 }
                                 ForEach($eventManager.EventDisplayList, id: \.id) { event in
                                     if !showTodayOnly || EventManager.IsTodayEvent(event: event.wrappedValue, today: .now) {
-                                        EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
+                                        EventListItemView(title: event.name, description: event.event_description, isPeriodEvent: event.is_period_event, starttime: event.timestart,endtime: event.timeend, courseName: event.course_name, backgroundCol: event.color)
                                             .onTapGesture {
                                                 curSelectEventUUID = event.id!
                                                 showEditEventView = true
@@ -340,7 +349,7 @@ struct EventListView: View {
                                         Spacer()
                                     }
                                     ForEach($eventManager.expiredEventDisplayList, id: \.id) { event in
-                                        EventListItemView(title: event.name, description: event.event_description, endtime: event.timestart, courseName: event.course_name, backgroundCol: event.color)
+                                        EventListItemView(title: event.name, description: event.event_description, isPeriodEvent: event.is_period_event, starttime: event.timestart,endtime: event.timeend, courseName: event.course_name, backgroundCol: event.color)
                                             .onTapGesture {
                                                 curSelectEventUUID = event.id!
                                                 showEditEventView = true

@@ -240,14 +240,16 @@ struct ExamInfoView: View {
                 found.isCustomEvent = true
                 found.name = "考试: \(exam.courseName)"
                 found.event_description = GetDescriptionOfExam(exam)
+                found.is_period_event = true
                 found.timestart = exam.GetExamStartDate()
+                found.timeend = exam.GetExamEndDate()
                 found.event_type = "exam"
                 DataController.shared.save(context: managedObjContext)
                 update_cnt += 1
             } else {
                 print("-> New")
                 // 新建考试项
-                DataController.shared.addEventStored(isCustomEvent: true, event_name: "考试: \(exam.courseName)", event_description: GetDescriptionOfExam(exam), lexue_id: nil, timestart: exam.GetExamStartDate(), timeusermidnight: nil, mindaytimestamp: nil, course_id: nil, course_name: nil, color: .orange, action_url: nil, event_type: "exam", instance: nil, url: nil, examCourseId: exam.courseId, context: managedObjContext)
+                DataController.shared.addEventStored(isCustomEvent: true, event_name: "考试: \(exam.courseName)", event_description: GetDescriptionOfExam(exam), lexue_id: nil, timestart: exam.GetExamStartDate(), timeusermidnight: nil, mindaytimestamp: nil, course_id: nil, course_name: nil, color: .orange, action_url: nil, event_type: "exam", instance: nil, url: nil, examCourseId: exam.courseId, isPeriodEvent: true, timeend: exam.GetExamEndDate(), context: managedObjContext)
                 import_cnt += 1
             }
         }
