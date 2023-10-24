@@ -20,11 +20,13 @@ struct EditEventView: View {
     @State private var eventDescription: String = ""
     @State private var eventUrl: String = ""
     @State private var startDate = Date.now
+    @State private var endDate = Date.now
     @State private var courseList = CourseManager.shared.CourseDisplayList
     @State private var withCourse: Bool = false
     @State private var selectCourseId: String = ""
     @State private var color: Color = .blue
     @State private var showDeleteAlert: Bool = false
+    @State private var isPeriodEvent: Bool = false
     
     // 有 作业 assignment 考试 exam 常规 general
     @State private var eventType: String = "assignment"
@@ -58,8 +60,18 @@ struct EditEventView: View {
                             Spacer()
                             TextField("选填，事件相关的链接", text: $eventUrl)
                         }
-                        DatePicker(selection: $startDate, displayedComponents: [.date, .hourAndMinute]) {
-                            Text("时间")
+                        Toggle("持续事件", isOn: $isPeriodEvent)
+                        if isPeriodEvent {
+                            DatePicker(selection: $startDate, displayedComponents: [.date, .hourAndMinute]) {
+                                Text("起始时间")
+                            }
+                            DatePicker(selection: $endDate, displayedComponents: [.date, .hourAndMinute]) {
+                                Text("结束时间")
+                            }
+                        } else {
+                            DatePicker(selection: $startDate, displayedComponents: [.date, .hourAndMinute]) {
+                                Text("时间")
+                            }
                         }
                         ColorPicker("强调色", selection: $color)
                         Picker("类型", selection: $eventType) {
@@ -92,6 +104,12 @@ struct EditEventView: View {
                                 globalVar.showAlert = true
                                 return
                             }
+                            if isPeriodEvent && endDate <= startDate {
+                                globalVar.alertTitle = "持续事件时间非法"
+                                globalVar.alertContent = "结束时间必须晚于起始时间"
+                                globalVar.showAlert = true
+                                return
+                            }
                             let eventName = eventName.trimmingCharacters(in: .whitespacesAndNewlines)
                             let description = eventDescription.trimmingCharacters(in: .whitespacesAndNewlines)
                             let courseId = withCourse ? selectCourseId : nil
@@ -103,6 +121,8 @@ struct EditEventView: View {
                             to_update?.event_type = eventType
                             to_update?.course_id = courseId
                             to_update?.course_name = courseName
+                            to_update?.is_period_event = isPeriodEvent
+                            to_update?.timeend = endDate
                             to_update?.color = color.toHex()
                             if !eventUrl.isEmpty && !eventUrl.hasPrefix("http://") && !eventUrl.hasPrefix("https://") {
                                 eventUrl = "https://" + eventUrl
@@ -164,6 +184,8 @@ struct EditEventView: View {
                         eventName = event_obj.name!
                         eventDescription = event_obj.event_description!
                         startDate = event_obj.timestart!
+                        isPeriodEvent = event_obj.is_period_event
+                        endDate = event_obj.timeend ?? Date()
                         if let courseId = event_obj.course_id {
                             withCourse = true
                             selectCourseId = courseId

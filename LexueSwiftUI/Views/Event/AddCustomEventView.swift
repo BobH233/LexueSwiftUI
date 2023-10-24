@@ -22,6 +22,8 @@ struct AddCustomEventView: View {
     @State private var eventDescription: String = ""
     @State private var eventUrl: String = ""
     @State private var startDate = Date.now
+    @State private var endDate = Date.now
+    @State private var isPeriodEvent = false
     @State private var courseList = CourseManager.shared.CourseDisplayList
     @State private var withCourse: Bool = false
     @State private var selectCourseId: String = ""
@@ -189,8 +191,18 @@ struct AddCustomEventView: View {
                     Spacer()
                     TextField("选填，事件相关的链接", text: $eventUrl)
                 }
-                DatePicker(selection: $startDate, in: Date.now..., displayedComponents: [.date, .hourAndMinute]) {
-                    Text("到期时间")
+                Toggle("持续事件", isOn: $isPeriodEvent)
+                if isPeriodEvent {
+                    DatePicker(selection: $startDate, in: Date.now..., displayedComponents: [.date, .hourAndMinute]) {
+                        Text("起始时间")
+                    }
+                    DatePicker(selection: $endDate, displayedComponents: [.date, .hourAndMinute]) {
+                        Text("结束时间")
+                    }
+                } else {
+                    DatePicker(selection: $startDate, in: Date.now..., displayedComponents: [.date, .hourAndMinute]) {
+                        Text("到期时间")
+                    }
                 }
                 ColorPicker("强调色", selection: $color)
                 Picker("类型", selection: $eventType) {
@@ -238,17 +250,24 @@ struct AddCustomEventView: View {
                         eventUrl = "https://" + eventUrl
                     }
                 }
+                if isPeriodEvent && endDate <= startDate {
+                    globalVar.alertTitle = "持续事件时间非法"
+                    globalVar.alertContent = "结束时间必须晚于起始时间"
+                    globalVar.showAlert = true
+                    return
+                }
                 let eventName = eventName.trimmingCharacters(in: .whitespacesAndNewlines)
                 let description = eventDescription.trimmingCharacters(in: .whitespacesAndNewlines)
                 let courseId = withCourse ? selectCourseId : nil
                 let courseName = withCourse ? GetCourseName(selectCourseId) : nil
-                DataController.shared.addEventStored(isCustomEvent: true, event_name: eventName, event_description: description, lexue_id: nil, timestart: startDate, timeusermidnight: nil, mindaytimestamp: .now, course_id: courseId, course_name: courseName, color: color, action_url: eventUrl, event_type: eventType, instance: nil, url: nil, context: managedObjContext)
+                DataController.shared.addEventStored(isCustomEvent: true, event_name: eventName, event_description: description, lexue_id: nil, timestart: startDate, timeusermidnight: nil, mindaytimestamp: .now, course_id: courseId, course_name: courseName, color: color, action_url: eventUrl, event_type: eventType, instance: nil, url: nil, isPeriodEvent: isPeriodEvent, timeend: endDate, context: managedObjContext)
                 dismiss()
             }
         }
         .onAppear {
             if let after_1h_time = Calendar.current.date(byAdding: .hour, value: 1, to: startDate) {
                 startDate = after_1h_time
+                endDate = startDate
             }
         }
         .navigationTitle("添加日程")
