@@ -98,7 +98,7 @@ class LexueHelperBackend {
                     AF.request(request).response { res in
                         switch res.result {
                         case .success(let data):
-                            if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                            if let json = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
                                 continuation.resume(returning: json)
                             } else {
                                 print("无法将响应数据转换为字典")

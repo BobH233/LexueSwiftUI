@@ -1398,9 +1398,9 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "352"
-            endingLineNumber = "352"
-            landmarkName = "GetEventTypeDescription(_:)"
+            startingLineNumber = "369"
+            endingLineNumber = "369"
+            landmarkName = "addEventStored(isCustomEvent:event_name:event_description:lexue_id:timestart:timeusermidnight:mindaytimestamp:course_id:course_name:color:action_url:event_type:instance:url:examCourseId:isPeriodEvent:timeend:context:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1414,8 +1414,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "345"
-            endingLineNumber = "345"
+            startingLineNumber = "362"
+            endingLineNumber = "362"
             landmarkName = "addEventStored(isCustomEvent:event_name:event_description:lexue_id:timestart:timeusermidnight:mindaytimestamp:course_id:course_name:color:action_url:event_type:instance:url:examCourseId:isPeriodEvent:timeend:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1430,9 +1430,9 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "353"
-            endingLineNumber = "353"
-            landmarkName = "GetEventTypeDescription(_:)"
+            startingLineNumber = "370"
+            endingLineNumber = "370"
+            landmarkName = "addEventStored(isCustomEvent:event_name:event_description:lexue_id:timestart:timeusermidnight:mindaytimestamp:course_id:course_name:color:action_url:event_type:instance:url:examCourseId:isPeriodEvent:timeend:context:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

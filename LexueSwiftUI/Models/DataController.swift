@@ -8,11 +8,39 @@
 import Foundation
 import CoreData
 import SwiftUI
+import CloudKit
 
 class DataController: ObservableObject {
     static let shared = DataController()
-    let container: NSPersistentCloudKitContainer
     
+    lazy var container: NSPersistentCloudKitContainer = {
+        let container = NSPersistentCloudKitContainer(name: "MessageModel")
+//        guard let description = container.persistentStoreDescriptions.first else {
+//            fatalError("No description!")
+//        }
+        let url = URL.storeURL(for: "group.cn.bobh.LexueSwiftUI", databaseName: "MessageModel")
+        let storeDescription = NSPersistentStoreDescription(url: url)
+        
+        storeDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        storeDescription.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.cn.bobh.LexueSwiftUI")
+        storeDescription.cloudKitContainerOptions?.databaseScope = .private
+        container.persistentStoreDescriptions = [storeDescription]
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        
+        container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        container.viewContext.automaticallyMergesChangesFromParent = true
+        return container
+    }()
+    
+    static var managedContext: NSManagedObjectContext {
+        let context = DataController.shared.container.viewContext
+        context.automaticallyMergesChangesFromParent = true
+        return context
+    }
     
     
     init() {
@@ -28,19 +56,6 @@ class DataController: ObservableObject {
                 exit(-1)
             }
         }*/
-        container = NSPersistentCloudKitContainer(name: "MessageModel")
-        let url = URL.storeURL(for: "group.cn.bobh.LexueSwiftUI", databaseName: "MessageModel")
-        let storeDescription = NSPersistentStoreDescription(url: url)
-        storeDescription.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.icloud.bobh.LexueSwiftUI")
-        container.persistentStoreDescriptions = [storeDescription]
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                print("fatal: Failed to load core data! \(error.localizedDescription)")
-                exit(-1)
-            }
-        }
-        container.viewContext.automaticallyMergesChangesFromParent = true
-        NotificationCenter.default.addObserver(self, selector: #selector(contextDidSave(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
     }
     
     @objc private func contextDidSave(_ notification: Notification) {
@@ -52,11 +67,13 @@ class DataController: ObservableObject {
     
     
     func save(context: NSManagedObjectContext) {
-        do {
-            try context.save()
-        } catch {
-            let nsError = error as NSError
-            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                let nsError = error as NSError
+                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
         }
     }
     
