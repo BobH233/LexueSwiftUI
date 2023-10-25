@@ -266,7 +266,7 @@ struct AddCustomEventView: View {
                 let description = eventDescription.trimmingCharacters(in: .whitespacesAndNewlines)
                 let courseId = withCourse ? selectCourseId : nil
                 let courseName = withCourse ? GetCourseName(selectCourseId) : nil
-                DataController.shared.addEventStored(isCustomEvent: true, event_name: eventName, event_description: description, lexue_id: nil, timestart: startDate, timeusermidnight: nil, mindaytimestamp: .now, course_id: courseId, course_name: courseName, color: color, action_url: eventUrl, event_type: eventType, instance: nil, url: nil, isPeriodEvent: isPeriodEvent, timeend: endDate, context: managedObjContext)
+                DataController.shared.addEventStored(isCustomEvent: true, event_name: eventName, event_description: description, lexue_id: nil, timestart: startDate, timeusermidnight: nil, mindaytimestamp: .now, course_id: courseId, course_name: courseName, color: color, action_url: eventUrl, event_type: eventType, instance: nil, url: nil, isPeriodEvent: isPeriodEvent, timeend: endDate, lastUpdateDate: Date(), context: managedObjContext)
                 dismiss()
             }
         }

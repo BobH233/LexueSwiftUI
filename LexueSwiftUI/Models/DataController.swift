@@ -345,7 +345,7 @@ class DataController: ObservableObject {
         save(context: context)
     }
     
-    func addEventStored(isCustomEvent: Bool, event_name: String?, event_description: String?, lexue_id: String?, timestart: Date?, timeusermidnight: Date?, mindaytimestamp: Date?, course_id: String?, course_name: String?, color: Color?, action_url: String?, event_type: String?, instance: Int64?, url: String?, examCourseId: String? = nil, isPeriodEvent: Bool = false, timeend: Date? = nil, context: NSManagedObjectContext) {
+    func addEventStored(isCustomEvent: Bool, event_name: String?, event_description: String?, lexue_id: String?, timestart: Date?, timeusermidnight: Date?, mindaytimestamp: Date?, course_id: String?, course_name: String?, color: Color?, action_url: String?, event_type: String?, instance: Int64?, url: String?, examCourseId: String? = nil, isPeriodEvent: Bool = false, timeend: Date? = nil, lastUpdateDate: Date? = nil, context: NSManagedObjectContext) {
         let eventStored = EventStored(context: context)
         eventStored.id = UUID()
         eventStored.action_url = action_url
@@ -367,6 +367,7 @@ class DataController: ObservableObject {
         eventStored.examCourseId = examCourseId
         eventStored.is_period_event = isPeriodEvent
         eventStored.timeend = timeend
+        eventStored.lastUpdateDate = lastUpdateDate
         save(context: context)
     }
     

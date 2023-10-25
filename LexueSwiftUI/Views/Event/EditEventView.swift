@@ -124,6 +124,7 @@ struct EditEventView: View {
                             to_update?.is_period_event = isPeriodEvent
                             to_update?.timeend = endDate
                             to_update?.color = color.toHex()
+                            to_update?.lastUpdateDate = .now
                             if !eventUrl.isEmpty && !eventUrl.hasPrefix("http://") && !eventUrl.hasPrefix("https://") {
                                 eventUrl = "https://" + eventUrl
                             }
@@ -165,6 +166,7 @@ struct EditEventView: View {
                     Button("修改日程") {
                         let to_update = DataController.shared.findEventById(id: event_uuid, context: managedObjContext)
                         to_update?.color = color.toHex()
+                        to_update?.lastUpdateDate = .now
                         DataController.shared.save(context: managedObjContext)
                         dismiss()
                     }

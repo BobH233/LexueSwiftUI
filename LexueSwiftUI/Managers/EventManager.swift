@@ -166,7 +166,8 @@ class EventManager: ObservableObject {
                     DataController.shared.save(context: context)
                 } else {
                     // print("add event \(newEvent.id)")
-                    DataController.shared.addEventStored(isCustomEvent: false, event_name: newEvent.name, event_description: newEvent.description, lexue_id: newEvent.id, timestart: newEvent.timestart, timeusermidnight: newEvent.timeusermidnight, mindaytimestamp: newEvent.mindaytimestamp, course_id: newEvent.course?.id, course_name: newEvent.course?.fullname, color: .green, action_url: newEvent.action_url, event_type: newEvent.eventtype, instance: Int64(newEvent.instance ?? 0), url: newEvent.url, context: context)
+                    // 如果是从乐学事件导入加进来的，则最后更新时间设置为很早以前，确保经过用户修改的最新一版能够被留下来
+                    DataController.shared.addEventStored(isCustomEvent: false, event_name: newEvent.name, event_description: newEvent.description, lexue_id: newEvent.id, timestart: newEvent.timestart, timeusermidnight: newEvent.timeusermidnight, mindaytimestamp: newEvent.mindaytimestamp, course_id: newEvent.course?.id, course_name: newEvent.course?.fullname, color: .green, action_url: newEvent.action_url, event_type: newEvent.eventtype, instance: Int64(newEvent.instance ?? 0), url: newEvent.url, lastUpdateDate: Date(timeIntervalSince1970: 0), context: context)
                 }
             }
             DispatchQueue.main.async {

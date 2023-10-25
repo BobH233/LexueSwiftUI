@@ -249,7 +249,7 @@ struct ExamInfoView: View {
             } else {
                 print("-> New")
                 // 新建考试项
-                DataController.shared.addEventStored(isCustomEvent: true, event_name: "考试: \(exam.courseName)", event_description: GetDescriptionOfExam(exam), lexue_id: nil, timestart: exam.GetExamStartDate(), timeusermidnight: nil, mindaytimestamp: nil, course_id: nil, course_name: nil, color: .orange, action_url: nil, event_type: "exam", instance: nil, url: nil, examCourseId: exam.courseId, isPeriodEvent: true, timeend: exam.GetExamEndDate(), context: managedObjContext)
+                DataController.shared.addEventStored(isCustomEvent: true, event_name: "考试: \(exam.courseName)", event_description: GetDescriptionOfExam(exam), lexue_id: nil, timestart: exam.GetExamStartDate(), timeusermidnight: nil, mindaytimestamp: nil, course_id: nil, course_name: nil, color: .orange, action_url: nil, event_type: "exam", instance: nil, url: nil, examCourseId: exam.courseId, isPeriodEvent: true, timeend: exam.GetExamEndDate(), lastUpdateDate: Date(), context: managedObjContext)
                 import_cnt += 1
             }
         }
