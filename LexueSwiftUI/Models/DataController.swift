@@ -19,12 +19,21 @@ class DataController: ObservableObject {
 //            fatalError("No description!")
 //        }
         let url = URL.storeURL(for: "group.cn.bobh.LexueSwiftUI", databaseName: "MessageModel")
-        let storeDescription = NSPersistentStoreDescription(url: url)
+        let cloudSyncDescriptor = NSPersistentStoreDescription(url: url)
+        let localStoredDescriptor = NSPersistentStoreDescription(url: URL.storeURL(for: "group.cn.bobh.LexueSwiftUI", databaseName: "MessageModel_local"))
         
-        storeDescription.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
-        storeDescription.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.cn.bobh.LexueSwiftUI")
-        storeDescription.cloudKitContainerOptions?.databaseScope = .private
-        container.persistentStoreDescriptions = [storeDescription]
+        cloudSyncDescriptor.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        cloudSyncDescriptor.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.cn.bobh.LexueSwiftUI")
+        cloudSyncDescriptor.configuration = "NeedSync"
+        cloudSyncDescriptor.cloudKitContainerOptions?.databaseScope = .private
+        
+        localStoredDescriptor.configuration = "Local"
+        
+        
+        container.persistentStoreDescriptions = [
+            cloudSyncDescriptor,
+            localStoredDescriptor
+        ]
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")

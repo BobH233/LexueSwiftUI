@@ -90,6 +90,9 @@
         <attribute name="text_data" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
+    <configuration name="Local">
+        <memberEntity name="CourseCacheStored"/>
+    </configuration>
     <configuration name="NeedSync" usedWithCloudKit="YES">
         <memberEntity name="ContactStored"/>
         <memberEntity name="EventStored"/>
