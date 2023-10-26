@@ -88,7 +88,9 @@ class EventManager: ObservableObject {
         for event in result {
             if event.finish {
                 tmp2.append(event)
-            } else if let startdate = event.timestart, startdate < now_time {
+            } else if event.is_period_event, let timeend = event.timeend, timeend < now_time  {
+                tmp2.append(event)
+            } else if event.is_period_event == false, let startdate = event.timestart, startdate < now_time {
                 tmp2.append(event)
             } else {
                 tmp1.append(event)
