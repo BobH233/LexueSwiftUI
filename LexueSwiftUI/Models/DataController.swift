@@ -10,6 +10,11 @@ import CoreData
 import SwiftUI
 import CloudKit
 
+extension Notification.Name {
+    // 全局消息，数据库更新时需要刷新，确保实时性
+    static let onDatabaseUpdate = Notification.Name("onDatabaseUpdate")
+}
+
 class DataController: ObservableObject {
     static let shared = DataController()
     
@@ -77,6 +82,10 @@ class DataController: ObservableObject {
             guard let transactions = result?.result as? [NSPersistentHistoryTransaction],
                   !transactions.isEmpty
             else { return }
+            
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .onDatabaseUpdate, object: self, userInfo: [:])
+            }
             
             // 处理新的事件记录对象ID
             var newEventStoredObjectIDs = [NSManagedObjectID]()

@@ -390,6 +390,10 @@ struct EventListView: View {
                 .onAppear {
                     showTodayOnly = SettingStorage.shared.event_showTodayOnly
                 }
+                .onReceive(NotificationCenter.default.publisher(for: .onDatabaseUpdate)) { _ in
+                    print("数据库更新，重新刷新事件列表!")
+                    EventManager.shared.LoadEventList()
+                }
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         Menu {

@@ -841,8 +841,8 @@
             filePath = "LexueSwiftUI/Managers/MessageManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "PushMessageWithContactCreation(senderUid:contactOriginNameIfMissing:contactTypeIfMissing:msgBody:date:notify:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -873,8 +873,8 @@
             filePath = "LexueSwiftUI/Managers/MessageManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "PushMessageWithContactCreation(senderUid:contactOriginNameIfMissing:contactTypeIfMissing:msgBody:date:notify:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -889,10 +889,10 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "540"
-            endingLineNumber = "540"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "544"
+            endingLineNumber = "544"
+            landmarkName = "MessageListView_Previews"
+            landmarkType = "14">
             <Locations>
                <Location
                   uuid = "F5EE0E33-65DF-48ED-B779-70F626FC604C - 261b7e7f97ab2a2a"
@@ -940,7 +940,7 @@
             startingLineNumber = "409"
             endingLineNumber = "409"
             landmarkName = "DoSearchMessage()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1270,8 +1270,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "510"
-            endingLineNumber = "510"
+            startingLineNumber = "514"
+            endingLineNumber = "514"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1398,8 +1398,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "501"
-            endingLineNumber = "501"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
             landmarkName = "addEventStored(isCustomEvent:event_name:event_description:lexue_id:timestart:timeusermidnight:mindaytimestamp:course_id:course_name:color:action_url:event_type:instance:url:examCourseId:isPeriodEvent:timeend:lastUpdateDate:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1414,8 +1414,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "494"
-            endingLineNumber = "494"
+            startingLineNumber = "503"
+            endingLineNumber = "503"
             landmarkName = "addEventStored(isCustomEvent:event_name:event_description:lexue_id:timestart:timeusermidnight:mindaytimestamp:course_id:course_name:color:action_url:event_type:instance:url:examCourseId:isPeriodEvent:timeend:lastUpdateDate:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1430,8 +1430,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "503"
-            endingLineNumber = "503"
+            startingLineNumber = "512"
+            endingLineNumber = "512"
             landmarkName = "addEventStored(isCustomEvent:event_name:event_description:lexue_id:timestart:timeusermidnight:mindaytimestamp:course_id:course_name:color:action_url:event_type:instance:url:examCourseId:isPeriodEvent:timeend:lastUpdateDate:context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1558,8 +1558,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "deduplicateEventStoredObject(eventObjectID:performingContext:)"
             landmarkType = "7">
             <Locations>
@@ -1606,8 +1606,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "processPersistentHistory()"
             landmarkType = "7">
             <Locations>
@@ -1654,8 +1654,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "storeRemoteChange(_:)"
             landmarkType = "7">
             <Locations>
@@ -1717,8 +1717,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "storeRemoteChange(_:)"
             landmarkType = "7">
             <Locations>
@@ -1765,8 +1765,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "container"
             landmarkType = "24">
             <Locations>
@@ -1813,8 +1813,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "processPersistentHistory()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1829,8 +1829,8 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "processPersistentHistory()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1845,10 +1845,26 @@
             filePath = "LexueSwiftUI/Models/DataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "deduplicateEventStoredObject(eventObjectID:performingContext:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9F941909-9B18-4E9D-B15A-155C2AA109A7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Views/Event/EventListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

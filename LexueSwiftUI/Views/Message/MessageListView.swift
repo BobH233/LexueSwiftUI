@@ -492,6 +492,10 @@ struct MessageListView: View {
                 UnloginView(tabSelection: $tabSelection)
             }
         }
+        .onReceive(NotificationCenter.default.publisher(for: .onDatabaseUpdate)) { _ in
+            print("数据库更新，重新刷新消息!")
+            RecalcUnread()
+        }
         .badge(unreadBadge)
         .onAppear {
             GlobalVariables.shared.refreshUnreadMsgCallback = RecalcUnread

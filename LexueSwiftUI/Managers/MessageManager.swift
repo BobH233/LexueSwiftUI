@@ -95,7 +95,8 @@ class MessageManager {
                 LocalNotificationManager.shared.PushNotification(title: contact.GetDisplayName(), body: GetMessageTextDecsription(messageBody: msgBody), userInfo: ["cmd": "contactMessage", "contactUid": contact.contactUid!, "msgId": msg.id!.uuidString], interval: 0.1)
             }
         }
-        GlobalVariables.shared.refreshUnreadMsgCallback?()
+        // 因为已经有数据库上的监控了，检测到数据库更新会自动同步的
+        // GlobalVariables.shared.refreshUnreadMsgCallback?()
     }
     
     func GetMessageTextDecsription(messageBody: MessageBodyItem?) -> String {

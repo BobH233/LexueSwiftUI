@@ -121,6 +121,11 @@ struct FavoriteURLView: View {
             }
         }
         .navigationTitle("我的收藏链接")
+        .onReceive(NotificationCenter.default.publisher(for: .onDatabaseUpdate)) { _ in
+            print("数据库更新，重新刷新收藏列表!")
+            favoriteUrls = []
+            favoriteUrls = DataController.shared.getFavoriteURLs(context: managedObjContext)
+        }
         .onAppear {
             favoriteUrls = []
             favoriteUrls = DataController.shared.getFavoriteURLs(context: managedObjContext)
