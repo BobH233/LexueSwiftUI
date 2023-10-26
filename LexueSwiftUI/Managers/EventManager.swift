@@ -8,6 +8,17 @@
 import Foundation
 import CoreData
 
+extension EventStored {
+    func IsExpired() -> Bool {
+        if is_period_event, let endtime = timeend {
+            return endtime < Date()
+        } else if !is_period_event, let starttime = timestart {
+            return starttime < Date()
+        }
+        return false
+    }
+}
+
 class EventManager: ObservableObject {
     static let shared = EventManager()
     
@@ -53,7 +64,7 @@ class EventManager: ObservableObject {
         var result = DataController.shared.queryAllEventStored(isDeleted: false, context: context)
         for event in result {
             let now_time = Date()
-            if let startdate = event.timestart, startdate < now_time {
+            if event.IsExpired() {
                 event.user_deleted = true
             }
         }
@@ -83,14 +94,11 @@ class EventManager: ObservableObject {
         var tmp1 = [EventStored]()
         var tmp2 = [EventStored]()
         
-        let now_time = Date()
         // 分组，已经完成的，或者过期的都放到expired组
         for event in result {
             if event.finish {
                 tmp2.append(event)
-            } else if event.is_period_event, let timeend = event.timeend, timeend < now_time  {
-                tmp2.append(event)
-            } else if event.is_period_event == false, let startdate = event.timestart, startdate < now_time {
+            } else if event.IsExpired() {
                 tmp2.append(event)
             } else {
                 tmp1.append(event)
