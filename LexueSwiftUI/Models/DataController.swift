@@ -15,14 +15,12 @@ class DataController: ObservableObject {
     
     lazy var container: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "MessageModel")
-//        guard let description = container.persistentStoreDescriptions.first else {
-//            fatalError("No description!")
-//        }
         let url = URL.storeURL(for: "group.cn.bobh.LexueSwiftUI", databaseName: "MessageModel")
         let cloudSyncDescriptor = NSPersistentStoreDescription(url: url)
         let localStoredDescriptor = NSPersistentStoreDescription(url: URL.storeURL(for: "group.cn.bobh.LexueSwiftUI", databaseName: "MessageModel_local"))
         
         cloudSyncDescriptor.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        cloudSyncDescriptor.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
         cloudSyncDescriptor.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.cn.bobh.LexueSwiftUI")
         cloudSyncDescriptor.configuration = "NeedSync"
         cloudSyncDescriptor.cloudKitContainerOptions?.databaseScope = .private
@@ -42,35 +40,152 @@ class DataController: ObservableObject {
         
         container.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
         container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        // 设置监控icloud更新
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(storeRemoteChange(_:)),
+                                               name: .NSPersistentStoreRemoteChange,
+                                               object: container.persistentStoreCoordinator)
+        
         return container
     }()
+    
+    // MARK: 处理icloud同步的信息
+    
+    private lazy var historyQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+    
+    @objc func storeRemoteChange(_ notification: Notification) {
+        // Process persistent history to merge changes from other coordinators.
+        historyQueue.addOperation {
+            self.processPersistentHistory()
+        }
+    }
+    
+    // To fetch change since last update, deduplicate if any new insert data, and save the updated token
+    private func processPersistentHistory() {
+        print("处理icloud同步数据库!!")
+        let taskContext = container.newBackgroundContext()
+        taskContext.performAndWait {
+            let historyFetchRequest = NSPersistentHistoryTransaction.fetchRequest!
+            let request = NSPersistentHistoryChangeRequest.fetchHistory(after: lastHistoryToken)
+            request.fetchRequest = historyFetchRequest
+            let result = (try? taskContext.execute(request)) as? NSPersistentHistoryResult
+            guard let transactions = result?.result as? [NSPersistentHistoryTransaction],
+                  !transactions.isEmpty
+            else { return }
+            
+            // 处理新的事件记录对象ID
+            var newEventStoredObjectIDs = [NSManagedObjectID]()
+            let eventStoredObjectName = EventStored.entity().name
+            for transaction in transactions where transaction.changes != nil {
+                for change in transaction.changes!
+                where change.changedObjectID.entity.name == eventStoredObjectName && change.changeType == .insert {
+                    newEventStoredObjectIDs.append(change.changedObjectID)
+                }
+            }
+            if !newEventStoredObjectIDs.isEmpty {
+                deduplicateEventStoredAndWait(eventStoredObjectIDs: newEventStoredObjectIDs)
+            }
+            lastHistoryToken = transactions.last!.token
+        }
+    }
+    
+    private func deduplicateEventStoredAndWait(eventStoredObjectIDs: [NSManagedObjectID]) {
+        // 去重从icloud同步的事件，只保留 lastUpdateDate 最晚的一版本
+        let taskContext = container.backgroundContext()
+        taskContext.performAndWait {
+            eventStoredObjectIDs.forEach { eventObjectID in
+                self.deduplicateEventStoredObject(eventObjectID: eventObjectID, performingContext: taskContext)
+            }
+            // Save the background context to trigger a notification and merge the result into the viewContext.
+            save(context: taskContext)
+        }
+    }
+    private func deduplicateEventStoredObject(eventObjectID: NSManagedObjectID, performingContext: NSManagedObjectContext) {
+        guard let event = performingContext.object(with: eventObjectID) as? EventStored else {
+            fatalError("###\(#function): Failed to retrieve a valid tag with ID: \(eventObjectID)")
+        }
+        if event.isCustomEvent {
+            // 如果是自定义事件，则不去重，只处理lexue事件
+            return
+        }
+        guard let lexue_event_id = event.lexue_event_id else {
+            return
+        }
+        let fetchRequest: NSFetchRequest<EventStored> = EventStored.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "lexue_event_id == %@", lexue_event_id)
+        guard var duplicatedEvents = try? performingContext.fetch(fetchRequest), duplicatedEvents.count > 1 else {
+            return
+        }
+        duplicatedEvents.sort { event1, event2 in
+            let date1 = event1.lastUpdateDate ?? Date(timeIntervalSince1970: 0)
+            let date2 = event2.lastUpdateDate ?? Date(timeIntervalSince1970: 0)
+            return date1 > date2
+        }
+        guard let winner = duplicatedEvents.first else {
+            fatalError("###\(#function): Failed to retrieve the first duplicated tag")
+        }
+        duplicatedEvents.removeFirst()
+        removeDuplicatedEvents(duplicatedEvents: duplicatedEvents, winner: winner, performingContext: performingContext)
+    }
+    
+    private func removeDuplicatedEvents(duplicatedEvents: [EventStored], winner: EventStored, performingContext: NSManagedObjectContext) {
+        duplicatedEvents.forEach { event in
+            defer { performingContext.delete(event) }
+            let msgStoredFetch = MessageStored.fetchRequest()
+            msgStoredFetch.predicate = NSPredicate(format: "event_uuid == %@", (event.id ?? UUID()) as CVarArg)
+            guard var msgs = try? performingContext.fetch(msgStoredFetch) else {
+                return
+            }
+            for msg in msgs {
+                print("重新定位消息指向的事件...")
+                msg.event_uuid = winner.id
+            }
+        }
+    }
+    
     
     static var managedContext: NSManagedObjectContext {
         let context = DataController.shared.container.viewContext
         context.automaticallyMergesChangesFromParent = true
         return context
     }
-    
-    
-    init() {
-        /*
-        container = NSPersistentContainer(name: "MessageModel")
-        let url = URL.storeURL(for: "group.cn.bobh.LexueSwiftUI", databaseName: "MessageModel")
-        let storeDescription = NSPersistentStoreDescription(url: url)
-        container.persistentStoreDescriptions = [storeDescription]
-        
-        container.loadPersistentStores { description, error in
-            if let error = error {
-                print("fatal: Failed to load core data! \(error.localizedDescription)")
-                exit(-1)
+    private lazy var tokenFile: URL = {
+        let url = NSPersistentContainer.defaultDirectoryURL().appendingPathComponent("iLexueHelper", isDirectory: true)
+        if !FileManager.default.fileExists(atPath: url.path) {
+            do {
+                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            } catch {
+                print("###\(#function): Failed to create persistent container URL. Error = \(error)")
             }
-        }*/
+        }
+        return url.appendingPathComponent("icloud_history_token.data", isDirectory: false)
+    }()
+    
+    private var lastHistoryToken: NSPersistentHistoryToken? = nil {
+        didSet {
+            guard let token = lastHistoryToken,
+                let data = try? NSKeyedArchiver.archivedData( withRootObject: token, requiringSecureCoding: true) else { return }
+            
+            do {
+                try data.write(to: tokenFile)
+            } catch {
+                print("###\(#function): Failed to write token data. Error = \(error)")
+            }
+        }
     }
     
-    @objc private func contextDidSave(_ notification: Notification) {
-        // 这个方法会在一个Context保存数据后被调用，我们可以在这里通知其他Context进行更新
-        container.viewContext.perform {
-            self.container.viewContext.mergeChanges(fromContextDidSave: notification)
+    init() {
+        if let tokenData = try? Data(contentsOf: tokenFile) {
+            do {
+                lastHistoryToken = try NSKeyedUnarchiver.unarchivedObject(ofClass: NSPersistentHistoryToken.self, from: tokenData)
+            } catch {
+                print("###\(#function): Failed to unarchive NSPersistentHistoryToken. Error = \(error)")
+            }
         }
     }
     
@@ -81,7 +196,15 @@ class DataController: ObservableObject {
                 try context.save()
             } catch {
                 let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+                #if MAIN_APP
+                UMAnalyticsSwift.event(eventId: "error_db", attributes: ["error": nsError.localizedDescription])
+                
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.alertTitle = "保存数据库失败，数据可能出现错误"
+                    GlobalVariables.shared.alertContent = nsError.localizedDescription
+                    GlobalVariables.shared.showAlert = true
+                }
+                #endif
             }
         }
     }

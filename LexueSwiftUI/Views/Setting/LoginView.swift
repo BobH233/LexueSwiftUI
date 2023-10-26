@@ -72,15 +72,15 @@ struct LoginView: View {
                         AppStatusManager.shared.action_after_get_lexue_context(context)
                         Task {
                             let ret = await CoreLogicManager.shared.RefreshSelfUserInfo()
-                            if ret {
-                                DispatchQueue.main.async {
-                                    globalVar.isLogin = true
-                                }
-                            }
                             DispatchQueue.main.async {
                                 globalVar.isLoading = false
                                 loginBtnDisabled = false
                                 dismiss()
+                            }
+                            if ret {
+                                DispatchQueue.main.async {
+                                    globalVar.isLogin = true
+                                }
                             }
                         }
                     case .failure(_):

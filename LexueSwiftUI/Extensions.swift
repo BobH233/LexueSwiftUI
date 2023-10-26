@@ -13,6 +13,7 @@ import UIKit
 import UserNotifications
 import SwiftSoup
 import AudioToolbox
+import CoreData
 
 // reference: https://stackoverflow.com/questions/43663622/is-a-date-in-same-week-month-year-of-another-date-in-swift
 extension Date {
@@ -472,5 +473,15 @@ extension String {
         } else {
             return self
         }
+    }
+}
+
+
+
+extension NSPersistentContainer {
+    func backgroundContext() -> NSManagedObjectContext {
+        let context = newBackgroundContext()
+        context.transactionAuthor = "LexueSwiftUI"
+        return context
     }
 }
