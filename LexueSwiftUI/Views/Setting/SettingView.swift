@@ -7,7 +7,7 @@
 
 import SwiftUI
 import ImageViewer
-
+import CloudKitSyncMonitor
 
 struct SettingView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
@@ -18,6 +18,9 @@ struct SettingView: View {
     @State var openExamInfoNavigation = false
     @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
     var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
+    
+    @ObservedObject var syncMonitor = SyncMonitor.shared
+    
     var body: some View {
         NavigationView {
             Form {
@@ -52,6 +55,37 @@ struct SettingView: View {
                                     .padding(.bottom, 10)
                             }
                             Spacer()
+                        }
+                    }
+                    Section("iCloud同步") {
+                        HStack {
+                            Image(systemName: syncMonitor.syncStateSummary.symbolName)
+                                .foregroundColor(syncMonitor.syncStateSummary.symbolColor)
+                            if syncMonitor.syncError {
+                                if let _ = syncMonitor.setupError {
+                                    Text("iCloud初始化失败")
+                                }
+                                if let _ = syncMonitor.importError {
+                                    Text("iCloud导入失败")
+                                }
+                                if let _ = syncMonitor.exportError {
+                                    Text("iCloud上传失败")
+                                }
+                            } else if syncMonitor.notSyncing {
+                                Text("iCloud未同步，请检查设置")
+                            } else if syncMonitor.syncStateSummary == .inProgress {
+                                Text("iCloud正在同步")
+                            } else if syncMonitor.syncStateSummary == .accountNotAvailable {
+                                Text("请登录iCloud账号以使用同步")
+                            } else if syncMonitor.syncStateSummary == .noNetwork {
+                                Text("网络连接后开始同步")
+                            } else if syncMonitor.syncStateSummary == .notStarted {
+                                Text("iCloud未开始同步")
+                            } else if syncMonitor.syncStateSummary == .succeeded {
+                                Text("iCloud同步成功")
+                            } else {
+                                Text("未知的iCloud状态")
+                            }
                         }
                     }
                 }

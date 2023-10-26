@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "cloudkitsyncmonitor",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:ggruen/CloudKitSyncMonitor.git",
+      "state" : {
+        "revision" : "8f8de8e71928df27bf023cc6ed808a8b6270a0d3",
+        "version" : "1.2.1"
+      }
+    },
+    {
       "identity" : "networkimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/NetworkImage",

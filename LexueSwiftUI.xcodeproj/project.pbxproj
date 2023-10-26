@@ -43,6 +43,7 @@
 		474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474515122AAB641700CCF24E /* ContactDetailView.swift */; };
 		47476B2F2AC2DC51009D967B /* CourseMembersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47476B2E2AC2DC51009D967B /* CourseMembersListView.swift */; };
 		474C9B792AA4E38D0064B5AF /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 474C9B782AA4E38D0064B5AF /* EventListView.swift */; };
+		474FEFEC2AEAC46F00B88E1F /* CloudKitSyncMonitor in Frameworks */ = {isa = PBXBuildFile; productRef = 474FEFEB2AEAC46F00B88E1F /* CloudKitSyncMonitor */; };
 		4750EB832AC43C640071118F /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4750EB822AC43C640071118F /* LocalNotificationManager.swift */; };
 		4755F24E2ADD764200D7640C /* ExamInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4755F24D2ADD764200D7640C /* ExamInfoView.swift */; };
 		475AFEF62AAF560A00C4020F /* BITLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475AFEF52AAF560A00C4020F /* BITLogin.swift */; };
@@ -320,6 +321,7 @@
 				479B22E42AD57B0300A7DCC7 /* Tabler in Frameworks */,
 				475AFEF92AAF61C900C4020F /* Alamofire in Frameworks */,
 				475AFEFE2AAF68E100C4020F /* SwiftSoup in Frameworks */,
+				474FEFEC2AEAC46F00B88E1F /* CloudKitSyncMonitor in Frameworks */,
 				47970AC22AC5AC7200C5BD03 /* UMAPM.framework in Frameworks */,
 				47970AC72AC5AC9800C5BD03 /* CoreTelephony.framework in Frameworks */,
 				47970AC92AC5ACAB00C5BD03 /* libsqlite3.tbd in Frameworks */,
@@ -673,6 +675,7 @@
 				479B22E62AD57D8100A7DCC7 /* Sideways */,
 				476448402AD84B7700952A22 /* WrappingHStack */,
 				474304C32ADAAC3900EB2073 /* SwiftUICharts */,
+				474FEFEB2AEAC46F00B88E1F /* CloudKitSyncMonitor */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -716,6 +719,7 @@
 				479B22E52AD57D8100A7DCC7 /* XCRemoteSwiftPackageReference "SwiftSideways" */,
 				4764483F2AD84B7700952A22 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 				474304C22ADAAC3900EB2073 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
+				474FEFEA2AEAC46F00B88E1F /* XCRemoteSwiftPackageReference "CloudKitSyncMonitor" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -1219,6 +1223,14 @@
 				minimumVersion = 2.10.2;
 			};
 		};
+		474FEFEA2AEAC46F00B88E1F /* XCRemoteSwiftPackageReference "CloudKitSyncMonitor" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:ggruen/CloudKitSyncMonitor.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
 		475AFEF72AAF61C900C4020F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1290,6 +1302,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 474304C22ADAAC3900EB2073 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
 			productName = SwiftUICharts;
+		};
+		474FEFEB2AEAC46F00B88E1F /* CloudKitSyncMonitor */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 474FEFEA2AEAC46F00B88E1F /* XCRemoteSwiftPackageReference "CloudKitSyncMonitor" */;
+			productName = CloudKitSyncMonitor;
 		};
 		475AFEF82AAF61C900C4020F /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

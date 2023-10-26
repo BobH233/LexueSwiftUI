@@ -25,6 +25,8 @@ private var packages: [PackageUsingDeclarationInfo] = [
     PackageUsingDeclarationInfo(packageName: "SwiftSideways", packageDescription: "A multi-platform SwiftUI component for the horizontal scrolling of tabular data in compact areas", license: "Apache-2.0 license", URL: URL(string: "https://github.com/openalloc/SwiftSideways"), ourPurpose: "用于程序内表格的左右拖动效果"),
     PackageUsingDeclarationInfo(packageName: "WrappingHStack", packageDescription: "A SwiftUI HStack with the ability to wrap contained elements", license: "MIT license", URL: URL(string: "https://github.com/dkk/WrappingHStack"), ourPurpose: "用于自动换行的水平布局"),
     PackageUsingDeclarationInfo(packageName: "ChartView", packageDescription: "ChartView made in SwiftUI", license: "MIT license", URL: URL(string: "https://github.com/AppPear/ChartView"), ourPurpose: "用于显示app内分析图表"),
+    PackageUsingDeclarationInfo(packageName: "CloudKitSyncMonitor", packageDescription: "Monitor current state of NSPersistentCloudKitContainer sync", license: "MIT license", URL: URL(string: "https://github.com/ggruen/CloudKitSyncMonitor"), ourPurpose: "用于监控并显示iCloud同步状态"),
+    
 ]
 
 struct PackageDeclarationView: View {
