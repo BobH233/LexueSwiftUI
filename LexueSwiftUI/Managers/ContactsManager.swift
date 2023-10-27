@@ -16,6 +16,7 @@ class ContactsManager: ObservableObject {
     func PinContact(contactUid: String, isPin: Bool, context: NSManagedObjectContext) {
         let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
         if let contact = contact {
+            contact.lastUpdateDate = Date()
             contact.pinned = isPin
             DataController.shared.save(context: context)
             GenerateContactDisplayLists(context: context)
@@ -24,6 +25,7 @@ class ContactsManager: ObservableObject {
     func SilentContact(contactUid: String, isSilent: Bool, context: NSManagedObjectContext) {
         let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
         if let contact = contact {
+            contact.lastUpdateDate = Date()
             contact.silent = isSilent
             DataController.shared.save(context: context)
             GenerateContactDisplayLists(context: context)
@@ -32,6 +34,7 @@ class ContactsManager: ObservableObject {
     func SetAlias(contactUid: String, alias: String, context: NSManagedObjectContext) {
         let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
         if let contact = contact {
+            contact.lastUpdateDate = Date()
             contact.alias = alias
             DataController.shared.save(context: context)
             GenerateContactDisplayLists(context: context)
@@ -41,6 +44,7 @@ class ContactsManager: ObservableObject {
     func ReadallContact(contactUid: String, context: NSManagedObjectContext) {
         let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
         if let contact = contact {
+            contact.lastUpdateDate = Date()
             contact.unreadCount = 0
             DataController.shared.save(context: context)
             GenerateContactDisplayLists(context: context)

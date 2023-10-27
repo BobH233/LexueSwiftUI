@@ -133,7 +133,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -142,7 +142,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -278,6 +278,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ContactsManager.SetAlias(contactUid:alias:context:):ContactsManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "contact.lastMessageDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in JXZXehall.GetRealWEU(fakeWEU:GS_SESSIONID:):JXZXehall.swift">
          <PersistentStrings>
             <PersistentString
@@ -317,13 +325,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
+               value = "event.name">
+            </PersistentString>
+            <PersistentString
                value = "event.timestart">
             </PersistentString>
             <PersistentString
                value = "event.id">
-            </PersistentString>
-            <PersistentString
-               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -331,10 +339,13 @@
          contextName = "closure #1 in AddCustomEventView.AskGpt():AddCustomEventView.swift">
       </ContextState>
       <ContextState
-         contextName = "DataController.save(context:):DataController.swift">
+         contextName = "closure #2 in closure #3 in closure #1 in closure #1 in EventListItemView.body.getter:EventListView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "pushedMessage">
+               value = "endtime">
+            </PersistentString>
+            <PersistentString
+               value = "starttime">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -347,21 +358,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "MessageListView.refreshToolbar.getter:MessageListView.swift">
+         contextName = "closure #2 in closure #5 in closure #1 in closure #1 in closure #1 in closure #1 in EventListView.body.getter:EventListView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "refreshAction">
+               value = "event.timeend">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #3 in closure #1 in closure #1 in EventListItemView.body.getter:EventListView.swift">
+         contextName = "MessageListView.refreshToolbar.getter:MessageListView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "endtime">
-            </PersistentString>
-            <PersistentString
-               value = "starttime">
+               value = "refreshAction">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -377,10 +385,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in closure #5 in closure #1 in closure #1 in closure #1 in closure #1 in EventListView.body.getter:EventListView.swift">
+         contextName = "DataController.save(context:):DataController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "event.timeend">
+               value = "pushedMessage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

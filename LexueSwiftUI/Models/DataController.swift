@@ -89,15 +89,23 @@ class DataController: ObservableObject {
             
             // 处理新的事件记录对象ID
             var newEventStoredObjectIDs = [NSManagedObjectID]()
+            var newContactStoredObjectIDs = [NSManagedObjectID]()
             let eventStoredObjectName = EventStored.entity().name
+            let contactStoredObjectName = ContactStored.entity().name
             for transaction in transactions where transaction.changes != nil {
-                for change in transaction.changes!
-                where change.changedObjectID.entity.name == eventStoredObjectName && change.changeType == .insert {
-                    newEventStoredObjectIDs.append(change.changedObjectID)
+                for change in transaction.changes! {
+                    if change.changedObjectID.entity.name == eventStoredObjectName && change.changeType == .insert {
+                        newEventStoredObjectIDs.append(change.changedObjectID)
+                    } else if change.changedObjectID.entity.name == contactStoredObjectName && change.changeType == .insert {
+                        newContactStoredObjectIDs.append(change.changedObjectID)
+                    }
                 }
             }
             if !newEventStoredObjectIDs.isEmpty {
                 deduplicateEventStoredAndWait(eventStoredObjectIDs: newEventStoredObjectIDs)
+            }
+            if !newContactStoredObjectIDs.isEmpty {
+                deduplicateContactStoredAndWait(contactStoredObjectIDs: newContactStoredObjectIDs)
             }
             lastHistoryToken = transactions.last!.token
         }
@@ -114,6 +122,46 @@ class DataController: ObservableObject {
             save(context: taskContext)
         }
     }
+    
+    private func deduplicateContactStoredAndWait(contactStoredObjectIDs: [NSManagedObjectID]) {
+        // 去重从icloud同步的事件，只保留 lastUpdateDate 最晚的一版本
+        let taskContext = container.backgroundContext()
+        taskContext.performAndWait {
+            contactStoredObjectIDs.forEach { contactObjectId in
+                self.deduplicateContactStoredObject(contactObjectID: contactObjectId, performingContext: taskContext)
+            }
+            // Save the background context to trigger a notification and merge the result into the viewContext.
+            save(context: taskContext)
+        }
+    }
+    
+    private func deduplicateContactStoredObject(contactObjectID: NSManagedObjectID, performingContext: NSManagedObjectContext) {
+        guard let contact = performingContext.object(with: contactObjectID) as? ContactStored else {
+            fatalError("###\(#function): Failed to retrieve a valid tag with ID: \(contactObjectID)")
+        }
+        guard let contact_id = contact.contactUid else {
+            return
+        }
+        let fetchRequest: NSFetchRequest<ContactStored> = ContactStored.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "contactUid == %@", contact_id)
+        guard var duplicatedContacts = try? performingContext.fetch(fetchRequest), duplicatedContacts.count > 1 else {
+            return
+        }
+        duplicatedContacts.sort { contact1, contact2 in
+            let date1 = contact1.lastUpdateDate ?? Date(timeIntervalSince1970: 0)
+            let date2 = contact2.lastUpdateDate ?? Date(timeIntervalSince1970: 0)
+            return date1 > date2
+        }
+        guard let winner = duplicatedContacts.first else {
+            fatalError("###\(#function): Failed to retrieve the first duplicated tag")
+        }
+        duplicatedContacts.removeFirst()
+        for to_remove in duplicatedContacts {
+            print("删除重复联系人!")
+            performingContext.delete(to_remove)
+        }
+    }
+    
     private func deduplicateEventStoredObject(eventObjectID: NSManagedObjectID, performingContext: NSManagedObjectContext) {
         guard let event = performingContext.object(with: eventObjectID) as? EventStored else {
             fatalError("###\(#function): Failed to retrieve a valid tag with ID: \(eventObjectID)")
@@ -471,7 +519,7 @@ class DataController: ObservableObject {
         return nil
     }
     
-    func addContactStored(contactUid: String, originName: String, pinned: Bool?, silent: Bool?, unreadCount: Int32?, avatar_data: String?, type: ContactType = .not_spec, context: NSManagedObjectContext) {
+    func addContactStored(contactUid: String, originName: String, pinned: Bool?, silent: Bool?, unreadCount: Int32?, avatar_data: String?, type: ContactType = .not_spec, lastUpdateDate: Date = Date(timeIntervalSince1970: 0), context: NSManagedObjectContext) {
         let contactStored = ContactStored(context: context)
         contactStored.id = UUID()
         contactStored.type = Int32(type.rawValue)
@@ -482,6 +530,7 @@ class DataController: ObservableObject {
         contactStored.pinned = pinned ?? false
         contactStored.silent = silent ?? false
         contactStored.unreadCount = unreadCount ?? 0
+        contactStored.lastUpdateDate = lastUpdateDate
         contactStored.alias = nil
         save(context: context)
     }
