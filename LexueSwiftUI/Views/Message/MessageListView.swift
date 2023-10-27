@@ -498,7 +498,7 @@ struct MessageListView: View {
                 RecalcUnread()
             }
         }
-        .badge(unreadBadge)
+        .badge(globalVar.isLogin ? unreadBadge : nil)
         .onAppear {
             GlobalVariables.shared.refreshUnreadMsgCallback = RecalcUnread
             GlobalVariables.shared.handleNotificationMsg = { param in
