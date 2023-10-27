@@ -165,7 +165,7 @@ class InfoMergingDataProvider: DataProvider {
         var msg = MessageBodyItem(type: .link)
         msg.link_title = notice.title ?? "无标题消息"
         msg.link = notice.link ?? ""
-        msgRequestList.append(PushMessageRequest(senderUid: source, contactOriginNameIfMissing: msgSource.fullName, contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date()))
+        msgRequestList.append(PushMessageRequest(senderUid: source, contactOriginNameIfMissing: msgSource.fullName, contactTypeIfMissing: .msg_provider, msgBody: msg, msgHash: notice.get_descriptor(), date: Date()))
     }
     
     func refresh(param: [String : Any], manually: Bool) async {

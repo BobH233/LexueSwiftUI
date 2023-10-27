@@ -24,6 +24,7 @@ struct PushMessageRequest {
     var contactOriginNameIfMissing: String = ""
     var contactTypeIfMissing: ContactType = .not_spec
     var msgBody: MessageBodyItem
+    var msgHash: String?
     var date: Date
 }
 

@@ -82,7 +82,7 @@ class DataProviderManager: ObservableObject {
             if provider.allowMessage {
                 for msg in provider.msgRequestList {
                     await DataController.shared.container.performBackgroundTask { (bgContext) in
-                        MessageManager.shared.PushMessageWithContactCreation(senderUid: msg.senderUid, contactOriginNameIfMissing: msg.contactOriginNameIfMissing, contactTypeIfMissing: msg.contactTypeIfMissing, msgBody: msg.msgBody, date: msg.date, notify: provider.allowNotification, context: bgContext)
+                        MessageManager.shared.PushMessageWithContactCreation(senderUid: msg.senderUid, contactOriginNameIfMissing: msg.contactOriginNameIfMissing, contactTypeIfMissing: msg.contactTypeIfMissing, msgBody: msg.msgBody, date: msg.date, notify: provider.allowNotification, messageHash: msg.msgHash, context: bgContext)
                     }
                 }
             }
@@ -110,7 +110,7 @@ class DataProviderManager: ObservableObject {
             if provider.allowMessage {
                 for msg in provider.msgRequestList {
                     await DataController.shared.container.performBackgroundTask { (bgContext) in
-                        MessageManager.shared.PushMessageWithContactCreation(senderUid: msg.senderUid, contactOriginNameIfMissing: msg.contactOriginNameIfMissing, contactTypeIfMissing: msg.contactTypeIfMissing, msgBody: msg.msgBody, date: msg.date, notify: provider.allowNotification, context: bgContext)
+                        MessageManager.shared.PushMessageWithContactCreation(senderUid: msg.senderUid, contactOriginNameIfMissing: msg.contactOriginNameIfMissing, contactTypeIfMissing: msg.contactTypeIfMissing, msgBody: msg.msgBody, date: msg.date, notify: provider.allowNotification, messageHash: msg.msgHash, context: bgContext)
                     }
                 }
             }

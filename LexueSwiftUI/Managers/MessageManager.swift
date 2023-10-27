@@ -76,8 +76,8 @@ class MessageManager {
     }
     
     // 推送一个消息给消息列表，如果联系人不存在则创建新联系人，存在则不创建新联系人
-    func PushMessageWithContactCreation(senderUid: String, contactOriginNameIfMissing: String, contactTypeIfMissing: ContactType, msgBody: MessageBodyItem, date: Date?, notify: Bool = false, context: NSManagedObjectContext) {
-        let msg = DataController.shared.addMessageStoredFromMsgBody(senderUid: senderUid, msgBody: msgBody, date: date, context: context)
+    func PushMessageWithContactCreation(senderUid: String, contactOriginNameIfMissing: String, contactTypeIfMissing: ContactType, msgBody: MessageBodyItem, date: Date?, notify: Bool = false, messageHash: String? = nil, context: NSManagedObjectContext) {
+        let msg = DataController.shared.addMessageStoredFromMsgBody(senderUid: senderUid, msgBody: msgBody, date: date, msgHash: messageHash, context: context)
         if let contact = DataController.shared.findContactStored(contactUid: senderUid, context: context) {
             contact.lastMessageDate = date ?? Date()
             contact.unreadCount = contact.unreadCount + 1

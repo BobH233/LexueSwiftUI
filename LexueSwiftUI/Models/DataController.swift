@@ -90,14 +90,20 @@ class DataController: ObservableObject {
             // 处理新的事件记录对象ID
             var newEventStoredObjectIDs = [NSManagedObjectID]()
             var newContactStoredObjectIDs = [NSManagedObjectID]()
+            var newMessageStoredObjectIDs = [NSManagedObjectID]()
+            
             let eventStoredObjectName = EventStored.entity().name
             let contactStoredObjectName = ContactStored.entity().name
+            let messageStoredObjectName = MessageStored.entity().name
+            
             for transaction in transactions where transaction.changes != nil {
                 for change in transaction.changes! {
                     if change.changedObjectID.entity.name == eventStoredObjectName && change.changeType == .insert {
                         newEventStoredObjectIDs.append(change.changedObjectID)
                     } else if change.changedObjectID.entity.name == contactStoredObjectName && change.changeType == .insert {
                         newContactStoredObjectIDs.append(change.changedObjectID)
+                    } else if change.changedObjectID.entity.name == messageStoredObjectName && change.changeType == .insert {
+                        newMessageStoredObjectIDs.append(change.changedObjectID)
                     }
                 }
             }
@@ -106,6 +112,9 @@ class DataController: ObservableObject {
             }
             if !newContactStoredObjectIDs.isEmpty {
                 deduplicateContactStoredAndWait(contactStoredObjectIDs: newContactStoredObjectIDs)
+            }
+            if !newMessageStoredObjectIDs.isEmpty {
+                deduplicateMessageStoredAndWait(messageStoredObjectIDs: newMessageStoredObjectIDs)
             }
             lastHistoryToken = transactions.last!.token
         }
@@ -132,6 +141,37 @@ class DataController: ObservableObject {
             }
             // Save the background context to trigger a notification and merge the result into the viewContext.
             save(context: taskContext)
+        }
+    }
+    
+    private func deduplicateMessageStoredAndWait(messageStoredObjectIDs: [NSManagedObjectID]) {
+        // 去重从icloud同步的事件，只保留 hash 一样的一份版本
+        let taskContext = container.backgroundContext()
+        taskContext.performAndWait {
+            messageStoredObjectIDs.forEach { messageObjectId in
+                self.deduplicateMessageStoredObject(messageObjectID: messageObjectId, performingContext: taskContext)
+            }
+            // Save the background context to trigger a notification and merge the result into the viewContext.
+            save(context: taskContext)
+        }
+    }
+    
+    private func deduplicateMessageStoredObject(messageObjectID: NSManagedObjectID, performingContext: NSManagedObjectContext) {
+        guard let contact = performingContext.object(with: messageObjectID) as? MessageStored else {
+            fatalError("###\(#function): Failed to retrieve a valid tag with ID: \(messageObjectID)")
+        }
+        guard let messageHash = contact.messageHash else {
+            return
+        }
+        let fetchRequest: NSFetchRequest<MessageStored> = MessageStored.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "messageHash == %@", messageHash)
+        guard var duplicatedMessages = try? performingContext.fetch(fetchRequest), duplicatedMessages.count > 1 else {
+            return
+        }
+        duplicatedMessages.removeFirst()
+        for to_remove in duplicatedMessages {
+            print("删除重复消息!")
+            performingContext.delete(to_remove)
         }
     }
     
@@ -488,7 +528,7 @@ class DataController: ObservableObject {
     }
     
     // 这个方法是为了方便后期可能要拓展消息类型，可以直接修改MessageBodyItem的内容
-    func addMessageStoredFromMsgBody(senderUid: String, msgBody: MessageBodyItem, date: Date?,  context: NSManagedObjectContext) -> MessageStored {
+    func addMessageStoredFromMsgBody(senderUid: String, msgBody: MessageBodyItem, date: Date?, msgHash: String?, context: NSManagedObjectContext) -> MessageStored {
         let msgStored = MessageStored(context: context)
         msgStored.id = UUID()
         msgStored.senderUid = senderUid
@@ -501,6 +541,7 @@ class DataController: ObservableObject {
         msgStored.event_name = msgBody.event_name
         msgStored.event_uuid = msgBody.event_uuid
         msgStored.event_starttime = msgBody.event_starttime
+        msgStored.messageHash = msgHash
         save(context: context)
         return msgStored
     }
