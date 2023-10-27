@@ -392,7 +392,9 @@ struct EventListView: View {
                 }
                 .onReceive(NotificationCenter.default.publisher(for: .onDatabaseUpdate)) { _ in
                     print("数据库更新，重新刷新事件列表!")
-                    EventManager.shared.LoadEventList()
+                    withAnimation {
+                        EventManager.shared.LoadEventList()
+                    }
                 }
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {

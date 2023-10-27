@@ -494,7 +494,9 @@ struct MessageListView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: .onDatabaseUpdate)) { _ in
             print("数据库更新，重新刷新消息!")
-            RecalcUnread()
+            withAnimation {
+                RecalcUnread()
+            }
         }
         .badge(unreadBadge)
         .onAppear {
