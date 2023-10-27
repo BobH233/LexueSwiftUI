@@ -807,6 +807,20 @@ class DataController: ObservableObject {
         }
         return nil
     }
+    
+    func deleteEntityAllData(entityName: String, context: NSManagedObjectContext) {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.returnsObjectsAsFaults = false
+        do {
+            let objects = try context.fetch(fetchRequest)
+            for case let object as NSManagedObject in objects {
+                context.delete(object)
+            }
+            try context.save()
+        } catch {
+            print("无法删除对象: \(error)")
+        }
+    }
 }
 
 

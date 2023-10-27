@@ -50,6 +50,7 @@
 		475AFEF92AAF61C900C4020F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 475AFEF82AAF61C900C4020F /* Alamofire */; };
 		475AFEFE2AAF68E100C4020F /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 475AFEFD2AAF68E100C4020F /* SwiftSoup */; };
 		475AFF002AB02A0C00C4020F /* LexueAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */; };
+		475D211D2AEC09B400CB9DC7 /* iCloudActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475D211C2AEC09B400CB9DC7 /* iCloudActions.swift */; };
 		475E22AF2ACFB4C800FE8679 /* InfoMergingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */; };
 		475E22B02ACFB66700FE8679 /* InfoMergingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */; };
 		475EDED42AB60697008486F0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475EDED32AB60697008486F0 /* ProfileView.swift */; };
@@ -228,6 +229,7 @@
 		4755F24D2ADD764200D7640C /* ExamInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamInfoView.swift; sourceTree = "<group>"; };
 		475AFEF52AAF560A00C4020F /* BITLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BITLogin.swift; sourceTree = "<group>"; };
 		475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueAPI.swift; sourceTree = "<group>"; };
+		475D211C2AEC09B400CB9DC7 /* iCloudActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudActions.swift; sourceTree = "<group>"; };
 		475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoMergingDataProvider.swift; sourceTree = "<group>"; };
 		475EDED32AB60697008486F0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		476340302AB89F47006C24E2 /* LexueProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueProfile.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 				47BCFB952ACD6A6200320CFD /* PackageDeclarationView.swift */,
 				47BCFB982ACD6FD800320CFD /* AboutView.swift */,
 				472E44302ADAE98400230FC4 /* Feedback.swift */,
+				475D211C2AEC09B400CB9DC7 /* iCloudActions.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -873,6 +876,7 @@
 				473D88972AD126DD00E7EB63 /* WelcomeUseWidget.swift in Sources */,
 				4750EB832AC43C640071118F /* LocalNotificationManager.swift in Sources */,
 				47BA831F2AC1289100954129 /* UnloginView.swift in Sources */,
+				475D211D2AEC09B400CB9DC7 /* iCloudActions.swift in Sources */,
 				47F4F29F2AC086A90047B395 /* SystemPHPicker.swift in Sources */,
 				47CE0FF92ACAF04700C68CA3 /* EditEventView.swift in Sources */,
 				476448432AD8E37D00952A22 /* ShareSheet.swift in Sources */,
