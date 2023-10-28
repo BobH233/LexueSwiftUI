@@ -151,38 +151,40 @@ struct SettingView: View {
                         }
                     }
                 }
-                if globalVar.isLogin {
-                    NavigationLink(destination: ProfileView(), label: {
-                        HStack{
-                            Image(systemName: "person.crop.rectangle.fill")
+                Section("账户") {
+                    if globalVar.isLogin {
+                        NavigationLink(destination: ProfileView(), label: {
+                            HStack{
+                                Image(systemName: "person.crop.rectangle.fill")
+                                    .foregroundColor(.blue)
+                                Text("个人资料")
+                                    .foregroundColor(.blue)
+                            }
+                        })
+                        Button(action: {
+                            print("exit login")
+                            UMAnalyticsSwift.event(eventId: "unlogin", attributes: ["username": globalVar.cur_user_info.userId])
+                            settings.loginnedContext = BITLogin.LoginSuccessContext()
+                            globalVar.cur_lexue_context = LexueAPI.LexueContext()
+                            SettingStorage.shared.set_widget_shared_LexueContext(LexueAPI.LexueContext())
+                            withAnimation {
+                                globalVar.isLogin = false
+                            }
+                        }) {
+                            HStack{
+                                Image(systemName: "delete.right.fill")
+                                    .foregroundColor(.red)
+                                Text("退出登录")
+                                    .foregroundColor(.red)
+                            }
+                        }
+                    } else {
+                        NavigationLink(destination: LoginView(), label: {
+                            Image(systemName: "rectangle.portrait.and.arrow.forward.fill")
                                 .foregroundColor(.blue)
-                            Text("个人资料")
-                                .foregroundColor(.blue)
-                        }
-                    })
-                    Button(action: {
-                        print("exit login")
-                        UMAnalyticsSwift.event(eventId: "unlogin", attributes: ["username": globalVar.cur_user_info.userId])
-                        settings.loginnedContext = BITLogin.LoginSuccessContext()
-                        globalVar.cur_lexue_context = LexueAPI.LexueContext()
-                        SettingStorage.shared.set_widget_shared_LexueContext(LexueAPI.LexueContext())
-                        withAnimation {
-                            globalVar.isLogin = false
-                        }
-                    }) {
-                        HStack{
-                            Image(systemName: "delete.right.fill")
-                                .foregroundColor(.red)
-                            Text("退出登录")
-                                .foregroundColor(.red)
-                        }
+                            Text("登录北理账号")
+                        })
                     }
-                } else {
-                    NavigationLink(destination: LoginView(), label: {
-                        Image(systemName: "rectangle.portrait.and.arrow.forward.fill")
-                            .foregroundColor(.blue)
-                        Text("登录北理账号")
-                    })
                 }
                 if globalVar.isLogin {
                     Section(header: Text("应用设置")) {
