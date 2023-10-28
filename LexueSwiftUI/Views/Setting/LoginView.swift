@@ -79,6 +79,8 @@ struct LoginView: View {
                                 globalVar.isLoading = false
                                 loginBtnDisabled = false
                                 settings.lastLoginUsername = username
+                                // 避免一下子出现一堆的事件...
+                                settings.HaoBITFirstFetch = true
                                 dismiss()
                             }
                             if ret {
