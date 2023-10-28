@@ -148,6 +148,9 @@ struct LoginView: View {
                 .padding(.top, 30)
                 .padding(.horizontal, 30)
                 .padding(.bottom, 20)
+                .alert(isPresented: $showError) {
+                    Alert(title: Text(showErrorTipsTitle), message: Text(showErrorTipsContent), dismissButton: .default(Text("确定")))
+                }
             SecureField("请输入密码", text: $password)
                 .padding()
                 .background(Color(.systemGray6))
@@ -184,6 +187,11 @@ struct LoginView: View {
                     .frame(maxWidth: .infinity)
                     .frame(height: 40)
             }
+            .alert(isPresented: $showTipsAlert) {
+                Alert(title: Text("温馨提示"), message: Text("我们建议您不要在同一个手机上登录多个北理账号，否则可能造成数据冲突，重复，错乱问题，真的要继续登录吗？"), primaryButton: .destructive(Text("确认"), action: {
+                    doLogin()
+                }), secondaryButton: .cancel(Text("取消")))
+            }
             .disabled(loginBtnDisabled)
             .buttonStyle(.borderedProminent)
             .padding(.horizontal, 30)
@@ -218,14 +226,6 @@ struct LoginView: View {
                 print("check captcha")
                 checkNeedCaptcha()
             }
-        }
-        .alert(isPresented: $showTipsAlert) {
-            Alert(title: Text("温馨提示"), message: Text("我们建议您不要在同一个手机上登录多个北理账号，否则可能造成数据冲突，重复，错乱问题，真的要继续登录吗？"), primaryButton: .destructive(Text("确认"), action: {
-                doLogin()
-            }), secondaryButton: .cancel(Text("取消")))
-        }
-        .alert(isPresented: $showError) {
-            Alert(title: Text(showErrorTipsTitle), message: Text(showErrorTipsContent), dismissButton: .default(Text("确定")))
         }
         .navigationTitle("登录北理账号")
     }
