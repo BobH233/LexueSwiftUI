@@ -405,6 +405,8 @@ class SettingStorage: ObservableObject {
         } else {
             HaoBITFirstFetch = true
         }
+        print("注册icloud同步")
+        iCloudUserDefaults.shared.setup()
         // 注册需要iCloud同步的一些属性
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(cloudUpdate(notification:)),
