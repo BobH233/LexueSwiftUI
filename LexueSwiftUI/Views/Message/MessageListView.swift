@@ -113,7 +113,7 @@ private struct ContactListItemView: View {
                         .frame(minHeight: 30)
                 }
             }
-            if UIDevice.current.userInterfaceIdiom == .pad {
+            if UIDevice.current.userInterfaceIdiom != .phone {
                 NavigationLink("", destination: MessageDetailView(contactUid: currentViewContact.contactUid, scrollMsgId: nil), isActive: $isOpenNavigationView)
                     .hidden()
             }
@@ -237,6 +237,7 @@ private struct SearchResultListItemView: View {
     @State var time: String = "昨天 12:00"
     @State var avatar: String = "default_avatar"
     @Binding var isOpenDatailView: ContactDisplayModel?
+    @State var isOpenNavigationView: Bool = false
     var body: some View {
         ZStack {
             HStack {
@@ -278,11 +279,23 @@ private struct SearchResultListItemView: View {
                     }
                 }
             }
+            if UIDevice.current.userInterfaceIdiom != .phone {
+                NavigationLink("", destination: MessageDetailView(contactUid: contactUid, scrollMsgId: msgUUID), isActive: $isOpenNavigationView)
+                    .hidden()
+            }
             Button(action: {
-                var tmp = ContactDisplayModel()
-                tmp.contactUid = contactUid
-                tmp.scrollToMsgId = msgUUID
-                isOpenDatailView = tmp
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    var tmp = ContactDisplayModel()
+                    tmp.contactUid = contactUid
+                    tmp.scrollToMsgId = msgUUID
+                    isOpenDatailView = tmp
+                } else {
+                    isOpenNavigationView = false
+                    DispatchQueue.main.async {
+                        isOpenNavigationView = true
+                    }
+                }
+                
             }, label: {
                 EmptyView()
             })

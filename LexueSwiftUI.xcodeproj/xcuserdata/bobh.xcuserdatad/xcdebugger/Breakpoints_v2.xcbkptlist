@@ -889,10 +889,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "546"
-            endingLineNumber = "546"
-            landmarkName = "MessageListView_Previews"
-            landmarkType = "14">
+            startingLineNumber = "560"
+            endingLineNumber = "560">
             <Locations>
                <Location
                   uuid = "F5EE0E33-65DF-48ED-B779-70F626FC604C - 261b7e7f97ab2a2a"
@@ -937,8 +935,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "409"
-            endingLineNumber = "409"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
             landmarkName = "DoSearchMessage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1270,8 +1268,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "516"
-            endingLineNumber = "516"
+            startingLineNumber = "530"
+            endingLineNumber = "530"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
