@@ -185,55 +185,14 @@ class SettingStorage: ObservableObject {
         }
     }
     
-    func ReloadAllStorage() {
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.preferColorScheme") as? Int {
-            preferColorScheme = stored
-        } else {
-            preferColorScheme = 2
+    
+    @Published var lastLoginUsername: String {
+        didSet {
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(lastLoginUsername, forKey: "setting.lastLoginUsername")
         }
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.username") as? String {
-            savedUsername = stored
-        } else {
-            savedUsername = ""
-        }
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.password") as? String {
-            savedPassword = stored
-        } else {
-            savedPassword = ""
-        }
-        if let stored1 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.context.happyVoyage") as? String, let stored2 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.context.castgc") as? String {
-            loginnedContext = BITLogin.LoginSuccessContext(happyVoyagePersonal: stored1, CASTGC: stored2)
-        } else {
-            loginnedContext = BITLogin.LoginSuccessContext()
-        }
-        if let stored1 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.userId") as? String {
-            var tmpInfo = LexueAPI.SelfUserInfo()
-            tmpInfo.userId = stored1
-            tmpInfo.fullName = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.fullName") as? String ?? ""
-            tmpInfo.firstAccessTime = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.firstAccessTime") as? String ?? ""
-            tmpInfo.onlineUsers = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.onlineUsers") as? String ?? ""
-            tmpInfo.email = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.email") as? String ?? ""
-            tmpInfo.stuId = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.stuId") as? String ?? ""
-            tmpInfo.phone = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.phone") as? String ?? ""
-            cacheUserInfo = tmpInfo
-        } else {
-            cacheUserInfo = LexueAPI.SelfUserInfo()
-        }
-        
-        if let stored1 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheSelfLexueProfile.appVersion") as? String {
-            var tmpProfile = LexueProfile()
-            tmpProfile.appVersion = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheSelfLexueProfile.appVersion") as? String ?? ""
-            tmpProfile.avatarBase64 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheSelfLexueProfile.avatarBase64") as? String ?? ""
-            tmpProfile.isDeveloperMode = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheSelfLexueProfile.isDeveloperMode") as? Bool ?? false
-            cacheSelfLexueProfile = tmpProfile
-        } else {
-            cacheSelfLexueProfile = LexueProfile()
-        }
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.agreePrivacyPolicy") as? Bool {
-            agreePrivacyPolicy = stored
-        } else {
-            agreePrivacyPolicy = false
-        }
+    }
+    
+    func ReloadAsyncedStorage() {
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.events.event_midnightFixTime") as? Int {
             event_midnightFixTime = stored
         } else {
@@ -254,45 +213,16 @@ class SettingStorage: ObservableObject {
         } else {
             event_preMinute = 0
         }
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.events.event_showTodayOnly") as? Bool {
-            event_showTodayOnly = stored
-        } else {
-            event_showTodayOnly = false
-        }
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.events.event_newEventNotification") as? Bool {
             event_newEventNotification = stored
         } else {
             event_newEventNotification = true
         }
         
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.welcomWidgetShown") as? Bool {
-            welcomWidgetShown = stored
-        } else {
-            welcomWidgetShown = false
-        }
-        
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cache_webvpn_context") as? String {
-            cache_webvpn_context = stored
-        } else {
-            cache_webvpn_context = ""
-        }
-        
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cache_webvpn_context_for_user") as? String {
-            cache_webvpn_context_for_user = stored
-        } else {
-            cache_webvpn_context_for_user = ""
-        }
-        
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.prefer_disable_background_fetch") as? Bool {
             prefer_disable_background_fetch = stored
         } else {
             prefer_disable_background_fetch = true
-        }
-        
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.HaoBITFirstFetch") as? Bool {
-            HaoBITFirstFetch = stored
-        } else {
-            HaoBITFirstFetch = true
         }
     }
     
@@ -405,6 +335,12 @@ class SettingStorage: ObservableObject {
         } else {
             HaoBITFirstFetch = true
         }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.lastLoginUsername") as? String {
+            lastLoginUsername = stored
+        } else {
+            lastLoginUsername = ""
+        }
         print("注册icloud同步")
         iCloudUserDefaults.shared.setup()
         // 注册需要iCloud同步的一些属性
@@ -419,7 +355,8 @@ class SettingStorage: ObservableObject {
             "setting.events.event_preHour",
             "setting.events.event_preMinute",
             "setting.events.event_newEventNotification",
-            "setting.prefer_disable_background_fetch"
+            "setting.prefer_disable_background_fetch",
+            "setting.events.event_enableNotification"
         ])
     }
     
@@ -428,7 +365,7 @@ class SettingStorage: ObservableObject {
         iCloudUserDefaults.shared.disableMonitor()
         print("正在重新同步全部userDefaults")
         DispatchQueue.main.async {
-            self.ReloadAllStorage()
+            self.ReloadAsyncedStorage()
         }
         iCloudUserDefaults.shared.enableMonitor()
     }

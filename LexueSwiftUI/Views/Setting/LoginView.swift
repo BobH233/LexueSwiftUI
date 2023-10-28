@@ -26,6 +26,8 @@ struct LoginView: View {
     @State private var showErrorTipsContent: String = ""
     @State private var showError = false
     
+    @State private var showTipsAlert = false
+    
     func refreshCaptcha() {
         BITLogin.shared.get_captcha_data(context: loginContext) { result in
             switch result {
@@ -57,12 +59,13 @@ struct LoginView: View {
         globalVar.LoadingText = "登录中"
         globalVar.isLoading = true
         BITLogin.shared.do_login(context: loginContext, username: username, password: password, captcha: captcha) { result in
-            
             switch result {
             case .success(let data):
                 print(data)
-                settings.savedUsername = username
-                settings.savedPassword = password
+                DispatchQueue.main.async {
+                    settings.savedUsername = username
+                    settings.savedPassword = password
+                }
                 UMAnalyticsSwift.event(eventId: "login", attributes: ["username": username])
                 settings.loginnedContext = data
                 LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
@@ -75,6 +78,7 @@ struct LoginView: View {
                             DispatchQueue.main.async {
                                 globalVar.isLoading = false
                                 loginBtnDisabled = false
+                                settings.lastLoginUsername = username
                                 dismiss()
                             }
                             if ret {
@@ -125,6 +129,14 @@ struct LoginView: View {
         }
     }
     
+    func doLoginPreVerify() {
+        if settings.lastLoginUsername == "" || settings.lastLoginUsername == username {
+            doLogin()
+        } else {
+            showTipsAlert = true
+        }
+    }
+    
     var body: some View {
         VStack {
             TextField("请输入学号", text: $username)
@@ -165,7 +177,7 @@ struct LoginView: View {
             }
             
             Button {
-                doLogin()
+                doLoginPreVerify()
             } label: {
                 Text("登录")
                     .font(.system(size: 24))
@@ -181,7 +193,7 @@ struct LoginView: View {
             if loginBtnDisabled {
                 return
             }
-            doLogin()
+            doLoginPreVerify()
         }
         .onAppear {
             // 确保已经获取到了消息
@@ -206,6 +218,11 @@ struct LoginView: View {
                 print("check captcha")
                 checkNeedCaptcha()
             }
+        }
+        .alert(isPresented: $showTipsAlert) {
+            Alert(title: Text("温馨提示"), message: Text("我们建议您不要在同一个手机上登录多个北理账号，否则可能造成数据冲突，重复，错乱问题，真的要继续登录吗？"), primaryButton: .destructive(Text("确认"), action: {
+                doLogin()
+            }), secondaryButton: .cancel(Text("取消")))
         }
         .alert(isPresented: $showError) {
             Alert(title: Text(showErrorTipsTitle), message: Text(showErrorTipsContent), dismissButton: .default(Text("确定")))
