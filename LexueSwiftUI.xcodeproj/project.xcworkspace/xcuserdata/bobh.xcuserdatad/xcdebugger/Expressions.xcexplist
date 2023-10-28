@@ -141,7 +141,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -150,7 +150,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -267,18 +267,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "LexueAPI.ParseSelfUserInfo(_:):LexueAPI.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "children">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "closure #1 in closure #1 in ContentView.body.getter:ContentView.swift">
          <PersistentStrings>
             <PersistentString
                value = "sysColorScheme">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LexueAPI.ParseSelfUserInfo(_:):LexueAPI.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "children">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -341,13 +341,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
+               value = "event.name">
+            </PersistentString>
+            <PersistentString
                value = "event.id">
             </PersistentString>
             <PersistentString
                value = "event.timestart">
-            </PersistentString>
-            <PersistentString
-               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -465,6 +465,14 @@
          <PersistentStrings>
             <PersistentString
                value = "record.eventUUID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewScoreView.CalcCurrentStatistics():ViewScoreView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "score">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

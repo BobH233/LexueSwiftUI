@@ -8,7 +8,7 @@
 import SwiftUI
 import WrappingHStack
 
-struct FilterOptionBool {
+struct FilterOptionBool: Equatable {
     var title: String = ""
     var choose: Bool = true
 }

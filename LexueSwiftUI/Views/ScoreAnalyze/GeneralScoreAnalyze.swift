@@ -90,7 +90,7 @@ class SemesterData {
         sumAvgGpaTimesCredit += others.sumAvgGpaTimesCredit
     }
     
-    func ConvertToGpa(score: String) -> (Bool, Float) {
+    static func ConvertToGpa(score: String) -> (Bool, Float) {
         let mp: [String: Float] = [
             "优秀": 4,
             "良好": 3.6,
@@ -123,12 +123,12 @@ class SemesterData {
             totAvgCredit = totAvgCredit + credit
             totAvgScoreTimesCredit = totAvgScoreTimesCredit + credit * avg_score
         }
-        let (success, gpa) = ConvertToGpa(score: course.my_score)
+        let (success, gpa) = SemesterData.ConvertToGpa(score: course.my_score)
         if let credit = Float(course.credit), success {
             gpaCredit = gpaCredit + credit
             sumGpaTimesCredit = sumGpaTimesCredit + gpa * credit
         }
-        let (success1, gpa1) = ConvertToGpa(score: course.avg_score)
+        let (success1, gpa1) = SemesterData.ConvertToGpa(score: course.avg_score)
         if let credit = Float(course.credit), success1 {
             gpaAvgCredit = gpaAvgCredit + credit
             sumAvgGpaTimesCredit = sumAvgGpaTimesCredit + gpa1 * credit

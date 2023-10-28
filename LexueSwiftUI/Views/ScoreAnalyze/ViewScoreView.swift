@@ -19,8 +19,51 @@ struct ViewScoreView: View {
     @State var showDetailCourse = Webvpn.ScoreInfo()
     @State var showFilterSheet: Bool = false
     
-    @State var couse_type_choices: [FilterOptionBool] = []
+    @State var course_type_choices: [FilterOptionBool] = []
     @State var semester_type_choices: [FilterOptionBool] = []
+    
+    // 当前列表显示中的优良率
+    @State var current_rate80: Float = 0
+    // 当期列表中显示的平均分
+    @State var current_avgScore: Float = 0
+    // 当前列表中显示的gpa
+    @State var current_avgGPA: Float = 0
+    // 当前列表中显示的门数
+    @State var current_courseCount: Int = 0
+    
+    private func CalcCurrentStatistics() {
+        var tmpCount: Float = 0
+        var tmpUpperEqual80: Float = 0
+        var totalScoreTimesCredit: Float = 0
+        var totalCredit: Float = 0
+        var totalGpaTimesCredit: Float = 0
+        current_courseCount = 0
+        for score in scoreInfo {
+            if !FilterScoreInfo(current: score) {
+                continue
+            }
+            current_courseCount += 1
+            guard let score_float = Float(score.my_score) else {
+                continue
+            }
+            guard let credit_float = Float(score.credit) else {
+                continue
+            }
+            totalCredit += credit_float
+            let (result, gpa) = SemesterData.ConvertToGpa(score: score.my_score)
+            tmpCount += 1
+            if score_float >= 80 {
+                tmpUpperEqual80 += 1
+            }
+            totalScoreTimesCredit += score_float * credit_float
+            if result {
+                totalGpaTimesCredit += gpa * credit_float
+            }
+        }
+        current_rate80 = tmpUpperEqual80 / tmpCount
+        current_avgScore = totalScoreTimesCredit / totalCredit
+        current_avgGPA = totalGpaTimesCredit / totalCredit
+    }
     
     private var gridItems: [GridItem] = [
         // 序号
@@ -150,7 +193,7 @@ struct ViewScoreView: View {
             }
         }
         for courseType in courseTypeSet {
-            couse_type_choices.append(.init(title: courseType, choose: true))
+            course_type_choices.append(.init(title: courseType, choose: true))
         }
         for semester in semesterSet {
             semester_type_choices.append(.init(title: semester, choose: true))
@@ -171,6 +214,7 @@ struct ViewScoreView: View {
                 case .success(let ret_scoreInfo):
                     DispatchQueue.main.async {
                         scoreInfo = ret_scoreInfo.reversed()
+                        CalcCurrentStatistics()
                         LoadFilterOptions()
                         loadingData = false
                     }
@@ -225,7 +269,7 @@ struct ViewScoreView: View {
             }
         }
         // 过滤课程类型
-        for couse_type_choice in couse_type_choices {
+        for couse_type_choice in course_type_choices {
             if couse_type_choice.title == current.course_type && !couse_type_choice.choose {
                 return false
             }
@@ -298,20 +342,54 @@ struct ViewScoreView: View {
                 Spacer()
             }
             .sheet(isPresented: $showFilterSheet, content: {
-                FilterScoreView(couse_type_choices: $couse_type_choices, semester_type_choices: $semester_type_choices)
+                FilterScoreView(couse_type_choices: $course_type_choices, semester_type_choices: $semester_type_choices)
             })
+            HStack {
+                VStack(spacing: 10) {
+                    HStack {
+                        Text("当前门数:")
+                            .bold()
+                        Text("\(current_courseCount)")
+                        Spacer()
+                    }
+                    HStack {
+                        Text("当前优良率:")
+                            .bold()
+                        Text("\(String(format: "%.2f", current_rate80 * 100))%")
+                        Spacer()
+                    }
+                    HStack {
+                        Text("当前平均分:")
+                            .bold()
+                        Text("\(String(format: "%.2f", current_avgScore))")
+                        Text("当前平均GPA:")
+                            .bold()
+                        Text("\(String(format: "%.2f", current_avgGPA))")
+                        Spacer()
+                    }
+                }
+                .padding(.top, 20)
+                .padding(.leading, 20)
+                Spacer()
+            }
             HStack {
                 Text("左右拖动列表可以查看更多信息")
                     .foregroundColor(.secondary)
-                    .padding(.top, 20)
+                    .padding(.top, 5)
                     .padding(.leading, 20)
                 Spacer()
             }
-            TablerList(.init(filter: FilterScoreInfo),header: header,
+            TablerList(.init(filter: FilterScoreInfo), header: header,
                        row: row,
                        results: scoreInfo)
             .sideways(minWidth: 1200, showIndicators: true)
             .background(Color.secondarySystemBackground)
+            .onChange(of: course_type_choices) { newVal in
+                CalcCurrentStatistics()
+            }
+            .onChange(of: semester_type_choices) { newVal in
+                CalcCurrentStatistics()
+            }
             .navigationTitle("成绩查询")
             NavigationLink("", destination: ViewCourseScoreView(currentCourse: $showDetailCourse, allCourses: $scoreInfo), isActive: $showDetailView)
                 .isDetailLink(false)
