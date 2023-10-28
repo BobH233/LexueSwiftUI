@@ -63,8 +63,28 @@ struct ImageMoveAndScaleSheet: View {
     ///find the length of the side of a square which will fit inside
     ///the Circle() shape of our mask to be sure all SF Symbol images fit inside.
     ///For the sake of sanity, just multiply the inset by 2.
-    let defaultImageSide = (UIScreen.main.bounds.width - (30)) * CGFloat(2).squareRoot() / 2
+    // let defaultImageSide = (GetScreenWidth() - (30)) * CGFloat(2).squareRoot() / 2
     
+    lazy var defaultImageSide: CGFloat = {
+        let screenWidth = GetScreenWidth()
+        return (screenWidth - 30) * CGFloat(2).squareRoot() / 2
+    }()
+    
+    func GetScreenWidth() -> CGFloat {
+        if UIScreen.main.bounds.width <= 700 {
+            return UIScreen.main.bounds.width
+        } else {
+            return 700
+        }
+    }
+    
+    func GetScreenHeight() -> CGFloat {
+        if UIScreen.main.bounds.height <= 1000 {
+            return UIScreen.main.bounds.height
+        } else {
+            return 1000
+        }
+    }
     
     //Localized strings
     let moveAndScale = "移动及缩放"
@@ -84,7 +104,7 @@ struct ImageMoveAndScaleSheet: View {
                         .scaledToFill()
                         .aspectRatio(contentMode: .fit)
                         .offset(x: self.currentPosition.width, y: self.currentPosition.height)
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                        .frame(width: GetScreenWidth(), height: GetScreenHeight())
                         .clipped()
                 } else {
                     viewModel.image
@@ -198,8 +218,8 @@ struct ImageMoveAndScaleSheet: View {
     ///
     ///Code for mask obtained from [StackOVerflow](https://stackoverflow.com/questions/59656117/swiftui-add-inverted-mask)
     func HoleShapeMask() -> Path {
-        let rect = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        let insetRect = CGRect(x: inset, y: inset, width: UIScreen.main.bounds.width - ( inset * 2 ), height: UIScreen.main.bounds.height - ( inset * 2 ))
+        let rect = CGRect(x: 0, y: 0, width: GetScreenWidth(), height: GetScreenHeight())
+        let insetRect = CGRect(x: inset, y: inset, width: GetScreenWidth() - ( inset * 2 ), height: GetScreenHeight() - ( inset * 2 ))
         var shape = Rectangle().path(in: rect)
         shape.addPath(Circle().path(in: insetRect))
         return shape

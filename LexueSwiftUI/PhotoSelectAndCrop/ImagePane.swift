@@ -92,6 +92,7 @@ public struct ImagePane: View {
         }
         .fullScreenCover(isPresented: $isShowingPhotoSelectionSheet) {
             ImageMoveAndScaleSheet(imageAttributes: imageAttributes)
+                .frame(maxWidth: 700, maxHeight: 1000)
         }
     }
     

@@ -56,8 +56,9 @@ struct AvatarSettingView: View {
                       renderingMode: renderingMode,
                       colors: colors,
                       showSelectionPanel: $showSelectionPanel)
-                .padding(.horizontal, 50)
-                .foregroundColor(themeColor)
+            .frame(maxWidth: 300)
+            .padding(.horizontal, 50)
+            .foregroundColor(themeColor)
             Button {
                 showSelectionPanel.toggle()
             } label: {
@@ -82,6 +83,7 @@ struct AvatarSettingView: View {
             .padding(.horizontal, 30)
             .padding(.top, 10)
         }
+        .frame(maxWidth: 500)
         .interactiveDismissDisabled(!allow_swipeclose)
         .overlay {
             if isUploading {
