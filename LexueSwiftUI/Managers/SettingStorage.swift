@@ -413,8 +413,8 @@ class SettingStorage: ObservableObject {
                                                name: iCloudUserDefaults.cloudSyncNotification,
                                                object: nil)
         iCloudUserDefaults.shared.monitored_specify.append(contentsOf: [
-            "setting.login.username",
-            "setting.login.password",
+            // "setting.login.username",
+            // "setting.login.password",
             "setting.events.event_midnightFixTime",
             "setting.events.event_preHour",
             "setting.events.event_preMinute",
