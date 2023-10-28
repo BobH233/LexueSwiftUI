@@ -78,6 +78,8 @@
 		4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8162AA6237500F812D6 /* CourseManager.swift */; };
 		4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C8182AA6239800F812D6 /* MessageDetailView.swift */; };
 		4799C81B2AA62CDB00F812D6 /* ContactMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4799C81A2AA62CDB00F812D6 /* ContactMessageModel.swift */; };
+		479A290C2AECCF9A009AAD4F /* iCloudUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A290B2AECCF9A009AAD4F /* iCloudUserDefaults.swift */; };
+		479A290D2AECD3A3009AAD4F /* iCloudUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A290B2AECCF9A009AAD4F /* iCloudUserDefaults.swift */; };
 		479B22E12AD571C400A7DCC7 /* ViewScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */; };
 		479B22E42AD57B0300A7DCC7 /* Tabler in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E32AD57B0300A7DCC7 /* Tabler */; };
 		479B22E72AD57D8100A7DCC7 /* Sideways in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E62AD57D8100A7DCC7 /* Sideways */; };
@@ -252,6 +254,7 @@
 		4799C8162AA6237500F812D6 /* CourseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseManager.swift; sourceTree = "<group>"; };
 		4799C8182AA6239800F812D6 /* MessageDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDetailView.swift; sourceTree = "<group>"; };
 		4799C81A2AA62CDB00F812D6 /* ContactMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactMessageModel.swift; sourceTree = "<group>"; };
+		479A290B2AECCF9A009AAD4F /* iCloudUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudUserDefaults.swift; sourceTree = "<group>"; };
 		479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScoreView.swift; sourceTree = "<group>"; };
 		479B22EB2AD641FB00A7DCC7 /* ViewCourseScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCourseScoreView.swift; sourceTree = "<group>"; };
 		47A927802AA77E6500ABDC53 /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
@@ -538,6 +541,7 @@
 				4750EB822AC43C640071118F /* LocalNotificationManager.swift */,
 				47BD51A62AC5B5A40029F9DB /* UMengManager.swift */,
 				471A1D182AC9932C00A3D847 /* EventManager.swift */,
+				479A290B2AECCF9A009AAD4F /* iCloudUserDefaults.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -783,6 +787,7 @@
 				47F4FD232ACDA62400C6C144 /* DataController.swift in Sources */,
 				47196FF12AC551D200979DFE /* Widget_Extension.swift in Sources */,
 				47F4FD302ACDC1D600C6C144 /* DataProviderManager.swift in Sources */,
+				479A290D2AECD3A3009AAD4F /* iCloudUserDefaults.swift in Sources */,
 				47F4FD332ACDC1E600C6C144 /* MessageManager.swift in Sources */,
 				47F4FD142ACD966C00C6C144 /* Event_SmallView.swift in Sources */,
 				47F4FD292ACDB4EE00C6C144 /* EventManager.swift in Sources */,
@@ -820,6 +825,7 @@
 				472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */,
 				478434802ADEDD890095A2EE /* LexueHelperBackend.swift in Sources */,
 				4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */,
+				479A290C2AECCF9A009AAD4F /* iCloudUserDefaults.swift in Sources */,
 				47B411792ACBD96300AC0B5E /* DataProviderSettingView.swift in Sources */,
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,

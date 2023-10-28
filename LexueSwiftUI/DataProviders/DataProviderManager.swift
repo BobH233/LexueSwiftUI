@@ -15,6 +15,20 @@ class DataProviderManager: ObservableObject {
         dataProviders.append(LexueDataProvider())
         dataProviders.append(InfoMergingDataProvider())
         loadSettingStorage()
+        // 将数据源的设置也通过icloud同步
+        iCloudUserDefaults.shared.monitored_prefix.append("dataprovider.")
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(cloudUpdate(notification:)),
+                                               name: iCloudUserDefaults.cloudSyncNotification,
+                                               object: nil)
+    }
+    
+    @objc internal func cloudUpdate(notification: NSNotification) {
+        // 如果云端消息更新了，那本地也得实时覆盖一下
+        iCloudUserDefaults.shared.disableMonitor()
+        print("正在重新同步全部dataprovider的设置")
+        loadSettingStorage()
+        iCloudUserDefaults.shared.enableMonitor()
     }
     
     func loadKeyOrWithDefault<T>(key: String, defaultVal: T) -> T {
@@ -24,6 +38,8 @@ class DataProviderManager: ObservableObject {
             return defaultVal
         }
     }
+    
+    
     
     func loadSettingStorage() {
         // 加载默认的一些选项

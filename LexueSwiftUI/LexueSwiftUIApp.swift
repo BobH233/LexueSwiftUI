@@ -116,6 +116,8 @@ struct LexueSwiftUIApp: App {
                 task.setTaskCompleted(success: true)
             }
         }
+        print("注册icloud同步")
+        iCloudUserDefaults.shared.setup()
     }
     
     func getPreferredColorScheme() -> ColorScheme {

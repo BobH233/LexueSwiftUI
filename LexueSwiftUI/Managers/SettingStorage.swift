@@ -13,7 +13,6 @@ class SettingStorage: ObservableObject {
     // 是否同意应用隐私政策
     @Published var agreePrivacyPolicy: Bool {
         didSet {
-            print("set setting.agreePrivacyPolicy \(agreePrivacyPolicy)")
             UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(agreePrivacyPolicy, forKey: "setting.agreePrivacyPolicy")
         }
     }
@@ -175,7 +174,7 @@ class SettingStorage: ObservableObject {
     // 是否禁用本地的后台拉取, 而使用apns服务
     @Published var prefer_disable_background_fetch: Bool {
         didSet {
-            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(prefer_disable_background_fetch, forKey: "setting.prefer_disable_background_fetch")
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(prefer_disable_background_fetch, forKey: "setting.login.username")
         }
     }
     
@@ -186,8 +185,7 @@ class SettingStorage: ObservableObject {
         }
     }
     
-    private init() {
-        
+    func ReloadAllStorage() {
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.preferColorScheme") as? Int {
             preferColorScheme = stored
         } else {
@@ -296,6 +294,140 @@ class SettingStorage: ObservableObject {
         } else {
             HaoBITFirstFetch = true
         }
+    }
+    
+    private init() {
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.preferColorScheme") as? Int {
+            preferColorScheme = stored
+        } else {
+            preferColorScheme = 2
+        }
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.username") as? String {
+            savedUsername = stored
+        } else {
+            savedUsername = ""
+        }
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.password") as? String {
+            savedPassword = stored
+        } else {
+            savedPassword = ""
+        }
+        if let stored1 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.context.happyVoyage") as? String, let stored2 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.context.castgc") as? String {
+            loginnedContext = BITLogin.LoginSuccessContext(happyVoyagePersonal: stored1, CASTGC: stored2)
+        } else {
+            loginnedContext = BITLogin.LoginSuccessContext()
+        }
+        if let stored1 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.userId") as? String {
+            var tmpInfo = LexueAPI.SelfUserInfo()
+            tmpInfo.userId = stored1
+            tmpInfo.fullName = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.fullName") as? String ?? ""
+            tmpInfo.firstAccessTime = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.firstAccessTime") as? String ?? ""
+            tmpInfo.onlineUsers = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.onlineUsers") as? String ?? ""
+            tmpInfo.email = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.email") as? String ?? ""
+            tmpInfo.stuId = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.stuId") as? String ?? ""
+            tmpInfo.phone = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheUserInfo.phone") as? String ?? ""
+            cacheUserInfo = tmpInfo
+        } else {
+            cacheUserInfo = LexueAPI.SelfUserInfo()
+        }
         
+        if let stored1 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheSelfLexueProfile.appVersion") as? String {
+            var tmpProfile = LexueProfile()
+            tmpProfile.appVersion = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheSelfLexueProfile.appVersion") as? String ?? ""
+            tmpProfile.avatarBase64 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheSelfLexueProfile.avatarBase64") as? String ?? ""
+            tmpProfile.isDeveloperMode = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cacheSelfLexueProfile.isDeveloperMode") as? Bool ?? false
+            cacheSelfLexueProfile = tmpProfile
+        } else {
+            cacheSelfLexueProfile = LexueProfile()
+        }
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.agreePrivacyPolicy") as? Bool {
+            agreePrivacyPolicy = stored
+        } else {
+            agreePrivacyPolicy = false
+        }
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.events.event_midnightFixTime") as? Int {
+            event_midnightFixTime = stored
+        } else {
+            event_midnightFixTime = 6
+        }
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.events.event_enableNotification") as? Bool {
+            event_enableNotification = stored
+        } else {
+            event_enableNotification = true
+        }
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.events.event_preHour") as? Int {
+            event_preHour = stored
+        } else {
+            event_preHour = 6
+        }
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.events.event_preMinute") as? Int {
+            event_preMinute = stored
+        } else {
+            event_preMinute = 0
+        }
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.events.event_showTodayOnly") as? Bool {
+            event_showTodayOnly = stored
+        } else {
+            event_showTodayOnly = false
+        }
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.events.event_newEventNotification") as? Bool {
+            event_newEventNotification = stored
+        } else {
+            event_newEventNotification = true
+        }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.welcomWidgetShown") as? Bool {
+            welcomWidgetShown = stored
+        } else {
+            welcomWidgetShown = false
+        }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cache_webvpn_context") as? String {
+            cache_webvpn_context = stored
+        } else {
+            cache_webvpn_context = ""
+        }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.cache_webvpn_context_for_user") as? String {
+            cache_webvpn_context_for_user = stored
+        } else {
+            cache_webvpn_context_for_user = ""
+        }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.prefer_disable_background_fetch") as? Bool {
+            prefer_disable_background_fetch = stored
+        } else {
+            prefer_disable_background_fetch = true
+        }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.HaoBITFirstFetch") as? Bool {
+            HaoBITFirstFetch = stored
+        } else {
+            HaoBITFirstFetch = true
+        }
+        // 注册需要iCloud同步的一些属性
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(cloudUpdate(notification:)),
+                                               name: iCloudUserDefaults.cloudSyncNotification,
+                                               object: nil)
+        iCloudUserDefaults.shared.monitored_specify.append(contentsOf: [
+            "setting.login.username",
+            "setting.login.password",
+            "setting.events.event_midnightFixTime",
+            "setting.events.event_preHour",
+            "setting.events.event_preMinute",
+            "setting.events.event_newEventNotification",
+            "setting.prefer_disable_background_fetch"
+        ])
+    }
+    
+    @objc internal func cloudUpdate(notification: NSNotification) {
+        // 如果云端消息更新了，那本地也得实时覆盖一下
+        iCloudUserDefaults.shared.disableMonitor()
+        print("正在重新同步全部userDefaults")
+        DispatchQueue.main.async {
+            self.ReloadAllStorage()
+        }
+        iCloudUserDefaults.shared.enableMonitor()
     }
 }
