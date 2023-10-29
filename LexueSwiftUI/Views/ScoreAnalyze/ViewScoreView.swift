@@ -214,9 +214,11 @@ struct ViewScoreView: View {
                 case .success(let ret_scoreInfo):
                     DispatchQueue.main.async {
                         scoreInfo = ret_scoreInfo.reversed()
-                        CalcCurrentStatistics()
                         LoadFilterOptions()
                         loadingData = false
+                        DispatchQueue.main.async {
+                            CalcCurrentStatistics()
+                        }
                     }
                 case .failure(_):
                     LoadScoresInfo(tryCache: false)

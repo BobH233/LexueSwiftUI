@@ -2099,8 +2099,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "FilterScoreInfo(current:)"
             landmarkType = "7">
             <Locations>
@@ -2163,8 +2163,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "388"
-            endingLineNumber = "388"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2179,8 +2179,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
