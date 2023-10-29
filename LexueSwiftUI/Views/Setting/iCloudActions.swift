@@ -14,6 +14,7 @@ struct iCloudActions: View {
     @State private var showAlert2 = false
     @State private var showAlert3 = false
     @State private var showAlert4 = false
+    @State private var showAlert5 = false
     @State private var alertMessage = ""
     var body: some View {
         Form {
@@ -38,6 +39,7 @@ struct iCloudActions: View {
                         DataController.shared.deleteEntityAllData(entityName: EventStored.entity().name ?? "", context: managedObjContext)
                         DataController.shared.deleteEntityAllData(entityName: CourseCacheStored.entity().name ?? "", context: managedObjContext)
                         DataController.shared.deleteEntityAllData(entityName: FavoriteURLStored.entity().name ?? "", context: managedObjContext)
+                        iCloudUserDefaults.shared.clearAllCloudStorage()
                         VibrateTwice()
                     }), secondaryButton: .cancel(Text("取消")))
                 }
@@ -95,6 +97,22 @@ struct iCloudActions: View {
                 .alert(isPresented: $showAlert3) {
                     Alert(title: Text("确认操作"), message: Text(alertMessage), primaryButton: .destructive(Text("确认"), action: {
                         DataController.shared.deleteEntityAllData(entityName: EventStored.entity().name ?? "", context: managedObjContext)
+                        VibrateTwice()
+                    }), secondaryButton: .cancel(Text("取消")))
+                }
+                Button(role: .none, action: {
+                    alertMessage = "确认要重置存储的设置吗？这将会删除你云端存储的全部设置，且不可恢复，请确认"
+                    VibrateOnce()
+                    showAlert4 = true
+                }, label: {
+                    HStack {
+                        Image(systemName: "tablecells")
+                        Text("仅重置存储的设置")
+                    }
+                })
+                .alert(isPresented: $showAlert4) {
+                    Alert(title: Text("确认操作"), message: Text(alertMessage), primaryButton: .destructive(Text("确认"), action: {
+                        iCloudUserDefaults.shared.clearAllCloudStorage()
                         VibrateTwice()
                     }), secondaryButton: .cancel(Text("取消")))
                 }

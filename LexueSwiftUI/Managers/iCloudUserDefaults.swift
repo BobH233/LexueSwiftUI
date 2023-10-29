@@ -57,6 +57,18 @@ class iCloudUserDefaults {
         enableMonitor()
         NotificationCenter.default.post(name: iCloudUserDefaults.cloudSyncNotification, object: dict)
     }
+    
+    func clearAllCloudStorage() {
+        let dict = NSUbiquitousKeyValueStore.default.dictionaryRepresentation
+        var toRemove = [String]()
+        for (key, _) in dict {
+            toRemove.append(key)
+        }
+        for key in toRemove {
+            NSUbiquitousKeyValueStore.default.removeObject(forKey: key)
+        }
+    }
+    
     @objc internal func notifyCloud(notification: NSNotification) {
         let dict = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.dictionaryRepresentation()
         for (key, value) in dict {
