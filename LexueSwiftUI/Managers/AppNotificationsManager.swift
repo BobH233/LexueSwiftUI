@@ -32,6 +32,14 @@ class AppNotificationsManager: ObservableObject {
         }
     }
     
+    func GetMaxId() -> Int {
+        var maxId = 0
+        for notification in notificationsList {
+            maxId = max(maxId, notification.notificationId)
+        }
+        return maxId
+    }
+    
     func SetReadPopupId(id: Int) {
         readPopupId[id] = true
         if let data = try? NSKeyedArchiver.archivedData(withRootObject: readPopupId, requiringSecureCoding: false) {
@@ -75,6 +83,15 @@ class AppNotificationsManager: ObservableObject {
         let res = await LexueHelperBackend.shared.FetchAppNotifications()
         DispatchQueue.main.async {
             self.notificationsList = res
+            self.notificationsList.sort { noti1, noti2 in
+                let pin1 = noti1.pinned ? 1 : 0
+                let pin2 = noti2.pinned ? 1 : 0
+                if pin1 != pin2 {
+                    return pin1 > pin2
+                } else {
+                    return noti1.GetDate() > noti2.GetDate()
+                }
+            }
         }
         // 判断是否有新的消息, 是否有需要显示的弹窗消息
         let readId = GetReadLastestId()

@@ -2403,8 +2403,8 @@
             filePath = "LexueSwiftUI/Managers/AppNotificationsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "UpdateNotifications()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2413,7 +2413,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "BBE41138-62FB-4F04-B42C-458E2EF49051"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LexueSwiftUI/Managers/AppNotificationsManager.swift"
@@ -2429,7 +2429,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "8D41B4CD-CF86-4648-B9D0-BB70E7385544"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LexueSwiftUI/Managers/AppNotificationsManager.swift"
