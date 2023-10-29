@@ -81,7 +81,7 @@ struct ViewEventView: View {
     
     // 是否已经是到期事件了
     func IsExpired(event: EventStored) -> Bool {
-        return event.timestart ?? Date() < Date.now
+        return event.IsExpired()
     }
     
     func GetCourseById(_ id: String) -> CourseShortInfo? {

@@ -141,7 +141,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -150,7 +150,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -214,6 +214,9 @@
          <PersistentStrings>
             <PersistentString
                value = "monitored_specify">
+            </PersistentString>
+            <PersistentString
+               value = "monitored_prefix">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -341,13 +344,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
-               value = "event.name">
+               value = "event.timestart">
             </PersistentString>
             <PersistentString
                value = "event.id">
             </PersistentString>
             <PersistentString
-               value = "event.timestart">
+               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
