@@ -27,7 +27,7 @@ class LexueHelperBackend {
     
     static func GetAPIUrl() -> String {
         if GlobalVariables.shared.DEBUG_BUILD {
-            return "http://192.168.8.143:3000"
+            return "http://127.0.0.1:3000"
         } else {
             return "https://api.bit-helper.cn"
         }
@@ -47,6 +47,7 @@ class LexueHelperBackend {
     
     let API_REGISTER_DEVICE_TOKEN = "\(GetAPIUrl())/api/device/register"
     let API_FETCH_NOTICE = "\(GetAPIUrl())/api/notice/fetch"
+    let API_FETCH_APP_NOTIFICATIONS = "\(GetAPIUrl())/api/notification/get"
     
     struct PackageWithSignature {
         var cmdName: String = ""
@@ -62,6 +63,108 @@ class LexueHelperBackend {
             } else {
                 return ""
             }
+        }
+    }
+    
+    // app的公告，包括更新内容之类的等等
+    struct AppNotification {
+        // 公告的id
+        var notificationId: Int = 0
+        // 发出的时间戳
+        var timestamp: String = ""
+        // 通知的markdown格式内容
+        var markdownContent: String = ""
+        // 是否置顶
+        var pinned: Bool = false
+        // 是否是弹出显示类消息
+        var isPopupNotification: Bool = false
+        // 只在某些版本的app上显示, 如果是空则默认在所有版本都显示
+        var appVersionLimit: [String] = []
+        func GetDate() -> Date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            dateFormatter.timeZone = TimeZone(identifier: "UTC")
+            if let date = dateFormatter.date(from: timestamp) {
+                let newDateFormatter = DateFormatter()
+                newDateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+                newDateFormatter.timeZone = TimeZone(identifier: "UTF+8")
+
+                let dateInUTF8TimeZoneString = newDateFormatter.string(from: date)
+                
+                if let dateInUTF8TimeZone = newDateFormatter.date(from: dateInUTF8TimeZoneString) {
+                    return dateInUTF8TimeZone
+                } else {
+                    return Date()
+                }
+            }
+            return Date()
+        }
+        func ShouldDisplayInCurrentApp() -> Bool {
+            if appVersionLimit.count == 0 {
+                return true
+            }
+            if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                return appVersionLimit.contains(version)
+            }
+            return false
+        }
+    }
+    
+    func FetchAppNotifications() async -> [AppNotification] {
+        let header: [String: String] = [
+            "Content-Type": "application/json"
+        ]
+        do {
+            var request = URLRequest(url: URL(string: API_FETCH_APP_NOTIFICATIONS)!)
+            request.cachePolicy = .reloadIgnoringCacheData
+            request.httpMethod = HTTPMethod.get.rawValue
+            request.headers = HTTPHeaders(header)
+            let ret = await withCheckedContinuation { continuation in
+                AF.request(request).response { res in
+                    switch res.result {
+                    case .success(let data):
+                        if let json = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [[String: Any]] {
+                            continuation.resume(returning: json)
+                        } else {
+                            print("无法将响应数据转换为字典")
+                            continuation.resume(returning: [[String: Any]]())
+                        }
+                    case .failure(let error):
+                        print("请求 后端 失败")
+                        print(error)
+                        continuation.resume(returning: [[String: Any]]())
+                    }
+                }
+            }
+            var retNotifications = [AppNotification]()
+            for notification in ret {
+                var current = AppNotification()
+                if let id = notification["id"] as? Int {
+                    current.notificationId = id
+                }
+                if let timestamp = notification["timestamp"] as? String {
+                    current.timestamp = timestamp
+                }
+                if let markdownContent = notification["markdownContent"] as? String {
+                    current.markdownContent = markdownContent
+                }
+                if let pinned = notification["pinned"] as? Bool {
+                    current.pinned = pinned
+                }
+                if let isPopupNotification = notification["isPopupNotification"] as? Bool {
+                    current.isPopupNotification = isPopupNotification
+                }
+                if let versionLimit = notification["appVersionLimit"] as? String, let data = versionLimit.data(using: .utf8), let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String] {
+                    current.appVersionLimit = json
+                }
+                if current.ShouldDisplayInCurrentApp() {
+                    retNotifications.append(current)
+                }
+            }
+            return retNotifications
+        } catch {
+            print("转换为 JSON 数据时发生错误: \(error)")
+            return []
         }
     }
     

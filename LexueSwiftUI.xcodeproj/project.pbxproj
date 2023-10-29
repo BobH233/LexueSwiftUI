@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4700A8042AD6ED8000F75386 /* GeneralScoreAnalyze.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4700A8032AD6ED8000F75386 /* GeneralScoreAnalyze.swift */; };
+		4703F66E2AEEACFF00899F61 /* AppNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F66D2AEEACFF00899F61 /* AppNotificationsManager.swift */; };
+		4703F6702AEEB10B00899F61 /* AppNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F66F2AEEB10B00899F61 /* AppNotificationsView.swift */; };
 		47066F602ADC32200092F891 /* JXZXehall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47066F5F2ADC32200092F891 /* JXZXehall.swift */; };
 		470AFC662ACB15FB004C7F70 /* DataProviderBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */; };
 		470AFC682ACB16D6004C7F70 /* DataProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */; };
@@ -190,6 +192,8 @@
 
 /* Begin PBXFileReference section */
 		4700A8032AD6ED8000F75386 /* GeneralScoreAnalyze.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralScoreAnalyze.swift; sourceTree = "<group>"; };
+		4703F66D2AEEACFF00899F61 /* AppNotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNotificationsManager.swift; sourceTree = "<group>"; };
+		4703F66F2AEEB10B00899F61 /* AppNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNotificationsView.swift; sourceTree = "<group>"; };
 		47066F5F2ADC32200092F891 /* JXZXehall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXZXehall.swift; sourceTree = "<group>"; };
 		470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderBase.swift; sourceTree = "<group>"; };
 		470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderManager.swift; sourceTree = "<group>"; };
@@ -511,6 +515,7 @@
 				47BCFB982ACD6FD800320CFD /* AboutView.swift */,
 				472E44302ADAE98400230FC4 /* Feedback.swift */,
 				475D211C2AEC09B400CB9DC7 /* iCloudActions.swift */,
+				4703F66F2AEEB10B00899F61 /* AppNotificationsView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -542,6 +547,7 @@
 				47BD51A62AC5B5A40029F9DB /* UMengManager.swift */,
 				471A1D182AC9932C00A3D847 /* EventManager.swift */,
 				479A290B2AECCF9A009AAD4F /* iCloudUserDefaults.swift */,
+				4703F66D2AEEACFF00899F61 /* AppNotificationsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -826,6 +832,7 @@
 				478434802ADEDD890095A2EE /* LexueHelperBackend.swift in Sources */,
 				4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */,
 				479A290C2AECCF9A009AAD4F /* iCloudUserDefaults.swift in Sources */,
+				4703F6702AEEB10B00899F61 /* AppNotificationsView.swift in Sources */,
 				47B411792ACBD96300AC0B5E /* DataProviderSettingView.swift in Sources */,
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,
@@ -846,6 +853,7 @@
 				47EC987A2ACBB6BF009CE125 /* DeletedEventView.swift in Sources */,
 				47DAD9B02AD7E9F100B4950D /* FilterScoreView.swift in Sources */,
 				470AFC662ACB15FB004C7F70 /* DataProviderBase.swift in Sources */,
+				4703F66E2AEEACFF00899F61 /* AppNotificationsManager.swift in Sources */,
 				47F4F2A42AC086A90047B395 /* ImageMoveAndScaleSheet.swift in Sources */,
 				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,
 				470AFC682ACB16D6004C7F70 /* DataProviderManager.swift in Sources */,

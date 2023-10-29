@@ -12,6 +12,8 @@ import CloudKitSyncMonitor
 struct SettingView: View {
     @ObservedObject var globalVar = GlobalVariables.shared
     @ObservedObject var settings = SettingStorage.shared
+    @ObservedObject var appNotificationManager = AppNotificationsManager.shared
+    
     @State var showImageViewer = false
     @State var avatar_image = Image("default_avatar")
     @State var openViewScoreNavigation = false
@@ -208,7 +210,19 @@ struct SettingView: View {
                         }
                     }
                 }
-                Section(header: Text("关于")) {
+                Section(header: Text("应用")) {
+                    NavigationLink(destination: AppNotificationsView(), label: {
+                        Image(systemName: "paperplane.fill")
+                            .foregroundColor(.blue)
+                        Text("应用公告")
+                        if appNotificationManager.hasNewNotifications {
+                            Circle()
+                                .frame(width: 8, height: 8)
+                                .offset(x: -5, y: -5)
+                                .foregroundColor(.red)
+                        }
+                    })
+                    .isDetailLink(false)
                     NavigationLink(destination: Feedback(), label: {
                         Image(systemName: "archivebox.fill")
                             .foregroundColor(.blue)

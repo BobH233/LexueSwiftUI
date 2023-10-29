@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import MarkdownUI
 
 struct ContentView: View {
     @State private var tabSelection = 0
     @ObservedObject var globalVar = GlobalVariables.shared
+    @ObservedObject var appNotificationManager = AppNotificationsManager.shared
     var body: some View {
         TabView(selection: $tabSelection) {
             MessageListView(tabSelection: $tabSelection)
@@ -67,6 +69,16 @@ struct ContentView: View {
         })
         .sheet(isPresented: $globalVar.isShowPrivacyPolicySheet, content: {
             PrivacyPolicyView()
+        })
+        .sheet(isPresented: $appNotificationManager.showPopupSheet, content: {
+            Form {
+                if appNotificationManager.popupNotificationQueue.count > 0 {
+                    Markdown(appNotificationManager.popupNotificationQueue.first!.markdownContent)
+                    Button("已读") {
+                        appNotificationManager.SetReadPopupId(id: appNotificationManager.popupNotificationQueue.first!.notificationId)
+                    }
+                }
+            }
         })
         .overlay {
             if globalVar.isLoading {

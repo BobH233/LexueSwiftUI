@@ -53,6 +53,12 @@ struct DebugDataView: View {
                         let res = await LexueHelperBackend.shared.RegisterDeviceTokenForServer(userId: "12345", deviceToken: "23333")
                     }
                 }
+                Button("FetchNotification") {
+                    Task {
+                        let res = await LexueHelperBackend.shared.FetchAppNotifications()
+                        print(res)
+                    }
+                }
             }
             Section("JXZX") {
                 Button("get_Context") {

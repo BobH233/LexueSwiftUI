@@ -142,8 +142,8 @@
             filePath = "LexueSwiftUI/Views/Setting/DebugDataView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "219"
-            endingLineNumber = "219"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -190,8 +190,8 @@
             filePath = "LexueSwiftUI/Views/Setting/DebugDataView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "216"
-            endingLineNumber = "216"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -967,8 +967,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
             <Locations>
@@ -1060,8 +1060,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
             <Locations>
@@ -1108,8 +1108,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1124,8 +1124,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1140,8 +1140,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1332,8 +1332,8 @@
             filePath = "LexueSwiftUI/Views/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2342,6 +2342,102 @@
             startingLineNumber = "28"
             endingLineNumber = "28"
             landmarkName = "shouldSync(keyName:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F0CB9863-F9FE-4572-B7E9-F016C49C767F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "FetchAppNotifications()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F0CB9863-F9FE-4572-B7E9-F016C49C767F - e8edcfe7ced878b5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.LexueHelperBackend.FetchAppNotifications() async -&gt; Swift.Array&lt;LexueSwiftUI.LexueHelperBackend.AppNotification&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueHelperBackend.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "2488">
+               </Location>
+               <Location
+                  uuid = "F0CB9863-F9FE-4572-B7E9-F016C49C767F - fd773f3c22e3d380"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in closure #1 (Swift.CheckedContinuation&lt;Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Any&gt;&gt;, Swift.Never&gt;) -&gt; () in LexueSwiftUI.LexueHelperBackend.FetchAppNotifications() async -&gt; Swift.Array&lt;LexueSwiftUI.LexueHelperBackend.AppNotification&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/LexueHelperBackend.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "134"
+                  endingLineNumber = "134"
+                  offsetFromSymbolStart = "1752">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "70499201-8AA7-49F3-A322-01240108D74C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/AppNotificationsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "UpdateNotifications()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BBE41138-62FB-4F04-B42C-458E2EF49051"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/AppNotificationsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "GetReadPopupId()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8D41B4CD-CF86-4648-B9D0-BB70E7385544"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/AppNotificationsManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "GetReadPopupId()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

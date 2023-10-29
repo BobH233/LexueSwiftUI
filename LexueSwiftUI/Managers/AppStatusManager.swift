@@ -163,7 +163,10 @@ class AppStatusManager {
                 }
             }
         }
-        
+        // 刷新app公告
+        Task {
+            await AppNotificationsManager.shared.UpdateNotifications()
+        }
         print("\(#function)")
         Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
             self.OnAppTickEveryMinute()
@@ -297,6 +300,9 @@ class AppStatusManager {
                 // RefreshLexueContext(silent_refresh: false)  // 不用这个方式了，因为GetSessKey自带重试处理，所以可以直接刷新SessKey
                 GlobalVariables.shared.LoadingText = "刷新中"
                 GlobalVariables.shared.isLoading = true
+                Task {
+                    await AppNotificationsManager.shared.UpdateNotifications()
+                }
                 Task {
                     let result = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
                     DispatchQueue.main.async {
