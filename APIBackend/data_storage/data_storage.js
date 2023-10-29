@@ -22,6 +22,17 @@ const db = new sqlite3.Database("./server_data/data.db", function () {
       jsonStr TEXT
     )
   `);
+  // 创建app通知消息表
+  db.run(`
+    CREATE TABLE IF NOT EXISTS AppNotifications (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      timestamp DATETIME,
+      markdownContent TEXT,
+      pinned BOOLEAN,
+      isPopupNotification BOOLEAN,
+      appVersionLimit TEXT
+    )
+  `);
 });
 
 const _RegisterDevice = (userId, deviceToken, CB) => {
@@ -158,6 +169,45 @@ const _QueryHaoBITNotificationsAfterId = (id, CB) => {
   });
 }
 
+const _QueryAppNotificationsAfterId = (id, CB) => {
+  db.serialize(() => {
+    db.all('SELECT * FROM AppNotifications WHERE id >= ? ORDER BY timestamp DESC', id, (err, rows) => {
+      if(err) {
+        CB(null, err)
+      } else {
+        CB(rows, null)
+      }
+    });
+  });
+}
+
+const _AddAppNotification = (markdownContent, pinned, isPopupNotification, appVersionLimit, CB) => {
+  db.serialize(() => {
+    db.run("INSERT INTO AppNotifications (timestamp, markdownContent, pinned, isPopupNotification, appVersionLimit) VALUES (?, ?, ?, ?, ?)", new Date().toISOString(), markdownContent, pinned, isPopupNotification, appVersionLimit, (err) => {
+      CB(err)
+      return
+    })
+  });
+}
+
+const _EditAppNotification = (id, markdownContent, pinned, isPopupNotification, appVersionLimit, CB) => {
+  db.serialize(() => {
+    db.run("UPDATE AppNotifications SET timestamp = ?, markdownContent = ?, pinned = ?, isPopupNotification = ?, appVersionLimit = ? WHERE id = ?", new Date().toISOString(), markdownContent, pinned, isPopupNotification, appVersionLimit, id, (err) => {
+      CB(err)
+      return
+    })
+  });
+}
+
+const _DeleteAppNotification = (id, CB) => {
+  db.serialize(() => {
+    db.run("DELETE FROM AppNotifications WHERE id = ?", id, (err) => {
+      CB(err)
+      return
+    })
+  });
+}
+
 module.exports = {
   getDB: () => db,
   _RegisterDevice,
@@ -168,5 +218,9 @@ module.exports = {
   _UpdateDeviceFailCount,
   _GetLatestHaoBITNotificationHash,
   _QueryHaoBITNotificationByHash,
-  _QueryHaoBITNotificationsAfterId
+  _QueryHaoBITNotificationsAfterId,
+  _QueryAppNotificationsAfterId,
+  _AddAppNotification,
+  _EditAppNotification,
+  _DeleteAppNotification
 };
