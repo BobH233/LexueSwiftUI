@@ -2035,8 +2035,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
+            startingLineNumber = "273"
+            endingLineNumber = "273"
             landmarkName = "FilterScoreInfo(current:)"
             landmarkType = "7">
             <Locations>
@@ -2083,8 +2083,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "CalcCurrentStatistics()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2099,8 +2099,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2115,8 +2115,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2131,8 +2131,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "CalcCurrentStatistics()"
             landmarkType = "7">
          </BreakpointContent>

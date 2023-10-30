@@ -22,6 +22,8 @@ struct ViewScoreView: View {
     @State var course_type_choices: [FilterOptionBool] = []
     @State var semester_type_choices: [FilterOptionBool] = []
     
+    let refreshTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
     // 当前列表显示中的优良率
     @State var current_rate80: Float = 0
     // 当期列表中显示的平均分
@@ -376,6 +378,10 @@ struct ViewScoreView: View {
                 .padding(.top, 20)
                 .padding(.leading, 20)
                 Spacer()
+            }
+            .onReceive(refreshTimer) { _ in
+                print("定时刷新成绩统计信息")
+                CalcCurrentStatistics()
             }
             HStack {
                 Text("左右拖动列表可以查看更多信息")
