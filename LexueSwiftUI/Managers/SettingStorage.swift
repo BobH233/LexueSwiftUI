@@ -79,6 +79,9 @@ class SettingStorage: ObservableObject {
     @Published var event_midnightFixTime: Int {
         didSet {
             UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(event_midnightFixTime, forKey: "setting.events.event_midnightFixTime")
+            if loadingDefaultFinished {
+                iCloudUserDefaults.shared.SyncSome(specify: ["setting.events.event_midnightFixTime"])
+            }
         }
     }
     
@@ -86,6 +89,9 @@ class SettingStorage: ObservableObject {
     @Published var event_enableNotification: Bool {
         didSet {
             UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(event_enableNotification, forKey: "setting.events.event_enableNotification")
+            if loadingDefaultFinished {
+                iCloudUserDefaults.shared.SyncSome(specify: ["setting.events.event_enableNotification"])
+            }
         }
     }
     
@@ -93,6 +99,9 @@ class SettingStorage: ObservableObject {
     @Published var event_preHour: Int {
         didSet {
             UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(event_preHour, forKey: "setting.events.event_preHour")
+            if loadingDefaultFinished {
+                iCloudUserDefaults.shared.SyncSome(specify: ["setting.events.event_preHour"])
+            }
         }
     }
     
@@ -100,6 +109,9 @@ class SettingStorage: ObservableObject {
     @Published var event_preMinute: Int {
         didSet {
             UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(event_preMinute, forKey: "setting.events.event_preMinute")
+            if loadingDefaultFinished {
+                iCloudUserDefaults.shared.SyncSome(specify: ["setting.events.event_preMinute"])
+            }
         }
     }
     
@@ -114,6 +126,9 @@ class SettingStorage: ObservableObject {
     @Published var event_newEventNotification: Bool {
         didSet {
             UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(event_newEventNotification, forKey: "setting.events.event_newEventNotification")
+            if loadingDefaultFinished {
+                iCloudUserDefaults.shared.SyncSome(specify: ["setting.events.event_newEventNotification"])
+            }
         }
     }
     
@@ -174,7 +189,10 @@ class SettingStorage: ObservableObject {
     // 是否禁用本地的后台拉取, 而使用apns服务
     @Published var prefer_disable_background_fetch: Bool {
         didSet {
-            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(prefer_disable_background_fetch, forKey: "setting.login.username")
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(prefer_disable_background_fetch, forKey: "setting.prefer_disable_background_fetch")
+            if loadingDefaultFinished {
+                iCloudUserDefaults.shared.SyncSome(specify: ["setting.prefer_disable_background_fetch"])
+            }
         }
     }
     
@@ -225,6 +243,8 @@ class SettingStorage: ObservableObject {
             prefer_disable_background_fetch = true
         }
     }
+    
+    var loadingDefaultFinished = false
     
     private init() {
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.preferColorScheme") as? Int {
@@ -358,6 +378,7 @@ class SettingStorage: ObservableObject {
             "setting.prefer_disable_background_fetch",
             "setting.events.event_enableNotification"
         ])
+        loadingDefaultFinished = true
     }
     
     @objc internal func cloudUpdate(notification: NSNotification) {

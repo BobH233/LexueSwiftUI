@@ -20,7 +20,22 @@ class iCloudUserDefaults {
     
     func setup() {
         NotificationCenter.default.addObserver(self, selector: #selector(notificationFromCloud(notification:)), name: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(notifyCloud(notification:)), name: UserDefaults.didChangeNotification, object: nil)
+        // NotificationCenter.default.addObserver(self, selector: #selector(notifyCloud(notification:)), name: UserDefaults.didChangeNotification, object: nil)
+    }
+    
+    private func shouldSync(keyName: String, prefix: [String], specify: [String], blacklist: [String]) -> Bool {
+        if blacklist.contains(keyName) {
+            return false
+        }
+        if specify.contains(keyName) {
+            return true
+        }
+        for pf in prefix {
+            if keyName.hasPrefix(pf) {
+                return true
+            }
+        }
+        return false
     }
     
     private func shouldSync(keyName: String) -> Bool {
@@ -48,14 +63,16 @@ class iCloudUserDefaults {
     
     @objc internal func notificationFromCloud(notification: NSNotification) {
         let dict = NSUbiquitousKeyValueStore.default.dictionaryRepresentation
-        disableMonitor()
-        for (key, value) in dict {
-            if shouldSync(keyName: key) {
-                UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(value, forKey: key)
+        if let dict2 = notification.userInfo?["NSUbiquitousKeyValueStoreChangedKeysKey"] as? [String] {
+            disableMonitor()
+            for key in dict2 {
+                if shouldSync(keyName: key) {
+                    UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(dict[key], forKey: key)
+                }
             }
+            enableMonitor()
+            NotificationCenter.default.post(name: iCloudUserDefaults.cloudSyncNotification, object: dict)
         }
-        enableMonitor()
-        NotificationCenter.default.post(name: iCloudUserDefaults.cloudSyncNotification, object: dict)
     }
     
     func clearAllCloudStorage() {
@@ -69,12 +86,22 @@ class iCloudUserDefaults {
         }
     }
     
-    @objc internal func notifyCloud(notification: NSNotification) {
+    func SyncSome(prefix: [String] = [], specify: [String] = [], blacklist: [String] = []) {
         let dict = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.dictionaryRepresentation()
         for (key, value) in dict {
-            if shouldSync(keyName: key) {
+            if shouldSync(keyName: key, prefix: prefix, specify: specify, blacklist: blacklist) {
                 NSUbiquitousKeyValueStore.default.set(value, forKey: key)
             }
         }
+    }
+    
+    @objc internal func notifyCloud(notification: NSNotification) {
+        // 不要自动监测了...还是有很多问题，直接改为在需要的地方手动上传吧...
+//        let dict = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.dictionaryRepresentation()
+//        for (key, value) in dict {
+//            if shouldSync(keyName: key) {
+//                NSUbiquitousKeyValueStore.default.set(value, forKey: key)
+//            }
+//        }
     }
 }

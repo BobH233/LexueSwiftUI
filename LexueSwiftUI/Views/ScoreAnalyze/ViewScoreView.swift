@@ -219,6 +219,9 @@ struct ViewScoreView: View {
                         DispatchQueue.main.async {
                             CalcCurrentStatistics()
                         }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            CalcCurrentStatistics()
+                        }
                     }
                 case .failure(_):
                     LoadScoresInfo(tryCache: false)

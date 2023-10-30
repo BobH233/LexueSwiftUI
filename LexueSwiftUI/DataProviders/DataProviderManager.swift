@@ -18,7 +18,7 @@ class DataProviderManager: ObservableObject {
         // 将数据源的设置也通过icloud同步
         // 不要同步已经push的消息
         iCloudUserDefaults.shared.monitored_blacklist.append("dataprovider.HaoBIT.pushedMessage")
-        iCloudUserDefaults.shared.monitored_prefix.append("dataprovider.")
+        iCloudUserDefaults.shared.monitored_prefix.append(contentsOf: ["dataprovider.setting.", "dataprovider.customsetting."])
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(cloudUpdate(notification:)),
                                                name: iCloudUserDefaults.cloudSyncNotification,
@@ -80,6 +80,7 @@ class DataProviderManager: ObservableObject {
                 break
             }
         }
+        iCloudUserDefaults.shared.SyncSome(prefix: ["dataprovider.setting.", "dataprovider.customsetting."])
     }
     
     func setProviderSetting<T>(attribute: String, providerId: String, val: T) {
