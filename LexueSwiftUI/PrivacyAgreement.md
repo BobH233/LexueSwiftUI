@@ -37,7 +37,4 @@
 
 ### 3.3 联系开发者
 
-有任何疑问，请通过以下联系方式联系我：[bobh@zendee.cn](mailto:bobh@zendee.cn)
-
-
-
+有任何疑问，请通过以下联系方式联系我：[admin@bit-helper.cn](mailto:admin@bit-helper.cn)

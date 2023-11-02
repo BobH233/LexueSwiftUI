@@ -24,7 +24,7 @@
 
 总而言之，“乐学助手”始于我对“及时获取消息”的需求，希望我的这些想法也能与你产生共鸣，让你使用这款app产生便利。当然目前这个app仍处于开发的初期，我也没有太多维护app的经验，如果你有更好的功能提议，或者遇到了使用上的问题，也欢迎随时与我联系，我很乐于听取大家的意见。
 
-邮箱：[bobh@zendee.cn](mailto:bobh@zendee.cn)
+邮箱：[admin@bit-helper.cn](mailto:admin@bit-helper.cn)
 
 ## 特别感谢
 
@@ -37,4 +37,4 @@
 
 ## 合作事宜
 
-如果你也愿意为“乐学助手”增砖加瓦，我将非常感谢，请联系我：[bobh@zendee.cn](mailto:bobh@zendee.cn)
+如果你也愿意为“乐学助手”增砖加瓦，我将非常感谢，请联系我：[admin@bit-helper.cn](mailto:admin@bit-helper.cn)
