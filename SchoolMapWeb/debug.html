@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>高德地图sdk测试</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, user-scalable=no, width=device-width"
+    />
+    <style>
+      html,
+      body,
+      #container {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script type="text/javascript">
+      window._AMapSecurityConfig = {
+        serviceHost: "http://mapapi.bit-helper.cn/_AMapService",
+      };
+    </script>
+    <script
+      type="text/javascript"
+      src="https://webapi.amap.com/maps?v=2.0&key=	e74b6dc93cc05f59bd10dba2e8843df7&&plugin=AMap.Scale,AMap.HawkEye,AMap.ToolBar,AMap.ControlBar,AMap.Walking"
+    ></script>
+    <script type="text/javascript">
+
+      var imageLayer = new AMap.ImageLayer({
+        url: './img/map.jpg',
+        bounds: new AMap.Bounds(
+            [116.16524858, 39.7237884],
+            [116.1813301, 39.7402679]
+        ),
+        zooms: [15, 20]
+      });
+      var map = new AMap.Map("container", {
+        viewMode: "3D",
+        pitch: 20,
+        zoom: 20,
+        terrain: true,
+        center: [116.16932464695257, 39.726016233346705],
+      });
+      map.setLayers([
+        AMap.createDefaultLayer(),
+        imageLayer,
+      ]);
+      var toolBar = new AMap.ToolBar({
+        visible: false,
+        position: {
+          top: "110px",
+          right: "40px",
+        },
+      });
+      var controlBar = new AMap.ControlBar({
+        visible: false,
+        position: {
+          top: "10px",
+          right: "10px",
+        },
+      });
+      map.addControl(toolBar);
+      map.addControl(controlBar);
+      toolBar.show();
+      controlBar.show();
+      const markerContent =
+        "" +
+        '<div class="custom-content-marker">' +
+        '   <img src="//a.amap.com/jsapi_demos/static/demo-center/icons/dir-via-marker.png">'
+        "</div>";
+      var marker = new AMap.Marker({
+        position: new AMap.LngLat(116.16912963512931, 39.72952503675784),
+        // 将 html 传给 content
+        content: markerContent,
+        // 以 icon 的 [center bottom] 为原点
+        offset: new AMap.Pixel(-13, -30)
+      });
+      map.add(marker);
+      var walking = new AMap.Walking({
+        map: map
+      });
+      walking.search(
+        new AMap.LngLat(116.16932464695257, 39.726016233346705),
+        new AMap.LngLat(116.17234105949967, 39.73754771675875),
+        function(status, result) {
+          if (status === 'complete') {
+            console.log('绘制路线完成')
+          } else {
+            console.log('获取驾车数据失败：' + result)
+          }
+        }
+      )
+      map.on('zoomend', function(ev) {
+        console.log(map.getZoom())
+        console.log(ev)
+      })
+      map.on('click', function(ev) {
+        console.log(ev.lnglat.lat, ev.lnglat.lng)
+      })
+    </script>
+  </body>
+</html>
