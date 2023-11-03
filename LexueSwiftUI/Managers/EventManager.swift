@@ -75,6 +75,7 @@ class EventManager: ObservableObject {
             let now_time = Date()
             if event.IsExpired() {
                 event.user_deleted = true
+                event.lastUpdateDate = .now
             }
         }
         DataController.shared.save(context: context)
@@ -140,6 +141,7 @@ class EventManager: ObservableObject {
     func FinishEvent(id: UUID, isFinish: Bool, context: NSManagedObjectContext) {
         let event = DataController.shared.findEventById(id: id, context: context)
         event?.finish = isFinish
+        event?.lastUpdateDate = .now
         DispatchQueue.main.async {
             DataController.shared.save(context: context)
             self.LoadEventList(context: context)
@@ -148,8 +150,6 @@ class EventManager: ObservableObject {
     
     // 判断是否是属于今天的ddl的逻辑，注意次日的凌晨的ddl也要考虑，现在暂时先这样写
     static func IsTodayEvent(event: EventStored, today: Date) -> Bool {
-        
-        
         let setting_value = SettingStorage.shared.event_midnightFixTime
         let calendar = Calendar.current
         let startOfToday = calendar.startOfDay(for: today)

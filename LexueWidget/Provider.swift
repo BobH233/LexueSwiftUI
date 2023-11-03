@@ -52,18 +52,6 @@ struct Provider: TimelineProvider {
     // 更新 eventlist
     func UpdateEventList() async throws {
         var recent_events:[LexueAPI.EventInfo] = []
-//        for i in -3 ... 7 {
-//            let currentDate = Date()
-//            let target_date = Calendar.current.date(byAdding: .day, value: i, to: currentDate)
-//            let target_date_comp = Calendar.current.dateComponents([.year, .month, .day], from: target_date!)
-//            let tmpRes = try await LexueAPI.shared.GetEventsByDay(GlobalVariables.shared.cur_lexue_context, sesskey: GlobalVariables.shared.cur_lexue_sessKey, year: String(target_date_comp.year!), month: String(target_date_comp.month!), day: String(target_date_comp.day!))
-//            switch tmpRes {
-//            case .success(let events):
-//                recent_events.append(contentsOf: events)
-//            case .failure(_):
-//                print("fail to fetch \(target_date_comp)")
-//            }
-//        }
         for i in 0 ... 1 {
             let currentDate = Date()
             let target_date = Calendar.current.date(byAdding: .month, value: i, to: currentDate)
