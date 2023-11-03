@@ -19,6 +19,15 @@ extension EventStored {
     }
 }
 
+extension LexueAPI.EventInfo {
+    func IsExpired() -> Bool {
+        if let endtime = timestart {
+            return endtime < Date()
+        }
+        return false
+    }
+}
+
 class EventManager: ObservableObject {
     static let shared = EventManager()
     
@@ -158,6 +167,10 @@ class EventManager: ObservableObject {
     func DiffAndUpdateCacheEvent(_ newEvents: [LexueAPI.EventInfo], context: NSManagedObjectContext = DataController.shared.container.viewContext) {
         DataController.shared.container.performBackgroundTask { (context) in
             for newEvent in newEvents {
+                if newEvent.IsExpired() {
+                    // 过期的事件就不用再更新了
+                    continue
+                }
                 let tryFind = DataController.shared.findEventStoredByLexueId(lexue_event_id: newEvent.id, context: context)
                 if let found = tryFind {
                     // print("Update event \(newEvent.id)")
