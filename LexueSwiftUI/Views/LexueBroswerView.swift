@@ -65,7 +65,7 @@ struct LexueBroswerView: View {
                 self.webViewStore.webView.evaluateJavaScript(execJs)
             }
         }
-        .onAppear {
+        .onFirstAppear {
             if #available(iOS 16.4, *) {
                 if GlobalVariables.shared.debugMode { self.webViewStore.webView.isInspectable = true }
             }
