@@ -51,6 +51,60 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    private func Is_Outof_China(lng: Float, lat: Float) -> Bool {
+        var lat = +lat;
+        var lng = +lng;
+        return !(lng > 73.66 && lng < 135.05 && lat > 3.86 && lat < 53.55);
+    }
+    
+    private func transformlat(_ lng: Float, _ lat: Float) -> Float {
+        let lat = lat
+        let lng = lng
+        let PI = Float.pi
+
+        var ret = -100.0 + 2.0 * lng + 3.0 * lat + 0.2 * lat * lat + 0.1 * lng * lat + 0.2 * sqrt(abs(lng))
+        ret += (20.0 * sin(6.0 * lng * PI) + 20.0 * sin(2.0 * lng * PI)) * 2.0 / 3.0
+        ret += (20.0 * sin(lat * PI) + 40.0 * sin(lat / 3.0 * PI)) * 2.0 / 3.0
+        ret += (160.0 * sin(lat / 12.0 * PI) + 320 * sin(lat * PI / 30.0)) * 2.0 / 3.0
+        
+        return ret
+    }
+    private func transformlng(_ lng: Float, _ lat: Float) -> Float {
+        let lat = lat
+        let lng = lng
+        let PI = Float.pi
+
+        var ret = 300.0 + lng + 2.0 * lat + 0.1 * lng * lng + 0.1 * lng * lat + 0.1 * sqrt(abs(lng))
+        ret += (20.0 * sin(6.0 * lng * PI) + 20.0 * sin(2.0 * lng * PI)) * 2.0 / 3.0
+        ret += (20.0 * sin(lng * PI) + 40.0 * sin(lng / 3.0 * PI)) * 2.0 / 3.0
+        ret += (150.0 * sin(lng / 12.0 * PI) + 300.0 * sin(lng / 30.0 * PI)) * 2.0 / 3.0
+
+        return ret
+    }
+    
+    // ret: (mglng, mglat)
+    private func WGS84_to_GCJ02(lng: Float, lat: Float) -> (Float, Float) {
+        var lat = +lat;
+        var lng = +lng;
+        let PI = Float.pi
+        let a = Float(6378245.0);
+        let ee = Float(0.00669342162296594323);
+        if Is_Outof_China(lng: lng, lat: lat) {
+            return (lng, lat)
+        }
+        var dlat = transformlat(lng - 105.0, lat - 35.0)
+        var dlng = transformlng(lng - 105.0, lat - 35.0)
+        let radlat = lat / 180.0 * PI
+        var magic = sin(radlat)
+        magic = 1 - ee * magic * magic
+        let sqrtmagic = sqrt(magic)
+        dlat = (dlat * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * PI)
+        dlng = (dlng * 180.0) / (a / sqrtmagic * cos(radlat) * PI)
+        let mglat = lat + dlat
+        let mglng = lng + dlng
+        
+        return (mglng, mglat)
+    }
     
     // 开始更新位置
     func startUpdate() {
