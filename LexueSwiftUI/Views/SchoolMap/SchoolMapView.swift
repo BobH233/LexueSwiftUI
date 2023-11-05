@@ -15,7 +15,7 @@ struct SchoolMapView: View {
     @Environment(\.dismiss) var dismiss
     
     // TODO: 改成真正的服务链接
-    let mapServiceUrl = "https://mapapi.bit-helper.cn/debug.html"
+    let mapServiceUrl = "https://mapapi.bit-helper.cn/debug.html?1"
     
     @State var isLocationAvailable: Bool = false
     @ObservedObject var locationManager = LocationManager.shared
@@ -46,6 +46,11 @@ struct SchoolMapView: View {
                 width: UIScreen.main.bounds.width ,
                 height: UIScreen.main.bounds.height
             )
+        }
+        .onChange(of: locationManager.compassHeading) { newVal in
+            if let NewVal = newVal {
+                self.webViewStore.webView.evaluateJavaScript("marker1.setAngle(\(NewVal));")
+            }
         }
         .navigationBarHidden(true)
         .ignoresSafeArea(.all, edges: [.top])

@@ -91,41 +91,47 @@
         map: map,
         policy: 0,
       });
-      walking.search(
-        new AMap.LngLat(116.16932464695257, 39.726016233346705),
-        new AMap.LngLat(116.17397059049713, 39.72625260990273),
-        function(status, result) {
-          if (status === 'complete') {
-            console.log('绘制路线完成')
-          } else {
-            console.log('获取驾车数据失败：' + result)
-          }
-        }
-      )
-      AMap.plugin('AMap.Geolocation', function() {
-        var geolocation = new AMap.Geolocation({
-            enableHighAccuracy: true,//是否使用高精度定位，默认:true
-            timeout: 10000,          //超过10秒后停止定位，默认：5s
-            buttonPosition:'RB',    //定位按钮的停靠位置
-            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-            zoomToAccuracy: false,   //定位成功后是否自动调整地图视野到定位点
-            showMarker: true,
-            panToLocation: false,
-        });
-        map.addControl(geolocation);
-        geolocation.getCurrentPosition(function(status,result){
-            if(status=='complete'){
-              var position = result.position;
-              var marker = new AMap.Marker({
-                position: [position.lng, position.lat], // 设置标记位置
-                map: map
-              });
-              marker.setAngle(270);
-            }else{
+      const marker1 = new AMap.Marker({
+        position: new AMap.LngLat(116.16932464695257, 39.726016233346705),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+        title: '北京'
+      });
+      map.add(marker1);
+      marker1.setAngle(30)
+      // walking.search(
+      //   new AMap.LngLat(116.16932464695257, 39.726016233346705),
+      //   new AMap.LngLat(116.17397059049713, 39.72625260990273),
+      //   function(status, result) {
+      //     if (status === 'complete') {
+      //       console.log('绘制路线完成')
+      //     } else {
+      //       console.log('获取驾车数据失败：' + result)
+      //     }
+      //   }
+      // )
+    //   AMap.plugin('AMap.Geolocation', function() {
+    //     var geolocation = new AMap.Geolocation({
+    //         enableHighAccuracy: true,//是否使用高精度定位，默认:true
+    //         timeout: 10000,          //超过10秒后停止定位，默认：5s
+    //         buttonPosition:'RB',    //定位按钮的停靠位置
+    //         buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+    //         zoomToAccuracy: false,   //定位成功后是否自动调整地图视野到定位点
+    //         showMarker: true,
+    //         panToLocation: false,
+    //     });
+    //     map.addControl(geolocation);
+    //     geolocation.getCurrentPosition(function(status,result){
+    //         if(status=='complete'){
+    //           var position = result.position;
+    //           var marker = new AMap.Marker({
+    //             position: [position.lng, position.lat], // 设置标记位置
+    //             map: map
+    //           });
+    //           marker.setAngle(270);
+    //         }else{
               
-            }
-        });
-    });
+    //         }
+    //     });
+    // });
       map.on('zoomend', function(ev) {
         console.log(map.getZoom())
         console.log(ev)
