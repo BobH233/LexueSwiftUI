@@ -18,6 +18,7 @@ struct SettingView: View {
     @State var avatar_image = Image("default_avatar")
     @State var openViewScoreNavigation = false
     @State var openExamInfoNavigation = false
+    @State var openSchoolMapNavigation = false
     @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
     var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
     
@@ -139,6 +140,30 @@ struct SettingView: View {
                         .onTapGesture {
                             VibrateOnce()
                             openExamInfoNavigation = true
+                        }
+                        .listRowInsets(EdgeInsets())
+                    }
+                    Section {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.blue)
+                            HStack {
+                                Spacer()
+                                Text("逛校园地图")
+                                    .bold()
+                                    .font(.system(size: 35))
+                                    .foregroundColor(.white)
+                                    .padding(.top, 20)
+                                    .padding(.bottom, 20)
+                                Spacer()
+                            }
+                            NavigationLink("", destination: SchoolMapView(), isActive: $openSchoolMapNavigation)
+                                .isDetailLink(false)
+                                .hidden()
+                        }
+                        .onTapGesture {
+                            VibrateOnce()
+                            openSchoolMapNavigation = true
                         }
                         .listRowInsets(EdgeInsets())
                     }

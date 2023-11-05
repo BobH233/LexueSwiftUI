@@ -67,7 +67,7 @@ struct LexueBroswerView: View {
         }
         .onFirstAppear {
             if #available(iOS 16.4, *) {
-                if GlobalVariables.shared.debugMode { self.webViewStore.webView.isInspectable = true }
+                if GlobalVariables.shared.DEBUG_BUILD { self.webViewStore.webView.isInspectable = true }
             }
             Task {
                 let res = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
