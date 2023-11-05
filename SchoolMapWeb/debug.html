@@ -25,12 +25,12 @@
     <div id="container"></div>
     <script type="text/javascript">
       window._AMapSecurityConfig = {
-        serviceHost: "http://mapapi.bit-helper.cn/_AMapService",
+        serviceHost: "https://mapapi.bit-helper.cn/_AMapService",
       };
     </script>
     <script
       type="text/javascript"
-      src="https://webapi.amap.com/maps?v=2.0&key=	e74b6dc93cc05f59bd10dba2e8843df7&&plugin=AMap.Scale,AMap.HawkEye,AMap.ToolBar,AMap.ControlBar,AMap.Walking"
+      src="https://webapi.amap.com/maps?v=2.0&key=e74b6dc93cc05f59bd10dba2e8843df7&&plugin=AMap.Scale,AMap.HawkEye,AMap.ToolBar,AMap.ControlBar,AMap.Walking,AMap.Riding"
     ></script>
     <script type="text/javascript">
 
@@ -38,8 +38,9 @@
         url: './img/map.jpg',
         bounds: new AMap.Bounds(
             [116.16524858, 39.7237884],
-            [116.1813301, 39.7402679]
+            [116.1813301, 39.7405679]
         ),
+        opacity: 0.9,
         zooms: [15, 20]
       });
       var map = new AMap.Map("container", {
@@ -49,10 +50,7 @@
         terrain: true,
         center: [116.16932464695257, 39.726016233346705],
       });
-      map.setLayers([
-        AMap.createDefaultLayer(),
-        imageLayer,
-      ]);
+      // map.addLayer(imageLayer);
       var toolBar = new AMap.ToolBar({
         visible: false,
         position: {
@@ -85,11 +83,12 @@
       });
       map.add(marker);
       var walking = new AMap.Walking({
-        map: map
+        map: map,
+        policy: 0,
       });
       walking.search(
         new AMap.LngLat(116.16932464695257, 39.726016233346705),
-        new AMap.LngLat(116.17234105949967, 39.73754771675875),
+        new AMap.LngLat(116.17397059049713, 39.72625260990273),
         function(status, result) {
           if (status === 'complete') {
             console.log('绘制路线完成')
@@ -98,6 +97,29 @@
           }
         }
       )
+      AMap.plugin('AMap.Geolocation', function() {
+        var geolocation = new AMap.Geolocation({
+            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+            timeout: 10000,          //超过10秒后停止定位，默认：5s
+            buttonPosition:'RB',    //定位按钮的停靠位置
+            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+            zoomToAccuracy: true,   //定位成功后是否自动调整地图视野到定位点
+
+        });
+        map.addControl(geolocation);
+        geolocation.getCurrentPosition(function(status,result){
+            if(status=='complete'){
+              var position = result.position;
+              var marker = new AMap.Marker({
+                position: [position.lng, position.lat], // 设置标记位置
+                map: map
+              });
+              marker.setAngle(270);
+            }else{
+              
+            }
+        });
+    });
       map.on('zoomend', function(ev) {
         console.log(map.getZoom())
         console.log(ev)
