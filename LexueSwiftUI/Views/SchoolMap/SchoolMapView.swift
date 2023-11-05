@@ -11,6 +11,9 @@ import WebView
 import WebKit
 
 struct SchoolMapView: View {
+    
+    @Environment(\.dismiss) var dismiss
+    
     // TODO: 改成真正的服务链接
     let mapServiceUrl = "https://mapapi.bit-helper.cn/debug.html"
     
@@ -20,13 +23,29 @@ struct SchoolMapView: View {
     
     var body: some View {
         ScrollView{
-            VStack {
+            ZStack {
                 WebView(webView: webViewStore.webView)
-                    .frame(
-                        width: UIScreen.main.bounds.width ,
-                        height: UIScreen.main.bounds.height
-                    )
+                HStack {
+                    VStack {
+                        // 关闭地图
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .shadow(radius: 10)
+                            .padding(20)
+                            .onTapGesture {
+                                VibrateOnce()
+                                dismiss()
+                            }
+                        Spacer()
+                    }
+                    Spacer()
+                }
             }
+            .frame(
+                width: UIScreen.main.bounds.width ,
+                height: UIScreen.main.bounds.height
+            )
         }
         .navigationBarHidden(true)
         .ignoresSafeArea(.all, edges: [.top])
