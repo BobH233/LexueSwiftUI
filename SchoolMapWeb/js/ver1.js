@@ -154,12 +154,6 @@ function init() {
     map.addControl(controlBar);
     controlBar.show();
   });
-  var marker = new AMap.Marker({
-    position: new AMap.LngLat(116.16932464695257, 39.726016233346705),
-    title: '北京'
-  });
-  document.mapInstance.debugMarker = marker;
-  map.add(marker);
   createLocationIndicatorLayer()
 }
 
