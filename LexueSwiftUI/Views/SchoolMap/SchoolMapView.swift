@@ -88,7 +88,11 @@ struct SchoolMapView: View {
                 isLocationAvailable = true
             }
             LocationManager.shared.startUpdate()
-            mapInteractive.enableDisplayPosition()
+            if isLocationAvailable {
+                mapInteractive.enableDisplayPosition()
+            } else {
+                mapInteractive.disableDisplayPosition()
+            }
         }
         .onDisappear() {
             LocationManager.shared.stopUpdate()
