@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>渐变扇形</title>
+    <style>
+      body {
+        background-color: black;
+      }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="800" height="800"></canvas>
+
+    <script>
+        // 获取 <canvas> 元素
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        var gpsDirection = 340;  
+
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+
+        // 画圆形
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, 170, 0, 2 * Math.PI);
+        ctx.fillStyle = "rgba(0,100,255, 0.2)";
+        
+        ctx.fill();
+        ctx.closePath();
+
+        // 描边
+        ctx.beginPath();
+        ctx.lineWidth = 5
+        ctx.arc(centerX, centerY, 170, 0, 2 * Math.PI);
+        ctx.strokeStyle = "rgba(255,255,255, 0.7)";
+        ctx.stroke();
+        ctx.closePath();
+
+        // 定义扇形的参数
+        var radius = 300;
+        var startAngle = 0;
+        var endAngle = Math.PI / 4; // 扇形的终止角度
+        var rotationAngle = (gpsDirection - 22.5 - 90 + 360) % 360; // 要旋转的角度
+        
+
+        // 创建渐变
+        var gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
+        gradient.addColorStop(0, "rgba(0,100,255,0)"); // 外部颜色，透明
+        gradient.addColorStop(0.5, "rgba(0,100,255, 0.5)"); // 内部颜色，蓝色
+        gradient.addColorStop(1, "rgba(0,100,255,0.0)"); // 外部颜色，透明
+
+        // 将角度转换为弧度
+        var startAngleInRadians = startAngle;
+        var endAngleInRadians = endAngle;
+        var rotationAngleInRadians = (rotationAngle * Math.PI) / 180;
+
+        // 开始路径
+        ctx.beginPath();
+
+        // 旋转画布
+        ctx.translate(centerX, centerY);
+        ctx.rotate(rotationAngleInRadians);
+        ctx.translate(-centerX, -centerY);
+
+        // 绘制扇形
+        ctx.arc(centerX, centerY, radius, startAngleInRadians, endAngleInRadians);
+
+        // 闭合路径并填充
+        ctx.lineTo(centerX, centerY);
+        ctx.closePath();
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        // 恢复画布旋转前的状态
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+
+        // 结束路径
+        ctx.closePath();
+
+    </script>
+</body>
+</html>

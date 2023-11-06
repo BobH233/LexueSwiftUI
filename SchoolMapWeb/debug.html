@@ -21,7 +21,6 @@
         user-select: none;
         -webkit-user-select: none;
       }
-      
     </style>
   </head>
   <body>
@@ -36,24 +35,24 @@
       src="https://webapi.amap.com/maps?v=2.0&key=e74b6dc93cc05f59bd10dba2e8843df7&&plugin=AMap.Scale,AMap.HawkEye,AMap.ToolBar,AMap.ControlBar,AMap.Walking,AMap.Riding"
     ></script>
     <script type="text/javascript">
-      document.addEventListener('selectstart', function(e) {
+      document.addEventListener("selectstart", function (e) {
         e.preventDefault();
       });
       var imageLayer = new AMap.ImageLayer({
-        url: 'https://cdn.bit-helper.cn/map.jpeg',
+        url: "https://cdn.bit-helper.cn/map.jpeg",
         bounds: new AMap.Bounds(
-            [116.16524858, 39.7237884],
-            [116.1813301, 39.7405679]
+          [116.16524858, 39.7237884],
+          [116.1813301, 39.7405679]
         ),
         opacity: 0.9,
-        zooms: [15, 20]
+        zooms: [15, 20],
       });
       var map = new AMap.Map("container", {
         viewMode: "3D",
         pitch: 20,
         zoom: 20,
         terrain: true,
-        center: [116.16932464695257, 39.726016233346705]
+        center: [116.16932464695257, 39.726016233346705],
       });
       map.addLayer(imageLayer);
       var toolBar = new AMap.ToolBar({
@@ -77,14 +76,14 @@
       const markerContent =
         "" +
         '<div class="custom-content-marker">' +
-        '   <img src="//a.amap.com/jsapi_demos/static/demo-center/icons/dir-via-marker.png">'
-        "</div>";
+        '   <img src="//a.amap.com/jsapi_demos/static/demo-center/icons/dir-via-marker.png">';
+      ("</div>");
       var marker = new AMap.Marker({
         position: new AMap.LngLat(116.16912963512931, 39.72952503675784),
         // 将 html 传给 content
         content: markerContent,
         // 以 icon 的 [center bottom] 为原点
-        offset: new AMap.Pixel(-13, -30)
+        offset: new AMap.Pixel(-13, -30),
       });
       map.add(marker);
       var walking = new AMap.Walking({
@@ -92,11 +91,28 @@
         policy: 0,
       });
       const marker1 = new AMap.Marker({
-        position: new AMap.LngLat(116.16932464695257, 39.726016233346705),   // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
-        title: '北京'
+        position: new AMap.LngLat(116.16932464695257, 39.726016233346705), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
+        title: "北京",
       });
       map.add(marker1);
-      marker1.setAngle(30)
+      marker1.setAngle(30);
+      // var circle = new AMap.Circle({
+      //   center: [116.16932464695257, 39.726016233346705],
+      //   radius: 50, //半径
+      //   borderWeight: 3,
+      //   strokeColor: "#FF33FF",
+      //   strokeOpacity: 1,
+      //   strokeWeight: 6,
+      //   strokeOpacity: 0.2,
+      //   fillOpacity: 0.4,
+      //   strokeStyle: 'dashed',
+      //   strokeDasharray: [10, 10],
+      //   // 线样式还支持 'dashed'
+      //   fillColor: '#1791fc',
+      //   zIndex: 50,
+      // })
+      // map.add(circle);
+      
       // walking.search(
       //   new AMap.LngLat(116.16932464695257, 39.726016233346705),
       //   new AMap.LngLat(116.17397059049713, 39.72625260990273),
@@ -108,37 +124,38 @@
       //     }
       //   }
       // )
-    //   AMap.plugin('AMap.Geolocation', function() {
-    //     var geolocation = new AMap.Geolocation({
-    //         enableHighAccuracy: true,//是否使用高精度定位，默认:true
-    //         timeout: 10000,          //超过10秒后停止定位，默认：5s
-    //         buttonPosition:'RB',    //定位按钮的停靠位置
-    //         buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-    //         zoomToAccuracy: false,   //定位成功后是否自动调整地图视野到定位点
-    //         showMarker: true,
-    //         panToLocation: false,
-    //     });
-    //     map.addControl(geolocation);
-    //     geolocation.getCurrentPosition(function(status,result){
-    //         if(status=='complete'){
-    //           var position = result.position;
-    //           var marker = new AMap.Marker({
-    //             position: [position.lng, position.lat], // 设置标记位置
-    //             map: map
-    //           });
-    //           marker.setAngle(270);
-    //         }else{
-              
-    //         }
-    //     });
-    // });
-      map.on('zoomend', function(ev) {
-        console.log(map.getZoom())
-        console.log(ev)
-      })
-      map.on('click', function(ev) {
-        console.log(ev.lnglat.lat, ev.lnglat.lng)
-      })
+        AMap.plugin('AMap.Geolocation', function() {
+          var geolocation = new AMap.Geolocation({
+              enableHighAccuracy: true,//是否使用高精度定位，默认:true
+              timeout: 10000,          //超过10秒后停止定位，默认：5s
+              buttonPosition:'RB',    //定位按钮的停靠位置
+              buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+              zoomToAccuracy: false,   //定位成功后是否自动调整地图视野到定位点
+              showMarker: true,
+              panToLocation: false,
+          });
+          document.geolocation = geolocation
+          map.addControl(geolocation);
+          geolocation.getCurrentPosition(function(status,result){
+              if(status=='complete'){
+                var position = result.position;
+                var marker = new AMap.Marker({
+                  position: [position.lng, position.lat], // 设置标记位置
+                  map: map
+                });
+                marker.setAngle(270);
+              }else{
+
+              }
+          });
+      });
+      map.on("zoomend", function (ev) {
+        console.log(map.getZoom());
+        console.log(ev);
+      });
+      map.on("click", function (ev) {
+        console.log(ev.lnglat.lat, ev.lnglat.lng);
+      });
     </script>
   </body>
 </html>
