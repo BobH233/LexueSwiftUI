@@ -10,17 +10,18 @@ import CoreLocation
 import WebView
 import WebKit
 
+
 struct SchoolMapView: View {
     
     @Environment(\.dismiss) var dismiss
     
     // TODO: 改成真正的服务链接
-    let mapServiceUrl = "https://mapapi.bit-helper.cn/debug.html?1"
+    let mapServiceUrl = "http://192.168.8.143:5500/ver1.html"
     
     @State var isLocationAvailable: Bool = false
     @ObservedObject var locationManager = LocationManager.shared
     @StateObject var webViewStore = WebViewStore()
-    
+    @State var mapInteractive: MapInteractive = MapInteractive()
     var body: some View {
         ScrollView{
             ZStack {
@@ -31,11 +32,13 @@ struct SchoolMapView: View {
                         Image(systemName: "xmark.circle.fill")
                             .resizable()
                             .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
                             .shadow(radius: 10)
                             .padding(20)
                             .onTapGesture {
                                 VibrateOnce()
                                 dismiss()
+                                mapInteractive.unsetWebView()
                             }
                         Spacer()
                     }
@@ -48,19 +51,32 @@ struct SchoolMapView: View {
             )
         }
         .onChange(of: locationManager.compassHeading) { newVal in
+            if let newVal = newVal {
+                mapInteractive.setGpsDirection(direction: newVal)
+            }
+        }
+        .onChange(of: locationManager.currentLocation) { newVal in
             if let NewVal = newVal {
-                self.webViewStore.webView.evaluateJavaScript("marker1.setAngle(\(NewVal));")
+                print(NewVal.coordinate.longitude)
+                print(NewVal.coordinate.latitude)
+                mapInteractive.setIndicatorCenter(lng: Float(NewVal.coordinate.longitude), lat: Float(NewVal.coordinate.latitude))
+//                let (mglng, mglat) = LocationManager.shared.WGS84_to_GCJ02(lng: Float(NewVal.coordinate.longitude), lat: Float(NewVal.coordinate.latitude))
+//                print("mglng: \(mglng)")
+//                print("mglat: \(mglat)")
+//                print("document.mapInstance.debugMarker.setPosition(new AMap.LngLat(\(mglng), \(mglat)));")
+//                self.webViewStore.webView.evaluateJavaScript("document.mapInstance.debugMarker.setPosition(new AMap.LngLat(\(mglng), \(mglat)));")
             }
         }
         .navigationBarHidden(true)
+        .statusBarHidden()
         .ignoresSafeArea(.all, edges: [.top])
-        .statusBar(hidden: true)
-        .onAppear {
+        .onFirstAppear {
             if #available(iOS 16.4, *) {
                 if GlobalVariables.shared.DEBUG_BUILD {
                     self.webViewStore.webView.isInspectable = true
                 }
             }
+            mapInteractive.setWebView(webView: webViewStore.webView)
             // 高德地图太坑了...必须加这一行才能正常工作，不知道是不是故意不让app用网页服务的
             self.webViewStore.webView.customUserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0"
             
@@ -77,6 +93,7 @@ struct SchoolMapView: View {
                 isLocationAvailable = true
             }
             LocationManager.shared.startUpdate()
+            mapInteractive.enableDisplayPosition()
         }
         .onDisappear() {
             LocationManager.shared.stopUpdate()

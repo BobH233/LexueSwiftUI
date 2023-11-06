@@ -20,6 +20,8 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     @Published var compassHeading: CLLocationDirection?
     
+    @Published var currentLocation: CLLocation?
+    
     public static let locationAuthUpdated = Notification.Name("locationAuthUpdated")
     
     override init() {
@@ -48,6 +50,12 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         if newHeading.magneticHeading >= 0 {
             compassHeading = newHeading.magneticHeading
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let newLocation = locations.last {
+            currentLocation = newLocation
         }
     }
     
@@ -83,7 +91,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     // ret: (mglng, mglat)
-    private func WGS84_to_GCJ02(lng: Float, lat: Float) -> (Float, Float) {
+    func WGS84_to_GCJ02(lng: Float, lat: Float) -> (Float, Float) {
         var lat = +lat;
         var lng = +lng;
         let PI = Float.pi

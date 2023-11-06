@@ -14,6 +14,7 @@
 		470AFC662ACB15FB004C7F70 /* DataProviderBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */; };
 		470AFC682ACB16D6004C7F70 /* DataProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */; };
 		470AFC6A2ACB194D004C7F70 /* LexueDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */; };
+		470CC1042AF9336B00D4789A /* MapInteractive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CC1032AF9336B00D4789A /* MapInteractive.swift */; };
 		470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470CC59A2AC1D15900142AC5 /* CourseDetailView.swift */; };
 		4715BE862ACC49F600163DA9 /* ContactAvatarSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4715BE852ACC49F600163DA9 /* ContactAvatarSettingView.swift */; };
 		47196FDD2AC5514F00979DFE /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47196FBA2AC54C6E00979DFE /* WidgetKit.framework */; };
@@ -200,6 +201,7 @@
 		470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderBase.swift; sourceTree = "<group>"; };
 		470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderManager.swift; sourceTree = "<group>"; };
 		470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueDataProvider.swift; sourceTree = "<group>"; };
+		470CC1032AF9336B00D4789A /* MapInteractive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInteractive.swift; sourceTree = "<group>"; };
 		470CC59A2AC1D15900142AC5 /* CourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseDetailView.swift; sourceTree = "<group>"; };
 		4715BE852ACC49F600163DA9 /* ContactAvatarSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAvatarSettingView.swift; sourceTree = "<group>"; };
 		47196FBA2AC54C6E00979DFE /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -575,6 +577,7 @@
 			isa = PBXGroup;
 			children = (
 				475522122AF7D1AB00B1347D /* SchoolMapView.swift */,
+				470CC1032AF9336B00D4789A /* MapInteractive.swift */,
 			);
 			path = SchoolMap;
 			sourceTree = "<group>";
@@ -859,6 +862,7 @@
 				47BD51A02AC5B43F0029F9DB /* UMCommonSwift.swift in Sources */,
 				475E22AF2ACFB4C800FE8679 /* InfoMergingDataProvider.swift in Sources */,
 				47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */,
+				470CC1042AF9336B00D4789A /* MapInteractive.swift in Sources */,
 				475522152AF7D2F200B1347D /* LocationManager.swift in Sources */,
 				47F4F29A2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift in Sources */,
 				47BD51A12AC5B43F0029F9DB /* UMCommonLogSwift.swift in Sources */,
