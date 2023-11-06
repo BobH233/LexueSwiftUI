@@ -60,11 +60,6 @@ struct SchoolMapView: View {
                 print(NewVal.coordinate.longitude)
                 print(NewVal.coordinate.latitude)
                 mapInteractive.setIndicatorCenter(lng: Float(NewVal.coordinate.longitude), lat: Float(NewVal.coordinate.latitude))
-//                let (mglng, mglat) = LocationManager.shared.WGS84_to_GCJ02(lng: Float(NewVal.coordinate.longitude), lat: Float(NewVal.coordinate.latitude))
-//                print("mglng: \(mglng)")
-//                print("mglat: \(mglat)")
-//                print("document.mapInstance.debugMarker.setPosition(new AMap.LngLat(\(mglng), \(mglat)));")
-//                self.webViewStore.webView.evaluateJavaScript("document.mapInstance.debugMarker.setPosition(new AMap.LngLat(\(mglng), \(mglat)));")
             }
         }
         .navigationBarHidden(true)

@@ -13,7 +13,8 @@ import WebKit
 
 class MapInteractive: NSObject, WKNavigationDelegate {
     
-    let rediusOfIndicator: Float = 0.0003
+    let rediusOfIndicatorX: Float = 0.0004
+    let rediusOfIndicatorY: Float = 0.0003
     
     var webView: WKWebView?
     var jsInited: Bool = false
@@ -78,8 +79,8 @@ class MapInteractive: NSObject, WKNavigationDelegate {
     // 设置圆的中心点
     func setIndicatorCenter(lng: Float, lat: Float) {
         // 分别得到上下限的真实gps地址，然后转换成gcj02坐标系
-        let (lng_1, lat_1) = (lng - rediusOfIndicator / 2, lat - rediusOfIndicator / 2)
-        let (lng_2, lat_2) = (lng + rediusOfIndicator / 2, lat + rediusOfIndicator / 2)
+        let (lng_1, lat_1) = (lng - rediusOfIndicatorX / 2, lat - rediusOfIndicatorY / 2)
+        let (lng_2, lat_2) = (lng + rediusOfIndicatorX / 2, lat + rediusOfIndicatorY / 2)
         let (lng_1_gcj, lat_1_gcj) = LocationManager.shared.WGS84_to_GCJ02(lng: lng_1, lat: lat_1)
         let (lng_2_gcj, lat_2_gcj) = LocationManager.shared.WGS84_to_GCJ02(lng: lng_2, lat: lat_2)
         let jsCode = "document.mapInstance.gps.bound = new AMap.Bounds([\(lng_1_gcj), \(lat_1_gcj)],[\(lng_2_gcj), \(lat_2_gcj)])"
