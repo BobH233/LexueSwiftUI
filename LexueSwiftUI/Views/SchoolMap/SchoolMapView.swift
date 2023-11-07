@@ -97,6 +97,7 @@ struct SchoolMapView: View {
                             .foregroundColor(.white)
                             .shadow(radius: 10)
                             .padding(20)
+                            .padding(.bottom, 20)
                             .onTapGesture {
                                 VibrateOnce()
                                 mapInteractive.setZoomFitCurrentLocation()
