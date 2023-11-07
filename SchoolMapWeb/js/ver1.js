@@ -10,12 +10,27 @@ function createLocationIndicatorLayer() {
       [116.16932464695257, 39.726016233346705],
       [116.17032464695257, 39.727016233346705]
     ),
-    zIndex: 7,
+    zIndex: 11,
     zooms: [15, 20],
   });
   document.mapInstance.canvasLayer = CanvasLayer;
   document.mapInstance.map.addLayer(CanvasLayer);
-  drawLocationIndicatorFrame()
+  // 放置中心原点
+  var circleMarker = new AMap.CircleMarker({
+    center: [116.16932464695257, 39.726016233346705],
+    radius: 6,//3D视图下，CircleMarker半径不要超过64px
+    strokeColor:'white',
+    strokeWeight: 3,
+    strokeOpacity: 0.8,
+    fillColor: 'rgba(0,100,255, 0.8)',
+    fillOpacity: 0.9,
+    zIndex: 12,
+    bubble: true,
+    cursor: 'pointer'
+  });
+  circleMarker.setMap(document.mapInstance.map);
+  document.mapInstance.circleMarker = circleMarker;
+  drawLocationIndicatorFrame();
 }
 
 // 绘制用户位置标识的每一帧
@@ -30,12 +45,14 @@ function drawLocationIndicatorFrame() {
   }
   if (!document.mapInstance.gps.enableDisplayPosition) {
     // 如果没有允许显示当前的位置，不绘制
+    document.mapInstance.circleMarker.hide();
     AMap.Util.requestAnimFrame(drawLocationIndicatorFrame);
     return;
   }
   if (typeof document.mapInstance.gps.bound != 'undefined') {
     document.mapInstance.canvasLayer.setBounds(document.mapInstance.gps.bound);
   }
+  document.mapInstance.circleMarker.show();
   // 获取用户的指南针朝向
   var gpsDirection = document.mapInstance.gps.direction;
   var centerX = canvas.width / 2;

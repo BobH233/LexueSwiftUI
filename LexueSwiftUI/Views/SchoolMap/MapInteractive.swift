@@ -81,9 +81,11 @@ class MapInteractive: NSObject, WKNavigationDelegate {
         // 分别得到上下限的真实gps地址，然后转换成gcj02坐标系
         let (lng_1, lat_1) = (lng - rediusOfIndicatorX / 2, lat - rediusOfIndicatorY / 2)
         let (lng_2, lat_2) = (lng + rediusOfIndicatorX / 2, lat + rediusOfIndicatorY / 2)
+        let (lng_ori_gcj, lat_ori_gcj) = LocationManager.shared.WGS84_to_GCJ02(lng: lng, lat: lat)
         let (lng_1_gcj, lat_1_gcj) = LocationManager.shared.WGS84_to_GCJ02(lng: lng_1, lat: lat_1)
         let (lng_2_gcj, lat_2_gcj) = LocationManager.shared.WGS84_to_GCJ02(lng: lng_2, lat: lat_2)
-        let jsCode = "document.mapInstance.gps.bound = new AMap.Bounds([\(lng_1_gcj), \(lat_1_gcj)],[\(lng_2_gcj), \(lat_2_gcj)])"
+        let jsCode =    "document.mapInstance.gps.bound = new AMap.Bounds([\(lng_1_gcj), \(lat_1_gcj)],[\(lng_2_gcj), \(lat_2_gcj)]);\n" +
+                        "document.mapInstance.circleMarker.setCenter([\(lng_ori_gcj), \(lat_ori_gcj)]);\n"
         if jsInited {
             webView?.evaluateJavaScript(jsCode)
         } else {
