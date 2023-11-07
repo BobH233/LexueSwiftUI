@@ -23,13 +23,39 @@ struct SchoolMapView: View {
     @StateObject var webViewStore = WebViewStore()
     @State var mapInteractive: MapInteractive = MapInteractive()
     var body: some View {
-        ScrollView{
-            ZStack {
+        ZStack {
+            ScrollView {
                 WebView(webView: webViewStore.webView)
+                .frame(
+                    width: UIScreen.main.bounds.width ,
+                    height: UIScreen.main.bounds.height
+                )
+            }
+            HStack {
+                VStack {
+                    // 关闭地图
+                    Image(systemName: "xmark.circle.fill")
+                        .resizable()
+                        .frame(width: 40, height: 40)
+                        .foregroundColor(.white)
+                        .shadow(radius: 10)
+                        .padding(20)
+                        .onTapGesture {
+                            VibrateOnce()
+                            dismiss()
+                            mapInteractive.unsetWebView()
+                        }
+                    Spacer()
+                }
+                Spacer()
+            }
+            if isLocationAvailable {
                 HStack {
+                    Spacer()
                     VStack {
-                        // 关闭地图
-                        Image(systemName: "xmark.circle.fill")
+                        Spacer()
+                        // 定位到当前位置
+                        Image(systemName: "location.circle.fill")
                             .resizable()
                             .frame(width: 40, height: 40)
                             .foregroundColor(.white)
@@ -37,18 +63,11 @@ struct SchoolMapView: View {
                             .padding(20)
                             .onTapGesture {
                                 VibrateOnce()
-                                dismiss()
-                                mapInteractive.unsetWebView()
+                                mapInteractive.setZoomFitCurrentLocation()
                             }
-                        Spacer()
                     }
-                    Spacer()
                 }
             }
-            .frame(
-                width: UIScreen.main.bounds.width ,
-                height: UIScreen.main.bounds.height
-            )
         }
         .onChange(of: locationManager.compassHeading) { newVal in
             if let newVal = newVal {

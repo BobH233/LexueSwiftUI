@@ -92,4 +92,14 @@ class MapInteractive: NSObject, WKNavigationDelegate {
             jsWaitQueue.append(jsCode)
         }
     }
+    
+    // 设置视角切换到当前用户的位置
+    func setZoomFitCurrentLocation() {
+        let jsCode = "document.mapInstance.map.setBounds(document.mapInstance.canvasLayer.getBounds());"
+        if jsInited {
+            webView?.evaluateJavaScript(jsCode)
+        } else {
+            jsWaitQueue.append(jsCode)
+        }
+    }
 }
