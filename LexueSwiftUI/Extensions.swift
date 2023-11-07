@@ -516,6 +516,10 @@ extension View {
                             return
                         }
                         if let controller = windows.windows.first?.rootViewController?.presentedViewController, let sheet = controller.presentationController as? UISheetPresentationController {
+                            if isTransparentBG {
+                                controller.view.backgroundColor = .clear
+                            }
+                            controller.presentingViewController?.view.tintAdjustmentMode = .normal
                             sheet.largestUndimmedDetentIdentifier = largestUndimmedIdentifier
                             sheet.preferredCornerRadius = sheetCornerRadius
                         } else {

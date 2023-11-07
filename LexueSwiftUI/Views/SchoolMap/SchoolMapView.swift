@@ -12,17 +12,23 @@ import WebKit
 
 private struct SheetView: View {
     var body: some View {
-        VStack(spacing: 15) {
-            TextField("搜索校园地点", text: .constant(""))
-                .padding(.vertical, 10)
-                .padding(.horizontal)
-                .background {
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(.ultraThickMaterial)
-                }
+        ScrollView {
+            VStack {
+                TextField("搜索校园地点", text: .constant(""))
+                    .padding(.vertical, 10)
+                    .padding(.horizontal)
+                    .background {
+                        RoundedRectangle(cornerRadius: 10, style: .continuous)
+                            .fill(.ultraThickMaterial)
+                    }
+            }
+            .padding()
         }
-        .padding()
-        .padding(.top)
+        .background(content: {
+            Rectangle()
+                .fill(.ultraThinMaterial)
+                .ignoresSafeArea()
+        })
     }
 }
 
@@ -30,7 +36,7 @@ extension View {
     @ViewBuilder
     func bottomSheetIfAvailable<Content: View>(@ViewBuilder content: @escaping () -> Content) -> some View {
         if #available(iOS 16.0, *) {
-            self.bottomSheet(presentationDetents: [.medium, .large, .height(70)], isPresented: .constant(true), sheetCornerRadius: 20) {
+            self.bottomSheet(presentationDetents: [.medium, .large, .height(70)], isPresented: .constant(true), sheetCornerRadius: 20, isTransparentBG: true) {
                 content()
             } onDismiss: {
                 
