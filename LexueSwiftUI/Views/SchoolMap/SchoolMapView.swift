@@ -36,11 +36,6 @@ private struct SheetView16: View {
                 selectedDetents1 = selectedDetents
             }
         }
-        .background(content: {
-            Rectangle()
-                .fill(.ultraThinMaterial)
-                .ignoresSafeArea()
-        })
         .presentationDetents([.medium, .large, .height(70)], largestUndimmed: .large, selection: $selectedDetents)
         .interactiveDismissDisabled(true)
     }
