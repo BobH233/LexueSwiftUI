@@ -487,7 +487,54 @@ extension NSPersistentContainer {
 }
 
 
+
+
 // 底部多级的抽屉sheet
+
+@available(iOS 15.0, *)
+@available(iOSApplicationExtension, unavailable)
+extension View {
+    @ViewBuilder
+    func bottomSheet15<Content: View> (
+        isPresented: Binding<Bool>,
+        dragIndicator: Visibility = .visible,
+        sheetCornerRadius: CGFloat?,
+        largestUndimmedIdentifier: UISheetPresentationController.Detent.Identifier = .large,
+        isTransparentBG: Bool = false,
+        interactiveDisabled: Bool = true,
+        @ViewBuilder content: @escaping () -> Content,
+        onDismiss: @escaping () -> ()
+    ) -> some View {
+        self
+            .sheet(isPresented: isPresented) {
+                onDismiss()
+            } content: {
+                content()
+                    .interactiveDismissDisabled(interactiveDisabled)
+                    .onAppear {
+                        guard let windows = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
+                            return
+                        }
+                        if let controller = windows.windows.first?.rootViewController?.presentedViewController, let sheet = controller.presentationController as? UISheetPresentationController {
+                            sheet.detents = [
+                                .medium(),
+                                .large()
+                            ]
+                            if isTransparentBG {
+                                controller.view.backgroundColor = .clear
+                            }
+                            sheet.prefersGrabberVisible = true
+                            controller.presentingViewController?.view.tintAdjustmentMode = .normal
+                            sheet.largestUndimmedDetentIdentifier = largestUndimmedIdentifier
+                            sheet.preferredCornerRadius = sheetCornerRadius
+                        } else {
+                            print("NO CONTROLLER")
+                        }
+                    }
+            }
+    }
+}
+
 @available(iOS 16.0, *)
 @available(iOSApplicationExtension, unavailable)
 extension View {

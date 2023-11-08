@@ -12,7 +12,7 @@ import WebKit
 
 private struct SheetView: View {
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 TextField("搜索校园地点", text: .constant(""))
                     .padding(.vertical, 10)
@@ -32,9 +32,12 @@ private struct SheetView: View {
     }
 }
 
+
+
 extension View {
+    
     @ViewBuilder
-    func bottomSheetIfAvailable<Content: View>(@ViewBuilder content: @escaping () -> Content) -> some View {
+    func bottomSheetIfAvailable<Content: View>(presented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) -> some View {
         if #available(iOS 16.0, *) {
             self.bottomSheet(presentationDetents: [.medium, .large, .height(70)], isPresented: .constant(true), sheetCornerRadius: 20, isTransparentBG: true) {
                 content()
@@ -42,7 +45,11 @@ extension View {
                 
             }
         } else {
-            self
+            self.bottomSheet15(isPresented: presented, sheetCornerRadius: 20, isTransparentBG: true, interactiveDisabled: false) {
+                content()
+            } onDismiss: {
+                
+            }
         }
     }
 }
@@ -50,9 +57,9 @@ extension View {
 struct SchoolMapView: View {
     
     @Environment(\.dismiss) var dismiss
-    
+    @State var sheetShow = false
     // TODO: 改成真正的服务链接
-    let mapServiceUrl = "http://192.168.8.143:5500/ver1.html"
+    let mapServiceUrl = "https://mapapi.bit-helper.cn/ver1.html"
     
     @State var isLocationAvailable: Bool = false
     @ObservedObject var locationManager = LocationManager.shared
@@ -106,7 +113,7 @@ struct SchoolMapView: View {
                 }
             }
         }
-        .bottomSheetIfAvailable {
+        .bottomSheetIfAvailable(presented: $sheetShow) {
             SheetView()
         }
         .onChange(of: locationManager.compassHeading) { newVal in
@@ -116,8 +123,6 @@ struct SchoolMapView: View {
         }
         .onChange(of: locationManager.currentLocation) { newVal in
             if let NewVal = newVal {
-//                print(NewVal.coordinate.longitude)
-//                print(NewVal.coordinate.latitude)
                 mapInteractive.setIndicatorCenter(lng: Float(NewVal.coordinate.longitude), lat: Float(NewVal.coordinate.latitude))
             }
         }
@@ -125,6 +130,7 @@ struct SchoolMapView: View {
         .statusBarHidden()
         .ignoresSafeArea(.all, edges: [.top])
         .onFirstAppear {
+            sheetShow = true
             if #available(iOS 16.4, *) {
                 if GlobalVariables.shared.DEBUG_BUILD {
                     self.webViewStore.webView.isInspectable = true
