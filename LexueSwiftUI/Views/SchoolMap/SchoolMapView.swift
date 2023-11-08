@@ -16,6 +16,7 @@ import SwiftUIKit
 @available(iOS 16.0, *)
 private struct SheetView16: View {
     @State var selectedDetents: PresentationDetent = .height(70)
+    @State var selectedDetents1: PresentationDetent = .height(70)
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
@@ -26,8 +27,14 @@ private struct SheetView16: View {
                         RoundedRectangle(cornerRadius: 10, style: .continuous)
                             .fill(.ultraThickMaterial)
                     }
+                
             }
             .padding()
+        }
+        .onChange(of: selectedDetents) { newVal in
+            withAnimation {
+                selectedDetents1 = selectedDetents
+            }
         }
         .background(content: {
             Rectangle()
