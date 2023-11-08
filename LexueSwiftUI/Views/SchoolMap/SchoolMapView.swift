@@ -92,11 +92,25 @@ struct SchoolMapView: View {
                 }
                 Spacer()
             }
-            if isLocationAvailable {
-                HStack {
+            
+            HStack {
+                Spacer()
+                VStack(spacing: 10) {
                     Spacer()
-                    VStack {
-                        Spacer()
+                    // 对于ios16以下的系统，需要按钮来显示sheet
+                    if #unavailable(iOS 16.0){
+                        Image(systemName: "line.3.horizontal.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                            .foregroundColor(.white)
+                            .shadow(radius: 10)
+                            .padding(.horizontal, 20)
+                            .onTapGesture {
+                                VibrateOnce()
+                                sheetShow.toggle()
+                            }
+                    }
+                    if isLocationAvailable {
                         // 定位到当前位置
                         Image(systemName: "location.circle.fill")
                             .resizable()
