@@ -95,7 +95,7 @@ struct SchoolMapView: View {
             
             HStack {
                 Spacer()
-                VStack(spacing: 10) {
+                VStack(spacing: 15) {
                     Spacer()
                     // 对于ios16以下的系统，需要按钮来显示sheet
                     if #unavailable(iOS 16.0){
@@ -117,7 +117,7 @@ struct SchoolMapView: View {
                             .frame(width: 40, height: 40)
                             .foregroundColor(.white)
                             .shadow(radius: 10)
-                            .padding(20)
+                            .padding(.horizontal, 20)
                             .padding(.bottom, 20)
                             .onTapGesture {
                                 VibrateOnce()
