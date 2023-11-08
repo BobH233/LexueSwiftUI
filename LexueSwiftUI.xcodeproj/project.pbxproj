@@ -11,6 +11,7 @@
 		4703F66E2AEEACFF00899F61 /* AppNotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F66D2AEEACFF00899F61 /* AppNotificationsManager.swift */; };
 		4703F6702AEEB10B00899F61 /* AppNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4703F66F2AEEB10B00899F61 /* AppNotificationsView.swift */; };
 		47066F602ADC32200092F891 /* JXZXehall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47066F5F2ADC32200092F891 /* JXZXehall.swift */; };
+		470A13D02AFBE4BE005AC8A0 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = 470A13CF2AFBE4BE005AC8A0 /* SwiftUIKit */; };
 		470AFC662ACB15FB004C7F70 /* DataProviderBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC652ACB15FB004C7F70 /* DataProviderBase.swift */; };
 		470AFC682ACB16D6004C7F70 /* DataProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */; };
 		470AFC6A2ACB194D004C7F70 /* LexueDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */; };
@@ -340,6 +341,7 @@
 				47970AC22AC5AC7200C5BD03 /* UMAPM.framework in Frameworks */,
 				47970AC72AC5AC9800C5BD03 /* CoreTelephony.framework in Frameworks */,
 				47970AC92AC5ACAB00C5BD03 /* libsqlite3.tbd in Frameworks */,
+				470A13D02AFBE4BE005AC8A0 /* SwiftUIKit in Frameworks */,
 				476448412AD84B7700952A22 /* WrappingHStack in Frameworks */,
 				47BD51A52AC5B4970029F9DB /* UMAnalyticsGame.framework in Frameworks */,
 				47970AC02AC5AC7200C5BD03 /* UMDevice.framework in Frameworks */,
@@ -706,6 +708,7 @@
 				476448402AD84B7700952A22 /* WrappingHStack */,
 				474304C32ADAAC3900EB2073 /* SwiftUICharts */,
 				474FEFEB2AEAC46F00B88E1F /* CloudKitSyncMonitor */,
+				470A13CF2AFBE4BE005AC8A0 /* SwiftUIKit */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -750,6 +753,7 @@
 				4764483F2AD84B7700952A22 /* XCRemoteSwiftPackageReference "WrappingHStack" */,
 				474304C22ADAAC3900EB2073 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 				474FEFEA2AEAC46F00B88E1F /* XCRemoteSwiftPackageReference "CloudKitSyncMonitor" */,
+				470A13CE2AFBE4BE005AC8A0 /* XCRemoteSwiftPackageReference "SwiftUIKit" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -1259,6 +1263,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		470A13CE2AFBE4BE005AC8A0 /* XCRemoteSwiftPackageReference "SwiftUIKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:danielsaidi/SwiftUIKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.9.0;
+			};
+		};
 		474304C22ADAAC3900EB2073 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:willdale/SwiftUICharts.git";
@@ -1342,6 +1354,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		470A13CF2AFBE4BE005AC8A0 /* SwiftUIKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 470A13CE2AFBE4BE005AC8A0 /* XCRemoteSwiftPackageReference "SwiftUIKit" */;
+			productName = SwiftUIKit;
+		};
 		474304C32ADAAC3900EB2073 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 474304C22ADAAC3900EB2073 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;

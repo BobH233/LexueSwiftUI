@@ -9,8 +9,13 @@ import SwiftUI
 import CoreLocation
 import WebView
 import WebKit
+import SwiftUIKit
 
-private struct SheetView: View {
+
+
+@available(iOS 16.0, *)
+private struct SheetView16: View {
+    @State var selectedDetents: PresentationDetent = .height(70)
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack {
@@ -29,35 +34,37 @@ private struct SheetView: View {
                 .fill(.ultraThinMaterial)
                 .ignoresSafeArea()
         })
+        .presentationDetents([.medium, .large, .height(70)], largestUndimmed: .large, selection: $selectedDetents)
+        .interactiveDismissDisabled(true)
     }
 }
 
 
-
-extension View {
-    
-    @ViewBuilder
-    func bottomSheetIfAvailable<Content: View>(presented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) -> some View {
-        if #available(iOS 16.0, *) {
-            self.bottomSheet(presentationDetents: [.medium, .large, .height(70)], isPresented: .constant(true), sheetCornerRadius: 20, isTransparentBG: true) {
-                content()
-            } onDismiss: {
-                
-            }
-        } else {
-            self.bottomSheet15(isPresented: presented, sheetCornerRadius: 20, isTransparentBG: true, interactiveDisabled: false) {
-                content()
-            } onDismiss: {
-                
-            }
-        }
-    }
-}
+//
+//extension View {
+//    
+//    @ViewBuilder
+//    func bottomSheetIfAvailable<Content: View>(presented: Binding<Bool>, @ViewBuilder content: @escaping () -> Content) -> some View {
+//        if #available(iOS 16.0, *) {
+//            self.bottomSheet(presentationDetents: [.medium, .large, .height(70)], isPresented: .constant(true), sheetCornerRadius: 20, isTransparentBG: true) {
+//                content()
+//            } onDismiss: {
+//                
+//            }
+//        } else {
+//            self.bottomSheet15(isPresented: presented, sheetCornerRadius: 20, isTransparentBG: true, interactiveDisabled: false) {
+//                content()
+//            } onDismiss: {
+//                
+//            }
+//        }
+//    }
+//}
 
 struct SchoolMapView: View {
     
     @Environment(\.dismiss) var dismiss
-    @State var sheetShow = false
+    @State var sheetShow = true
     // TODO: 改成真正的服务链接
     let mapServiceUrl = "https://mapapi.bit-helper.cn/ver1.html"
     
@@ -127,8 +134,10 @@ struct SchoolMapView: View {
                 }
             }
         }
-        .bottomSheetIfAvailable(presented: $sheetShow) {
-            SheetView()
+        .sheet(isPresented: $sheetShow) {
+            if #available(iOS 16.0, *) {
+                SheetView16()
+            }
         }
         .onChange(of: locationManager.compassHeading) { newVal in
             if let newVal = newVal {

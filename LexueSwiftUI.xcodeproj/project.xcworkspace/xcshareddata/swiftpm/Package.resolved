@@ -91,6 +91,15 @@
       }
     },
     {
+      "identity" : "swiftuikit",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:danielsaidi/SwiftUIKit.git",
+      "state" : {
+        "revision" : "933a747c10787f84e04ad4c0f5de8cb590bf36e0",
+        "version" : "3.9.0"
+      }
+    },
+    {
       "identity" : "url-image",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dmytro-anokhin/url-image.git",
