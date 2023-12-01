@@ -112,6 +112,7 @@
 		47BD51A52AC5B4970029F9DB /* UMAnalyticsGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BD51A42AC5B4960029F9DB /* UMAnalyticsGame.framework */; };
 		47BD51A72AC5B5A40029F9DB /* UMengManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BD51A62AC5B5A40029F9DB /* UMengManager.swift */; };
 		47BDAF3E2B1A261300D43119 /* MessageCategorySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BDAF3D2B1A261300D43119 /* MessageCategorySelector.swift */; };
+		47BDAF402B1A367600D43119 /* ExtraFunctionSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BDAF3F2B1A367600D43119 /* ExtraFunctionSelectionView.swift */; };
 		47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */; };
 		47CE0FF72ACADED400C68CA3 /* AddCustomEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FF62ACADED400C68CA3 /* AddCustomEventView.swift */; };
 		47CE0FF92ACAF04700C68CA3 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FF82ACAF04700C68CA3 /* EditEventView.swift */; };
@@ -291,6 +292,7 @@
 		47BD51A42AC5B4960029F9DB /* UMAnalyticsGame.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalyticsGame.framework; sourceTree = "<group>"; };
 		47BD51A62AC5B5A40029F9DB /* UMengManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UMengManager.swift; sourceTree = "<group>"; };
 		47BDAF3D2B1A261300D43119 /* MessageCategorySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCategorySelector.swift; sourceTree = "<group>"; };
+		47BDAF3F2B1A367600D43119 /* ExtraFunctionSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionSelectionView.swift; sourceTree = "<group>"; };
 		47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseShortInfo.swift; sourceTree = "<group>"; };
 		47CE0FF62ACADED400C68CA3 /* AddCustomEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomEventView.swift; sourceTree = "<group>"; };
 		47CE0FF82ACAF04700C68CA3 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
@@ -528,6 +530,7 @@
 				472E44302ADAE98400230FC4 /* Feedback.swift */,
 				475D211C2AEC09B400CB9DC7 /* iCloudActions.swift */,
 				4703F66F2AEEB10B00899F61 /* AppNotificationsView.swift */,
+				47BDAF3F2B1A367600D43119 /* ExtraFunctionSelectionView.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				475AFF002AB02A0C00C4020F /* LexueAPI.swift in Sources */,
 				47F4F29C2AC086A90047B395 /* ImageAttributes.swift in Sources */,
 				470AFC6A2ACB194D004C7F70 /* LexueDataProvider.swift in Sources */,
+				47BDAF402B1A367600D43119 /* ExtraFunctionSelectionView.swift in Sources */,
 				47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */,
 				47F4F2A12AC086A90047B395 /* Image+Extensions.swift in Sources */,
 				479839DB2AA9FCD40094C5E1 /* ContactDisplayModel.swift in Sources */,

@@ -137,9 +137,11 @@ struct SchoolMapView: View {
             }
         }
         .sheet(isPresented: $sheetShow) {
+            Text("这部分正在开发中......")
             if #available(iOS 16.0, *) {
                 SheetView16()
             }
+            // TODO: 16.0 以下系统的sheetview单独编写
         }
         .onChange(of: locationManager.compassHeading) { newVal in
             if let newVal = newVal {
