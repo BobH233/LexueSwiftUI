@@ -155,7 +155,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -164,7 +164,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -200,6 +200,14 @@
          <PersistentStrings>
             <PersistentString
                value = "webView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in closure #1 in MessageCategorySelector.body.getter:MessageCategorySelector.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "sysColorScheme">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -249,13 +257,13 @@
          contextName = "iCloudUserDefaults.notificationFromCloud(notification:):iCloudUserDefaults.swift">
          <PersistentStrings>
             <PersistentString
+               value = "monitored_prefix">
+            </PersistentString>
+            <PersistentString
                value = "monitored_specify">
             </PersistentString>
             <PersistentString
                value = "dict[key]">
-            </PersistentString>
-            <PersistentString
-               value = "monitored_prefix">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -383,13 +391,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
+               value = "event.name">
+            </PersistentString>
+            <PersistentString
                value = "event.id">
             </PersistentString>
             <PersistentString
                value = "event.timestart">
-            </PersistentString>
-            <PersistentString
-               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

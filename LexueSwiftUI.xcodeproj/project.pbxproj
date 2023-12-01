@@ -111,6 +111,7 @@
 		47BD51A32AC5B43F0029F9DB /* UMAnalyticsSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BD519F2AC5B43F0029F9DB /* UMAnalyticsSwift.swift */; };
 		47BD51A52AC5B4970029F9DB /* UMAnalyticsGame.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BD51A42AC5B4960029F9DB /* UMAnalyticsGame.framework */; };
 		47BD51A72AC5B5A40029F9DB /* UMengManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BD51A62AC5B5A40029F9DB /* UMengManager.swift */; };
+		47BDAF3E2B1A261300D43119 /* MessageCategorySelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47BDAF3D2B1A261300D43119 /* MessageCategorySelector.swift */; };
 		47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */; };
 		47CE0FF72ACADED400C68CA3 /* AddCustomEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FF62ACADED400C68CA3 /* AddCustomEventView.swift */; };
 		47CE0FF92ACAF04700C68CA3 /* EditEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FF82ACAF04700C68CA3 /* EditEventView.swift */; };
@@ -289,6 +290,7 @@
 		47BD519F2AC5B43F0029F9DB /* UMAnalyticsSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMAnalyticsSwift.swift; sourceTree = "<group>"; };
 		47BD51A42AC5B4960029F9DB /* UMAnalyticsGame.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMAnalyticsGame.framework; sourceTree = "<group>"; };
 		47BD51A62AC5B5A40029F9DB /* UMengManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UMengManager.swift; sourceTree = "<group>"; };
+		47BDAF3D2B1A261300D43119 /* MessageCategorySelector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCategorySelector.swift; sourceTree = "<group>"; };
 		47CBA2402AA5CF32009F9242 /* CourseShortInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseShortInfo.swift; sourceTree = "<group>"; };
 		47CE0FF62ACADED400C68CA3 /* AddCustomEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCustomEventView.swift; sourceTree = "<group>"; };
 		47CE0FF82ACAF04700C68CA3 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
@@ -495,6 +497,7 @@
 				4799C8182AA6239800F812D6 /* MessageDetailView.swift */,
 				474515122AAB641700CCF24E /* ContactDetailView.swift */,
 				4715BE852ACC49F600163DA9 /* ContactAvatarSettingView.swift */,
+				47BDAF3D2B1A261300D43119 /* MessageCategorySelector.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -867,6 +870,7 @@
 				475E22AF2ACFB4C800FE8679 /* InfoMergingDataProvider.swift in Sources */,
 				47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */,
 				470CC1042AF9336B00D4789A /* MapInteractive.swift in Sources */,
+				47BDAF3E2B1A261300D43119 /* MessageCategorySelector.swift in Sources */,
 				475522152AF7D2F200B1347D /* LocationManager.swift in Sources */,
 				47F4F29A2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift in Sources */,
 				47BD51A12AC5B43F0029F9DB /* UMCommonLogSwift.swift in Sources */,
@@ -1123,7 +1127,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LexueSwiftUI/LexueSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 36YU895APH;
 				ENABLE_PREVIEWS = YES;
@@ -1180,7 +1184,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LexueSwiftUI/LexueSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 36YU895APH;
 				ENABLE_PREVIEWS = YES;

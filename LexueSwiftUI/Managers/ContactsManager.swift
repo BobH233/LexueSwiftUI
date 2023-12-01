@@ -51,7 +51,29 @@ class ContactsManager: ObservableObject {
         }
     }
     
+    func ReadallForAllContact(context: NSManagedObjectContext) {
+        let contacts = DataController.shared.getAllContacts(context: context)
+        for contact in contacts {
+            contact.lastUpdateDate = Date()
+            contact.unreadCount = 0
+        }
+        DataController.shared.save(context: context)
+        GenerateContactDisplayLists(context: context)
+    }
+    
+    var currentFilterOption = "全部"
+    
     func GenerateContactDisplayLists(context: NSManagedObjectContext) {
+        if currentFilterOption == "全部" {
+            GenerateContactDisplayLists_internal(context: context)
+        } else if currentFilterOption == "未读" {
+            GenerateContactDisplayLists_internal(context: context, unreadOnly: true)
+        } else if currentFilterOption == "置顶" {
+            GenerateContactDisplayLists_internal(context: context, pinnedOnly: true)
+        }
+    }
+    
+    func GenerateContactDisplayLists_internal(context: NSManagedObjectContext, unreadOnly: Bool = false, pinnedOnly: Bool = false) {
         var result: [ContactDisplayModel] = []
         var contacts = DataController.shared.getAllContacts(context: context)
         // 排序，置顶的在前面，最近消息近的在前面
@@ -71,6 +93,12 @@ class ContactsManager: ObservableObject {
         var uniqueContactUids = Set<String>()
         for contact in contacts {
             if uniqueContactUids.contains(contact.contactUid!) {
+                continue
+            }
+            if unreadOnly && contact.unreadCount == 0 {
+                continue
+            }
+            if pinnedOnly && !contact.pinned {
                 continue
             }
             uniqueContactUids.insert(contact.contactUid!)

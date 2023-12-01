@@ -339,6 +339,7 @@ private struct ListView: View {
                     SearchResultListView(searchMessageResult: $searchMessageResult, searchContactResult: $searchContactResult, isOpenDatailView: $isOpenDatailView)
                 }
             } else {
+                MessageCategorySelector()
                 ContactListView(contacts: $contacts, isOpenDatailView: $isOpenDatailView)
                     .refreshable {
                         if let refresh = refreshAction {
@@ -346,22 +347,47 @@ private struct ListView: View {
                         }
                     }
                     .toolbar {
-                        if isRefreshing {
-                            ProgressView()
-                        } else {
-                            Button(action: {
-                                if let refresh = refreshAction {
-                                    isRefreshing = true
-                                    Task {
-                                        await refresh()
+                        ToolbarItem(placement: .primaryAction) {
+                            Menu {
+                                Section {
+                                    Button(role: .cancel, action: {
+                                        ContactsManager.shared.ReadallForAllContact(context: managedObjContext)
+                                        VibrateOnce()
+                                    }) {
+                                        Label("全部已读", systemImage: "checkmark.circle")
                                     }
                                 }
-                            }) {
-                                Image(systemName: "arrow.clockwise")
+                            }
+                        label: {
+                            Label("Add", systemImage: "checkmark.circle")
+                        }
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            if isRefreshing {
+                                ProgressView()
+                            } else {
+                                Button(action: {
+                                    if let refresh = refreshAction {
+                                        isRefreshing = true
+                                        Task {
+                                            await refresh()
+                                        }
+                                    }
+                                }) {
+                                    Image(systemName: "arrow.clockwise")
+                                }
                             }
                         }
                     }
             }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: messageCategoryChangeNotification)) { param in
+            let selection = param.object as! String
+            print("选择了: \(param.object as! String)")
+            ContactsManager.shared.currentFilterOption = selection
+            ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+            VibrateOnce()
+            
         }
         .onChange(of: isSearching) {newVal in
             print("start seaching: \(newVal)")
