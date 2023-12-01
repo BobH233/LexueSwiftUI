@@ -131,17 +131,19 @@ class JXZXehall {
         
         // 判断考试是否是已完成的考试
         func IsFinished() -> Bool {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            if let date = dateFormatter.date(from: examTimeMidnight) {
-                if let oneDayLater = Calendar.current.date(byAdding: .day, value: 1, to: date) {
-                    return oneDayLater < Date.now
-                } else {
-                    return false
-                }
-            } else {
-                return false
-            }
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+//            if let date = dateFormatter.date(from: examTimeMidnight) {
+//                if let oneDayLater = Calendar.current.date(byAdding: .day, value: 1, to: date) {
+//                    return oneDayLater < Date.now
+//                } else {
+//                    return false
+//                }
+//            } else {
+//                return false
+//            }
+            // 更新使用考试完成的时间逻辑
+            return GetExamEndDate() < Date.now
         }
     }
     
