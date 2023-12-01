@@ -59,7 +59,7 @@ class InfoMergingDataProvider: DataProvider {
             .init(shortName: "创新创业", fullName: "学生创新创业实践中心", optionName: "option_18"),
             .init(shortName: "资助公示", fullName: "学生事务中心校内公示", optionName: "option_19"),
             .init(shortName: "大创", fullName: "大学生创新创业训练计划管理系统", optionName: "option_20"),
-            .init(shortName: "第二课堂", fullName: "第二课堂", optionName: "option_21"),
+            .init(shortName: "第二课堂", fullName: "第二课堂(已失效)", optionName: "option_21"),
             .init(shortName: "光电", fullName: "光电学院", optionName: "option_22"),
             .init(shortName: "网信", fullName: "网络信息技术中心", optionName: "option_23"),
             .init(shortName: "数学实验", fullName: "数学实验中心", optionName: "option_24"),
