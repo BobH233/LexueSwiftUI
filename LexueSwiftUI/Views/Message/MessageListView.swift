@@ -138,9 +138,12 @@ private struct ContactListView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @Binding var contacts: [ContactDisplayModel]
     @Binding var isOpenDatailView: ContactDisplayModel?
+    
+    @Binding var isEditMode: Bool
+    @Binding var selectedMessages: Set<String>
     var body: some View {
         VStack {
-            List($contacts) { contact in
+            List($contacts, selection: $selectedMessages) { contact in
                 ContactListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, silent: contact.silent,  isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
                     .swipeActions(edge: .leading) {
                         Button {
@@ -201,6 +204,12 @@ private struct ContactListView: View {
                         }
                     }))
             }
+            .onReceive(NotificationCenter.default.publisher(for: toggleEditModeNotification)) { param in
+                withAnimation {
+                    isEditMode.toggle()
+                }
+            }
+            .environment(\.editMode, isEditMode ? .constant(.active) : .constant(.inactive))
             .listStyle(.plain)
         }
     }
@@ -303,6 +312,8 @@ private struct SearchResultListItemView: View {
     }
 }
 
+let toggleEditModeNotification = Notification.Name("toggleEditModeNotification")
+
 private struct ListView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @Environment(\.isSearching) private var isSearching
@@ -315,10 +326,12 @@ private struct ListView: View {
     @Binding var searchMessageResult: [ContactMessageSearchResult]
     @Binding var searchContactResult: [ContactStored]
     
+    @State var isEditMode: Bool = false
+    @State var selectedMessages = Set<String>()
     
     let refreshAction: (()async -> Void)?
 
-    
+    @State var showAlert1 = false
     var body: some View {
         Group {
             if isSearching {
@@ -340,7 +353,7 @@ private struct ListView: View {
                 }
             } else {
                 MessageCategorySelector()
-                ContactListView(contacts: $contacts, isOpenDatailView: $isOpenDatailView)
+                ContactListView(contacts: $contacts, isOpenDatailView: $isOpenDatailView, isEditMode: $isEditMode, selectedMessages: $selectedMessages)
                     .refreshable {
                         if let refresh = refreshAction {
                             await refresh()
@@ -348,38 +361,104 @@ private struct ListView: View {
                     }
                     .toolbar {
                         ToolbarItem(placement: .primaryAction) {
-                            Menu {
-                                Section {
-                                    Button(role: .cancel, action: {
-                                        ContactsManager.shared.ReadallForAllContact(context: managedObjContext)
-                                        VibrateOnce()
+                            if !isEditMode{
+                                Menu {
+                                    Section {
+                                        Button(role: .cancel, action: {
+                                            NotificationCenter.default.post(name: toggleEditModeNotification, object: nil)
+                                            VibrateOnce()
+                                        }) {
+                                            Label("选择信息", systemImage: "checkmark.circle")
+                                        }
+                                    }
+                                } label: {
+                                    Label("Add", systemImage: "checkmark.circle")
+                                }
+                            }
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            if !isEditMode {
+                                if isRefreshing {
+                                    ProgressView()
+                                } else {
+                                    Button(action: {
+                                        if let refresh = refreshAction {
+                                            isRefreshing = true
+                                            Task {
+                                                await refresh()
+                                            }
+                                        }
                                     }) {
-                                        Label("全部已读", systemImage: "checkmark.circle")
+                                        Image(systemName: "arrow.clockwise")
                                     }
                                 }
                             }
-                        label: {
-                            Label("Add", systemImage: "checkmark.circle")
-                        }
                         }
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            if isRefreshing {
-                                ProgressView()
-                            } else {
-                                Button(action: {
-                                    if let refresh = refreshAction {
-                                        isRefreshing = true
-                                        Task {
-                                            await refresh()
+                            if isEditMode {
+                                Menu {
+                                    Section {
+                                        Button(role: .cancel, action: {
+                                            withAnimation {
+                                                for readedUid in selectedMessages {
+                                                    ContactsManager.shared.ReadallContact(contactUid: readedUid, context: managedObjContext)
+                                                }
+                                                isEditMode = false
+                                            }
+                                            VibrateOnce()
+                                        }) {
+                                            Label("已读选中", systemImage: "checkmark.circle")
+                                        }
+                                        Button(role: .destructive, action: {
+                                            showAlert1 = true
+                                        }) {
+                                            Label("删除选中", systemImage: "trash")
                                         }
                                     }
-                                }) {
-                                    Image(systemName: "arrow.clockwise")
+                                    Section {
+                                        Button(role: .cancel, action: {
+                                            for displayed in ContactsManager.shared.ContactDisplayLists {
+                                                selectedMessages.insert(displayed.id)
+                                            }
+                                            VibrateOnce()
+                                        }) {
+                                            Label("全选", systemImage: "checkmark.square.fill")
+                                        }
+                                        Button(role: .cancel, action: {
+                                            selectedMessages.removeAll()
+                                            VibrateOnce()
+                                        }) {
+                                            Label("全不选", systemImage: "checkmark.square")
+                                        }
+                                    }
+                                } label: {
+                                    Text("操作")
+                                }
+                            }
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            if isEditMode {
+                                Button("完成") {
+                                    withAnimation {
+                                        isEditMode = false
+                                    }
                                 }
                             }
                         }
                     }
             }
+        }
+        .alert(isPresented: $showAlert1) {
+            Alert(title: Text("确认操作"), message: Text("删除这些联系人信息将同时影响本地和iCloud云端，而且不能恢复，你确定要执行删除吗？"), primaryButton: .destructive(Text("确认"), action: {
+                for readedUid in selectedMessages {
+                    ContactsManager.shared.DeleteAllMessagesAboutContact(contactUid: readedUid, context: managedObjContext, refresh: false)
+                }
+                ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+                withAnimation {
+                    isEditMode = false
+                }
+                VibrateOnce()
+            }), secondaryButton: .cancel(Text("取消")))
         }
         .onReceive(NotificationCenter.default.publisher(for: messageCategoryChangeNotification)) { param in
             let selection = param.object as! String

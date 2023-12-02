@@ -322,6 +322,20 @@ class DataController: ObservableObject {
         return ret
     }
     
+    func deleteMessagesByContactUid(senderUid: String,  context: NSManagedObjectContext) {
+        let request: NSFetchRequest<MessageStored> = MessageStored.fetchRequest()
+        request.predicate = NSPredicate(format: "senderUid == %@", senderUid)
+        do {
+            let results = try context.fetch(request)
+            for result in results {
+                context.delete(result)
+            }
+            save(context: context)
+        } catch {
+            print("删除联系人消息失败：\(error)")
+        }
+    }
+    
     func queryMessagesByContactUid(senderUid: String,  context: NSManagedObjectContext) -> [ContactMessage] {
         let request: NSFetchRequest<MessageStored> = MessageStored.fetchRequest()
         var ret: [ContactMessage] = [ContactMessage]()

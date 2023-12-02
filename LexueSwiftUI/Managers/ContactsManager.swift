@@ -41,15 +41,30 @@ class ContactsManager: ObservableObject {
         }
     }
     
-    func ReadallContact(contactUid: String, context: NSManagedObjectContext) {
+    func DeleteAllMessagesAboutContact(contactUid: String, context: NSManagedObjectContext, refresh: Bool = true) {
+        DataController.shared.deleteMessagesByContactUid(senderUid: contactUid, context: context)
+        let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
+        if let contact = contact {
+            context.delete(contact)
+            DataController.shared.save(context: context)
+        }
+        if refresh {
+            GenerateContactDisplayLists(context: context)
+        }
+    }
+    
+    func ReadallContact(contactUid: String, context: NSManagedObjectContext, refresh: Bool = true) {
         let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
         if let contact = contact {
             contact.lastUpdateDate = Date()
             contact.unreadCount = 0
             DataController.shared.save(context: context)
-            GenerateContactDisplayLists(context: context)
+            if refresh {
+                GenerateContactDisplayLists(context: context)
+            }
         }
     }
+    
     
     func ReadallForAllContact(context: NSManagedObjectContext) {
         let contacts = DataController.shared.getAllContacts(context: context)
