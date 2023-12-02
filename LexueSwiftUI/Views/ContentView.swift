@@ -112,6 +112,7 @@ struct ContentView: View {
                         Spacer()
                     }
                 }
+                .ignoresSafeArea()
             }
         }
     }
