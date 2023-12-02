@@ -96,9 +96,32 @@ struct SettingView: View {
                 }
                 if globalVar.isLogin {
                     Section("实用功能") {
-                        ExtraFunctionSelectionView()
-                            .listRowInsets(EdgeInsets())
-                            .padding()
+                        ZStack {
+                            ExtraFunctionSelectionView()
+                                .listRowInsets(EdgeInsets())
+                                .padding()
+                            NavigationLink("", destination: ViewScoreView(), isActive: $openViewScoreNavigation)
+                                .isDetailLink(false)
+                                .hidden()
+                            NavigationLink("", destination: ExamInfoView(), isActive: $openExamInfoNavigation)
+                                .isDetailLink(false)
+                                .hidden()
+                            NavigationLink("", destination: SchoolMapView(), isActive: $openSchoolMapNavigation)
+                                .isDetailLink(false)
+                                .hidden()
+                        }
+                        .padding(0)
+                    }
+                    .onReceive(NotificationCenter.default.publisher(for: extraFunctionSelectedNotification)) { param in
+                        let notificationName = param.object as! String
+                        if notificationName == "queryScore" {
+                            openViewScoreNavigation = true
+                        } else if notificationName == "examArrange" {
+                            openExamInfoNavigation = true
+                        } else if notificationName == "schoolMap" {
+                            openSchoolMapNavigation = true
+                        }
+                        
                     }
 //                    Section {
 //                        ZStack {
