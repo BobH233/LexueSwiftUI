@@ -380,7 +380,7 @@ struct ViewScoreView: View {
                 Spacer()
             }
             .onReceive(refreshTimer) { _ in
-                print("定时刷新成绩统计信息")
+                // print("定时刷新成绩统计信息")
                 CalcCurrentStatistics()
             }
             HStack {

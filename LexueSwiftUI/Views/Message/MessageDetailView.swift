@@ -498,7 +498,7 @@ struct MessageDetailViewInternal: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: ContactDetailView(contactUid: contactUid).onDisappear {
                         let contact = DataController.shared.findContactStored(contactUid: contactUid, context: managedObjContext)
-                        contactName = contact!.GetDisplayName()
+                        contactName = contact?.GetDisplayName() ?? "出错"
                     }) {
                         Image(systemName: "ellipsis")
                     }

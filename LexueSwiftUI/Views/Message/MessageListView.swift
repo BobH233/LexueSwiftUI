@@ -372,7 +372,7 @@ private struct ListView: View {
                                         }
                                     }
                                 } label: {
-                                    Label("Add", systemImage: "checkmark.circle")
+                                    Label("Add", systemImage: "ellipsis.circle")
                                 }
                             }
                         }
