@@ -401,9 +401,14 @@ private struct ListView: View {
                                         Button(role: .cancel, action: {
                                             withAnimation {
                                                 for readedUid in selectedMessages {
-                                                    ContactsManager.shared.ReadallContact(contactUid: readedUid, context: managedObjContext)
+                                                    ContactsManager.shared.ReadallContact(contactUid: readedUid, context: managedObjContext, refresh: false)
                                                 }
-                                                isEditMode = false
+                                                ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+                                            }
+                                            DispatchQueue.main.async {
+                                                withAnimation {
+                                                    isEditMode = false
+                                                }
                                             }
                                             VibrateOnce()
                                         }) {
