@@ -399,13 +399,9 @@ private struct ListView: View {
                                 Menu {
                                     Section {
                                         Button(role: .cancel, action: {
-                                            withAnimation {
-                                                for readedUid in selectedMessages {
-                                                    ContactsManager.shared.ReadallContact(contactUid: readedUid, context: managedObjContext, refresh: false)
-                                                }
-                                                ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
-                                            }
-                                            DispatchQueue.main.async {
+                                            ContactsManager.shared.ReadallContact(contactUidArr: selectedMessages.sorted(), context: managedObjContext)
+                                            ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                 withAnimation {
                                                     isEditMode = false
                                                 }

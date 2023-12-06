@@ -53,6 +53,16 @@ class ContactsManager: ObservableObject {
         }
     }
     
+    func ReadallContact(contactUidArr: [String], context: NSManagedObjectContext) {
+        for contactUid in contactUidArr {
+            if let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context) {
+                contact.lastUpdateDate = Date()
+                contact.unreadCount = 0
+            }
+        }
+        DataController.shared.save(context: context)
+    }
+    
     func ReadallContact(contactUid: String, context: NSManagedObjectContext, refresh: Bool = true) {
         let contact = DataController.shared.findContactStored(contactUid: contactUid, context: context)
         if let contact = contact {

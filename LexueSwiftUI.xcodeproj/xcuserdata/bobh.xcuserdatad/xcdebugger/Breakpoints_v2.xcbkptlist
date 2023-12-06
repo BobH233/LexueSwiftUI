@@ -889,8 +889,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "670"
-            endingLineNumber = "670">
+            startingLineNumber = "675"
+            endingLineNumber = "675">
             <Locations>
                <Location
                   uuid = "F5EE0E33-65DF-48ED-B779-70F626FC604C - 261b7e7f97ab2a2a"
@@ -935,8 +935,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
+            startingLineNumber = "533"
+            endingLineNumber = "533"
             landmarkName = "DoSearchMessage()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1268,8 +1268,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "640"
-            endingLineNumber = "640"
+            startingLineNumber = "641"
+            endingLineNumber = "641"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1910,7 +1910,7 @@
             startingLineNumber = "421"
             endingLineNumber = "421"
             landmarkName = "cloudUpdate(notification:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1958,7 +1958,7 @@
             startingLineNumber = "422"
             endingLineNumber = "422"
             landmarkName = "cloudUpdate(notification:)"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2197,7 +2197,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "290"
             endingLineNumber = "290"
-            landmarkName = "GetEnabledExtraFunctions()"
+            landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2245,7 +2245,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "292"
             endingLineNumber = "292"
-            landmarkName = "GetEnabledExtraFunctions()"
+            landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3470,8 +3470,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "417"
-            endingLineNumber = "417"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -3518,8 +3518,8 @@
             filePath = "LexueSwiftUI/Views/Message/MessageListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "418"
-            endingLineNumber = "418"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
