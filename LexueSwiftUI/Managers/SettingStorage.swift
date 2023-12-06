@@ -210,6 +210,40 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    func GetEnabledExtraFunctions() -> [ExtraFunctionDescription] {
+        // 获得用户启用的实用功能列表
+        if let stored_data = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.enabledFunctions") as? Data {
+            let tmp = decodeStructArray(from: stored_data)
+            var ret: [ExtraFunctionDescription] = []
+            for t in tmp {
+                if let tt = t.toDescription() {
+                    ret.append(tt)
+                }
+            }
+            return ret
+        } else {
+            // 如果是第一次，那么返回默认启用的功能列表
+            var ret: [ExtraFunctionDescription] = []
+            for des in GlobalVariables.shared.extraFunctions {
+                if des.enable {
+                    ret.append(des)
+                }
+            }
+            return ret
+        }
+    }
+    
+    func SetEnabledExtraFunctions(current: [ExtraFunctionDescription]) {
+        var tmp: [ExtraFunctionDescriptionStored] = []
+        for c in current {
+            tmp.append(c.toDescriptionStored())
+        }
+        if let data = encodeFuncDescriptionStoredArr(tmp) {
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(data, forKey: "setting.enabledFunctions")
+            print("保存设置成功！")
+        }
+    }
+    
     func ReloadAsyncedStorage() {
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.events.event_midnightFixTime") as? Int {
             event_midnightFixTime = stored

@@ -11,19 +11,9 @@ import SwiftUI
 
 let extraFunctionSelectedNotification = Notification.Name("extraFunctionSelectedNotification")
 
-struct ExtraFunctionDescription: Hashable {
-    var notificationName: String            // 到时候要发送的通知名字
-    var titleName: String                   // 显示在列表中的名字
-    var imageName: String                   // 列表中显示的图标的systemName
-    var color: Color                        // 背景颜色
-}
+
 struct ExtraFunctionSelectionView: View {
-    @State var functions: [ExtraFunctionDescription] = [
-        .init(notificationName: "queryScore", titleName: "成绩查询", imageName: "graduationcap.fill", color: .blue),
-        .init(notificationName: "examArrange", titleName: "考试安排", imageName: "calendar", color: .blue),
-        .init(notificationName: "schoolMap", titleName: "校园导航", imageName: "map.fill", color: .blue),
-        .init(notificationName: "editFunctions", titleName: "编辑", imageName: "ellipsis", color: .gray),
-    ]
+    @State var functions: [ExtraFunctionDescription] = []
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
@@ -55,6 +45,11 @@ struct ExtraFunctionSelectionView: View {
                 }
                 
             }
+        }
+        .onAppear {
+            functions = SettingStorage.shared.GetEnabledExtraFunctions()
+            functions.append(
+                .init(notificationName: "editFunctions", titleName: "编辑", imageName: "ellipsis", enable: true, color: .gray))
         }
     }
 }

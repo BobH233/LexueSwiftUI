@@ -65,6 +65,9 @@
 		476448432AD8E37D00952A22 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476448422AD8E37D00952A22 /* ShareSheet.swift */; };
 		47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */; };
 		478434802ADEDD890095A2EE /* LexueHelperBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */; };
+		4784DBD42B201050000B12CE /* ExtraFunctionSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */; };
+		4784DBD62B202492000B12CE /* ExtraFunctionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */; };
+		4784DBD72B2024AB000B12CE /* ExtraFunctionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */; };
 		478B70562AD445190008865A /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
 		4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791050E2AB0ACD4004FD26C /* LoginView.swift */; };
 		479129C02AC309BA00F811F9 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = 479129BF2AC309BA00F811F9 /* WebView */; };
@@ -251,6 +254,8 @@
 		476448422AD8E37D00952A22 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLogicManager.swift; sourceTree = "<group>"; };
 		4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueHelperBackend.swift; sourceTree = "<group>"; };
+		4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionSetting.swift; sourceTree = "<group>"; };
+		4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionDescription.swift; sourceTree = "<group>"; };
 		478B70552AD445190008865A /* Webvpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webvpn.swift; sourceTree = "<group>"; };
 		4791050E2AB0ACD4004FD26C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueBroswerView.swift; sourceTree = "<group>"; };
@@ -531,6 +536,7 @@
 				475D211C2AEC09B400CB9DC7 /* iCloudActions.swift */,
 				4703F66F2AEEB10B00899F61 /* AppNotificationsView.swift */,
 				47BDAF3F2B1A367600D43119 /* ExtraFunctionSelectionView.swift */,
+				4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -639,6 +645,7 @@
 				47A927822AA77FDA00ABDC53 /* DataController.swift */,
 				479839DA2AA9FCD40094C5E1 /* ContactDisplayModel.swift */,
 				476340302AB89F47006C24E2 /* LexueProfile.swift */,
+				4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -817,6 +824,7 @@
 				47F4FD282ACDADCA00C6C144 /* Event_MediumView.swift in Sources */,
 				47196FF32AC551D200979DFE /* Provider.swift in Sources */,
 				47F4FD2B2ACDB9CF00C6C144 /* Event_LargeView.swift in Sources */,
+				4784DBD72B2024AB000B12CE /* ExtraFunctionDescription.swift in Sources */,
 				47F4FD232ACDA62400C6C144 /* DataController.swift in Sources */,
 				47196FF12AC551D200979DFE /* Widget_Extension.swift in Sources */,
 				47F4FD302ACDC1D600C6C144 /* DataProviderManager.swift in Sources */,
@@ -874,6 +882,7 @@
 				47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */,
 				470CC1042AF9336B00D4789A /* MapInteractive.swift in Sources */,
 				47BDAF3E2B1A261300D43119 /* MessageCategorySelector.swift in Sources */,
+				4784DBD42B201050000B12CE /* ExtraFunctionSetting.swift in Sources */,
 				475522152AF7D2F200B1347D /* LocationManager.swift in Sources */,
 				47F4F29A2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift in Sources */,
 				47BD51A12AC5B43F0029F9DB /* UMCommonLogSwift.swift in Sources */,
@@ -923,6 +932,7 @@
 				475522132AF7D1AB00B1347D /* SchoolMapView.swift in Sources */,
 				47BA831F2AC1289100954129 /* UnloginView.swift in Sources */,
 				475D211D2AEC09B400CB9DC7 /* iCloudActions.swift in Sources */,
+				4784DBD62B202492000B12CE /* ExtraFunctionDescription.swift in Sources */,
 				47F4F29F2AC086A90047B395 /* SystemPHPicker.swift in Sources */,
 				47CE0FF92ACAF04700C68CA3 /* EditEventView.swift in Sources */,
 				476448432AD8E37D00952A22 /* ShareSheet.swift in Sources */,

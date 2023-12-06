@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+
 class GlobalVariables: ObservableObject {
     static let shared = GlobalVariables()
     
@@ -52,6 +53,13 @@ class GlobalVariables: ObservableObject {
     
     // 是否允许app进行跟踪
     @Published var enableTracking: Bool = false
+    
+    // 附加功能的定义常量
+    let extraFunctions: [ExtraFunctionDescription] = [
+        .init(notificationName: "queryScore", titleName: "成绩查询", imageName: "graduationcap.fill", enable: true, color: .blue),
+        .init(notificationName: "examArrange", titleName: "考试安排", imageName: "calendar", enable: true, color: .blue),
+        .init(notificationName: "schoolMap", titleName: "校园导航", imageName: "map.fill", enable: true, color: .blue),
+    ]
     
     var handleNotificationMsg: (([AnyHashable : Any]) -> Void)?
     var refreshUnreadMsgCallback: (() -> Void)?

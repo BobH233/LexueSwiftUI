@@ -19,6 +19,7 @@ struct SettingView: View {
     @State var openViewScoreNavigation = false
     @State var openExamInfoNavigation = false
     @State var openSchoolMapNavigation = false
+    @State var openExtraFuncSettingNavigation = false
     @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
     var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
     
@@ -109,6 +110,9 @@ struct SettingView: View {
                             NavigationLink("", destination: SchoolMapView(), isActive: $openSchoolMapNavigation)
                                 .isDetailLink(false)
                                 .hidden()
+                            NavigationLink("", destination: ExtraFunctionSetting(), isActive: $openExtraFuncSettingNavigation)
+                                .isDetailLink(false)
+                                .hidden()
                         }
                         .padding(0)
                     }
@@ -120,81 +124,11 @@ struct SettingView: View {
                             openExamInfoNavigation = true
                         } else if notificationName == "schoolMap" {
                             openSchoolMapNavigation = true
+                        } else if notificationName == "editFunctions" {
+                            openExtraFuncSettingNavigation = true
                         }
                         
                     }
-//                    Section {
-//                        ZStack {
-//                            Rectangle()
-//                                .foregroundColor(.blue)
-//                            HStack {
-//                                Spacer()
-//                                Text("查课程成绩")
-//                                    .bold()
-//                                    .font(.system(size: 35))
-//                                    .foregroundColor(.white)
-//                                    .padding(.top, 20)
-//                                    .padding(.bottom, 20)
-//                                Spacer()
-//                            }
-//                            NavigationLink("", destination: ViewScoreView(), isActive: $openViewScoreNavigation)
-//                                .isDetailLink(false)
-//                                .hidden()
-//                        }
-//                        .onTapGesture {
-//                            VibrateOnce()
-//                            openViewScoreNavigation = true
-//                        }
-//                        .listRowInsets(EdgeInsets())
-//                    }
-//                    Section {
-//                        ZStack {
-//                            Rectangle()
-//                                .foregroundColor(.blue)
-//                            HStack {
-//                                Spacer()
-//                                Text("看考试安排")
-//                                    .bold()
-//                                    .font(.system(size: 35))
-//                                    .foregroundColor(.white)
-//                                    .padding(.top, 20)
-//                                    .padding(.bottom, 20)
-//                                Spacer()
-//                            }
-//                            NavigationLink("", destination: ExamInfoView(), isActive: $openExamInfoNavigation)
-//                                .isDetailLink(false)
-//                                .hidden()
-//                        }
-//                        .onTapGesture {
-//                            VibrateOnce()
-//                            openExamInfoNavigation = true
-//                        }
-//                        .listRowInsets(EdgeInsets())
-//                    }
-//                    Section {
-//                        ZStack {
-//                            Rectangle()
-//                                .foregroundColor(.blue)
-//                            HStack {
-//                                Spacer()
-//                                Text("逛校园地图")
-//                                    .bold()
-//                                    .font(.system(size: 35))
-//                                    .foregroundColor(.white)
-//                                    .padding(.top, 20)
-//                                    .padding(.bottom, 20)
-//                                Spacer()
-//                            }
-//                            NavigationLink("", destination: SchoolMapView(), isActive: $openSchoolMapNavigation)
-//                                .isDetailLink(false)
-//                                .hidden()
-//                        }
-//                        .onTapGesture {
-//                            VibrateOnce()
-//                            openSchoolMapNavigation = true
-//                        }
-//                        .listRowInsets(EdgeInsets())
-//                    }
                 }
                 if globalVar.debugMode || globalVar.DEBUG_BUILD {
                     Section(header: Text("Debug")) {
