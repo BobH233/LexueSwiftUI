@@ -145,6 +145,7 @@ private struct ContactListView: View {
         VStack {
             List($contacts, selection: $selectedMessages) { contact in
                 ContactListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, silent: contact.silent,  isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
+                    .id(contact.wrappedValue.contactUid)
                     .swipeActions(edge: .leading) {
                         Button {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -169,7 +170,7 @@ private struct ContactListView: View {
                                 }
                             }
                         } label: {
-                            Label("Pin", systemImage: "pin")
+                            Label("Pin", systemImage: contact.wrappedValue.pinned ? "pin.slash.fill" : "pin.fill")
                         }
                         .tint(.orange)
                     }
