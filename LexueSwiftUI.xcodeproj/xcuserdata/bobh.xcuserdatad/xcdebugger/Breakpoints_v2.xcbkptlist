@@ -3556,5 +3556,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1585F732-330D-4EA1-A255-A25CE6DBFD50"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Views/Setting/AppNotificationsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "1585F732-330D-4EA1-A255-A25CE6DBFD50 - 5b29a8086210136a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;LexueSwiftUI.LexueHelperBackend.AppNotification&gt;&gt;, Swift.Int, Swift.Optional&lt;LexueSwiftUI.NotificationCard&gt;&gt;, SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;LexueSwiftUI.LexueHelperBackend.AppNotification&gt;&gt;, Swift.Int, Swift.Optional&lt;LexueSwiftUI.NotificationCard&gt;&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0 in LexueSwiftUI.AppNotificationsView.body.getter : some"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Setting/AppNotificationsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "848">
+               </Location>
+               <Location
+                  uuid = "1585F732-330D-4EA1-A255-A25CE6DBFD50 - 1074f277bfc39b9b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (SwiftUI.Binding&lt;LexueSwiftUI.LexueHelperBackend.AppNotification&gt;) -&gt; Swift.Optional&lt;LexueSwiftUI.NotificationCard&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;LexueSwiftUI.LexueHelperBackend.AppNotification&gt;&gt;, Swift.Int, Swift.Optional&lt;LexueSwiftUI.NotificationCard&gt;&gt;, SwiftUI.ForEach&lt;SwiftUI.Binding&lt;Swift.Array&lt;LexueSwiftUI.LexueHelperBackend.AppNotification&gt;&gt;, Swift.Int, Swift.Optional&lt;LexueSwiftUI.NotificationCard&gt;&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0 in LexueSwiftUI.AppNotificationsView.body.getter : some"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/Setting/AppNotificationsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "648">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
