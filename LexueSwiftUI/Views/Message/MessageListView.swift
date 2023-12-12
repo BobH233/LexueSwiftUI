@@ -141,12 +141,48 @@ private struct ContactListView: View {
     
     @Binding var isEditMode: Bool
     @Binding var selectedMessages: Set<String>
+    
+    @Binding var showAlert: Bool
+    @Binding var alertData: AlertData
+    
+    @State var deletedUid = ""
     var body: some View {
         VStack {
             List($contacts, selection: $selectedMessages) { contact in
                 ContactListItemView(title: contact.displayName, content: contact.recentMessage, unreadCnt: contact.unreadCount, time: contact.timeString, avatar: contact.avatar_data, pinned: contact.pinned, silent: contact.silent,  isOpenDatailView: $isOpenDatailView, currentViewContact: contact)
                     .id(contact.wrappedValue.contactUid)
-                    .swipeActions(edge: .leading) {
+                    .swipeActions(edge: .trailing) {
+                        Button {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                withAnimation(.easeIn) {
+                                    deletedUid = contact.contactUid.wrappedValue
+                                    alertData = AlertData(title: "删除确认", actionsView: AnyView(
+                                        Group {
+                                            Button("删除选中") {
+                                                ContactsManager.shared.DeleteAllMessagesAboutContact(contactUid: deletedUid, context: managedObjContext, refresh: false)
+                                                withAnimation {
+                                                    ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+                                                }
+                                                VibrateOnce()
+                                            }
+                                            Button("取消") {
+                                                
+                                            }
+                                        }
+                                    ), messageView: AnyView(
+                                        Text("删除此联系人信息将同时影响本地和iCloud云端，而且不能恢复，你确定要执行删除吗？")
+                                    ))
+                                    showAlert = true
+                                    
+                                    // showDeleteAlert1 = true
+                                }
+                            }
+                        } label: {
+                            Label("", systemImage: "trash.fill")
+                        }
+                        .tint(.red)
+                    }
+                    .swipeActions(edge: .trailing) {
                         Button {
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                 withAnimation {
@@ -154,7 +190,7 @@ private struct ContactListView: View {
                                 }
                             }
                         } label: {
-                            Label("Read", systemImage: "checkmark.circle.fill")
+                            Label("", systemImage: "checkmark.circle.fill")
                         }
                         .tint(.blue)
                     }
@@ -170,10 +206,11 @@ private struct ContactListView: View {
                                 }
                             }
                         } label: {
-                            Label("Pin", systemImage: contact.wrappedValue.pinned ? "pin.slash.fill" : "pin.fill")
+                            Label("", systemImage: contact.wrappedValue.pinned ? "pin.slash.fill" : "pin.fill")
                         }
                         .tint(.orange)
                     }
+                    
                     .listRowBackground(Color(contact.pinned.wrappedValue ? UIColor.systemFill : UIColor.systemBackground).animation(.easeInOut))
                     .contextMenu(ContextMenu(menuItems: {
                         Button {
@@ -331,7 +368,9 @@ private struct ListView: View {
     @State var selectedMessages = Set<String>()
     
     let refreshAction: (()async -> Void)?
-
+    
+    @State var alertData = AlertData()
+    
     @State var showAlert1 = false
     var body: some View {
         Group {
@@ -354,7 +393,7 @@ private struct ListView: View {
                 }
             } else {
                 MessageCategorySelector()
-                ContactListView(contacts: $contacts, isOpenDatailView: $isOpenDatailView, isEditMode: $isEditMode, selectedMessages: $selectedMessages)
+                ContactListView(contacts: $contacts, isOpenDatailView: $isOpenDatailView, isEditMode: $isEditMode, selectedMessages: $selectedMessages, showAlert: $showAlert1, alertData: $alertData)
                     .refreshable {
                         if let refresh = refreshAction {
                             await refresh()
@@ -412,6 +451,25 @@ private struct ListView: View {
                                             Label("已读选中", systemImage: "checkmark.circle")
                                         }
                                         Button(role: .destructive, action: {
+                                            alertData = AlertData(title: "删除确认", actionsView: AnyView(
+                                                Group {
+                                                    Button("删除选中") {
+                                                        for readedUid in selectedMessages {
+                                                            ContactsManager.shared.DeleteAllMessagesAboutContact(contactUid: readedUid, context: managedObjContext, refresh: false)
+                                                        }
+                                                        ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+                                                        withAnimation {
+                                                            isEditMode = false
+                                                        }
+                                                        VibrateOnce()
+                                                    }
+                                                    Button("取消") {
+                                                        
+                                                    }
+                                                }
+                                            ), messageView: AnyView(
+                                                Text("删除这些联系人信息将同时影响本地和iCloud云端，而且不能恢复，你确定要执行删除吗？")
+                                            ))
                                             showAlert1 = true
                                         }) {
                                             Label("删除选中", systemImage: "trash")
@@ -450,18 +508,23 @@ private struct ListView: View {
                     }
             }
         }
-        .alert(isPresented: $showAlert1) {
-            Alert(title: Text("确认操作"), message: Text("删除这些联系人信息将同时影响本地和iCloud云端，而且不能恢复，你确定要执行删除吗？"), primaryButton: .destructive(Text("确认"), action: {
-                for readedUid in selectedMessages {
-                    ContactsManager.shared.DeleteAllMessagesAboutContact(contactUid: readedUid, context: managedObjContext, refresh: false)
-                }
-                ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
-                withAnimation {
-                    isEditMode = false
-                }
-                VibrateOnce()
-            }), secondaryButton: .cancel(Text("取消")))
+        .alert(alertData.title, isPresented: $showAlert1, presenting: alertData) {
+            item in item.actionsView
+        } message: {
+            item in item.messageView
         }
+//        .alert(isPresented: $showAlert1) {
+//            Alert(title: Text("确认操作"), message: Text("删除这些联系人信息将同时影响本地和iCloud云端，而且不能恢复，你确定要执行删除吗？"), primaryButton: .destructive(Text("确认"), action: {
+//                for readedUid in selectedMessages {
+//                    ContactsManager.shared.DeleteAllMessagesAboutContact(contactUid: readedUid, context: managedObjContext, refresh: false)
+//                }
+//                ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+//                withAnimation {
+//                    isEditMode = false
+//                }
+//                VibrateOnce()
+//            }), secondaryButton: .cancel(Text("取消")))
+//        }
         .onReceive(NotificationCenter.default.publisher(for: messageCategoryChangeNotification)) { param in
             let selection = param.object as! String
             print("选择了: \(param.object as! String)")
