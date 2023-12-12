@@ -114,6 +114,7 @@ struct SettingView: View {
                                 .isDetailLink(false)
                                 .hidden()
                         }
+                        .frame(minHeight: 100)
                         .padding(0)
                     }
                     .onReceive(NotificationCenter.default.publisher(for: extraFunctionSelectedNotification)) { param in
