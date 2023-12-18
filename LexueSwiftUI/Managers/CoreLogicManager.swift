@@ -76,6 +76,13 @@ class CoreLogicManager {
         case .success(let data):
             DispatchQueue.main.async {
                 GlobalVariables.shared.cur_user_info = data
+                Task {
+                    let isAdmin = await LexueHelperBackend.shared.GetIsAdmin(userId: data.stuId)
+                    DispatchQueue.main.async {
+                        print("isAdmin:\(isAdmin)")
+                        GlobalVariables.shared.cur_isAdmin = isAdmin
+                    }
+                }
                 SettingStorage.shared.cacheUserInfo = data
                 // 刷新完了，更新用户的id
                 if GlobalVariables.shared.deviceToken != nil {

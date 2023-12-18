@@ -199,6 +199,14 @@ struct SettingView: View {
                     }
                 }
                 Section(header: Text("应用")) {
+                    if globalVar.cur_isAdmin {
+                        NavigationLink(destination: AdminManageView(), label: {
+                            Image(systemName: "swirl.circle.righthalf.filled.inverse")
+                                .foregroundColor(.blue)
+                            Text("管理后台")
+                        })
+                        .isDetailLink(false)
+                    }
                     NavigationLink(destination: AppNotificationsView(), label: {
                         Image(systemName: "paperplane.fill")
                             .foregroundColor(.blue)

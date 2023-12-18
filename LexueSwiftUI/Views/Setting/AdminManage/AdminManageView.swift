@@ -8,8 +8,25 @@
 import SwiftUI
 
 struct AdminManageView: View {
+    @State var adminKey = ""
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            Section("管理员密匙") {
+                TextField("管理员密匙", text: $adminKey)
+            }
+            Section("公告管理") {
+                NavigationLink("添加新公告", destination: AddNotificationView())
+                    .isDetailLink(true)
+            }
+            
+        }
+        .onAppear {
+            adminKey = SettingStorage.shared.adminKey
+        }
+        .onChange(of: adminKey) { newVal in
+            SettingStorage.shared.adminKey = newVal
+        }
+        .navigationTitle("管理后台")
     }
 }
 

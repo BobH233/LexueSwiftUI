@@ -210,6 +210,12 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    @Published var adminKey: String {
+        didSet {
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(adminKey, forKey: "setting.adminKey")
+        }
+    }
+    
     func GetEnabledExtraFunctions() -> [ExtraFunctionDescription] {
         // 获得用户启用的实用功能列表
         if let stored_data = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.enabledFunctions") as? Data {
@@ -388,6 +394,12 @@ class SettingStorage: ObservableObject {
             HaoBITFirstFetch = stored
         } else {
             HaoBITFirstFetch = true
+        }
+        
+        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.adminKey") as? String {
+            adminKey = stored
+        } else {
+            adminKey = ""
         }
         
         if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.lastLoginUsername") as? String {

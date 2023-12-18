@@ -69,6 +69,8 @@
 		4784DBD62B202492000B12CE /* ExtraFunctionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */; };
 		4784DBD72B2024AB000B12CE /* ExtraFunctionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */; };
 		478B70562AD445190008865A /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
+		47906C342B30975700DAACAA /* AdminManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47906C332B30975700DAACAA /* AdminManageView.swift */; };
+		47906C372B30996C00DAACAA /* AddNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47906C362B30996C00DAACAA /* AddNotificationView.swift */; };
 		4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4791050E2AB0ACD4004FD26C /* LoginView.swift */; };
 		479129C02AC309BA00F811F9 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = 479129BF2AC309BA00F811F9 /* WebView */; };
 		479129C22AC30A3A00F811F9 /* LexueBroswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */; };
@@ -258,6 +260,8 @@
 		4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionSetting.swift; sourceTree = "<group>"; };
 		4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionDescription.swift; sourceTree = "<group>"; };
 		478B70552AD445190008865A /* Webvpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webvpn.swift; sourceTree = "<group>"; };
+		47906C332B30975700DAACAA /* AdminManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminManageView.swift; sourceTree = "<group>"; };
+		47906C362B30996C00DAACAA /* AddNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotificationView.swift; sourceTree = "<group>"; };
 		4791050E2AB0ACD4004FD26C /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueBroswerView.swift; sourceTree = "<group>"; };
 		47970ABA2AC5AC7200C5BD03 /* UMDevice.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UMDevice.framework; sourceTree = "<group>"; };
@@ -525,6 +529,7 @@
 		473BAE902AA48E6700968C3C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				47906C352B3097FB00DAACAA /* AdminManage */,
 				47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */,
 				473BAE932AA4969F00968C3C /* SettingView.swift */,
 				47A927882AA786ED00ABDC53 /* DebugDataView.swift */,
@@ -604,6 +609,15 @@
 				4755F24D2ADD764200D7640C /* ExamInfoView.swift */,
 			);
 			path = ExamInfo;
+			sourceTree = "<group>";
+		};
+		47906C352B3097FB00DAACAA /* AdminManage */ = {
+			isa = PBXGroup;
+			children = (
+				47906C332B30975700DAACAA /* AdminManageView.swift */,
+				47906C362B30996C00DAACAA /* AddNotificationView.swift */,
+			);
+			path = AdminManage;
 			sourceTree = "<group>";
 		};
 		479B22DF2AD5719F00A7DCC7 /* ScoreAnalyze */ = {
@@ -853,6 +867,7 @@
 				472E44312ADAE98400230FC4 /* Feedback.swift in Sources */,
 				473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */,
 				4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */,
+				47906C342B30975700DAACAA /* AdminManageView.swift in Sources */,
 				473BAE942AA4969F00968C3C /* SettingView.swift in Sources */,
 				473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */,
 				470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */,
@@ -900,6 +915,7 @@
 				47F4F2A42AC086A90047B395 /* ImageMoveAndScaleSheet.swift in Sources */,
 				473BAE962AA496AE00968C3C /* CourseListView.swift in Sources */,
 				470AFC682ACB16D6004C7F70 /* DataProviderManager.swift in Sources */,
+				47906C372B30996C00DAACAA /* AddNotificationView.swift in Sources */,
 				47F4F29B2AC086A90047B395 /* ImageManipulation.swift in Sources */,
 				47BD51A32AC5B43F0029F9DB /* UMAnalyticsSwift.swift in Sources */,
 				474C9B792AA4E38D0064B5AF /* EventListView.swift in Sources */,

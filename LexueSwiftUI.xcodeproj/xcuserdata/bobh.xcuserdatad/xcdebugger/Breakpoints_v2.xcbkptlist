@@ -969,8 +969,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
             <Locations>
@@ -1062,8 +1062,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
             <Locations>
@@ -1110,8 +1110,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "323"
-            endingLineNumber = "323"
+            startingLineNumber = "328"
+            endingLineNumber = "328"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1126,8 +1126,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1142,8 +1142,8 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
             landmarkName = "RegisterDeviceTokenForServer(userId:deviceToken:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1909,8 +1909,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "421"
-            endingLineNumber = "421"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
             landmarkName = "cloudUpdate(notification:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1957,8 +1957,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "422"
-            endingLineNumber = "422"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
             landmarkName = "cloudUpdate(notification:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2197,8 +2197,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "290"
-            endingLineNumber = "290"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2245,8 +2245,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2293,9 +2293,9 @@
             filePath = "LexueSwiftUI/Network/LexueHelperBackend.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "FetchAppNotifications()"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "FetchAppNotifications(onlyThisVersion:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -2341,8 +2341,8 @@
             filePath = "LexueSwiftUI/Managers/AppNotificationsManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "UpdateNotifications()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3536,8 +3536,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
             landmarkName = "GetEnabledExtraFunctions()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3552,8 +3552,8 @@
             filePath = "LexueSwiftUI/Managers/SettingStorage.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "GetEnabledExtraFunctions()"
             landmarkType = "7">
          </BreakpointContent>

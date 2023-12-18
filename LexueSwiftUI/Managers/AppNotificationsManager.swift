@@ -80,7 +80,13 @@ class AppNotificationsManager: ObservableObject {
     }
     
     func UpdateNotifications() async {
-        let res = await LexueHelperBackend.shared.FetchAppNotifications()
+        let res_1 = await LexueHelperBackend.shared.FetchAppNotifications()
+        var res: [LexueHelperBackend.AppNotification] = []
+        for tmp in res_1 {
+            if tmp.isHide == 0 {
+                res.append(tmp)
+            }
+        }
         DispatchQueue.main.async {
             self.notificationsList = res
             self.notificationsList.sort { noti1, noti2 in

@@ -40,6 +40,8 @@ class GlobalVariables: ObservableObject {
     
     @Published var cur_user_info = LexueAPI.SelfUserInfo()
     
+    @Published var cur_isAdmin = false
+    
     @Published var cur_lexue_sessKey = ""
     
     @Published var courseList: [CourseShortInfo] = []

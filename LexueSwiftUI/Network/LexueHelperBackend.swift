@@ -81,6 +81,8 @@ class LexueHelperBackend {
         var isPopupNotification: Bool = false
         // 只在某些版本的app上显示, 如果是空则默认在所有版本都显示
         var appVersionLimit: [String] = []
+        // 是否被隐藏，不为0的话，就不显示
+        var isHide: Int = 0
         func GetDate() -> Date {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
@@ -111,7 +113,7 @@ class LexueHelperBackend {
         }
     }
     
-    func FetchAppNotifications() async -> [AppNotification] {
+    func FetchAppNotifications(onlyThisVersion: Bool = true) async -> [AppNotification] {
         let header: [String: String] = [
             "Content-Type": "application/json"
         ]
@@ -158,7 +160,10 @@ class LexueHelperBackend {
                 if let versionLimit = notification["appVersionLimit"] as? String, let data = versionLimit.data(using: .utf8), let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String] {
                     current.appVersionLimit = json
                 }
-                if current.ShouldDisplayInCurrentApp() {
+                if let isHide = notification["isHide"] as? Int {
+                    current.isHide = isHide
+                }
+                if current.ShouldDisplayInCurrentApp() || !onlyThisVersion {
                     retNotifications.append(current)
                 }
             }
