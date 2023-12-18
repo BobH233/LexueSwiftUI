@@ -59,6 +59,12 @@ struct DebugDataView: View {
                         print(res)
                     }
                 }
+                Button("ISAdmin") {
+                    Task {
+                        let res = await LexueHelperBackend.shared.GetIsAdmin(userId: "123")
+                        print(res)
+                    }
+                }
             }
             Section("JXZX") {
                 Button("get_Context") {

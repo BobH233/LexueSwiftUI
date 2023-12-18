@@ -27,7 +27,7 @@ class LexueHelperBackend {
     
     static func GetAPIUrl() -> String {
         if GlobalVariables.shared.DEBUG_BUILD {
-            return "http://127.0.0.1:3000"
+            return "http://192.168.8.143:3000"
         } else {
             return "https://api.bit-helper.cn"
         }
@@ -48,6 +48,7 @@ class LexueHelperBackend {
     let API_REGISTER_DEVICE_TOKEN = "\(GetAPIUrl())/api/device/register"
     let API_FETCH_NOTICE = "\(GetAPIUrl())/api/notice/fetch"
     let API_FETCH_APP_NOTIFICATIONS = "\(GetAPIUrl())/api/notification/get"
+    let API_CHECK_IS_ADMIN = "\(GetAPIUrl())/api/device/isadmin"
     
     struct PackageWithSignature {
         var cmdName: String = ""
@@ -165,6 +166,63 @@ class LexueHelperBackend {
         } catch {
             print("转换为 JSON 数据时发生错误: \(error)")
             return []
+        }
+    }
+    
+    // 获取当前用户是否在后台管理员列表中
+    func GetIsAdmin(userId: String) async -> Bool {
+        var packageHeader = PackageWithSignature()
+        packageHeader.cmdName = "IsAdmin"
+        packageHeader.userId = userId
+        packageHeader.timestamp = "\(Int(Date.now.timeIntervalSince1970))"
+        let Payload: [String: Any] = [
+            "cmdName": packageHeader.cmdName,
+            "UUID": packageHeader.packageUUID,
+            "userId": userId,
+            "signature": packageHeader.CalcSignature(),
+            "timestamp": packageHeader.timestamp,
+            "data": []
+        ]
+        let header: [String: String] = [
+            "Content-Type": "application/json"
+        ]
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: Payload, options: [])
+            if let jsonStr = String(data: jsonData, encoding: .utf8) {
+                print(jsonStr)
+                var request = URLRequest(url: URL(string: API_CHECK_IS_ADMIN)!)
+                request.cachePolicy = .reloadIgnoringCacheData
+                request.httpMethod = HTTPMethod.post.rawValue
+                request.headers = HTTPHeaders(header)
+                request.httpBody = jsonData
+                let ret = await withCheckedContinuation { continuation in
+                    AF.request(request).response { res in
+                        switch res.result {
+                        case .success(let data):
+                            if let json = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
+                                continuation.resume(returning: json)
+                            } else {
+                                print("无法将响应数据转换为字典")
+                                continuation.resume(returning: [String: Any]())
+                            }
+                        case .failure(_):
+                            print("请求 后端 失败")
+                            continuation.resume(returning: [String: Any]())
+                        }
+                    }
+                }
+                if let isadmin = ret["isAdmin"] as? Bool {
+                    return isadmin
+                } else {
+                    return false
+                }
+            } else {
+                print("转换为 JSON 数据时发生错误")
+                return false
+            }
+        } catch {
+            print("转换为 JSON 数据时发生错误: \(error)")
+            return false
         }
     }
     
