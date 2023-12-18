@@ -8,4 +8,6 @@ router.post("/register", require("../middleware/SignatureCheck"), DeviceControll
 
 router.post("/debug", require("../middleware/AntiTimingAtk"), require("../middleware/AdminPermissionCheck"), DeviceController.DebugDevices)
 
+router.post("/isadmin", require("../middleware/SignatureCheck"), DeviceController.IsAdmin)
+
 module.exports = router;

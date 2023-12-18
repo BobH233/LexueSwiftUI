@@ -6,6 +6,23 @@ const Logger = require("../utils/Logger");
 const Apns = require("../utils/Apns")
 var apn = require("apn");
 
+const IsAdmin = (req, res, next) => {
+  try {
+    let { userId } = req.body;
+    if(core_info.adminList.includes(userId)) {
+      res.status(200).json({
+        isAdmin: true,
+      });
+    } else {
+      res.status(200).json({
+        isAdmin: false,
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
 const DebugDevices = (req, res, next) => {
   try {
     let { adminToken, info } = req.body;
@@ -89,4 +106,4 @@ const registerDevice = async (req, res, next) => {
   }
 };
 
-module.exports = { registerDevice, DebugDevices };
+module.exports = { registerDevice, DebugDevices, IsAdmin };
