@@ -30,7 +30,8 @@ const db = new sqlite3.Database("./server_data/data.db", function () {
       markdownContent TEXT,
       pinned BOOLEAN,
       isPopupNotification BOOLEAN,
-      appVersionLimit TEXT
+      appVersionLimit TEXT,
+      isHide BOOLEAN
     )
   `);
 });
@@ -181,18 +182,18 @@ const _QueryAppNotificationsAfterId = (id, CB) => {
   });
 }
 
-const _AddAppNotification = (markdownContent, pinned, isPopupNotification, appVersionLimit, CB) => {
+const _AddAppNotification = (markdownContent, pinned, isPopupNotification, appVersionLimit, isHide, CB) => {
   db.serialize(() => {
-    db.run("INSERT INTO AppNotifications (timestamp, markdownContent, pinned, isPopupNotification, appVersionLimit) VALUES (?, ?, ?, ?, ?)", new Date().toISOString(), markdownContent, pinned, isPopupNotification, appVersionLimit, (err) => {
+    db.run("INSERT INTO AppNotifications (timestamp, markdownContent, pinned, isPopupNotification, appVersionLimit, isHide) VALUES (?, ?, ?, ?, ?, ?)", new Date().toISOString(), markdownContent, pinned, isPopupNotification, appVersionLimit, isHide, (err) => {
       CB(err)
       return
     })
   });
 }
 
-const _EditAppNotification = (id, markdownContent, pinned, isPopupNotification, appVersionLimit, CB) => {
+const _EditAppNotification = (id, markdownContent, pinned, isPopupNotification, appVersionLimit, isHide, CB) => {
   db.serialize(() => {
-    db.run("UPDATE AppNotifications SET timestamp = ?, markdownContent = ?, pinned = ?, isPopupNotification = ?, appVersionLimit = ? WHERE id = ?", new Date().toISOString(), markdownContent, pinned, isPopupNotification, appVersionLimit, id, (err) => {
+    db.run("UPDATE AppNotifications SET timestamp = ?, markdownContent = ?, pinned = ?, isPopupNotification = ?, appVersionLimit = ?, isHide = ? WHERE id = ?", new Date().toISOString(), markdownContent, pinned, isPopupNotification, appVersionLimit, isHide, id, (err) => {
       CB(err)
       return
     })

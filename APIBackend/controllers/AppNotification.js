@@ -35,7 +35,7 @@ const GetAppNotifications = (req, res, next) => {
 const AddNewAppNotifications = (req, res, next) => {
   try {
     let { markdownContent, pinned, isPopupNotification, appVersionLimit } = req.body;
-    data_storage._AddAppNotification(markdownContent, pinned, isPopupNotification, appVersionLimit, (err) => {
+    data_storage._AddAppNotification(markdownContent, pinned, isPopupNotification, appVersionLimit, 0, (err) => {
       if(err) {
         next(err);
         return;
@@ -52,8 +52,8 @@ const AddNewAppNotifications = (req, res, next) => {
 // admin: 编辑app通知
 const EditAppNotifications = (req, res, next) => {
   try {
-    let { id, markdownContent, pinned, isPopupNotification, appVersionLimit } = req.body;
-    data_storage._EditAppNotification(id, markdownContent, pinned, isPopupNotification, appVersionLimit, (err) => {
+    let { id, markdownContent, pinned, isPopupNotification, appVersionLimit, isHide } = req.body;
+    data_storage._EditAppNotification(id, markdownContent, pinned, isPopupNotification, appVersionLimit, isHide ?? 0, (err) => {
       if(err) {
         next(err);
         return;
