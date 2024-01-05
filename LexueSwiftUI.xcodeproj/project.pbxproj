@@ -29,6 +29,7 @@
 		47196FF72AC5522500979DFE /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FF62AC5522500979DFE /* WidgetView.swift */; };
 		471A1D192AC9932C00A3D847 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A1D182AC9932C00A3D847 /* EventManager.swift */; };
 		47223A612AD053E4000D8B9C /* KeyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47223A602AD053E4000D8B9C /* KeyInfo.plist */; };
+		4728F7572B4804A500A6348B /* MarkdownPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728F7562B4804A500A6348B /* MarkdownPreview.swift */; };
 		472984A02AA706BB000814EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729849F2AA706BB000814EE /* Extensions.swift */; };
 		472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */; };
 		472E44312ADAE98400230FC4 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 472E44302ADAE98400230FC4 /* Feedback.swift */; };
@@ -225,6 +226,7 @@
 		47196FF62AC5522500979DFE /* WidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
 		471A1D182AC9932C00A3D847 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		47223A602AD053E4000D8B9C /* KeyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KeyInfo.plist; sourceTree = "<group>"; };
+		4728F7562B4804A500A6348B /* MarkdownPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownPreview.swift; sourceTree = "<group>"; };
 		4729849F2AA706BB000814EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		472C4BC22AB15D3B001C1755 /* AppStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStatusManager.swift; sourceTree = "<group>"; };
 		472E44302ADAE98400230FC4 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 			children = (
 				47906C332B30975700DAACAA /* AdminManageView.swift */,
 				47906C362B30996C00DAACAA /* AddNotificationView.swift */,
+				4728F7562B4804A500A6348B /* MarkdownPreview.swift */,
 			);
 			path = AdminManage;
 			sourceTree = "<group>";
@@ -883,6 +886,7 @@
 				4799C8152AA6235C00F812D6 /* ContactsManager.swift in Sources */,
 				472C4BC32AB15D3B001C1755 /* AppStatusManager.swift in Sources */,
 				478434802ADEDD890095A2EE /* LexueHelperBackend.swift in Sources */,
+				4728F7572B4804A500A6348B /* MarkdownPreview.swift in Sources */,
 				4799C8172AA6237500F812D6 /* CourseManager.swift in Sources */,
 				479A290C2AECCF9A009AAD4F /* iCloudUserDefaults.swift in Sources */,
 				4703F6702AEEB10B00899F61 /* AppNotificationsView.swift in Sources */,
@@ -1161,7 +1165,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LexueSwiftUI/LexueSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 36YU895APH;
 				ENABLE_PREVIEWS = YES;
@@ -1218,7 +1222,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = LexueSwiftUI/LexueSwiftUI.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 36YU895APH;
 				ENABLE_PREVIEWS = YES;

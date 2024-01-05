@@ -50,6 +50,11 @@ class LexueHelperBackend {
     let API_FETCH_APP_NOTIFICATIONS = "\(GetAPIUrl())/api/notification/get"
     let API_CHECK_IS_ADMIN = "\(GetAPIUrl())/api/device/isadmin"
     
+    // admin
+    let API_ADMIN_ADD_NOTIFICATION = "\(GetAPIUrl())/api/notification/add"
+    let API_ADMIN_EDIT_NOTIFICATION = "\(GetAPIUrl())/api/notification/edit"
+    let API_ADMIN_DELETE_NOTIFICATION = "\(GetAPIUrl())/api/notification/delete"
+    
     struct PackageWithSignature {
         var cmdName: String = ""
         var packageUUID: String = UUID().uuidString
@@ -227,6 +232,54 @@ class LexueHelperBackend {
             }
         } catch {
             print("转换为 JSON 数据时发生错误: \(error)")
+            return false
+        }
+    }
+    
+    func Admin_AddAppNotification(adminToken: String, markdownContent: String, pinned: Bool, isPopupNotification: Bool, appVersionLimit: [String]) async -> Bool {
+        let versionStr = try? JSONSerialization.data(withJSONObject: appVersionLimit, options: [])
+        guard let versionData = versionStr, let versionLimitJsonStr = String(data: versionData, encoding: .utf8) else {
+            return false
+        }
+        let Payload: [String: Any] = [
+            "adminToken": adminToken,
+            "markdownContent": markdownContent,
+            "pinned": pinned,
+            "isPopupNotification": isPopupNotification,
+            "appVersionLimit": versionLimitJsonStr
+        ]
+        print(Payload)
+        let payloadData = try? JSONSerialization.data(withJSONObject: Payload, options: [])
+        guard let payloadStr = payloadData, let payloadJson = String(data: payloadStr, encoding: .utf8) else {
+            return false
+        }
+        let header: [String: String] = [
+            "Content-Type": "application/json"
+        ]
+        var request = URLRequest(url: URL(string: API_ADMIN_ADD_NOTIFICATION)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.headers = HTTPHeaders(header)
+        request.httpBody = payloadData
+        let ret = await withCheckedContinuation { continuation in
+            AF.request(request).response { res in
+                switch res.result {
+                case .success(let data):
+                    if let json = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
+                        continuation.resume(returning: json)
+                    } else {
+                        print("无法将响应数据转换为字典")
+                        continuation.resume(returning: [String: Any]())
+                    }
+                case .failure(_):
+                    print("请求 后端 失败")
+                    continuation.resume(returning: [String: Any]())
+                }
+            }
+        }
+        if let retMsg = ret["msg"] as? String {
+            return true
+        } else {
             return false
         }
     }

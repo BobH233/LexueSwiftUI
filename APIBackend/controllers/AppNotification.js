@@ -70,7 +70,7 @@ const EditAppNotifications = (req, res, next) => {
 // admin: 删除app通知
 const DeleteAppNotifications = (req, res, next) => {
   try {
-    let { id} = req.body;
+    let { id } = req.body;
     data_storage._DeleteAppNotification(id, (err) => {
       if(err) {
         next(err);

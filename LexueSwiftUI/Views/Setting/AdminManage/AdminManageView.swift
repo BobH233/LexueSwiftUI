@@ -12,7 +12,7 @@ struct AdminManageView: View {
     var body: some View {
         Form {
             Section("管理员密匙") {
-                TextField("管理员密匙", text: $adminKey)
+                SecureField("管理员密匙", text: $adminKey)
             }
             Section("公告管理") {
                 NavigationLink("添加新公告", destination: AddNotificationView())
