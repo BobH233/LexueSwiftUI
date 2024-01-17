@@ -6,7 +6,7 @@ const Logger = require("../utils/Logger");
 
 
 
-console.log("apns production: " + !process.env.APN_PRODUCTION)
+console.log("apns production: " + !process.env.APN_PRODUCTION, process.env.APN_PRODUCTION == "true")
 var options = {
   token: {
     key: "./private/AuthKey_new.p8",
