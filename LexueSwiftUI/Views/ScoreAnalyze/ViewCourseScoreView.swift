@@ -229,10 +229,12 @@ struct ViewCourseScoreView: View {
                 VStack(spacing: 10) {
                     Text(currentCourse.courseName)
                         .bold()
+                        .strikethrough(currentCourse.ignored_course)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(shareMode ? .black : (sysColorScheme == .dark ? .white : .black))
                         .font(.system(size: 40))
                         .padding(.bottom, 10)
+                        
                     
                     if !currentCourse.semester.isEmpty {
                         SimpleCardView(image_name: "microbe.fill", title: "开课学期", content: "\(currentCourse.semester)")
@@ -258,8 +260,12 @@ struct ViewCourseScoreView: View {
                         SimpleCardView(image_name: "flag.fill", title: "最高分", content: "\(currentCourse.max_score) 分")
                             .padding(.bottom, 0)
                     }
-                    if abs(evaluateDiff) > 0.01 {
+                    if abs(evaluateDiff) > 0.01 && !currentCourse.ignored_course {
                         SimpleCardView(color: evaluateDiff > 0 ? .green : .red, image_name: evaluateDiff > 0 ? "hand.thumbsup.fill" : "hand.thumbsdown.fill", title: evaluateDiff > 0 ? "这门课拉高了平均分" : "这门课拉低了平均分", content: "\(String(format: "%.2f", abs(evaluateDiff))) 分")
+                            .padding(.bottom, 0)
+                    }
+                    if currentCourse.ignored_course {
+                        SimpleCardView(color: .red, image_name: "exclamationmark.triangle.fill", title: "不计入分数", content: "补考取最高分算入成绩")
                             .padding(.bottom, 0)
                     }
                     if !currentCourse.my_grade_in_all.isEmpty && !currentCourse.all_study_count.isEmpty {

@@ -376,6 +376,9 @@ struct GeneralScoreAnalyze: View {
         }
         initAllParam()
         for course in allCourses {
+            if course.ignored_course {
+                continue
+            }
             if let score = Float(course.my_score) {
                 if score > 100 {
                     continue
@@ -403,6 +406,9 @@ struct GeneralScoreAnalyze: View {
         
         for course in allCourses {
             if course.semester.isEmpty {
+                continue
+            }
+            if course.ignored_course {
                 continue
             }
             if semestersMap[course.semester] == nil {

@@ -45,7 +45,7 @@ class Webvpn {
     
     struct ScoreInfo: Identifiable, Hashable {
         var id: String {
-            return courseId
+            return courseId + index
         }
         
         // 序号
@@ -80,6 +80,10 @@ class Webvpn {
         var avg_score: String = ""
         // 最高分
         var max_score: String = ""
+        // 考试性质: 补考/正常考试
+        var exam_type: String = ""
+        // 是否不计入成绩统计, 用于补考后覆盖
+        var ignored_course: Bool = false
         
         static func SemesterInt(semesterStr: String) -> Int {
             let segments = semesterStr.split(separator: "-")
@@ -123,7 +127,7 @@ class Webvpn {
                 attriMap[data[0][i]] = i
             }
             // 确保每一个想要的属性都存在了
-            let wantedAttri = ["开课学期", "课程名称", "课程编号", "成绩", "学分", "总学时", "课程性质", "本人成绩在专业中占", "本人成绩在班级中占", "本人成绩在所有学生中占", "班级人数", "学习人数", "专业人数", "平均分", "最高分", "序号"]
+            let wantedAttri = ["开课学期", "课程名称", "课程编号", "成绩", "学分", "总学时", "课程性质", "本人成绩在专业中占", "本人成绩在班级中占", "本人成绩在所有学生中占", "班级人数", "学习人数", "专业人数", "平均分", "最高分", "序号", "考试性质"]
             for attri in wantedAttri {
                 if attriMap[attri] == nil {
                     // 没有返回全部需要的属性
@@ -148,6 +152,7 @@ class Webvpn {
                 currentCourse.major_study_count = data[i][attriMap["专业人数"]!]
                 currentCourse.avg_score = data[i][attriMap["平均分"]!]
                 currentCourse.max_score = data[i][attriMap["最高分"]!]
+                currentCourse.exam_type = data[i][attriMap["考试性质"]!]
                 ret_scores.append(currentCourse)
             }
             return .success(ret_scores)

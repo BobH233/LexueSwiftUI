@@ -44,6 +44,10 @@ struct ViewScoreView: View {
             if !FilterScoreInfo(current: score) {
                 continue
             }
+            // 过滤掉忽略的课程
+            if score.ignored_course {
+                continue
+            }
             current_courseCount += 1
             guard let score_float = Float(score.my_score) else {
                 continue
@@ -205,17 +209,55 @@ struct ViewScoreView: View {
         }
     }
     
+    func ProcessResitSituation(_ score_res: [Webvpn.ScoreInfo]) -> [Webvpn.ScoreInfo] {
+        // 处理补考的相关情况，取分数最高的一次作为最后取用的结果
+        var couseIdToIndex: [String: [Int]] = [:]
+        var ret = score_res
+        for (index, score) in score_res.enumerated() {
+            if couseIdToIndex[score.courseId] == nil {
+                couseIdToIndex[score.courseId] = [index]
+            } else {
+                couseIdToIndex[score.courseId]!.append(index)
+            }
+        }
+        for (_, value) in couseIdToIndex {
+            var hasResit = false
+            for courseIndex in value {
+                if score_res[courseIndex].exam_type == "补考" {
+                    hasResit = true
+                    break
+                }
+            }
+            if !hasResit {
+                continue
+            }
+            var maxScore = 0
+            for courseIndex in value {
+                maxScore = max(maxScore, Int(score_res[courseIndex].my_score) ?? 0)
+                ret[courseIndex].ignored_course = true
+            }
+            for courseIndex in value {
+                var curScore = Int(score_res[courseIndex].my_score) ?? 0
+                if curScore == maxScore {
+                    ret[courseIndex].ignored_course = false
+                    break
+                }
+            }
+        }
+        return ret
+    }
+    
     func LoadScoresInfo(tryCache: Bool = true) {
         if tryCache && SettingStorage.shared.cache_webvpn_context != "" && SettingStorage.shared.cache_webvpn_context_for_user == GlobalVariables.shared.cur_user_info.stuId {
             // 有缓存，先尝试缓存
             print("Hit Cache, try cache loading score...")
             Task {
                 var context = Webvpn.WebvpnContext(wengine_vpn_ticketwebvpn_bit_edu_cn: SettingStorage.shared.cache_webvpn_context)
-                let score_res = await Webvpn.shared.QueryScoreInfo(webvpn_context: context)
+                var score_res = await Webvpn.shared.QueryScoreInfo(webvpn_context: context)
                 switch score_res {
                 case .success(let ret_scoreInfo):
                     DispatchQueue.main.async {
-                        scoreInfo = ret_scoreInfo.reversed()
+                        scoreInfo = ProcessResitSituation(ret_scoreInfo).reversed()
                         LoadFilterOptions()
                         loadingData = false
                         DispatchQueue.main.async {
@@ -287,16 +329,52 @@ struct ViewScoreView: View {
     private func row(course: Webvpn.ScoreInfo) -> some View {
         ZStack {
             LazyVGrid(columns: gridItems) {
-                Text(course.index)
-                Text(course.courseName)
-                Text(course.my_score)
-                Text(course.credit)
-                Text(course.avg_score)
-                Text(course.max_score)
-                Text(course.my_grade_in_all)
-                Text(course.my_grade_in_major)
-                Text(course.semester)
-                Text(course.course_type)
+                if course.exam_type == "补考" {
+                    Group {
+                        Text(course.index)
+                            .strikethrough(course.ignored_course)
+                        Text("\(course.courseName) (补考)")
+                            .strikethrough(course.ignored_course)
+                        Text(course.my_score)
+                            .strikethrough(course.ignored_course)
+                        Text(course.credit)
+                            .strikethrough(course.ignored_course)
+                        Text(course.avg_score)
+                            .strikethrough(course.ignored_course)
+                        Text(course.max_score)
+                            .strikethrough(course.ignored_course)
+                        Text(course.my_grade_in_all)
+                            .strikethrough(course.ignored_course)
+                        Text(course.my_grade_in_major)
+                            .strikethrough(course.ignored_course)
+                        Text(course.semester)
+                            .strikethrough(course.ignored_course)
+                        Text(course.course_type)
+                            .strikethrough(course.ignored_course)
+                    }
+                    .foregroundColor(.green)
+                } else {
+                    Text(course.index)
+                        .strikethrough(course.ignored_course)
+                    Text(course.courseName)
+                        .strikethrough(course.ignored_course)
+                    Text(course.my_score)
+                        .strikethrough(course.ignored_course)
+                    Text(course.credit)
+                        .strikethrough(course.ignored_course)
+                    Text(course.avg_score)
+                        .strikethrough(course.ignored_course)
+                    Text(course.max_score)
+                        .strikethrough(course.ignored_course)
+                    Text(course.my_grade_in_all)
+                        .strikethrough(course.ignored_course)
+                    Text(course.my_grade_in_major)
+                        .strikethrough(course.ignored_course)
+                    Text(course.semester)
+                        .strikethrough(course.ignored_course)
+                    Text(course.course_type)
+                        .strikethrough(course.ignored_course)
+                }
             }
             Rectangle()
                 .foregroundColor(.white.opacity(0.01))
