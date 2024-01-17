@@ -20,7 +20,7 @@ struct ExtraFunctionSetting: View {
     }
     var body: some View {
         List {
-            Section("已启用") {
+            Section(header: Text("已启用"), footer: Text("更多功能正在开发适配中，敬请期待！")) {
                 ForEach(enabled_functions, id: \.self) { enabled_function in
                     HStack {
                         if isEditMode {
