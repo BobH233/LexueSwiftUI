@@ -38,6 +38,7 @@ struct CurrentNotificationCard: View {
                 HStack {
                     Text(isPinned ? "置顶公告" : "普通公告")
                         .bold()
+                        .foregroundColor(sysColorScheme == .dark ? .white : .black)
                         .font(.system(size: 24))
                         .multilineTextAlignment(.leading)
                     Spacer()
@@ -49,6 +50,7 @@ struct CurrentNotificationCard: View {
                         .foregroundColor(.blue)
                     Text("消息ID:")
                         .bold()
+                        .foregroundColor(sysColorScheme == .dark ? .white : .black)
                     Text(id)
                     Spacer()
                 }
@@ -58,6 +60,7 @@ struct CurrentNotificationCard: View {
                         .foregroundColor(.blue)
                     Text("是否是弹出消息:")
                         .bold()
+                        .foregroundColor(sysColorScheme == .dark ? .white : .black)
                     Text(isPopup ? "是" : "否")
                     Spacer()
                 }
@@ -67,6 +70,7 @@ struct CurrentNotificationCard: View {
                         .foregroundColor(.blue)
                     Text("是否已隐藏:")
                         .bold()
+                        .foregroundColor(sysColorScheme == .dark ? .white : .black)
                     Text(isHidden ? "是" : "否")
                     Spacer()
                 }
@@ -76,6 +80,7 @@ struct CurrentNotificationCard: View {
                         .foregroundColor(.blue)
                     Text("适用版本:")
                         .bold()
+                        .foregroundColor(sysColorScheme == .dark ? .white : .black)
                     Text(GetVersionsString())
                     Spacer()
                 }
@@ -85,6 +90,7 @@ struct CurrentNotificationCard: View {
                         .foregroundColor(.blue)
                     Text("最后修改日期:")
                         .bold()
+                        .foregroundColor(sysColorScheme == .dark ? .white : .black)
                     Text(timeStr)
                     Spacer()
                 }
@@ -94,6 +100,7 @@ struct CurrentNotificationCard: View {
                         .foregroundColor(.blue)
                     Text("内容:")
                         .bold()
+                        .foregroundColor(sysColorScheme == .dark ? .white : .black)
                     Text(markdownContent)
                     Spacer()
                 }
@@ -113,12 +120,15 @@ struct EditNotificationView: View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 20) {
                 ForEach(notifications, id: \.notificationId) { notification in
-                    CurrentNotificationCard(isPinned: notification.pinned, isPopup: notification.isPopupNotification, isHidden: notification.isHide != 0, versions: notification.appVersionLimit, markdownContent: notification.markdownContent, timeStr: GetDateDescriptionText(sendDate: notification.GetDate()), id: "\(notification.notificationId)")
+                    NavigationLink(destination: AddNotificationView(isEditMode: true, editId: "\(notification.notificationId)", pinned: notification.pinned, isPopup: notification.isPopupNotification, isHidden: notification.isHide != 0, appVersionLim: notification.appVersionLimit.joined(separator: "\n"), markdownContent: notification.markdownContent)) {
+                        CurrentNotificationCard(isPinned: notification.pinned, isPopup: notification.isPopupNotification, isHidden: notification.isHide != 0, versions: notification.appVersionLimit, markdownContent: notification.markdownContent, timeStr: GetDateDescriptionText(sendDate: notification.GetDate()), id: "\(notification.notificationId)")
+                    }
                 }
             }
             .frame(maxWidth: 500)
             .padding()
         }
+        .navigationTitle("编辑公告")
         .onAppear {
             Task {
                 let result = await LexueHelperBackend.shared.FetchAppNotifications(onlyThisVersion: false)

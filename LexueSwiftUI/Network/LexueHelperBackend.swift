@@ -284,6 +284,97 @@ class LexueHelperBackend {
         }
     }
     
+    func Admin_EditAppNotification(adminToken: String, editId: String, markdownContent: String, pinned: Bool, isPopupNotification: Bool, appVersionLimit: [String], isHidden: Bool) async -> Bool {
+        let versionStr = try? JSONSerialization.data(withJSONObject: appVersionLimit, options: [])
+        guard let versionData = versionStr, let versionLimitJsonStr = String(data: versionData, encoding: .utf8) else {
+            return false
+        }
+        let Payload: [String: Any] = [
+            "adminToken": adminToken,
+            "id": editId,
+            "markdownContent": markdownContent,
+            "pinned": pinned,
+            "isPopupNotification": isPopupNotification,
+            "appVersionLimit": versionLimitJsonStr,
+            "isHide": isHidden ? "1" : "0"
+        ]
+        print(Payload)
+        let payloadData = try? JSONSerialization.data(withJSONObject: Payload, options: [])
+        guard let payloadStr = payloadData, let payloadJson = String(data: payloadStr, encoding: .utf8) else {
+            return false
+        }
+        let header: [String: String] = [
+            "Content-Type": "application/json"
+        ]
+        var request = URLRequest(url: URL(string: API_ADMIN_EDIT_NOTIFICATION)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.headers = HTTPHeaders(header)
+        request.httpBody = payloadData
+        let ret = await withCheckedContinuation { continuation in
+            AF.request(request).response { res in
+                switch res.result {
+                case .success(let data):
+                    if let json = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
+                        continuation.resume(returning: json)
+                    } else {
+                        print("无法将响应数据转换为字典")
+                        continuation.resume(returning: [String: Any]())
+                    }
+                case .failure(_):
+                    print("请求 后端 失败")
+                    continuation.resume(returning: [String: Any]())
+                }
+            }
+        }
+        if let retMsg = ret["msg"] as? String {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func Admin_DeleteAppNotification(adminToken: String, editId: String) async -> Bool {
+        let Payload: [String: Any] = [
+            "adminToken": adminToken,
+            "id": editId,
+        ]
+        print(Payload)
+        let payloadData = try? JSONSerialization.data(withJSONObject: Payload, options: [])
+        guard let payloadStr = payloadData, let payloadJson = String(data: payloadStr, encoding: .utf8) else {
+            return false
+        }
+        let header: [String: String] = [
+            "Content-Type": "application/json"
+        ]
+        var request = URLRequest(url: URL(string: API_ADMIN_DELETE_NOTIFICATION)!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.headers = HTTPHeaders(header)
+        request.httpBody = payloadData
+        let ret = await withCheckedContinuation { continuation in
+            AF.request(request).response { res in
+                switch res.result {
+                case .success(let data):
+                    if let json = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
+                        continuation.resume(returning: json)
+                    } else {
+                        print("无法将响应数据转换为字典")
+                        continuation.resume(returning: [String: Any]())
+                    }
+                case .failure(_):
+                    print("请求 后端 失败")
+                    continuation.resume(returning: [String: Any]())
+                }
+            }
+        }
+        if let retMsg = ret["msg"] as? String {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     // 请求i乐学助手维护的HaoBIT消息
     func FetchHaoBITMessage(userId: String) async -> [HaoBIT.Notice] {
         print("lastFetchNotificationHash: \(lastFetchNotificationHash)")
