@@ -69,6 +69,7 @@
 		4784DBD42B201050000B12CE /* ExtraFunctionSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */; };
 		4784DBD62B202492000B12CE /* ExtraFunctionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */; };
 		4784DBD72B2024AB000B12CE /* ExtraFunctionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */; };
+		478661372B577FC300CC734E /* EditNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478661362B577FC300CC734E /* EditNotificationView.swift */; };
 		478B70562AD445190008865A /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
 		47906C342B30975700DAACAA /* AdminManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47906C332B30975700DAACAA /* AdminManageView.swift */; };
 		47906C372B30996C00DAACAA /* AddNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47906C362B30996C00DAACAA /* AddNotificationView.swift */; };
@@ -261,6 +262,7 @@
 		4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueHelperBackend.swift; sourceTree = "<group>"; };
 		4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionSetting.swift; sourceTree = "<group>"; };
 		4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionDescription.swift; sourceTree = "<group>"; };
+		478661362B577FC300CC734E /* EditNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotificationView.swift; sourceTree = "<group>"; };
 		478B70552AD445190008865A /* Webvpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webvpn.swift; sourceTree = "<group>"; };
 		47906C332B30975700DAACAA /* AdminManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminManageView.swift; sourceTree = "<group>"; };
 		47906C362B30996C00DAACAA /* AddNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotificationView.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 				47906C332B30975700DAACAA /* AdminManageView.swift */,
 				47906C362B30996C00DAACAA /* AddNotificationView.swift */,
 				4728F7562B4804A500A6348B /* MarkdownPreview.swift */,
+				478661362B577FC300CC734E /* EditNotificationView.swift */,
 			);
 			path = AdminManage;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,
 				479129C22AC30A3A00F811F9 /* LexueBroswerView.swift in Sources */,
 				474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */,
+				478661372B577FC300CC734E /* EditNotificationView.swift in Sources */,
 				475EDED42AB60697008486F0 /* ProfileView.swift in Sources */,
 				47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */,
 				47E1D6A42AD01FDF007A0D75 /* HaoBIT.swift in Sources */,

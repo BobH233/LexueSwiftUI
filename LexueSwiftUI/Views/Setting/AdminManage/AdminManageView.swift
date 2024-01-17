@@ -17,6 +17,8 @@ struct AdminManageView: View {
             Section("公告管理") {
                 NavigationLink("添加新公告", destination: AddNotificationView())
                     .isDetailLink(true)
+                NavigationLink("编辑公告", destination: EditNotificationView())
+                    .isDetailLink(true)
             }
             
         }
