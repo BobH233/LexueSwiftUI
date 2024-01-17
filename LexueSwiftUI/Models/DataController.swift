@@ -308,8 +308,8 @@ class DataController: ObservableObject {
     
     private func wrapperContactMessage(origin: MessageStored) -> ContactMessage {
         var ret: ContactMessage = ContactMessage()
-        ret.id = origin.id!
-        ret.sendDate = origin.date!
+        ret.id = origin.id ?? UUID()
+        ret.sendDate = origin.date ?? Date.now
         ret.senderUid = origin.senderUid
         ret.messageBody.type = MessageBodyType(rawValue: Int(origin.type))!
         ret.messageBody.image_data = origin.image_data
