@@ -265,7 +265,7 @@ struct ViewCourseScoreView: View {
                             .padding(.bottom, 0)
                     }
                     if currentCourse.ignored_course {
-                        SimpleCardView(color: .red, image_name: "exclamationmark.triangle.fill", title: "不计入分数", content: "补考取最高分算入成绩")
+                        SimpleCardView(color: .red, image_name: "exclamationmark.triangle.fill", title: "不计入分数", content: "补考、重考取最高分算入成绩")
                             .padding(.bottom, 0)
                     }
                     if !currentCourse.my_grade_in_all.isEmpty && !currentCourse.all_study_count.isEmpty {

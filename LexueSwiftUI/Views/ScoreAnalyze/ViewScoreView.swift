@@ -223,7 +223,7 @@ struct ViewScoreView: View {
         for (_, value) in couseIdToIndex {
             var hasResit = false
             for courseIndex in value {
-                if score_res[courseIndex].exam_type == "补考" {
+                if score_res[courseIndex].exam_type == "补考" || score_res[courseIndex].exam_type == "重考" {
                     hasResit = true
                     break
                 }
@@ -329,11 +329,11 @@ struct ViewScoreView: View {
     private func row(course: Webvpn.ScoreInfo) -> some View {
         ZStack {
             LazyVGrid(columns: gridItems) {
-                if course.exam_type == "补考" {
+                if course.exam_type == "补考" || course.exam_type == "重考" {
                     Group {
                         Text(course.index)
                             .strikethrough(course.ignored_course)
-                        Text("\(course.courseName) (补考)")
+                        Text("\(course.courseName) (\(course.exam_type))")
                             .strikethrough(course.ignored_course)
                         Text(course.my_score)
                             .strikethrough(course.ignored_course)

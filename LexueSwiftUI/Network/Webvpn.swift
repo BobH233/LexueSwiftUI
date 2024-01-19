@@ -80,7 +80,7 @@ class Webvpn {
         var avg_score: String = ""
         // 最高分
         var max_score: String = ""
-        // 考试性质: 补考/正常考试
+        // 考试性质: 补考/正常考试/重考
         var exam_type: String = ""
         // 是否不计入成绩统计, 用于补考后覆盖
         var ignored_course: Bool = false
