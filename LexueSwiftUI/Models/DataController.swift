@@ -91,10 +91,12 @@ class DataController: ObservableObject {
             var newEventStoredObjectIDs = [NSManagedObjectID]()
             var newContactStoredObjectIDs = [NSManagedObjectID]()
             var newMessageStoredObjectIDs = [NSManagedObjectID]()
+            var newScoreDiffCacheIDs = [NSManagedObjectID]()
             
             let eventStoredObjectName = EventStored.entity().name
             let contactStoredObjectName = ContactStored.entity().name
             let messageStoredObjectName = MessageStored.entity().name
+            let newScoreDiffCacheName = ScoreDiffCache.entity().name
             
             for transaction in transactions where transaction.changes != nil {
                 for change in transaction.changes! {
@@ -104,6 +106,8 @@ class DataController: ObservableObject {
                         newContactStoredObjectIDs.append(change.changedObjectID)
                     } else if change.changedObjectID.entity.name == messageStoredObjectName && change.changeType == .insert {
                         newMessageStoredObjectIDs.append(change.changedObjectID)
+                    } else if change.changedObjectID.entity.name == newScoreDiffCacheName && change.changeType == .insert {
+                        newScoreDiffCacheIDs.append(change.changedObjectID)
                     }
                 }
             }
@@ -116,7 +120,21 @@ class DataController: ObservableObject {
             if !newMessageStoredObjectIDs.isEmpty {
                 deduplicateMessageStoredAndWait(messageStoredObjectIDs: newMessageStoredObjectIDs)
             }
+            if !newScoreDiffCacheIDs.isEmpty {
+                deduplicateScoreDiffCacheAndWait(ObjectIDs: newScoreDiffCacheIDs)
+            }
             lastHistoryToken = transactions.last!.token
+        }
+    }
+    
+    private func deduplicateScoreDiffCacheAndWait(ObjectIDs: [NSManagedObjectID]) {
+        let taskContext = container.backgroundContext()
+        // 去重hash重复的记录，如果有read为true的，保留read为true的，否则保留以前的
+        taskContext.performAndWait {
+            ObjectIDs.forEach { newDiffCacheID in
+                self.deduplicateScoreDiffCacheObject(ObjectID: newDiffCacheID, performingContext: taskContext)
+            }
+            save(context: taskContext)
         }
     }
     
@@ -153,6 +171,33 @@ class DataController: ObservableObject {
             }
             // Save the background context to trigger a notification and merge the result into the viewContext.
             save(context: taskContext)
+        }
+    }
+    
+    private func deduplicateScoreDiffCacheObject(ObjectID: NSManagedObjectID, performingContext: NSManagedObjectContext) {
+        guard let newCache = performingContext.object(with: ObjectID) as? ScoreDiffCache else {
+            fatalError("###\(#function): Failed to retrieve a valid tag with ID: \(ObjectID)")
+        }
+        guard let scoreHash = newCache.score_hash else {
+            return
+        }
+        let fetchRequest: NSFetchRequest<ScoreDiffCache> = ScoreDiffCache.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "score_hash == %@", scoreHash)
+        var has_read_message = false
+        guard var duplicatedCaches = try? performingContext.fetch(fetchRequest), duplicatedCaches.count > 1 else {
+            return
+        }
+        for duplicatedCache in duplicatedCaches {
+            if duplicatedCache.read {
+                has_read_message = true
+                break
+            }
+        }
+        duplicatedCaches.first!.read = has_read_message
+        duplicatedCaches.removeFirst()
+        for to_remove in duplicatedCaches {
+            print("删除重复cache!")
+            performingContext.delete(to_remove)
         }
     }
     

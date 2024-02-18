@@ -47,6 +47,10 @@ class Webvpn {
         var id: String {
             return courseId + index
         }
+        var hash: String {
+            // 用于统计成绩是否发生变化的hash值
+            return "\(semester)_\(courseId)_\(courseName)_\(credit)_\(study_hours)_\(course_type)_\(my_score)_\(exam_type)_hash".sha256
+        }
         
         // 序号
         var index: String = ""
