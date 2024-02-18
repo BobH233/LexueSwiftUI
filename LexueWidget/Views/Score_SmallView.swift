@@ -1,15 +1,15 @@
 //
-//  Event_SmallView.swift
-//  LexueWidgetExtension
+//  Score_SmallView.swift
+//  LexueSwiftUI
 //
-//  Created by bobh on 2023/10/4.
+//  Created by bobh on 2024/2/18.
 //
 
 import WidgetKit
 import SwiftUI
 
-struct Event_SmallView: View {
-    var entry: EventDefaultEntry = EventDefaultEntry()
+struct Score_SmallView: View {
+    var entry: ScoreDefaultEntry = ScoreDefaultEntry()
     func GetFontSize() -> CGFloat {
         if entry.size.height <= 148 {
             return 15
@@ -30,46 +30,43 @@ struct Event_SmallView: View {
     }
     var body: some View {
         VStack(spacing: GetVSpacing()) {
-            if entry.isLogin {
-                HStack {
-                    Text(entry.GetDayText())
-                        .font(.system(size: GetFontSize()))
-                    Text("|")
-                        .font(.system(size: GetFontSize()))
-                    Text(entry.GetWeekdayText())
-                        .font(.system(size: GetFontSize()))
-                        .foregroundColor(.red)
-                    Spacer()
-                }
+            if entry.isLogin && entry.isEnableScoreMonitor {
+                
                 HStack {
                     Text("乐学助手")
                         .font(.system(size: GetFontSize()))
                     Spacer()
                 }
-                HStack(alignment: .bottom) {
-                    Rectangle()
-                        .frame(width: 4)
-                        .foregroundColor(.blue)
-                        .cornerRadius(2)
-                    Text("今日")
-                    Text("\(entry.day_event_count)")
-                        .font(.system(size: 25))
+                HStack {
+                    Text("成绩监控")
+                        .font(.system(size: GetFontSize()))
                         .bold()
-                        .foregroundColor(.blue)
-                    Text("个")
                     Spacer()
                 }
                 HStack(alignment: .bottom) {
                     Rectangle()
                         .frame(width: 4)
-                        .foregroundColor(.orange)
+                        .foregroundColor(.green)
                         .cornerRadius(2)
-                    Text("本周")
-                    Text("\(entry.week_event_count)")
+                    Text("未读")
+                    Text("\(entry.unread_cnt)")
                         .font(.system(size: 25))
                         .bold()
-                        .foregroundColor(.orange)
-                    Text("个")
+                        .foregroundColor(.green)
+                    Text("门")
+                    Spacer()
+                }
+                HStack(alignment: .bottom) {
+                    Rectangle()
+                        .frame(width: 4)
+                        .foregroundColor(.blue)
+                        .cornerRadius(2)
+                    Text("总计")
+                    Text("\(entry.total_cnt)")
+                        .font(.system(size: 25))
+                        .bold()
+                        .foregroundColor(.blue)
+                    Text("门")
                     Spacer()
                 }
                 .padding(.bottom, 5)
@@ -78,8 +75,14 @@ struct Event_SmallView: View {
                 Image(systemName: "person")
                 HStack {
                     Spacer()
-                    Text("请先登录乐学助手")
-                        .multilineTextAlignment(.center)
+                    if entry.isLogin {
+                        Text("请启用\"成绩监控\"消息源")
+                            .multilineTextAlignment(.center)
+                    } else {
+                        Text("请先登录乐学助手")
+                            .multilineTextAlignment(.center)
+                    }
+                    
                     Spacer()
                 }
                 Spacer()
@@ -88,14 +91,14 @@ struct Event_SmallView: View {
     }
 }
 
-struct Event_SmallView_Previews: PreviewProvider {
+struct Score_SmallView_Previews: PreviewProvider {
     static var previews: some View {
         if #available(iOS 17.0, *) {
-            Event_SmallView(entry: EventDefaultEntry(isLogin: true))
+            Score_SmallView(entry: ScoreDefaultEntry(isLogin: true))
                 .containerBackground(.fill.tertiary, for: .widget)
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
         } else {
-            Event_SmallView(entry: EventDefaultEntry(isLogin: true))
+            Score_SmallView(entry: ScoreDefaultEntry(isLogin: true))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
         }
         

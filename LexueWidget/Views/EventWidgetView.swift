@@ -8,9 +8,9 @@
 import WidgetKit
 import SwiftUI
 
-struct WidgetView: View {
+struct EventWidgetView: View {
     @Environment(\.widgetFamily) var widgetFamily
-    let entry: DefaultEntry
+    let entry: EventDefaultEntry
     
     var body: some View {
         switch widgetFamily {

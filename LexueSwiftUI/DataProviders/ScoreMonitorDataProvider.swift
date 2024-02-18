@@ -53,7 +53,7 @@ class ScoreMonitorDataProvider: DataProvider {
     }
     
     func LoadScoresInfo(tryCache: Bool = true) async -> [Webvpn.ScoreInfo]  {
-        if tryCache && SettingStorage.shared.cache_webvpn_context != "" && SettingStorage.shared.cache_webvpn_context_for_user == GlobalVariables.shared.cur_user_info.stuId {
+        if tryCache && SettingStorage.shared.cache_webvpn_context != "" && SettingStorage.shared.cache_webvpn_context_for_user == SettingStorage.shared.savedUsername {
             print("Hit Cache, try cache loading score...")
             var context = Webvpn.WebvpnContext(wengine_vpn_ticketwebvpn_bit_edu_cn: SettingStorage.shared.cache_webvpn_context)
             var score_res = await Webvpn.shared.QueryScoreInfo(webvpn_context: context, auto_diff_score: false)
@@ -69,7 +69,7 @@ class ScoreMonitorDataProvider: DataProvider {
             case .success(let context):
                 DispatchQueue.main.async {
                     SettingStorage.shared.cache_webvpn_context = context.wengine_vpn_ticketwebvpn_bit_edu_cn
-                    SettingStorage.shared.cache_webvpn_context_for_user = GlobalVariables.shared.cur_user_info.stuId
+                    SettingStorage.shared.cache_webvpn_context_for_user = SettingStorage.shared.savedUsername
                 }
                 let score_res = await Webvpn.shared.QueryScoreInfo(webvpn_context: context, auto_diff_score: false)
                 switch score_res {

@@ -11,6 +11,7 @@ import SwiftUI
 @main
 struct LexueWidgetBundle: WidgetBundle {
     var body: some Widget {
-        LexueWidget()
+        LexueEventWidget()
+        ScoreMonitorWidget()
     }
 }

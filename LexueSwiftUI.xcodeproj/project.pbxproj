@@ -24,9 +24,9 @@
 		47196FE52AC5515000979DFE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47196FE42AC5515000979DFE /* Assets.xcassets */; };
 		47196FE92AC5515000979DFE /* LexueWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 47196FDC2AC5514F00979DFE /* LexueWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		47196FF12AC551D200979DFE /* Widget_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FED2AC551D200979DFE /* Widget_Extension.swift */; };
-		47196FF22AC551D200979DFE /* DefaultEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FEE2AC551D200979DFE /* DefaultEntry.swift */; };
-		47196FF32AC551D200979DFE /* Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FEF2AC551D200979DFE /* Provider.swift */; };
-		47196FF72AC5522500979DFE /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FF62AC5522500979DFE /* WidgetView.swift */; };
+		47196FF22AC551D200979DFE /* EventDefaultEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FEE2AC551D200979DFE /* EventDefaultEntry.swift */; };
+		47196FF32AC551D200979DFE /* EventProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FEF2AC551D200979DFE /* EventProvider.swift */; };
+		47196FF72AC5522500979DFE /* EventWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FF62AC5522500979DFE /* EventWidgetView.swift */; };
 		471A1D192AC9932C00A3D847 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A1D182AC9932C00A3D847 /* EventManager.swift */; };
 		47223A612AD053E4000D8B9C /* KeyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47223A602AD053E4000D8B9C /* KeyInfo.plist */; };
 		4728F7572B4804A500A6348B /* MarkdownPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728F7562B4804A500A6348B /* MarkdownPreview.swift */; };
@@ -67,6 +67,12 @@
 		4773446E2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */; };
 		4773446F2B81C88700AB5358 /* ScoreMonitorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */; };
 		477344702B81D52100AB5358 /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
+		4773447F2B820CBA00AB5358 /* ScoreProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773447D2B820C4400AB5358 /* ScoreProvider.swift */; };
+		477344802B820CCD00AB5358 /* ScoreDefaultEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477344742B82080900AB5358 /* ScoreDefaultEntry.swift */; };
+		477344812B820CD200AB5358 /* ScoreWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477344712B82078800AB5358 /* ScoreWidgetView.swift */; };
+		477344822B820CD400AB5358 /* Score_SmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477344762B82087100AB5358 /* Score_SmallView.swift */; };
+		477344832B820CD700AB5358 /* Score_MediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477344782B820ACE00AB5358 /* Score_MediumView.swift */; };
+		477344842B820CDA00AB5358 /* Score_LargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773447A2B820ADE00AB5358 /* Score_LargeView.swift */; };
 		47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */; };
 		478434802ADEDD890095A2EE /* LexueHelperBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */; };
 		4784DBD42B201050000B12CE /* ExtraFunctionSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */; };
@@ -225,9 +231,9 @@
 		47196FE42AC5515000979DFE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47196FE62AC5515000979DFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47196FED2AC551D200979DFE /* Widget_Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Widget_Extension.swift; sourceTree = "<group>"; };
-		47196FEE2AC551D200979DFE /* DefaultEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultEntry.swift; sourceTree = "<group>"; };
-		47196FEF2AC551D200979DFE /* Provider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Provider.swift; sourceTree = "<group>"; };
-		47196FF62AC5522500979DFE /* WidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WidgetView.swift; sourceTree = "<group>"; };
+		47196FEE2AC551D200979DFE /* EventDefaultEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDefaultEntry.swift; sourceTree = "<group>"; };
+		47196FEF2AC551D200979DFE /* EventProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventProvider.swift; sourceTree = "<group>"; };
+		47196FF62AC5522500979DFE /* EventWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventWidgetView.swift; sourceTree = "<group>"; };
 		471A1D182AC9932C00A3D847 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
 		47223A602AD053E4000D8B9C /* KeyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KeyInfo.plist; sourceTree = "<group>"; };
 		4728F7562B4804A500A6348B /* MarkdownPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownPreview.swift; sourceTree = "<group>"; };
@@ -262,6 +268,12 @@
 		476340302AB89F47006C24E2 /* LexueProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueProfile.swift; sourceTree = "<group>"; };
 		476448422AD8E37D00952A22 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreMonitorDataProvider.swift; sourceTree = "<group>"; };
+		477344712B82078800AB5358 /* ScoreWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreWidgetView.swift; sourceTree = "<group>"; };
+		477344742B82080900AB5358 /* ScoreDefaultEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreDefaultEntry.swift; sourceTree = "<group>"; };
+		477344762B82087100AB5358 /* Score_SmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score_SmallView.swift; sourceTree = "<group>"; };
+		477344782B820ACE00AB5358 /* Score_MediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score_MediumView.swift; sourceTree = "<group>"; };
+		4773447A2B820ADE00AB5358 /* Score_LargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score_LargeView.swift; sourceTree = "<group>"; };
+		4773447D2B820C4400AB5358 /* ScoreProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreProvider.swift; sourceTree = "<group>"; };
 		47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLogicManager.swift; sourceTree = "<group>"; };
 		4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueHelperBackend.swift; sourceTree = "<group>"; };
 		4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionSetting.swift; sourceTree = "<group>"; };
@@ -418,9 +430,9 @@
 		47196FDF2AC5514F00979DFE /* LexueWidget */ = {
 			isa = PBXGroup;
 			children = (
+				4773447C2B820AED00AB5358 /* Providers */,
+				477344732B8207DB00AB5358 /* Entries */,
 				47196FF52AC5520900979DFE /* Views */,
-				47196FEE2AC551D200979DFE /* DefaultEntry.swift */,
-				47196FEF2AC551D200979DFE /* Provider.swift */,
 				47196FED2AC551D200979DFE /* Widget_Extension.swift */,
 				47196FE02AC5514F00979DFE /* LexueWidgetBundle.swift */,
 				47196FE42AC5515000979DFE /* Assets.xcassets */,
@@ -432,10 +444,14 @@
 		47196FF52AC5520900979DFE /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				47196FF62AC5522500979DFE /* WidgetView.swift */,
+				47196FF62AC5522500979DFE /* EventWidgetView.swift */,
 				47F4FD132ACD966C00C6C144 /* Event_SmallView.swift */,
 				47F4FD272ACDADCA00C6C144 /* Event_MediumView.swift */,
 				47F4FD2A2ACDB9CF00C6C144 /* Event_LargeView.swift */,
+				477344712B82078800AB5358 /* ScoreWidgetView.swift */,
+				477344762B82087100AB5358 /* Score_SmallView.swift */,
+				477344782B820ACE00AB5358 /* Score_MediumView.swift */,
+				4773447A2B820ADE00AB5358 /* Score_LargeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -618,6 +634,24 @@
 				4755F24D2ADD764200D7640C /* ExamInfoView.swift */,
 			);
 			path = ExamInfo;
+			sourceTree = "<group>";
+		};
+		477344732B8207DB00AB5358 /* Entries */ = {
+			isa = PBXGroup;
+			children = (
+				47196FEE2AC551D200979DFE /* EventDefaultEntry.swift */,
+				477344742B82080900AB5358 /* ScoreDefaultEntry.swift */,
+			);
+			path = Entries;
+			sourceTree = "<group>";
+		};
+		4773447C2B820AED00AB5358 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				47196FEF2AC551D200979DFE /* EventProvider.swift */,
+				4773447D2B820C4400AB5358 /* ScoreProvider.swift */,
+			);
+			path = Providers;
 			sourceTree = "<group>";
 		};
 		47906C352B3097FB00DAACAA /* AdminManage */ = {
@@ -838,13 +872,14 @@
 				47F4FD2C2ACDBF3F00C6C144 /* LocalNotificationManager.swift in Sources */,
 				47F4FD312ACDC1D800C6C144 /* DataProviderBase.swift in Sources */,
 				4773446F2B81C88700AB5358 /* ScoreMonitorDataProvider.swift in Sources */,
-				47196FF72AC5522500979DFE /* WidgetView.swift in Sources */,
+				47196FF72AC5522500979DFE /* EventWidgetView.swift in Sources */,
 				47F4FD172ACD9CD700C6C144 /* LexueAPI.swift in Sources */,
 				47F4FD162ACD9CD500C6C144 /* BITLogin.swift in Sources */,
 				47F5F6EF2AE10EA1009A2B7B /* LexueHelperBackend.swift in Sources */,
+				4773447F2B820CBA00AB5358 /* ScoreProvider.swift in Sources */,
 				47F4FD262ACDA64500C6C144 /* MessageModel.xcdatamodeld in Sources */,
 				47F4FD242ACDA62E00C6C144 /* ContactMessageModel.swift in Sources */,
-				47196FF22AC551D200979DFE /* DefaultEntry.swift in Sources */,
+				47196FF22AC551D200979DFE /* EventDefaultEntry.swift in Sources */,
 				47F4FD182ACD9CE200C6C144 /* GlobalVariables.swift in Sources */,
 				47F4FD2E2ACDC07900C6C144 /* CourseManager.swift in Sources */,
 				477344702B81D52100AB5358 /* Webvpn.swift in Sources */,
@@ -852,7 +887,8 @@
 				47196FE12AC5514F00979DFE /* LexueWidgetBundle.swift in Sources */,
 				47F4FD252ACDA63A00C6C144 /* ContactDisplayModel.swift in Sources */,
 				47F4FD282ACDADCA00C6C144 /* Event_MediumView.swift in Sources */,
-				47196FF32AC551D200979DFE /* Provider.swift in Sources */,
+				47196FF32AC551D200979DFE /* EventProvider.swift in Sources */,
+				477344812B820CD200AB5358 /* ScoreWidgetView.swift in Sources */,
 				47F4FD2B2ACDB9CF00C6C144 /* Event_LargeView.swift in Sources */,
 				4784DBD72B2024AB000B12CE /* ExtraFunctionDescription.swift in Sources */,
 				47F4FD232ACDA62400C6C144 /* DataController.swift in Sources */,
@@ -860,8 +896,12 @@
 				47F4FD302ACDC1D600C6C144 /* DataProviderManager.swift in Sources */,
 				479A290D2AECD3A3009AAD4F /* iCloudUserDefaults.swift in Sources */,
 				47F4FD332ACDC1E600C6C144 /* MessageManager.swift in Sources */,
+				477344822B820CD400AB5358 /* Score_SmallView.swift in Sources */,
+				477344832B820CD700AB5358 /* Score_MediumView.swift in Sources */,
 				47F4FD142ACD966C00C6C144 /* Event_SmallView.swift in Sources */,
 				47F4FD292ACDB4EE00C6C144 /* EventManager.swift in Sources */,
+				477344802B820CCD00AB5358 /* ScoreDefaultEntry.swift in Sources */,
+				477344842B820CDA00AB5358 /* Score_LargeView.swift in Sources */,
 				47F4FD1A2ACD9D3500C6C144 /* CourseShortInfo.swift in Sources */,
 				475E22B02ACFB66700FE8679 /* InfoMergingDataProvider.swift in Sources */,
 				47F4FD192ACD9CFE00C6C144 /* Extensions.swift in Sources */,

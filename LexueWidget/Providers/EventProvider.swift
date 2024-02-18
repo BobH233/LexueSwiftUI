@@ -8,15 +8,15 @@
 import WidgetKit
 import UserNotifications
 
-struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> DefaultEntry {
-        var ret = DefaultEntry()
+struct EventProvider: TimelineProvider {
+    func placeholder(in context: Context) -> EventDefaultEntry {
+        var ret = EventDefaultEntry()
         ret.isLogin = true
         return ret
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (DefaultEntry) -> ()) {
-        var entry = DefaultEntry()
+    func getSnapshot(in context: Context, completion: @escaping (EventDefaultEntry) -> ()) {
+        var entry = EventDefaultEntry()
         entry.isLogin = true
         completion(entry)
     }
@@ -69,9 +69,9 @@ struct Provider: TimelineProvider {
         }
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<DefaultEntry>) -> ()) {
+    func getTimeline(in context: Context, completion: @escaping (Timeline<EventDefaultEntry>) -> ()) {
         print("getTimeline")
-        var entry = DefaultEntry()
+        var entry = EventDefaultEntry()
         entry.events = EventManager.shared.Widget_GetEventList()
         entry.day_event_count = GetTodayEventCount(today: Date(), events: entry.events)
         entry.week_event_count = GetWeekEventCount(todayInWeek: Date(), events: entry.events)

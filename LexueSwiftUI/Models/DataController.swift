@@ -892,6 +892,17 @@ class DataController: ObservableObject {
         return true
     }
     
+    func queryAllScoreDiffCache(context: NSManagedObjectContext) -> [ScoreDiffCache] {
+        let request: NSFetchRequest<ScoreDiffCache> = ScoreDiffCache.fetchRequest()
+        do {
+            let results = try context.fetch(request)
+            return results
+        } catch {
+            print("查询isScoreDiffCacheEmpty失败：\(error)")
+        }
+        return []
+    }
+    
     func addScoreDiffCache(context: NSManagedObjectContext, read: Bool, id: String, scoreHash: String, scoreInMajor: String, myScore: String, last_update: Date, courseName: String, avgScore: String, with_save: Bool = false) {
         let diffCache = ScoreDiffCache(context: context)
         diffCache.read = read

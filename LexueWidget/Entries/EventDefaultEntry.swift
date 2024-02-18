@@ -8,7 +8,7 @@
 
 import WidgetKit
 
-struct DefaultEntry: TimelineEntry {
+struct EventDefaultEntry: TimelineEntry {
     var date: Date = Date()
     var size: CGSize = CGSize()
     var isLogin: Bool = false
@@ -17,7 +17,7 @@ struct DefaultEntry: TimelineEntry {
     var events: [EventStored] = []
 }
 
-extension DefaultEntry {
+extension EventDefaultEntry {
     func GetDayText() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M.d"
