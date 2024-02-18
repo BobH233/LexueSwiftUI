@@ -1432,7 +1432,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "661"
             endingLineNumber = "661"
-            landmarkName = "GetEventTypeDescription(_:)"
+            landmarkName = "addEventStored(isCustomEvent:event_name:event_description:lexue_id:timestart:timeusermidnight:mindaytimestamp:course_id:course_name:color:action_url:event_type:instance:url:examCourseId:isPeriodEvent:timeend:lastUpdateDate:context:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2037,8 +2037,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
             landmarkName = "FilterScoreInfo(current:)"
             landmarkType = "7">
             <Locations>
@@ -2085,8 +2085,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "CalcCurrentStatistics()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2101,8 +2101,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
+            startingLineNumber = "509"
+            endingLineNumber = "509"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2117,8 +2117,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
+            startingLineNumber = "512"
+            endingLineNumber = "512"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2133,8 +2133,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "CalcCurrentStatistics()"
             landmarkType = "7">
          </BreakpointContent>
@@ -3759,8 +3759,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
+            startingLineNumber = "274"
+            endingLineNumber = "274"
             landmarkName = "LoadScoresInfo(tryCache:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3775,8 +3775,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "215"
-            endingLineNumber = "215"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "ProcessResitSituation(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3791,8 +3791,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "ProcessResitSituation(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3807,9 +3807,25 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "ProcessResitSituation(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7632DB97-72BC-4CA1-9A98-54834E40E0FE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/Webvpn.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "DiffScoreInfoAndUpdate(curScoreInfo:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -880,6 +880,56 @@ class DataController: ObservableObject {
             print("无法删除对象: \(error)")
         }
     }
+    
+    func isScoreDiffCacheEmpty(context: NSManagedObjectContext) -> Bool {
+        let request: NSFetchRequest<ScoreDiffCache> = ScoreDiffCache.fetchRequest()
+        do {
+            let results = try context.fetch(request)
+            return results.count == 0
+        } catch {
+            print("查询isScoreDiffCacheEmpty失败：\(error)")
+        }
+        return true
+    }
+    
+    func addScoreDiffCache(context: NSManagedObjectContext, read: Bool, id: String, scoreHash: String, scoreInMajor: String, myScore: String, last_update: Date, courseName: String, avgScore: String, with_save: Bool = false) {
+        let diffCache = ScoreDiffCache(context: context)
+        diffCache.read = read
+        diffCache.scoreId = id
+        diffCache.score_hash = scoreHash
+        diffCache.scoreInMajor = scoreInMajor
+        diffCache.myScore = myScore
+        diffCache.last_update = last_update
+        diffCache.courseName = courseName
+        diffCache.avgScore = avgScore
+        if with_save {
+            save(context: context)
+        }
+    }
+    
+    func isScoreDiffCacheExist(context: NSManagedObjectContext, scoreHash: String) -> Bool {
+        let request: NSFetchRequest<ScoreDiffCache> = ScoreDiffCache.fetchRequest()
+        request.predicate = NSPredicate(format: "score_hash == %@", scoreHash)
+        do {
+            let objects = try context.fetch(request)
+            return objects.count > 0
+        } catch {
+            print("无法执行isScoreDiffCacheExist")
+        }
+        return false
+    }
+    
+    func QueryScoreDiffCache(context: NSManagedObjectContext, scoreHash: String) -> ScoreDiffCache? {
+        let request: NSFetchRequest<ScoreDiffCache> = ScoreDiffCache.fetchRequest()
+        request.predicate = NSPredicate(format: "score_hash == %@", scoreHash)
+        do {
+            let objects = try context.fetch(request)
+            return objects.first
+        } catch {
+            print("无法执行QueryScoreDiffCache")
+        }
+        return nil
+    }
 }
 
 

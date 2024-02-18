@@ -88,6 +88,9 @@ class Webvpn {
         var exam_type: String = ""
         // 是否不计入成绩统计, 用于补考后覆盖
         var ignored_course: Bool = false
+        // 是否是未读的新成绩, 用于高亮显示
+        var is_unread_new_score: Bool = false
+        
         
         static func SemesterInt(semesterStr: String) -> Int {
             let segments = semesterStr.split(separator: "-")
@@ -101,7 +104,28 @@ class Webvpn {
         }
     }
     
-    func QueryScoreInfo(webvpn_context: WebvpnContext) async -> Result<[ScoreInfo], WebvpnError> {
+    func DiffScoreInfoAndUpdate(curScoreInfo: [ScoreInfo]) async {
+        // 如果数据库都是空的，那么就把所有hash都加进去，但是是已读状态
+        // 如果数据库不是空的，那么就只加数据库里面没有的hash，并且是未读状态
+        let curDate = Date.now
+        await DataController.shared.container.performBackgroundTask { (bgContext) in
+            let isEmptyDB = DataController.shared.isScoreDiffCacheEmpty(context: bgContext)
+            if isEmptyDB {
+                for score in curScoreInfo {
+                    DataController.shared.addScoreDiffCache(context: bgContext, read: true, id: score.index, scoreHash: score.hash, scoreInMajor: score.my_grade_in_major, myScore: score.my_score, last_update: curDate, courseName: score.courseName, avgScore: score.avg_score)
+                }
+            } else {
+                for score in curScoreInfo {
+                    if !DataController.shared.isScoreDiffCacheExist(context: bgContext, scoreHash: score.hash) {
+                        DataController.shared.addScoreDiffCache(context: bgContext, read: false, id: score.index, scoreHash: score.hash, scoreInMajor: score.my_grade_in_major, myScore: score.my_score, last_update: curDate, courseName: score.courseName, avgScore: score.avg_score)
+                    }
+                }
+            }
+            DataController.shared.save(context: bgContext)
+        }
+    }
+    
+    func QueryScoreInfo(webvpn_context: WebvpnContext, auto_diff_score: Bool = true) async -> Result<[ScoreInfo], WebvpnError> {
         let header = [
             "Webvpn-Cookie": "wengine_vpn_ticketwebvpn_bit_edu_cn=\(webvpn_context.wengine_vpn_ticketwebvpn_bit_edu_cn); Path=/; Domain=webvpn.bit.edu.cn; HttpOnly",
             "User-Agent": "LexueHelper"
@@ -158,6 +182,9 @@ class Webvpn {
                 currentCourse.max_score = data[i][attriMap["最高分"]!]
                 currentCourse.exam_type = data[i][attriMap["考试性质"]!]
                 ret_scores.append(currentCourse)
+            }
+            if auto_diff_score {
+                await DiffScoreInfoAndUpdate(curScoreInfo: ret_scores)
             }
             return .success(ret_scores)
         } else {

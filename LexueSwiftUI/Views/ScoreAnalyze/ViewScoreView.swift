@@ -33,6 +33,8 @@ struct ViewScoreView: View {
     // 当前列表中显示的门数
     @State var current_courseCount: Int = 0
     
+    @Environment(\.managedObjectContext) var managedObjContext
+    
     private func CalcCurrentStatistics() {
         var tmpCount: Float = 0
         var tmpUpperEqual80: Float = 0
@@ -247,6 +249,16 @@ struct ViewScoreView: View {
         return ret
     }
     
+    func ProcessNewUpdateScore(_ score_res: [Webvpn.ScoreInfo]) -> [Webvpn.ScoreInfo] {
+        var ret = score_res
+        for (index, score) in ret.enumerated() {
+            if let score_cache = DataController.shared.QueryScoreDiffCache(context: managedObjContext, scoreHash: score.hash) {
+                ret[index].is_unread_new_score = !score_cache.read
+            }
+        }
+        return ret
+    }
+    
     func LoadScoresInfo(tryCache: Bool = true) {
         if tryCache && SettingStorage.shared.cache_webvpn_context != "" && SettingStorage.shared.cache_webvpn_context_for_user == GlobalVariables.shared.cur_user_info.stuId {
             // 有缓存，先尝试缓存
@@ -257,7 +269,8 @@ struct ViewScoreView: View {
                 switch score_res {
                 case .success(let ret_scoreInfo):
                     DispatchQueue.main.async {
-                        scoreInfo = ProcessResitSituation(ret_scoreInfo).reversed()
+                        scoreInfo = ProcessNewUpdateScore(ret_scoreInfo)
+                        scoreInfo = ProcessResitSituation(scoreInfo).reversed()
                         LoadFilterOptions()
                         loadingData = false
                         DispatchQueue.main.async {
@@ -284,7 +297,8 @@ struct ViewScoreView: View {
                     switch score_res {
                     case .success(let ret_scoreInfo):
                         DispatchQueue.main.async {
-                            scoreInfo = ProcessResitSituation(ret_scoreInfo).reversed()
+                            scoreInfo = ProcessNewUpdateScore(ret_scoreInfo)
+                            scoreInfo = ProcessResitSituation(scoreInfo).reversed()
                             LoadFilterOptions()
                             loadingData = false
                         }
@@ -331,8 +345,17 @@ struct ViewScoreView: View {
             LazyVGrid(columns: gridItems) {
                 if course.exam_type == "补考" || course.exam_type == "重考" {
                     Group {
-                        Text(course.index)
-                            .strikethrough(course.ignored_course)
+                        ZStack {
+                            Text(course.index)
+                                .strikethrough(course.ignored_course)
+                            if course.is_unread_new_score {
+                                Image(systemName: "moonphase.new.moon.inverse")
+                                    .resizable()
+                                    .frame(width: 10, height: 10)
+                                    .offset(x: -25, y: 0)
+                                    .foregroundColor(.blue)
+                            }
+                        }
                         Text("\(course.courseName) (\(course.exam_type))")
                             .strikethrough(course.ignored_course)
                         Text(course.my_score)
@@ -354,8 +377,17 @@ struct ViewScoreView: View {
                     }
                     .foregroundColor(.green)
                 } else {
-                    Text(course.index)
-                        .strikethrough(course.ignored_course)
+                    ZStack {
+                        Text(course.index)
+                            .strikethrough(course.ignored_course)
+                        if course.is_unread_new_score {
+                            Image(systemName: "moonphase.new.moon.inverse")
+                                .resizable()
+                                .frame(width: 10, height: 10)
+                                .offset(x: -25, y: 0)
+                                .foregroundColor(.blue)
+                        }
+                    }
                     Text(course.courseName)
                         .strikethrough(course.ignored_course)
                     Text(course.my_score)

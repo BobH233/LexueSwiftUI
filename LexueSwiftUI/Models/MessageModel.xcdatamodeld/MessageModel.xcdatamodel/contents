@@ -100,7 +100,7 @@
         <attribute name="read" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="score_hash" optional="YES" attributeType="String"/>
         <attribute name="scoreId" optional="YES" attributeType="String"/>
-        <attribute name="socreInMajor" optional="YES" attributeType="String"/>
+        <attribute name="scoreInMajor" optional="YES" attributeType="String"/>
     </entity>
     <configuration name="Local">
         <memberEntity name="CourseCacheStored"/>

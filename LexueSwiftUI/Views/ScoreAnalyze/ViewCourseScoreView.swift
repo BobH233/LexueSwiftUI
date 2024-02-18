@@ -170,7 +170,7 @@ struct ViewCourseScoreView: View {
     @State var evaluateDiff: Float = 0
     @State private var isActionSheetPresented = false
     @Environment(\.colorScheme) var sysColorScheme
-    
+    @Environment(\.managedObjectContext) var managedObjContext
     
     @State var shareMode: Bool = false
     
@@ -355,6 +355,18 @@ struct ViewCourseScoreView: View {
                 ])
             }
         )
+        .onAppear {
+            // 设置为已读
+            if var cache = DataController.shared.QueryScoreDiffCache(context: managedObjContext, scoreHash: currentCourse.hash) {
+                cache.read = true
+                for (index, course) in allCourses.enumerated() {
+                    if course.hash == currentCourse.hash {
+                        allCourses[index].is_unread_new_score = false
+                    }
+                }
+                DataController.shared.save(context: managedObjContext)
+            }
+        }
         .onFirstAppear {
             evaluateDiff = GetEvaluateResult()
         }
