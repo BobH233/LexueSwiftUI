@@ -18,7 +18,7 @@ enum MessageBodyType: Int, Codable {
     case new_event_notification = 4
     case due_event_notification = 5
     // 留给未来拓展富文本消息用的，目前暂时不使用
-    case unknow3 = 6
+    case markdown = 6
     case unknow4 = 7
     case unknow5 = 8
     case unknow6 = 9

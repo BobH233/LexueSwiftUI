@@ -54,11 +54,7 @@ class LexueDataProvider: DataProvider {
     func GetCourseContactId(_ courseId: String) -> String {
         return "lexue_course_\(courseId)"
     }
-    func GetFullDisplayTime(_ date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy年M月d日 HH:mm"
-        return dateFormatter.string(from: date)
-    }
+    
     
     func handleApns(data: Any) {
         

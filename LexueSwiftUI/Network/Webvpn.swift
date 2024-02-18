@@ -104,10 +104,11 @@ class Webvpn {
         }
     }
     
-    func DiffScoreInfoAndUpdate(curScoreInfo: [ScoreInfo]) async {
+    func DiffScoreInfoAndUpdate(curScoreInfo: [ScoreInfo]) async -> [ScoreInfo] {
         // 如果数据库都是空的，那么就把所有hash都加进去，但是是已读状态
         // 如果数据库不是空的，那么就只加数据库里面没有的hash，并且是未读状态
         let curDate = Date.now
+        var newScoreInfo: [ScoreInfo] = []
         await DataController.shared.container.performBackgroundTask { (bgContext) in
             let isEmptyDB = DataController.shared.isScoreDiffCacheEmpty(context: bgContext)
             if isEmptyDB {
@@ -117,12 +118,14 @@ class Webvpn {
             } else {
                 for score in curScoreInfo {
                     if !DataController.shared.isScoreDiffCacheExist(context: bgContext, scoreHash: score.hash) {
+                        newScoreInfo.append(score)
                         DataController.shared.addScoreDiffCache(context: bgContext, read: false, id: score.index, scoreHash: score.hash, scoreInMajor: score.my_grade_in_major, myScore: score.my_score, last_update: curDate, courseName: score.courseName, avgScore: score.avg_score)
                     }
                 }
             }
             DataController.shared.save(context: bgContext)
         }
+        return newScoreInfo
     }
     
     func QueryScoreInfo(webvpn_context: WebvpnContext, auto_diff_score: Bool = true) async -> Result<[ScoreInfo], WebvpnError> {

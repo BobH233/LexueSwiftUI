@@ -348,6 +348,11 @@ func GetHtmlText(_ html: String) -> String {
     }
 }
 
+func GetFullDisplayTime(_ date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yyyy年M月d日 HH:mm"
+    return dateFormatter.string(from: date)
+}
 
 // https://gist.github.com/swhitty/9be89dfe97dbb55c6ef0f916273bbb97
 extension Task where Failure == Error {

@@ -112,6 +112,8 @@ class MessageManager {
                 return "[新事件提醒] \(messagebody.event_name ?? "")"
             case .due_event_notification:
                 return "[事件到期提醒] \(messagebody.event_name ?? "")"
+            case .markdown:
+                return "[markdown消息] \(messagebody.text_data ?? "")"
             default:
                 return "[未知消息]"
             }

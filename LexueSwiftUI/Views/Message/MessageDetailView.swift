@@ -7,6 +7,7 @@
 
 import SwiftUI
 import ImageViewer
+import MarkdownUI
 
 protocol BubbleBaseColorConfig: View {
     var sysColorScheme: ColorScheme { get }
@@ -166,6 +167,33 @@ private struct BubbleTextMessageView: View, BubbleBaseColorConfig {
     var body: some View {
         ChatBubble(direction: .left) {
             Text(message.messageBody.text_data!)
+                .padding(.vertical, 10)
+                .padding(.horizontal, 20)
+                .foregroundColor(BubbleTextColor)
+                .background(BubbleColor)
+        }
+        .onAppear {
+            sendDate = MessageManager.shared.GetSendDateDescriptionText(sendDate: message.sendDate)
+        }
+        .contextMenu(ContextMenu(menuItems: {
+            Label("发送日期: \(sendDate)", systemImage: "clock.arrow.circlepath")
+            Button {
+                UIPasteboard.general.string = message.messageBody.text_data!
+            } label: {
+                Label("复制", systemImage: "doc.on.doc")
+            }
+        }))
+        .padding(.leading, 10)
+    }
+}
+
+private struct MarkdownMessageView: View, BubbleBaseColorConfig {
+    @Environment(\.colorScheme) var sysColorScheme
+    let message: ContactMessage
+    @State var sendDate: String = ""
+    var body: some View {
+        ChatBubble(direction: .left) {
+            Markdown(message.messageBody.text_data!)
                 .padding(.vertical, 10)
                 .padding(.horizontal, 20)
                 .foregroundColor(BubbleTextColor)
@@ -444,6 +472,9 @@ struct MessageDetailViewInternal: View {
                                     .id(message.id)
                             } else if message.messageBody.type == .new_event_notification || message.messageBody.type == .due_event_notification {
                                 BubbleEventNotificationMessageView(message: message)
+                                    .id(message.id)
+                            } else if message.messageBody.type == .markdown {
+                                MarkdownMessageView(message: message)
                                     .id(message.id)
                             }
                             else {

@@ -14,6 +14,7 @@ class DataProviderManager: ObservableObject {
     init() {
         dataProviders.append(LexueDataProvider())
         dataProviders.append(InfoMergingDataProvider())
+        dataProviders.append(ScoreMonitorDataProvider())
         loadSettingStorage()
         // 将数据源的设置也通过icloud同步
         // 不要同步已经push的消息
@@ -107,6 +108,15 @@ class DataProviderManager: ObservableObject {
             }
             provider.msgRequestList.removeAll()
         }
+    }
+    
+    func FindProvider(providerId: String) -> DataProvider? {
+        for registered_provider in dataProviders {
+            if registered_provider.providerIdForEach == providerId {
+                return registered_provider
+            }
+        }
+        return nil
     }
     
     func DoRefreshAll(param: [String: Any] = [:], manually: Bool = false) async {

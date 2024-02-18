@@ -825,8 +825,8 @@
             filePath = "LexueSwiftUI/DataProviders/DataProviderManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "DoRefreshAll(param:manually:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2949,8 +2949,8 @@
             filePath = "LexueSwiftUI/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "509"
-            endingLineNumber = "509"
+            startingLineNumber = "514"
+            endingLineNumber = "514"
             landmarkName = "bottomSheet15(isPresented:dragIndicator:sheetCornerRadius:largestUndimmedIdentifier:isTransparentBG:interactiveDisabled:@ViewBuilder:onDismiss:)"
             landmarkType = "7">
             <Locations>
@@ -2997,8 +2997,8 @@
             filePath = "LexueSwiftUI/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "512"
-            endingLineNumber = "512"
+            startingLineNumber = "517"
+            endingLineNumber = "517"
             landmarkName = "bottomSheet15(isPresented:dragIndicator:sheetCornerRadius:largestUndimmedIdentifier:isTransparentBG:interactiveDisabled:@ViewBuilder:onDismiss:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3013,8 +3013,8 @@
             filePath = "LexueSwiftUI/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "511"
-            endingLineNumber = "511"
+            startingLineNumber = "516"
+            endingLineNumber = "516"
             landmarkName = "bottomSheet15(isPresented:dragIndicator:sheetCornerRadius:largestUndimmedIdentifier:isTransparentBG:interactiveDisabled:@ViewBuilder:onDismiss:)"
             landmarkType = "7">
             <Locations>
@@ -3298,8 +3298,8 @@
             filePath = "LexueSwiftUI/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "579"
-            endingLineNumber = "579">
+            startingLineNumber = "584"
+            endingLineNumber = "584">
             <Locations>
                <Location
                   uuid = "1DD0D6E8-234B-4561-9009-0565C3391CB1 - 17520a0f7f6bcf06"
@@ -3344,8 +3344,8 @@
             filePath = "LexueSwiftUI/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "578"
-            endingLineNumber = "578"
+            startingLineNumber = "583"
+            endingLineNumber = "583"
             landmarkName = "View"
             landmarkType = "21">
          </BreakpointContent>
@@ -3360,8 +3360,8 @@
             filePath = "LexueSwiftUI/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567"
+            startingLineNumber = "572"
+            endingLineNumber = "572"
             landmarkName = "bottomSheet(presentationDetents:isPresented:dragIndicator:sheetCornerRadius:largestUndimmedIdentifier:isTransparentBG:interactiveDisabled:@ViewBuilder:onDismiss:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3376,8 +3376,8 @@
             filePath = "LexueSwiftUI/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "566"
-            endingLineNumber = "566"
+            startingLineNumber = "571"
+            endingLineNumber = "571"
             landmarkName = "bottomSheet(presentationDetents:isPresented:dragIndicator:sheetCornerRadius:largestUndimmedIdentifier:isTransparentBG:interactiveDisabled:@ViewBuilder:onDismiss:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3392,8 +3392,8 @@
             filePath = "LexueSwiftUI/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "568"
-            endingLineNumber = "568"
+            startingLineNumber = "573"
+            endingLineNumber = "573"
             landmarkName = "bottomSheet(presentationDetents:isPresented:dragIndicator:sheetCornerRadius:largestUndimmedIdentifier:isTransparentBG:interactiveDisabled:@ViewBuilder:onDismiss:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3408,8 +3408,8 @@
             filePath = "LexueSwiftUI/Extensions.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "569"
-            endingLineNumber = "569"
+            startingLineNumber = "574"
+            endingLineNumber = "574"
             landmarkName = "bottomSheet(presentationDetents:isPresented:dragIndicator:sheetCornerRadius:largestUndimmedIdentifier:isTransparentBG:interactiveDisabled:@ViewBuilder:onDismiss:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3823,9 +3823,152 @@
             filePath = "LexueSwiftUI/Network/Webvpn.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "DiffScoreInfoAndUpdate(curScoreInfo:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CA84C288-988C-469C-8CA3-A937AC3A0087"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/DataProviders/ScoreMonitorDataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
+            landmarkName = "refresh(param:manually:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "969DAA0A-8D92-482E-A407-9833380C62C9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/DataProviders/ScoreMonitorDataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "refresh(param:manually:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "969DAA0A-8D92-482E-A407-9833380C62C9 - f388a3a8b20fcb3e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.ScoreMonitorDataProvider.refresh(param: Swift.Dictionary&lt;Swift.String, Any&gt;, manually: Swift.Bool) async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/DataProviders/ScoreMonitorDataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "969DAA0A-8D92-482E-A407-9833380C62C9 - 5d3fc4694eec6f0c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.ScoreMonitorDataProvider.refresh(param: Swift.Dictionary&lt;Swift.String, Any&gt;, manually: Swift.Bool) async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/DataProviders/ScoreMonitorDataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "100">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A6EAA242-F7AD-4CA5-9583-9E3BCBE84BC0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/DataProviders/ScoreMonitorDataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "refresh(param:manually:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A6EAA242-F7AD-4CA5-9583-9E3BCBE84BC0 - 68198ed699ab3741"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.ScoreMonitorDataProvider.refresh(param: Swift.Dictionary&lt;Swift.String, Any&gt;, manually: Swift.Bool) async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/DataProviders/ScoreMonitorDataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "A6EAA242-F7AD-4CA5-9583-9E3BCBE84BC0 - 45c328058d45d0b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) await resume partial function for LexueSwiftUI.ScoreMonitorDataProvider.refresh(param: Swift.Dictionary&lt;Swift.String, Any&gt;, manually: Swift.Bool) async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/DataProviders/ScoreMonitorDataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "48">
+               </Location>
+               <Location
+                  uuid = "A6EAA242-F7AD-4CA5-9583-9E3BCBE84BC0 - f388a3a8b20fcb5f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.ScoreMonitorDataProvider.refresh(param: Swift.Dictionary&lt;Swift.String, Any&gt;, manually: Swift.Bool) async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/DataProviders/ScoreMonitorDataProvider.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "106"
+                  endingLineNumber = "106"
+                  offsetFromSymbolStart = "100">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4D7D8424-3B68-41B6-9790-BD70A7579755"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/DataProviders/ScoreMonitorDataProvider.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "handleNewScoreInfo(score:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

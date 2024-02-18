@@ -64,6 +64,9 @@
 		476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476340302AB89F47006C24E2 /* LexueProfile.swift */; };
 		476448412AD84B7700952A22 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 476448402AD84B7700952A22 /* WrappingHStack */; };
 		476448432AD8E37D00952A22 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476448422AD8E37D00952A22 /* ShareSheet.swift */; };
+		4773446E2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */; };
+		4773446F2B81C88700AB5358 /* ScoreMonitorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */; };
+		477344702B81D52100AB5358 /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
 		47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */; };
 		478434802ADEDD890095A2EE /* LexueHelperBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */; };
 		4784DBD42B201050000B12CE /* ExtraFunctionSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */; };
@@ -258,6 +261,7 @@
 		475EDED32AB60697008486F0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		476340302AB89F47006C24E2 /* LexueProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueProfile.swift; sourceTree = "<group>"; };
 		476448422AD8E37D00952A22 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreMonitorDataProvider.swift; sourceTree = "<group>"; };
 		47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLogicManager.swift; sourceTree = "<group>"; };
 		4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueHelperBackend.swift; sourceTree = "<group>"; };
 		4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionSetting.swift; sourceTree = "<group>"; };
@@ -387,6 +391,7 @@
 				470AFC672ACB16D6004C7F70 /* DataProviderManager.swift */,
 				470AFC692ACB194D004C7F70 /* LexueDataProvider.swift */,
 				475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */,
+				4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */,
 			);
 			path = DataProviders;
 			sourceTree = "<group>";
@@ -832,6 +837,7 @@
 			files = (
 				47F4FD2C2ACDBF3F00C6C144 /* LocalNotificationManager.swift in Sources */,
 				47F4FD312ACDC1D800C6C144 /* DataProviderBase.swift in Sources */,
+				4773446F2B81C88700AB5358 /* ScoreMonitorDataProvider.swift in Sources */,
 				47196FF72AC5522500979DFE /* WidgetView.swift in Sources */,
 				47F4FD172ACD9CD700C6C144 /* LexueAPI.swift in Sources */,
 				47F4FD162ACD9CD500C6C144 /* BITLogin.swift in Sources */,
@@ -841,6 +847,7 @@
 				47196FF22AC551D200979DFE /* DefaultEntry.swift in Sources */,
 				47F4FD182ACD9CE200C6C144 /* GlobalVariables.swift in Sources */,
 				47F4FD2E2ACDC07900C6C144 /* CourseManager.swift in Sources */,
+				477344702B81D52100AB5358 /* Webvpn.swift in Sources */,
 				47F4FD322ACDC1DA00C6C144 /* LexueDataProvider.swift in Sources */,
 				47196FE12AC5514F00979DFE /* LexueWidgetBundle.swift in Sources */,
 				47F4FD252ACDA63A00C6C144 /* ContactDisplayModel.swift in Sources */,
@@ -894,6 +901,7 @@
 				479A290C2AECCF9A009AAD4F /* iCloudUserDefaults.swift in Sources */,
 				4703F6702AEEB10B00899F61 /* AppNotificationsView.swift in Sources */,
 				47B411792ACBD96300AC0B5E /* DataProviderSettingView.swift in Sources */,
+				4773446E2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift in Sources */,
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,
 				479129C22AC30A3A00F811F9 /* LexueBroswerView.swift in Sources */,
