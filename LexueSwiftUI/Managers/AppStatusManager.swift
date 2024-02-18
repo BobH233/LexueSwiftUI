@@ -163,6 +163,9 @@ class AppStatusManager {
                 }
             }
         }
+        if SettingStorage.shared.loginnedContext.CASTGC != "" {
+            GlobalVariables.shared.isLogin = true
+        }
         // 刷新app公告
         Task {
             await AppNotificationsManager.shared.UpdateNotifications()
@@ -173,8 +176,8 @@ class AppStatusManager {
         }
         UMengManager.shared.AppStartLogic()
         LocalNotificationManager.shared.GuardNotificationPermission()
-        GlobalVariables.shared.LoadingText = "加载中"
-        GlobalVariables.shared.isLoading = true
+//        GlobalVariables.shared.LoadingText = "加载中"
+//        GlobalVariables.shared.isLoading = true
         if let data = Data(base64Encoded: SettingStorage.shared.cacheSelfLexueProfile.avatarBase64 ?? ""), let image = UIImage(data: data) {
             GlobalVariables.shared.userAvatarUIImage = image
         }
@@ -298,8 +301,8 @@ class AppStatusManager {
                 // 切回重新刷新sesskey的阈值时间设定为60s，因为如果没被踢刷新速度会很快，所以不必担心体验问题
                 print("BackGoreground 60s for get sessKey")
                 // RefreshLexueContext(silent_refresh: false)  // 不用这个方式了，因为GetSessKey自带重试处理，所以可以直接刷新SessKey
-                GlobalVariables.shared.LoadingText = "刷新中"
-                GlobalVariables.shared.isLoading = true
+//                GlobalVariables.shared.LoadingText = "刷新中"
+//                GlobalVariables.shared.isLoading = true
                 Task {
                     await AppNotificationsManager.shared.UpdateNotifications()
                 }

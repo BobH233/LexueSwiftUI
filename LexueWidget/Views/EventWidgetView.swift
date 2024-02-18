@@ -16,10 +16,13 @@ struct EventWidgetView: View {
         switch widgetFamily {
         case .systemSmall:
             Event_SmallView(entry: entry)
+                .widgetURL(URL(string: "lexuehelper://event_view"))
         case .systemMedium:
             Event_MediumView(entry: entry)
+                .widgetURL(URL(string: "lexuehelper://event_view"))
         case .systemLarge:
             Event_LargeView(entry: entry)
+                .widgetURL(URL(string: "lexuehelper://event_view"))
         default:
             EmptyView()
         }

@@ -59,6 +59,18 @@ struct ContentView: View {
                     GlobalVariables.shared.debugMode = false
                     return
                 }
+                if let action = components.host, action == "score_view" {
+                    print("查看分数界面")
+                    self.tabSelection = 4
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        NotificationCenter.default.post(name: extraFunctionSelectedNotification, object: "queryScore")
+                    }
+                    return
+                }
+                if let action = components.host, action == "event_view" {
+                    print("查看事件界面")
+                    self.tabSelection = 3
+                }
             }
         }
         .alert(isPresented: $globalVar.showAlert) {

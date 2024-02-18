@@ -16,10 +16,13 @@ struct ScoreWidgetView: View {
         switch widgetFamily {
         case .systemSmall:
             Score_SmallView(entry: entry)
+                .widgetURL(URL(string: "lexuehelper://score_view"))
         case .systemMedium:
             Score_MediumView(entry: entry)
+                .widgetURL(URL(string: "lexuehelper://score_view"))
         case .systemLarge:
             Score_LargeView(entry: entry)
+                .widgetURL(URL(string: "lexuehelper://score_view"))
         default:
             EmptyView()
         }
