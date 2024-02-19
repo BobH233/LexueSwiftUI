@@ -28,13 +28,14 @@ struct ScoreProvider: TimelineProvider {
     func CalcEntryInfo(context widget_context: Context, db_context context: NSManagedObjectContext = DataController.shared.container.viewContext) async -> ScoreDefaultEntry {
         var new_entry = ScoreDefaultEntry()
         new_entry.size = widget_context.displaySize
-        new_entry.isEnableScoreMonitor = false
-        if let monitor = DataProviderManager.shared.FindProvider(providerId: "provider.score_monitor") {
-            new_entry.isEnableScoreMonitor = monitor.enabled
+        new_entry.isLogin = (GlobalVariables.shared.cur_lexue_context.MoodleSession !=  "")
+        new_entry.isEnableScoreMonitor = DataProviderManager.shared.getProviderSetting(attribute: "enable", providerId: "provider.score_monitor") ?? false
+        if !new_entry.isEnableScoreMonitor {
+            return new_entry
         }
         var allScores = DataController.shared.queryAllScoreDiffCache(context: context)
         
-        new_entry.isLogin = (GlobalVariables.shared.cur_lexue_context.MoodleSession !=  "")
+        
         new_entry.total_cnt = allScores.count
         new_entry.unread_cnt = 0
         for score in allScores {

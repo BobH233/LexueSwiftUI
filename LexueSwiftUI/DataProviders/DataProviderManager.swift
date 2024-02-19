@@ -89,6 +89,10 @@ class DataProviderManager: ObservableObject {
         loadSettingStorage()
     }
     
+    func getProviderSetting<T>(attribute: String, providerId: String) -> T? {
+        return UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.object(forKey: "dataprovider.setting.\(providerId).\(attribute)") as? T
+    }
+    
     var lastRefresh: Double = 0
     
     // 分发apns端发来的消息
