@@ -64,6 +64,7 @@
 		476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476340302AB89F47006C24E2 /* LexueProfile.swift */; };
 		476448412AD84B7700952A22 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 476448402AD84B7700952A22 /* WrappingHStack */; };
 		476448432AD8E37D00952A22 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476448422AD8E37D00952A22 /* ShareSheet.swift */; };
+		476B89102B85F7C100D28B56 /* iOSCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B890F2B85F7C100D28B56 /* iOSCalendarManager.swift */; };
 		4773446E2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */; };
 		4773446F2B81C88700AB5358 /* ScoreMonitorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */; };
 		477344702B81D52100AB5358 /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
@@ -267,6 +268,7 @@
 		475EDED32AB60697008486F0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		476340302AB89F47006C24E2 /* LexueProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueProfile.swift; sourceTree = "<group>"; };
 		476448422AD8E37D00952A22 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		476B890F2B85F7C100D28B56 /* iOSCalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCalendarManager.swift; sourceTree = "<group>"; };
 		4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreMonitorDataProvider.swift; sourceTree = "<group>"; };
 		477344712B82078800AB5358 /* ScoreWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreWidgetView.swift; sourceTree = "<group>"; };
 		477344742B82080900AB5358 /* ScoreDefaultEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreDefaultEntry.swift; sourceTree = "<group>"; };
@@ -602,6 +604,7 @@
 				479A290B2AECCF9A009AAD4F /* iCloudUserDefaults.swift */,
 				4703F66D2AEEACFF00899F61 /* AppNotificationsManager.swift */,
 				475522142AF7D2F200B1347D /* LocationManager.swift */,
+				476B890F2B85F7C100D28B56 /* iOSCalendarManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -945,6 +948,7 @@
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,
 				479129C22AC30A3A00F811F9 /* LexueBroswerView.swift in Sources */,
+				476B89102B85F7C100D28B56 /* iOSCalendarManager.swift in Sources */,
 				474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */,
 				478661372B577FC300CC734E /* EditNotificationView.swift in Sources */,
 				475EDED42AB60697008486F0 /* ProfileView.swift in Sources */,
@@ -1232,7 +1236,7 @@
 				INFOPLIST_FILE = LexueSwiftUI/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "i乐学助手";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCalendarsUsageDescription = "需要访问你的日历来自动导入事件提醒";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "需要访问你的日历来自动导入事件提醒，导入课程表等";
 				INFOPLIST_KEY_NSCameraUsageDescription = "需要访问你的摄像头来进行应用内作业拍摄等功能";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "i乐学助手需要访问您的位置来使用校园地图服务";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "i乐学助手需要访问您的位置来使用校园地图服务";
@@ -1289,7 +1293,7 @@
 				INFOPLIST_FILE = LexueSwiftUI/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "i乐学助手";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSCalendarsUsageDescription = "需要访问你的日历来自动导入事件提醒";
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "需要访问你的日历来自动导入事件提醒，导入课程表等";
 				INFOPLIST_KEY_NSCameraUsageDescription = "需要访问你的摄像头来进行应用内作业拍摄等功能";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "i乐学助手需要访问您的位置来使用校园地图服务";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "i乐学助手需要访问您的位置来使用校园地图服务";

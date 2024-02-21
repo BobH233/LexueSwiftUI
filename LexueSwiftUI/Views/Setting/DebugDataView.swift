@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import EventKit
 
 struct DebugDataView: View {
     @Environment(\.managedObjectContext) var managedObjContext
@@ -45,8 +46,62 @@ struct DebugDataView: View {
     @State var JXZX_context: JXZXehall.JXZXContext = JXZXehall.JXZXContext()
     
     @State var isPresentAlert = false
+    
+    @State var eventStore = EKEventStore()
     var body: some View {
         Form {
+            Section("Schedule") {
+                Button("添加或覆盖日历列表") {
+                    Task {
+                        let res = await iOSCalendarManager.shared.AddNewCalendar(calendarName: "📅 我的日历表", calendarColor: .red, rewriteExist: true)
+                        if(res) {
+                            DispatchQueue.main.async {
+                                GlobalVariables.shared.alertTitle = "Success"
+                                GlobalVariables.shared.alertContent = "Success"
+                                GlobalVariables.shared.showAlert = true
+                            }
+                            print("成功")
+                        } else {
+                            DispatchQueue.main.async {
+                                GlobalVariables.shared.alertTitle = "Failed"
+                                GlobalVariables.shared.alertContent = "Failed"
+                                GlobalVariables.shared.showAlert = true
+                            }
+                            print("失败")
+                        }
+                    }
+                }
+                Button("添加日历列表") {
+                    eventStore.requestAccess(to: .event) { granted, error in
+                        if let error = error {
+                            print(error.localizedDescription)
+                            return
+                        }
+                        if granted {
+                            print("granted!")
+                            let newCalendar = EKCalendar(for: .event, eventStore: eventStore)
+                            newCalendar.title = "北理工课程表"
+                            newCalendar.cgColor = UIColor.systemBlue.cgColor
+                            print(eventStore.sources)
+                            // 选择源
+                            if let iCloudSource = eventStore.sources.first(where: { $0.sourceType == .calDAV && $0.title == "iCloud" }) {
+                                newCalendar.source = iCloudSource
+                            } else if let localSource = eventStore.sources.first(where: { $0.sourceType == .local }) {
+                                newCalendar.source = localSource
+                            } else {
+                                print("未找到合适的源")
+                                return
+                            }
+                            do {
+                                try eventStore.saveCalendar(newCalendar, commit: true)
+                                print("新日历创建成功！")
+                            } catch {
+                                print("创建日历时发生错误: \(error)")
+                            }
+                        }
+                    }
+                }
+            }
             Section("Backend") {
                 Button("UploadDeviceToken") {
                     Task {
