@@ -60,10 +60,12 @@ struct ContentView: View {
                     return
                 }
                 if let action = components.host, action == "score_view" {
-                    print("查看分数界面")
-                    self.tabSelection = 4
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        NotificationCenter.default.post(name: extraFunctionSelectedNotification, object: "queryScore")
+                    if SettingStorage.shared.savedUsername != "" &&  SettingStorage.shared.savedPassword != ""{
+                        print("查看分数界面")
+                        self.tabSelection = 4
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            NotificationCenter.default.post(name: extraFunctionSelectedNotification, object: "queryScore")
+                        }
                     }
                     return
                 }
