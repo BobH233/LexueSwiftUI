@@ -219,7 +219,7 @@ class SettingStorage: ObservableObject {
     func GetEnabledExtraFunctions() -> [ExtraFunctionDescription] {
         // 获得用户启用的实用功能列表
         if let stored_data = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.enabledFunctions") as? Data {
-            let tmp = decodeStructArray(from: stored_data)
+            let tmp: [ExtraFunctionDescriptionStored] = decodeStructArray(from: stored_data)
             var ret: [ExtraFunctionDescription] = []
             for t in tmp {
                 if let tt = t.toDescription() {
@@ -239,6 +239,29 @@ class SettingStorage: ObservableObject {
         }
     }
     
+    func GetEnabledScoreViewModule() -> [CourseScoreViewModuleDescription] {
+        // 获得用户启用的实用功能列表
+        if let stored_data = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.enableScoreModule") as? Data {
+            let tmp: [CourseScoreViewModuleDescriptionStored] = decodeStructArray(from: stored_data)
+            var ret: [CourseScoreViewModuleDescription] = []
+            for t in tmp {
+                if let tt = t.toDescription() {
+                    ret.append(tt)
+                }
+            }
+            return ret
+        } else {
+            // 如果是第一次，那么返回默认启用的功能列表
+            var ret: [CourseScoreViewModuleDescription] = []
+            for des in allCourseScoreViewModules {
+                if des.enable {
+                    ret.append(des)
+                }
+            }
+            return ret
+        }
+    }
+    
     func SetEnabledExtraFunctions(current: [ExtraFunctionDescription]) {
         var tmp: [ExtraFunctionDescriptionStored] = []
         for c in current {
@@ -246,6 +269,17 @@ class SettingStorage: ObservableObject {
         }
         if let data = encodeFuncDescriptionStoredArr(tmp) {
             UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(data, forKey: "setting.enabledFunctions")
+            print("保存设置成功！")
+        }
+    }
+    
+    func SetEnabledScoreViewModule(current: [CourseScoreViewModuleDescription]) {
+        var tmp: [CourseScoreViewModuleDescriptionStored] = []
+        for c in current {
+            tmp.append(c.toDescriptionStored())
+        }
+        if let data = encodeFuncDescriptionStoredArr(tmp) {
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(data, forKey: "setting.enableScoreModule")
             print("保存设置成功！")
         }
     }

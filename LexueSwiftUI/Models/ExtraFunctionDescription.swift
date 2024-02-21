@@ -34,10 +34,10 @@ struct ExtraFunctionDescriptionStored: Codable {
     }
 }
 
-func encodeFuncDescriptionStoredArr(_ array: [ExtraFunctionDescriptionStored]) -> Data? {
+func encodeFuncDescriptionStoredArr<T: Encodable>(_ array: [T]) -> Data? {
     try? JSONEncoder().encode(array)
 }
 
-func decodeStructArray(from data: Data) -> [ExtraFunctionDescriptionStored] {
-    return (try? JSONDecoder().decode([ExtraFunctionDescriptionStored].self, from: data)) ?? []
+func decodeStructArray<T: Decodable>(from data: Data) -> [T] {
+    return (try? JSONDecoder().decode([T].self, from: data)) ?? []
 }

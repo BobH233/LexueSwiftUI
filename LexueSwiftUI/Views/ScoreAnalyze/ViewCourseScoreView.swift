@@ -180,6 +180,8 @@ struct ViewCourseScoreView: View {
     @State var showShareSheet: Bool = false
     @State var showImage: UIImage? = nil
     
+    @State var enabled_modules: [CourseScoreViewModuleDescription] = []
+    
     func StringToFloat(str: String) -> Float {
         return Float(str.filter { "0123456789".contains($0) }) ?? 0
     }
@@ -234,54 +236,61 @@ struct ViewCourseScoreView: View {
                         .foregroundColor(shareMode ? .black : (sysColorScheme == .dark ? .white : .black))
                         .font(.system(size: 40))
                         .padding(.bottom, 10)
-                        
-                    
-                    if !currentCourse.semester.isEmpty {
-                        SimpleCardView(image_name: "microbe.fill", title: "开课学期", content: "\(currentCourse.semester)")
-                            .padding(.bottom, 0)
-                    }
-                    if !currentCourse.course_type.isEmpty {
-                        SimpleCardView(image_name: "square.split.2x2.fill", title: "课程性质", content: "\(currentCourse.course_type)")
-                            .padding(.bottom, 0)
-                    }
-                    if !currentCourse.my_score.isEmpty {
-                        SimpleCardView(image_name: "star.fill", title: "我的成绩", content: "\(currentCourse.my_score) 分")
-                            .padding(.bottom, 0)
-                    }
-                    if !currentCourse.credit.isEmpty {
-                        SimpleCardView(image_name: "graduationcap.fill", title: "学分", content: "\(currentCourse.credit)")
-                            .padding(.bottom, 0)
-                    }
-                    if !currentCourse.avg_score.isEmpty {
-                        SimpleCardView(image_name: "alternatingcurrent", title: "平均分", content: "\(currentCourse.avg_score) 分")
-                            .padding(.bottom, 0)
-                    }
-                    if !currentCourse.max_score.isEmpty {
-                        SimpleCardView(image_name: "flag.fill", title: "最高分", content: "\(currentCourse.max_score) 分")
-                            .padding(.bottom, 0)
-                    }
-                    if abs(evaluateDiff) > 0.01 && !currentCourse.ignored_course {
-                        SimpleCardView(color: evaluateDiff > 0 ? .green : .red, image_name: evaluateDiff > 0 ? "hand.thumbsup.fill" : "hand.thumbsdown.fill", title: evaluateDiff > 0 ? "这门课拉高了平均分" : "这门课拉低了平均分", content: "\(String(format: "%.2f", abs(evaluateDiff))) 分")
-                            .padding(.bottom, 0)
-                    }
-                    if currentCourse.ignored_course {
-                        SimpleCardView(color: .red, image_name: "exclamationmark.triangle.fill", title: "不计入分数", content: "补考、重考取最高分算入成绩")
-                            .padding(.bottom, 0)
-                    }
-                    if !currentCourse.my_grade_in_all.isEmpty && !currentCourse.all_study_count.isEmpty {
-                        ContentCardView(title0: "全部同学中(前\(currentCourse.my_grade_in_all))", color0: .blue, forceWhite: true) {
-                            ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_all) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).1)")
-                                .padding(.horizontal, 10)
-                                .padding(.top, 10)
-                                .padding(.bottom, 90)
+                    ForEach(enabled_modules, id: \.self) { enabled_function in
+                        if enabled_function.moduleName == "startSem" && !currentCourse.semester.isEmpty {
+                            SimpleCardView(image_name: "microbe.fill", title: "开课学期", content: "\(currentCourse.semester)")
+                                .padding(.bottom, 0)
+                        }
+                        if enabled_function.moduleName == "courseType" && !currentCourse.course_type.isEmpty {
+                            SimpleCardView(image_name: "square.split.2x2.fill", title: "课程性质", content: "\(currentCourse.course_type)")
+                                .padding(.bottom, 0)
+                        }
+                        if enabled_function.moduleName == "myGrade" && !currentCourse.my_score.isEmpty {
+                            SimpleCardView(image_name: "star.fill", title: "我的成绩", content: "\(currentCourse.my_score) 分")
+                                .padding(.bottom, 0)
+                        }
+                        if enabled_function.moduleName == "credit" && !currentCourse.credit.isEmpty {
+                            SimpleCardView(image_name: "graduationcap.fill", title: "学分", content: "\(currentCourse.credit)")
+                                .padding(.bottom, 0)
+                        }
+                        if enabled_function.moduleName == "avgScore" && !currentCourse.avg_score.isEmpty {
+                            SimpleCardView(image_name: "alternatingcurrent", title: "平均分", content: "\(currentCourse.avg_score) 分")
+                                .padding(.bottom, 0)
+                        }
+                        if enabled_function.moduleName == "maxScore" && !currentCourse.max_score.isEmpty {
+                            SimpleCardView(image_name: "flag.fill", title: "最高分", content: "\(currentCourse.max_score) 分")
+                                .padding(.bottom, 0)
+                        }
+                        if enabled_function.moduleName == "changeMyAvg" && abs(evaluateDiff) > 0.01 && !currentCourse.ignored_course {
+                            SimpleCardView(color: evaluateDiff > 0 ? .green : .red, image_name: evaluateDiff > 0 ? "hand.thumbsup.fill" : "hand.thumbsdown.fill", title: evaluateDiff > 0 ? "这门课拉高了平均分" : "这门课拉低了平均分", content: "\(String(format: "%.2f", abs(evaluateDiff))) 分")
+                                .padding(.bottom, 0)
+                        }
+                        if enabled_function.moduleName == "reexamTip" && currentCourse.ignored_course {
+                            SimpleCardView(color: .red, image_name: "exclamationmark.triangle.fill", title: "不计入分数", content: "补考、重考取最高分算入成绩")
+                                .padding(.bottom, 0)
+                        }
+                        if enabled_function.moduleName == "inAllStu" && !currentCourse.my_grade_in_all.isEmpty && !currentCourse.all_study_count.isEmpty {
+                            ContentCardView(title0: "全部同学中(前\(currentCourse.my_grade_in_all))", color0: .blue, forceWhite: true) {
+                                ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_all) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.all_study_count, progressStr: currentCourse.my_grade_in_all).1)")
+                                    .padding(.horizontal, 10)
+                                    .padding(.top, 10)
+                                    .padding(.bottom, 90)
+                            }
+                        }
+                        if enabled_function.moduleName == "inMajorStu" && !currentCourse.my_grade_in_major.isEmpty && !currentCourse.major_study_count.isEmpty {
+                            ContentCardView(title0: "同专业同学中(前\(currentCourse.my_grade_in_major))", color0: .blue, forceWhite: true) {
+                                ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_major) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).1)")
+                                    .padding(.horizontal, 10)
+                                    .padding(.top, 10)
+                                    .padding(.bottom, 90)
+                            }
                         }
                     }
-                    if !currentCourse.my_grade_in_major.isEmpty && !currentCourse.major_study_count.isEmpty {
-                        ContentCardView(title0: "同专业同学中(前\(currentCourse.my_grade_in_major))", color0: .blue, forceWhite: true) {
-                            ColoredProgressView(progress: Double(StringToFloat(str: currentCourse.my_grade_in_major) / 100.0), beforeText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).0)", afterText: "\(GetPeopleCount(totPeopleStr: currentCourse.major_study_count, progressStr: currentCourse.my_grade_in_major).1)")
-                                .padding(.horizontal, 10)
-                                .padding(.top, 10)
-                                .padding(.bottom, 90)
+                    if !shareMode {
+                        HStack {
+                            Spacer()
+                            NavigationLink("编辑显示内容", destination: CourseScoreViewEditor())
+                            Spacer()
                         }
                     }
                     if shareMode {
@@ -365,6 +374,9 @@ struct ViewCourseScoreView: View {
                     }
                 }
                 DataController.shared.save(context: managedObjContext)
+            }
+            withAnimation {
+                enabled_modules = SettingStorage.shared.GetEnabledScoreViewModule()
             }
         }
         .onFirstAppear {

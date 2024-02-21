@@ -65,6 +65,8 @@
 		476448412AD84B7700952A22 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 476448402AD84B7700952A22 /* WrappingHStack */; };
 		476448432AD8E37D00952A22 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476448422AD8E37D00952A22 /* ShareSheet.swift */; };
 		476B89102B85F7C100D28B56 /* iOSCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B890F2B85F7C100D28B56 /* iOSCalendarManager.swift */; };
+		476B89132B8604F200D28B56 /* CourseScoreViewEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B89122B8604F200D28B56 /* CourseScoreViewEditor.swift */; };
+		476B89142B86074500D28B56 /* CourseScoreViewEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B89122B8604F200D28B56 /* CourseScoreViewEditor.swift */; };
 		4773446E2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */; };
 		4773446F2B81C88700AB5358 /* ScoreMonitorDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */; };
 		477344702B81D52100AB5358 /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
@@ -269,6 +271,7 @@
 		476340302AB89F47006C24E2 /* LexueProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueProfile.swift; sourceTree = "<group>"; };
 		476448422AD8E37D00952A22 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
 		476B890F2B85F7C100D28B56 /* iOSCalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSCalendarManager.swift; sourceTree = "<group>"; };
+		476B89122B8604F200D28B56 /* CourseScoreViewEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseScoreViewEditor.swift; sourceTree = "<group>"; };
 		4773446D2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreMonitorDataProvider.swift; sourceTree = "<group>"; };
 		477344712B82078800AB5358 /* ScoreWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreWidgetView.swift; sourceTree = "<group>"; };
 		477344742B82080900AB5358 /* ScoreDefaultEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreDefaultEntry.swift; sourceTree = "<group>"; };
@@ -556,6 +559,7 @@
 		473BAE902AA48E6700968C3C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				476B89112B8603EF00D28B56 /* ExtraFunction */,
 				47906C352B3097FB00DAACAA /* AdminManage */,
 				47B4420A2AC5C0B600EE03A9 /* PrivacyStatement.swift */,
 				473BAE932AA4969F00968C3C /* SettingView.swift */,
@@ -569,8 +573,6 @@
 				472E44302ADAE98400230FC4 /* Feedback.swift */,
 				475D211C2AEC09B400CB9DC7 /* iCloudActions.swift */,
 				4703F66F2AEEB10B00899F61 /* AppNotificationsView.swift */,
-				47BDAF3F2B1A367600D43119 /* ExtraFunctionSelectionView.swift */,
-				4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -639,6 +641,15 @@
 			path = ExamInfo;
 			sourceTree = "<group>";
 		};
+		476B89112B8603EF00D28B56 /* ExtraFunction */ = {
+			isa = PBXGroup;
+			children = (
+				47BDAF3F2B1A367600D43119 /* ExtraFunctionSelectionView.swift */,
+				4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */,
+			);
+			path = ExtraFunction;
+			sourceTree = "<group>";
+		};
 		477344732B8207DB00AB5358 /* Entries */ = {
 			isa = PBXGroup;
 			children = (
@@ -675,6 +686,7 @@
 				479B22EB2AD641FB00A7DCC7 /* ViewCourseScoreView.swift */,
 				4700A8032AD6ED8000F75386 /* GeneralScoreAnalyze.swift */,
 				47DAD9AF2AD7E9F100B4950D /* FilterScoreView.swift */,
+				476B89122B8604F200D28B56 /* CourseScoreViewEditor.swift */,
 			);
 			path = ScoreAnalyze;
 			sourceTree = "<group>";
@@ -901,6 +913,7 @@
 				47F4FD332ACDC1E600C6C144 /* MessageManager.swift in Sources */,
 				477344822B820CD400AB5358 /* Score_SmallView.swift in Sources */,
 				477344832B820CD700AB5358 /* Score_MediumView.swift in Sources */,
+				476B89142B86074500D28B56 /* CourseScoreViewEditor.swift in Sources */,
 				47F4FD142ACD966C00C6C144 /* Event_SmallView.swift in Sources */,
 				47F4FD292ACDB4EE00C6C144 /* EventManager.swift in Sources */,
 				477344802B820CCD00AB5358 /* ScoreDefaultEntry.swift in Sources */,
@@ -947,6 +960,7 @@
 				4773446E2B81C77D00AB5358 /* ScoreMonitorDataProvider.swift in Sources */,
 				47CBA2412AA5CF32009F9242 /* CourseShortInfo.swift in Sources */,
 				47A927892AA786ED00ABDC53 /* DebugDataView.swift in Sources */,
+				476B89132B8604F200D28B56 /* CourseScoreViewEditor.swift in Sources */,
 				479129C22AC30A3A00F811F9 /* LexueBroswerView.swift in Sources */,
 				476B89102B85F7C100D28B56 /* iOSCalendarManager.swift in Sources */,
 				474515132AAB641700CCF24E /* ContactDetailView.swift in Sources */,
