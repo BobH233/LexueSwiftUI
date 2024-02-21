@@ -467,9 +467,6 @@ struct ViewScoreView: View {
                         Text("当前门数:")
                             .bold()
                         Text("\(current_courseCount)")
-                        Spacer()
-                    }
-                    HStack {
                         Text("当前优良率:")
                             .bold()
                         Text("\(String(format: "%.2f", current_rate80 * 100))%")
