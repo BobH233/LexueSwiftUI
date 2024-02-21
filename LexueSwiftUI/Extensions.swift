@@ -591,3 +591,39 @@ extension String {
         }
     }
 }
+
+struct ImageSaver: UIViewControllerRepresentable {
+    var image: UIImage
+    var completion: (Error?) -> Void
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        // 创建并返回一个空的UIViewController实例，因为我们不需要展示任何UI
+        UIViewController()
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        // 当需要更新UI时调用，此例中不需要实现
+    }
+
+    // Coordinator用于处理图片保存完成后的回调
+    class Coordinator: NSObject {
+        var completion: (Error?) -> Void
+
+        init(completion: @escaping (Error?) -> Void) {
+            self.completion = completion
+        }
+
+        @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+            completion(error)
+        }
+    }
+
+    func makeCoordinator() -> Coordinator {
+        Coordinator(completion: completion)
+    }
+
+    // 调用此方法来保存图片
+    func saveToPhotoAlbum() {
+        UIImageWriteToSavedPhotosAlbum(image, makeCoordinator(), #selector(Coordinator.image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+}

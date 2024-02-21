@@ -338,10 +338,33 @@ struct ViewCourseScoreView: View {
                         currentSize.height += 130
                         let result = self.body.snapshot(size: currentSize)
                         shareMode = false
-                        UIImageWriteToSavedPhotosAlbum(result, nil, nil, nil)
-                        GlobalVariables.shared.alertTitle = "成功导出成绩单"
-                        GlobalVariables.shared.alertContent = "请在你的照片中查看"
-                        GlobalVariables.shared.showAlert = true
+                        
+//                        UIImageWriteToSavedPhotosAlbum(result, nil, nil, nil)
+//                        GlobalVariables.shared.alertTitle = "成功导出成绩单"
+//                        GlobalVariables.shared.alertContent = "请在你的照片中查看"
+//                        GlobalVariables.shared.showAlert = true
+                        let imageSaver = ImageSaver(image: result) { error in
+                            if let error = error {
+                                // 处理保存失败的情况
+                                print("保存失败: \(error.localizedDescription)")
+                                DispatchQueue.main.async {
+                                    GlobalVariables.shared.alertTitle = "保存失败"
+                                    GlobalVariables.shared.alertContent = "\(error.localizedDescription), 请检查设置中的app权限！"
+                                    GlobalVariables.shared.showAlert = true
+                                }
+                                
+                            } else {
+                                // 处理保存成功的情况
+                                print("图片保存成功")
+                                DispatchQueue.main.async {
+                                    GlobalVariables.shared.alertTitle = "成功导出成绩单"
+                                    GlobalVariables.shared.alertContent = "请在你的照片中查看"
+                                    GlobalVariables.shared.showAlert = true
+                                }
+                            }
+                        }
+                        // 调用方法保存图片
+                        imageSaver.saveToPhotoAlbum()
                     },
                     .default(Text("分享成绩单图片")) {
                         if geometryProxy == nil {
