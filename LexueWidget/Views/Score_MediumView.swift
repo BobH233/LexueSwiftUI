@@ -83,7 +83,7 @@ struct Score_MediumView: View {
                 }
                 .padding(.bottom, 3)
                 ForEach(limited_scores) { score in
-                    ScoreItemView(color: score.read ? .gray : .green, courseName: score.courseName ?? "未知", description: "我:\(score.myScore ?? "-") 均:\(score.avgScore ?? "-") 专业:\(score.scoreInMajor ?? "-")")
+                    ScoreItemView(color: score.read ? .gray : .green, courseName: score.courseName?.DashIfEmpty() ?? "未知", description: "我:\(score.myScore?.DashIfEmpty() ?? "-") 均:\(score.avgScore?.DashIfEmpty() ?? "-") 专业:\(score.scoreInMajor?.DashIfEmpty() ?? "-")")
                 }
                 Spacer()
             } else {

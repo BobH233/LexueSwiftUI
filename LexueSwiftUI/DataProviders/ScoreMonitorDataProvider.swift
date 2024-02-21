@@ -90,7 +90,7 @@ class ScoreMonitorDataProvider: DataProvider {
                 return
             }
             var msg = MessageBodyItem(type: .markdown)
-            msg.text_data = "## 成绩信息更新提醒：\n\n**课程名称:** \(score.courseName)\n\n**检测更新时间:** \(GetFullDisplayTime(scoreCache.last_update ?? Date.now))\n\n**我的成绩:** \(score.my_score)\n\n**平均分:** \(score.avg_score)\n\n**我的专业排名:** \(score.my_grade_in_major)\n\n**我的全部排名:** \(score.my_grade_in_all)\n\n\n详细分析，请进入\"成绩查询\"功能查看。"
+            msg.text_data = "## 成绩信息更新提醒：\n\n**课程名称:** \(score.courseName)\n\n**检测更新时间:** \(GetFullDisplayTime(scoreCache.last_update ?? Date.now))\n\n**我的成绩:** \(score.my_score.DashIfEmpty())\n\n**平均分:** \(score.avg_score.DashIfEmpty())\n\n**我的专业排名:** \(score.my_grade_in_major.DashIfEmpty())\n\n**我的全部排名:** \(score.my_grade_in_all.DashIfEmpty())\n\n\n详细分析，请进入\"成绩查询\"功能查看。"
             self.msgRequestList.append(PushMessageRequest(senderUid: "score_monitor", contactOriginNameIfMissing: "成绩监控", contactTypeIfMissing: .msg_provider, msgBody: msg, date: Date()))
         }
     }

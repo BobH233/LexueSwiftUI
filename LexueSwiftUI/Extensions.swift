@@ -581,3 +581,13 @@ extension View {
             }
     }
 }
+
+extension String {
+    func DashIfEmpty() -> String {
+        if self.isEmpty {
+            return "-"
+        } else {
+            return self
+        }
+    }
+}
