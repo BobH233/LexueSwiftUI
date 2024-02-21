@@ -30,6 +30,10 @@ class JXZXehall {
     // 表单 XNXQDM=2023-2024-1
     let API_JXZX_GET_UNSCHEDULED_EXAM = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/cxwapdksrw.do"
     
+    // 查询某学期的课程表安排，post
+    // 表单 XNXQDM=2023-2024-2
+    let API_JXZX_GET_SEMESTER_COURSE = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/modules/xskcb/cxxszhxqkb.do"
+    
     let bit_login_header = [
         "Referer": "https://login.bit.edu.cn/authserver/login",
         "Host": "login.bit.edu.cn",
@@ -145,6 +149,37 @@ class JXZXehall {
             // 更新使用考试完成的时间逻辑
             return GetExamEndDate() < Date.now
         }
+    }
+    
+    // 课程表上课程的信息
+    struct ScheduleCourseInfo {
+        // KKDWDM_DISPLAY: 开课学院
+        var KKDWDM_DISPLAY: String = ""
+        // KCM: 课程名
+        var CourseName: String = ""
+        // SKJS: 授课老师名字
+        var TeacherName: String = ""
+        // SKZC: 课程所在的周数, 01串
+        var ExistWeek: String = ""
+        // JASMC: 上课的教室位置
+        var ClassroomLocation: String = ""
+        // YPSJDD: 上课的时间地点总字符串(e.g. "1-8周 星期三 6-7节 综教B302,1-8周 星期五 6-7节 综教B302")
+        var ClassroomLocationTimeDes: String = ""
+        // SKXQ: 上课星期，整数，1~7
+        var DayOfWeek: Int = 1
+        // KSJC: 开始节次，整数
+        var StartSectionId: Int = 0
+        // JSJC: 结束节次，整数
+        var EndSectionId: Int = 0
+        // XXXQMC: 校区
+        var SchoolRegion: String = ""
+        // KCH: 课程号
+        var CourseId: String = ""
+        // XF: 学分，整数
+        var CourseCredit: Int = 0
+        // KCXZDM_DISPLAY: 课程性质，选修，必修
+        var CourseType: String = ""
+        
     }
     
     enum JXZXError: Error {
