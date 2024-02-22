@@ -82,6 +82,7 @@
 		4784DBD62B202492000B12CE /* ExtraFunctionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */; };
 		4784DBD72B2024AB000B12CE /* ExtraFunctionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */; };
 		478661372B577FC300CC734E /* EditNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478661362B577FC300CC734E /* EditNotificationView.swift */; };
+		478AB1762B87207600E72F7C /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AB1752B87207600E72F7C /* ScheduleManager.swift */; };
 		478B70562AD445190008865A /* Webvpn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478B70552AD445190008865A /* Webvpn.swift */; };
 		47906C342B30975700DAACAA /* AdminManageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47906C332B30975700DAACAA /* AdminManageView.swift */; };
 		47906C372B30996C00DAACAA /* AddNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47906C362B30996C00DAACAA /* AddNotificationView.swift */; };
@@ -284,6 +285,7 @@
 		4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionSetting.swift; sourceTree = "<group>"; };
 		4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionDescription.swift; sourceTree = "<group>"; };
 		478661362B577FC300CC734E /* EditNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotificationView.swift; sourceTree = "<group>"; };
+		478AB1752B87207600E72F7C /* ScheduleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleManager.swift; sourceTree = "<group>"; };
 		478B70552AD445190008865A /* Webvpn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webvpn.swift; sourceTree = "<group>"; };
 		47906C332B30975700DAACAA /* AdminManageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminManageView.swift; sourceTree = "<group>"; };
 		47906C362B30996C00DAACAA /* AddNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNotificationView.swift; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 				4703F66D2AEEACFF00899F61 /* AppNotificationsManager.swift */,
 				475522142AF7D2F200B1347D /* LocationManager.swift */,
 				476B890F2B85F7C100D28B56 /* iOSCalendarManager.swift */,
+				478AB1752B87207600E72F7C /* ScheduleManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -937,6 +940,7 @@
 				473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */,
 				4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */,
 				47906C342B30975700DAACAA /* AdminManageView.swift in Sources */,
+				478AB1762B87207600E72F7C /* ScheduleManager.swift in Sources */,
 				473BAE942AA4969F00968C3C /* SettingView.swift in Sources */,
 				473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */,
 				470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */,

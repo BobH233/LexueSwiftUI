@@ -122,15 +122,40 @@ struct DebugDataView: View {
                 }
             }
             Section("JXZX") {
-                Button("get_Context") {
+                Button("GetTickLoginRes") {
                     Task {
-                        let result = await JXZXehall.shared.GetJXZXContext(loginnedContext: SettingStorage.shared.loginnedContext)
+                        let location1 = await JXZXehall.shared.GetUrlRetHead(url: "https://jxzxehall.bit.edu.cn/appShow?appId=5959167891382285")["Location"]
+                        print(location1)
+                    }
+                }
+                Button("get_pc_Context") {
+                    Task {
+                        let result = await JXZXehall.shared.GetJXZXwdkbbyContext(loginnedContext: SettingStorage.shared.loginnedContext)
                         switch result {
                         case .success(let context):
                             JXZX_context = context
+                            print(context)
                         case .failure(_):
                             print("failed to get jxzx context!")
                         }
+                    }
+                }
+                Button("get_mobile_Context") {
+                    Task {
+                        let result = await JXZXehall.shared.GetJXZXMobileContext(loginnedContext: SettingStorage.shared.loginnedContext)
+                        switch result {
+                        case .success(let context):
+                            JXZX_context = context
+                            print(context)
+                        case .failure(_):
+                            print("failed to get jxzx context!")
+                        }
+                    }
+                }
+                Button("get_schedule_courses") {
+                    Task {
+                        let result = await JXZXehall.shared.GetSemesterScheduleCourses(context: JXZX_context, semesterId: "2023-2024-2")
+                        print(result)
                     }
                 }
                 Button("get_current_semester") {

@@ -142,8 +142,8 @@
             filePath = "LexueSwiftUI/Views/Setting/DebugDataView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -190,8 +190,8 @@
             filePath = "LexueSwiftUI/Views/Setting/DebugDataView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "308"
+            endingLineNumber = "308"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -316,9 +316,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "447"
-            endingLineNumber = "447"
-            landmarkName = "GetJXZXContext(loginnedContext:)"
+            startingLineNumber = "553"
+            endingLineNumber = "553"
+            landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -364,9 +364,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "471"
-            endingLineNumber = "471"
-            landmarkName = "GetJXZXContext(loginnedContext:)"
+            startingLineNumber = "577"
+            endingLineNumber = "577"
+            landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -380,9 +380,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
-            landmarkName = "GetJXZXContext(loginnedContext:)"
+            startingLineNumber = "567"
+            endingLineNumber = "567"
+            landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -396,9 +396,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "463"
-            endingLineNumber = "463"
-            landmarkName = "GetJXZXContext(loginnedContext:)"
+            startingLineNumber = "569"
+            endingLineNumber = "569"
+            landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -412,9 +412,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
-            landmarkName = "GetJXZXContext(loginnedContext:)"
+            startingLineNumber = "573"
+            endingLineNumber = "573"
+            landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -428,9 +428,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "455"
-            endingLineNumber = "455"
-            landmarkName = "GetJXZXContext(loginnedContext:)"
+            startingLineNumber = "561"
+            endingLineNumber = "561"
+            landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -444,9 +444,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "466"
-            endingLineNumber = "466"
-            landmarkName = "GetJXZXContext(loginnedContext:)"
+            startingLineNumber = "572"
+            endingLineNumber = "572"
+            landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -460,9 +460,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "481"
-            endingLineNumber = "481"
-            landmarkName = "GetJXZXContext(loginnedContext:)"
+            startingLineNumber = "587"
+            endingLineNumber = "587"
+            landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -476,9 +476,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
-            landmarkName = "GetJXZXContext(loginnedContext:)"
+            startingLineNumber = "585"
+            endingLineNumber = "585"
+            landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -492,8 +492,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "407"
-            endingLineNumber = "407"
+            startingLineNumber = "422"
+            endingLineNumber = "422"
             landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:method:)"
             landmarkType = "7">
             <Locations>
@@ -542,6 +542,21 @@
                   endingLineNumber = "74"
                   offsetFromSymbolStart = "292">
                </Location>
+               <Location
+                  uuid = "23C3A974-51A1-4722-9E8A-6F9062D66F04 - fedfb46bbd48a0b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Swift.Optional&lt;Foundation.Data&gt;, Alamofire.AFError&gt;) -&gt; () in closure #1 (Swift.CheckedContinuation&lt;Swift.String, Swift.Never&gt;) -&gt; () in LexueSwiftUI.JXZXehall.GetRealWEU(fakeWEU: Swift.String, GS_SESSIONID: Swift.String, origin: Swift.Bool, url: Swift.String, method: Alamofire.HTTPMethod) async -&gt; Swift.String"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "422"
+                  endingLineNumber = "422"
+                  offsetFromSymbolStart = "292">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -555,8 +570,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
             landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:method:)"
             landmarkType = "7">
             <Locations>
@@ -603,8 +618,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
             landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:method:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -619,9 +634,9 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
-            landmarkName = "GetJXZXContext(loginnedContext:)"
+            startingLineNumber = "586"
+            endingLineNumber = "586"
+            landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4086,6 +4101,790 @@
             endingLineNumber = "99"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F0D87BC1-E2D0-4219-8148-44251B0B70D8"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "380"
+            endingLineNumber = "380"
+            landmarkName = "GetUrlRetHead(url:header:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91E937DF-EB7B-431A-8903-B93F608BD2D1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "382"
+            endingLineNumber = "382"
+            landmarkName = "GetUrlRetHead(url:header:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "36864BE4-65BE-49D1-AC37-097392C4D51C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "374"
+            endingLineNumber = "374"
+            landmarkName = "GetUrlRetHead(url:header:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0D7F6BF9-0FE9-4195-B8FE-09D07835E328"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "523"
+            endingLineNumber = "523"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2B289EB3-1541-45B2-8F85-9AB947694033"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "526"
+            endingLineNumber = "526"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2B289EB3-1541-45B2-8F85-9AB947694033 - ea9c45133f77f275"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "523"
+                  endingLineNumber = "523"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  uuid = "2B289EB3-1541-45B2-8F85-9AB947694033 - 5ab6521e4f78c677"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "523"
+                  endingLineNumber = "523"
+                  offsetFromSymbolStart = "260">
+               </Location>
+               <Location
+                  uuid = "2B289EB3-1541-45B2-8F85-9AB947694033 - ca603b25df810a71"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "523"
+                  endingLineNumber = "523"
+                  offsetFromSymbolStart = "1344">
+               </Location>
+               <Location
+                  uuid = "2B289EB3-1541-45B2-8F85-9AB947694033 - ea9c45133f77f254"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  uuid = "2B289EB3-1541-45B2-8F85-9AB947694033 - 5ab6521e4f78c656"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "492">
+               </Location>
+               <Location
+                  uuid = "2B289EB3-1541-45B2-8F85-9AB947694033 - ca603b25df810a50"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "1344">
+               </Location>
+               <Location
+                  uuid = "2B289EB3-1541-45B2-8F85-9AB947694033 - ea9c45133f77f1ea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "526"
+                  endingLineNumber = "526"
+                  offsetFromSymbolStart = "192">
+               </Location>
+               <Location
+                  uuid = "2B289EB3-1541-45B2-8F85-9AB947694033 - 5ab6521e4f78c5e8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "526"
+                  endingLineNumber = "526"
+                  offsetFromSymbolStart = "492">
+               </Location>
+               <Location
+                  uuid = "2B289EB3-1541-45B2-8F85-9AB947694033 - ca603b25df8109ee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "526"
+                  endingLineNumber = "526"
+                  offsetFromSymbolStart = "372">
+               </Location>
+               <Location
+                  uuid = "2B289EB3-1541-45B2-8F85-9AB947694033 - 3a1a00316f8a5dec"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(9) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "526"
+                  endingLineNumber = "526"
+                  offsetFromSymbolStart = "520">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8687A761-3616-4E13-AA29-FD68564A3847"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "493"
+            endingLineNumber = "493"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8687A761-3616-4E13-AA29-FD68564A3847 - 5ab6521e4f78fa76"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "492"
+                  endingLineNumber = "492"
+                  offsetFromSymbolStart = "208">
+               </Location>
+               <Location
+                  uuid = "8687A761-3616-4E13-AA29-FD68564A3847 - 5ab6521e4f78f9a9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "493"
+                  endingLineNumber = "493"
+                  offsetFromSymbolStart = "440">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EC946254-F6D9-40CB-A58C-824B314EA65F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "492"
+            endingLineNumber = "492"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EC946254-F6D9-40CB-A58C-824B314EA65F - 5ab6521e4f78fa17"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "491"
+                  endingLineNumber = "491"
+                  offsetFromSymbolStart = "172">
+               </Location>
+               <Location
+                  uuid = "EC946254-F6D9-40CB-A58C-824B314EA65F - 5ab6521e4f78fa76"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "492"
+                  endingLineNumber = "492"
+                  offsetFromSymbolStart = "404">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0B715B3F-441D-4FD3-A3FC-AF00E01940DE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "495"
+            endingLineNumber = "495"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0B715B3F-441D-4FD3-A3FC-AF00E01940DE - 5ab6521e4f78f988"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "494"
+                  endingLineNumber = "494"
+                  offsetFromSymbolStart = "360">
+               </Location>
+               <Location
+                  uuid = "0B715B3F-441D-4FD3-A3FC-AF00E01940DE - 5ab6521e4f78f9eb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "495"
+                  endingLineNumber = "495"
+                  offsetFromSymbolStart = "592">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A657B956-9671-4349-8760-E5301F20A81C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "496"
+            endingLineNumber = "496"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A657B956-9671-4349-8760-E5301F20A81C - 5ab6521e4f78f9eb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "495"
+                  endingLineNumber = "495"
+                  offsetFromSymbolStart = "408">
+               </Location>
+               <Location
+                  uuid = "A657B956-9671-4349-8760-E5301F20A81C - 5ab6521e4f78f9ca"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "496"
+                  endingLineNumber = "496"
+                  offsetFromSymbolStart = "640">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3A4AE8AE-3CFE-4A01-8A53-16DADC5E350E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "474"
+            endingLineNumber = "474"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3A4AE8AE-3CFE-4A01-8A53-16DADC5E350E - ea9c45133f77c826"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "474"
+                  endingLineNumber = "474"
+                  offsetFromSymbolStart = "404">
+               </Location>
+               <Location
+                  uuid = "3A4AE8AE-3CFE-4A01-8A53-16DADC5E350E - bf403be864f4414"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) await resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "474"
+                  endingLineNumber = "474"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "3A4AE8AE-3CFE-4A01-8A53-16DADC5E350E - 5ab6521e4f78fc24"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "474"
+                  endingLineNumber = "474"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "3A4AE8AE-3CFE-4A01-8A53-16DADC5E350E - 52cb14b77f8027"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.CheckedContinuation&lt;Swift.String, Swift.Never&gt;) -&gt; () in LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "475"
+                  endingLineNumber = "475"
+                  offsetFromSymbolStart = "244">
+               </Location>
+               <Location
+                  uuid = "3A4AE8AE-3CFE-4A01-8A53-16DADC5E350E - 5ab6521e4f78fc24"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "474"
+                  endingLineNumber = "474"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "3A4AE8AE-3CFE-4A01-8A53-16DADC5E350E - ea9c45133f77c826"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "474"
+                  endingLineNumber = "474"
+                  offsetFromSymbolStart = "384">
+               </Location>
+               <Location
+                  uuid = "3A4AE8AE-3CFE-4A01-8A53-16DADC5E350E - 5ab6521e4f78fc24"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "474"
+                  endingLineNumber = "474"
+                  offsetFromSymbolStart = "68">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6F060E46-9E71-49D8-AD84-FEEFC88594E1"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9FAE1D61-D2AF-48F1-957F-8A52FA3BCF0F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "517"
+            endingLineNumber = "517"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9FAE1D61-D2AF-48F1-957F-8A52FA3BCF0F - ca603b25df810ab7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "517"
+                  endingLineNumber = "517"
+                  offsetFromSymbolStart = "312">
+               </Location>
+               <Location
+                  uuid = "9FAE1D61-D2AF-48F1-957F-8A52FA3BCF0F - ca603b25df810ab7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "517"
+                  endingLineNumber = "517"
+                  offsetFromSymbolStart = "296">
+               </Location>
+               <Location
+                  uuid = "9FAE1D61-D2AF-48F1-957F-8A52FA3BCF0F - ca603b25df810ab7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "517"
+                  endingLineNumber = "517"
+                  offsetFromSymbolStart = "280">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "81C5A669-F8BC-4B6F-9147-1414B008FB01"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "81C5A669-F8BC-4B6F-9147-1414B008FB01 - 7ae27c07af6e94bc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "470"
+                  endingLineNumber = "470"
+                  offsetFromSymbolStart = "68">
+               </Location>
+               <Location
+                  uuid = "81C5A669-F8BC-4B6F-9147-1414B008FB01 - 4e3346966eae0492"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "470"
+                  endingLineNumber = "470"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "81C5A669-F8BC-4B6F-9147-1414B008FB01 - ea9c45133f77c8a2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "470"
+                  endingLineNumber = "470"
+                  offsetFromSymbolStart = "60">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8C0B122E-7043-451F-B08A-3C993CD0F3A2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "161176A6-61C0-4EB0-9633-0DD200382AAE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "524"
+            endingLineNumber = "524"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "161176A6-61C0-4EB0-9633-0DD200382AAE - ca603b25df810a50"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "1388">
+               </Location>
+               <Location
+                  uuid = "161176A6-61C0-4EB0-9633-0DD200382AAE - 7f77990f518afe62"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(8) await resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "161176A6-61C0-4EB0-9633-0DD200382AAE - 3a1a00316f8a5e52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(9) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "524"
+                  endingLineNumber = "524"
+                  offsetFromSymbolStart = "92">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3A637268-22C1-466F-A627-D472C89E3EBE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Network/JXZXehall.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "525"
+            endingLineNumber = "525"
+            landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

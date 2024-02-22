@@ -265,7 +265,7 @@ struct ExamInfoView: View {
         Task {
             var currentContext = JXZXehall.JXZXContext()
             var currentSemesterId: String = ""
-            let context_result = await JXZXehall.shared.GetJXZXContext(loginnedContext: SettingStorage.shared.loginnedContext)
+            let context_result = await JXZXehall.shared.GetJXZXMobileContext(loginnedContext: SettingStorage.shared.loginnedContext)
             switch context_result {
             case .success(let context):
                 DispatchQueue.main.async {
