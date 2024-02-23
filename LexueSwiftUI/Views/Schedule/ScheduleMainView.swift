@@ -54,13 +54,13 @@ struct WeeklyScheduleView: View {
     // 每天的课程
     @State var dailyCourses: [DailyScheduleInfo] = [
         .init(day_index: 1, courses_today: [
-            .init(CourseName: "会员制餐厅导论", TeacherName: "醇平", ClassroomLocation:"会员制餐厅", StartSectionId: 1, EndSectionId: 2),
-            .init(CourseName: "如何赚钱", TeacherName: "申家芮", ClassroomLocation:"北京良乡看守所", StartSectionId: 5, EndSectionId: 8),
+            .init(CourseName: "会员制餐厅导论", TeacherName: "醇平", ClassroomLocation:"会员制餐厅", StartSectionId: 1, EndSectionId: 2, CourseBgColor: .brown),
+            .init(CourseName: "如何赚钱", TeacherName: "申家芮", ClassroomLocation:"北京良乡看守所", StartSectionId: 5, EndSectionId: 8, CourseBgColor: .yellow),
         ]),
         .init(day_index: 2, courses_today: []),
         .init(day_index: 3, courses_today: [
             .init(CourseName: "数据结构与编曲", TeacherName: "泽野螳螂", ClassroomLocation:"Bilibili", StartSectionId: 3, EndSectionId: 5),
-            .init(CourseName: "哲学与人生", TeacherName: "VanSama", ClassroomLocation:"博雅更衣室", StartSectionId: 6, EndSectionId: 7),
+            .init(CourseName: "哲学与人生", TeacherName: "VanSama", ClassroomLocation:"博雅更衣室", StartSectionId: 6, EndSectionId: 7, CourseBgColor: .pink),
         ]),
         .init(day_index: 4, courses_today: []),
         .init(day_index: 5, courses_today: []),
