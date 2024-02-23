@@ -122,30 +122,34 @@ struct WeeklyScheduleView: View {
                                         RoundedRectangle(cornerRadius: 10) // 圆角矩形
                                             .stroke(Color.white.opacity(0.5), lineWidth: 2) // 白色半透明描边
                                             .frame(height: GetCourseBlockHeight(course))
-                                            .background(RoundedRectangle(cornerRadius: 10).fill(course.CourseBgColor))
+                                            .background(RoundedRectangle(cornerRadius: 10).fill(LinearGradient(gradient: Gradient(colors: [course.CourseBgColor.opacity(0.7), course.CourseBgColor.opacity(1)]), startPoint: .topTrailing, endPoint: .bottomLeading)))
                                         VStack(spacing: 0) {
                                             // 课程名
-                                            Text(course.CourseName) // 文本内容
+                                            Text(course.CourseName.DashIfEmpty()) // 文本内容
                                                 .font(.system(size: 13))
                                                 .foregroundColor(.white) // 文字颜色
                                                 .bold()
                                                 .multilineTextAlignment(.center) // 文本居中对齐
                                                 .padding(.horizontal, 5)
                                                 .truncationMode(.tail)
-                                            // 上课地点
-                                            Text("@\(course.ClassroomLocation)") // 文本内容
-                                                .font(.system(size: 13))
-                                                .foregroundColor(.white) // 文字颜色
-                                                .bold()
-                                                .multilineTextAlignment(.center) // 文本居中对齐
-                                                .padding(.horizontal, 5)
-                                                .truncationMode(.tail)
-                                            Text("\(course.TeacherName)") // 文本内容
-                                                .font(.system(size: 13))
-                                                .foregroundColor(.white)
-                                                .multilineTextAlignment(.center)
-                                                .padding(.horizontal, 5)
-                                                .padding(.top, 15)
+                                            if !course.ClassroomLocation.isEmpty {
+                                                // 上课地点
+                                                Text("@\(course.ClassroomLocation)") // 文本内容
+                                                    .font(.system(size: 13))
+                                                    .foregroundColor(.white) // 文字颜色
+                                                    .bold()
+                                                    .multilineTextAlignment(.center) // 文本居中对齐
+                                                    .padding(.horizontal, 5)
+                                                    .truncationMode(.tail)
+                                            }
+                                            if !course.TeacherName.isEmpty {
+                                                Text("\(course.TeacherName)") // 文本内容
+                                                    .font(.system(size: 13))
+                                                    .foregroundColor(.white)
+                                                    .multilineTextAlignment(.center)
+                                                    .padding(.horizontal, 5)
+                                                    .padding(.top, 15)
+                                            }
                                         }
                                         .padding(.vertical, 2)
                                         .frame(maxHeight: GetCourseBlockHeight(course))
