@@ -9,7 +9,6 @@ import SwiftUI
 
 // 每一周的课程表安排
 struct WeeklyScheduleView: View {
-    
     func chooseTextColor(_ backgroundColor: UIColor) -> Color {
         // 计算背景颜色的亮度
         let red = backgroundColor.cgColor.components?[0] ?? 0
@@ -192,13 +191,22 @@ struct WeeklyScheduleView: View {
 struct ScheduleMainView: View {
     // 示例数据，您可以根据需要替换为动态数据
     @State var selection: Int = 1
-
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
             Color.blue.opacity(0.1).ignoresSafeArea()
             VStack(spacing: 0) {
                 HStack {
+                    Button(action: {
+                        // 返回上一级
+                        dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .font(Font.system(size: 25).weight(.semibold))
+                    }
+                    .foregroundColor(.white)
                     VStack(spacing: 5) {
                         HStack {
                             Text("2024/2/23")

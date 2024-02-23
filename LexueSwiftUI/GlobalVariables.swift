@@ -60,6 +60,7 @@ class GlobalVariables: ObservableObject {
     let extraFunctions: [ExtraFunctionDescription] = [
         .init(notificationName: "queryScore", titleName: "成绩查询", imageName: "graduationcap.fill", enable: true, color: .blue),
         .init(notificationName: "examArrange", titleName: "考试安排", imageName: "calendar", enable: true, color: .blue),
+        .init(notificationName: "scheduleView", titleName: "课程表", imageName: "clock", enable: true, color: .blue),
         /*.init(notificationName: "schoolMap", titleName: "校园导航", imageName: "map.fill", enable: true, color: .blue),*/
     ]
     

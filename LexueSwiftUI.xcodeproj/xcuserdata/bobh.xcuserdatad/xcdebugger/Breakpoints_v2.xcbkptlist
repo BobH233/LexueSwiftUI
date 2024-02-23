@@ -4726,6 +4726,21 @@
                   endingLineNumber = "517"
                   offsetFromSymbolStart = "280">
                </Location>
+               <Location
+                  uuid = "9FAE1D61-D2AF-48F1-957F-8A52FA3BCF0F - ca603b25df8109cd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for LexueSwiftUI.JXZXehall.GetJXZXwdkbbyContext(loginnedContext: LexueSwiftUI.BITLogin.LoginSuccessContext) async -&gt; Swift.Result&lt;LexueSwiftUI.JXZXehall.JXZXContext, LexueSwiftUI.JXZXehall.JXZXError&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/JXZXehall.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "527"
+                  endingLineNumber = "527"
+                  offsetFromSymbolStart = "280">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

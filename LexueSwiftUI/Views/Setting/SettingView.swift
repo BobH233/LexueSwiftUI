@@ -19,6 +19,7 @@ struct SettingView: View {
     @State var openViewScoreNavigation = false
     @State var openExamInfoNavigation = false
     @State var openSchoolMapNavigation = false
+    @State var openScheduleViewNavigation = false
     @State var openExtraFuncSettingNavigation = false
     @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
     var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
@@ -113,6 +114,10 @@ struct SettingView: View {
                             NavigationLink("", destination: ExtraFunctionSetting(), isActive: $openExtraFuncSettingNavigation)
                                 .isDetailLink(false)
                                 .hidden()
+                            NavigationLink("", destination: ScheduleMainView(), isActive: $openScheduleViewNavigation)
+                                .isDetailLink(false)
+                                .hidden()
+                            
                         }
                         .frame(minHeight: 100)
                         .padding(0)
@@ -127,6 +132,8 @@ struct SettingView: View {
                             openSchoolMapNavigation = true
                         } else if notificationName == "editFunctions" {
                             openExtraFuncSettingNavigation = true
+                        } else if notificationName == "scheduleView" {
+                            openScheduleViewNavigation = true
                         }
                         
                     }
