@@ -28,6 +28,7 @@
 		47196FF32AC551D200979DFE /* EventProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FEF2AC551D200979DFE /* EventProvider.swift */; };
 		47196FF72AC5522500979DFE /* EventWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47196FF62AC5522500979DFE /* EventWidgetView.swift */; };
 		471A1D192AC9932C00A3D847 /* EventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A1D182AC9932C00A3D847 /* EventManager.swift */; };
+		471D57432B88340700E1FFFF /* ScheduleMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471D57422B88340700E1FFFF /* ScheduleMainView.swift */; };
 		47223A612AD053E4000D8B9C /* KeyInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 47223A602AD053E4000D8B9C /* KeyInfo.plist */; };
 		4728F7572B4804A500A6348B /* MarkdownPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4728F7562B4804A500A6348B /* MarkdownPreview.swift */; };
 		472984A02AA706BB000814EE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4729849F2AA706BB000814EE /* Extensions.swift */; };
@@ -239,6 +240,7 @@
 		47196FEF2AC551D200979DFE /* EventProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventProvider.swift; sourceTree = "<group>"; };
 		47196FF62AC5522500979DFE /* EventWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventWidgetView.swift; sourceTree = "<group>"; };
 		471A1D182AC9932C00A3D847 /* EventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventManager.swift; sourceTree = "<group>"; };
+		471D57422B88340700E1FFFF /* ScheduleMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleMainView.swift; sourceTree = "<group>"; };
 		47223A602AD053E4000D8B9C /* KeyInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = KeyInfo.plist; sourceTree = "<group>"; };
 		4728F7562B4804A500A6348B /* MarkdownPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownPreview.swift; sourceTree = "<group>"; };
 		4729849F2AA706BB000814EE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -463,6 +465,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		471D57412B8833D400E1FFFF /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				471D57422B88340700E1FFFF /* ScheduleMainView.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
 		473BAE732AA48DAA00968C3C = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +528,7 @@
 		473BAE8D2AA48E4300968C3C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				471D57412B8833D400E1FFFF /* Schedule */,
 				475522112AF7D18200B1347D /* SchoolMap */,
 				4755F24C2ADD760A00D7640C /* ExamInfo */,
 				479B22DF2AD5719F00A7DCC7 /* ScoreAnalyze */,
@@ -978,6 +989,7 @@
 				47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */,
 				470CC1042AF9336B00D4789A /* MapInteractive.swift in Sources */,
 				47BDAF3E2B1A261300D43119 /* MessageCategorySelector.swift in Sources */,
+				471D57432B88340700E1FFFF /* ScheduleMainView.swift in Sources */,
 				4784DBD42B201050000B12CE /* ExtraFunctionSetting.swift in Sources */,
 				475522152AF7D2F200B1347D /* LocationManager.swift in Sources */,
 				47F4F29A2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import SwiftUI
 
 // 教学中心电子大厅，用于查询考试安排相关
 class JXZXehall {
@@ -180,6 +181,15 @@ class JXZXehall {
         // KCXZDM_DISPLAY: 课程性质，选修，必修
         var CourseType: String = ""
         
+        // 本地自定义属性，颜色
+        var CourseBgColor: Color = .blue
+        
+        func GetSectionLength() -> Int {
+            if EndSectionId >= StartSectionId {
+                return EndSectionId - StartSectionId + 1
+            }
+            return 0
+        }
     }
     
     enum JXZXError: Error {
