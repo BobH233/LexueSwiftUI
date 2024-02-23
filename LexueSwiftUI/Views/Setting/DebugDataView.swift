@@ -103,6 +103,12 @@ struct DebugDataView: View {
                 }
             }
             Section("Backend") {
+                Button("GetScheduleSectionInfo") {
+                    Task {
+                        let res = await LexueHelperBackend.shared.GetScheduleSectionInfo()
+                        print(res)
+                    }
+                }
                 Button("UploadDeviceToken") {
                     Task {
                         let res = await LexueHelperBackend.shared.RegisterDeviceTokenForServer(userId: "12345", deviceToken: "23333")

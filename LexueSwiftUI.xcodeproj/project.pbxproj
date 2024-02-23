@@ -63,6 +63,8 @@
 		475E22B02ACFB66700FE8679 /* InfoMergingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */; };
 		475EDED42AB60697008486F0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475EDED32AB60697008486F0 /* ProfileView.swift */; };
 		476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476340302AB89F47006C24E2 /* LexueProfile.swift */; };
+		476366F32B88EEBD00E9EAC6 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AB1752B87207600E72F7C /* ScheduleManager.swift */; };
+		476366F42B88EF1300E9EAC6 /* JXZXehall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47066F5F2ADC32200092F891 /* JXZXehall.swift */; };
 		476448412AD84B7700952A22 /* WrappingHStack in Frameworks */ = {isa = PBXBuildFile; productRef = 476448402AD84B7700952A22 /* WrappingHStack */; };
 		476448432AD8E37D00952A22 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476448422AD8E37D00952A22 /* ShareSheet.swift */; };
 		476B89102B85F7C100D28B56 /* iOSCalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B890F2B85F7C100D28B56 /* iOSCalendarManager.swift */; };
@@ -902,6 +904,8 @@
 				47F4FD312ACDC1D800C6C144 /* DataProviderBase.swift in Sources */,
 				4773446F2B81C88700AB5358 /* ScoreMonitorDataProvider.swift in Sources */,
 				47196FF72AC5522500979DFE /* EventWidgetView.swift in Sources */,
+				476366F42B88EF1300E9EAC6 /* JXZXehall.swift in Sources */,
+				476366F32B88EEBD00E9EAC6 /* ScheduleManager.swift in Sources */,
 				47F4FD172ACD9CD700C6C144 /* LexueAPI.swift in Sources */,
 				47F4FD162ACD9CD500C6C144 /* BITLogin.swift in Sources */,
 				47F5F6EF2AE10EA1009A2B7B /* LexueHelperBackend.swift in Sources */,

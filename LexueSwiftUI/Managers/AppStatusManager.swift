@@ -170,6 +170,10 @@ class AppStatusManager {
         Task {
             await AppNotificationsManager.shared.UpdateNotifications()
         }
+        // 从后端拉取课程表的信息
+        Task {
+            await ScheduleManager.shared.UpdateScheduleInfo()
+        }
         print("\(#function)")
         Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in
             self.OnAppTickEveryMinute()

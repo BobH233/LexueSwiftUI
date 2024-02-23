@@ -27,7 +27,7 @@ class LexueHelperBackend {
     
     static func GetAPIUrl() -> String {
         if GlobalVariables.shared.DEBUG_BUILD {
-            return "http://192.168.8.143:3000"
+            return "http://192.168.1.9:3000"
         } else {
             return "https://api.bit-helper.cn"
         }
@@ -49,6 +49,8 @@ class LexueHelperBackend {
     let API_FETCH_NOTICE = "\(GetAPIUrl())/api/notice/fetch"
     let API_FETCH_APP_NOTIFICATIONS = "\(GetAPIUrl())/api/notification/get"
     let API_CHECK_IS_ADMIN = "\(GetAPIUrl())/api/device/isadmin"
+    let API_SCHEDULE_SECTION_INFO = "\(GetAPIUrl())/api/schedule/sectioninfo"
+    let API_SCHEDULE_SECTION_SEMESTER = "\(GetAPIUrl())/api/schedule/cursemester"
     
     // admin
     let API_ADMIN_ADD_NOTIFICATION = "\(GetAPIUrl())/api/notification/add"
@@ -115,6 +117,87 @@ class LexueHelperBackend {
                 return appVersionLimit.contains(version)
             }
             return false
+        }
+    }
+    
+    
+    func GetScheduleSectionInfo() async -> [ScheduleSectionInfo] {
+        let header: [String: String] = [
+            "Content-Type": "application/json"
+        ]
+        do {
+            var request = URLRequest(url: URL(string: API_SCHEDULE_SECTION_INFO)!)
+            request.cachePolicy = .reloadIgnoringCacheData
+            request.httpMethod = HTTPMethod.get.rawValue
+            request.headers = HTTPHeaders(header)
+            let ret = await withCheckedContinuation { continuation in
+                AF.request(request).response { res in
+                    switch res.result {
+                    case .success(let data):
+                        if let json = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
+                            continuation.resume(returning: json)
+                        } else {
+                            print("无法将响应数据转换为字典")
+                            continuation.resume(returning: [String: Any]())
+                        }
+                    case .failure(let error):
+                        print("请求 后端 失败")
+                        print(error)
+                        continuation.resume(returning: [String: Any]())
+                    }
+                }
+            }
+            var retSectionInfos = [ScheduleSectionInfo]()
+            for (key, schedule) in ret {
+                guard let key_as_int = Int(key) else {
+                    continue
+                }
+                let schedule_obj = schedule as! [String: String]
+                let start = schedule_obj["start"] ?? ""
+                let end = schedule_obj["end"] ?? ""
+                
+                let scheduleInfo = ScheduleSectionInfo(sectionIndex: key_as_int, sectionStartDateStr: start, sectionEndDateStr: end)
+                retSectionInfos.append(scheduleInfo)
+            }
+            retSectionInfos.sort { info1, info2 in
+                return info1.sectionIndex < info2.sectionIndex
+            }
+            return retSectionInfos
+        } catch {
+            print("转换为 JSON 数据时发生错误: \(error)")
+            return []
+        }
+    }
+    func GetScheduleSemesterInfo() async -> String {
+        let header: [String: String] = [
+            "Content-Type": "application/json"
+        ]
+        do {
+            var request = URLRequest(url: URL(string: API_SCHEDULE_SECTION_SEMESTER)!)
+            request.cachePolicy = .reloadIgnoringCacheData
+            request.httpMethod = HTTPMethod.get.rawValue
+            request.headers = HTTPHeaders(header)
+            let ret = await withCheckedContinuation { continuation in
+                AF.request(request).response { res in
+                    switch res.result {
+                    case .success(let data):
+                        if let json = try? JSONSerialization.jsonObject(with: data ?? Data(), options: []) as? [String: Any] {
+                            continuation.resume(returning: json)
+                        } else {
+                            print("无法将响应数据转换为字典")
+                            continuation.resume(returning: [String: Any]())
+                        }
+                    case .failure(let error):
+                        print("请求 后端 失败")
+                        print(error)
+                        continuation.resume(returning: [String: Any]())
+                    }
+                }
+            }
+            return (ret["semester"] as? String) ?? ""
+        } catch {
+            print("转换为 JSON 数据时发生错误: \(error)")
+            return ""
         }
     }
     
