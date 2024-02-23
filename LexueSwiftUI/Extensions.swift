@@ -627,3 +627,15 @@ struct ImageSaver: UIViewControllerRepresentable {
         UIImageWriteToSavedPhotosAlbum(image, makeCoordinator(), #selector(Coordinator.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
 }
+
+
+extension UINavigationController: UIGestureRecognizerDelegate {
+    override open func viewDidLoad() {
+        super.viewDidLoad()
+        interactivePopGestureRecognizer?.delegate = self
+    }
+
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
+    }
+}
