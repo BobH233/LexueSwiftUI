@@ -246,6 +246,7 @@ struct ScheduleMainView: View {
                         .tag(3)
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                .ignoresSafeArea(.all, edges: .bottom)
                 
             }
         }
