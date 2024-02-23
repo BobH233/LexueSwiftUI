@@ -10,6 +10,21 @@ import SwiftUI
 // 每一周的课程表安排
 struct WeeklyScheduleView: View {
     
+    func chooseTextColor(_ backgroundColor: UIColor) -> Color {
+        // 计算背景颜色的亮度
+        let red = backgroundColor.cgColor.components?[0] ?? 0
+        let green = backgroundColor.cgColor.components?[1] ?? 0
+        let blue = backgroundColor.cgColor.components?[2] ?? 0
+        let brightness = (red * 299 + green * 587 + blue * 114) / 1000
+        
+        // 根据背景颜色亮度选择前景文字颜色
+        if brightness < 0.7 {
+            return .white
+        } else {
+            return .black
+        }
+    }
+    
     // 定义常量用于设定单个课程的高度
     let UnitBlockHeight: Float = 80
     
@@ -128,7 +143,7 @@ struct WeeklyScheduleView: View {
                                             // 课程名
                                             Text(course.CourseName.DashIfEmpty()) // 文本内容
                                                 .font(.system(size: 13))
-                                                .foregroundColor(.white) // 文字颜色
+                                                .foregroundColor(chooseTextColor(UIColor(course.CourseBgColor))) // 文字颜色
                                                 .bold()
                                                 .multilineTextAlignment(.center) // 文本居中对齐
                                                 .padding(.horizontal, 5)
@@ -137,7 +152,7 @@ struct WeeklyScheduleView: View {
                                                 // 上课地点
                                                 Text("@\(course.ClassroomLocation)") // 文本内容
                                                     .font(.system(size: 13))
-                                                    .foregroundColor(.white) // 文字颜色
+                                                    .foregroundColor(chooseTextColor(UIColor(course.CourseBgColor)))
                                                     .bold()
                                                     .multilineTextAlignment(.center) // 文本居中对齐
                                                     .padding(.horizontal, 5)
@@ -146,7 +161,7 @@ struct WeeklyScheduleView: View {
                                             if !course.TeacherName.isEmpty {
                                                 Text("\(course.TeacherName)") // 文本内容
                                                     .font(.system(size: 13))
-                                                    .foregroundColor(.white)
+                                                    .foregroundColor(chooseTextColor(UIColor(course.CourseBgColor)))
                                                     .multilineTextAlignment(.center)
                                                     .padding(.horizontal, 5)
                                                     .padding(.top, 15)
