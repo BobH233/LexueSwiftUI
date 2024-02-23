@@ -98,11 +98,12 @@ struct WeeklyScheduleView: View {
                         ForEach(sectionInfo, id: \.sectionIndex) { curSection in
                             VStack {
                                 Text("\(curSection.sectionIndex)")
+                                    .font(.system(size: 15))
                                     .bold()
                                 Text("\(curSection.sectionStartDateStr)")
-                                    .font(.system(size: 10))
+                                    .font(.system(size: 12))
                                 Text("\(curSection.sectionEndDateStr)")
-                                    .font(.system(size: 10))
+                                    .font(.system(size: 12))
                             }
                             .frame(height: CGFloat(UnitBlockHeight))
                             // .background(.red)
