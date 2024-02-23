@@ -67,6 +67,7 @@ struct ScoreWidgetPreview: View {
 
 struct WelcomeUseWidget: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var sysColorScheme
     
     func GetDescriptiveText(selectionTag: Int) -> String {
         if selectionTag == 1 {
@@ -101,6 +102,16 @@ struct WelcomeUseWidget: View {
                     ScoreWidgetPreview()
                         .tag(2)
                 }
+                .onAppear {
+                    if sysColorScheme == .light {
+                        UIPageControl.appearance().currentPageIndicatorTintColor = .black
+                        UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
+                    } else {
+                        UIPageControl.appearance().currentPageIndicatorTintColor = .white
+                        UIPageControl.appearance().pageIndicatorTintColor = UIColor.white.withAlphaComponent(0.2)
+                    }
+                }
+                // .background(.red)
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always)) // 设置样式为页面式，隐藏页码指示器
                 Spacer()
                 if selectionAnimated < 2 {
