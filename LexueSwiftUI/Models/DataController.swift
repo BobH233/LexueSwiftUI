@@ -941,6 +941,27 @@ class DataController: ObservableObject {
         }
         return nil
     }
+    
+    func AddScheduleCourseStored(context: NSManagedObjectContext, scheduleInfo: JXZXehall.ScheduleCourseInfo, with_save: Bool = false) {
+        let newStored = ScheduleCourseStored(context: context)
+        newStored.classroomLocation = scheduleInfo.ClassroomLocation
+        newStored.classroomLocationTimeDes = scheduleInfo.ClassroomLocationTimeDes
+        newStored.color = scheduleInfo.CourseBgColor.toHex()
+        newStored.courseCredit = Int32(scheduleInfo.CourseCredit)
+        newStored.courseId = scheduleInfo.CourseId
+        newStored.courseName = scheduleInfo.CourseName
+        newStored.courseType = scheduleInfo.CourseType
+        newStored.dayOfWeek = Int32(scheduleInfo.DayOfWeek)
+        newStored.endSectionId = Int32(scheduleInfo.EndSectionId)
+        newStored.existWeek = scheduleInfo.ExistWeek
+        newStored.kKKDWDM_DISPLAY = scheduleInfo.KKDWDM_DISPLAY
+        newStored.schoolRegion = scheduleInfo.SchoolRegion
+        newStored.startSectionId = Int32(scheduleInfo.StartSectionId)
+        newStored.teacherName = scheduleInfo.TeacherName
+        if with_save {
+            save(context: context)
+        }
+    }
 }
 
 
@@ -984,6 +1005,27 @@ extension CourseCacheStored {
         ret.showshortname = showshortname
         ret.coursecategory = coursecategory
         ret.local_favorite = local_favorite
+        return ret
+    }
+}
+
+extension ScheduleCourseStored {
+    func ToScheduleCourseInfo() -> JXZXehall.ScheduleCourseInfo {
+        var ret = JXZXehall.ScheduleCourseInfo()
+        ret.ClassroomLocation = classroomLocation ?? ""
+        ret.ClassroomLocationTimeDes = classroomLocationTimeDes ?? ""
+        ret.CourseBgColor = Color(hex: color ?? "") ?? .blue
+        ret.CourseCredit = Int(courseCredit)
+        ret.CourseId = courseId ?? ""
+        ret.CourseName = courseName ?? ""
+        ret.CourseType = courseType ?? ""
+        ret.DayOfWeek = Int(dayOfWeek)
+        ret.EndSectionId = Int(endSectionId)
+        ret.ExistWeek = existWeek ?? ""
+        ret.KKDWDM_DISPLAY = kKKDWDM_DISPLAY ?? ""
+        ret.SchoolRegion = schoolRegion ?? ""
+        ret.StartSectionId = Int(startSectionId)
+        ret.TeacherName = teacherName ?? ""
         return ret
     }
 }
