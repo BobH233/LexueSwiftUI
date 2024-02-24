@@ -184,6 +184,11 @@ struct ScheduleMainView: View {
     @State var selection: Int = 1
     @Environment(\.dismiss) var dismiss
     
+    @State var currentDateString = ""
+    
+    @State var currentViewWeekIndex = 1
+    @State var currentWeekDescriptionText = "当前周"
+    
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -201,14 +206,17 @@ struct ScheduleMainView: View {
                     .foregroundColor(.white)
                     VStack(spacing: 5) {
                         HStack {
-                            Text("2024/2/23")
+                            Text(currentDateString)
                                 .bold()
                                 .font(.system(size: 25))
                             Spacer()
                         }
+                        .onAppear {
+                            currentDateString = ScheduleManager.shared.GetCurrentDateString()
+                        }
                         HStack {
-                            Text("第1周")
-                            Text("当前周")
+                            Text("第\(selection)周")
+                            Text("\(currentWeekDescriptionText)")
                             Spacer()
                         }
                         .font(.system(size: 20))

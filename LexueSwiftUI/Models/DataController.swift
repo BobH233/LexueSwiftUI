@@ -958,6 +958,7 @@ class DataController: ObservableObject {
         newStored.schoolRegion = scheduleInfo.SchoolRegion
         newStored.startSectionId = Int32(scheduleInfo.StartSectionId)
         newStored.teacherName = scheduleInfo.TeacherName
+        newStored.semesterStartDate = scheduleInfo.SemesterStartDate
         if with_save {
             save(context: context)
         }
@@ -1026,6 +1027,7 @@ extension ScheduleCourseStored {
         ret.SchoolRegion = schoolRegion ?? ""
         ret.StartSectionId = Int(startSectionId)
         ret.TeacherName = teacherName ?? ""
+        ret.SemesterStartDate = semesterStartDate ?? .now
         return ret
     }
 }

@@ -146,6 +146,12 @@ struct DebugDataView: View {
                         }
                     }
                 }
+                Button("GetSemesterFirstDay") {
+                    Task {
+                        let res = await JXZXehall.shared.GetSemesterStartDate(context: JXZX_context, semesterId: "2023-2024-2")
+                        print(res)
+                    }
+                }
                 Button("get_mobile_Context") {
                     Task {
                         let result = await JXZXehall.shared.GetJXZXMobileContext(loginnedContext: SettingStorage.shared.loginnedContext)

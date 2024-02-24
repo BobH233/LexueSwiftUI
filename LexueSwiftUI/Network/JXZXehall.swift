@@ -31,6 +31,9 @@ class JXZXehall {
     // 表单 XNXQDM=2023-2024-1
     let API_JXZX_GET_UNSCHEDULED_EXAM = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/cxwapdksrw.do"
     
+    // 查询某学期的日期信息，用于查询第一天post
+    // 表单 requestParamStr={"XNXQDM":"2023-2024-2","ZC":"1"}
+    let API_JXZX_GET_SEMESTER_DATE = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/wdkbByController/cxzkbrq.do"
     // 查询某学期的课程表安排，post
     // 表单 XNXQDM=2023-2024-2
     let API_JXZX_GET_SEMESTER_SCHEDULED_COURSE = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/modules/xskcb/cxxszhxqkb.do"
@@ -183,6 +186,8 @@ class JXZXehall {
         
         // 本地自定义属性，颜色
         var CourseBgColor: Color = .blue
+        // 本地存储属性，开学时间
+        var SemesterStartDate: Date = .now
         
         func GetSectionLength() -> Int {
             if EndSectionId >= StartSectionId {
@@ -597,7 +602,46 @@ class JXZXehall {
         return .success(retContext)
     }
     
-    
+    // 返回 比如 2024-02-26
+    func GetSemesterStartDate(context: JXZXContext, semesterId: String) async -> Result<String, JXZXError> {
+        var cur_headers = HTTPHeaders(jxzx_header)
+        cur_headers.add(name: "Referer", value: "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/*default/index.do")
+        cur_headers.add(name: "Cookie", value: "GS_SESSIONID=\(context.GS_SESSIONID); _WEU=\(context._WEU)")
+        let submitForm = [
+            "requestParamStr": "{\"XNXQDM\":\"\(semesterId)\",\"ZC\":\"1\"}"
+        ]
+        let retJson = await withCheckedContinuation { continuation in
+            AF.requestWithoutCache(API_JXZX_GET_SEMESTER_DATE, method: .post, parameters: submitForm, encoding: URLEncoding.default, headers: cur_headers)
+                .response { result in
+                    switch result.result {
+                    case .success(let data):
+                        if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                            continuation.resume(returning: json)
+                        } else {
+                            print("无法将响应数据转换为字典")
+                            continuation.resume(returning: [String: Any]())
+                        }
+                    case .failure(_):
+                        print("请求 GetSemesterStartDate 失败")
+                        continuation.resume(returning: [String: Any]())
+                    }
+                }
+        }
+        if let data = retJson["data"] as? [[String: Any]] {
+            for record in data {
+                guard let XQ = record["XQ"] as? Int else {
+                    continue
+                }
+                guard let RQ = record["RQ"] as? String else {
+                    continue
+                }
+                if XQ == 1 {
+                    return .success(RQ)
+                }
+            }
+        }
+        return .failure(.JsonConvertError)
+    }
     
     func GetSemesterScheduleCourses(context: JXZXContext, semesterId: String) async -> Result<[ScheduleCourseInfo], JXZXError> {
         var cur_headers = HTTPHeaders(jxzx_header)

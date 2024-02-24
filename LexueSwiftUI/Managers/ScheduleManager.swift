@@ -113,6 +113,13 @@ class ScheduleManager {
         await UpdateSectionInfo()
         await UpdateSemesterInfo()
     }
+    
+    func GetCurrentDateString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/M/d"
+        let todayDateString = dateFormatter.string(from: Date())
+        return todayDateString
+    }
 }
 
 

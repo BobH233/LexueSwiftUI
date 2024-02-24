@@ -1,164 +1,137 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0"
-  lastSavedToolsVersion="22222" systemVersion="23C71" minimumToolsVersion="Automatic"
-  sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-  <entity name="ContactStored" representedClassName="ContactStored" syncable="YES"
-    codeGenerationType="class">
-    <attribute name="alias" optional="YES" attributeType="String" />
-    <attribute name="avatar_data" optional="YES" attributeType="String" />
-    <attribute name="contactUid" optional="YES" attributeType="String" />
-    <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" />
-    <attribute name="lastMessageDate" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="lastUpdateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="originName" optional="YES" attributeType="String" />
-    <attribute name="pinned" optional="YES" attributeType="Boolean" usesScalarValueType="YES" />
-    <attribute name="silent" optional="YES" attributeType="Boolean" usesScalarValueType="YES" />
-    <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0"
-      usesScalarValueType="YES" />
-    <attribute name="unreadCount" optional="YES" attributeType="Integer 32" defaultValueString="0"
-      usesScalarValueType="YES" />
-  </entity>
-  <entity name="CourseCacheStored" representedClassName="CourseCacheStored" syncable="YES"
-    codeGenerationType="class">
-    <attribute name="coursecategory" optional="YES" attributeType="String" />
-    <attribute name="courseimage" optional="YES" attributeType="String" />
-    <attribute name="enddate" optional="YES" attributeType="Integer 64" defaultValueString="0"
-      usesScalarValueType="YES" />
-    <attribute name="fullname" optional="YES" attributeType="String" />
-    <attribute name="fullnamedisplay" optional="YES" attributeType="String" />
-    <attribute name="hasprogress" optional="YES" attributeType="Boolean" usesScalarValueType="YES" />
-    <attribute name="hidden" optional="YES" attributeType="Boolean" usesScalarValueType="YES" />
-    <attribute name="id" optional="YES" attributeType="String" />
-    <attribute name="idnumber" optional="YES" attributeType="String" />
-    <attribute name="isfavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES" />
-    <attribute name="lastUpdateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="local_favorite" optional="YES" attributeType="Boolean"
-      usesScalarValueType="YES" />
-    <attribute name="progress" optional="YES" attributeType="Integer 32" defaultValueString="0"
-      usesScalarValueType="YES" />
-    <attribute name="shortname" optional="YES" attributeType="String" />
-    <attribute name="showactivitydates" optional="YES" attributeType="Boolean"
-      usesScalarValueType="YES" />
-    <attribute name="showcompletionconditions" optional="YES" attributeType="Boolean"
-      usesScalarValueType="YES" />
-    <attribute name="showshortname" optional="YES" attributeType="Boolean" usesScalarValueType="YES" />
-    <attribute name="startdate" optional="YES" attributeType="Integer 64" defaultValueString="0"
-      usesScalarValueType="YES" />
-    <attribute name="summary" optional="YES" attributeType="String" />
-    <attribute name="summaryformat" optional="YES" attributeType="Integer 32" defaultValueString="0"
-      usesScalarValueType="YES" />
-    <attribute name="viewurl" optional="YES" attributeType="String" />
-    <attribute name="visible" optional="YES" attributeType="Boolean" usesScalarValueType="YES" />
-  </entity>
-  <entity name="EventStored" representedClassName="EventStored" syncable="YES"
-    codeGenerationType="class">
-    <attribute name="action_url" optional="YES" attributeType="String" />
-    <attribute name="color" optional="YES" attributeType="String" />
-    <attribute name="course_id" optional="YES" attributeType="String" />
-    <attribute name="course_name" optional="YES" attributeType="String" />
-    <attribute name="event_description" optional="YES" attributeType="String" />
-    <attribute name="event_type" optional="YES" attributeType="String" />
-    <attribute name="examCourseId" optional="YES" attributeType="String" />
-    <attribute name="finish" optional="YES" attributeType="Boolean" usesScalarValueType="YES" />
-    <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" />
-    <attribute name="instance" optional="YES" attributeType="Integer 64" defaultValueString="0"
-      usesScalarValueType="YES" />
-    <attribute name="is_period_event" optional="YES" attributeType="Boolean" defaultValueString="NO"
-      usesScalarValueType="YES" />
-    <attribute name="isCustomEvent" optional="YES" attributeType="Boolean" usesScalarValueType="YES" />
-    <attribute name="lastUpdateDate" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="lexue_event_id" optional="YES" attributeType="String" />
-    <attribute name="mindaytimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="name" optional="YES" attributeType="String" />
-    <attribute name="timeend" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="timestart" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="timeusermidnight" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="url" optional="YES" attributeType="String" />
-    <attribute name="user_deleted" attributeType="Boolean" defaultValueString="NO"
-      usesScalarValueType="YES" />
-  </entity>
-  <entity name="FavoriteURLStored" representedClassName="FavoriteURLStored" syncable="YES"
-    codeGenerationType="class">
-    <attribute name="favorite_date" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="from_course_id" optional="YES" attributeType="String" />
-    <attribute name="from_course_name" optional="YES" attributeType="String" />
-    <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" />
-    <attribute name="title" optional="YES" attributeType="String" />
-    <attribute name="url" optional="YES" attributeType="String" />
-  </entity>
-  <entity name="LexueDP_RecordEvent" representedClassName="LexueDP_RecordEvent" syncable="YES"
-    codeGenerationType="class">
-    <attribute name="eventUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO" />
-  </entity>
-  <entity name="LexueDP_RecordNotification" representedClassName="LexueDP_RecordNotification"
-    syncable="YES" codeGenerationType="class">
-    <attribute name="notificationID" optional="YES" attributeType="String" />
-  </entity>
-  <entity name="LexueDP_RecordNotifiedEvent" representedClassName="LexueDP_RecordNotifiedEvent"
-    syncable="YES" codeGenerationType="class">
-    <attribute name="eventUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO" />
-    <attribute name="notifiedTime" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-  </entity>
-  <entity name="MessageStored" representedClassName="MessageStored" syncable="YES"
-    codeGenerationType="class">
-    <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="event_name" optional="YES" attributeType="String" />
-    <attribute name="event_starttime" optional="YES" attributeType="String" />
-    <attribute name="event_uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO" />
-    <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO" />
-    <attribute name="image_data" optional="YES" attributeType="String" />
-    <attribute name="link_data" optional="YES" attributeType="String" />
-    <attribute name="link_title" optional="YES" attributeType="String" />
-    <attribute name="messageHash" optional="YES" attributeType="String" />
-    <attribute name="senderUid" optional="YES" attributeType="String" />
-    <attribute name="text_data" optional="YES" attributeType="String" />
-    <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0"
-      usesScalarValueType="YES" />
-  </entity>
-  <entity name="ScoreDiffCache" representedClassName="ScoreDiffCache" syncable="YES"
-    codeGenerationType="class">
-    <attribute name="avgScore" optional="YES" attributeType="String" />
-    <attribute name="courseName" optional="YES" attributeType="String" />
-    <attribute name="last_update" optional="YES" attributeType="Date" usesScalarValueType="NO" />
-    <attribute name="myScore" optional="YES" attributeType="String" />
-    <attribute name="read" optional="YES" attributeType="Boolean" usesScalarValueType="YES" />
-    <attribute name="score_hash" optional="YES" attributeType="String" />
-    <attribute name="scoreId" optional="YES" attributeType="String" />
-    <attribute name="scoreInMajor" optional="YES" attributeType="String" />
-  </entity>
-  <entity name="ScheduleCourseStored" representedClassName="ScheduleCourseStored" syncable="YES"
-    codeGenerationType="class">
-    <attribute name="classroomLocation" optional="YES" attributeType="String" />
-    <attribute name="classroomLocationTimeDes" optional="YES" attributeType="String" />
-    <attribute name="color" optional="YES" attributeType="String" />
-    <attribute name="courseCredit" optional="YES" attributeType="Integer 32" defaultValueString="0"
-      usesScalarValueType="YES" />
-    <attribute name="courseId" optional="YES" attributeType="String" />
-    <attribute name="courseName" optional="YES" attributeType="String" />
-    <attribute name="courseType" optional="YES" attributeType="String" />
-    <attribute name="dayOfWeek" optional="YES" attributeType="Integer 32" defaultValueString="0"
-      usesScalarValueType="YES" />
-    <attribute name="endSectionId" optional="YES" attributeType="Integer 32" defaultValueString="0"
-      usesScalarValueType="YES" />
-    <attribute name="existWeek" optional="YES" attributeType="String" />
-    <attribute name="kKKDWDM_DISPLAY" optional="YES" attributeType="String" />
-    <attribute name="schoolRegion" optional="YES" attributeType="String" />
-    <attribute name="startSectionId" optional="YES" attributeType="Integer 32"
-      defaultValueString="0" usesScalarValueType="YES" />
-    <attribute name="teacherName" optional="YES" attributeType="String" />
-  </entity>
-  <configuration name="Local">
-    <memberEntity name="CourseCacheStored" />
-  </configuration>
-  <configuration name="NeedSync" usedWithCloudKit="YES">
-    <memberEntity name="ContactStored" />
-    <memberEntity name="EventStored" />
-    <memberEntity name="FavoriteURLStored" />
-    <memberEntity name="LexueDP_RecordNotifiedEvent" />
-    <memberEntity name="LexueDP_RecordNotification" />
-    <memberEntity name="LexueDP_RecordEvent" />
-    <memberEntity name="MessageStored" />
-    <memberEntity name="ScoreDiffCache" />
-    <memberEntity name="ScheduleCourseStored" />
-  </configuration>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23C71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="ContactStored" representedClassName="ContactStored" syncable="YES" codeGenerationType="class">
+        <attribute name="alias" optional="YES" attributeType="String"/>
+        <attribute name="avatar_data" optional="YES" attributeType="String"/>
+        <attribute name="contactUid" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="lastMessageDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastUpdateDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="originName" optional="YES" attributeType="String"/>
+        <attribute name="pinned" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="silent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="unreadCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="CourseCacheStored" representedClassName="CourseCacheStored" syncable="YES" codeGenerationType="class">
+        <attribute name="coursecategory" optional="YES" attributeType="String"/>
+        <attribute name="courseimage" optional="YES" attributeType="String"/>
+        <attribute name="enddate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fullname" optional="YES" attributeType="String"/>
+        <attribute name="fullnamedisplay" optional="YES" attributeType="String"/>
+        <attribute name="hasprogress" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hidden" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="idnumber" optional="YES" attributeType="String"/>
+        <attribute name="isfavourite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUpdateDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="local_favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="progress" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="shortname" optional="YES" attributeType="String"/>
+        <attribute name="showactivitydates" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showcompletionconditions" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="showshortname" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="startdate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String"/>
+        <attribute name="summaryformat" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="viewurl" optional="YES" attributeType="String"/>
+        <attribute name="visible" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="EventStored" representedClassName="EventStored" syncable="YES" codeGenerationType="class">
+        <attribute name="action_url" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="course_id" optional="YES" attributeType="String"/>
+        <attribute name="course_name" optional="YES" attributeType="String"/>
+        <attribute name="event_description" optional="YES" attributeType="String"/>
+        <attribute name="event_type" optional="YES" attributeType="String"/>
+        <attribute name="examCourseId" optional="YES" attributeType="String"/>
+        <attribute name="finish" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="instance" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="is_period_event" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="isCustomEvent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lastUpdateDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lexue_event_id" optional="YES" attributeType="String"/>
+        <attribute name="mindaytimestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="timeend" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timestart" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timeusermidnight" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+        <attribute name="user_deleted" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="FavoriteURLStored" representedClassName="FavoriteURLStored" syncable="YES" codeGenerationType="class">
+        <attribute name="favorite_date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="from_course_id" optional="YES" attributeType="String"/>
+        <attribute name="from_course_name" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="LexueDP_RecordEvent" representedClassName="LexueDP_RecordEvent" syncable="YES" codeGenerationType="class">
+        <attribute name="eventUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="LexueDP_RecordNotification" representedClassName="LexueDP_RecordNotification" syncable="YES" codeGenerationType="class">
+        <attribute name="notificationID" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="LexueDP_RecordNotifiedEvent" representedClassName="LexueDP_RecordNotifiedEvent" syncable="YES" codeGenerationType="class">
+        <attribute name="eventUUID" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="notifiedTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="MessageStored" representedClassName="MessageStored" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="event_name" optional="YES" attributeType="String"/>
+        <attribute name="event_starttime" optional="YES" attributeType="String"/>
+        <attribute name="event_uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="image_data" optional="YES" attributeType="String"/>
+        <attribute name="link_data" optional="YES" attributeType="String"/>
+        <attribute name="link_title" optional="YES" attributeType="String"/>
+        <attribute name="messageHash" optional="YES" attributeType="String"/>
+        <attribute name="senderUid" optional="YES" attributeType="String"/>
+        <attribute name="text_data" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ScheduleCourseStored" representedClassName="ScheduleCourseStored" syncable="YES" codeGenerationType="class">
+        <attribute name="classroomLocation" optional="YES" attributeType="String"/>
+        <attribute name="classroomLocationTimeDes" optional="YES" attributeType="String"/>
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="courseCredit" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="courseId" optional="YES" attributeType="String"/>
+        <attribute name="courseName" optional="YES" attributeType="String"/>
+        <attribute name="courseType" optional="YES" attributeType="String"/>
+        <attribute name="dayOfWeek" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endSectionId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="existWeek" optional="YES" attributeType="String"/>
+        <attribute name="importDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="kKKDWDM_DISPLAY" optional="YES" attributeType="String"/>
+        <attribute name="schoolRegion" optional="YES" attributeType="String"/>
+        <attribute name="semesterStartDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="startSectionId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="teacherName" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ScoreDiffCache" representedClassName="ScoreDiffCache" syncable="YES" codeGenerationType="class">
+        <attribute name="avgScore" optional="YES" attributeType="String"/>
+        <attribute name="courseName" optional="YES" attributeType="String"/>
+        <attribute name="last_update" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="myScore" optional="YES" attributeType="String"/>
+        <attribute name="read" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="score_hash" optional="YES" attributeType="String"/>
+        <attribute name="scoreId" optional="YES" attributeType="String"/>
+        <attribute name="scoreInMajor" optional="YES" attributeType="String"/>
+    </entity>
+    <configuration name="Local">
+        <memberEntity name="CourseCacheStored"/>
+    </configuration>
+    <configuration name="NeedSync" usedWithCloudKit="YES">
+        <memberEntity name="ContactStored"/>
+        <memberEntity name="EventStored"/>
+        <memberEntity name="FavoriteURLStored"/>
+        <memberEntity name="LexueDP_RecordNotifiedEvent"/>
+        <memberEntity name="LexueDP_RecordNotification"/>
+        <memberEntity name="LexueDP_RecordEvent"/>
+        <memberEntity name="MessageStored"/>
+        <memberEntity name="ScoreDiffCache"/>
+        <memberEntity name="ScheduleCourseStored"/>
+    </configuration>
 </model>

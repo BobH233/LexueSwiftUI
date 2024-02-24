@@ -80,6 +80,7 @@
 		477344832B820CD700AB5358 /* Score_MediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477344782B820ACE00AB5358 /* Score_MediumView.swift */; };
 		477344842B820CDA00AB5358 /* Score_LargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4773447A2B820ADE00AB5358 /* Score_LargeView.swift */; };
 		47758F4C2AB2F61C0043D65A /* CoreLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */; };
+		477D3D172B89A053000A3D28 /* ImportScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477D3D162B89A053000A3D28 /* ImportScheduleView.swift */; };
 		478434802ADEDD890095A2EE /* LexueHelperBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */; };
 		4784DBD42B201050000B12CE /* ExtraFunctionSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */; };
 		4784DBD62B202492000B12CE /* ExtraFunctionDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */; };
@@ -285,6 +286,7 @@
 		4773447A2B820ADE00AB5358 /* Score_LargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score_LargeView.swift; sourceTree = "<group>"; };
 		4773447D2B820C4400AB5358 /* ScoreProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreProvider.swift; sourceTree = "<group>"; };
 		47758F4B2AB2F61C0043D65A /* CoreLogicManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLogicManager.swift; sourceTree = "<group>"; };
+		477D3D162B89A053000A3D28 /* ImportScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportScheduleView.swift; sourceTree = "<group>"; };
 		4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueHelperBackend.swift; sourceTree = "<group>"; };
 		4784DBD32B201050000B12CE /* ExtraFunctionSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionSetting.swift; sourceTree = "<group>"; };
 		4784DBD52B202492000B12CE /* ExtraFunctionDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraFunctionDescription.swift; sourceTree = "<group>"; };
@@ -471,6 +473,7 @@
 			isa = PBXGroup;
 			children = (
 				471D57422B88340700E1FFFF /* ScheduleMainView.swift */,
+				477D3D162B89A053000A3D28 /* ImportScheduleView.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -1000,6 +1003,7 @@
 				47BD51A12AC5B43F0029F9DB /* UMCommonLogSwift.swift in Sources */,
 				47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */,
 				4715BE862ACC49F600163DA9 /* ContactAvatarSettingView.swift in Sources */,
+				477D3D172B89A053000A3D28 /* ImportScheduleView.swift in Sources */,
 				47EF59E22B280636009FE836 /* AlertData.swift in Sources */,
 				47CE0FF72ACADED400C68CA3 /* AddCustomEventView.swift in Sources */,
 				47EC987A2ACBB6BF009CE125 /* DeletedEventView.swift in Sources */,
