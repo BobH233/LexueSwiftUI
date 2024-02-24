@@ -117,9 +117,9 @@ struct WeeklyScheduleView: View {
                             ForEach(sectionInfo, id: \.sectionIndex) { curSection in
                                 if let course = today_courses.HasCourseInSection(sectionId: curSection.sectionIndex) {
                                     // 如果这里有课, 那么就绘制课程框
-//                                    Text(course.CourseName)
-//                                        .frame(height: GetCourseBlockHeight(course))
-//                                        .background(.blue)
+                                    //                                    Text(course.CourseName)
+                                    //                                        .frame(height: GetCourseBlockHeight(course))
+                                    //                                        .background(.blue)
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 10) // 圆角矩形
                                             .stroke(Color.white.opacity(0.5), lineWidth: 2) // 白色半透明描边
@@ -170,7 +170,7 @@ struct WeeklyScheduleView: View {
                     }
                 }
             }
-            .foregroundColor(.black)
+                .foregroundColor(.black)
         }
         .onAppear {
             // 载入节数信息
@@ -192,6 +192,7 @@ struct ScheduleMainView: View {
                 HStack {
                     Button(action: {
                         // 返回上一级
+                        VibrateOnce()
                         dismiss()
                     }) {
                         Image(systemName: "chevron.left")
@@ -233,19 +234,28 @@ struct ScheduleMainView: View {
                 }
                 .padding() // 顶部元素的内边距
                 .background(Color.blue) // 确保顶部栏背景色与整体背景一致
-                TabView(selection: $selection) {
-                    WeeklyScheduleView()
+                ZStack {
+                    TabView(selection: $selection) {
+                        WeeklyScheduleView()
                         // .background(.yellow)
-                        .tag(1)
-                    WeeklyScheduleView()
+                            .tag(1)
+                        WeeklyScheduleView()
                         // .background(.yellow)
-                        .tag(2)
-                    WeeklyScheduleView()
+                            .tag(2)
+                        WeeklyScheduleView()
                         // .background(.yellow)
-                        .tag(3)
+                            .tag(3)
+                    }
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                    .ignoresSafeArea(.all, edges: .bottom)
+                    HStack {
+                        Rectangle()
+                            .foregroundColor(.blue.opacity(0.01))
+                            .frame(maxHeight: .infinity)
+                            .frame(width: 20)
+                        Spacer()
+                    }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .ignoresSafeArea(.all, edges: .bottom)
                 
             }
         }
