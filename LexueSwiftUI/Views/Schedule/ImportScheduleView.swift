@@ -32,9 +32,10 @@ struct ScheduleCourseImportPreviewCard: View {
                 HStack {
                     Text(courseName)
                         .bold()
+                        .lineLimit(nil)
                         .font(.system(size: 24))
                         .multilineTextAlignment(.leading)
-                        .lineLimit(99)
+                        .fixedSize(horizontal: false, vertical: true)
                     Spacer()
                 }
                 .padding(.top, 10)
@@ -76,8 +77,10 @@ struct ScheduleCourseImportPreviewCard: View {
                 }
                 .padding(.bottom, 10)
             }
+            .frame(maxHeight: .infinity)
             .padding(.leading, 30)
         }
+        .frame(maxHeight: .infinity)
         .cornerRadius(10)
         .shadow(radius: 2)
     }
@@ -98,7 +101,7 @@ struct ImportScheduleView: View {
     ]
     
     @State var uniqueSemeCourse: [JXZXehall.ScheduleCourseInfo] = [
-        
+        .init(KKDWDM_DISPLAY: "啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦", CourseName: "哦哦哦哦哦哦哦哦哦哦哦", TeacherName: "急急急急急急急急急")
     ]
     
     func ImportSchedule() {
@@ -279,15 +282,14 @@ struct ImportScheduleView: View {
                         .padding(.top, 10)
                     }
                     if true {
-                        HStack {
-                            Text("课程信息")
-                                .bold()
-                                .font(.title)
-                            Spacer()
-                        }
-                        .padding(.top, 20)
-                        .padding(.bottom, 20)
                         VStack(spacing: 20) {
+                            HStack {
+                                Text("课程信息")
+                                    .bold()
+                                    .font(.title)
+                                Spacer()
+                            }
+                            .padding(.top, 20)
                             ForEach(uniqueSemeCourse, id: \.CourseId) { course in
                                 ScheduleCourseImportPreviewCard(courseName: "\(course.CourseName)[\(course.KKDWDM_DISPLAY)]", teacherName: course.TeacherName, courseLocationAndTime: course.ClassroomLocationTimeDes, credit: "\(course.CourseCredit)")
                                     .padding(.horizontal, 10)
