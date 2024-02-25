@@ -207,6 +207,7 @@ struct WeeklyScheduleView: View {
     }
 }
 
+
 struct ScheduleMainView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @State var selection: Int = 1
@@ -216,6 +217,8 @@ struct ScheduleMainView: View {
     
     @State var currentViewWeekIndex = 1
     @State var currentWeekDescriptionText = "当前周"
+    
+    @State var showImportSheet = false
     
     var body: some View {
         ZStack {
@@ -261,9 +264,14 @@ struct ScheduleMainView: View {
                         }
                         Button(action: {
                             // 导入学校的课程表
+                            VibrateOnce()
+                            showImportSheet = true
                         }) {
                             Image(systemName: "arrow.down.circle")
                                 .font(Font.system(size: 25).weight(.semibold))
+                        }
+                        .sheet(isPresented: $showImportSheet) {
+                            ImportScheduleView()
                         }
                     }
                     .foregroundColor(.white)

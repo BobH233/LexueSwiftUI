@@ -217,6 +217,19 @@ class ScheduleManager {
         return ""
     }
     
+    // 按照课程号去重课程，用于显示导入课程
+    func GetUniqueScheduleCourseInfo(allInfo: [JXZXehall.ScheduleCourseInfo]) -> [JXZXehall.ScheduleCourseInfo] {
+        // 使用字典去重，保持插入顺序
+        let uniqueCourses = allInfo.reduce(into: [String: JXZXehall.ScheduleCourseInfo]()) { (result, courseInfo) in
+            // 如果该课程号还未添加到结果中，则添加之
+            if result[courseInfo.CourseId] == nil {
+                result[courseInfo.CourseId] = courseInfo
+            }
+        }
+        // 返回去重后的课程数组
+        return Array(uniqueCourses.values)
+    }
+    
 }
 
 
