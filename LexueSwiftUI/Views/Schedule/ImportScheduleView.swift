@@ -17,6 +17,7 @@ struct ScheduleCourseImportPreviewCard: View {
     var teacherName: String = "金海"
     var courseLocationAndTime: String = "233"
     var credit: String = ""
+    var CourseType: String = "必修"
     
     var body: some View {
         ZStack {
@@ -46,6 +47,15 @@ struct ScheduleCourseImportPreviewCard: View {
                     Text("老师:")
                         .bold()
                     Text(teacherName.GuardNotEmpty())
+                    Spacer()
+                }
+                HStack {
+                    Circle()
+                        .frame(width: 10, height: 10)
+                        .foregroundColor(.blue)
+                    Text("课程类型:")
+                        .bold()
+                    Text(CourseType.GuardNotEmpty())
                     Spacer()
                 }
                 HStack {
@@ -364,7 +374,7 @@ struct ImportScheduleView: View {
                             }
                             .padding(.top, 20)
                             ForEach(uniqueSemeCourse, id: \.CourseId) { course in
-                                ScheduleCourseImportPreviewCard(courseName: "\(course.CourseName)[\(course.KKDWDM_DISPLAY)]", teacherName: course.TeacherName, courseLocationAndTime: course.ClassroomLocationTimeDes, credit: "\(course.CourseCredit)")
+                                ScheduleCourseImportPreviewCard(courseName: "\(course.CourseName)[\(course.KKDWDM_DISPLAY)]", teacherName: course.TeacherName, courseLocationAndTime: course.ClassroomLocationTimeDes, credit: "\(course.CourseCredit)", CourseType: course.CourseType)
                                     .padding(.horizontal, 10)
                             }
                         }

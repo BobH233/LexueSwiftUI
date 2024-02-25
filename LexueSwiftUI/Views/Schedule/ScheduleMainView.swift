@@ -66,23 +66,25 @@ struct WeeklyScheduleView: View {
     @State var firstDate: Date = .now
     @State var currentMonth = "2月"
     
-    // 每天的课程
-    @State var dailyCourses: [DailyScheduleInfo] = [
-        .init(day_index: 1, courses_today: [
-            .init(CourseName: "会员制餐厅导论", TeacherName: "醇平", ClassroomLocation:"会员制餐厅", StartSectionId: 1, EndSectionId: 2, CourseBgColor: .brown),
-            .init(CourseName: "如何赚钱", TeacherName: "申家芮", ClassroomLocation:"北京良乡看守所", StartSectionId: 5, EndSectionId: 8, CourseBgColor: .yellow),
-        ]),
-        .init(day_index: 2, courses_today: []),
-        .init(day_index: 3, courses_today: [
-            .init(CourseName: "数据结构与编曲", TeacherName: "泽野螳螂", ClassroomLocation:"Bilibili", StartSectionId: 3, EndSectionId: 5),
-            .init(CourseName: "哲学与人生", TeacherName: "VanSama", ClassroomLocation:"博雅更衣室", StartSectionId: 6, EndSectionId: 7, CourseBgColor: .pink),
-        ]),
-        .init(day_index: 4, courses_today: []),
-        .init(day_index: 5, courses_today: []),
-        .init(day_index: 6, courses_today: []),
-        .init(day_index: 7, courses_today: []),
-    ]
     
+    // 每天的课程
+//    @State var dailyCourses: [DailyScheduleInfo] = [
+//        .init(day_index: 1, courses_today: [
+//            .init(CourseName: "会员制餐厅导论", TeacherName: "醇平", ClassroomLocation:"会员制餐厅", StartSectionId: 1, EndSectionId: 2, CourseBgColor: .brown),
+//            .init(CourseName: "如何赚钱", TeacherName: "申家芮", ClassroomLocation:"北京良乡看守所", StartSectionId: 5, EndSectionId: 8, CourseBgColor: .yellow),
+//        ]),
+//        .init(day_index: 2, courses_today: []),
+//        .init(day_index: 3, courses_today: [
+//            .init(CourseName: "数据结构与编曲", TeacherName: "泽野螳螂", ClassroomLocation:"Bilibili", StartSectionId: 3, EndSectionId: 5),
+//            .init(CourseName: "哲学与人生", TeacherName: "VanSama", ClassroomLocation:"博雅更衣室", StartSectionId: 6, EndSectionId: 7, CourseBgColor: .pink),
+//        ]),
+//        .init(day_index: 4, courses_today: []),
+//        .init(day_index: 5, courses_today: []),
+//        .init(day_index: 6, courses_today: []),
+//        .init(day_index: 7, courses_today: []),
+//    ]
+    
+    @Binding var dailyCourses: [DailyScheduleInfo]
     func GetCourseBlockHeight(_ course: JXZXehall.ScheduleCourseInfo) -> CGFloat {
         let height: Float = (UnitBlockHeight + 3.0) * Float(course.GetSectionLength()) - 3.0
         return CGFloat(height)
@@ -161,7 +163,7 @@ struct WeeklyScheduleView: View {
                                                 .truncationMode(.tail)
                                             if !course.ClassroomLocation.isEmpty {
                                                 // 上课地点
-                                                Text("@\(course.ClassroomLocation)") // 文本内容
+                                                Text("@\(course.SchoolRegion)\(course.ClassroomLocation)") // 文本内容
                                                     .font(.system(size: 13))
                                                     .foregroundColor(chooseTextColor(UIColor(course.CourseBgColor)))
                                                     .bold()
@@ -220,6 +222,11 @@ struct ScheduleMainView: View {
     
     @State var showImportSheet = false
     
+    
+    @State var allWeekSchedule: [[DailyScheduleInfo]] = [[]]
+    
+    @State var weekOffset: Int = 0
+    
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
@@ -246,7 +253,7 @@ struct ScheduleMainView: View {
                             currentDateString = ScheduleManager.shared.GetCurrentDateString()
                         }
                         HStack {
-                            Text("第\(selection)周")
+                            Text("第\(selection-weekOffset)周")
                             Text("\(currentWeekDescriptionText)")
                             Spacer()
                         }
@@ -280,18 +287,12 @@ struct ScheduleMainView: View {
                 .background(Color.blue) // 确保顶部栏背景色与整体背景一致
                 ZStack {
                     TabView(selection: $selection) {
-                        WeeklyScheduleView(weekIndex: 0)
-                        // .background(.yellow)
-                            .tag(1)
-                        WeeklyScheduleView(weekIndex: 1)
-                        // .background(.yellow)
-                            .tag(2)
-                        WeeklyScheduleView(weekIndex: 2)
-                        // .background(.yellow)
-                            .tag(3)
+                        ForEach(allWeekSchedule.indices, id: \.self) { weekId in
+                            WeeklyScheduleView(weekIndex: weekId, dailyCourses: $allWeekSchedule[weekId])
+                                .tag(weekId + 1)
+                        }
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                    .ignoresSafeArea(.all, edges: .bottom)
                     .onChange(of: selection) { newVal in
                         currentWeekDescriptionText = ScheduleManager.shared.GetWeekDesText(context: managedObjContext, selectionWeekIndex: newVal - 1)
                     }
@@ -305,6 +306,9 @@ struct ScheduleMainView: View {
                 }
                 
             }
+        }
+        .onAppear {
+            (allWeekSchedule, weekOffset) = ScheduleManager.shared.GenerateAllWeekScheduleInSemester(context: managedObjContext)
         }
         .navigationBarHidden(true)
     }

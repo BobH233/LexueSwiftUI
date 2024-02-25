@@ -246,7 +246,75 @@ class ScheduleManager {
         DataController.shared.save(context: context)
     }
     
-    
+    // 生成总的课表，所有周的课程表
+    func GenerateAllWeekScheduleInSemester(context: NSManagedObjectContext) -> ([[DailyScheduleInfo]], Int) {
+        // 从数据库查询所有存储的课程，并只过滤importDate最新的
+        let request: NSFetchRequest<ScheduleCourseStored> = ScheduleCourseStored.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "importDate", ascending: false)
+        request.sortDescriptors = [sortDescriptor]
+        var latestImportDate: Date = .now
+        var semesterStartDate: Date = .now
+        var allCourseValid: [JXZXehall.ScheduleCourseInfo] = []
+        var calendar = Calendar.current
+        do {
+            // 执行fetch请求
+            let result = try context.fetch(request)
+            if let maxRecord = result.first {
+                latestImportDate = maxRecord.importDate ?? .now
+                semesterStartDate = maxRecord.semesterStartDate ?? .now
+            } else {
+                return ([[]],0)
+            }
+            for course in result {
+                if course.importDate == latestImportDate {
+                    allCourseValid.append(course.ToScheduleCourseInfo())
+                }
+            }
+        } catch {
+            print("Failed to fetch data: \(error.localizedDescription)")
+            return ([[]],0)
+        }
+        if allCourseValid.count == 0 {
+            return ([[]],0)
+        }
+        // 先获取从学期开始，最大的有多少周
+        var maxWeekCount = 0
+        for course in allCourseValid {
+            maxWeekCount = max(maxWeekCount, course.ExistWeek.count)
+        }
+        print("maxWeekCount: ", maxWeekCount)
+        // 计算一下从当前日程表的第一周到开学周，有多少偏移
+        let firstDate = GetScheduleDisplayFirstWeek(context: context)
+        var offsetWeekToSemesterStart = 0
+        for i in 0..<maxWeekCount {
+            guard let offsetWeekDate = calendar.date(byAdding: .day, value: 7 * i, to: firstDate) else {
+                continue
+            }
+            if compareDatesIgnoringTime(offsetWeekDate, semesterStartDate) == .orderedSame {
+                offsetWeekToSemesterStart = i
+                break
+            }
+        }
+        print("offsetWeekToSemesterStart:", offsetWeekToSemesterStart)
+        
+        // 新建最终的课程表结构
+        var retWeekSchedule: [[DailyScheduleInfo]] = [[DailyScheduleInfo]]()
+        for _ in 0..<(maxWeekCount + offsetWeekToSemesterStart) {
+            retWeekSchedule.append([])
+            for i in 1...7 {
+                retWeekSchedule[retWeekSchedule.count-1].append(.init(day_index: i, courses_today: []))
+            }
+        }
+        // 处理每一门课程的情况
+        for course in allCourseValid {
+            for (index, character) in course.ExistWeek.enumerated() {
+                if character == "1" {
+                    retWeekSchedule[offsetWeekToSemesterStart + index][course.DayOfWeek - 1].courses_today.append(course)
+                }
+            }
+        }
+        return (retWeekSchedule, offsetWeekToSemesterStart)
+    }
 }
 
 
