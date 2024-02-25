@@ -192,6 +192,31 @@ class ScheduleManager {
         return (ret_month, ret_arr, ret_date_arr)
     }
     
+    // 获取是否是当前周
+    func GetWeekDesText(context: NSManagedObjectContext, selectionWeekIndex: Int) -> String {
+        let calendar = Calendar.current
+        let firstDate = GetScheduleDisplayFirstWeek(context: context)
+        guard let selectionWeekMonday = calendar.date(byAdding: .day, value: 7 * selectionWeekIndex, to: firstDate) else {
+            return ""
+        }
+        guard let selectionNextWeekMonday = calendar.date(byAdding: .day, value: 7 * (selectionWeekIndex + 1), to: firstDate) else {
+            return ""
+        }
+        guard let selectionPrevWeekMonday = calendar.date(byAdding: .day, value: 7 * (selectionWeekIndex - 1), to: firstDate) else {
+            return ""
+        }
+        if compareDatesIgnoringTime(selectionWeekMonday, getMondayOfCurrentWeek()) == .orderedSame {
+            return "当前周"
+        }
+        if compareDatesIgnoringTime(selectionPrevWeekMonday, getMondayOfCurrentWeek()) == .orderedSame {
+            return "下一周"
+        }
+        if compareDatesIgnoringTime(selectionNextWeekMonday, getMondayOfCurrentWeek()) == .orderedSame {
+            return "上一周"
+        }
+        return ""
+    }
+    
 }
 
 

@@ -208,7 +208,7 @@ struct WeeklyScheduleView: View {
 }
 
 struct ScheduleMainView: View {
-    // 示例数据，您可以根据需要替换为动态数据
+    @Environment(\.managedObjectContext) var managedObjContext
     @State var selection: Int = 1
     @Environment(\.dismiss) var dismiss
     
@@ -284,6 +284,9 @@ struct ScheduleMainView: View {
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                     .ignoresSafeArea(.all, edges: .bottom)
+                    .onChange(of: selection) { newVal in
+                        currentWeekDescriptionText = ScheduleManager.shared.GetWeekDesText(context: managedObjContext, selectionWeekIndex: newVal - 1)
+                    }
                     HStack {
                         Rectangle()
                             .foregroundColor(.blue.opacity(0.01))
