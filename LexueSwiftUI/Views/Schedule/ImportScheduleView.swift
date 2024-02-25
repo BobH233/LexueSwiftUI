@@ -101,7 +101,7 @@ struct ImportScheduleView: View {
     ]
     
     @State var uniqueSemeCourse: [JXZXehall.ScheduleCourseInfo] = [
-        .init(KKDWDM_DISPLAY: "啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦", CourseName: "哦哦哦哦哦哦哦哦哦哦哦", TeacherName: "急急急急急急急急急")
+//        .init(KKDWDM_DISPLAY: "啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦", CourseName: "哦哦哦哦哦哦哦哦哦哦哦", TeacherName: "急急急急急急急急急")
     ]
     
     func ImportSchedule() {
@@ -146,7 +146,9 @@ struct ImportScheduleView: View {
                     withAnimation {
                         uniqueSemeCourse = ScheduleManager.shared.GetUniqueScheduleCourseInfo(allInfo: currentSemeCourse)
                         self.importButtonDisable = false
-                        isLoadedSchedule = true
+                        withAnimation {
+                            isLoadedSchedule = true
+                        }
                     }
                 }
             case .failure(_):
@@ -281,7 +283,7 @@ struct ImportScheduleView: View {
                         .tint(.green)
                         .padding(.top, 10)
                     }
-                    if true {
+                    if isLoadedSchedule {
                         VStack(spacing: 20) {
                             HStack {
                                 Text("课程信息")
