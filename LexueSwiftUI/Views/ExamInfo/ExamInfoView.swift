@@ -182,12 +182,13 @@ struct ExamInfoView: View {
                     }
                 }
             case .failure(_):
-                DispatchQueue.main.async {
-                    GlobalVariables.shared.alertTitle = "无法拉取当前学期考试"
-                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
-                    GlobalVariables.shared.showAlert = true
-                }
-                return
+//                DispatchQueue.main.async {
+//                    GlobalVariables.shared.alertTitle = "无法拉取当前学期考试"
+//                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
+//                    GlobalVariables.shared.showAlert = true
+//                }
+                finishedExam = []
+                arrangedExam = []
             }
             
             let unscheduled_exams = await JXZXehall.shared.GetUnscheduledExam(context: JXZXContext, semesterId: semesterId)
@@ -198,12 +199,12 @@ struct ExamInfoView: View {
                     unscheduledExam = success
                 }
             case .failure(_):
-                DispatchQueue.main.async {
-                    GlobalVariables.shared.alertTitle = "无法拉取当前学期未安排的考试"
-                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
-                    GlobalVariables.shared.showAlert = true
-                }
-                return
+//                DispatchQueue.main.async {
+//                    GlobalVariables.shared.alertTitle = "无法拉取当前学期未安排的考试"
+//                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
+//                    GlobalVariables.shared.showAlert = true
+//                }
+                unscheduledExam = []
             }
             
             DispatchQueue.main.async {
@@ -332,12 +333,14 @@ struct ExamInfoView: View {
                     }
                 }
             case .failure(_):
-                DispatchQueue.main.async {
-                    GlobalVariables.shared.alertTitle = "无法拉取当前学期考试"
-                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
-                    GlobalVariables.shared.showAlert = true
-                }
-                return
+//                DispatchQueue.main.async {
+//                    GlobalVariables.shared.alertTitle = "无法拉取当前学期考试"
+//                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
+//                    GlobalVariables.shared.showAlert = true
+//                }
+//                return
+                finishedExam = []
+                arrangedExam = []
             }
             
             let unscheduled_exams = await JXZXehall.shared.GetUnscheduledExam(context: currentContext, semesterId: currentSemesterId)
@@ -354,12 +357,13 @@ struct ExamInfoView: View {
                     }
                 }
             case .failure(_):
-                DispatchQueue.main.async {
-                    GlobalVariables.shared.alertTitle = "无法拉取当前学期未安排的考试"
-                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
-                    GlobalVariables.shared.showAlert = true
-                }
-                return
+//                DispatchQueue.main.async {
+//                    GlobalVariables.shared.alertTitle = "无法拉取当前学期未安排的考试"
+//                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
+//                    GlobalVariables.shared.showAlert = true
+//                }
+//                return
+                unscheduledExam = []
             }
             
             DispatchQueue.main.async {
@@ -419,6 +423,12 @@ struct ExamInfoView: View {
                         ForEach(arrangedExam, id: \.courseName) { currentExam in
                             ArrangedExamCardView(sideBarColor: .blue, courseName: currentExam.courseName, examType: currentExam.examType, teacherName: currentExam.teacherName, seatNumber: currentExam.seatIndex, examTime: currentExam.examTime, examLocation: currentExam.examLocation)
                         }
+                        if arrangedExam.count == 0 {
+                            Text("暂无已安排的考试")
+                                .foregroundColor(.secondary)
+                                .font(.system(size: 20))
+                                .padding(.bottom, 10)
+                        }
                         
                         
                         HStack {
@@ -427,9 +437,16 @@ struct ExamInfoView: View {
                                 .font(.system(size: 40))
                             Spacer()
                         }
+                        .padding(.bottom, 10)
                         
                         ForEach(unscheduledExam, id: \.courseName) { currentExam in
                             UnscheduledExamCardView(sideBarColor: .gray, courseName: currentExam.courseName, examType: currentExam.examType, teacherName: currentExam.teacherName)
+                        }
+                        if unscheduledExam.count == 0 {
+                            Text("暂无未安排的考试")
+                                .foregroundColor(.secondary)
+                                .font(.system(size: 20))
+                                .padding(.bottom, 10)
                         }
                         
                         
@@ -445,6 +462,12 @@ struct ExamInfoView: View {
                             ArrangedExamCardView(sideBarColor: .green, courseName: currentExam.courseName, examType: currentExam.examType, teacherName: currentExam.teacherName, seatNumber: currentExam.seatIndex, examTime: currentExam.examTime, examLocation: currentExam.examLocation)
                         }
                         .padding(.bottom, 10)
+                        if finishedExam.count == 0 {
+                            Text("暂无已完成的考试")
+                                .foregroundColor(.secondary)
+                                .font(.system(size: 20))
+                                .padding(.bottom, 10)
+                        }
                         
                     }
                 }
