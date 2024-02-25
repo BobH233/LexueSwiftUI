@@ -9,6 +9,8 @@ import SwiftUI
 
 // 每一周的课程表安排
 struct WeeklyScheduleView: View {
+    @Environment(\.managedObjectContext) var managedObjContext
+    
     func chooseTextColor(_ backgroundColor: UIColor) -> Color {
         // 计算背景颜色的亮度
         let red = backgroundColor.cgColor.components?[0] ?? 0
@@ -26,6 +28,8 @@ struct WeeklyScheduleView: View {
     
     // 定义常量用于设定单个课程的高度
     let UnitBlockHeight: Float = 80
+    
+    @State var weekIndex: Int
     
     // 星期文本
     @State var weekTextArr: [String] = [
@@ -47,9 +51,19 @@ struct WeeklyScheduleView: View {
         "6",
         "7"
     ]
-    @State var sectionInfo: [ScheduleSectionInfo] = [
+    @State var dateDayDateArr: [Date] = [
+        .now,
+        .now,
+        .now,
+        .now,
+        .now,
+        .now,
+        .now
     ]
     
+    @State var sectionInfo: [ScheduleSectionInfo] = [
+    ]
+    @State var firstDate: Date = .now
     @State var currentMonth = "2月"
     
     // 每天的课程
@@ -83,12 +97,23 @@ struct WeeklyScheduleView: View {
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity)
                 ForEach(Array(weekTextArr.enumerated()), id: \.element) { index, element in
-                    VStack {
-                        Text(element)
-                        Text(dateDayArr[index])
+                    if compareDatesIgnoringTime(dateDayDateArr[index], .now) == .orderedSame {
+                        VStack {
+                            Text(element)
+                                .bold()
+                            Text(dateDayArr[index])
+                                .bold()
+                        }
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.blue)
+                    } else {
+                        VStack {
+                            Text(element)
+                            Text(dateDayArr[index])
+                        }
+                        .frame(maxWidth: .infinity)
+                        .foregroundColor(.gray)
                     }
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.gray)
                 }
             }
             .padding(.top, 10)
@@ -175,6 +200,9 @@ struct WeeklyScheduleView: View {
         .onAppear {
             // 载入节数信息
             sectionInfo = ScheduleManager.shared.GetScheduleSectionInfo()
+            // 载入时间信息
+            firstDate = ScheduleManager.shared.GetScheduleDisplayFirstWeek(context: managedObjContext)
+            (currentMonth, dateDayArr, dateDayDateArr) = ScheduleManager.shared.GetWeekDisplayInfo(firstWeek: firstDate, targetWeekIndex: weekIndex)
         }
     }
 }
@@ -244,13 +272,13 @@ struct ScheduleMainView: View {
                 .background(Color.blue) // 确保顶部栏背景色与整体背景一致
                 ZStack {
                     TabView(selection: $selection) {
-                        WeeklyScheduleView()
+                        WeeklyScheduleView(weekIndex: 0)
                         // .background(.yellow)
                             .tag(1)
-                        WeeklyScheduleView()
+                        WeeklyScheduleView(weekIndex: 1)
                         // .background(.yellow)
                             .tag(2)
-                        WeeklyScheduleView()
+                        WeeklyScheduleView(weekIndex: 2)
                         // .background(.yellow)
                             .tag(3)
                     }

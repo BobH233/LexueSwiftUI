@@ -120,6 +120,78 @@ class ScheduleManager {
         let todayDateString = dateFormatter.string(from: Date())
         return todayDateString
     }
+    
+    // 获取本地存储的课表的第一天开学时间，如果本地没存储课程表，则返回nil
+    func GetFirstDateOfLocalSchedule(context: NSManagedObjectContext) -> Date? {
+        let request: NSFetchRequest<ScheduleCourseStored> = ScheduleCourseStored.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "importDate", ascending: false)
+        request.sortDescriptors = [sortDescriptor]
+        request.fetchLimit = 1
+        do {
+            // 执行fetch请求
+            let result = try context.fetch(request)
+            if let maxRecord = result.first {
+                return maxRecord.semesterStartDate
+            } else {
+                return nil
+            }
+        } catch {
+            print("Failed to fetch data: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
+    private func getMondayOfCurrentWeek() -> Date {
+        var calendar = Calendar.current
+        calendar.firstWeekday = 2 // 将星期一设置为每周的第一天
+        let today = Date()
+        let weekday = calendar.component(.weekday, from: today)
+
+        // 计算从今天到本周一的天数差
+        var daysToMonday = -((weekday - calendar.firstWeekday - 1 + 7) % 7)
+        // 如果今天是星期日，则特殊处理，直接回溯到上周的星期一
+        if weekday == 1 {
+            daysToMonday = -6
+        }
+
+        let monday = calendar.date(byAdding: .day, value: daysToMonday, to: today)!
+        return monday
+    }
+
+    
+    // 获取课程表第一周星期一应该显示哪一天，如果有GetFirstDateOfLocalSchedule，且这个日期在今天之前，则第一天应该显示学期开始的第一天
+    // 如果没有 GetFirstDateOfLocalSchedule 或者 GetFirstDateOfLocalSchedule 还没到来，则显示当前这一周
+    func GetScheduleDisplayFirstWeek(context: NSManagedObjectContext) -> Date {
+        if let firstSemesterDate = GetFirstDateOfLocalSchedule(context: context) {
+            let today = Date.now
+            if compareDatesIgnoringTime(today, firstSemesterDate) == .orderedDescending {
+                // 今天在学期第一天之后，所以应该返回学期第一天
+                return firstSemesterDate
+            }
+        }
+        // 学期还没开始，返回这周一的日期
+        return getMondayOfCurrentWeek()
+    }
+    
+    // 获取以第一周时间为准往后的n周的信息
+    func GetWeekDisplayInfo(firstWeek: Date, targetWeekIndex: Int) -> (String, [String], [Date]) {
+        let calendar = Calendar.current
+        var ret_arr: [String] = []
+        var ret_date_arr: [Date] = []
+        guard let start = calendar.date(byAdding: .day, value: 7 * targetWeekIndex, to: firstWeek) else {
+            return ("错误", ["","","","","","",""], [Date.now,Date.now,Date.now,Date.now,Date.now,Date.now,Date.now])
+        }
+        let ret_month = "\(calendar.component(.month, from: start))月"
+        for i in 0..<7 {
+            guard let now = calendar.date(byAdding: .day, value: i, to: start) else {
+                return ("错误", ["","","","","","",""], [Date.now,Date.now,Date.now,Date.now,Date.now,Date.now,Date.now])
+            }
+            ret_arr.append("\(calendar.component(.day, from: now))")
+            ret_date_arr.append(now)
+        }
+        return (ret_month, ret_arr, ret_date_arr)
+    }
+    
 }
 
 

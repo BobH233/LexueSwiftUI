@@ -639,3 +639,12 @@ extension UINavigationController: UIGestureRecognizerDelegate {
         return viewControllers.count > 1
     }
 }
+
+func compareDatesIgnoringTime(_ date1: Date, _ date2: Date) -> ComparisonResult {
+    let calendar = Calendar.current
+    let components: Set<Calendar.Component> = [.year, .month, .day]
+    let truncatedDate1 = calendar.date(from: calendar.dateComponents(components, from: date1))!
+    let truncatedDate2 = calendar.date(from: calendar.dateComponents(components, from: date2))!
+    
+    return calendar.compare(truncatedDate1, to: truncatedDate2, toGranularity: .day)
+}
