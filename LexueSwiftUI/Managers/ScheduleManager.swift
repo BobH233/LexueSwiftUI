@@ -230,6 +230,23 @@ class ScheduleManager {
         return Array(uniqueCourses.values)
     }
     
+    // 存储当前的课程表
+    func SaveScheduleCourseToLocal(context: NSManagedObjectContext, allInfo: [JXZXehall.ScheduleCourseInfo], semesterStartDate: Date, coverAll: Bool = true) {
+        if coverAll {
+            // 先把现存的课程表全部删除了
+            DataController.shared.deleteEntityAllData(entityName: ScheduleCourseStored.entity().name ?? "", context: context)
+        }
+        let importDate = Date.now
+        
+        for var course in allInfo {
+            course.ImportDate = importDate
+            course.SemesterStartDate = semesterStartDate
+            DataController.shared.AddScheduleCourseStored(context: context, scheduleInfo: course)
+        }
+        DataController.shared.save(context: context)
+    }
+    
+    
 }
 
 

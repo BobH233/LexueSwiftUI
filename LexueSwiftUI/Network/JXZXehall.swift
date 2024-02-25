@@ -188,6 +188,8 @@ class JXZXehall {
         var CourseBgColor: Color = .blue
         // 本地存储属性，开学时间
         var SemesterStartDate: Date = .now
+        // 导入时间
+        var ImportDate: Date = .now
         
         func GetSectionLength() -> Int {
             if EndSectionId >= StartSectionId {

@@ -87,11 +87,15 @@ struct ScheduleCourseImportPreviewCard: View {
 }
 
 struct ImportScheduleView: View {
+    @Environment(\.managedObjectContext) var managedObjContext
     @State var isLoadedSchedule = false
     @Environment(\.colorScheme) var sysColorScheme
     @State var importButtonDisable = false
+    @State var importButtonProgress: Float = 0.4
     @State var JXZX_context = JXZXehall.JXZXContext()
     @State var inited = false
+    @Environment(\.dismiss) var dismiss
+    @State var semesterStartDate: Date = .now
     
     @State var semester: [FilterOptionBool] = [
     ]
@@ -103,6 +107,17 @@ struct ImportScheduleView: View {
     @State var uniqueSemeCourse: [JXZXehall.ScheduleCourseInfo] = [
 //        .init(KKDWDM_DISPLAY: "啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦", CourseName: "哦哦哦哦哦哦哦哦哦哦哦", TeacherName: "急急急急急急急急急")
     ]
+    
+    func ConvertSemesterDate(strDate: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = TimeZone(identifier: "UTF+8")
+        if let date = dateFormatter.date(from: strDate) {
+            return date
+        } else {
+            return nil
+        }
+    }
     
     func ImportSchedule() {
         Task {
@@ -123,6 +138,7 @@ struct ImportScheduleView: View {
             }
             DispatchQueue.main.async {
                 importButtonDisable = true
+                importButtonProgress = 0.05
             }
             let result = await JXZXehall.shared.GetJXZXwdkbbyContext(loginnedContext: SettingStorage.shared.loginnedContext)
             switch result {
@@ -138,6 +154,43 @@ struct ImportScheduleView: View {
                 }
                 return
             }
+            DispatchQueue.main.async {
+                withAnimation {
+                    importButtonProgress = 0.3
+                }
+            }
+            
+            let semester_start = await JXZXehall.shared.GetSemesterStartDate(context: JXZX_context, semesterId: selection)
+            switch semester_start {
+            case .success(let context):
+                if let convertDate = ConvertSemesterDate(strDate: context) {
+                    semesterStartDate = convertDate
+                } else {
+                    DispatchQueue.main.async {
+                        self.importButtonDisable = false
+                        GlobalVariables.shared.alertTitle = "获取学期起始日失败"
+                        GlobalVariables.shared.alertContent = "请检查网络或者退出重试"
+                        GlobalVariables.shared.showAlert = true
+                        
+                    }
+                    return
+                }
+            case .failure(_):
+                DispatchQueue.main.async {
+                    self.importButtonDisable = false
+                    GlobalVariables.shared.alertTitle = "获取\(selection)学期课程失败"
+                    GlobalVariables.shared.alertContent = "请检查网络或者退出重试"
+                    GlobalVariables.shared.showAlert = true
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                withAnimation {
+                    importButtonProgress = 0.6
+                }
+            }
+            
             let course_res = await JXZXehall.shared.GetSemesterScheduleCourses(context: JXZX_context, semesterId: selection)
             switch course_res {
             case .success(let context):
@@ -163,6 +216,16 @@ struct ImportScheduleView: View {
         }
     }
     
+    func SaveScheduleToLocal() {
+        ScheduleManager.shared.SaveScheduleCourseToLocal(context: managedObjContext, allInfo: currentSemeCourse, semesterStartDate: semesterStartDate)
+        dismiss()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            GlobalVariables.shared.alertTitle = "导入成功"
+            GlobalVariables.shared.alertContent = "导入了\(uniqueSemeCourse.count)门不同的课程"
+            GlobalVariables.shared.showAlert = true
+        }
+    }
+    
     func LoadSemesterInfo() {
         print("LoadSemesterInfo...")
         inited = false
@@ -173,6 +236,7 @@ struct ImportScheduleView: View {
             DispatchQueue.main.async {
                 inited = true
             }
+            // 教学中心太慢了, 就暂时不提供以前的查询服务了
 //            let context_result = await JXZXehall.shared.GetJXZXMobileContext(loginnedContext: SettingStorage.shared.loginnedContext)
 //            print("GetJXZXMobileContext!")
 //            switch context_result {
@@ -269,11 +333,18 @@ struct ImportScheduleView: View {
                         .disabled(importButtonDisable)
                         .buttonStyle(.borderedProminent)
                         .padding(.top, 10)
+                        if importButtonDisable {
+                            ProgressView(value: importButtonProgress, total: 1.0)
+                                .progressViewStyle(LinearProgressViewStyle(tint: .blue))
+                                .frame(height: 50)
+                                .background(Color.clear)
+                                .scaleEffect(x: 1, y: 4, anchor: .center)
+                        }
                     } else {
                         Button {
-                            
+                            SaveScheduleToLocal()
                         } label: {
-                            Text("确认导入")
+                            Text("确认导入(覆盖当前)")
                                 .font(.system(size: 24))
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 40)
