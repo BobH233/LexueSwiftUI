@@ -497,18 +497,27 @@ struct ViewScoreView: View {
                     .padding(.leading, 20)
                 Spacer()
             }
-            TablerList(.init(filter: FilterScoreInfo), header: header,
-                       row: row,
-                       results: scoreInfo)
-            .sideways(minWidth: 1200, showIndicators: true)
-            .background(Color.secondarySystemBackground)
-            .onChange(of: course_type_choices) { newVal in
-                CalcCurrentStatistics()
+            ZStack {
+                TablerList(.init(filter: FilterScoreInfo), header: header,
+                           row: row,
+                           results: scoreInfo)
+                .sideways(minWidth: 1200, showIndicators: true)
+                .background(Color.secondarySystemBackground)
+                .onChange(of: course_type_choices) { newVal in
+                    CalcCurrentStatistics()
+                }
+                .onChange(of: semester_type_choices) { newVal in
+                    CalcCurrentStatistics()
+                }
+                .navigationTitle("成绩查询")
+                HStack {
+                    Rectangle()
+                        .foregroundColor(.blue.opacity(0.01))
+                        .frame(maxHeight: .infinity)
+                        .frame(width: 20)
+                    Spacer()
+                }
             }
-            .onChange(of: semester_type_choices) { newVal in
-                CalcCurrentStatistics()
-            }
-            .navigationTitle("成绩查询")
             NavigationLink("", destination: ViewCourseScoreView(currentCourse: $showDetailCourse, allCourses: $scoreInfo), isActive: $showDetailView)
                 .isDetailLink(false)
                 .hidden()
