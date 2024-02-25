@@ -308,7 +308,13 @@ struct ScheduleMainView: View {
             }
         }
         .onAppear {
+            NotificationCenter.default.post(name: refreshScheduleListNotification, object: nil)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: refreshScheduleListNotification)) { param in
             (allWeekSchedule, weekOffset) = ScheduleManager.shared.GenerateAllWeekScheduleInSemester(context: managedObjContext)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                selection = ScheduleManager.shared.GetCurrentWeekSelection(context: managedObjContext)
+            }
         }
         .navigationBarHidden(true)
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 struct ScheduleSectionInfo: Codable {
     var sectionIndex: Int = 0
@@ -15,7 +16,7 @@ struct ScheduleSectionInfo: Codable {
     var sectionEndDateStr: String = ""
 }
 
-
+let refreshScheduleListNotification = Notification.Name("refreshScheduleListNotification")
 
 struct DailyScheduleInfo {
     var day_index: Int
@@ -241,6 +242,7 @@ class ScheduleManager {
         for var course in allInfo {
             course.ImportDate = importDate
             course.SemesterStartDate = semesterStartDate
+            course.CourseBgColor = GetStringColor(str: course.CourseName)
             DataController.shared.AddScheduleCourseStored(context: context, scheduleInfo: course)
         }
         DataController.shared.save(context: context)
@@ -255,7 +257,7 @@ class ScheduleManager {
         var latestImportDate: Date = .now
         var semesterStartDate: Date = .now
         var allCourseValid: [JXZXehall.ScheduleCourseInfo] = []
-        var calendar = Calendar.current
+        let calendar = Calendar.current
         do {
             // 执行fetch请求
             let result = try context.fetch(request)
@@ -263,7 +265,15 @@ class ScheduleManager {
                 latestImportDate = maxRecord.importDate ?? .now
                 semesterStartDate = maxRecord.semesterStartDate ?? .now
             } else {
-                return ([[]],0)
+                return ([[
+                    .init(day_index: 1, courses_today: []),
+                    .init(day_index: 2, courses_today: []),
+                    .init(day_index: 3, courses_today: []),
+                    .init(day_index: 4, courses_today: []),
+                    .init(day_index: 5, courses_today: []),
+                    .init(day_index: 6, courses_today: []),
+                    .init(day_index: 7, courses_today: [])
+                ]],0)
             }
             for course in result {
                 if course.importDate == latestImportDate {
@@ -272,10 +282,26 @@ class ScheduleManager {
             }
         } catch {
             print("Failed to fetch data: \(error.localizedDescription)")
-            return ([[]],0)
+            return ([[
+                .init(day_index: 1, courses_today: []),
+                .init(day_index: 2, courses_today: []),
+                .init(day_index: 3, courses_today: []),
+                .init(day_index: 4, courses_today: []),
+                .init(day_index: 5, courses_today: []),
+                .init(day_index: 6, courses_today: []),
+                .init(day_index: 7, courses_today: [])
+            ]],0)
         }
         if allCourseValid.count == 0 {
-            return ([[]],0)
+            return ([[
+                .init(day_index: 1, courses_today: []),
+                .init(day_index: 2, courses_today: []),
+                .init(day_index: 3, courses_today: []),
+                .init(day_index: 4, courses_today: []),
+                .init(day_index: 5, courses_today: []),
+                .init(day_index: 6, courses_today: []),
+                .init(day_index: 7, courses_today: [])
+            ]],0)
         }
         // 先获取从学期开始，最大的有多少周
         var maxWeekCount = 0
@@ -314,6 +340,22 @@ class ScheduleManager {
             }
         }
         return (retWeekSchedule, offsetWeekToSemesterStart)
+    }
+    
+    // 获取当前日期应该选择哪一周
+    func GetCurrentWeekSelection(context: NSManagedObjectContext) -> Int {
+        let firstDate = GetScheduleDisplayFirstWeek(context: context)
+        let calendar = Calendar.current
+        for i in 0..<30 {
+            guard let offsetWeekDate = calendar.date(byAdding: .day, value: 7 * i, to: firstDate) else {
+                continue
+            }
+            
+            if compareDatesIgnoringTime(offsetWeekDate, getMondayOfCurrentWeek()) == .orderedSame {
+                return i + 1
+            }
+        }
+        return 1
     }
 }
 

@@ -15,6 +15,7 @@ struct iCloudActions: View {
     @State private var showAlert3 = false
     @State private var showAlert4 = false
     @State private var showAlert5 = false
+    @State private var showAlert6 = false
     @State private var alertMessage = ""
     var body: some View {
         Form {
@@ -40,6 +41,7 @@ struct iCloudActions: View {
                         DataController.shared.deleteEntityAllData(entityName: CourseCacheStored.entity().name ?? "", context: managedObjContext)
                         DataController.shared.deleteEntityAllData(entityName: FavoriteURLStored.entity().name ?? "", context: managedObjContext)
                         iCloudUserDefaults.shared.clearAllCloudStorage()
+                        DataController.shared.deleteEntityAllData(entityName: ScheduleCourseStored.entity().name ?? "", context: managedObjContext)
                         VibrateTwice()
                     }), secondaryButton: .cancel(Text("取消")))
                 }
@@ -100,6 +102,24 @@ struct iCloudActions: View {
                         VibrateTwice()
                     }), secondaryButton: .cancel(Text("取消")))
                 }
+                
+                Button(role: .none, action: {
+                    alertMessage = "确认要重置课程表吗？这将会删除你本地以及云端的课程表数据，且不可恢复，请确认"
+                    VibrateOnce()
+                    showAlert6 = true
+                }, label: {
+                    HStack {
+                        Image(systemName: "clock")
+                        Text("仅重置课程表")
+                    }
+                })
+                .alert(isPresented: $showAlert6) {
+                    Alert(title: Text("确认操作"), message: Text(alertMessage), primaryButton: .destructive(Text("确认"), action: {
+                        DataController.shared.deleteEntityAllData(entityName: ScheduleCourseStored.entity().name ?? "", context: managedObjContext)
+                        VibrateTwice()
+                    }), secondaryButton: .cancel(Text("取消")))
+                }
+                
                 Button(role: .none, action: {
                     alertMessage = "确认要重置存储的设置吗？这将会删除你云端存储的全部设置，且不可恢复，请确认"
                     VibrateOnce()

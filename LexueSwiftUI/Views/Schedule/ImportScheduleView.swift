@@ -229,6 +229,7 @@ struct ImportScheduleView: View {
     func SaveScheduleToLocal() {
         ScheduleManager.shared.SaveScheduleCourseToLocal(context: managedObjContext, allInfo: currentSemeCourse, semesterStartDate: semesterStartDate)
         dismiss()
+        NotificationCenter.default.post(name: refreshScheduleListNotification, object: nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             GlobalVariables.shared.alertTitle = "导入成功"
             GlobalVariables.shared.alertContent = "导入了\(uniqueSemeCourse.count)门不同的课程"
@@ -374,7 +375,7 @@ struct ImportScheduleView: View {
                             }
                             .padding(.top, 20)
                             ForEach(uniqueSemeCourse, id: \.CourseId) { course in
-                                ScheduleCourseImportPreviewCard(courseName: "\(course.CourseName)[\(course.KKDWDM_DISPLAY)]", teacherName: course.TeacherName, courseLocationAndTime: course.ClassroomLocationTimeDes, credit: "\(course.CourseCredit)", CourseType: course.CourseType)
+                                ScheduleCourseImportPreviewCard(sideBarColor: GetStringColor(str: course.CourseName) ,courseName: "\(course.CourseName)[\(course.KKDWDM_DISPLAY)]", teacherName: course.TeacherName, courseLocationAndTime: course.ClassroomLocationTimeDes, credit: "\(course.CourseCredit)", CourseType: course.CourseType)
                                     .padding(.horizontal, 10)
                             }
                         }
@@ -390,6 +391,12 @@ struct ImportScheduleView: View {
                 }
             }
             .padding(15)
+        }
+        .onFirstAppear {
+            print("try login")
+            Task {
+                let result = await JXZXehall.shared.GetJXZXwdkbbyContext(loginnedContext: SettingStorage.shared.loginnedContext)
+            }
         }
         .foregroundColor(sysColorScheme == .light ? .black : .white)
     }

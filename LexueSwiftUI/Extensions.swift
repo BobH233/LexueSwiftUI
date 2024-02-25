@@ -648,3 +648,45 @@ func compareDatesIgnoringTime(_ date1: Date, _ date2: Date) -> ComparisonResult 
     
     return calendar.compare(truncatedDate1, to: truncatedDate2, toGranularity: .day)
 }
+
+var StringColorMap: [String: Color] = [:]
+
+
+var nextColorIndex: Int = 0
+private func GetNextColorForMap() -> Color {
+    let colorArr: [Color] = [
+        .init(hex: "FF4500")!,
+        .init(hex: "FFD700")!,
+        .init(hex: "FF00FF")!,
+        .init(hex: "9400D3")!,
+        .init(hex: "6A5ACD")!,
+        .init(hex: "008080")!,
+        .init(hex: "2E8B57")!,
+        .init(hex: "00FFFF")!,
+        .init(hex: "00CED1")!,
+        .init(hex: "1E90FF")!,
+        .init(hex: "0000FF")!,
+        .init(hex: "FFDEAD")!,
+        .init(hex: "A0522D")!,
+        .init(hex: "800000")!,
+        .init(hex: "FFE4E1")!,
+        .init(hex: "A9A9A9")!,
+        .init(hex: "CD5C5C")!,
+        .init(hex: "FFA07A")!,
+        .init(hex: "FF1493")!,
+        .init(hex: "FFA500")!,
+        .init(hex: "FFFACD")!,
+    ]
+    let ret = colorArr[nextColorIndex]
+    nextColorIndex += 1
+    nextColorIndex %= colorArr.count
+    return ret
+}
+
+func GetStringColor(str: String) -> Color {
+    if let color_save = StringColorMap[str] {
+        return color_save
+    }
+    StringColorMap[str] = GetNextColorForMap()
+    return StringColorMap[str]!
+}
