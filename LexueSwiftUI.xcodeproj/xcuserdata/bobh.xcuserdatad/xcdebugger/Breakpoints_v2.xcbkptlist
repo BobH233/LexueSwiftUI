@@ -5774,10 +5774,42 @@
             filePath = "LexueSwiftUI/Managers/ScheduleManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "GetScheduleDisplayFirstWeek(context:)"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
+            landmarkName = "getMondayOfCurrentWeek()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E9D80F1A-05AB-4137-B425-7426EE69C623 - e9d8aa83c95b1c0b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.ScheduleManager.GetScheduleDisplayFirstWeek(context: __C.NSManagedObjectContext) -&gt; Foundation.Date"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/ScheduleManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
+                  offsetFromSymbolStart = "480">
+               </Location>
+               <Location
+                  uuid = "E9D80F1A-05AB-4137-B425-7426EE69C623 - e9d8aa83c95b1c0b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.ScheduleManager.GetScheduleDisplayFirstWeek(context: __C.NSManagedObjectContext) -&gt; Foundation.Date"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/ScheduleManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "170"
+                  endingLineNumber = "170"
+                  offsetFromSymbolStart = "884">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -5790,10 +5822,42 @@
             filePath = "LexueSwiftUI/Managers/ScheduleManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "GetScheduleDisplayFirstWeek(context:)"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "getMondayOfCurrentWeek()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E2767D6F-31A0-4C57-B46D-678DE78CF537 - e9d8aa83c95b1c87"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.ScheduleManager.GetScheduleDisplayFirstWeek(context: __C.NSManagedObjectContext) -&gt; Foundation.Date"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/ScheduleManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "174"
+                  endingLineNumber = "174"
+                  offsetFromSymbolStart = "584">
+               </Location>
+               <Location
+                  uuid = "E2767D6F-31A0-4C57-B46D-678DE78CF537 - e9d8aa83c95b1c87"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.ScheduleManager.GetScheduleDisplayFirstWeek(context: __C.NSManagedObjectContext) -&gt; Foundation.Date"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/ScheduleManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "174"
+                  endingLineNumber = "174"
+                  offsetFromSymbolStart = "984">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -6075,8 +6139,8 @@
             filePath = "LexueSwiftUI/Managers/ScheduleManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "311"
-            endingLineNumber = "311"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
             landmarkName = "GenerateAllWeekScheduleInSemester(context:)"
             landmarkType = "7">
             <Locations>
@@ -6123,8 +6187,8 @@
             filePath = "LexueSwiftUI/Managers/ScheduleManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "GenerateAllWeekScheduleInSemester(context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6139,8 +6203,8 @@
             filePath = "LexueSwiftUI/Managers/ScheduleManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "342"
-            endingLineNumber = "342"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
             landmarkName = "GenerateAllWeekScheduleInSemester(context:)"
             landmarkType = "7">
             <Locations>
@@ -6187,8 +6251,8 @@
             filePath = "LexueSwiftUI/Managers/ScheduleManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
             landmarkName = "GenerateAllWeekScheduleInSemester(context:)"
             landmarkType = "7">
             <Locations>
@@ -6235,8 +6299,8 @@
             filePath = "LexueSwiftUI/Managers/ScheduleManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
             landmarkName = "GenerateAllWeekScheduleInSemester(context:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6251,9 +6315,9 @@
             filePath = "LexueSwiftUI/Managers/ScheduleManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
-            landmarkName = "GetCurrentWeekSelection(context:)"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
+            landmarkName = "GenerateAllWeekScheduleInSemester(context:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -6299,9 +6363,9 @@
             filePath = "LexueSwiftUI/Managers/ScheduleManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "358"
-            endingLineNumber = "358"
-            landmarkName = "GetCurrentWeekSelection(context:)"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
+            landmarkName = "GenerateAllWeekScheduleInSemester(context:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -6333,6 +6397,54 @@
                   startingLineNumber = "356"
                   endingLineNumber = "356"
                   offsetFromSymbolStart = "1636">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9125FD87-1D4F-4FAB-A9E2-177D0DE7820E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/ScheduleManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "getMondayOfCurrentWeek()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9125FD87-1D4F-4FAB-A9E2-177D0DE7820E - e9d8aa83c95b1c49"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.ScheduleManager.GetScheduleDisplayFirstWeek(context: __C.NSManagedObjectContext) -&gt; Foundation.Date"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/ScheduleManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
+                  offsetFromSymbolStart = "380">
+               </Location>
+               <Location
+                  uuid = "9125FD87-1D4F-4FAB-A9E2-177D0DE7820E - e9d8aa83c95b1c49"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.ScheduleManager.GetScheduleDisplayFirstWeek(context: __C.NSManagedObjectContext) -&gt; Foundation.Date"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/ScheduleManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
+                  offsetFromSymbolStart = "484">
                </Location>
             </Locations>
          </BreakpointContent>

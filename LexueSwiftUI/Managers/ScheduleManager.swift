@@ -142,30 +142,22 @@ class ScheduleManager {
         }
     }
     
-    private func getMondayOfCurrentWeek() -> Date {
-        var calendar = Calendar.current
-        calendar.firstWeekday = 2 // 将星期一设置为每周的第一天
-        let today = Date()
-        let weekday = calendar.component(.weekday, from: today)
-
-        // 计算从今天到本周一的天数差
-        var daysToMonday = -((weekday - calendar.firstWeekday - 1 + 7) % 7)
-        // 如果今天是星期日，则特殊处理，直接回溯到上周的星期一
-        if weekday == 1 {
-            daysToMonday = -6
-        }
-
-        let monday = calendar.date(byAdding: .day, value: daysToMonday, to: today)!
-        return monday
+    private func getMondayOfCurrentWeek(nowDate: Date = .now) -> Date {
+        let cal = Calendar.current
+        var comps = cal.dateComponents([.weekOfYear, .yearForWeekOfYear], from: nowDate)
+        comps.weekday = 2 // Monday
+        let mondayInWeek = cal.date(from: comps)!
+        return mondayInWeek
     }
 
     
     // 获取课程表第一周星期一应该显示哪一天，如果有GetFirstDateOfLocalSchedule，且这个日期在今天之前，则第一天应该显示学期开始的第一天
     // 如果没有 GetFirstDateOfLocalSchedule 或者 GetFirstDateOfLocalSchedule 还没到来，则显示当前这一周
     func GetScheduleDisplayFirstWeek(context: NSManagedObjectContext) -> Date {
+        print("getMondayOfCurrentWeek", getMondayOfCurrentWeek())
         if let firstSemesterDate = GetFirstDateOfLocalSchedule(context: context) {
             let today = Date.now
-            if compareDatesIgnoringTime(today, firstSemesterDate) == .orderedDescending {
+            if compareDatesIgnoringTime(today, firstSemesterDate) == .orderedDescending || compareDatesIgnoringTime(today, firstSemesterDate) == .orderedSame {
                 // 今天在学期第一天之后，所以应该返回学期第一天
                 return firstSemesterDate
             }

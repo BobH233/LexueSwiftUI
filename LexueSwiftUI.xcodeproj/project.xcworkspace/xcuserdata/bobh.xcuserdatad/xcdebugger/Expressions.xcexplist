@@ -79,6 +79,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "closure #1 in ImportScheduleView.ImportSchedule():ImportScheduleView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "convertDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #2 in ViewEventView.body.getter:ViewEventView.swift">
          <PersistentStrings>
             <PersistentString
@@ -94,14 +102,6 @@
          <PersistentStrings>
             <PersistentString
                value = "sysColorScheme">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in ImportScheduleView.ImportSchedule():ImportScheduleView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "convertDate">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -171,7 +171,7 @@
          contextName = "SettingStorage.agreePrivacyPolicy.didset:SettingStorage.swift">
          <PersistentStrings>
             <PersistentString
-               value = "savedPassword">
+               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
             </PersistentString>
             <PersistentString
                value = "savedUsername">
@@ -180,7 +180,7 @@
                value = "UserDefaults.standard">
             </PersistentString>
             <PersistentString
-               value = "UserDefaults.standard.value(forKey: &quot;setting.agreePrivacyPolicy&quot;) as? Bool">
+               value = "savedPassword">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -205,6 +205,14 @@
          <PersistentStrings>
             <PersistentString
                value = "GlobalVariables.shared.cur_user_info">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ScheduleManager.GetScheduleDisplayFirstWeek(context:):ScheduleManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "today">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -289,13 +297,13 @@
          contextName = "iCloudUserDefaults.notificationFromCloud(notification:):iCloudUserDefaults.swift">
          <PersistentStrings>
             <PersistentString
+               value = "monitored_prefix">
+            </PersistentString>
+            <PersistentString
                value = "monitored_specify">
             </PersistentString>
             <PersistentString
                value = "dict[key]">
-            </PersistentString>
-            <PersistentString
-               value = "monitored_prefix">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -319,21 +327,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
+         contextName = "FavoriteURLView.favoriteUrls.setter:FavoriteURLView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "favoriteUrls">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "SettingStorage.().init():SettingStorage.swift">
       </ContextState>
       <ContextState
-         contextName = "CoreLogicManager.refreshSelfUserInfo():CoreLogicManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "GlobalVariables.shared.cur_lexue_context">
-            </PersistentString>
-            <PersistentString
-               value = "refreshSelfUserInfo">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "BITLogin.do_login(context:username:password:captcha:completion:):BITLogin.swift">
       </ContextState>
       <ContextState
          contextName = "ListView.refreshToolbar.getter:MessageListView.swift">
@@ -379,10 +384,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "FavoriteURLView.favoriteUrls.setter:FavoriteURLView.swift">
+         contextName = "CoreLogicManager.refreshSelfUserInfo():CoreLogicManager.swift">
          <PersistentStrings>
             <PersistentString
-               value = "favoriteUrls">
+               value = "GlobalVariables.shared.cur_lexue_context">
+            </PersistentString>
+            <PersistentString
+               value = "refreshSelfUserInfo">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -434,13 +442,13 @@
          contextName = "LexueDataProvider.CheckNearbyEvent(context:):LexueDataProvider.swift">
          <PersistentStrings>
             <PersistentString
+               value = "event.name">
+            </PersistentString>
+            <PersistentString
                value = "event.timestart">
             </PersistentString>
             <PersistentString
                value = "event.id">
-            </PersistentString>
-            <PersistentString
-               value = "event.name">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
