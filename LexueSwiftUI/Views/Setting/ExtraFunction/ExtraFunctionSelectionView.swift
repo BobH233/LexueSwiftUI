@@ -30,18 +30,18 @@ struct ExtraFunctionSelectionView: View {
                                 .foregroundColor(.white)
                         }
                         HStack {
-                            Spacer()
                             Text(function.titleName)
                                 .bold()
-                            Spacer()
                         }
-                        .padding(.vertical, 5)
+                        .padding(.top, 10)
                     }
+                    .frame(width: 70)
+                    .padding(.horizontal, 10)
                     .onTapGesture {
                         VibrateOnce()
                         NotificationCenter.default.post(name: extraFunctionSelectedNotification, object: function.notificationName)
                     }
-                    .padding(.horizontal, 5)
+                    
                 }
                 
             }
