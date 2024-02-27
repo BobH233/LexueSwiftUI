@@ -7019,8 +7019,8 @@
             filePath = "LexueSwiftUI/Managers/SchoolMapManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "99"
-            endingLineNumber = "99"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "GenerateRecommandationSchoolLocation(courseLocationDes:courseRegion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7193,8 +7193,8 @@
             filePath = "LexueSwiftUI/Managers/SchoolMapManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "GetSchoolLocations()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7209,8 +7209,8 @@
             filePath = "LexueSwiftUI/Managers/SchoolMapManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "UpdateMapInfo()"
             landmarkType = "7">
             <Locations>
@@ -7257,8 +7257,8 @@
             filePath = "LexueSwiftUI/Managers/SchoolMapManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "UpdateMapInfo()"
             landmarkType = "7">
             <Locations>

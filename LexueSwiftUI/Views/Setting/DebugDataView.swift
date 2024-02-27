@@ -69,7 +69,7 @@ struct DebugDataView: View {
 
                     // 尝试编码default_school_locations到JSON
                     do {
-                        let jsonData = try encoder.encode(SchoolMapManager.shared.GetSchoolLocations())
+                        let jsonData = try encoder.encode(SchoolMapManager.shared.default_school_locations)
                         
                         // 将JSON数据转换为String以便打印或其他用途
                         if let jsonString = String(data: jsonData, encoding: .utf8) {

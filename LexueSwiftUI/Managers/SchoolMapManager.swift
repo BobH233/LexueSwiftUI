@@ -42,15 +42,22 @@ class SchoolMapManager {
         .init(shortName: "良乡文萃楼K", fullName: "良乡校区文萃楼K", latitude: 39.733607, longitude: 116.173844, matchKeywords: ["文萃楼K"], matchRegion: "良乡校区"),
         .init(shortName: "良乡文萃楼L", fullName: "良乡校区文萃楼L", latitude: 39.733572, longitude: 116.174227, matchKeywords: ["文萃楼L"], matchRegion: "良乡校区"),
         .init(shortName: "良乡文萃楼M", fullName: "良乡校区文萃楼M", latitude: 39.732941, longitude: 116.174576, matchKeywords: ["文萃楼M"], matchRegion: "良乡校区"),
+        .init(shortName: "良乡理学楼A", fullName: "良乡校区理学楼A", latitude: 39.728819, longitude: 116.171667, matchKeywords: ["理学A"], matchRegion: "良乡校区"),
+        .init(shortName: "良乡理学楼B", fullName: "良乡校区理学楼B", latitude: 39.729345, longitude: 116.171568, matchKeywords: ["理学B"], matchRegion: "良乡校区"),
+        .init(shortName: "良乡理学楼C", fullName: "良乡校区理学楼C", latitude: 39.729668, longitude: 116.171564, matchKeywords: ["理学C"], matchRegion: "良乡校区"),
         // 体育课方面
         .init(shortName: "良乡体育馆", fullName: "良乡校区体育馆", latitude: 39.731844, longitude: 116.176544, matchKeywords: ["良乡体育馆", "游泳馆"], matchRegion: "良乡校区"),
         .init(shortName: "良乡南操场", fullName: "良乡校区南校区足球场", latitude: 39.729293, longitude: 116.169420, matchKeywords: ["南校区足球场", "田径场主席台"], matchRegion: "良乡校区"),
+        .init(shortName: "良乡北篮球场", fullName: "良乡校区北校区篮球场", latitude: 39.736448, longitude: 116.170642, matchKeywords: ["北校区篮球场"], matchRegion: "良乡校区"),
         .init(shortName: "良乡南篮球场", fullName: "良乡校区南校区篮球场", latitude: 39.728285, longitude: 116.168703, matchKeywords: ["南校区篮球场"], matchRegion: "良乡校区"),
         .init(shortName: "良乡南网球场", fullName: "良乡校区南校区网球场", latitude: 39.727715, longitude: 116.168760, matchKeywords: ["南校区网球场"], matchRegion: "良乡校区"),
         .init(shortName: "良乡南排球场", fullName: "良乡校区南校区排球场", latitude: 39.727433, longitude: 116.169478, matchKeywords: ["南校区排球场"], matchRegion: "良乡校区"),
         .init(shortName: "良乡疏桐园A", fullName: "良乡校区疏桐园A", latitude: 39.728745, longitude: 116.168117, matchKeywords: ["疏桐园A"], matchRegion: "良乡校区"),
         // 其他杂项方面
         .init(shortName: "良乡工训楼", fullName: "良乡校区工训楼", latitude: 39.725954, longitude: 116.173800, matchKeywords: ["工训楼"], matchRegion: "良乡校区"),
+        .init(shortName: "良乡生态楼", fullName: "良乡校区工业生态楼", latitude: 39.726089, longitude: 116.170593, matchKeywords: ["工业生态楼"], matchRegion: "良乡校区"),
+        .init(shortName: "良乡化学实验中心", fullName: "良乡校区化学实验中心", latitude: 39.727940, longitude: 116.170593, matchKeywords: ["化学实验中心", "化学实验楼"], matchRegion: "良乡校区"),
+        .init(shortName: "良乡学生服务中心", fullName: "良乡校区学生服务中心", latitude: 39.732746, longitude: 116.168011, matchKeywords: ["学生服务中心"], matchRegion: "良乡校区"),
     ]
     
     func UpdateSchoolLocations(newLocations: [SchoolLocationDescription]) {
