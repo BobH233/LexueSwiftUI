@@ -143,6 +143,7 @@
 		47CE0FFB2ACAFB8600C68CA3 /* ViewEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CE0FFA2ACAFB8600C68CA3 /* ViewEventView.swift */; };
 		47D230412AD028D1000DB15C /* HaoBIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */; };
 		47DAD9B02AD7E9F100B4950D /* FilterScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DAD9AF2AD7E9F100B4950D /* FilterScoreView.swift */; };
+		47E03A192B8CDA00008330EB /* ExportCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E03A182B8CDA00008330EB /* ExportCalendarView.swift */; };
 		47E1D6A42AD01FDF007A0D75 /* HaoBIT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */; };
 		47EC987A2ACBB6BF009CE125 /* DeletedEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EC98792ACBB6BF009CE125 /* DeletedEventView.swift */; };
 		47EF59E22B280636009FE836 /* AlertData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EF59E12B280636009FE836 /* AlertData.swift */; };
@@ -341,6 +342,7 @@
 		47CE0FF82ACAF04700C68CA3 /* EditEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditEventView.swift; sourceTree = "<group>"; };
 		47CE0FFA2ACAFB8600C68CA3 /* ViewEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewEventView.swift; sourceTree = "<group>"; };
 		47DAD9AF2AD7E9F100B4950D /* FilterScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterScoreView.swift; sourceTree = "<group>"; };
+		47E03A182B8CDA00008330EB /* ExportCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportCalendarView.swift; sourceTree = "<group>"; };
 		47E1D6A32AD01FDF007A0D75 /* HaoBIT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaoBIT.swift; sourceTree = "<group>"; };
 		47EC98792ACBB6BF009CE125 /* DeletedEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletedEventView.swift; sourceTree = "<group>"; };
 		47EF59E12B280636009FE836 /* AlertData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertData.swift; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 			children = (
 				471D57422B88340700E1FFFF /* ScheduleMainView.swift */,
 				477D3D162B89A053000A3D28 /* ImportScheduleView.swift */,
+				47E03A182B8CDA00008330EB /* ExportCalendarView.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -1002,6 +1005,7 @@
 				47F4F29A2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift in Sources */,
 				47BD51A12AC5B43F0029F9DB /* UMCommonLogSwift.swift in Sources */,
 				47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */,
+				47E03A192B8CDA00008330EB /* ExportCalendarView.swift in Sources */,
 				4715BE862ACC49F600163DA9 /* ContactAvatarSettingView.swift in Sources */,
 				477D3D172B89A053000A3D28 /* ImportScheduleView.swift in Sources */,
 				47EF59E22B280636009FE836 /* AlertData.swift in Sources */,

@@ -14,6 +14,20 @@ struct ScheduleSectionInfo: Codable {
     var sectionIndex: Int = 0
     var sectionStartDateStr: String = ""
     var sectionEndDateStr: String = ""
+    func GetStartDateCp() -> (Int, Int) {
+        let components = sectionStartDateStr.split(separator: ":")
+        if components.count == 2 {
+            return (Int(components[0]) ?? 0, Int(components[1]) ?? 0)
+        }
+        return (0, 0)
+    }
+    func GetEndDateCp() -> (Int, Int) {
+        let components = sectionEndDateStr.split(separator: ":")
+        if components.count == 2 {
+            return (Int(components[0]) ?? 0, Int(components[1]) ?? 0)
+        }
+        return (0, 0)
+    }
 }
 
 let refreshScheduleListNotification = Notification.Name("refreshScheduleListNotification")
@@ -240,40 +254,41 @@ class ScheduleManager {
         DataController.shared.save(context: context)
     }
     
-    // 生成总的课表，所有周的课程表
-    func GenerateAllWeekScheduleInSemester(context: NSManagedObjectContext) -> ([[DailyScheduleInfo]], Int) {
+    func GetValidCourse(context: NSManagedObjectContext) -> ([JXZXehall.ScheduleCourseInfo], Bool) {
         // 从数据库查询所有存储的课程，并只过滤importDate最新的
         let request: NSFetchRequest<ScheduleCourseStored> = ScheduleCourseStored.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "importDate", ascending: false)
         request.sortDescriptors = [sortDescriptor]
         var latestImportDate: Date = .now
-        var semesterStartDate: Date = .now
         var allCourseValid: [JXZXehall.ScheduleCourseInfo] = []
-        let calendar = Calendar.current
         do {
             // 执行fetch请求
             let result = try context.fetch(request)
             if let maxRecord = result.first {
                 latestImportDate = maxRecord.importDate ?? .now
-                semesterStartDate = maxRecord.semesterStartDate ?? .now
             } else {
-                return ([[
-                    .init(day_index: 1, courses_today: []),
-                    .init(day_index: 2, courses_today: []),
-                    .init(day_index: 3, courses_today: []),
-                    .init(day_index: 4, courses_today: []),
-                    .init(day_index: 5, courses_today: []),
-                    .init(day_index: 6, courses_today: []),
-                    .init(day_index: 7, courses_today: [])
-                ]],0)
+                return ([], true)
             }
             for course in result {
                 if course.importDate == latestImportDate {
                     allCourseValid.append(course.ToScheduleCourseInfo())
                 }
             }
+            return (allCourseValid, true)
         } catch {
             print("Failed to fetch data: \(error.localizedDescription)")
+            return ([], false)
+        }
+    }
+    
+    // 生成总的课表，所有周的课程表
+    func GenerateAllWeekScheduleInSemester(context: NSManagedObjectContext) -> ([[DailyScheduleInfo]], Int) {
+        var allCourseValid: [JXZXehall.ScheduleCourseInfo] = []
+        var success: Bool = false
+        (allCourseValid, success) = GetValidCourse(context: context)
+        var semesterStartDate: Date = .now
+        let calendar = Calendar.current
+        if allCourseValid.count == 0 || !success {
             return ([[
                 .init(day_index: 1, courses_today: []),
                 .init(day_index: 2, courses_today: []),
@@ -284,17 +299,9 @@ class ScheduleManager {
                 .init(day_index: 7, courses_today: [])
             ]],0)
         }
-        if allCourseValid.count == 0 {
-            return ([[
-                .init(day_index: 1, courses_today: []),
-                .init(day_index: 2, courses_today: []),
-                .init(day_index: 3, courses_today: []),
-                .init(day_index: 4, courses_today: []),
-                .init(day_index: 5, courses_today: []),
-                .init(day_index: 6, courses_today: []),
-                .init(day_index: 7, courses_today: [])
-            ]],0)
-        }
+        semesterStartDate = allCourseValid.first!.SemesterStartDate
+        
+        
         // 先获取从学期开始，最大的有多少周
         var maxWeekCount = 0
         for course in allCourseValid {
@@ -348,6 +355,56 @@ class ScheduleManager {
             }
         }
         return 1
+    }
+    
+    struct CalendarEvent {
+        var title: String = ""  // e.g. 课程名
+        var location: String = ""  // e.g. 良乡校区理教楼308 xxx老师
+        var StartDate: Date = .now
+        var EndDate: Date = .now
+        var note: String = ""  // 备注，显示上课地点+上课时间+老师
+    }
+    
+    private func SetDate(toSet: Date, value: (Int, Int)) -> Date {
+        var ret = toSet
+        let calendar = Calendar.current
+        ret = calendar.date(bySetting: .hour, value: value.0, of: ret)!
+        ret = calendar.date(bySetting: .minute, value: value.1, of: ret)!
+        return ret
+    }
+    
+    func GenerateCalendarEvents(context: NSManagedObjectContext) -> [CalendarEvent] {
+        let scheduleInfo = GetScheduleSectionInfo()
+        let calendar = Calendar.current
+        var (allCourseValid, success) = GetValidCourse(context: context)
+        if !success || allCourseValid.count == 0 {
+            return []
+        }
+        var semesterStartDate = allCourseValid.first!.SemesterStartDate
+        var ret: [CalendarEvent] = []
+        for course in allCourseValid {
+            for (index, character) in course.ExistWeek.enumerated() {
+                if character == "1" {
+                    var currentEvent: CalendarEvent = CalendarEvent()
+                    guard let date_day_start = calendar.date(byAdding: .day, value: 7 * index + (course.DayOfWeek - 1), to: semesterStartDate) else {
+                        continue
+                    }
+                    guard let section_start = scheduleInfo.first(where: { $0.sectionIndex == course.StartSectionId }) else {
+                        continue
+                    }
+                    guard let section_end = scheduleInfo.first(where: { $0.sectionIndex == course.EndSectionId }) else {
+                        continue
+                    }
+                    currentEvent.title = course.CourseName
+                    currentEvent.location = "\(course.SchoolRegion)\(course.ClassroomLocation) \(course.TeacherName)"
+                    currentEvent.StartDate = SetDate(toSet: date_day_start, value: section_start.GetStartDateCp())
+                    currentEvent.EndDate = SetDate(toSet: date_day_start, value: section_end.GetEndDateCp())
+                    currentEvent.note = "\(course.ClassroomLocationTimeDes)\n\(course.SchoolRegion)\(course.ClassroomLocation)\n\(course.TeacherName)"
+                    ret.append(currentEvent)
+                }
+            }
+        }
+        return ret
     }
 }
 

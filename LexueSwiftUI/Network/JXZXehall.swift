@@ -714,6 +714,9 @@ class JXZXehall {
                 }
                 ret.append(currentRow)
             }
+            ret = ret.sorted { course1, course2 in
+                return course1.CourseId > course2.CourseId
+            }
             return .success(ret)
         } else {
             return .failure(.JsonConvertError)

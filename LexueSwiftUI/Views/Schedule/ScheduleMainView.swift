@@ -221,6 +221,7 @@ struct ScheduleMainView: View {
     @State var currentWeekDescriptionText = "当前周"
     
     @State var showImportSheet = false
+    @State var showExportSheet = false
     
     
     @State var allWeekSchedule: [[DailyScheduleInfo]] = [[]]
@@ -265,9 +266,14 @@ struct ScheduleMainView: View {
                     HStack(spacing: 20) {
                         Button(action: {
                             // 导出到日程表
+                            VibrateOnce()
+                            showExportSheet = true
                         }) {
                             Image(systemName: "calendar.badge.plus")
                                 .font(Font.system(size: 25).weight(.semibold))
+                        }
+                        .sheet(isPresented: $showExportSheet) {
+                            ExportCalendarView()
                         }
                         Button(action: {
                             // 导入学校的课程表

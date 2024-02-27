@@ -284,121 +284,126 @@ struct ImportScheduleView: View {
     }
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                HStack {
-                    Text("从教务导入课表")
-                        .bold()
-                        .font(.title)
-                    Spacer()
-                }
-                .padding(.horizontal, 20)
-                if inited {
-                    if !isLoadedSchedule {
-                        ContentCardView(title0: "选择学期", color0: .systemBlue) {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack {
-                                    ForEach($semester, id: \.title) { choice in
-                                        ZStack {
-                                            Rectangle()
-                                                .foregroundColor(choice.choose.wrappedValue ? .blue : .secondarySystemBackground)
-                                                .cornerRadius(10)
-                                                .shadow(color: .secondary, radius: 1)
-                                            Text(choice.title.wrappedValue)
-                                                .bold()
-                                                .foregroundColor(choice.choose.wrappedValue ? .white : (sysColorScheme == .light ? .black : .white))
-                                                .padding()
-                                        }
-                                        .onTapGesture {
-                                            // 将其他的选项设置为未选中
-                                            withAnimation(.spring(duration: 0.1)) {
-                                                for i in 0 ..< semester.count {
-                                                    if semester[i].title == choice.title.wrappedValue {
-                                                        continue
-                                                    }
-                                                    semester[i].choose = false
-                                                }
-                                                choice.choose.wrappedValue = true
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 0) {
+//                    HStack {
+//                        Text("从教务导入课表")
+//                            .bold()
+//                            .font(.title)
+//                        Spacer()
+//                    }
+//                    .padding(.horizontal, 20)
+                    if inited {
+                        if !isLoadedSchedule {
+                            ContentCardView(title0: "选择学期", color0: .systemBlue) {
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+                                        ForEach($semester, id: \.title) { choice in
+                                            ZStack {
+                                                Rectangle()
+                                                    .foregroundColor(choice.choose.wrappedValue ? .blue : .secondarySystemBackground)
+                                                    .cornerRadius(10)
+                                                    .shadow(color: .secondary, radius: 1)
+                                                Text(choice.title.wrappedValue)
+                                                    .bold()
+                                                    .foregroundColor(choice.choose.wrappedValue ? .white : (sysColorScheme == .light ? .black : .white))
+                                                    .padding()
                                             }
+                                            .onTapGesture {
+                                                // 将其他的选项设置为未选中
+                                                withAnimation(.spring(duration: 0.1)) {
+                                                    for i in 0 ..< semester.count {
+                                                        if semester[i].title == choice.title.wrappedValue {
+                                                            continue
+                                                        }
+                                                        semester[i].choose = false
+                                                    }
+                                                    choice.choose.wrappedValue = true
+                                                }
+                                            }
+                                            .padding(.horizontal, 5)
+                                            .padding(.vertical, 10)
                                         }
-                                        .padding(.horizontal, 5)
-                                        .padding(.vertical, 10)
                                     }
-                                }
-                                .padding(.horizontal, 10)
-                            }
-                        }
-                        .padding(.bottom, 20)
-                        .padding(.top, 20)
-                    }
-                    if !isLoadedSchedule {
-                        Button {
-                            ImportSchedule()
-                        } label: {
-                            Text(importButtonDisable ? "正在导入..." : "导入课表")
-                                .font(.system(size: 24))
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 40)
-                                .foregroundColor(.white)
-                        }
-                        .disabled(importButtonDisable)
-                        .buttonStyle(.borderedProminent)
-                        .padding(.top, 10)
-                        if importButtonDisable {
-                            ProgressView(value: importButtonProgress, total: 1.0)
-                                .progressViewStyle(LinearProgressViewStyle(tint: .blue))
-                                .frame(height: 50)
-                                .background(Color.clear)
-                                .scaleEffect(x: 1, y: 4, anchor: .center)
-                        }
-                    } else {
-                        Button {
-                            SaveScheduleToLocal()
-                        } label: {
-                            Text("确认导入(覆盖当前)")
-                                .font(.system(size: 24))
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 40)
-                                .foregroundColor(.white)
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .tint(.green)
-                        .padding(.top, 10)
-                    }
-                    if isLoadedSchedule {
-                        VStack(spacing: 20) {
-                            HStack {
-                                Text("课程信息")
-                                    .bold()
-                                    .font(.title)
-                                Spacer()
-                            }
-                            .padding(.top, 20)
-                            ForEach(uniqueSemeCourse, id: \.CourseId) { course in
-                                ScheduleCourseImportPreviewCard(sideBarColor: GetStringColor(str: course.CourseName) ,courseName: "\(course.CourseName)[\(course.KKDWDM_DISPLAY)]", teacherName: course.TeacherName, courseLocationAndTime: course.ClassroomLocationTimeDes, credit: "\(course.CourseCredit)", CourseType: course.CourseType)
                                     .padding(.horizontal, 10)
+                                }
+                            }
+                            .padding(.bottom, 20)
+                            .padding(.top, 20)
+                        }
+                        if !isLoadedSchedule {
+                            Button {
+                                ImportSchedule()
+                            } label: {
+                                Text(importButtonDisable ? "正在导入..." : "导入课表")
+                                    .font(.system(size: 24))
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 40)
+                                    .foregroundColor(.white)
+                            }
+                            .disabled(importButtonDisable)
+                            .buttonStyle(.borderedProminent)
+                            .padding(.top, 10)
+                            if importButtonDisable {
+                                ProgressView(value: importButtonProgress, total: 1.0)
+                                    .progressViewStyle(LinearProgressViewStyle(tint: .blue))
+                                    .frame(height: 50)
+                                    .background(Color.clear)
+                                    .scaleEffect(x: 1, y: 4, anchor: .center)
+                            }
+                        } else {
+                            Button {
+                                SaveScheduleToLocal()
+                            } label: {
+                                Text("确认导入(覆盖当前)")
+                                    .font(.system(size: 24))
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 40)
+                                    .foregroundColor(.white)
+                            }
+                            .buttonStyle(.borderedProminent)
+                            .tint(.green)
+                            .padding(.top, 10)
+                        }
+                        if isLoadedSchedule {
+                            VStack(spacing: 20) {
+                                HStack {
+                                    Text("课程信息")
+                                        .bold()
+                                        .font(.title)
+                                    Spacer()
+                                }
+                                .padding(.top, 20)
+                                ForEach(uniqueSemeCourse, id: \.CourseId) { course in
+                                    ScheduleCourseImportPreviewCard(sideBarColor: GetStringColor(str: course.CourseName) ,courseName: "\(course.CourseName)[\(course.KKDWDM_DISPLAY)]", teacherName: course.TeacherName, courseLocationAndTime: course.ClassroomLocationTimeDes, credit: "\(course.CourseCredit)", CourseType: course.CourseType)
+                                        .padding(.horizontal, 10)
+                                }
                             }
                         }
                     }
+                    else {
+                        ProgressView()
+                            .controlSize(.large)
+                            .padding(.top, 20)
+                            .onFirstAppear {
+                                LoadSemesterInfo()
+                            }
+                    }
                 }
-                else {
-                    ProgressView()
-                        .controlSize(.large)
-                        .padding(.top, 20)
-                        .onFirstAppear {
-                            LoadSemesterInfo()
-                        }
+                .padding(15)
+            }
+            .onFirstAppear {
+                print("try login")
+                Task {
+                    // let result = await JXZXehall.shared.GetJXZXwdkbbyContext(loginnedContext: SettingStorage.shared.loginnedContext)
                 }
             }
-            .padding(15)
+            .foregroundColor(nil)
+            .navigationTitle("从教务导入课表")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .onFirstAppear {
-            print("try login")
-            Task {
-                let result = await JXZXehall.shared.GetJXZXwdkbbyContext(loginnedContext: SettingStorage.shared.loginnedContext)
-            }
-        }
-        .foregroundColor(sysColorScheme == .light ? .black : .white)
+        
     }
 }
 
