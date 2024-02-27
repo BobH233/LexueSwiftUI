@@ -51,6 +51,7 @@ app.use("/api/device", require("./routers/DeviceRouter"));
 app.use("/api/notice", require("./routers/NoticeRouter"));
 app.use("/api/notification", require("./routers/AppNotificationRouter"));
 app.use("/api/schedule", require("./routers/ScheduleRouter"));
+app.use("/api/map", require("./routers/SchoolMapRouter"));
 
 // set static routers
 app.use(express.static(__dirname + '/static'));
