@@ -63,6 +63,7 @@
 		475E22B02ACFB66700FE8679 /* InfoMergingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */; };
 		475E9F3F2B8DF78500354A42 /* ScheduleCourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E9F3E2B8DF78500354A42 /* ScheduleCourseDetailView.swift */; };
 		475E9F412B8E14CE00354A42 /* SchoolMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E9F402B8E14CE00354A42 /* SchoolMapManager.swift */; };
+		475E9F422B8E295B00354A42 /* SchoolMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E9F402B8E14CE00354A42 /* SchoolMapManager.swift */; };
 		475EDED42AB60697008486F0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475EDED32AB60697008486F0 /* ProfileView.swift */; };
 		476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476340302AB89F47006C24E2 /* LexueProfile.swift */; };
 		476366F32B88EEBD00E9EAC6 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AB1752B87207600E72F7C /* ScheduleManager.swift */; };
@@ -937,6 +938,7 @@
 				47F4FD2B2ACDB9CF00C6C144 /* Event_LargeView.swift in Sources */,
 				4784DBD72B2024AB000B12CE /* ExtraFunctionDescription.swift in Sources */,
 				47F4FD232ACDA62400C6C144 /* DataController.swift in Sources */,
+				475E9F422B8E295B00354A42 /* SchoolMapManager.swift in Sources */,
 				47196FF12AC551D200979DFE /* Widget_Extension.swift in Sources */,
 				47F4FD302ACDC1D600C6C144 /* DataProviderManager.swift in Sources */,
 				479A290D2AECD3A3009AAD4F /* iCloudUserDefaults.swift in Sources */,

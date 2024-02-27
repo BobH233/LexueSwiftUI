@@ -173,6 +173,7 @@ class AppStatusManager {
         // 从后端拉取课程表的信息
         Task {
             await ScheduleManager.shared.UpdateScheduleInfo()
+            await SchoolMapManager.shared.UpdateMapInfo()
         }
         print("\(#function)")
         Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { timer in

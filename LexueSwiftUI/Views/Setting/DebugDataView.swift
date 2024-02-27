@@ -61,6 +61,24 @@ struct DebugDataView: View {
                     
                     SchoolMapManager.shared.OpenMapAppWithLocation(latitude: Double(latStr)!, longitude: Double(lonStr)!, regionDistance: 1000, name: "北理大专")
                 }
+                Button("dump_json") {
+                    let encoder = JSONEncoder()
+
+                    // 设置编码选项（例如，漂亮打印）
+                    encoder.outputFormatting = .prettyPrinted
+
+                    // 尝试编码default_school_locations到JSON
+                    do {
+                        let jsonData = try encoder.encode(SchoolMapManager.shared.GetSchoolLocations())
+                        
+                        // 将JSON数据转换为String以便打印或其他用途
+                        if let jsonString = String(data: jsonData, encoding: .utf8) {
+                            print(jsonString)
+                        }
+                    } catch {
+                        print("编码错误: \(error)")
+                    }
+                }
             }
             Section("Schedule") {
                 Button("添加或覆盖日历列表") {

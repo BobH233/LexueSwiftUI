@@ -27,7 +27,7 @@ class LexueHelperBackend {
     
     static func GetAPIUrl() -> String {
         if GlobalVariables.shared.DEBUG_BUILD {
-            return "http://192.168.1.9:3000"
+            return "http://192.168.8.143:3000"
         } else {
             return "https://api.bit-helper.cn"
         }
@@ -51,6 +51,7 @@ class LexueHelperBackend {
     let API_CHECK_IS_ADMIN = "\(GetAPIUrl())/api/device/isadmin"
     let API_SCHEDULE_SECTION_INFO = "\(GetAPIUrl())/api/schedule/sectioninfo"
     let API_SCHEDULE_SECTION_SEMESTER = "\(GetAPIUrl())/api/schedule/cursemester"
+    let API_MAP_GET_LOCATIONS = "\(GetAPIUrl())/api/map/locations"
     
     // admin
     let API_ADMIN_ADD_NOTIFICATION = "\(GetAPIUrl())/api/notification/add"
@@ -168,6 +169,50 @@ class LexueHelperBackend {
             return []
         }
     }
+    
+    func GetMapLocations() async -> [SchoolMapManager.SchoolLocationDescription] {
+        let header: [String: String] = [
+            "Content-Type": "application/json"
+        ]
+        do {
+            var request = URLRequest(url: URL(string: API_MAP_GET_LOCATIONS)!)
+            request.cachePolicy = .reloadIgnoringCacheData
+            request.httpMethod = HTTPMethod.get.rawValue
+            request.headers = HTTPHeaders(header)
+            let ret = await withCheckedContinuation { continuation in
+                AF.request(request).response { res in
+                    switch res.result {
+                    case .success(let data):
+                        let decoder = JSONDecoder()
+                        guard let json_data = data else {
+                            continuation.resume(returning: [SchoolMapManager.SchoolLocationDescription]())
+                            return
+                        }
+                        do {
+                            // 解码JSON数据到结构体数组
+                            let schoolLocations = try decoder.decode([SchoolMapManager.SchoolLocationDescription].self, from: json_data)
+                            // 使用解码后的数据
+                            print(schoolLocations)
+                            continuation.resume(returning: schoolLocations)
+                        } catch {
+                            // 如果解码失败，打印错误信息
+                            print("解码失败: \(error)")
+                            continuation.resume(returning: [SchoolMapManager.SchoolLocationDescription]())
+                        }
+                    case .failure(let error):
+                        print("请求 后端 失败")
+                        print(error)
+                        continuation.resume(returning: [SchoolMapManager.SchoolLocationDescription]())
+                    }
+                }
+            }
+            return ret
+        } catch {
+            print("转换为 JSON 数据时发生错误: \(error)")
+            return []
+        }
+    }
+    
     func GetScheduleSemesterInfo() async -> String {
         let header: [String: String] = [
             "Content-Type": "application/json"

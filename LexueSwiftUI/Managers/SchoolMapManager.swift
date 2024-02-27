@@ -69,6 +69,13 @@ class SchoolMapManager {
         }
     }
     
+    func UpdateMapInfo() async {
+        let backendResult = await LexueHelperBackend.shared.GetMapLocations()
+        if backendResult.count > 0 {
+            UpdateSchoolLocations(newLocations: backendResult)
+        }
+    }
+    
     func OpenMapAppWithLocation(latitude la: Double, longitude lon: Double, regionDistance: CLLocationDistance, name: String) {
         let latitude: CLLocationDegrees = la
         let longitude: CLLocationDegrees = lon
