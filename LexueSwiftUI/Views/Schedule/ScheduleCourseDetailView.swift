@@ -22,6 +22,8 @@ struct ScheduleCourseDetailView: View {
     @State var colorSelect: Color = .red
     @State var colorChanged: Int = 0
     
+    @State var recommandationSchoolLocation: [SchoolMapManager.SchoolLocationDescription] = []
+    
     @Environment(\.dismiss) var dismiss
     
     func generateHistoryChartData(_ originData: [Webvpn.CourseHistoryScoreInfo]) -> MultiLineChartData {
@@ -133,6 +135,23 @@ struct ScheduleCourseDetailView: View {
                             .foregroundColor(.secondary)
                             .textSelection(.enabled)
                     }
+                }
+                
+                Section("导航") {
+                    if recommandationSchoolLocation.count == 0 {
+                        Text("暂未适配当前上课地点的导航位置")
+                    } else {
+                        ForEach(recommandationSchoolLocation.indices, id: \.self) { locationId in
+                            Button(action: {
+                                SchoolMapManager.shared.OpenMapAppWithLocation(latitude: recommandationSchoolLocation[locationId].latitude, longitude: recommandationSchoolLocation[locationId].longitude, regionDistance: 100, name: recommandationSchoolLocation[locationId].fullName)
+                            }) {
+                                Label("导航前往 \(recommandationSchoolLocation[locationId].shortName)", systemImage: "figure.walk")
+                            }
+                        }
+                    }
+                }
+                .onFirstAppear {
+                    recommandationSchoolLocation = SchoolMapManager.shared.GenerateRecommandationSchoolLocation(courseLocationDes: courseObject.ClassroomLocationTimeDes)
                 }
                 
                 Section("操作") {

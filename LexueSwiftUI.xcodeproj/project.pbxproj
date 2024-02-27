@@ -62,6 +62,7 @@
 		475E22AF2ACFB4C800FE8679 /* InfoMergingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */; };
 		475E22B02ACFB66700FE8679 /* InfoMergingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */; };
 		475E9F3F2B8DF78500354A42 /* ScheduleCourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E9F3E2B8DF78500354A42 /* ScheduleCourseDetailView.swift */; };
+		475E9F412B8E14CE00354A42 /* SchoolMapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E9F402B8E14CE00354A42 /* SchoolMapManager.swift */; };
 		475EDED42AB60697008486F0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475EDED32AB60697008486F0 /* ProfileView.swift */; };
 		476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476340302AB89F47006C24E2 /* LexueProfile.swift */; };
 		476366F32B88EEBD00E9EAC6 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AB1752B87207600E72F7C /* ScheduleManager.swift */; };
@@ -276,6 +277,7 @@
 		475D211C2AEC09B400CB9DC7 /* iCloudActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudActions.swift; sourceTree = "<group>"; };
 		475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoMergingDataProvider.swift; sourceTree = "<group>"; };
 		475E9F3E2B8DF78500354A42 /* ScheduleCourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCourseDetailView.swift; sourceTree = "<group>"; };
+		475E9F402B8E14CE00354A42 /* SchoolMapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolMapManager.swift; sourceTree = "<group>"; };
 		475EDED32AB60697008486F0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		476340302AB89F47006C24E2 /* LexueProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueProfile.swift; sourceTree = "<group>"; };
 		476448422AD8E37D00952A22 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
@@ -632,6 +634,7 @@
 				475522142AF7D2F200B1347D /* LocationManager.swift */,
 				476B890F2B85F7C100D28B56 /* iOSCalendarManager.swift */,
 				478AB1752B87207600E72F7C /* ScheduleManager.swift */,
+				475E9F402B8E14CE00354A42 /* SchoolMapManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -968,6 +971,7 @@
 				473BAE942AA4969F00968C3C /* SettingView.swift in Sources */,
 				473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */,
 				470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */,
+				475E9F412B8E14CE00354A42 /* SchoolMapManager.swift in Sources */,
 				4791050F2AB0ACD4004FD26C /* LoginView.swift in Sources */,
 				47BD51A22AC5B43F0029F9DB /* UMGameAnalyticsSwift.swift in Sources */,
 				478B70562AD445190008865A /* Webvpn.swift in Sources */,

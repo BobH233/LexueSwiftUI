@@ -48,8 +48,20 @@ struct DebugDataView: View {
     @State var isPresentAlert = false
     
     @State var eventStore = EKEventStore()
+    
+    @State var latStr: String = "39.738763"
+    @State var lonStr: String = "116.178278"
+    
     var body: some View {
         Form {
+            Section("Map") {
+                TextField("latStr", text: $latStr)
+                TextField("lonStr", text: $lonStr)
+                Button("打开地图") {
+                    
+                    SchoolMapManager.shared.OpenMapAppWithLocation(latitude: Double(latStr)!, longitude: Double(lonStr)!, regionDistance: 1000, name: "北理大专")
+                }
+            }
             Section("Schedule") {
                 Button("添加或覆盖日历列表") {
                     Task {
