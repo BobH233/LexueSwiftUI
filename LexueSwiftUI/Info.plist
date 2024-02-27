@@ -28,6 +28,8 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>i乐学助手需要访问您的日历来导入课程表</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

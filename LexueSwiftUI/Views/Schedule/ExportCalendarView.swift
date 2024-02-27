@@ -25,9 +25,15 @@ struct ExportCalendarView: View {
     @State var alertTitle: String = ""
     @State var alertContent: String = ""
     
+    
     func ExportToSystemCalendar() {
         Task {
             var successSave = 0
+            if #available(iOS 17.0, *) {
+                let ret = try await iOSCalendarManager.shared.eventStore.requestFullAccessToEvents()
+                print("ret", ret)
+            }
+            
             guard !calendarName.isEmpty else {
                 DispatchQueue.main.async {
                     alertTitle = "日历名称为空"
