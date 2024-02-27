@@ -39,7 +39,7 @@ struct ExportCalendarView: View {
             guard let calendar = await iOSCalendarManager.shared.AddNewCalendar(calendarName: calendarName, calendarColor: UIColor(color)) else {
                 DispatchQueue.main.async {
                     alertTitle = "新建日历失败"
-                    alertContent = "请确保你已经打开了乐学助手访问日历的权限，并重试"
+                    alertContent = "请前往设置，确保你已经打开了乐学助手\"完全访问日历\"的权限，并重试"
                     showAlert = true
                 }
                 return
