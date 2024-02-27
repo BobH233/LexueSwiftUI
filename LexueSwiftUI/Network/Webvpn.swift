@@ -27,6 +27,7 @@ class Webvpn {
     let BIT101_WEBVPN_INIT = "https://bit101.flwfdd.xyz/user/webvpn_verify_init"
     let BIT101_WEBVPN_VERIFY = "https://bit101.flwfdd.xyz/user/webvpn_verify"
     let BIT101_QUERY_SCORE = "https://bit101.flwfdd.xyz/score?detail=true"
+    let BIT101_COURSE_HISTORY = "https://bit101.flwfdd.xyz/courses/histories"
     
     let WEBVPN_ORIGIN_DOMAIN = "webvpn.bit.edu.cn"
     let PROXY_WEBVPN_DOMAIN = "lexue.zendee.cn"
@@ -193,6 +194,52 @@ class Webvpn {
         } else {
             return .failure(.JsonConvertError)
         }
+    }
+    
+    struct CourseHistoryScoreInfo {
+        var term: String = ""
+        var avg_score: Double = 0
+        var max_score: Double = 0
+        var student_num: Int = 0
+    }
+    
+    func QueryCourseHistoryScoreInfo(courseId: String) async -> [CourseHistoryScoreInfo] {
+        let header = [
+            "User-Agent": "LexueHelper"
+        ]
+        var request = URLRequest(url: URL(string: "\(BIT101_COURSE_HISTORY)/\(courseId)")!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.headers = HTTPHeaders(header)
+        let ret = await withCheckedContinuation { continuation in
+            AF.request(request).response { res in
+                switch res.result {
+                case .success(let data):
+                    continuation.resume(returning: data)
+                case .failure(_):
+                    print("请求 bit101 失败")
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+        if ret == nil {
+            return []
+        }
+        var ret_scores = [CourseHistoryScoreInfo]()
+        if let json = try? JSONSerialization.jsonObject(with: ret!, options: []) as? [[String: Any]] {
+            for record in json {
+                var current = CourseHistoryScoreInfo()
+                guard let term = record["term"] as? String, let avg = record["avg_score"] as? Double, let maxv = record["max_score"] as? Double, let stu_num = record["student_num"] as? Int else {
+                    continue
+                }
+                current.avg_score = avg
+                current.max_score = maxv
+                current.student_num = stu_num
+                current.term = term
+                ret_scores.append(current)
+            }
+        }
+        return ret_scores
     }
     
     func GetWebvpnContext(username: String, password: String) async -> Result<WebvpnContext, WebvpnError> {

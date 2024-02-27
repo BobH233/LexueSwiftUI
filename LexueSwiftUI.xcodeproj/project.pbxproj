@@ -61,6 +61,7 @@
 		475D211D2AEC09B400CB9DC7 /* iCloudActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475D211C2AEC09B400CB9DC7 /* iCloudActions.swift */; };
 		475E22AF2ACFB4C800FE8679 /* InfoMergingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */; };
 		475E22B02ACFB66700FE8679 /* InfoMergingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */; };
+		475E9F3F2B8DF78500354A42 /* ScheduleCourseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E9F3E2B8DF78500354A42 /* ScheduleCourseDetailView.swift */; };
 		475EDED42AB60697008486F0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475EDED32AB60697008486F0 /* ProfileView.swift */; };
 		476340312AB89F47006C24E2 /* LexueProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476340302AB89F47006C24E2 /* LexueProfile.swift */; };
 		476366F32B88EEBD00E9EAC6 /* ScheduleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AB1752B87207600E72F7C /* ScheduleManager.swift */; };
@@ -274,6 +275,7 @@
 		475AFEFF2AB02A0C00C4020F /* LexueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueAPI.swift; sourceTree = "<group>"; };
 		475D211C2AEC09B400CB9DC7 /* iCloudActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudActions.swift; sourceTree = "<group>"; };
 		475E22AE2ACFB4C800FE8679 /* InfoMergingDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoMergingDataProvider.swift; sourceTree = "<group>"; };
+		475E9F3E2B8DF78500354A42 /* ScheduleCourseDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCourseDetailView.swift; sourceTree = "<group>"; };
 		475EDED32AB60697008486F0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		476340302AB89F47006C24E2 /* LexueProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexueProfile.swift; sourceTree = "<group>"; };
 		476448422AD8E37D00952A22 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				471D57422B88340700E1FFFF /* ScheduleMainView.swift */,
 				477D3D162B89A053000A3D28 /* ImportScheduleView.swift */,
 				47E03A182B8CDA00008330EB /* ExportCalendarView.swift */,
+				475E9F3E2B8DF78500354A42 /* ScheduleCourseDetailView.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -1003,6 +1006,7 @@
 				4784DBD42B201050000B12CE /* ExtraFunctionSetting.swift in Sources */,
 				475522152AF7D2F200B1347D /* LocationManager.swift in Sources */,
 				47F4F29A2AC086A90047B395 /* ImageMoveAndScaleSheet+ViewModel.swift in Sources */,
+				475E9F3F2B8DF78500354A42 /* ScheduleCourseDetailView.swift in Sources */,
 				47BD51A12AC5B43F0029F9DB /* UMCommonLogSwift.swift in Sources */,
 				47F4F2882AC080100047B395 /* AvatarSettingView.swift in Sources */,
 				47E03A192B8CDA00008330EB /* ExportCalendarView.swift in Sources */,

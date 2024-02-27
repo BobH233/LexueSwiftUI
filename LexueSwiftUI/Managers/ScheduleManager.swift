@@ -406,6 +406,47 @@ class ScheduleManager {
         }
         return ret
     }
+    
+    func GetAllCourseById(context: NSManagedObjectContext, courseId: String) -> [ScheduleCourseStored] {
+        let request: NSFetchRequest<ScheduleCourseStored> = ScheduleCourseStored.fetchRequest()
+        var predicates: [NSPredicate] = []
+        predicates.append(NSPredicate(format: "courseId == %@", courseId))
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        do {
+            // 执行查询
+            let results = try context.fetch(request)
+            
+            return results
+        } catch {
+            return []
+        }
+    }
+    
+    func DeleteScheduleCourse(context: NSManagedObjectContext, courseId: String, deleteOnlySpecDay: Int?) {
+        // 如果deleteOnlySpecDay指定，则只删除dayOfWeek满足这一天deleteOnlySpecDay的且课程号courseId为参数courseId的，否则删除所有courseId符合的
+        let request: NSFetchRequest<ScheduleCourseStored> = ScheduleCourseStored.fetchRequest()
+        var predicates: [NSPredicate] = []
+        predicates.append(NSPredicate(format: "courseId == %@", courseId))
+        if let day = deleteOnlySpecDay {
+            predicates.append(NSPredicate(format: "dayOfWeek == %d", day))
+        }
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        do {
+            // 执行查询
+            let results = try context.fetch(request)
+            
+            // 删除符合条件的对象
+            for course in results {
+                context.delete(course)
+            }
+            
+            // 保存更改
+            try context.save()
+        } catch {
+            // 处理错误
+            print("删除失败: \(error)")
+        }
+    }
 }
 
 

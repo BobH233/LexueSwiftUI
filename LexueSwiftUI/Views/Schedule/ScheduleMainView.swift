@@ -74,6 +74,9 @@ struct WeeklyScheduleView: View {
         return CGFloat(height)
     }
     
+    @State var showDetailSheet: Bool = false
+    @State var detailSheetCourse: JXZXehall.ScheduleCourseInfo = .init()
+    
     var body: some View {
         // 抬头不可滚动栏，写日期
         VStack {
@@ -162,7 +165,10 @@ struct WeeklyScheduleView: View {
                                         }
                                         .padding(.vertical, 2)
                                         .frame(maxHeight: GetCourseBlockHeight(course))
-                                        
+                                        .onTapGesture {
+                                            detailSheetCourse = course
+                                            showDetailSheet = true
+                                        }
                                     }
                                 } else if today_courses.IsSectionFree(sectionId: curSection.sectionIndex) {
                                     // 如果没课，则绘制空白占位框
@@ -178,6 +184,9 @@ struct WeeklyScheduleView: View {
                 }
             }
                 .foregroundColor(.black)
+        }
+        .sheet(isPresented: $showDetailSheet) {
+            ScheduleCourseDetailView(courseObject: detailSheetCourse)
         }
         .onFirstAppear {
             print("OnFirstAppear: Week \(weekIndex)")
