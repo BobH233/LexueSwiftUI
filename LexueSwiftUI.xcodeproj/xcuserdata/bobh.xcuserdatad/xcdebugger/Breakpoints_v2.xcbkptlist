@@ -7019,9 +7019,9 @@
             filePath = "LexueSwiftUI/Managers/SchoolMapManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "GenerateRecommandationSchoolLocation(courseLocationDes:)"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "GenerateRecommandationSchoolLocation(courseLocationDes:courseRegion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -7029,7 +7029,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "DFC72F7B-FB38-4B1C-8C35-E4281C16A8DA"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
@@ -7092,7 +7092,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "477F63F7-0884-4B08-8170-338124BD6D3F"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LexueSwiftUI/Managers/AppStatusManager.swift"
@@ -7193,8 +7193,8 @@
             filePath = "LexueSwiftUI/Managers/SchoolMapManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "GetSchoolLocations()"
             landmarkType = "7">
          </BreakpointContent>
@@ -7203,7 +7203,55 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "31C6EC2B-64E0-426D-84F2-B64D71A0DB7A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Managers/SchoolMapManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "UpdateMapInfo()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "31C6EC2B-64E0-426D-84F2-B64D71A0DB7A - 4c36fcbd6ec48e9f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.SchoolMapManager.UpdateMapInfo() async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/SchoolMapManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "31C6EC2B-64E0-426D-84F2-B64D71A0DB7A - 4c36fcbd6ec48f7e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.SchoolMapManager.UpdateMapInfo() async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/SchoolMapManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "104">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3F02E12F-9ACA-48D9-92D4-DAB4B38A0B8E"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LexueSwiftUI/Managers/SchoolMapManager.swift"
@@ -7211,22 +7259,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "74"
             endingLineNumber = "74"
-            landmarkName = "UpdateMapInfo()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3F02E12F-9ACA-48D9-92D4-DAB4B38A0B8E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "LexueSwiftUI/Managers/SchoolMapManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
             landmarkName = "UpdateMapInfo()"
             landmarkType = "7">
             <Locations>
@@ -7273,6 +7305,51 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "73"
                   endingLineNumber = "73"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "3F02E12F-9ACA-48D9-92D4-DAB4B38A0B8E - cb1be8d75f484285"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for LexueSwiftUI.SchoolMapManager.UpdateMapInfo() async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/SchoolMapManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "3F02E12F-9ACA-48D9-92D4-DAB4B38A0B8E - 584e44b24d8bcb8c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for LexueSwiftUI.SchoolMapManager.UpdateMapInfo() async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/SchoolMapManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "3F02E12F-9ACA-48D9-92D4-DAB4B38A0B8E - 4c36fcbd6ec48e9f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LexueSwiftUI.SchoolMapManager.UpdateMapInfo() async -&gt; ()"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Managers/SchoolMapManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
                   offsetFromSymbolStart = "40">
                </Location>
             </Locations>

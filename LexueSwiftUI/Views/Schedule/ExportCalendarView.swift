@@ -111,7 +111,12 @@ struct ExportCalendarView: View {
             .foregroundColor(nil)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
-                events_to_add = ScheduleManager.shared.GenerateCalendarEvents(context: managedObjContext)
+                Task {
+                    let tmp_events_to_add = ScheduleManager.shared.GenerateCalendarEvents(context: managedObjContext)
+                    DispatchQueue.main.async {
+                        events_to_add = tmp_events_to_add
+                    }
+                }
             }
             .alert(isPresented: $showAlert) {
                 Alert(title: Text(alertTitle), message: Text(alertContent), dismissButton: .default(Text("确定")))

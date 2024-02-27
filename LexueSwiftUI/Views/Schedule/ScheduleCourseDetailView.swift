@@ -151,7 +151,7 @@ struct ScheduleCourseDetailView: View {
                     }
                 }
                 .onFirstAppear {
-                    recommandationSchoolLocation = SchoolMapManager.shared.GenerateRecommandationSchoolLocation(courseLocationDes: courseObject.ClassroomLocationTimeDes)
+                    recommandationSchoolLocation = SchoolMapManager.shared.GenerateRecommandationSchoolLocation(courseLocationDes: courseObject.ClassroomLocationTimeDes, courseRegion: courseObject.SchoolRegion)
                 }
                 
                 Section("操作") {

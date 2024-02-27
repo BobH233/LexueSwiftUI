@@ -49,7 +49,8 @@ class SchoolMapManager {
         .init(shortName: "良乡南网球场", fullName: "良乡校区南校区网球场", latitude: 39.727715, longitude: 116.168760, matchKeywords: ["南校区网球场"], matchRegion: "良乡校区"),
         .init(shortName: "良乡南排球场", fullName: "良乡校区南校区排球场", latitude: 39.727433, longitude: 116.169478, matchKeywords: ["南校区排球场"], matchRegion: "良乡校区"),
         .init(shortName: "良乡疏桐园A", fullName: "良乡校区疏桐园A", latitude: 39.728745, longitude: 116.168117, matchKeywords: ["疏桐园A"], matchRegion: "良乡校区"),
-        
+        // 其他杂项方面
+        .init(shortName: "良乡工训楼", fullName: "良乡校区工训楼", latitude: 39.725954, longitude: 116.173800, matchKeywords: ["工训楼"], matchRegion: "良乡校区"),
     ]
     
     func UpdateSchoolLocations(newLocations: [SchoolLocationDescription]) {
@@ -92,14 +93,14 @@ class SchoolMapManager {
         mapItem.openInMaps(launchOptions: options)
     }
     
-    func GenerateRecommandationSchoolLocation(courseLocationDes: String) -> [SchoolLocationDescription] {
+    func GenerateRecommandationSchoolLocation(courseLocationDes: String, courseRegion: String = "良乡校区") -> [SchoolLocationDescription] {
         // 根据上课地点生成推荐的导航地点
         let allLocations = GetSchoolLocations()
         var ret: [SchoolLocationDescription] = []
         for location in allLocations {
             var match = false
             for keyword in location.matchKeywords {
-                if courseLocationDes.contains(keyword) {
+                if courseLocationDes.contains(keyword) && courseRegion == location.matchRegion {
                     match = true
                     break
                 }
