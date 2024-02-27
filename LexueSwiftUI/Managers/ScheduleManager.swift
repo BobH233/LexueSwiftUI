@@ -200,9 +200,9 @@ class ScheduleManager {
     }
     
     // 获取是否是当前周
-    func GetWeekDesText(context: NSManagedObjectContext, selectionWeekIndex: Int) -> String {
+    func GetWeekDesText(context: NSManagedObjectContext, selectionWeekIndex: Int, firstDateProvided: Date? = nil) -> String {
         let calendar = Calendar.current
-        let firstDate = GetScheduleDisplayFirstWeek(context: context)
+        let firstDate = firstDateProvided ?? GetScheduleDisplayFirstWeek(context: context)
         guard let selectionWeekMonday = calendar.date(byAdding: .day, value: 7 * selectionWeekIndex, to: firstDate) else {
             return ""
         }
@@ -282,7 +282,7 @@ class ScheduleManager {
     }
     
     // 生成总的课表，所有周的课程表
-    func GenerateAllWeekScheduleInSemester(context: NSManagedObjectContext) -> ([[DailyScheduleInfo]], Int) {
+    func GenerateAllWeekScheduleInSemester(context: NSManagedObjectContext, firstDateProvided: Date? = nil) -> ([[DailyScheduleInfo]], Int) {
         var allCourseValid: [JXZXehall.ScheduleCourseInfo] = []
         var success: Bool = false
         (allCourseValid, success) = GetValidCourse(context: context)
@@ -309,7 +309,7 @@ class ScheduleManager {
         }
         print("maxWeekCount: ", maxWeekCount)
         // 计算一下从当前日程表的第一周到开学周，有多少偏移
-        let firstDate = GetScheduleDisplayFirstWeek(context: context)
+        let firstDate = firstDateProvided ?? GetScheduleDisplayFirstWeek(context: context)
         var offsetWeekToSemesterStart = 0
         for i in 0..<maxWeekCount {
             guard let offsetWeekDate = calendar.date(byAdding: .day, value: 7 * i, to: firstDate) else {
@@ -342,8 +342,8 @@ class ScheduleManager {
     }
     
     // 获取当前日期应该选择哪一周
-    func GetCurrentWeekSelection(context: NSManagedObjectContext) -> Int {
-        let firstDate = GetScheduleDisplayFirstWeek(context: context)
+    func GetCurrentWeekSelection(context: NSManagedObjectContext, firstDateProvided: Date? = nil) -> Int {
+        let firstDate = firstDateProvided ?? GetScheduleDisplayFirstWeek(context: context)
         let calendar = Calendar.current
         for i in 0..<30 {
             guard let offsetWeekDate = calendar.date(byAdding: .day, value: 7 * i, to: firstDate) else {

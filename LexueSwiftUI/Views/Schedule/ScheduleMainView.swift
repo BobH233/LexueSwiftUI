@@ -42,29 +42,13 @@ struct WeeklyScheduleView: View {
         "日"
     ]
     // 星期n对应的是几号
-    @State var dateDayArr: [String] = [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
-    ]
-    @State var dateDayDateArr: [Date] = [
-        .now,
-        .now,
-        .now,
-        .now,
-        .now,
-        .now,
-        .now
-    ]
+    @Binding var dateDayArr: [String]
+    @Binding var dateDayDateArr: [Date]
     
-    @State var sectionInfo: [ScheduleSectionInfo] = [
-    ]
-    @State var firstDate: Date = .now
-    @State var currentMonth = "2月"
+    @Binding var sectionInfo: [ScheduleSectionInfo]
+    
+    @Binding var firstDate: Date
+    @Binding var currentMonth: String
     
     
     // 每天的课程
@@ -143,10 +127,6 @@ struct WeeklyScheduleView: View {
                         VStack(spacing: 3) {
                             ForEach(sectionInfo, id: \.sectionIndex) { curSection in
                                 if let course = today_courses.HasCourseInSection(sectionId: curSection.sectionIndex) {
-                                    // 如果这里有课, 那么就绘制课程框
-                                    //                                    Text(course.CourseName)
-                                    //                                        .frame(height: GetCourseBlockHeight(course))
-                                    //                                        .background(.blue)
                                     ZStack {
                                         RoundedRectangle(cornerRadius: 10) // 圆角矩形
                                             .stroke(Color.white.opacity(0.5), lineWidth: 2) // 白色半透明描边
@@ -199,12 +179,13 @@ struct WeeklyScheduleView: View {
             }
                 .foregroundColor(.black)
         }
-        .onAppear {
+        .onFirstAppear {
+            print("OnFirstAppear: Week \(weekIndex)")
             // 载入节数信息
-            sectionInfo = ScheduleManager.shared.GetScheduleSectionInfo()
+            // sectionInfo = ScheduleManager.shared.GetScheduleSectionInfo()
             // 载入时间信息
-            firstDate = ScheduleManager.shared.GetScheduleDisplayFirstWeek(context: managedObjContext)
-            (currentMonth, dateDayArr, dateDayDateArr) = ScheduleManager.shared.GetWeekDisplayInfo(firstWeek: firstDate, targetWeekIndex: weekIndex)
+            // firstDate = ScheduleManager.shared.GetScheduleDisplayFirstWeek(context: managedObjContext)
+//            (currentMonth, dateDayArr, dateDayDateArr) = ScheduleManager.shared.GetWeekDisplayInfo(firstWeek: firstDate, targetWeekIndex: weekIndex)
         }
     }
 }
@@ -224,9 +205,15 @@ struct ScheduleMainView: View {
     @State var showExportSheet = false
     
     
-    @State var allWeekSchedule: [[DailyScheduleInfo]] = [[]]
+    @State var allWeekSchedule: [[DailyScheduleInfo]] = [[DailyScheduleInfo]]()
     
     @State var weekOffset: Int = 0
+    
+    @State var sectionInfo: [ScheduleSectionInfo] = []
+    @State var firstDate: Date = .now
+    @State var currentMonthStrArr: [String] = []
+    @State var dateDayArr: [[String]] = [[String]]()
+    @State var dateDayDateArr: [[Date]] = [[Date]]()
     
     var body: some View {
         ZStack {
@@ -294,13 +281,13 @@ struct ScheduleMainView: View {
                 ZStack {
                     TabView(selection: $selection) {
                         ForEach(allWeekSchedule.indices, id: \.self) { weekId in
-                            WeeklyScheduleView(weekIndex: weekId, dailyCourses: $allWeekSchedule[weekId])
+                            WeeklyScheduleView(weekIndex: weekId, dateDayArr: $dateDayArr[weekId], dateDayDateArr: $dateDayDateArr[weekId], sectionInfo: $sectionInfo, firstDate: $firstDate, currentMonth: $currentMonthStrArr[weekId], dailyCourses: $allWeekSchedule[weekId])
                                 .tag(weekId + 1)
                         }
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                     .onChange(of: selection) { newVal in
-                        currentWeekDescriptionText = ScheduleManager.shared.GetWeekDesText(context: managedObjContext, selectionWeekIndex: newVal - 1)
+                        currentWeekDescriptionText = ScheduleManager.shared.GetWeekDesText(context: managedObjContext, selectionWeekIndex: newVal - 1, firstDateProvided: firstDate)
                     }
                     HStack {
                         Rectangle()
@@ -313,13 +300,24 @@ struct ScheduleMainView: View {
                 
             }
         }
-        .onAppear {
+        .onFirstAppear {
+            print("on first appear")
             NotificationCenter.default.post(name: refreshScheduleListNotification, object: nil)
         }
         .onReceive(NotificationCenter.default.publisher(for: refreshScheduleListNotification)) { param in
-            (allWeekSchedule, weekOffset) = ScheduleManager.shared.GenerateAllWeekScheduleInSemester(context: managedObjContext)
+            sectionInfo = ScheduleManager.shared.GetScheduleSectionInfo()
+            firstDate = ScheduleManager.shared.GetScheduleDisplayFirstWeek(context: managedObjContext)
+            
+            var (tmp_allWeekSchedule, weekOffset) = ScheduleManager.shared.GenerateAllWeekScheduleInSemester(context: managedObjContext, firstDateProvided: firstDate)
+            for i in 0..<tmp_allWeekSchedule.count {
+                let (tmp_currentMonth, tmp_dateDayArr, tmp_dateDayDateArr) = ScheduleManager.shared.GetWeekDisplayInfo(firstWeek: firstDate, targetWeekIndex: i)
+                currentMonthStrArr.append(tmp_currentMonth)
+                dateDayArr.append(tmp_dateDayArr)
+                dateDayDateArr.append(tmp_dateDayDateArr)
+            }
+            allWeekSchedule = tmp_allWeekSchedule
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                selection = ScheduleManager.shared.GetCurrentWeekSelection(context: managedObjContext)
+                selection = ScheduleManager.shared.GetCurrentWeekSelection(context: managedObjContext, firstDateProvided: firstDate)
             }
         }
         .navigationBarHidden(true)

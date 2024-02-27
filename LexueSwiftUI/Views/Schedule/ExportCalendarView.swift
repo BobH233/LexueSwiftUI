@@ -21,14 +21,26 @@ struct ExportCalendarView: View {
     
     @State var events_to_add: [ScheduleManager.CalendarEvent] = []
     
+    @State var showAlert: Bool = false
+    @State var alertTitle: String = ""
+    @State var alertContent: String = ""
+    
     func ExportToSystemCalendar() {
         Task {
             var successSave = 0
+            guard !calendarName.isEmpty else {
+                DispatchQueue.main.async {
+                    alertTitle = "日历名称为空"
+                    alertContent = "必须指定日历名称！"
+                    showAlert = true
+                }
+                return
+            }
             guard let calendar = await iOSCalendarManager.shared.AddNewCalendar(calendarName: calendarName, calendarColor: UIColor(color)) else {
                 DispatchQueue.main.async {
-                    GlobalVariables.shared.alertTitle = "新建日历失败"
-                    GlobalVariables.shared.alertTitle = "请确保你已经打开了乐学助手访问日历的权限，并重试"
-                    GlobalVariables.shared.showAlert = true
+                    alertTitle = "新建日历失败"
+                    alertContent = "请确保你已经打开了乐学助手访问日历的权限，并重试"
+                    showAlert = true
                 }
                 return
             }
@@ -100,6 +112,9 @@ struct ExportCalendarView: View {
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 events_to_add = ScheduleManager.shared.GenerateCalendarEvents(context: managedObjContext)
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text(alertTitle), message: Text(alertContent), dismissButton: .default(Text("确定")))
             }
         }
     }
