@@ -165,10 +165,10 @@ struct WeeklyScheduleView: View {
                                         }
                                         .padding(.vertical, 2)
                                         .frame(maxHeight: GetCourseBlockHeight(course))
-                                        .onTapGesture {
-                                            detailSheetCourse = course
-                                            showDetailSheet = true
-                                        }
+                                    }
+                                    .onTapGesture {
+                                        detailSheetCourse = course
+                                        showDetailSheet = true
                                     }
                                 } else if today_courses.IsSectionFree(sectionId: curSection.sectionIndex) {
                                     // 如果没课，则绘制空白占位框

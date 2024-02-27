@@ -33,7 +33,7 @@ struct ScheduleCourseDetailView: View {
         var xAxisLabels: [String] = []
         for history in originData {
             xAxisLabels.append("")
-            points1.append(.init(value: history.avg_score, description: history.term))
+            points1.append(.init(value: history.avg_score))
             points2.append(.init(value: history.max_score, description: history.term))
             minGrade = min(minGrade, history.max_score)
             minGrade = min(minGrade, history.avg_score)
@@ -42,7 +42,7 @@ struct ScheduleCourseDetailView: View {
         }
         let dataset1 = LineDataSet(dataPoints: points1, legendTitle: "平均分", pointStyle: PointStyle(borderColour: .black, pointType: .outline, pointShape: .circle), style: LineStyle(lineColour: ColourStyle(colours: [Color.red.opacity(0.90),                                        Color.red.opacity(0.60)],startPoint: .top,endPoint: .bottom)))
         let dataset2 = LineDataSet(dataPoints: points2, legendTitle: "最高分", pointStyle: PointStyle(borderColour: .black, pointType: .outline, pointShape: .square), style: LineStyle(lineColour: ColourStyle(colours: [Color.blue.opacity(0.90),                                        Color.blue.opacity(0.60)],startPoint: .top,endPoint: .bottom)))
-        let multi_data = MultiLineDataSet(dataSets: [dataset1, dataset2])
+        let multi_data = MultiLineDataSet(dataSets: [dataset2, dataset1])
         return MultiLineChartData(dataSets: multi_data, metadata: ChartMetadata(title: "课程成绩历史"), xAxisLabels: xAxisLabels, chartStyle: LineChartStyle(infoBoxPlacement: .floating, markerType: .full(attachment: .point), yAxisTitle: "分数", baseline: .minimumWithMaximum(of: max(Double(minGrade - 5), 0)), topLine: .maximum(of: min(Double(maxGrade + 5), 100))))
     }
     
