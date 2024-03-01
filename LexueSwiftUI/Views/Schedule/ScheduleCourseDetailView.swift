@@ -139,7 +139,8 @@ struct ScheduleCourseDetailView: View {
                 
                 Section("导航") {
                     if recommandationSchoolLocation.count == 0 {
-                        Text("暂未适配当前上课地点的导航位置")
+                        // Text("暂未适配当前上课地点的导航位置")
+                        Text(try! AttributedString(markdown: "暂未适配当前上课地点的导航位置, [点击反馈](https://github.com/BobH233/LexueSwiftUI/issues)"))
                     } else {
                         ForEach(recommandationSchoolLocation.indices, id: \.self) { locationId in
                             Button(action: {
@@ -155,7 +156,7 @@ struct ScheduleCourseDetailView: View {
                 }
                 
                 Section("操作") {
-                    Button("删除今天的这门课程") {
+                    Button("删除 星期\(courseObject.GetDayOfWeekText()) 的这门课程") {
                         VibrateOnce()
                         deleteCurrentCourseAlert = true
                     }
@@ -163,14 +164,14 @@ struct ScheduleCourseDetailView: View {
                     .alert(isPresented: $deleteCurrentCourseAlert) {
                         Alert(
                             title: Text("删除确认"),
-                            message: Text("确认要删除所有周今天的这门课程吗？之后你可以重新导入"),
+                            message: Text("确认要删除所有周 星期\(courseObject.GetDayOfWeekText()) 的这门课程吗？之后你可以重新从教务导入"),
                             primaryButton: .destructive(Text("确定").foregroundColor(.red)) {
                                 DeleteCurrentCourse()
                             },
                             secondaryButton: .cancel()
                         )
                     }
-                    Button("删除这门课程(整周的)") {
+                    Button("完全删除这门课程") {
                         VibrateOnce()
                         deleteCourseInWeekAlert = true
                     }
@@ -178,7 +179,7 @@ struct ScheduleCourseDetailView: View {
                     .alert(isPresented: $deleteCourseInWeekAlert) {
                         Alert(
                             title: Text("删除确认"),
-                            message: Text("确认要删除所有周每一天的这门课程吗？之后你可以重新导入"),
+                            message: Text("确认要删除所有周的这门课程吗？之后你可以重新从教务导入"),
                             primaryButton: .destructive(Text("确定").foregroundColor(.red)) {
                                 DeleteCourseInWeek()
                             },

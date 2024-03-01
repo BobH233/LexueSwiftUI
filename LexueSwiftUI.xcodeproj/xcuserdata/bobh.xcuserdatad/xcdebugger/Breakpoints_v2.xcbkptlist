@@ -316,8 +316,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "570"
-            endingLineNumber = "570"
+            startingLineNumber = "580"
+            endingLineNumber = "580"
             landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -364,8 +364,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "594"
-            endingLineNumber = "594"
+            startingLineNumber = "604"
+            endingLineNumber = "604"
             landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -380,8 +380,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "584"
-            endingLineNumber = "584"
+            startingLineNumber = "594"
+            endingLineNumber = "594"
             landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -396,8 +396,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "586"
-            endingLineNumber = "586"
+            startingLineNumber = "596"
+            endingLineNumber = "596"
             landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -412,8 +412,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "590"
-            endingLineNumber = "590"
+            startingLineNumber = "600"
+            endingLineNumber = "600"
             landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -428,8 +428,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "578"
-            endingLineNumber = "578"
+            startingLineNumber = "588"
+            endingLineNumber = "588"
             landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -444,8 +444,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "589"
-            endingLineNumber = "589"
+            startingLineNumber = "599"
+            endingLineNumber = "599"
             landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -460,8 +460,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "604"
-            endingLineNumber = "604"
+            startingLineNumber = "614"
+            endingLineNumber = "614"
             landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -476,8 +476,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "602"
-            endingLineNumber = "602"
+            startingLineNumber = "612"
+            endingLineNumber = "612"
             landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -492,8 +492,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "439"
-            endingLineNumber = "439"
+            startingLineNumber = "449"
+            endingLineNumber = "449"
             landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:method:)"
             landmarkType = "7">
             <Locations>
@@ -570,8 +570,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "429"
-            endingLineNumber = "429"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
             landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:method:)"
             landmarkType = "7">
             <Locations>
@@ -618,8 +618,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "438"
-            endingLineNumber = "438"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
             landmarkName = "GetRealWEU(fakeWEU:GS_SESSIONID:origin:url:method:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -634,8 +634,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "603"
-            endingLineNumber = "603"
+            startingLineNumber = "613"
+            endingLineNumber = "613"
             landmarkName = "GetJXZXMobileContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -650,8 +650,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "273"
-            endingLineNumber = "273"
+            startingLineNumber = "283"
+            endingLineNumber = "283"
             landmarkName = "GetArrangedExam(context:semesterId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -666,8 +666,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
             landmarkName = "GetArrangedExam(context:semesterId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -682,8 +682,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "GetArrangedExam(context:semesterId:)"
             landmarkType = "7">
             <Locations>
@@ -4113,8 +4113,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "397"
-            endingLineNumber = "397"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "GetUrlRetHead(url:header:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4129,8 +4129,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
             landmarkName = "GetUrlRetHead(url:header:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4145,8 +4145,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
+            startingLineNumber = "401"
+            endingLineNumber = "401"
             landmarkName = "GetUrlRetHead(url:header:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4161,8 +4161,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "540"
-            endingLineNumber = "540"
+            startingLineNumber = "550"
+            endingLineNumber = "550"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4177,8 +4177,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "543"
-            endingLineNumber = "543"
+            startingLineNumber = "553"
+            endingLineNumber = "553"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -4405,8 +4405,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "510"
-            endingLineNumber = "510"
+            startingLineNumber = "520"
+            endingLineNumber = "520"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -4453,8 +4453,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "509"
-            endingLineNumber = "509"
+            startingLineNumber = "519"
+            endingLineNumber = "519"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -4516,8 +4516,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "512"
-            endingLineNumber = "512"
+            startingLineNumber = "522"
+            endingLineNumber = "522"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -4564,8 +4564,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "513"
-            endingLineNumber = "513"
+            startingLineNumber = "523"
+            endingLineNumber = "523"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -4612,8 +4612,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "491"
-            endingLineNumber = "491"
+            startingLineNumber = "501"
+            endingLineNumber = "501"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -4795,8 +4795,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "499"
-            endingLineNumber = "499"
+            startingLineNumber = "509"
+            endingLineNumber = "509"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4811,8 +4811,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "534"
-            endingLineNumber = "534"
+            startingLineNumber = "544"
+            endingLineNumber = "544"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -4904,8 +4904,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
+            startingLineNumber = "497"
+            endingLineNumber = "497"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -4967,8 +4967,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "488"
-            endingLineNumber = "488"
+            startingLineNumber = "498"
+            endingLineNumber = "498"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -4983,8 +4983,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "541"
-            endingLineNumber = "541"
+            startingLineNumber = "551"
+            endingLineNumber = "551"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
             <Locations>
@@ -5046,8 +5046,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "542"
-            endingLineNumber = "542"
+            startingLineNumber = "552"
+            endingLineNumber = "552"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5379,8 +5379,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "615"
-            endingLineNumber = "615"
+            startingLineNumber = "625"
+            endingLineNumber = "625"
             landmarkName = "GetSemesterStartDate(context:semesterId:)"
             landmarkType = "7">
             <Locations>
@@ -5457,8 +5457,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "614"
-            endingLineNumber = "614"
+            startingLineNumber = "624"
+            endingLineNumber = "624"
             landmarkName = "GetSemesterStartDate(context:semesterId:)"
             landmarkType = "7">
             <Locations>
@@ -5662,8 +5662,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "535"
-            endingLineNumber = "535"
+            startingLineNumber = "545"
+            endingLineNumber = "545"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5678,8 +5678,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "539"
-            endingLineNumber = "539"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5694,8 +5694,8 @@
             filePath = "LexueSwiftUI/Network/JXZXehall.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "536"
-            endingLineNumber = "536"
+            startingLineNumber = "546"
+            endingLineNumber = "546"
             landmarkName = "GetJXZXwdkbbyContext(loginnedContext:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -6635,8 +6635,8 @@
             filePath = "LexueSwiftUI/Views/Schedule/ScheduleCourseDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -6683,8 +6683,8 @@
             filePath = "LexueSwiftUI/Views/Schedule/ScheduleCourseDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -6699,8 +6699,8 @@
             filePath = "LexueSwiftUI/Views/Schedule/ScheduleCourseDetailView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>

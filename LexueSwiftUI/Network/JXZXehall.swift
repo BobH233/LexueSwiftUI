@@ -197,6 +197,15 @@ class JXZXehall {
             }
             return 0
         }
+        
+        
+        func GetDayOfWeekText() -> String {
+            let text_arr = ["一","二","三","四","五","六","日"]
+            if DayOfWeek >= 1 && DayOfWeek <= 7 {
+                return text_arr[DayOfWeek-1]
+            }
+            return ""
+        }
     }
     
     enum JXZXError: Error {
@@ -205,6 +214,7 @@ class JXZXehall {
         case CannotGetTicket
         case JsonConvertError
     }
+    
     
     func GetUnscheduledExam(context: JXZXContext, semesterId: String) async -> Result<[UnscheduledExamInfo], JXZXError> {
         var cur_headers = HTTPHeaders(jxzx_header)
