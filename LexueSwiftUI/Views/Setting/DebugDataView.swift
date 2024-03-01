@@ -81,6 +81,12 @@ struct DebugDataView: View {
                 }
             }
             Section("Schedule") {
+                Button("课程评价") {
+                    Task {
+                        let res = await Webvpn.shared.GetCourseComments(courseId: "100270024")
+                        print(res)
+                    }
+                }
                 Button("添加或覆盖日历列表") {
                     Task {
                         let res = await iOSCalendarManager.shared.AddNewCalendar(calendarName: "📅 我的日历表", calendarColor: .red, rewriteExist: true)

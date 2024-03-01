@@ -28,6 +28,10 @@ class Webvpn {
     let BIT101_WEBVPN_VERIFY = "https://bit101.flwfdd.xyz/user/webvpn_verify"
     let BIT101_QUERY_SCORE = "https://bit101.flwfdd.xyz/score?detail=true"
     let BIT101_COURSE_HISTORY = "https://bit101.flwfdd.xyz/courses/histories"
+    // ?search=100063122&order=new&page=0
+    let BIT101_COURSE_SEARCH = "https://bit101.flwfdd.xyz/courses"
+    // ?obj=course5932&order=default&page=0
+    let BIT101_COURSE_COMMENTS = "https://bit101.flwfdd.xyz/reaction/comments"
     
     let WEBVPN_ORIGIN_DOMAIN = "webvpn.bit.edu.cn"
     let PROXY_WEBVPN_DOMAIN = "lexue.zendee.cn"
@@ -240,6 +244,115 @@ class Webvpn {
             }
         }
         return ret_scores
+    }
+    
+    struct CourseSearchResult {
+        // BIT101的id号
+        var id: Int = 0
+        // 课程编号
+        var number: String = ""
+        // 老师名字
+        var teacherName: String = ""
+        // 评价人数
+        var comment_num: Int = 0
+    }
+    
+    struct CourseComment {
+        var comment_id: Int = 0
+        var update_time: Date = .now
+        var comment_text: String = ""
+        var for_course_teacher: String = ""
+        var rate: Int = 0
+    }
+    
+    func GetCourseComments(courseId: String) async -> [CourseComment] {
+        let header = [
+            "User-Agent": "LexueHelper"
+        ]
+        var request = URLRequest(url: URL(string: "\(BIT101_COURSE_SEARCH)?search=\(courseId)&order=new&page=0")!)
+        request.cachePolicy = .reloadIgnoringCacheData
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.headers = HTTPHeaders(header)
+        let ret = await withCheckedContinuation { continuation in
+            AF.request(request).response { res in
+                switch res.result {
+                case .success(let data):
+                    continuation.resume(returning: data)
+                case .failure(_):
+                    print("请求 bit101 失败")
+                    continuation.resume(returning: nil)
+                }
+            }
+        }
+        if ret == nil {
+            return []
+        }
+        var courses = [CourseSearchResult]()
+        if let json = try? JSONSerialization.jsonObject(with: ret!, options: []) as? [[String: Any]] {
+            for record in json {
+                var current = CourseSearchResult()
+                guard let id = record["id"] as? Int, let number = record["number"] as? String, let teachers_name = record["teachers_name"] as? String, let comment_num = record["comment_num"] as? Int else {
+                    continue
+                }
+                if number != courseId {
+                    continue
+                }
+                if comment_num == 0 {
+                    continue
+                }
+                current.id = id
+                current.number = number
+                current.teacherName = teachers_name
+                current.comment_num = comment_num
+                courses.append(current)
+            }
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let dateFormatter2 = DateFormatter()
+        dateFormatter2.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZ"
+        var comments = [CourseComment]()
+        for course in courses {
+            var request = URLRequest(url: URL(string: "\(BIT101_COURSE_COMMENTS)?obj=course\(course.id)&order=default&page=0")!)
+            request.cachePolicy = .reloadIgnoringCacheData
+            request.httpMethod = HTTPMethod.get.rawValue
+            request.headers = HTTPHeaders(header)
+            let ret = await withCheckedContinuation { continuation in
+                AF.request(request).response { res in
+                    switch res.result {
+                    case .success(let data):
+                        continuation.resume(returning: data)
+                    case .failure(_):
+                        print("请求 bit101 失败")
+                        continuation.resume(returning: nil)
+                    }
+                }
+            }
+            if ret == nil {
+                continue
+            }
+            if let json = try? JSONSerialization.jsonObject(with: ret!, options: []) as? [[String: Any]] {
+                for record in json {
+                    var current = CourseComment()
+                    guard let update_time = record["update_time"] as? String, let text = record["text"] as? String, let rate = record["rate"] as? Int, let id = record["id"] as? Int else {
+                        continue
+                    }
+                    current.comment_id = id
+                    current.comment_text = text
+                    current.for_course_teacher = course.teacherName
+                    current.rate = rate
+                    if let format_date = dateFormatter.date(from: update_time) {
+                        current.update_time = format_date
+                    } else if let format_date = dateFormatter2.date(from: update_time) {
+                        current.update_time = format_date
+                    } else {
+                        print("无法转换")
+                    }
+                    comments.append(current)
+                }
+            }
+        }
+        return comments
     }
     
     func GetWebvpnContext(username: String, password: String) async -> Result<WebvpnContext, WebvpnError> {

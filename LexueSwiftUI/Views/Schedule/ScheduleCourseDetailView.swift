@@ -8,6 +8,68 @@
 import SwiftUI
 import SwiftUICharts
 
+struct CourseCommentView: View {
+    func GetFullDisplayTime(_ date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy年M月d日 HH:mm"
+        return dateFormatter.string(from: date)
+    }
+    
+    @State var comment_text: String = "啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦，啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦，啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦"
+    @State var teacher_name: String = "xxxxxxxxxxxxxx"
+    @State var teacher_name_display: String = "xxxxxxxxxxxxxx"
+    @State var comment_date: Date = .now
+    @State var comment_date_str: String = "2024年1月1日"
+    @State var rate: Int = 0
+    @State var rateColor: Color = .green
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Image("default_avatar")
+                    .resizable()
+                    .clipShape(Circle())
+                    .frame(width: 45, height: 45)
+                
+                VStack(spacing: 0) {
+                    HStack {
+                        Text(teacher_name_display)
+                            .font(.system(size: 20))
+                            .bold()
+                        Spacer()
+                    }
+                    HStack {
+                        Text(comment_date_str)
+                            .textSelection(.enabled)
+                            .foregroundColor(.secondary)
+                        
+                        Text("评分: \(rate) 分")
+                            .foregroundColor(rateColor)
+                        Spacer()
+                    }
+                    .font(.system(size: 18))
+                }
+            }
+            HStack {
+                Text(comment_text)
+                    .lineSpacing(6)
+                Spacer()
+            }
+        }
+        .onFirstAppear {
+            comment_date_str = GetFullDisplayTime(comment_date)
+            teacher_name_display = "来自 \(teacher_name) 老师班级的同学"
+            if rate < 4 {
+                rateColor = .red
+            } else if rate < 6 {
+                rateColor = .orange
+            } else {
+                rateColor = .green
+            }
+        }
+    }
+}
+
 struct ScheduleCourseDetailView: View {
     @Environment(\.managedObjectContext) var managedObjContext
     @State var courseObject: JXZXehall.ScheduleCourseInfo =
@@ -15,6 +77,9 @@ struct ScheduleCourseDetailView: View {
     @State var historyLoaded: Bool = false
     @State var historyScores: [Webvpn.CourseHistoryScoreInfo] = []
     @State var lineChartHistoryData: MultiLineChartData = MultiLineChartData(dataSets: MultiLineDataSet(dataSets: []))
+    
+    @State var commentsLoaded: Bool = false
+    @State var commentsAboutCourse: [Webvpn.CourseComment] = []
     
     @State var deleteCurrentCourseAlert: Bool = false
     @State var deleteCourseInWeekAlert: Bool  = false
@@ -278,6 +343,66 @@ struct ScheduleCourseDetailView: View {
                         }
                     }
                 }
+                Section() {
+                    if !commentsLoaded {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                                .controlSize(.large)
+                            Spacer()
+                        }
+                    } else {
+                        if commentsAboutCourse.count == 0 {
+                            Text("暂时没有同学评价该课程")
+                        } else {
+                            ForEach(commentsAboutCourse.indices, id: \.self) { commentId in
+                                CourseCommentView(comment_text: commentsAboutCourse[commentId].comment_text, teacher_name: commentsAboutCourse[commentId].for_course_teacher, comment_date: commentsAboutCourse[commentId].update_time, rate: commentsAboutCourse[commentId].rate)
+                            }
+                        }
+                    }
+                } header: {
+                    Text("课程评价")
+                } footer: {
+                    Text("课程评价由BIT101维护")
+                }
+                .onFirstAppear {
+                    Task {
+                        var result = await Webvpn.shared.GetCourseComments(courseId: courseObject.CourseId)
+                        
+                        // 让与这节课关联度更大的评论排在前面
+                        result = result.sorted { comment1, comment2 in
+                            var score1 = 0
+                            var score2 = 0
+                            var containTeacher: Bool = false
+                            if comment1.for_course_teacher == courseObject.TeacherName {
+                                score1 = 3
+                                containTeacher = true
+                            } else if comment1.for_course_teacher.contains(courseObject.TeacherName) {
+                                score1 = 2
+                                containTeacher = true
+                            }
+                            if comment2.for_course_teacher == courseObject.TeacherName {
+                                score2 = 3
+                                containTeacher = true
+                            } else if comment2.for_course_teacher.contains(courseObject.TeacherName) {
+                                score2 = 2
+                                containTeacher = true
+                            }
+                            if !containTeacher {
+                                return comment1.for_course_teacher > comment2.for_course_teacher
+                            }
+                            if score1 == score2 {
+                                return comment1.update_time > comment2.update_time
+                            }
+                            return score1 > score2
+                            
+                        }
+                        DispatchQueue.main.async {
+                            commentsAboutCourse = result
+                            commentsLoaded = true
+                        }
+                    }
+                }
             }
             .onDisappear {
                 if colorChanged > 1 {
@@ -291,5 +416,9 @@ struct ScheduleCourseDetailView: View {
 }
 
 #Preview {
-    ScheduleCourseDetailView()
+//    ScheduleCourseDetailView()
+    Form {
+        CourseCommentView()
+        CourseCommentView()
+    }
 }
