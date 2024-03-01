@@ -196,7 +196,7 @@ struct ScheduleCourseDetailView: View {
                 }
                 
                 Section() {
-                    if true {
+                    if !historyLoaded {
                         HStack {
                             Spacer()
                             ProgressView()
