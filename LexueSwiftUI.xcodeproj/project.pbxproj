@@ -117,6 +117,11 @@
 		479B22E42AD57B0300A7DCC7 /* Tabler in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E32AD57B0300A7DCC7 /* Tabler */; };
 		479B22E72AD57D8100A7DCC7 /* Sideways in Frameworks */ = {isa = PBXBuildFile; productRef = 479B22E62AD57D8100A7DCC7 /* Sideways */; };
 		479B22EC2AD641FB00A7DCC7 /* ViewCourseScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B22EB2AD641FB00A7DCC7 /* ViewCourseScoreView.swift */; };
+		47A760972B9227FA00DABEC7 /* ScheduleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A760962B9227FA00DABEC7 /* ScheduleProvider.swift */; };
+		47A760992B92282300DABEC7 /* ScheduleDefaultEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A760982B92282300DABEC7 /* ScheduleDefaultEntry.swift */; };
+		47A7609E2B922C6700DABEC7 /* Schedule_MediumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A7609B2B922C6700DABEC7 /* Schedule_MediumView.swift */; };
+		47A7609F2B922C6700DABEC7 /* ScheduleWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A7609C2B922C6700DABEC7 /* ScheduleWidgetView.swift */; };
+		47A760A02B922C6700DABEC7 /* Schedule_LargeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A7609D2B922C6700DABEC7 /* Schedule_LargeView.swift */; };
 		47A927812AA77E6500ABDC53 /* MessageModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 47A9277F2AA77E6500ABDC53 /* MessageModel.xcdatamodeld */; };
 		47A927832AA77FDA00ABDC53 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927822AA77FDA00ABDC53 /* DataController.swift */; };
 		47A927852AA7836300ABDC53 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
@@ -319,6 +324,11 @@
 		479A290B2AECCF9A009AAD4F /* iCloudUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudUserDefaults.swift; sourceTree = "<group>"; };
 		479B22E02AD571C400A7DCC7 /* ViewScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewScoreView.swift; sourceTree = "<group>"; };
 		479B22EB2AD641FB00A7DCC7 /* ViewCourseScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCourseScoreView.swift; sourceTree = "<group>"; };
+		47A760962B9227FA00DABEC7 /* ScheduleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleProvider.swift; sourceTree = "<group>"; };
+		47A760982B92282300DABEC7 /* ScheduleDefaultEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDefaultEntry.swift; sourceTree = "<group>"; };
+		47A7609B2B922C6700DABEC7 /* Schedule_MediumView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule_MediumView.swift; sourceTree = "<group>"; };
+		47A7609C2B922C6700DABEC7 /* ScheduleWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleWidgetView.swift; sourceTree = "<group>"; };
+		47A7609D2B922C6700DABEC7 /* Schedule_LargeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedule_LargeView.swift; sourceTree = "<group>"; };
 		47A927802AA77E6500ABDC53 /* MessageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MessageModel.xcdatamodel; sourceTree = "<group>"; };
 		47A927822AA77FDA00ABDC53 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		47A927842AA7836300ABDC53 /* MessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageManager.swift; sourceTree = "<group>"; };
@@ -464,6 +474,9 @@
 		47196FF52AC5520900979DFE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				47A7609D2B922C6700DABEC7 /* Schedule_LargeView.swift */,
+				47A7609B2B922C6700DABEC7 /* Schedule_MediumView.swift */,
+				47A7609C2B922C6700DABEC7 /* ScheduleWidgetView.swift */,
 				47196FF62AC5522500979DFE /* EventWidgetView.swift */,
 				47F4FD132ACD966C00C6C144 /* Event_SmallView.swift */,
 				47F4FD272ACDADCA00C6C144 /* Event_MediumView.swift */,
@@ -684,6 +697,7 @@
 			children = (
 				47196FEE2AC551D200979DFE /* EventDefaultEntry.swift */,
 				477344742B82080900AB5358 /* ScoreDefaultEntry.swift */,
+				47A760982B92282300DABEC7 /* ScheduleDefaultEntry.swift */,
 			);
 			path = Entries;
 			sourceTree = "<group>";
@@ -693,6 +707,7 @@
 			children = (
 				47196FEF2AC551D200979DFE /* EventProvider.swift */,
 				4773447D2B820C4400AB5358 /* ScoreProvider.swift */,
+				47A760962B9227FA00DABEC7 /* ScheduleProvider.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -930,6 +945,7 @@
 				47F4FD2E2ACDC07900C6C144 /* CourseManager.swift in Sources */,
 				477344702B81D52100AB5358 /* Webvpn.swift in Sources */,
 				47F4FD322ACDC1DA00C6C144 /* LexueDataProvider.swift in Sources */,
+				47A760972B9227FA00DABEC7 /* ScheduleProvider.swift in Sources */,
 				47196FE12AC5514F00979DFE /* LexueWidgetBundle.swift in Sources */,
 				47F4FD252ACDA63A00C6C144 /* ContactDisplayModel.swift in Sources */,
 				47F4FD282ACDADCA00C6C144 /* Event_MediumView.swift in Sources */,
@@ -940,12 +956,16 @@
 				47F4FD232ACDA62400C6C144 /* DataController.swift in Sources */,
 				475E9F422B8E295B00354A42 /* SchoolMapManager.swift in Sources */,
 				47196FF12AC551D200979DFE /* Widget_Extension.swift in Sources */,
+				47A7609F2B922C6700DABEC7 /* ScheduleWidgetView.swift in Sources */,
 				47F4FD302ACDC1D600C6C144 /* DataProviderManager.swift in Sources */,
 				479A290D2AECD3A3009AAD4F /* iCloudUserDefaults.swift in Sources */,
 				47F4FD332ACDC1E600C6C144 /* MessageManager.swift in Sources */,
+				47A760992B92282300DABEC7 /* ScheduleDefaultEntry.swift in Sources */,
+				47A7609E2B922C6700DABEC7 /* Schedule_MediumView.swift in Sources */,
 				477344822B820CD400AB5358 /* Score_SmallView.swift in Sources */,
 				477344832B820CD700AB5358 /* Score_MediumView.swift in Sources */,
 				476B89142B86074500D28B56 /* CourseScoreViewEditor.swift in Sources */,
+				47A760A02B922C6700DABEC7 /* Schedule_LargeView.swift in Sources */,
 				47F4FD142ACD966C00C6C144 /* Event_SmallView.swift in Sources */,
 				47F4FD292ACDB4EE00C6C144 /* EventManager.swift in Sources */,
 				477344802B820CCD00AB5358 /* ScoreDefaultEntry.swift in Sources */,

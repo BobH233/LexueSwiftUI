@@ -49,3 +49,24 @@ struct ScoreMonitorWidget: Widget {
         .description("显示实时的成绩更新情况")
     }
 }
+
+
+struct ScheduleWidget: Widget {
+    let kind: String = "ScheduleWidget"
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: ScheduleProvider()) { entry in
+            if #available(iOS 17.0, *) {
+                ScheduleWidgetView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+            } else {
+                ScheduleWidgetView(entry: entry)
+                    .padding()
+                    .background()
+            }
+            
+        }
+        .configurationDisplayName("乐学助手-课程表")
+        .supportedFamilies([.systemMedium, .systemLarge])
+        .description("显示每日课程表")
+    }
+}

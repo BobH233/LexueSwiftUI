@@ -13,5 +13,6 @@ struct LexueWidgetBundle: WidgetBundle {
     var body: some Widget {
         LexueEventWidget()
         ScoreMonitorWidget()
+        ScheduleWidget()
     }
 }

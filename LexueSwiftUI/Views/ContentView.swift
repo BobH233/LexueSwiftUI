@@ -63,8 +63,17 @@ struct ContentView: View {
                     if SettingStorage.shared.savedUsername != "" &&  SettingStorage.shared.savedPassword != ""{
                         print("查看分数界面")
                         self.tabSelection = 4
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                             NotificationCenter.default.post(name: extraFunctionSelectedNotification, object: "queryScore")
+                        }
+                    }
+                    return
+                }
+                if let action = components.host, action == "schedule_view" {
+                    if SettingStorage.shared.savedUsername != "" &&  SettingStorage.shared.savedPassword != ""{
+                        self.tabSelection = 4
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            NotificationCenter.default.post(name: extraFunctionSelectedNotification, object: "scheduleView")
                         }
                     }
                     return

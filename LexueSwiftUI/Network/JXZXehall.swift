@@ -156,7 +156,8 @@ class JXZXehall {
     }
     
     // 课程表上课程的信息
-    struct ScheduleCourseInfo {
+    struct ScheduleCourseInfo: Identifiable {
+        var id = UUID()
         // KKDWDM_DISPLAY: 开课学院
         var KKDWDM_DISPLAY: String = ""
         // KCM: 课程名
@@ -206,6 +207,11 @@ class JXZXehall {
             }
             return ""
         }
+        
+        func GetFullLocationText() -> String {
+            return "\(SchoolRegion)\(ClassroomLocation)"
+        }
+        
     }
     
     enum JXZXError: Error {

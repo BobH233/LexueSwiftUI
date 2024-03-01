@@ -361,7 +361,7 @@ class ScheduleManager {
     }
     
     // 获取当前日期应该选择哪一周
-    func GetCurrentWeekSelection(context: NSManagedObjectContext, firstDateProvided: Date? = nil) -> Int {
+    func GetCurrentWeekSelection(context: NSManagedObjectContext, nowDate: Date = .now, firstDateProvided: Date? = nil) -> Int {
         let firstDate = firstDateProvided ?? GetScheduleDisplayFirstWeek(context: context)
         let calendar = Calendar.current
         for i in 0..<30 {
@@ -369,7 +369,7 @@ class ScheduleManager {
                 continue
             }
             
-            if compareDatesIgnoringTime(offsetWeekDate, getMondayOfCurrentWeek()) == .orderedSame {
+            if compareDatesIgnoringTime(offsetWeekDate, getMondayOfCurrentWeek(nowDate: nowDate)) == .orderedSame {
                 return i + 1
             }
         }
@@ -415,10 +415,10 @@ class ScheduleManager {
                         continue
                     }
                     currentEvent.title = course.CourseName
-                    currentEvent.location = "\(course.SchoolRegion)\(course.ClassroomLocation) \(course.TeacherName)"
+                    currentEvent.location = "\(course.GetFullLocationText()) \(course.TeacherName)"
                     currentEvent.StartDate = SetDate(toSet: date_day_start, value: section_start.GetStartDateCp())
                     currentEvent.EndDate = SetDate(toSet: date_day_start, value: section_end.GetEndDateCp())
-                    currentEvent.note = "\(course.ClassroomLocationTimeDes)\n\(course.SchoolRegion)\(course.ClassroomLocation)\n\(course.TeacherName)"
+                    currentEvent.note = "\(course.ClassroomLocationTimeDes)\n\(course.GetFullLocationText())\n\(course.TeacherName)"
                     ret.append(currentEvent)
                 }
             }
@@ -439,6 +439,31 @@ class ScheduleManager {
         } catch {
             return []
         }
+    }
+    
+    func IsCourseEnded(course: JXZXehall.ScheduleCourseInfo, nowTime: Date = .now) -> Bool {
+        let sectionInfos = GetScheduleSectionInfo()
+        var endSectionInfo: ScheduleSectionInfo? = nil
+        for sectionInfo in sectionInfos {
+            if sectionInfo.sectionIndex == course.EndSectionId {
+                endSectionInfo = sectionInfo
+                break
+            }
+        }
+        guard let endSectionInfo = endSectionInfo else {
+            return false
+        }
+        let (endHour, endMinute) = endSectionInfo.GetEndDateCp()
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: nowTime)
+        if let hour = components.hour, let minute = components.minute {
+            let endMinu = endHour * 60 + endMinute
+            let nowMinu = hour * 60 + minute
+            if nowMinu > endMinu {
+                return true
+            }
+        }
+        return false
     }
     
     func DeleteScheduleCourse(context: NSManagedObjectContext, courseId: String, deleteOnlySpecDay: Int?) {
@@ -465,6 +490,21 @@ class ScheduleManager {
             // 处理错误
             print("删除失败: \(error)")
         }
+    }
+    
+    func GetCourseSectionTimeText(sectionId: Int, is_start_text: Bool) -> String {
+        let sectionInfos = GetScheduleSectionInfo()
+        for sectionInfo in sectionInfos {
+            if sectionInfo.sectionIndex == sectionId {
+                if is_start_text {
+                    return sectionInfo.sectionStartDateStr
+                } else {
+                    return sectionInfo.sectionEndDateStr
+                }
+                
+            }
+        }
+        return ""
     }
 }
 

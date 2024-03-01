@@ -162,7 +162,7 @@ struct WeeklyScheduleView: View {
                                                 .truncationMode(.tail)
                                             if !course.ClassroomLocation.isEmpty {
                                                 // 上课地点
-                                                Text("@\(course.SchoolRegion)\(course.ClassroomLocation)") // 文本内容
+                                                Text("@\(course.GetFullLocationText())") // 文本内容
                                                     .font(.system(size: 13))
                                                     .foregroundColor(chooseTextColor(UIColor(course.CourseBgColor)))
                                                     .bold()
