@@ -410,6 +410,17 @@ private struct ListView: View {
                                         }) {
                                             Label("选择信息", systemImage: "checkmark.circle")
                                         }
+                                        Button(role: .cancel, action: {
+                                            var allContactUid: [String] = []
+                                            for contact in contacts {
+                                                allContactUid.append(contact.contactUid)
+                                            }
+                                            ContactsManager.shared.ReadallContact(contactUidArr: allContactUid, context: managedObjContext)
+                                            ContactsManager.shared.GenerateContactDisplayLists(context: managedObjContext)
+                                            VibrateOnce()
+                                        }) {
+                                            Label("全部已读", systemImage: "checkmark")
+                                        }
                                     }
                                 } label: {
                                     Label("Add", systemImage: "ellipsis.circle")
