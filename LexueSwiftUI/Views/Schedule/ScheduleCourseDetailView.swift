@@ -196,9 +196,14 @@ struct ScheduleCourseDetailView: View {
                 }
                 
                 Section() {
-                    if !historyLoaded {
-                        ProgressView()
-                            .controlSize(.large)
+                    if true {
+                        HStack {
+                            Spacer()
+                            ProgressView()
+                                .controlSize(.large)
+                            Spacer()
+                        }
+                        
                     } else {
                         if historyScores.count == 0 {
                             Text("暂时查询不到历史分数信息")
