@@ -56,8 +56,10 @@ struct ExportCalendarView: View {
                 sys_event.location = event.location
                 sys_event.startDate = event.StartDate
                 sys_event.endDate = event.EndDate
-                let alarm = EKAlarm(relativeOffset: -60 * (Double(selectedHour) * 60 + Double(selectedMinute)))
-                sys_event.addAlarm(alarm)
+                if enableNotification {
+                    let alarm = EKAlarm(relativeOffset: -60 * (Double(selectedHour) * 60 + Double(selectedMinute)))
+                    sys_event.addAlarm(alarm)
+                }
                 sys_event.notes = event.note
                 sys_event.calendar = calendar
                 do {
