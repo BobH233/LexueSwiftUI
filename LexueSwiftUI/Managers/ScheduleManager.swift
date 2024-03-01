@@ -28,6 +28,25 @@ struct ScheduleSectionInfo: Codable {
         }
         return (0, 0)
     }
+    func GetIsDateInSection(date: Date = Date()) -> Bool {
+        let (startHour, startMinute) = GetStartDateCp()
+        let (endHour, endMinute) = GetEndDateCp()
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.hour, .minute], from: date)
+        
+        if let hour = components.hour, let minute = components.minute {
+            let dateHourMinute = hour * 60 + minute
+            let startDateHourMinute = startHour * 60 + startMinute
+            let endDateHourMinute = endHour * 60 + endMinute
+            
+            if startDateHourMinute <= dateHourMinute && dateHourMinute <= endDateHourMinute {
+                return true
+            }
+        }
+        
+        return false
+    }
 }
 
 let refreshScheduleListNotification = Notification.Name("refreshScheduleListNotification")

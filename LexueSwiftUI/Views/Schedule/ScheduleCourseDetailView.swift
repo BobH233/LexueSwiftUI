@@ -47,11 +47,12 @@ struct CourseCommentView: View {
                             .foregroundColor(rateColor)
                         Spacer()
                     }
-                    .font(.system(size: 18))
+                    .font(.system(size: 16))
                 }
             }
             HStack {
                 Text(comment_text)
+                    .textSelection(.enabled)
                     .lineSpacing(6)
                 Spacer()
             }

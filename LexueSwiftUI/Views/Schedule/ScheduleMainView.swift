@@ -111,16 +111,32 @@ struct WeeklyScheduleView: View {
                     // 显示每节课上下课信息列
                     VStack(spacing: 3) {
                         ForEach(sectionInfo, id: \.sectionIndex) { curSection in
-                            VStack {
-                                Text("\(curSection.sectionIndex)")
-                                    .font(.system(size: 15))
-                                    .bold()
-                                Text("\(curSection.sectionStartDateStr)")
-                                    .font(.system(size: 12))
-                                Text("\(curSection.sectionEndDateStr)")
-                                    .font(.system(size: 12))
+                            if curSection.GetIsDateInSection() {
+                                VStack {
+                                    Text("\(curSection.sectionIndex)")
+                                        .bold()
+                                        .font(.system(size: 15))
+                                    Text("\(curSection.sectionStartDateStr)")
+                                        .bold()
+                                        .font(.system(size: 12))
+                                    Text("\(curSection.sectionEndDateStr)")
+                                        .bold()
+                                        .font(.system(size: 12))
+                                }
+                                .foregroundColor(.blue)
+                                .frame(height: CGFloat(UnitBlockHeight))
+                            } else {
+                                VStack {
+                                    Text("\(curSection.sectionIndex)")
+                                        .font(.system(size: 15))
+                                        .bold()
+                                    Text("\(curSection.sectionStartDateStr)")
+                                        .font(.system(size: 12))
+                                    Text("\(curSection.sectionEndDateStr)")
+                                        .font(.system(size: 12))
+                                }
+                                .frame(height: CGFloat(UnitBlockHeight))
                             }
-                            .frame(height: CGFloat(UnitBlockHeight))
                             // .background(.red)
                         }
                     }
