@@ -64,6 +64,7 @@ struct Schedule_MediumView: View {
     var limitCount: Int = 2
     @State var showTomorrowTips = false
     @State var showTomorrowSchedule = false
+    @State var todayContentCount = 0
     
     
     var body: some View {
@@ -103,9 +104,9 @@ struct Schedule_MediumView: View {
                 ForEach(limited_schedule) { course in
                     ScheduleItemView(color: course.CourseBgColor, courseName: course.CourseName, description: "\(course.GetFullLocationText()) \(course.TeacherName)", starttime: ScheduleManager.shared.GetCourseSectionTimeText(sectionId: course.StartSectionId, is_start_text: true), endtime: ScheduleManager.shared.GetCourseSectionTimeText(sectionId: course.EndSectionId, is_start_text: false))
                 }
-                if limited_schedule.count < entry.today_courses.count {
+                if limited_schedule.count < todayContentCount {
                     HStack {
-                        Text("还有\(entry.today_courses.count - limited_schedule.count)门课未显示")
+                        Text("还有\(todayContentCount - limited_schedule.count)门课未显示")
                             .font(.system(size: firstLineSize))
                         Spacer()
                     }
@@ -147,7 +148,9 @@ struct Schedule_MediumView: View {
                 }
                 today_content.append(today_course)
             }
+            todayContentCount = today_content.count
             if today_content.count > 0 {
+                
                 // 如果今天还有课，则只显示今天课程，不显示明天的课程，并且要显示明天还有几门课
                 for i in 0 ..< min(today_content.count, limitCount) {
                     limited_schedule.append(today_content[i])

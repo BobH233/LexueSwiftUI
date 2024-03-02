@@ -21,7 +21,7 @@ let markdownFeedbackTipsForTestFlight = """
 
 您可通过TestFlight及时向开发者反馈出现的问题，劳烦您提供出现问题的详细位置、问题截图等信息方便我们更快速处理这些问题，我们会收集内测时产生的崩溃日志信息以供修复。
 
-**欢迎您添加意见反馈QQ群：297983455**，提出您宝贵的意见，对“i乐学助手”有帮助的建议我们都会采纳并附上感谢！
+**欢迎您添加意见反馈QQ群：[点击加群](https://qm.qq.com/q/SjrrWAcNUa)**，提出您宝贵的意见，对“i乐学助手”有帮助的建议我们都会采纳并附上感谢！
 
 您也可以向开发者发送邮件：[admin@bit-helper.cn](mailto:admin@bit-helper.cn)
 
