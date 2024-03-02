@@ -16,6 +16,7 @@ struct iCloudActions: View {
     @State private var showAlert4 = false
     @State private var showAlert5 = false
     @State private var showAlert6 = false
+    @State private var showAlert7 = false
     @State private var alertMessage = ""
     var body: some View {
         Form {
@@ -42,6 +43,7 @@ struct iCloudActions: View {
                         DataController.shared.deleteEntityAllData(entityName: FavoriteURLStored.entity().name ?? "", context: managedObjContext)
                         iCloudUserDefaults.shared.clearAllCloudStorage()
                         DataController.shared.deleteEntityAllData(entityName: ScheduleCourseStored.entity().name ?? "", context: managedObjContext)
+                        DataController.shared.deleteEntityAllData(entityName: ScoreDiffCache.entity().name ?? "", context: managedObjContext)
                         VibrateTwice()
                     }), secondaryButton: .cancel(Text("取消")))
                 }
@@ -116,6 +118,23 @@ struct iCloudActions: View {
                 .alert(isPresented: $showAlert6) {
                     Alert(title: Text("确认操作"), message: Text(alertMessage), primaryButton: .destructive(Text("确认"), action: {
                         DataController.shared.deleteEntityAllData(entityName: ScheduleCourseStored.entity().name ?? "", context: managedObjContext)
+                        VibrateTwice()
+                    }), secondaryButton: .cancel(Text("取消")))
+                }
+                
+                Button(role: .none, action: {
+                    alertMessage = "确认要重置成绩监控数据吗？这会清除之前保存的成绩更新记录，但是不会对功能造成影响"
+                    VibrateOnce()
+                    showAlert7 = true
+                }, label: {
+                    HStack {
+                        Image(systemName: "point.bottomleft.forward.to.point.topright.filled.scurvepath")
+                        Text("仅重置成绩监控数据")
+                    }
+                })
+                .alert(isPresented: $showAlert7) {
+                    Alert(title: Text("确认操作"), message: Text(alertMessage), primaryButton: .destructive(Text("确认"), action: {
+                        DataController.shared.deleteEntityAllData(entityName: ScoreDiffCache.entity().name ?? "", context: managedObjContext)
                         VibrateTwice()
                     }), secondaryButton: .cancel(Text("取消")))
                 }
