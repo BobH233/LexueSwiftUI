@@ -65,6 +65,27 @@ struct ScoreWidgetPreview: View {
     }
 }
 
+struct ScheduleWidgetPreview: View {
+    var body: some View {
+        ZStack {
+            Image("schedule_widget_large_preview")
+                .resizable()
+                .scaledToFit()
+                .clipShape(RoundedRectangle(cornerRadius: 23))
+                .padding(.horizontal, 40)
+                .shadow(radius: 10)
+                .offset(CGSize(width: 20.0, height: 10.0))
+            Image("schedule_widget_medium_preview")
+                .resizable()
+                .scaledToFit()
+                .clipShape(RoundedRectangle(cornerRadius: 23))
+                .padding(.horizontal, 40)
+                .shadow(radius: 10)
+                .offset(CGSize(width: -20.0, height: 80.0))
+        }
+    }
+}
+
 struct WelcomeUseWidget: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var sysColorScheme
@@ -74,6 +95,8 @@ struct WelcomeUseWidget: View {
             return "随时查看事件"
         } else if selectionTag == 2 {
             return "即刻监控你的成绩"
+        } else if selectionTag == 3 {
+            return "快速查看每天课程"
         }
         return ""
     }
@@ -101,6 +124,8 @@ struct WelcomeUseWidget: View {
                         .tag(1)
                     ScoreWidgetPreview()
                         .tag(2)
+                    ScheduleWidgetPreview()
+                        .tag(3)
                 }
                 .onAppear {
                     if sysColorScheme == .light {
@@ -114,7 +139,7 @@ struct WelcomeUseWidget: View {
                 // .background(.red)
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always)) // 设置样式为页面式，隐藏页码指示器
                 Spacer()
-                if selectionAnimated < 2 {
+                if selectionAnimated < 3 {
                     Button {
                         withAnimation {
                             selection += 1
