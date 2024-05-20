@@ -15,6 +15,13 @@ struct UnscheduledExamCardView: View {
     var examType: String = "(本)分散考试"
     var teacherName: String = "金海"
     
+    func stripHTML(from input: String) -> String {
+        let pattern = "<[^>]+>"
+        let regex = try! NSRegularExpression(pattern: pattern, options: [])
+        let range = NSRange(input.startIndex..<input.endIndex, in: input)
+        return regex.stringByReplacingMatches(in: input, options: [], range: range, withTemplate: "")
+    }
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -27,7 +34,7 @@ struct UnscheduledExamCardView: View {
             }
             VStack(spacing: 5) {
                 HStack {
-                    Text(courseName)
+                    Text(stripHTML(from: courseName))
                         .bold()
                         .font(.system(size: 24))
                         .multilineTextAlignment(.leading)

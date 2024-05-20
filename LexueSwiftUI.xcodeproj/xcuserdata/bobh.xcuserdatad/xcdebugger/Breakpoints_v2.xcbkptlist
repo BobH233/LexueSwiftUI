@@ -808,8 +808,8 @@
             filePath = "LexueSwiftUI/Views/ExamInfo/ExamInfoView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "ImportOrUpdateExam()"
             landmarkType = "7">
          </BreakpointContent>
@@ -5710,8 +5710,8 @@
             filePath = "LexueSwiftUI/Views/ExamInfo/ExamInfoView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
             landmarkName = "FetchSemesterInfo(semesterId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5726,8 +5726,8 @@
             filePath = "LexueSwiftUI/Views/ExamInfo/ExamInfoView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "FetchSemesterInfo(semesterId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5742,8 +5742,8 @@
             filePath = "LexueSwiftUI/Views/ExamInfo/ExamInfoView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
             landmarkName = "FetchSemesterInfo(semesterId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5758,8 +5758,8 @@
             filePath = "LexueSwiftUI/Views/ExamInfo/ExamInfoView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "FetchSemesterInfo(semesterId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -5774,8 +5774,8 @@
             filePath = "LexueSwiftUI/Views/ExamInfo/ExamInfoView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "FetchSemesterInfo(semesterId:)"
             landmarkType = "7">
          </BreakpointContent>

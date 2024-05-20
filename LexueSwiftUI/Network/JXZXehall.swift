@@ -29,7 +29,7 @@ class JXZXehall {
     let API_JXZX_GET_ARRANGED_EXAM = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/cxxsksap.do"
     // 查询某学期未安排考试信息, post
     // 表单 XNXQDM=2023-2024-1
-    let API_JXZX_GET_UNSCHEDULED_EXAM = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/cxwapdksrw.do"
+    let API_JXZX_GET_UNSCHEDULED_EXAM = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/modules/ksap/cxapzjwaprw.do"
     
     // 查询某学期的日期信息，用于查询第一天post
     // 表单 requestParamStr={"XNXQDM":"2023-2024-2","ZC":"1"}
@@ -246,7 +246,7 @@ class JXZXehall {
                     }
                 }
         }
-        if let datas = retJson["datas"] as? [String: Any], let cxwapdksrw = datas["cxwapdksrw"] as? [String: Any], let rows = cxwapdksrw["rows"] as? [[String: Any]], rows.count > 0 {
+        if let datas = retJson["datas"] as? [String: Any], let cxwapdksrw = datas["cxapzjwaprw"] as? [String: Any], let rows = cxwapdksrw["rows"] as? [[String: Any]], rows.count > 0 {
             var ret: [UnscheduledExamInfo] = []
             for row in rows {
                 var currentRow = UnscheduledExamInfo()
