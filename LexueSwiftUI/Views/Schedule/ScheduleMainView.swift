@@ -342,7 +342,15 @@ struct ScheduleMainView: View {
             }
             allWeekSchedule = tmp_allWeekSchedule
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                selection = ScheduleManager.shared.GetCurrentWeekSelection(context: managedObjContext, firstDateProvided: firstDate)
+                var tmp = ScheduleManager.shared.GetCurrentWeekSelection(context: managedObjContext, firstDateProvided: firstDate)
+                if tmp > tmp_allWeekSchedule.count {
+                    withAnimation {
+                        tmp = tmp_allWeekSchedule.count
+                    }
+                }
+                withAnimation {
+                    selection = tmp
+                }
             }
         }
         .navigationBarHidden(true)
