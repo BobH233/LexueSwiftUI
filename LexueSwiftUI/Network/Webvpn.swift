@@ -95,6 +95,8 @@ class Webvpn {
         var ignored_course: Bool = false
         // 是否是未读的新成绩, 用于高亮显示
         var is_unread_new_score: Bool = false
+        // 成绩标识, 如果是缓考会在这里显示
+        var score_tag: String = ""
         
         
         static func SemesterInt(semesterStr: String) -> Int {
@@ -163,7 +165,7 @@ class Webvpn {
                 attriMap[data[0][i]] = i
             }
             // 确保每一个想要的属性都存在了
-            let wantedAttri = ["开课学期", "课程名称", "课程编号", "成绩", "学分", "总学时", "课程性质", "本人成绩在专业中占", "本人成绩在班级中占", "本人成绩在所有学生中占", "班级人数", "学习人数", "专业人数", "平均分", "最高分", "序号", "考试性质"]
+            let wantedAttri = ["开课学期", "课程名称", "课程编号", "成绩", "学分", "总学时", "课程性质", "本人成绩在专业中占", "本人成绩在班级中占", "本人成绩在所有学生中占", "班级人数", "学习人数", "专业人数", "平均分", "最高分", "序号", "考试性质", "成绩标识"]
             for attri in wantedAttri {
                 if attriMap[attri] == nil {
                     // 没有返回全部需要的属性
@@ -189,6 +191,7 @@ class Webvpn {
                 currentCourse.avg_score = data[i][attriMap["平均分"]!]
                 currentCourse.max_score = data[i][attriMap["最高分"]!]
                 currentCourse.exam_type = data[i][attriMap["考试性质"]!]
+                currentCourse.score_tag = data[i][attriMap["成绩标识"]!]
                 ret_scores.append(currentCourse)
             }
             if auto_diff_score {
@@ -334,7 +337,7 @@ class Webvpn {
             if let json = try? JSONSerialization.jsonObject(with: ret!, options: []) as? [[String: Any]] {
                 for record in json {
                     var current = CourseComment()
-                    guard let update_time = record["update_time"] as? String, let text = record["text"] as? String, let rate = record["rate"] as? Int, let id = record["id"] as? Int else {
+                    guard let update_time = record["create_time"] as? String, let text = record["text"] as? String, let rate = record["rate"] as? Int, let id = record["id"] as? Int else {
                         continue
                     }
                     current.comment_id = id

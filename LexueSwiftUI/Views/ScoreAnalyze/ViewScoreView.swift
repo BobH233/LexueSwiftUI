@@ -259,6 +259,24 @@ struct ViewScoreView: View {
         return ret
     }
     
+    func ProcessSpecialScore(_ score_res: [Webvpn.ScoreInfo]) -> [Webvpn.ScoreInfo] {
+        // 处理缓考特殊情况
+        var ret = score_res
+        for (index, score) in ret.enumerated() {
+            if score.score_tag == "缓考" {
+                ret[index].ignored_course = true
+            }
+        }
+        return ret
+    }
+    
+    func ProcessScoreInfo(_ score_res: [Webvpn.ScoreInfo]) -> [Webvpn.ScoreInfo] {
+        var ret = ProcessNewUpdateScore(score_res)
+        ret = ProcessResitSituation(ret)
+        ret = ProcessSpecialScore(ret)
+        return ret
+    }
+    
     func LoadScoresInfo(tryCache: Bool = true) {
         if tryCache && SettingStorage.shared.cache_webvpn_context != "" && SettingStorage.shared.cache_webvpn_context_for_user == GlobalVariables.shared.cur_user_info.stuId {
             // 有缓存，先尝试缓存
@@ -269,8 +287,7 @@ struct ViewScoreView: View {
                 switch score_res {
                 case .success(let ret_scoreInfo):
                     DispatchQueue.main.async {
-                        scoreInfo = ProcessNewUpdateScore(ret_scoreInfo)
-                        scoreInfo = ProcessResitSituation(scoreInfo).reversed()
+                        scoreInfo = ProcessScoreInfo(ret_scoreInfo).reversed()
                         LoadFilterOptions()
                         loadingData = false
                         DispatchQueue.main.async {
@@ -297,8 +314,7 @@ struct ViewScoreView: View {
                     switch score_res {
                     case .success(let ret_scoreInfo):
                         DispatchQueue.main.async {
-                            scoreInfo = ProcessNewUpdateScore(ret_scoreInfo)
-                            scoreInfo = ProcessResitSituation(scoreInfo).reversed()
+                            scoreInfo = ProcessScoreInfo(ret_scoreInfo).reversed()
                             LoadFilterOptions()
                             loadingData = false
                         }
@@ -376,6 +392,39 @@ struct ViewScoreView: View {
                             .strikethrough(course.ignored_course)
                     }
                     .foregroundColor(.green)
+                } else if course.score_tag == "缓考" {
+                    Group {
+                        ZStack {
+                            Text(course.index)
+                                .strikethrough(course.ignored_course)
+                            if course.is_unread_new_score {
+                                Image(systemName: "moonphase.new.moon.inverse")
+                                    .resizable()
+                                    .frame(width: 10, height: 10)
+                                    .offset(x: -25, y: 0)
+                                    .foregroundColor(.blue)
+                            }
+                        }
+                        Text("\(course.courseName) (\(course.score_tag))")
+                            .strikethrough(course.ignored_course)
+                        Text(course.my_score)
+                            .strikethrough(course.ignored_course)
+                        Text(course.credit)
+                            .strikethrough(course.ignored_course)
+                        Text(course.avg_score)
+                            .strikethrough(course.ignored_course)
+                        Text(course.max_score)
+                            .strikethrough(course.ignored_course)
+                        Text(course.my_grade_in_all)
+                            .strikethrough(course.ignored_course)
+                        Text(course.my_grade_in_major)
+                            .strikethrough(course.ignored_course)
+                        Text(course.semester)
+                            .strikethrough(course.ignored_course)
+                        Text(course.course_type)
+                            .strikethrough(course.ignored_course)
+                    }
+                    .foregroundColor(.orange)
                 } else {
                     ZStack {
                         Text(course.index)
