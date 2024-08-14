@@ -1028,6 +1028,11 @@ class LexueAPI {
                     AF.request(request).response { res in
                         switch res.result {
                         case .success(let data):
+                            if data == nil {
+                                print("无法将响应数据转换为字典")
+                                continuation.resume(returning: [String: Any]())
+                                return
+                            }
                             if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [[String: Any]], json.count > 0 {
                                 continuation.resume(returning: json[0])
                             } else {

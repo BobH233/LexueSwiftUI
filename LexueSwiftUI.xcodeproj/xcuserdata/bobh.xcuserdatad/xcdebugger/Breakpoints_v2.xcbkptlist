@@ -2052,8 +2052,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
             landmarkName = "FilterScoreInfo(current:)"
             landmarkType = "7">
             <Locations>
@@ -2116,8 +2116,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "507"
-            endingLineNumber = "507"
+            startingLineNumber = "556"
+            endingLineNumber = "556"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2132,8 +2132,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "510"
-            endingLineNumber = "510"
+            startingLineNumber = "559"
+            endingLineNumber = "559"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -3778,8 +3778,8 @@
             filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
             landmarkName = "LoadScoresInfo(tryCache:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -3842,8 +3842,8 @@
             filePath = "LexueSwiftUI/Network/Webvpn.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
             landmarkName = "DiffScoreInfoAndUpdate(curScoreInfo:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7721,8 +7721,8 @@
             filePath = "LexueSwiftUI/Network/Webvpn.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
             landmarkName = "GetCourseComments(courseId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7737,8 +7737,8 @@
             filePath = "LexueSwiftUI/Network/Webvpn.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "317"
+            endingLineNumber = "317"
             landmarkName = "GetCourseComments(courseId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7753,8 +7753,8 @@
             filePath = "LexueSwiftUI/Network/Webvpn.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "GetCourseComments(courseId:)"
             landmarkType = "7">
             <Locations>
@@ -7801,8 +7801,8 @@
             filePath = "LexueSwiftUI/Network/Webvpn.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "307"
-            endingLineNumber = "307"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
             landmarkName = "GetCourseComments(courseId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7817,8 +7817,8 @@
             filePath = "LexueSwiftUI/Network/Webvpn.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "335"
-            endingLineNumber = "335"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
             landmarkName = "GetCourseComments(courseId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -7849,8 +7849,8 @@
             filePath = "LexueSwiftUI/Network/Webvpn.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "337"
-            endingLineNumber = "337"
+            startingLineNumber = "340"
+            endingLineNumber = "340"
             landmarkName = "GetCourseComments(courseId:)"
             landmarkType = "7">
             <Locations>
@@ -8032,8 +8032,8 @@
             filePath = "LexueSwiftUI/Network/Webvpn.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "GetCourseComments(courseId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -8048,8 +8048,8 @@
             filePath = "LexueSwiftUI/Network/Webvpn.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
             landmarkName = "GetCourseComments(courseId:)"
             landmarkType = "7">
             <Locations>
@@ -8081,6 +8081,36 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "349"
                   endingLineNumber = "349"
+                  offsetFromSymbolStart = "7100">
+               </Location>
+               <Location
+                  uuid = "AA91C2DC-8522-4F31-9C3E-BBF19157FB3E - 1ba9edd7b68eaac9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.Webvpn.GetCourseComments(courseId: Swift.String) async -&gt; Swift.Array&lt;LexueSwiftUI.Webvpn.CourseComment&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/Webvpn.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "349"
+                  endingLineNumber = "349"
+                  offsetFromSymbolStart = "10419">
+               </Location>
+               <Location
+                  uuid = "AA91C2DC-8522-4F31-9C3E-BBF19157FB3E - 1ba9edd7b68eab24"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueSwiftUI.Webvpn.GetCourseComments(courseId: Swift.String) async -&gt; Swift.Array&lt;LexueSwiftUI.Webvpn.CourseComment&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/Webvpn.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "352"
+                  endingLineNumber = "352"
                   offsetFromSymbolStart = "7100">
                </Location>
             </Locations>
@@ -8242,6 +8272,54 @@
             endingLineNumber = "42"
             landmarkName = "GetIsDateInSection(date:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA9277E7-7349-4969-BBDA-0F1CD830F2AF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "ProcessSpecialScore(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EA9277E7-7349-4969-BBDA-0F1CD830F2AF - 863bb083b550bb7d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.ViewScoreView.ProcessSpecialScore(Swift.Array&lt;LexueSwiftUI.Webvpn.ScoreInfo&gt;) -&gt; Swift.Array&lt;LexueSwiftUI.Webvpn.ScoreInfo&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "270"
+                  endingLineNumber = "270"
+                  offsetFromSymbolStart = "1596">
+               </Location>
+               <Location
+                  uuid = "EA9277E7-7349-4969-BBDA-0F1CD830F2AF - 863bb083b550bb7d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LexueSwiftUI.ViewScoreView.ProcessSpecialScore(Swift.Array&lt;LexueSwiftUI.Webvpn.ScoreInfo&gt;) -&gt; Swift.Array&lt;LexueSwiftUI.Webvpn.ScoreInfo&gt;"
+                  moduleName = "LexueSwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Views/ScoreAnalyze/ViewScoreView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "270"
+                  endingLineNumber = "270"
+                  offsetFromSymbolStart = "1660">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
