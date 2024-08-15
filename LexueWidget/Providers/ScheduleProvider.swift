@@ -41,11 +41,19 @@ struct ScheduleProvider: TimelineProvider {
         } else {
             entry.isLogin = true
         }
-        entry.today_courses = semesterSchedule[today_in_week-1][today_index].courses_today.sorted { course1, course2 in
-            return course1.StartSectionId < course2.StartSectionId
+        if today_in_week - 1 >= semesterSchedule.count {
+            entry.isSemesterEnd = true
+        } else {
+            entry.today_courses = semesterSchedule[today_in_week-1][today_index].courses_today.sorted { course1, course2 in
+                return course1.StartSectionId < course2.StartSectionId
+            }
         }
-        entry.tomorrow_courses = semesterSchedule[tomorrow_in_week-1][tomorrow_index].courses_today.sorted { course1, course2 in
-            return course1.StartSectionId < course2.StartSectionId
+        if tomorrow_in_week - 1 >= semesterSchedule.count {
+//            entry.isSemesterEnd = true
+        } else {
+            entry.tomorrow_courses = semesterSchedule[tomorrow_in_week-1][tomorrow_index].courses_today.sorted { course1, course2 in
+                return course1.StartSectionId < course2.StartSectionId
+            }
         }
         let timeline = Timeline(entries: [entry], policy: .after(.now.advanced(by: 10 * 60)))
         completion(timeline)

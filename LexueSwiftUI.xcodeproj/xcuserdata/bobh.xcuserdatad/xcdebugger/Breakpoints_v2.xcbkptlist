@@ -8113,6 +8113,21 @@
                   endingLineNumber = "352"
                   offsetFromSymbolStart = "7100">
                </Location>
+               <Location
+                  uuid = "AA91C2DC-8522-4F31-9C3E-BBF19157FB3E - 20a8d011ad82bcea"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for LexueWidgetExtension.Webvpn.GetCourseComments(courseId: Swift.String) async -&gt; Swift.Array&lt;LexueWidgetExtension.Webvpn.CourseComment&gt;"
+                  moduleName = "LexueWidgetExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bobh/Documents/Coding/LexueSwiftUI/LexueSwiftUI/Network/Webvpn.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "352"
+                  endingLineNumber = "352"
+                  offsetFromSymbolStart = "7100">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

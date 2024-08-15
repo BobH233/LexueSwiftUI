@@ -13,6 +13,7 @@ struct ScheduleDefaultEntry: TimelineEntry {
     var isLogin: Bool = false
     var today_courses: [JXZXehall.ScheduleCourseInfo] = []
     var tomorrow_courses: [JXZXehall.ScheduleCourseInfo] = []
+    var isSemesterEnd: Bool = false
 }
 
 extension ScheduleDefaultEntry {

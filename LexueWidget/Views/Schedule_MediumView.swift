@@ -85,7 +85,14 @@ struct Schedule_MediumView: View {
                     Spacer()
                 }
                 .padding(.bottom, 5)
-                if showTomorrowSchedule {
+                if entry.isSemesterEnd {
+                    HStack {
+                        Text("学期已经结束了哦~")
+                            .font(.system(size: 16))
+                            .foregroundColor(.green)
+                        Spacer()
+                    }
+                } else if showTomorrowSchedule {
                     if entry.tomorrow_courses.count > 0 {
                         HStack {
                             Text("明天还有\(entry.tomorrow_courses.count)门课")
