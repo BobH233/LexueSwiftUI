@@ -234,6 +234,11 @@ class JXZXehall {
                 .response { result in
                     switch result.result {
                     case .success(let data):
+                        if data == nil {
+                            print("无法将响应数据转换为字典")
+                            continuation.resume(returning: [String: Any]())
+                            return
+                        }
                         if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
                             continuation.resume(returning: json)
                         } else {
@@ -283,6 +288,11 @@ class JXZXehall {
                 .response { result in
                     switch result.result {
                     case .success(let data):
+                        if data == nil {
+                            print("无法将响应数据转换为字典")
+                            continuation.resume(returning: [String: Any]())
+                            return
+                        }
                         if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
                             continuation.resume(returning: json)
                         } else {
@@ -339,6 +349,11 @@ class JXZXehall {
             AF.requestWithoutCache(API_JXZX_GET_ALL_SEMESTERS, method: .get, headers: cur_headers).response { res in
                 switch res.result {
                 case .success(let data):
+                    if data == nil {
+                        print("无法将响应数据转换为字典")
+                        continuation.resume(returning: [String: Any]())
+                        return
+                    }
                     if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
                         continuation.resume(returning: json)
                     } else {
@@ -377,6 +392,11 @@ class JXZXehall {
             AF.requestWithoutCache(API_JXZX_GET_CURRENT_SEMESTER, method: .get, headers: cur_headers).response { res in
                 switch res.result {
                 case .success(let data):
+                    if data == nil {
+                        print("无法将响应数据转换为字典")
+                        continuation.resume(returning: [String: Any]())
+                        return
+                    }
                     if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
                         continuation.resume(returning: json)
                     } else {
@@ -633,6 +653,11 @@ class JXZXehall {
                 .response { result in
                     switch result.result {
                     case .success(let data):
+                        if data == nil {
+                            print("无法将响应数据转换为字典")
+                            continuation.resume(returning: [String: Any]())
+                            return
+                        }
                         if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
                             continuation.resume(returning: json)
                         } else {
@@ -673,6 +698,11 @@ class JXZXehall {
                 .response { result in
                     switch result.result {
                     case .success(let data):
+                        if data == nil {
+                            print("无法将响应数据转换为字典")
+                            continuation.resume(returning: [String: Any]())
+                            return
+                        }
                         if let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
                             continuation.resume(returning: json)
                         } else {
