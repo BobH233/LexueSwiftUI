@@ -67,7 +67,7 @@ class iCloudUserDefaults {
             disableMonitor()
             for key in dict2 {
                 if shouldSync(keyName: key) {
-                    UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(dict[key], forKey: key)
+                    UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(dict[key], forKey: key)
                 }
             }
             enableMonitor()
@@ -87,7 +87,7 @@ class iCloudUserDefaults {
     }
     
     func SyncSome(prefix: [String] = [], specify: [String] = [], blacklist: [String] = []) {
-        let dict = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.dictionaryRepresentation()
+        let dict = UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.dictionaryRepresentation()
         for (key, value) in dict {
             if shouldSync(keyName: key, prefix: prefix, specify: specify, blacklist: blacklist) {
                 NSUbiquitousKeyValueStore.default.set(value, forKey: key)
@@ -97,7 +97,7 @@ class iCloudUserDefaults {
     
     @objc internal func notifyCloud(notification: NSNotification) {
         // 不要自动监测了...还是有很多问题，直接改为在需要的地方手动上传吧...
-//        let dict = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.dictionaryRepresentation()
+//        let dict = UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.dictionaryRepresentation()
 //        for (key, value) in dict {
 //            if shouldSync(keyName: key) {
 //                NSUbiquitousKeyValueStore.default.set(value, forKey: key)

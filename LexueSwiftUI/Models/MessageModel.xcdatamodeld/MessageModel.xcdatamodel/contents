@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="23C71" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24C101" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="ContactStored" representedClassName="ContactStored" syncable="YES" codeGenerationType="class">
         <attribute name="alias" optional="YES" attributeType="String"/>
         <attribute name="avatar_data" optional="YES" attributeType="String"/>
@@ -124,7 +124,6 @@
         <memberEntity name="CourseCacheStored"/>
     </configuration>
     <configuration name="NeedSync" usedWithCloudKit="YES">
-        <memberEntity name="ContactStored"/>
         <memberEntity name="EventStored"/>
         <memberEntity name="FavoriteURLStored"/>
         <memberEntity name="LexueDP_RecordNotifiedEvent"/>
@@ -133,5 +132,6 @@
         <memberEntity name="MessageStored"/>
         <memberEntity name="ScoreDiffCache"/>
         <memberEntity name="ScheduleCourseStored"/>
+        <memberEntity name="ContactStored"/>
     </configuration>
 </model>

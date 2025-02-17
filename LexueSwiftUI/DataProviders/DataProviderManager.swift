@@ -35,7 +35,7 @@ class DataProviderManager: ObservableObject {
     }
     
     func loadKeyOrWithDefault<T>(key: String, defaultVal: T) -> T {
-        if let result = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: key) as? T {
+        if let result = UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.value(forKey: key) as? T {
             return result
         } else {
             return defaultVal
@@ -73,9 +73,9 @@ class DataProviderManager: ObservableObject {
                 dataProviders[i].customOptions = newOptionValue
                 for option in newOptionValue {
                     if option.optionType == .bool {
-                        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(option.optionValueBool, forKey: "dataprovider.customsetting.\(curId).\(option.optionName)")
+                        UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(option.optionValueBool, forKey: "dataprovider.customsetting.\(curId).\(option.optionName)")
                     } else if option.optionType == .string {
-                        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(option.optionValueString, forKey: "dataprovider.customsetting.\(curId).\(option.optionName)")
+                        UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(option.optionValueString, forKey: "dataprovider.customsetting.\(curId).\(option.optionName)")
                     }
                 }
                 break
@@ -85,12 +85,12 @@ class DataProviderManager: ObservableObject {
     }
     
     func setProviderSetting<T>(attribute: String, providerId: String, val: T) {
-        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(val, forKey: "dataprovider.setting.\(providerId).\(attribute)")
+        UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(val, forKey: "dataprovider.setting.\(providerId).\(attribute)")
         loadSettingStorage()
     }
     
     func getProviderSetting<T>(attribute: String, providerId: String) -> T? {
-        return UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.object(forKey: "dataprovider.setting.\(providerId).\(attribute)") as? T
+        return UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.object(forKey: "dataprovider.setting.\(providerId).\(attribute)") as? T
     }
     
     var lastRefresh: Double = 0

@@ -20,13 +20,13 @@ class DataController: ObservableObject {
     
     lazy var container: NSPersistentCloudKitContainer = {
         let container = NSPersistentCloudKitContainer(name: "MessageModel")
-        let url = URL.storeURL(for: "group.cn.bobh.LexueSwiftUI", databaseName: "MessageModel")
+        let url = URL.storeURL(for: "group.cn.lucyhe.LexueSwiftUI", databaseName: "MessageModel")
         let cloudSyncDescriptor = NSPersistentStoreDescription(url: url)
-        let localStoredDescriptor = NSPersistentStoreDescription(url: URL.storeURL(for: "group.cn.bobh.LexueSwiftUI", databaseName: "MessageModel_local"))
+        let localStoredDescriptor = NSPersistentStoreDescription(url: URL.storeURL(for: "group.cn.lucyhe.LexueSwiftUI", databaseName: "MessageModel_local"))
         
         cloudSyncDescriptor.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
         cloudSyncDescriptor.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
-        cloudSyncDescriptor.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.cn.bobh.LexueSwiftUI")
+        cloudSyncDescriptor.cloudKitContainerOptions = NSPersistentCloudKitContainerOptions(containerIdentifier: "iCloud.cn.lucyhe.LexueSwiftUI")
         cloudSyncDescriptor.configuration = "NeedSync"
         cloudSyncDescriptor.cloudKitContainerOptions?.databaseScope = .private
         

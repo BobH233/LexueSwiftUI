@@ -25,7 +25,7 @@ class AppNotificationsManager: ObservableObject {
     }
     
     func GetReadPopupId() {
-        if let data = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.data(forKey: "appnotifications.readPopupId"), let saveData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Int: Bool] {
+        if let data = UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.data(forKey: "appnotifications.readPopupId"), let saveData = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Int: Bool] {
             readPopupId = saveData
         } else {
             readPopupId = [:]
@@ -43,7 +43,7 @@ class AppNotificationsManager: ObservableObject {
     func SetReadPopupId(id: Int) {
         readPopupId[id] = true
         if let data = try? NSKeyedArchiver.archivedData(withRootObject: readPopupId, requiringSecureCoding: false) {
-            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(data, forKey: "appnotifications.readPopupId")
+            UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(data, forKey: "appnotifications.readPopupId")
         }
         DispatchQueue.main.async {
             self.popupNotificationQueue.removeAll { notification in
@@ -57,7 +57,7 @@ class AppNotificationsManager: ObservableObject {
     }
     
     func GetReadLastestId() -> Int {
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "appnotifications.readlatestid") as? Int {
+        if let stored = UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.value(forKey: "appnotifications.readlatestid") as? Int {
             return stored
         } else {
             return -1
@@ -65,7 +65,7 @@ class AppNotificationsManager: ObservableObject {
     }
     
     func SetReadLatestId(id: Int) {
-        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(id, forKey: "appnotifications.readlatestid")
+        UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(id, forKey: "appnotifications.readlatestid")
         DispatchQueue.main.async {
             var hasNewMessage = false
             for notification in self.notificationsList {

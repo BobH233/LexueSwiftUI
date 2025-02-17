@@ -138,11 +138,11 @@ class InfoMergingDataProvider: DataProvider {
     var pushedMessage = [String: Bool]()
     
     func loadPushedMessage() {
-        pushedMessage = (UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "dataprovider.HaoBIT.pushedMessage") as? [String: Bool]) ?? [String: Bool]()
+        pushedMessage = (UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.value(forKey: "dataprovider.HaoBIT.pushedMessage") as? [String: Bool]) ?? [String: Bool]()
     }
     
     func savePushedMessage() {
-        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(pushedMessage, forKey: "dataprovider.HaoBIT.pushedMessage")
+        UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(pushedMessage, forKey: "dataprovider.HaoBIT.pushedMessage")
     }
     
     func handleNewNotice(notice: HaoBIT.Notice) {

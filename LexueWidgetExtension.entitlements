@@ -6,17 +6,15 @@
 	<string>development</string>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
-		<string>iCloud.cn.bobh.LexueSwiftUI</string>
+		<string>iCloud.cn.lucyhe.LexueSwiftUI</string>
 	</array>
 	<key>com.apple.developer.icloud-services</key>
 	<array>
 		<string>CloudKit</string>
 	</array>
-	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
-	<string>$(TeamIdentifierPrefix)$(CFBundleIdentifier)</string>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.cn.bobh.LexueSwiftUI</string>
+		<string>group.cn.lucyhe.LexueSwiftUI</string>
 	</array>
 </dict>
 </plist>

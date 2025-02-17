@@ -98,13 +98,13 @@ class ScheduleManager {
 
     func SaveScheduleSectionInfo(current: [ScheduleSectionInfo]) {
         if let data = encodeFuncDescriptionStoredArr(current) {
-            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(data, forKey: "stored.scheduleInfo")
+            UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(data, forKey: "stored.scheduleInfo")
             print("保存设置成功！")
         }
     }
 
     func GetScheduleSectionInfo() -> [ScheduleSectionInfo] {
-        if let stored_data = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "stored.scheduleInfo") as? Data {
+        if let stored_data = UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.value(forKey: "stored.scheduleInfo") as? Data {
             let tmp: [ScheduleSectionInfo] = decodeStructArray(from: stored_data)
             return tmp
         } else {
@@ -114,11 +114,11 @@ class ScheduleManager {
     }
     
     func SaveSemesterInfo(current: String) {
-        UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(current, forKey: "stored.semesterInfo")
+        UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(current, forKey: "stored.semesterInfo")
     }
     
     func GetSemesterInfo() -> String {
-        if let stored_data = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "stored.semesterInfo") as? String {
+        if let stored_data = UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.value(forKey: "stored.semesterInfo") as? String {
             return stored_data
         } else {
             // 如果是第一次，那么返回默认信息

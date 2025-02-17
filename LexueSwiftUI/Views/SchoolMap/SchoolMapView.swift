@@ -68,7 +68,7 @@ struct SchoolMapView: View {
     @Environment(\.dismiss) var dismiss
     @State var sheetShow = true
     // TODO: 改成真正的服务链接
-    let mapServiceUrl = "https://mapapi.bit-helper.cn/ver1.html"
+    let mapServiceUrl = "https://mapapi.lucy.he.cn/ver1.html"
     
     @State var isLocationAvailable: Bool = false
     @ObservedObject var locationManager = LocationManager.shared

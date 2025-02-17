@@ -12,7 +12,7 @@ class LexueHelperBackend {
     static let shared = LexueHelperBackend()
     
     init() {
-        if let stored = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "backend.lastFetchNotificationHash") as? String {
+        if let stored = UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.value(forKey: "backend.lastFetchNotificationHash") as? String {
             lastFetchNotificationHash = stored
         } else {
             lastFetchNotificationHash = ""
@@ -27,9 +27,9 @@ class LexueHelperBackend {
     
     static func GetAPIUrl() -> String {
         if GlobalVariables.shared.DEBUG_BUILD {
-            return "http://192.168.8.143:3000"
+            return "https://api.lucy.he.cn"
         } else {
-            return "https://api.bit-helper.cn"
+            return "https://api.lucy.he.cn"
         }
     }
     
@@ -41,7 +41,7 @@ class LexueHelperBackend {
     
     var lastFetchNotificationHash: String {
         didSet {
-            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(lastFetchNotificationHash, forKey: "backend.lastFetchNotificationHash")
+            UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(lastFetchNotificationHash, forKey: "backend.lastFetchNotificationHash")
         }
     }
     
@@ -266,8 +266,27 @@ class LexueHelperBackend {
                             continuation.resume(returning: [[String: Any]]())
                         }
                     case .failure(let error):
+                        // 改进的错误处理
                         print("请求 后端 失败")
-                        print(error)
+                        switch error {
+                        case .sessionTaskFailed(let urlError as URLError):
+                            switch urlError.code {
+                            case .notConnectedToInternet:
+                                print("网络连接已断开，请检查网络设置")
+                            case .timedOut:
+                                print("请求超时，请稍后重试")
+                            case .cannotConnectToHost:
+                                print("无法连接到服务器，请稍后重试")
+                            case .networkConnectionLost:
+                                print("网络连接已断开，请检查网络状态")
+                            default:
+                                print("网络错误：\(urlError.code)")
+                            }
+                        case .responseSerializationFailed(let reason):
+                            print("数据解析失败：\(reason)")
+                        default:
+                            print("其他错误：\(error)")
+                        }
                         continuation.resume(returning: [[String: Any]]())
                     }
                 }

@@ -62,13 +62,13 @@ class SchoolMapManager {
     
     func UpdateSchoolLocations(newLocations: [SchoolLocationDescription]) {
         if let data = encodeFuncDescriptionStoredArr(newLocations) {
-            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(data, forKey: "stored.school_locations")
+            UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.set(data, forKey: "stored.school_locations")
             print("保存设置成功！")
         }
     }
     
     func GetSchoolLocations() -> [SchoolLocationDescription] {
-        if let stored_data = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "stored.school_locations") as? Data {
+        if let stored_data = UserDefaults(suiteName: "group.cn.lucyhe.LexueSwiftUI")!.value(forKey: "stored.school_locations") as? Data {
             let tmp: [SchoolLocationDescription] = decodeStructArray(from: stored_data)
             return tmp
         } else {

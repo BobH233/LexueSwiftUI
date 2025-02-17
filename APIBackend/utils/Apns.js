@@ -1,3 +1,10 @@
+if (process.env.DISABLE_APNS === 'true') {
+    module.exports = {
+        SendNotification: () => Promise.resolve(),
+        SendNotificationToMultipleDevice: () => Promise.resolve()
+    };
+    return;
+}
 
 const data_storage = require("../data_storage/data_storage");
 const core_info = require("../private/core_info");
