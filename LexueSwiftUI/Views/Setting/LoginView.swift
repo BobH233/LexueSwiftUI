@@ -126,6 +126,10 @@ struct LoginView: View {
                     showErrorTipsTitle = "账号或密码错误(登录失败)"
                     showErrorTipsContent = "请检查账号和密码是否错误"
                     showError = true
+                case .cryptoError:
+                    showErrorTipsTitle = "客户端错误(登录失败)"
+                    showErrorTipsContent = "加密过程出现错误，请稍后重试"
+                    showError = true
                 }
             }
         }

@@ -194,6 +194,8 @@
 		47F4FD332ACDC1E600C6C144 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
 		47F5F6EF2AE10EA1009A2B7B /* LexueHelperBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */; };
 		47FBC8C62AC579DD00FB1523 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */; };
+		DCCAE6322E05ADA1009B9735 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCCAE6312E05ADA1009B9735 /* CryptoSwift */; };
+		DCCAE6342E05ADC8009B9735 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCCAE6332E05ADC8009B9735 /* CryptoSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -391,6 +393,7 @@
 				47F4FD1D2ACD9ECA00C6C144 /* Alamofire in Frameworks */,
 				47F4FD1F2ACD9EED00C6C144 /* SwiftSoup in Frameworks */,
 				47196FDE2AC5514F00979DFE /* SwiftUI.framework in Frameworks */,
+				DCCAE6342E05ADC8009B9735 /* CryptoSwift in Frameworks */,
 				47196FDD2AC5514F00979DFE /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,6 +409,7 @@
 				47970AC22AC5AC7200C5BD03 /* UMAPM.framework in Frameworks */,
 				47970AC72AC5AC9800C5BD03 /* CoreTelephony.framework in Frameworks */,
 				47970AC92AC5ACAB00C5BD03 /* libsqlite3.tbd in Frameworks */,
+				DCCAE6322E05ADA1009B9735 /* CryptoSwift in Frameworks */,
 				470A13D02AFBE4BE005AC8A0 /* SwiftUIKit in Frameworks */,
 				476448412AD84B7700952A22 /* WrappingHStack in Frameworks */,
 				47BD51A52AC5B4970029F9DB /* UMAnalyticsGame.framework in Frameworks */,
@@ -809,6 +813,7 @@
 			packageProductDependencies = (
 				47F4FD1C2ACD9ECA00C6C144 /* Alamofire */,
 				47F4FD1E2ACD9EED00C6C144 /* SwiftSoup */,
+				DCCAE6332E05ADC8009B9735 /* CryptoSwift */,
 			);
 			productName = LexueWidgetExtension;
 			productReference = 47196FDC2AC5514F00979DFE /* LexueWidgetExtension.appex */;
@@ -843,6 +848,7 @@
 				474304C32ADAAC3900EB2073 /* SwiftUICharts */,
 				474FEFEB2AEAC46F00B88E1F /* CloudKitSyncMonitor */,
 				470A13CF2AFBE4BE005AC8A0 /* SwiftUIKit */,
+				DCCAE6312E05ADA1009B9735 /* CryptoSwift */,
 			);
 			productName = LexueSwiftUI;
 			productReference = 473BAE7C2AA48DAA00968C3C /* LexueSwiftUI.app */;
@@ -888,6 +894,7 @@
 				474304C22ADAAC3900EB2073 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 				474FEFEA2AEAC46F00B88E1F /* XCRemoteSwiftPackageReference "CloudKitSyncMonitor" */,
 				470A13CE2AFBE4BE005AC8A0 /* XCRemoteSwiftPackageReference "SwiftUIKit" */,
+				DCCAE6302E05AC34009B9735 /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = 473BAE7D2AA48DAA00968C3C /* Products */;
 			projectDirPath = "";
@@ -1525,6 +1532,14 @@
 				minimumVersion = 2.4.1;
 			};
 		};
+		DCCAE6302E05AC34009B9735 /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1597,6 +1612,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 475AFEFC2AAF68E100C4020F /* XCRemoteSwiftPackageReference "SwiftSoup" */;
 			productName = SwiftSoup;
+		};
+		DCCAE6312E05ADA1009B9735 /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCCAE6302E05AC34009B9735 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
+		};
+		DCCAE6332E05ADC8009B9735 /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCCAE6302E05AC34009B9735 /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

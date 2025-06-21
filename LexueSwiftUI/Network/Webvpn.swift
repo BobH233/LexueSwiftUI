@@ -411,16 +411,14 @@ class Webvpn {
                     return .failure(.NeedCaptcha)
                 }
                 let encryptedPassword = BITLogin.shared.encryptPassword(pwd0: password, key: salt)
-                let param2 = [
+                let param2: [String: Any] = [
                     "sid": username,
                     "password": encryptedPassword,
                     "execution": execution,
-                    "cookie": cookie
+                    "cookie": cookie,
+                    "salt": salt
                 ]
                 let jsonData2 = try JSONSerialization.data(withJSONObject: param2, options: [])
-                guard let t = String(data: jsonData2, encoding: .utf8) else {
-                    return .failure(.JsonConvertError)
-                }
                 var request2 = URLRequest(url: URL(string: BIT101_WEBVPN_VERIFY)!)
                 request2.headers = HTTPHeaders(header_with_json_type)
                 request2.cachePolicy = .reloadIgnoringCacheData

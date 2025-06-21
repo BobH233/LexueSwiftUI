@@ -7,6 +7,8 @@
 import Foundation
 import Alamofire
 import SwiftSoup
+import CommonCrypto
+import CryptoSwift
 
 
 
@@ -16,13 +18,13 @@ class BITLogin {
     static let shared = BITLogin()
     var cookies: String = ""
     
-    let API_INDEX = "https://login.bit.edu.cn/authserver/login"
-    let API_CAPTCHA_GET = "https://login.bit.edu.cn/authserver/getCaptcha.htl"
-    let API_CAPTCHA_CHECK = "https://login.bit.edu.cn/authserver/checkNeedCaptcha.htl"
+    let API_INDEX = "https://sso.bit.edu.cn/cas/login"
+    let API_CAPTCHA_GET = "https://sso.bit.edu.cn/cas/getCaptcha.htl"
+    let API_CAPTCHA_CHECK = "https://sso.bit.edu.cn/cas/checkNeedCaptcha.htl"
     
     let headers = [
-        "Referer": "https://login.bit.edu.cn/authserver/login",
-        "Host": "login.bit.edu.cn",
+        "Referer": "https://sso.bit.edu.cn/cas/login",
+        "Host": "sso.bit.edu.cn",
         "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0"
     ]
@@ -45,44 +47,76 @@ class BITLogin {
         case wrongCaptcha
         case stopAccount
         case unknowError
+        case cryptoError
     }
     
-    func encryptAES(data: String, aesKey: String) -> String? {
-        if aesKey.isEmpty {
-            return data
+    func aesECBEncrypt(data: Data, key: Data) -> Data? {
+        let keyLength = key.count
+        guard [kCCKeySizeAES128, kCCKeySizeAES192, kCCKeySizeAES256].contains(keyLength) else {
+            return nil
         }
-        let processedPasswd = randomString(len: 64) + data
-        let key0 = aesKey
-        let iv0 = randomString(len: 16)
-        if let result = processedPasswd.aesCBCEncrypt(key0, iv: iv0) {
-            return result.base64EncodedString(options: NSData.Base64EncodingOptions())
+
+        var encryptedBytes = [UInt8](repeating: 0, count: data.count + kCCBlockSizeAES128)
+        var encryptedLength = 0
+
+        let status = key.withUnsafeBytes { keyBytes in
+            data.withUnsafeBytes { dataBytes in
+                CCCrypt(
+                    CCOperation(kCCEncrypt),
+                    CCAlgorithm(kCCAlgorithmAES),
+                    CCOptions(kCCOptionPKCS7Padding | kCCOptionECBMode),
+                    keyBytes.baseAddress, keyLength,
+                    nil, // IV for ECB is nil
+                    dataBytes.baseAddress, data.count,
+                    &encryptedBytes, encryptedBytes.count,
+                    &encryptedLength
+                )
+            }
+        }
+
+        if status == kCCSuccess {
+            return Data(bytes: encryptedBytes, count: encryptedLength)
         } else {
             return nil
         }
     }
 
+    @available(*, deprecated, message: "This is the old encryption method for login.bit.edu.cn. Use encryptPasswordNew for sso.bit.edu.cn")
     func encryptPassword(pwd0: String, key: String) -> String {
-        if let encryptedPassword = encryptAES(data: pwd0, aesKey: key) {
-            return encryptedPassword
+        guard let keyData = Data(base64Encoded: key) else {
+            return ""
         }
-        return pwd0
+        let data: [UInt8] = Array(pwd0.utf8)
+        let iv: [UInt8] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        do {
+            let encrypted = try AES(key: keyData.bytes, blockMode: CBC(iv: iv), padding: .pkcs7).encrypt(data)
+            return Data(encrypted).base64EncodedString()
+        } catch {
+            return ""
+        }
     }
 
-    func randomString(len: Int) -> String {
-        var retStr = ""
-        for _ in 0..<len {
-            // TODO: 添加真正的随机字符串保证安全性，现在调试方便
-            retStr.append("A")
+    func encryptPasswordNew(password: String, loginCrypto: String) -> String? {
+        guard let keyData = Data(base64Encoded: loginCrypto) else {
+            return nil
         }
-        return retStr
+        guard let passwordData = password.data(using: .utf8) else {
+            return nil
+        }
+
+        if let encryptedData = aesECBEncrypt(data: passwordData, key: keyData) {
+            return encryptedData.base64EncodedString()
+        }
+        
+        return nil
     }
     
     func get_html_encSalt(_ html: String) -> String {
         do {
             let document = try SwiftSoup.parse(html)
-            if let inputElement = try document.select("#pwdEncryptSalt").first() {
+            if let inputElement = try document.select("#login-croypto").first() {
                 // 获取输入元素的 name 属性值
-                let nameAttribute = try inputElement.attr("value")
+                let nameAttribute = try inputElement.text()
                 return nameAttribute
             }
             return ""
@@ -95,9 +129,9 @@ class BITLogin {
     func get_html_execution(_ html: String) -> String {
         do {
             let document = try SwiftSoup.parse(html)
-            if let inputElement = try document.select("#execution").first() {
+            if let inputElement = try document.select("#login-page-flowkey").first() {
                 // 获取输入元素的 name 属性值
-                let nameAttribute = try inputElement.attr("value")
+                let nameAttribute = try inputElement.text()
                 return nameAttribute
             }
             return ""
@@ -123,10 +157,16 @@ class BITLogin {
     }
 
     
-    private func get_pour_cookie(_ cookie: String) -> String {
-        let routeValue = get_cookie_key(cookie, "route")
-        let JSESSIONIDValue = get_cookie_key(cookie, "JSESSIONID")
-        return "route=\(routeValue); JSESSIONID=\(JSESSIONIDValue);"
+    private func get_session_cookie(_ cookie: String) -> String {
+        if let range = cookie.range(of: "SESSION=") {
+            let substring = cookie[range.upperBound...]
+            if let semicolonIndex = substring.firstIndex(of: ";") {
+                return "SESSION=" + String(substring[..<semicolonIndex])
+            } else {
+                return "SESSION=" + String(substring)
+            }
+        }
+        return ""
     }
     
     func init_login_param(completion: @escaping (Result<LoginContext, Error>) -> Void ) {
@@ -141,7 +181,7 @@ class BITLogin {
                             return
                         }
                         var ret = LoginContext()
-                        ret.cookies = self.get_pour_cookie(ret_headers["Set-Cookie"]!.replacingOccurrences(of: "HttpOnly", with: ""))
+                        ret.cookies = self.get_session_cookie(ret_headers["Set-Cookie"]!.replacingOccurrences(of: "HttpOnly", with: ""))
                         ret.execution = self.get_html_execution(htmlString)
                         ret.encryptSalt = self.get_html_encSalt(htmlString)
                         completion(.success(ret))
@@ -193,17 +233,27 @@ class BITLogin {
     func do_login(context: LoginContext, username: String, password: String, captcha: String = "", completion: @escaping (Result<LoginSuccessContext, LoginError>) -> Void) {
         var cur_headers = HTTPHeaders(headers)
         cur_headers.add(name: "Cookie", value: context.cookies)
-        let encryptedPassword = encryptPassword(pwd0: password, key: context.encryptSalt)
+        
+        guard let encryptedPassword = encryptPasswordNew(password: password, loginCrypto: context.encryptSalt) else {
+            completion(.failure(.cryptoError))
+            return
+        }
+        
+        guard let captchaPayload = encryptPasswordNew(password: "{}", loginCrypto: context.encryptSalt) else {
+            completion(.failure(.cryptoError))
+            return
+        }
+
         let param: [String: Any] = [
             "username": username,
             "password": encryptedPassword,
-            "captcha": captcha,
-            "rememberMe": "true",
-            "_eventId": "submit",
-            "cllt": "userNameLogin",
-            "dllt": "generalLogin",
-            "lt": "",
-            "execution": context.execution
+            "execution": context.execution,
+            "croypto": context.encryptSalt,
+            "captcha_payload": captchaPayload,
+            "type": "UsernamePassword",
+            "geolocation": "",
+            "captcha_code": captcha,
+            "_eventId": "submit"
         ]
         AF.requestWithoutCache(API_INDEX, method: .post, parameters: param, encoding: URLEncoding.default, headers: cur_headers)
             .validate(statusCode: 300..<500)
@@ -215,17 +265,17 @@ class BITLogin {
                         if respCode == 302 {
                             // 登录成功
                             let respHeader = response.response?.allHeaderFields as? [String: String]
-                            let Cookie = respHeader?["Set-Cookie"] ?? ""
+                            let allCookies = respHeader?["Set-Cookie"] ?? ""
                             var loginned_context = LoginSuccessContext()
-                            loginned_context.CASTGC = get_cookie_key(Cookie, "CASTGC")
-                            loginned_context.happyVoyagePersonal = get_cookie_key(Cookie, "happyVoyagePersonal")
+                            loginned_context.CASTGC = get_cookie_key(allCookies, "SOURCEID_TGC")
+                            loginned_context.happyVoyagePersonal = get_cookie_key(allCookies, "happyVoyagePersonal")
                             completion(.success(loginned_context))
                         } else {
                             // 登录失败
                             if let data = response.data, let htmlString = String(data: data, encoding: .utf8) {
                                 let reason_cn = self.get_html_errorTip(htmlString)
                                 print("reason: \(reason_cn)")
-                                if reason_cn.contains("账号或密码错误") {
+                                if reason_cn.contains("账号或密码错误") || reason_cn.contains("用户名或密码错误") {
                                     completion(.failure(.wrongPassword))
                                 } else if reason_cn.contains("验证码错误") {
                                     completion(.failure(.wrongCaptcha))

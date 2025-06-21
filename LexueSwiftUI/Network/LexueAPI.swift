@@ -15,7 +15,7 @@ import SwiftSoup
 class LexueAPI {
     static let shared = LexueAPI()
     
-    let API_LEXUE_TICK = "https://login.bit.edu.cn/authserver/login?service=https://lexue.bit.edu.cn/login/index.php"
+    let API_LEXUE_TICK = "https://sso.bit.edu.cn/cas/login?service=https://lexue.bit.edu.cn/login/index.php"
     let API_LEXUE_SECOND_AUTH = "https://lexue.bit.edu.cn/login/index.php"
     let API_LEXUE_INDEX = "https://lexue.bit.edu.cn/"
     let API_LEXUE_DETAIL_INFO = "https://lexue.bit.edu.cn/user/edit.php"
@@ -24,8 +24,8 @@ class LexueAPI {
     let API_LEXUE_VIEW_COURSE = "https://lexue.bit.edu.cn/course/view.php"
     
     let headers = [
-        "Referer": "https://login.bit.edu.cn/authserver/login",
-        "Host": "login.bit.edu.cn",
+        "Referer": "https://sso.bit.edu.cn/cas/login",
+        "Host": "sso.bit.edu.cn",
         "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0"
     ]
@@ -858,7 +858,7 @@ class LexueAPI {
     
     func GetLexueLoginTicket(_ loginnedContext: BITLogin.LoginSuccessContext, completion: @escaping (Result<String, LexueLoginError>) -> Void) {
         var cur_headers = HTTPHeaders(headers)
-        cur_headers.add(name: "Cookie", value: "CASTGC=\(loginnedContext.CASTGC)")
+        cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
         AF.requestWithoutCache(API_LEXUE_TICK, method: .get, headers: cur_headers)
             .validate(statusCode: 300..<500)
             .redirect(using: Redirector.doNotFollow)
@@ -880,7 +880,7 @@ class LexueAPI {
     
     func GetLexueContext(_ loginnedContext: BITLogin.LoginSuccessContext, completion: @escaping (Result<LexueContext, LexueLoginError>) -> Void) {
         var cur_headers = HTTPHeaders(headers)
-        cur_headers.add(name: "Cookie", value: "CASTGC=\(loginnedContext.CASTGC)")
+        cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
         AF.requestWithoutCache(API_LEXUE_TICK, method: .get, headers: cur_headers)
             .validate(statusCode: 300..<500)
             .redirect(using: Redirector.doNotFollow)
