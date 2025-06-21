@@ -243,43 +243,53 @@ struct ImportScheduleView: View {
         Task {
             var currentContext = JXZXehall.JXZXContext()
             var currentSemesterId: String = ScheduleManager.shared.GetSemesterInfo()
-            semester.append(.init(title: currentSemesterId, choose: true))
+            // 先添加当前学期作为默认选项
             DispatchQueue.main.async {
-                inited = true
+                semester.append(.init(title: currentSemesterId, choose: true))
             }
-            // 教学中心太慢了, 就暂时不提供以前的查询服务了
-//            let context_result = await JXZXehall.shared.GetJXZXMobileContext(loginnedContext: SettingStorage.shared.loginnedContext)
-//            print("GetJXZXMobileContext!")
-//            switch context_result {
-//            case .success(let context):
-//                currentContext = context
-//            case .failure(_):
-//                DispatchQueue.main.async {
-//                    GlobalVariables.shared.alertTitle = "无法访问教学中心"
-//                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
-//                    GlobalVariables.shared.showAlert = true
-//                }
-//                return
-//            }
-//            
-//            let all_semesters = await JXZXehall.shared.GetAllSemesterInfo(context: currentContext)
-//            print("GetAllSemesterInfo!")
-//            switch all_semesters {
-//            case .success(let semesterInfo):
-//                DispatchQueue.main.async {
-//                    for sem in semesterInfo {
-//                        semester.append(.init(title: sem.semesterId, choose: sem.semesterId == currentSemesterId))
-//                    }
-//                    inited = true
-//                }
-//            case .failure(_):
-//                DispatchQueue.main.async {
-//                    GlobalVariables.shared.alertTitle = "无法拉取全部学期信息"
-//                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
-//                    GlobalVariables.shared.showAlert = true
-//                }
-//                return
-//            }
+            
+            // 现在认证已修复，重新启用教学中心学期查询功能
+            let context_result = await JXZXehall.shared.GetJXZXMobileContext(loginnedContext: SettingStorage.shared.loginnedContext)
+            print("GetJXZXMobileContext!")
+            switch context_result {
+            case .success(let context):
+                currentContext = context
+            case .failure(_):
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.alertTitle = "无法访问教学中心"
+                    GlobalVariables.shared.alertContent = "可能是网络问题，请检查网络后重试"
+                    GlobalVariables.shared.showAlert = true
+                    inited = true  // 即使失败也设置为已初始化，使用默认学期
+                }
+                return
+            }
+            
+            let all_semesters = await JXZXehall.shared.GetAllSemesterInfo(context: currentContext)
+            print("GetAllSemesterInfo!")
+            switch all_semesters {
+            case .success(let semesterInfo):
+                DispatchQueue.main.async {
+                    // 清除之前添加的默认学期，用获取到的完整列表替代
+                    semester.removeAll()
+                    for sem in semesterInfo {
+                        semester.append(.init(title: sem.semesterId, choose: sem.semesterId == currentSemesterId))
+                    }
+                    // 如果没有找到当前学期，则默认选择第一个
+                    if !semester.contains(where: { $0.choose }) && !semester.isEmpty {
+                        semester[0].choose = true
+                    }
+                    inited = true
+                }
+            case .failure(_):
+                DispatchQueue.main.async {
+                    GlobalVariables.shared.alertTitle = "无法拉取全部学期信息"
+                    GlobalVariables.shared.alertContent = "可能是网络问题，使用默认学期。请检查网络后重试"
+                    GlobalVariables.shared.showAlert = true
+                    // 即使获取失败，也标记为已初始化，使用默认学期
+                    inited = true
+                }
+                return
+            }
         }
     }
     

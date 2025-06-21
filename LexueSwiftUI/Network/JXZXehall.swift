@@ -15,7 +15,7 @@ class JXZXehall {
     
     // 用手机版获取Cookie方便一些
     let JXZX_INDEX = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/*default/index.do"
-    let API_JXZX_TICK = "https://login.bit.edu.cn/authserver/login?service=https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/*default/index.do#/"
+    let API_JXZX_TICK = "https://sso.bit.edu.cn/cas/login?service=https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/*default/index.do#/"
     let API_JXZX_APP_INDEX = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/mobilepub/res/sentry/wdksapMobile.do"
     // post
     let API_JXZX_APP_CONFIG = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/mobilepub/getAppConfig/wdksapMobile.do"
@@ -39,8 +39,8 @@ class JXZXehall {
     let API_JXZX_GET_SEMESTER_SCHEDULED_COURSE = "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/modules/xskcb/cxxszhxqkb.do"
     
     let bit_login_header = [
-        "Referer": "https://login.bit.edu.cn/authserver/login",
-        "Host": "login.bit.edu.cn",
+        "Referer": "https://sso.bit.edu.cn/cas/login",
+        "Host": "sso.bit.edu.cn",
         "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:103.0) Gecko/20100101 Firefox/103.0"
     ]
@@ -440,7 +440,8 @@ class JXZXehall {
     
     private func GetTicketLoginUrl(targetTicketUrl: String, loginnedContext: BITLogin.LoginSuccessContext) async -> String {
         var cur_headers = HTTPHeaders(bit_login_header)
-        cur_headers.add(name: "Cookie", value: "CASTGC=\(loginnedContext.CASTGC)")
+        // 新的身份认证使用 SOURCEID_TGC 替代 CASTGC
+        cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
         return await withCheckedContinuation { continuation in
             AF.requestWithoutCache(targetTicketUrl, method: .get, headers: cur_headers)
                 .validate(statusCode: 300..<500)
@@ -520,7 +521,7 @@ class JXZXehall {
     
     // 获取 wdkbby 相关的 cookie
     func GetJXZXwdkbbyContext(loginnedContext: BITLogin.LoginSuccessContext) async -> Result<JXZXContext, JXZXError> {
-        let ticketLoginUrl = await GetTicketLoginUrl(targetTicketUrl: "https://login.bit.edu.cn/authserver/login?service=https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/*default/index.do", loginnedContext: loginnedContext)
+        let ticketLoginUrl = await GetTicketLoginUrl(targetTicketUrl: "https://sso.bit.edu.cn/cas/login?service=https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/*default/index.do", loginnedContext: loginnedContext)
         if ticketLoginUrl.isEmpty {
             return .failure(.CannotGetTicket)
         }
