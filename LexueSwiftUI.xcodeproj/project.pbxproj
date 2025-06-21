@@ -1301,7 +1301,7 @@
 				CODE_SIGN_ENTITLEMENTS = LexueSwiftUI/LexueSwiftUI.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 6TUKVU7P77;
 				ENABLE_PREVIEWS = YES;
@@ -1334,7 +1334,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 1.8;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1360,7 +1360,7 @@
 				CODE_SIGN_ENTITLEMENTS = LexueSwiftUI/LexueSwiftUI.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LexueSwiftUI/Preview Content\"";
 				DEVELOPMENT_TEAM = 6TUKVU7P77;
 				ENABLE_PREVIEWS = YES;
@@ -1393,7 +1393,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 1.8;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
