@@ -244,6 +244,10 @@ class LexueDataProvider: DataProvider {
     }
     
     func refresh(param: [String: Any], manually: Bool) async {
+        if GlobalVariables.shared.is_postgraduate() {
+            print("研究生，跳过乐学刷新")
+            return
+        }
         if !enabled {
             return
         }

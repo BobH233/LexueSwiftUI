@@ -15,6 +15,10 @@ class CoreLogicManager {
     static let shared = CoreLogicManager()
     
     func UpdateCourseList() async {
+        if GlobalVariables.shared.is_postgraduate() {
+            print("研究生，跳过乐学刷新")
+            return
+        }
         let curCourseList = await LexueAPI.shared.GetAllCourseList(GlobalVariables.shared.cur_lexue_context, sesskey: GlobalVariables.shared.cur_lexue_sessKey)
         switch curCourseList {
         case .success(let courseList):
@@ -71,6 +75,10 @@ class CoreLogicManager {
     }
     
     func RefreshSelfUserInfo() async -> Bool {
+        if GlobalVariables.shared.is_postgraduate() {
+            print("研究生，跳过乐学刷新")
+            return true
+        }
         let result = await LexueAPI.shared.GetSelfUserInfo(GlobalVariables.shared.cur_lexue_context)
         switch result {
         case .success(let data):
@@ -105,6 +113,10 @@ class CoreLogicManager {
     
     // newVal中为nil的不会改变，只有不为nil的才会得到更新
     func UpdateSelfProfile(_ newVal: LexueProfile) async {
+        if GlobalVariables.shared.is_postgraduate() {
+            print("研究生，跳过乐学刷新")
+            return
+        }
         // 先设定为合适的值，再上传
         var toUpdate = SettingStorage.shared.cacheSelfLexueProfile
         if let appVersion = newVal.appVersion {

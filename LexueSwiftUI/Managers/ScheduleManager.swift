@@ -79,7 +79,7 @@ struct DailyScheduleInfo {
 class ScheduleManager {
     static let shared = ScheduleManager()
     // TODO: 学期更新时记得更新
-    let default_semester_info = "2023-2024-2"
+    let default_semester_info = "2025-2026-1"
     let default_schedule_section_info: [ScheduleSectionInfo] = [
         ScheduleSectionInfo(sectionIndex: 1, sectionStartDateStr: "8:00", sectionEndDateStr: "8:45"),
         ScheduleSectionInfo(sectionIndex: 2, sectionStartDateStr: "8:50", sectionEndDateStr: "9:35"),

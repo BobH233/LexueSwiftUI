@@ -70,6 +70,13 @@ class GlobalVariables: ObservableObject {
     // 默认是false
     @Published var debugMode = false
 
+    func is_postgraduate(specifyId: String = "") -> Bool {
+        if specifyId != "" {
+            return specifyId.hasPrefix("31") || specifyId.hasPrefix("32")
+        }
+        return SettingStorage.shared.savedUsername.hasPrefix("31") || SettingStorage.shared.savedUsername.hasPrefix("32")
+    }
+
     private init() {
         userAvatarUIImage = UIImage(named: "default_avatar")
         defaultUIImage = UIImage(named: "default_avatar")

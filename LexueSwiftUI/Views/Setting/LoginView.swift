@@ -68,31 +68,47 @@ struct LoginView: View {
                 }
                 UMAnalyticsSwift.event(eventId: "login", attributes: ["username": username])
                 settings.loginnedContext = data
-                LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
-                    switch result {
-                    case .success(let context):
-                        globalVar.cur_lexue_context = context
-                        AppStatusManager.shared.action_after_get_lexue_context(context)
-                        Task {
-                            let ret = await CoreLogicManager.shared.RefreshSelfUserInfo()
-                            DispatchQueue.main.async {
-                                globalVar.isLoading = false
-                                loginBtnDisabled = false
-                                settings.lastLoginUsername = username
-                                // 避免一下子出现一堆的事件...
-                                settings.HaoBITFirstFetch = true
-                                dismiss()
-                            }
-                            if ret {
+                if !GlobalVariables.shared.is_postgraduate(specifyId: username) {
+                    LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
+                        switch result {
+                        case .success(let context):
+                            globalVar.cur_lexue_context = context
+                            AppStatusManager.shared.action_after_get_lexue_context(context)
+                            Task {
+                                let ret = await CoreLogicManager.shared.RefreshSelfUserInfo()
                                 DispatchQueue.main.async {
-                                    globalVar.isLogin = true
+                                    globalVar.isLoading = false
+                                    loginBtnDisabled = false
+                                    settings.lastLoginUsername = username
+                                    // 避免一下子出现一堆的事件...
+                                    settings.HaoBITFirstFetch = true
+                                    dismiss()
+                                }
+                                if ret {
+                                    DispatchQueue.main.async {
+                                        globalVar.isLogin = true
+                                    }
                                 }
                             }
+                            
+                        case .failure(_):
+                            showErrorTipsTitle = "网络错误(乐学登录失败)"
+                            showErrorTipsContent = "请检查你的网络环境，然后重试"
+                            showError = true
                         }
-                    case .failure(_):
-                        showErrorTipsTitle = "网络错误(乐学登录失败)"
-                        showErrorTipsContent = "请检查你的网络环境，然后重试"
-                        showError = true
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        GlobalVariables.shared.alertTitle = "研究生功能受限"
+                        GlobalVariables.shared.alertContent = "检测到你是研究生，已经无法访问乐学平台的服务，本App的全部乐学相关功能将被禁用。你仍然可以使用课程表App相关功能。"
+                        GlobalVariables.shared.showAlert = true
+                        globalVar.isLoading = false
+                        loginBtnDisabled = false
+                        settings.lastLoginUsername = username
+                        // 避免一下子出现一堆的事件...
+                        settings.HaoBITFirstFetch = true
+                        dismiss()
+                        globalVar.isLogin = true
                     }
                 }
             case .failure(let error):
@@ -230,7 +246,7 @@ struct LoginView: View {
             if !newVal && !username.isEmpty {
                 // 开始看是否需要验证码
                 print("check captcha")
-                checkNeedCaptcha()
+//                checkNeedCaptcha()
             }
         }
         .navigationTitle("登录北理账号")

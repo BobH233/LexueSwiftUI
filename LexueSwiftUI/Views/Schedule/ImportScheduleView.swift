@@ -249,7 +249,9 @@ struct ImportScheduleView: View {
             }
             
             // 现在认证已修复，重新启用教学中心学期查询功能
-            let context_result = await JXZXehall.shared.GetJXZXMobileContext(loginnedContext: SettingStorage.shared.loginnedContext)
+            let context_result = await JXZXehall.shared.GetJXZXwdkbbyContext(
+                loginnedContext: SettingStorage.shared.loginnedContext
+            )
             print("GetJXZXMobileContext!")
             switch context_result {
             case .success(let context):

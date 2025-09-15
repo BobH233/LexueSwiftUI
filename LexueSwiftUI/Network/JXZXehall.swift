@@ -521,62 +521,154 @@ class JXZXehall {
     
     // 获取 wdkbby 相关的 cookie
     func GetJXZXwdkbbyContext(loginnedContext: BITLogin.LoginSuccessContext) async -> Result<JXZXContext, JXZXError> {
-        let ticketLoginUrl = await GetTicketLoginUrl(targetTicketUrl: "https://sso.bit.edu.cn/cas/login?service=https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/*default/index.do", loginnedContext: loginnedContext)
-        if ticketLoginUrl.isEmpty {
-            return .failure(.CannotGetTicket)
-        }
-        let first_cookie = await withCheckedContinuation { continuation in
-            AF.requestWithoutCache(ticketLoginUrl, method: .get)
+        // 第一步：GET 请求获取初始 location 和 JSESSIONID
+        let (initialLocation, jsessionId) = await withCheckedContinuation { continuation in
+            AF.requestWithoutCache("https://jxzxehall.bit.edu.cn/auth-protocol-core/login?service=https%3A%2F%2Fjxzxehallapp.bit.edu.cn%2Fjwapp%2Fsys%2Fwdkbby%2F*default%2Findex.do", method: .get)
                 .validate(statusCode: 300..<500)
                 .redirect(using: Redirector.doNotFollow)
-                .response { response1 in
-                    switch response1.result {
-                    case .success(_):
-                        if let ret_headers = response1.response?.allHeaderFields as? [String: String], let cookie = ret_headers["Set-Cookie"] {
-                            continuation.resume(returning: cookie)
-                        } else {
-                            continuation.resume(returning: "")
+                .response { response in
+                    var location = ""
+                    var jsessionId = ""
+                    
+                    if let ret_headers = response.response?.allHeaderFields as? [String: String] {
+                        location = ret_headers["Location"] ?? ""
+                        if let setCookie = ret_headers["Set-Cookie"] {
+                            jsessionId = get_cookie_key(setCookie, "JSESSIONID")
                         }
-                    case .failure(_):
-                        continuation.resume(returning: "")
                     }
+                    continuation.resume(returning: (location, jsessionId))
                 }
         }
-//        print("firstCookie:", first_cookie)
-        if first_cookie.isEmpty {
+        
+        if initialLocation.isEmpty || jsessionId.isEmpty {
             return .failure(.CannotGetTicket)
         }
-        var retContext = JXZXContext()
-        retContext.GS_SESSIONID = get_cookie_key(first_cookie, "GS_SESSIONID")
-        var second_cookie = await withCheckedContinuation { continuation in
+        
+        // 第二步：使用 SOURCEID_TGC 访问 SSO 获取新的 location
+        let newLocation = await withCheckedContinuation { continuation in
+            var cur_headers = HTTPHeaders(bit_login_header)
+            cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
+            
+            AF.requestWithoutCache(initialLocation, method: .get, headers: cur_headers)
+                .validate(statusCode: 300..<500)
+                .redirect(using: Redirector.doNotFollow)
+                .response { response in
+                    var location = ""
+                    if let ret_headers = response.response?.allHeaderFields as? [String: String] {
+                        location = ret_headers["Location"] ?? ""
+                    }
+                    continuation.resume(returning: location)
+                }
+        }
+        
+        if newLocation.isEmpty {
+            return .failure(.CannotGetTicket)
+        }
+        print("newLocation: \(newLocation)")
+        
+        // 第三步：使用 JSESSIONID 访问新的 location 获取 CASTGC 和最终的 location
+        let (finalLocation, castgc) = await withCheckedContinuation { continuation in
+            var cur_headers = HTTPHeaders()
+            cur_headers.add(name: "Cookie", value: "JSESSIONID=\(jsessionId)")
+            
+            AF.requestWithoutCache(newLocation, method: .get, headers: cur_headers)
+                .validate(statusCode: 300..<500)
+                .redirect(using: Redirector.doNotFollow)
+                .response { response in
+                    var location = ""
+                    var castgc = ""
+                    
+                    if let ret_headers = response.response?.allHeaderFields as? [String: String] {
+                        location = ret_headers["Location"] ?? ""
+                        if let setCookie = ret_headers["Set-Cookie"] {
+                            castgc = get_cookie_key(setCookie, "CASTGC")
+                        }
+                    }
+                    continuation.resume(returning: (location, castgc))
+                }
+        }
+        
+        if finalLocation.isEmpty {
+            return .failure(.CannotGetTicket)
+        }
+        
+        // 第四步：访问最终 location 获取 GS_SESSIONID
+        let gsSessionId = await withCheckedContinuation { continuation in
+            var cur_headers = HTTPHeaders()
+            cur_headers.add(name: "Cookie", value: "CASTGC=\(castgc)")
+            
+            AF.requestWithoutCache(finalLocation, method: .get, headers: cur_headers)
+                .validate(statusCode: 300..<500)
+                .redirect(using: Redirector.doNotFollow)
+                .response { response in
+                    var sessionId = ""
+                    if let ret_headers = response.response?.allHeaderFields as? [String: String] {
+                        if let setCookie = ret_headers["Set-Cookie"] {
+                            sessionId = get_cookie_key(setCookie, "GS_SESSIONID")
+                        }
+                    }
+                    continuation.resume(returning: sessionId)
+                }
+        }
+        
+        if gsSessionId.isEmpty {
+            return .failure(.CannotGetTicket)
+        }
+        
+        // 第五步：使用 GS_SESSIONID 获取临时 _WEU
+        let tempWEU = await withCheckedContinuation { continuation in
             var cur_headers = HTTPHeaders(jxzx_header)
-            cur_headers.add(name: "Cookie", value: "GS_SESSIONID=\(retContext.GS_SESSIONID)")
+            cur_headers.add(name: "Cookie", value: "GS_SESSIONID=\(gsSessionId)")
+            
             AF.requestWithoutCache("https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/*default/index.do", method: .get, headers: cur_headers)
                 .redirect(using: Redirector.doNotFollow)
-                .response { response1 in
-                    switch response1.result {
-                    case .success(_):
-                        if let ret_headers = response1.response?.allHeaderFields as? [String: String], let cookie = ret_headers["Set-Cookie"] {
-                            continuation.resume(returning: cookie)
-                        } else {
-                            continuation.resume(returning: "")
+                .response { response in
+                    var weu = ""
+                    if let ret_headers = response.response?.allHeaderFields as? [String: String] {
+                        if let setCookie = ret_headers["Set-Cookie"] {
+                            // 获取第二个 _WEU 值
+                            let cookies = setCookie.components(separatedBy: "set-cookie")
+                            for cookie in cookies {
+                                if cookie.contains("_WEU=") {
+                                    let weuValue = get_cookie_key(cookie, "_WEU")
+                                    if !weuValue.isEmpty {
+                                        weu = weuValue // 取最后一个 _WEU 值
+                                    }
+                                }
+                            }
                         }
-                    case .failure(let error):
-                        print(error     )
-                        continuation.resume(returning: "")
                     }
+                    continuation.resume(returning: weu)
                 }
         }
-        if second_cookie.isEmpty {
+        
+        if tempWEU.isEmpty {
             return .failure(.CannotGetTicket)
         }
-        if let range = second_cookie.range(of: "_WEU=") {
-            second_cookie.replaceSubrange(range, with: "")
+        
+        // 第六步：获取最终的真实 _WEU
+        let finalWEU = await withCheckedContinuation { continuation in
+            var cur_headers = HTTPHeaders(jxzx_header)
+            cur_headers.add(name: "Cookie", value: "GS_SESSIONID=\(gsSessionId); _WEU=\(tempWEU)")
+            cur_headers.add(name: "Referer", value: "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdkbby/*default/index.do")
+            
+            AF.requestWithoutCache("https://jxzxehallapp.bit.edu.cn/jwapp/sys/funauthapp/api/getAppConfig/wdkbby-5959167891382285.do", method: .get, headers: cur_headers)
+                .redirect(using: Redirector.doNotFollow)
+                .response { response in
+                    var weu = ""
+                    if let ret_headers = response.response?.allHeaderFields as? [String: String] {
+                        if let setCookie = ret_headers["Set-Cookie"] {
+                            weu = get_cookie_key(setCookie, "_WEU")
+                        }
+                    }
+                    continuation.resume(returning: weu)
+                }
         }
-        var tmpWEU = get_cookie_key(second_cookie, "_WEU")
-//        print("GS_SESSIONID", retContext.GS_SESSIONID, "tmpWEU", tmpWEU)
-        retContext._WEU = await GetRealWEU(fakeWEU: tmpWEU, GS_SESSIONID: retContext.GS_SESSIONID, origin: false, url: "https://jxzxehallapp.bit.edu.cn/jwapp/sys/funauthapp/api/getAppConfig/wdkbby-5959167891382285.do?v=09859374943354992", method: .get)
-//        print(retContext)
+        
+        var retContext = JXZXContext()
+        retContext.GS_SESSIONID = gsSessionId
+        retContext._WEU = finalWEU
+        
         return .success(retContext)
     }
     
@@ -687,6 +779,37 @@ class JXZXehall {
         return .failure(.JsonConvertError)
     }
     
+    func sortWeekdays(_ weekdays: [String]) -> [String] {
+        let weekdayOrder = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+        
+        return weekdays.sorted { first, second in
+            let firstIndex = weekdayOrder.firstIndex(of: first) ?? Int.max
+            let secondIndex = weekdayOrder.firstIndex(of: second) ?? Int.max
+            return firstIndex < secondIndex
+        }
+    }
+    
+    // 研究生的课程可能不带时间地点，需要手动生成
+    func GetFallbackClassroomLocationTimeDes(fullCourseJson: [[String: Any]], targetCourse: [String: Any]) -> String {
+        var location_map: [String: String] = [:]
+        var timedes_map: [String: [String]] = [:]
+        for row in fullCourseJson {
+            if let KCM = row["KCM"] as? String, let location_des = row["JASYWMC"] as? String, let time_des = row["SKXQ_DISPLAY"] as? String {
+                location_map[KCM] = location_des
+                if timedes_map[KCM] != nil {
+                    timedes_map[KCM]!.append(time_des)
+                } else {
+                    timedes_map[KCM] = [time_des]
+                }
+            }
+        }
+        let target_KCM = targetCourse["KCM"] as! String
+        let target_location = targetCourse["JASYWMC"] as! String
+        var sorted_timedes = sortWeekdays(Array(Set(timedes_map[target_KCM]!))).joined(separator: ", ")
+        return "\(target_location) \(sorted_timedes)"
+    }
+    
+    
     func GetSemesterScheduleCourses(context: JXZXContext, semesterId: String) async -> Result<[ScheduleCourseInfo], JXZXError> {
         var cur_headers = HTTPHeaders(jxzx_header)
         cur_headers.add(name: "Referer", value: "https://jxzxehallapp.bit.edu.cn/jwapp/sys/wdksapMobile/*default/index.do")
@@ -723,6 +846,9 @@ class JXZXehall {
                 if let KKDWDM_DISPLAY = row["KKDWDM_DISPLAY"] as? String {
                     currentRow.KKDWDM_DISPLAY = KKDWDM_DISPLAY
                 }
+                if currentRow.KKDWDM_DISPLAY == "", let DWDM_DISPLAY = row["DWDM_DISPLAY"] as? String {
+                    currentRow.KKDWDM_DISPLAY = DWDM_DISPLAY
+                }
                 if let CourseName = row["KCM"] as? String {
                     currentRow.CourseName = CourseName
                 }
@@ -735,8 +861,19 @@ class JXZXehall {
                 if let ClassroomLocation = row["JASMC"] as? String {
                     currentRow.ClassroomLocation = ClassroomLocation
                 }
+                if currentRow.ClassroomLocation == "", let ClassroomLocation2 = row["JASMC"] as? String {
+                    currentRow.ClassroomLocation = ClassroomLocation2
+                }
                 if let ClassroomLocationTimeDes = row["YPSJDD"] as? String {
                     currentRow.ClassroomLocationTimeDes = ClassroomLocationTimeDes
+                }
+                if currentRow.ClassroomLocationTimeDes == "" {
+                    if let _ = row["JASYWMC"], let _ = row["SKXQ_DISPLAY"] {
+                        currentRow.ClassroomLocationTimeDes = GetFallbackClassroomLocationTimeDes(
+                            fullCourseJson: rows,
+                            targetCourse: row
+                        )
+                    }
                 }
                 if let DayOfWeek = row["SKXQ"] as? Int {
                     currentRow.DayOfWeek = DayOfWeek

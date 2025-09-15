@@ -23,6 +23,10 @@ class AppStatusManager {
     
     
     func action_after_get_lexue_context(_ context: LexueAPI.LexueContext) {
+        if GlobalVariables.shared.is_postgraduate() {
+            print("研究生，跳过乐学刷新")
+            return
+        }
         print("action_after_get_lexue_context")
         CourseManager.shared.LoadStoredCacheCourses()
         // 显示小组件欢迎使用界面
@@ -235,6 +239,10 @@ class AppStatusManager {
         }
         // 刷新sesskey
         Task {
+            if GlobalVariables.shared.is_postgraduate() {
+                print("研究生，跳过乐学刷新")
+                return
+            }
             print("OnTick60s for get sesskey...")
             let result = await LexueAPI.shared.GetSessKey(GlobalVariables.shared.cur_lexue_context)
             switch result {
