@@ -194,6 +194,7 @@
 		47F4FD332ACDC1E600C6C144 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47A927842AA7836300ABDC53 /* MessageManager.swift */; };
 		47F5F6EF2AE10EA1009A2B7B /* LexueHelperBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4784347F2ADEDD890095A2EE /* LexueHelperBackend.swift */; };
 		47FBC8C62AC579DD00FB1523 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */; };
+		DC5A1ED92E845F3F00CC27AF /* CourseSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5A1ED82E845F3F00CC27AF /* CourseSelectionView.swift */; };
 		DCCAE6322E05ADA1009B9735 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCCAE6312E05ADA1009B9735 /* CryptoSwift */; };
 		DCCAE6342E05ADC8009B9735 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCCAE6332E05ADC8009B9735 /* CryptoSwift */; };
 /* End PBXBuildFile section */
@@ -383,6 +384,7 @@
 		47F4FD272ACDADCA00C6C144 /* Event_MediumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event_MediumView.swift; sourceTree = "<group>"; };
 		47F4FD2A2ACDB9CF00C6C144 /* Event_LargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event_LargeView.swift; sourceTree = "<group>"; };
 		47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		DC5A1ED82E845F3F00CC27AF /* CourseSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,6 +502,7 @@
 				477D3D162B89A053000A3D28 /* ImportScheduleView.swift */,
 				47E03A182B8CDA00008330EB /* ExportCalendarView.swift */,
 				475E9F3E2B8DF78500354A42 /* ScheduleCourseDetailView.swift */,
+				DC5A1ED82E845F3F00CC27AF /* CourseSelectionView.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -998,6 +1001,7 @@
 				47906C342B30975700DAACAA /* AdminManageView.swift in Sources */,
 				478AB1762B87207600E72F7C /* ScheduleManager.swift in Sources */,
 				473BAE942AA4969F00968C3C /* SettingView.swift in Sources */,
+				DC5A1ED92E845F3F00CC27AF /* CourseSelectionView.swift in Sources */,
 				473BAE822AA48DAA00968C3C /* ContentView.swift in Sources */,
 				470CC59B2AC1D15900142AC5 /* CourseDetailView.swift in Sources */,
 				475E9F412B8E14CE00354A42 /* SchoolMapManager.swift in Sources */,
@@ -1334,7 +1338,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 1.10;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1393,7 +1397,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 1.10;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
@@ -1473,7 +1477,7 @@
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.0;
+				minimumVersion = 5.10.0;
 			};
 		};
 		475AFEFC2AAF68E100C4020F /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {

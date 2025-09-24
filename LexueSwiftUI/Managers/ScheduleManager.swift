@@ -377,6 +377,8 @@ class ScheduleManager {
     }
     
     struct CalendarEvent {
+        var courseId: String = ""
+        var courseName: String = ""
         var title: String = ""  // e.g. 课程名
         var location: String = ""  // e.g. 良乡校区理教楼308 xxx老师
         var StartDate: Date = .now
@@ -414,6 +416,8 @@ class ScheduleManager {
                     guard let section_end = scheduleInfo.first(where: { $0.sectionIndex == course.EndSectionId }) else {
                         continue
                     }
+                    currentEvent.courseId = course.CourseId
+                    currentEvent.courseName = course.CourseName
                     currentEvent.title = course.CourseName
                     currentEvent.location = "\(course.GetFullLocationText()) \(course.TeacherName)"
                     currentEvent.StartDate = SetDate(toSet: date_day_start, value: section_start.GetStartDateCp())

@@ -19,12 +19,16 @@ struct ExportCalendarView: View {
     @State private var color: Color = .blue
     @Environment(\.dismiss) var dismiss
     
-    @State var events_to_add: [ScheduleManager.CalendarEvent] = []
+    @State var selectableCourses: [CourseExportSelection] = []
+    @State private var showCourseSelection = false
     
     @State var showAlert: Bool = false
     @State var alertTitle: String = ""
     @State var alertContent: String = ""
     
+    var selectedEventsCount: Int {
+        selectableCourses.filter { $0.isSelected }.reduce(0) { $0 + $1.events.count }
+    }
     
     func ExportToSystemCalendar() {
         Task {
@@ -50,7 +54,10 @@ struct ExportCalendarView: View {
                 }
                 return
             }
-            for event in events_to_add {
+            
+            let eventsToExport = selectableCourses.filter { $0.isSelected }.flatMap { $0.events }
+            
+            for event in eventsToExport {
                 let sys_event = EKEvent(eventStore: iOSCalendarManager.shared.eventStore)
                 sys_event.title = event.title
                 sys_event.location = event.location
@@ -72,7 +79,7 @@ struct ExportCalendarView: View {
             dismiss()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 GlobalVariables.shared.alertTitle = "导出完毕"
-                GlobalVariables.shared.alertContent = "总共\(events_to_add.count)个日程，导出成功\(successSave)个日程，请前往日历检查是否有误"
+                GlobalVariables.shared.alertContent = "总共\(eventsToExport.count)个日程，导出成功\(successSave)个日程，请前往日历检查是否有误"
                 GlobalVariables.shared.showAlert = true
             }
         }
@@ -88,7 +95,25 @@ struct ExportCalendarView: View {
                         TextField("必填，输入导入日历的名称", text: $calendarName)
                     }
                     ColorPicker("强调色", selection: $color)
-                    Text("一共有\(events_to_add.count)个独立课程事件")
+                    
+                    Button(action: {
+                        showCourseSelection = true
+                    }) {
+                        HStack {
+                            Text("课程")
+                            Spacer()
+                            Text("\(selectableCourses.filter { $0.isSelected }.count) / \(selectableCourses.count) 项")
+                                .foregroundColor(.secondary)
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                    .foregroundColor(.primary)
+                    .sheet(isPresented: $showCourseSelection) {
+                        CourseSelectionView(courses: $selectableCourses)
+                    }
+                    
+                    Text("一共有\(selectedEventsCount)个独立课程事件")
                         .foregroundColor(.secondary)
                 }
                 Section() {
@@ -120,9 +145,15 @@ struct ExportCalendarView: View {
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 Task {
-                    let tmp_events_to_add = ScheduleManager.shared.GenerateCalendarEvents(context: managedObjContext)
+                    let allEvents = ScheduleManager.shared.GenerateCalendarEvents(context: managedObjContext)
+                    let groupedEvents = Dictionary(grouping: allEvents, by: { $0.courseId })
+                    
+                    let sortedCourses = groupedEvents.values.sorted { $0[0].courseName < $1[0].courseName }
+                    
                     DispatchQueue.main.async {
-                        events_to_add = tmp_events_to_add
+                        self.selectableCourses = sortedCourses.map { events in
+                            CourseExportSelection(id: events[0].courseId, courseName: events[0].courseName, events: events, isSelected: true)
+                        }
                     }
                 }
             }
