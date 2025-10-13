@@ -804,7 +804,7 @@ class JXZXehall {
             }
         }
         let target_KCM = targetCourse["KCM"] as! String
-        let target_location = targetCourse["JASYWMC"] as! String
+        let target_location = targetCourse["JASYWMC"] as? String ?? "暂无上课地点"
         var sorted_timedes = sortWeekdays(Array(Set(timedes_map[target_KCM]!))).joined(separator: ", ")
         return "\(target_location) \(sorted_timedes)"
     }
