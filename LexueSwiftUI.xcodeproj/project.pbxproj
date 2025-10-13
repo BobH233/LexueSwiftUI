@@ -197,6 +197,7 @@
 		DC5A1ED92E845F3F00CC27AF /* CourseSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5A1ED82E845F3F00CC27AF /* CourseSelectionView.swift */; };
 		DCCAE6322E05ADA1009B9735 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCCAE6312E05ADA1009B9735 /* CryptoSwift */; };
 		DCCAE6342E05ADC8009B9735 /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DCCAE6332E05ADC8009B9735 /* CryptoSwift */; };
+		DCFAEABB2E9D0828004859B7 /* ChargerQueryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFAEABA2E9D081E004859B7 /* ChargerQueryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -385,6 +386,7 @@
 		47F4FD2A2ACDB9CF00C6C144 /* Event_LargeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event_LargeView.swift; sourceTree = "<group>"; };
 		47FBC8C52AC579DD00FB1523 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DC5A1ED82E845F3F00CC27AF /* CourseSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseSelectionView.swift; sourceTree = "<group>"; };
+		DCFAEABA2E9D081E004859B7 /* ChargerQueryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChargerQueryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -572,6 +574,7 @@
 				473BAE902AA48E6700968C3C /* Setting */,
 				474C9B772AA4E3680064B5AF /* Event */,
 				473BAE812AA48DAA00968C3C /* ContentView.swift */,
+				DCFAEABA2E9D081E004859B7 /* ChargerQueryView.swift */,
 				47BA831E2AC1289100954129 /* UnloginView.swift */,
 				479129C12AC30A3A00F811F9 /* LexueBroswerView.swift */,
 				473D88962AD126DD00E7EB63 /* WelcomeUseWidget.swift */,
@@ -999,6 +1002,7 @@
 				473BAE9C2AA4C13B00968C3C /* SettingStorage.swift in Sources */,
 				4799C8192AA6239800F812D6 /* MessageDetailView.swift in Sources */,
 				47906C342B30975700DAACAA /* AdminManageView.swift in Sources */,
+				DCFAEABB2E9D0828004859B7 /* ChargerQueryView.swift in Sources */,
 				478AB1762B87207600E72F7C /* ScheduleManager.swift in Sources */,
 				473BAE942AA4969F00968C3C /* SettingView.swift in Sources */,
 				DC5A1ED92E845F3F00CC27AF /* CourseSelectionView.swift in Sources */,
@@ -1338,7 +1342,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10;
+				MARKETING_VERSION = 1.11;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1397,7 +1401,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.10;
+				MARKETING_VERSION = 1.11;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.bobh.LexueSwiftUI;

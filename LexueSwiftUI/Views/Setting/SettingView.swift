@@ -21,6 +21,7 @@ struct SettingView: View {
     @State var openSchoolMapNavigation = false
     @State var openScheduleViewNavigation = false
     @State var openExtraFuncSettingNavigation = false
+    @State var openChagerQuery = false;
     @State private var colorSchemeIndex = SettingStorage.shared.preferColorScheme
     var colorSchemeText = ["黑暗模式", "明亮模式", "跟随系统"]
     
@@ -117,6 +118,13 @@ struct SettingView: View {
                             NavigationLink("", destination: ScheduleMainView(), isActive: $openScheduleViewNavigation)
                                 .isDetailLink(false)
                                 .hidden()
+                            NavigationLink(
+                                "",
+                                destination: ChargerQueryView(),
+                                isActive: $openChagerQuery
+                            )
+                                .isDetailLink(false)
+                                .hidden()
                             
                         }
                         .frame(minHeight: 100)
@@ -134,6 +142,8 @@ struct SettingView: View {
                             openExtraFuncSettingNavigation = true
                         } else if notificationName == "scheduleView" {
                             openScheduleViewNavigation = true
+                        } else if notificationName == "chargerQuery" {
+                            openChagerQuery = true
                         }
                         
                     }
