@@ -21,6 +21,7 @@ class BITLogin {
     let API_INDEX = "https://sso.bit.edu.cn/cas/login"
     let API_CAPTCHA_GET = "https://sso.bit.edu.cn/cas/getCaptcha.htl"
     let API_CAPTCHA_CHECK = "https://sso.bit.edu.cn/cas/checkNeedCaptcha.htl"
+    let API_CAS_REST = "https://sso.bit.edu.cn/cas/v1/tickets"
     
     let headers = [
         "Referer": "https://sso.bit.edu.cn/cas/login",
@@ -38,7 +39,7 @@ class BITLogin {
     struct LoginSuccessContext {
         var happyVoyagePersonal: String = ""
         var CASTGC: String = ""
-        
+        var tgtUrl: String = ""
     }
 
     enum LoginError: Error {
@@ -296,6 +297,108 @@ class BITLogin {
                     completion(.failure(.networkError))
                 }
             }
+    }
+    
+    // MARK: - CAS REST API 登录方式（绕过验证码和短信验证）
+    // 参考: https://github.com/yht0511/bit-login
+    
+    static func extractServiceUrl(from ssoUrl: String) -> String {
+        guard let range = ssoUrl.range(of: "service=") else { return "" }
+        var serviceEncoded = String(ssoUrl[range.upperBound...])
+        if let fragmentIndex = serviceEncoded.firstIndex(of: "#") {
+            serviceEncoded = String(serviceEncoded[..<fragmentIndex])
+        }
+        if let ampIndex = serviceEncoded.firstIndex(of: "&") {
+            serviceEncoded = String(serviceEncoded[..<ampIndex])
+        }
+        return serviceEncoded.removingPercentEncoding ?? serviceEncoded
+    }
+    
+    private var restHeaders: HTTPHeaders {
+        HTTPHeaders([
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36"
+        ])
+    }
+    
+    func getTGT(username: String, password: String, completion: @escaping (Result<String, LoginError>) -> Void) {
+        let params: [String: Any] = [
+            "username": username,
+            "password": password
+        ]
+        AF.requestWithoutCache(API_CAS_REST, method: .post, parameters: params, encoding: URLEncoding.default, headers: restHeaders)
+            .redirect(using: Redirector.doNotFollow)
+            .response { response in
+                guard let httpResponse = response.response else {
+                    completion(.failure(.networkError))
+                    return
+                }
+                switch httpResponse.statusCode {
+                case 201:
+                    if let location = (httpResponse.allHeaderFields as? [String: String])?["Location"], !location.isEmpty {
+                        completion(.success(location))
+                        return
+                    }
+                    if let data = response.data, let html = String(data: data, encoding: .utf8),
+                       let actionRange = html.range(of: "action=\""),
+                       let endRange = html[actionRange.upperBound...].range(of: "\"") {
+                        let tgtUrl = String(html[actionRange.upperBound..<endRange.lowerBound])
+                        completion(.success(tgtUrl))
+                        return
+                    }
+                    completion(.failure(.unknowError))
+                case 401:
+                    completion(.failure(.wrongPassword))
+                default:
+                    completion(.failure(.networkError))
+                }
+            }
+    }
+    
+    func getServiceTicket(tgtUrl: String, service: String, completion: @escaping (Result<String, LoginError>) -> Void) {
+        let params: [String: Any] = ["service": service]
+        AF.requestWithoutCache(tgtUrl, method: .post, parameters: params, encoding: URLEncoding.default, headers: restHeaders)
+            .response { response in
+                guard let httpResponse = response.response, httpResponse.statusCode == 200,
+                      let data = response.data,
+                      let ticket = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines),
+                      !ticket.isEmpty else {
+                    completion(.failure(.networkError))
+                    return
+                }
+                completion(.success(ticket))
+            }
+    }
+    
+    func getServiceTicket(tgtUrl: String, service: String) async -> Result<String, LoginError> {
+        await withCheckedContinuation { continuation in
+            getServiceTicket(tgtUrl: tgtUrl, service: service) { result in
+                continuation.resume(returning: result)
+            }
+        }
+    }
+    
+    func getServiceTicketUrl(tgtUrl: String, service: String) async -> String {
+        let result = await getServiceTicket(tgtUrl: tgtUrl, service: service)
+        switch result {
+        case .success(let ticket):
+            let separator = service.contains("?") ? "&" : "?"
+            return "\(service)\(separator)ticket=\(ticket)"
+        case .failure(_):
+            return ""
+        }
+    }
+    
+    func do_login_rest(username: String, password: String, completion: @escaping (Result<LoginSuccessContext, LoginError>) -> Void) {
+        getTGT(username: username, password: password) { result in
+            switch result {
+            case .success(let tgtUrl):
+                var context = LoginSuccessContext()
+                context.tgtUrl = tgtUrl
+                completion(.success(context))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }
 

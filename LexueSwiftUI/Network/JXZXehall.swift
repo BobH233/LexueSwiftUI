@@ -439,26 +439,29 @@ class JXZXehall {
     }
     
     private func GetTicketLoginUrl(targetTicketUrl: String, loginnedContext: BITLogin.LoginSuccessContext) async -> String {
-        var cur_headers = HTTPHeaders(bit_login_header)
-        // 新的身份认证使用 SOURCEID_TGC 替代 CASTGC
-        cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
-        return await withCheckedContinuation { continuation in
-            AF.requestWithoutCache(targetTicketUrl, method: .get, headers: cur_headers)
-                .validate(statusCode: 300..<500)
-                .redirect(using: Redirector.doNotFollow)
-                .response { response in
-                    switch response.result {
-                    case .success(_):
-                        if let ret_headers = response.response?.allHeaderFields as? [String: String], let login_url = ret_headers["Location"] {
-                            continuation.resume(returning: login_url)
-                        } else {
-                            continuation.resume(returning: "")
-                        }
-                    case .failure(_):
-                        continuation.resume(returning: "")
-                    }
-                }
-        }
+        let service = BITLogin.extractServiceUrl(from: targetTicketUrl)
+        guard !service.isEmpty else { return "" }
+        return await BITLogin.shared.getServiceTicketUrl(tgtUrl: loginnedContext.tgtUrl, service: service)
+        // [旧版 CASTGC 方式]
+        // var cur_headers = HTTPHeaders(bit_login_header)
+        // cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
+        // return await withCheckedContinuation { continuation in
+        //     AF.requestWithoutCache(targetTicketUrl, method: .get, headers: cur_headers)
+        //         .validate(statusCode: 300..<500)
+        //         .redirect(using: Redirector.doNotFollow)
+        //         .response { response in
+        //             switch response.result {
+        //             case .success(_):
+        //                 if let ret_headers = response.response?.allHeaderFields as? [String: String], let login_url = ret_headers["Location"] {
+        //                     continuation.resume(returning: login_url)
+        //                 } else {
+        //                     continuation.resume(returning: "")
+        //                 }
+        //             case .failure(_):
+        //                 continuation.resume(returning: "")
+        //             }
+        //         }
+        // }
     }
     
     private func GetRealWEU(fakeWEU: String, GS_SESSIONID: String, origin: Bool, url: String, method: HTTPMethod) async -> String {
@@ -544,22 +547,24 @@ class JXZXehall {
             return .failure(.CannotGetTicket)
         }
         
-        // 第二步：使用 SOURCEID_TGC 访问 SSO 获取新的 location
-        let newLocation = await withCheckedContinuation { continuation in
-            var cur_headers = HTTPHeaders(bit_login_header)
-            cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
-            
-            AF.requestWithoutCache(initialLocation, method: .get, headers: cur_headers)
-                .validate(statusCode: 300..<500)
-                .redirect(using: Redirector.doNotFollow)
-                .response { response in
-                    var location = ""
-                    if let ret_headers = response.response?.allHeaderFields as? [String: String] {
-                        location = ret_headers["Location"] ?? ""
-                    }
-                    continuation.resume(returning: location)
-                }
-        }
+        // 第二步：使用 TGT URL 获取 Service Ticket，构造回调 URL
+        let service = BITLogin.extractServiceUrl(from: initialLocation)
+        let newLocation = await BITLogin.shared.getServiceTicketUrl(tgtUrl: loginnedContext.tgtUrl, service: service)
+        // [旧版 CASTGC 方式]
+        // let newLocation = await withCheckedContinuation { continuation in
+        //     var cur_headers = HTTPHeaders(bit_login_header)
+        //     cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
+        //     AF.requestWithoutCache(initialLocation, method: .get, headers: cur_headers)
+        //         .validate(statusCode: 300..<500)
+        //         .redirect(using: Redirector.doNotFollow)
+        //         .response { response in
+        //             var location = ""
+        //             if let ret_headers = response.response?.allHeaderFields as? [String: String] {
+        //                 location = ret_headers["Location"] ?? ""
+        //             }
+        //             continuation.resume(returning: location)
+        //         }
+        // }
         
         if newLocation.isEmpty {
             return .failure(.CannotGetTicket)

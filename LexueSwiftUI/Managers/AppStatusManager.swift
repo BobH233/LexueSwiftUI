@@ -104,40 +104,41 @@ class AppStatusManager {
             GlobalVariables.shared.isLogin = false
             SettingStorage.shared.loginnedContext.CASTGC = ""
             SettingStorage.shared.loginnedContext.happyVoyagePersonal = ""
+            SettingStorage.shared.loginnedContext.tgtUrl = ""
             GlobalVariables.shared.showAlert = true
             UMAnalyticsSwift.event(eventId: "universal_error", attributes: ["username": GlobalVariables.shared.cur_user_info.stuId, "error_type": "自动登录失败"])
         }
-        BITLogin.shared.init_login_param() { result in
+        // 使用 CAS REST API 自动重新登录
+        BITLogin.shared.do_login_rest(username: SettingStorage.shared.savedUsername, password: SettingStorage.shared.savedPassword) { result in
+            GlobalVariables.shared.isLoading = false
             switch result {
-            case .failure(_):
-                print("尝试自动登录失败1")
-                failedOperation()
-            case .success(let loginContext):
-                BITLogin.shared.do_login(context: loginContext, username: SettingStorage.shared.savedUsername, password: SettingStorage.shared.savedPassword, captcha: "") { result in
-                    GlobalVariables.shared.isLoading = false
+            case .success(let data):
+                print(data)
+                SettingStorage.shared.loginnedContext = data
+                LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
                     switch result {
-                    case .success(let data):
-                        print(data)
-                        SettingStorage.shared.loginnedContext = data
-                        LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
-                            switch result {
-                            case .success(let context):
-                                GlobalVariables.shared.cur_lexue_context = context
-                                self.action_after_get_lexue_context(context)
-                            case .failure(_):
-                                // 直接清空，让用户重新登录
-                                print("尝试自动登录失败3")
-                                failedOperation()
-                            }
-                        }
+                    case .success(let context):
+                        GlobalVariables.shared.cur_lexue_context = context
+                        self.action_after_get_lexue_context(context)
                     case .failure(_):
-                        // 直接清空，让用户重新登录
-                        print("尝试自动登录失败2")
+                        print("尝试自动登录失败(GetLexueContext)")
                         failedOperation()
                     }
                 }
+            case .failure(_):
+                print("尝试自动登录失败(do_login_rest)")
+                failedOperation()
             }
         }
+        // [旧版表单登录] 原始自动登录方式
+        // BITLogin.shared.init_login_param() { result in
+        //     switch result {
+        //     case .failure(_):
+        //         failedOperation()
+        //     case .success(let loginContext):
+        //         BITLogin.shared.do_login(context: loginContext, username: ..., password: ..., captcha: "") { result in ... }
+        //     }
+        // }
     }
     
     
@@ -167,7 +168,7 @@ class AppStatusManager {
                 }
             }
         }
-        if SettingStorage.shared.loginnedContext.CASTGC != "" {
+        if SettingStorage.shared.loginnedContext.tgtUrl != "" || SettingStorage.shared.loginnedContext.CASTGC != "" {
             GlobalVariables.shared.isLogin = true
         }
         // 刷新app公告
@@ -190,8 +191,8 @@ class AppStatusManager {
         if let data = Data(base64Encoded: SettingStorage.shared.cacheSelfLexueProfile.avatarBase64 ?? ""), let image = UIImage(data: data) {
             GlobalVariables.shared.userAvatarUIImage = image
         }
-        // 首先检查全局是否保存了login界面的cookie，如果没有就尝试检查是否有记住密码
-        if SettingStorage.shared.loginnedContext.CASTGC != "" {
+        // 首先检查全局是否保存了 TGT URL（REST API）或 CASTGC（旧方式）
+        if SettingStorage.shared.loginnedContext.tgtUrl != "" || SettingStorage.shared.loginnedContext.CASTGC != "" {
             LexueAPI.shared.GetLexueContext(SettingStorage.shared.loginnedContext) { result in
                 switch result {
                 case .success(let context):

@@ -15,11 +15,12 @@ struct LoginView: View {
     
     @State var username: String = ""
     @State var password: String = ""
-    @State var captcha: String = ""
-    @State var loginContext: BITLogin.LoginContext = BITLogin.LoginContext()
-    @State var needCaptcha: Bool = false
-    @State private var imageCaptchaData: Data? = nil
-    @State private var loginBtnDisabled = true
+    // [旧版表单登录] 验证码相关状态，REST API 方式不再需要
+    // @State var captcha: String = ""
+    // @State var loginContext: BITLogin.LoginContext = BITLogin.LoginContext()
+    // @State var needCaptcha: Bool = false
+    // @State private var imageCaptchaData: Data? = nil
+    @State private var loginBtnDisabled = false
     @FocusState private var focusedOnPassword
     
     @State private var showErrorTipsTitle: String = ""
@@ -28,37 +29,39 @@ struct LoginView: View {
     
     @State private var showTipsAlert = false
     
-    func refreshCaptcha() {
-        BITLogin.shared.get_captcha_data(context: loginContext) { result in
-            switch result {
-            case .success(let data):
-                imageCaptchaData = data
-            case .failure(_):
-                showErrorTipsTitle = "网络错误(获取验证码图像失败)"
-                showErrorTipsContent = "请检查你的网络环境，然后重试"
-                showError = true
-            }
-        }
-    }
-    
-    func checkNeedCaptcha() {
-        BITLogin.shared.check_need_captcha(context: loginContext, username: username) { result in
-            switch result {
-            case .success(let data):
-                needCaptcha = data
-            case .failure(_):
-                showErrorTipsTitle = "网络错误(检查验证码失败)"
-                showErrorTipsContent = "请检查你的网络环境，然后重试"
-                showError = true
-            }
-        }
-    }
+    // [旧版表单登录] 验证码相关方法，REST API 方式不再需要
+    // func refreshCaptcha() {
+    //     BITLogin.shared.get_captcha_data(context: loginContext) { result in
+    //         switch result {
+    //         case .success(let data):
+    //             imageCaptchaData = data
+    //         case .failure(_):
+    //             showErrorTipsTitle = "网络错误(获取验证码图像失败)"
+    //             showErrorTipsContent = "请检查你的网络环境，然后重试"
+    //             showError = true
+    //         }
+    //     }
+    // }
+    //
+    // func checkNeedCaptcha() {
+    //     BITLogin.shared.check_need_captcha(context: loginContext, username: username) { result in
+    //         switch result {
+    //         case .success(let data):
+    //             needCaptcha = data
+    //         case .failure(_):
+    //             showErrorTipsTitle = "网络错误(检查验证码失败)"
+    //             showErrorTipsContent = "请检查你的网络环境，然后重试"
+    //             showError = true
+    //         }
+    //     }
+    // }
     
     func doLogin() {
         loginBtnDisabled = true
         globalVar.LoadingText = "登录中"
         globalVar.isLoading = true
-        BITLogin.shared.do_login(context: loginContext, username: username, password: password, captcha: captcha) { result in
+        // 使用 CAS REST API 登录（绕过验证码和短信验证）
+        BITLogin.shared.do_login_rest(username: username, password: password) { result in
             switch result {
             case .success(let data):
                 print(data)
@@ -80,7 +83,6 @@ struct LoginView: View {
                                     globalVar.isLoading = false
                                     loginBtnDisabled = false
                                     settings.lastLoginUsername = username
-                                    // 避免一下子出现一堆的事件...
                                     settings.HaoBITFirstFetch = true
                                     dismiss()
                                 }
@@ -92,6 +94,8 @@ struct LoginView: View {
                             }
                             
                         case .failure(_):
+                            globalVar.isLoading = false
+                            loginBtnDisabled = false
                             showErrorTipsTitle = "网络错误(乐学登录失败)"
                             showErrorTipsContent = "请检查你的网络环境，然后重试"
                             showError = true
@@ -105,7 +109,6 @@ struct LoginView: View {
                         globalVar.isLoading = false
                         loginBtnDisabled = false
                         settings.lastLoginUsername = username
-                        // 避免一下子出现一堆的事件...
                         settings.HaoBITFirstFetch = true
                         dismiss()
                         globalVar.isLogin = true
@@ -119,36 +122,19 @@ struct LoginView: View {
                     showErrorTipsTitle = "网络错误(登录失败)"
                     showErrorTipsContent = "请检查你的网络环境，然后重试"
                     showError = true
-                case .stopAccount:
-                    refreshCaptcha()
-                    showErrorTipsTitle = "账号被冻结(登录失败)"
-                    showErrorTipsContent = "可能尝试错误密码过多次，请稍等15分钟再试"
-                    showError = true
-                case .unknowError:
-                    showErrorTipsTitle = "未知错误(登录失败)"
-                    showErrorTipsContent = "请检查账号密码以及网络环境"
-                    showError = true
-                case .wrongCaptcha:
-                    refreshCaptcha()
-                    showErrorTipsTitle = "验证码错误(登录失败)"
-                    showErrorTipsContent = "请重新输入验证码"
-                    showError = true
                 case .wrongPassword:
-                    if needCaptcha {
-                        refreshCaptcha()
-                    } else {
-                        checkNeedCaptcha()
-                    }
                     showErrorTipsTitle = "账号或密码错误(登录失败)"
                     showErrorTipsContent = "请检查账号和密码是否错误"
                     showError = true
-                case .cryptoError:
-                    showErrorTipsTitle = "客户端错误(登录失败)"
-                    showErrorTipsContent = "加密过程出现错误，请稍后重试"
+                default:
+                    showErrorTipsTitle = "未知错误(登录失败)"
+                    showErrorTipsContent = "请检查账号密码以及网络环境"
                     showError = true
                 }
             }
         }
+        // [旧版表单登录] 原始登录方式（需要 init_login_param + 验证码 + AES 加密）
+        // BITLogin.shared.do_login(context: loginContext, username: username, password: password, captcha: captcha) { result in ... }
     }
     
     func doLoginPreVerify() {
@@ -179,27 +165,28 @@ struct LoginView: View {
                 .cornerRadius(5.0)
                 .keyboardType(.default)
                 .padding(.horizontal, 30)
-                .padding(.bottom, needCaptcha ? 20 : 30)
-            if needCaptcha {
-                HStack {
-                    TextField("验证码", text: $captcha)
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(5.0)
-                        .keyboardType(.default)
-                    if let data = imageCaptchaData, let uiImage = UIImage(data: data) {
-                        Image(uiImage: uiImage)
-                            .onTapGesture {
-                                refreshCaptcha()
-                            }
-                    }
-                }
-                .padding(.horizontal, 30)
                 .padding(.bottom, 30)
-                .onAppear {
-                    refreshCaptcha()
-                }
-            }
+            // [旧版表单登录] 验证码 UI，REST API 方式不再需要
+            // if needCaptcha {
+            //     HStack {
+            //         TextField("验证码", text: $captcha)
+            //             .padding()
+            //             .background(Color(.systemGray6))
+            //             .cornerRadius(5.0)
+            //             .keyboardType(.default)
+            //         if let data = imageCaptchaData, let uiImage = UIImage(data: data) {
+            //             Image(uiImage: uiImage)
+            //                 .onTapGesture {
+            //                     refreshCaptcha()
+            //                 }
+            //         }
+            //     }
+            //     .padding(.horizontal, 30)
+            //     .padding(.bottom, 30)
+            //     .onAppear {
+            //         refreshCaptcha()
+            //     }
+            // }
             
             Button {
                 doLoginPreVerify()
@@ -226,28 +213,21 @@ struct LoginView: View {
             doLoginPreVerify()
         }
         .onAppear {
-            // 确保已经获取到了消息
             UIApplication.shared.registerForRemoteNotifications()
             username = settings.savedUsername
             password = settings.savedPassword
-            BITLogin.shared.init_login_param { result in
-                switch result {
-                case .success(let context):
-                    loginContext = context
-                    loginBtnDisabled = false
-                case .failure(_):
-                    showErrorTipsTitle = "网络错误(初始化登录参数失败)"
-                    showErrorTipsContent = "请检查你的网络环境，然后重试"
-                    showError = true
-                }
-            }
-        }
-        .onChange(of: focusedOnPassword) { newVal in
-            if !newVal && !username.isEmpty {
-                // 开始看是否需要验证码
-                print("check captcha")
-//                checkNeedCaptcha()
-            }
+            // [旧版表单登录] REST API 方式不再需要初始化登录参数
+            // BITLogin.shared.init_login_param { result in
+            //     switch result {
+            //     case .success(let context):
+            //         loginContext = context
+            //         loginBtnDisabled = false
+            //     case .failure(_):
+            //         showErrorTipsTitle = "网络错误(初始化登录参数失败)"
+            //         showErrorTipsContent = "请检查你的网络环境，然后重试"
+            //         showError = true
+            //     }
+            // }
         }
         .navigationTitle("登录北理账号")
     }

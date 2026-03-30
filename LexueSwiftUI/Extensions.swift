@@ -545,7 +545,7 @@ extension View {
 extension View {
     @ViewBuilder
     func bottomSheet<Content: View> (
-        presentationDetents: Set<PresentationDetent>,
+//        presentationDetents: Set<PresentationDetent>,
         isPresented: Binding<Bool>,
         dragIndicator: Visibility = .visible,
         sheetCornerRadius: CGFloat?,
@@ -560,8 +560,8 @@ extension View {
                 onDismiss()
             } content: {
                 content()
-                    .presentationDetents(presentationDetents)
-                    .presentationDragIndicator(dragIndicator)
+//                    .presentationDetents(presentationDetents)
+//                    .presentationDragIndicator(dragIndicator)
                     .interactiveDismissDisabled(interactiveDisabled)
                     .onAppear {
                         guard let windows = UIApplication.shared.connectedScenes.first as? UIWindowScene else {

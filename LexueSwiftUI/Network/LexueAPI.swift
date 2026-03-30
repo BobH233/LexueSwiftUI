@@ -857,88 +857,94 @@ class LexueAPI {
     }
     
     func GetLexueLoginTicket(_ loginnedContext: BITLogin.LoginSuccessContext, completion: @escaping (Result<String, LexueLoginError>) -> Void) {
-        var cur_headers = HTTPHeaders(headers)
-        cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
-        AF.requestWithoutCache(API_LEXUE_TICK, method: .get, headers: cur_headers)
-            .validate(statusCode: 300..<500)
-            .redirect(using: Redirector.doNotFollow)
-            .response { response in
-                switch response.result {
-                case .success( _):
-                    if let ret_headers = response.response?.allHeaderFields as? [String: String], let login_url = ret_headers["Location"] {
-                        completion(.success(login_url))
-                    } else {
-                        completion(.failure(LexueLoginError.noLocationHeader))
-                    }
-                case .failure(_):
-                    print("GetLexueContext 失败")
-                    completion(.failure(LexueLoginError.networkError))
-                }
-                
+        let lexueService = "https://lexue.bit.edu.cn/login/index.php"
+        BITLogin.shared.getServiceTicket(tgtUrl: loginnedContext.tgtUrl, service: lexueService) { result in
+            switch result {
+            case .success(let ticket):
+                let login_url = "\(lexueService)?ticket=\(ticket)"
+                completion(.success(login_url))
+            case .failure(_):
+                print("GetLexueLoginTicket 失败 (REST API)")
+                completion(.failure(LexueLoginError.networkError))
             }
+        }
+        // [旧版 CASTGC 方式]
+        // var cur_headers = HTTPHeaders(headers)
+        // cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
+        // AF.requestWithoutCache(API_LEXUE_TICK, method: .get, headers: cur_headers)
+        //     .validate(statusCode: 300..<500)
+        //     .redirect(using: Redirector.doNotFollow)
+        //     .response { response in
+        //         switch response.result {
+        //         case .success( _):
+        //             if let ret_headers = response.response?.allHeaderFields as? [String: String], let login_url = ret_headers["Location"] {
+        //                 completion(.success(login_url))
+        //             } else {
+        //                 completion(.failure(LexueLoginError.noLocationHeader))
+        //             }
+        //         case .failure(_):
+        //             completion(.failure(LexueLoginError.networkError))
+        //         }
+        //     }
     }
     
     func GetLexueContext(_ loginnedContext: BITLogin.LoginSuccessContext, completion: @escaping (Result<LexueContext, LexueLoginError>) -> Void) {
-        var cur_headers = HTTPHeaders(headers)
-        cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
-        AF.requestWithoutCache(API_LEXUE_TICK, method: .get, headers: cur_headers)
-            .validate(statusCode: 300..<500)
-            .redirect(using: Redirector.doNotFollow)
-            .response { response in
-                switch response.result {
-                case .success( _):
-                    if let ret_headers = response.response?.allHeaderFields as? [String: String], let login_url = ret_headers["Location"] {
-                        // print("login_url: \(login_url)")
-                        AF.requestWithoutCache(login_url, method: .get)
-                            .validate(statusCode: 300..<500)
-                            .redirect(using: Redirector.doNotFollow)
-                            .response { response1 in
-                                switch response1.result {
-                                case .success(_):
-                                    if let ret_headers = response1.response?.allHeaderFields as? [String: String], let cookie = ret_headers["Set-Cookie"] {
-                                        let firstMoodle = get_cookie_key(cookie, "MoodleSession")
-                                        // print("firstMoodle: \(cookie)")
-                                        var secondHeaders = HTTPHeaders(self.headers1)
-                                        secondHeaders.add(name: "Cookie", value: "MoodleSession=\(firstMoodle);")
-                                        AF.requestWithoutCache(self.API_LEXUE_SECOND_AUTH, method: .get, headers: secondHeaders)
-                                            .validate(statusCode: 300..<500)
-                                            .redirect(using: Redirector.doNotFollow)
-                                            .response { response2 in
-                                                switch response2.result {
-                                                case .success(_):
-                                                    if let ret_headers = response2.response?.allHeaderFields as? [String: String], let cookie = ret_headers["Set-Cookie"]{
-                                                        var ret = LexueContext()
-                                                        ret.MoodleSession = get_cookie_key(cookie, "MoodleSession")
-                                                        SettingStorage.shared.set_widget_shared_LexueContext(ret)
-                                                        // print(ret)
-                                                        completion(.success(ret))
-                                                    } else {
-                                                        print("登录lexue 失败")
-                                                        completion(.failure(LexueLoginError.networkError))
-                                                    }
-                                                case .failure(_):
-                                                    print("登录lexue 失败")
-                                                    completion(.failure(LexueLoginError.networkError))
-                                                }
+        let lexueService = "https://lexue.bit.edu.cn/login/index.php"
+        BITLogin.shared.getServiceTicket(tgtUrl: loginnedContext.tgtUrl, service: lexueService) { [self] ticketResult in
+            switch ticketResult {
+            case .success(let ticket):
+                let login_url = "\(lexueService)?ticket=\(ticket)"
+                AF.requestWithoutCache(login_url, method: .get)
+                    .validate(statusCode: 300..<500)
+                    .redirect(using: Redirector.doNotFollow)
+                    .response { response1 in
+                        switch response1.result {
+                        case .success(_):
+                            if let ret_headers = response1.response?.allHeaderFields as? [String: String], let cookie = ret_headers["Set-Cookie"] {
+                                let firstMoodle = get_cookie_key(cookie, "MoodleSession")
+                                var secondHeaders = HTTPHeaders(self.headers1)
+                                secondHeaders.add(name: "Cookie", value: "MoodleSession=\(firstMoodle);")
+                                AF.requestWithoutCache(self.API_LEXUE_SECOND_AUTH, method: .get, headers: secondHeaders)
+                                    .validate(statusCode: 300..<500)
+                                    .redirect(using: Redirector.doNotFollow)
+                                    .response { response2 in
+                                        switch response2.result {
+                                        case .success(_):
+                                            if let ret_headers = response2.response?.allHeaderFields as? [String: String], let cookie = ret_headers["Set-Cookie"]{
+                                                var ret = LexueContext()
+                                                ret.MoodleSession = get_cookie_key(cookie, "MoodleSession")
+                                                SettingStorage.shared.set_widget_shared_LexueContext(ret)
+                                                completion(.success(ret))
+                                            } else {
+                                                print("登录lexue 失败")
+                                                completion(.failure(LexueLoginError.networkError))
                                             }
-                                    } else {
-                                        print("登录lexue 失败")
-                                        completion(.failure(LexueLoginError.networkError))
+                                        case .failure(_):
+                                            print("登录lexue 失败")
+                                            completion(.failure(LexueLoginError.networkError))
+                                        }
                                     }
-                                case .failure(_):
-                                    print("登录lexue 失败")
-                                    completion(.failure(LexueLoginError.networkError))
-                                }
+                            } else {
+                                print("登录lexue 失败")
+                                completion(.failure(LexueLoginError.networkError))
                             }
-                    } else {
-                        completion(.failure(LexueLoginError.noLocationHeader))
+                        case .failure(_):
+                            print("登录lexue 失败")
+                            completion(.failure(LexueLoginError.networkError))
+                        }
                     }
-                case .failure(_):
-                    print("GetLexueContext 失败")
-                    completion(.failure(LexueLoginError.networkError))
-                }
-                
+            case .failure(_):
+                print("GetLexueContext 失败 (REST API 获取 Service Ticket)")
+                completion(.failure(LexueLoginError.networkError))
             }
+        }
+        // [旧版 CASTGC 方式] 原始实现通过 SOURCEID_TGC cookie 获取 ticket
+        // var cur_headers = HTTPHeaders(headers)
+        // cur_headers.add(name: "Cookie", value: "SOURCEID_TGC=\(loginnedContext.CASTGC)")
+        // AF.requestWithoutCache(API_LEXUE_TICK, method: .get, headers: cur_headers)
+        //     .validate(statusCode: 300..<500)
+        //     .redirect(using: Redirector.doNotFollow)
+        //     .response { response in ... }
     }
     
     func ParseCourseObject(course: [String: Any]) -> CourseShortInfo {

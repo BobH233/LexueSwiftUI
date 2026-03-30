@@ -27,7 +27,7 @@ class LexueHelperBackend {
     
     static func GetAPIUrl() -> String {
         if GlobalVariables.shared.DEBUG_BUILD {
-            return "http://192.168.8.143:3000"
+            return "https://api.bit-helper.cn"
         } else {
             return "https://api.bit-helper.cn"
         }

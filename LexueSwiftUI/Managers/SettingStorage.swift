@@ -50,6 +50,7 @@ class SettingStorage: ObservableObject {
         didSet {
             UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(loginnedContext.happyVoyagePersonal, forKey: "setting.login.context.happyVoyage")
             UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(loginnedContext.CASTGC, forKey: "setting.login.context.castgc")
+            UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.set(loginnedContext.tgtUrl, forKey: "setting.login.context.tgtUrl")
         }
     }
     
@@ -337,7 +338,8 @@ class SettingStorage: ObservableObject {
             savedPassword = ""
         }
         if let stored1 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.context.happyVoyage") as? String, let stored2 = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.context.castgc") as? String {
-            loginnedContext = BITLogin.LoginSuccessContext(happyVoyagePersonal: stored1, CASTGC: stored2)
+            let storedTgtUrl = UserDefaults(suiteName: "group.cn.bobh.LexueSwiftUI")!.value(forKey: "setting.login.context.tgtUrl") as? String ?? ""
+            loginnedContext = BITLogin.LoginSuccessContext(happyVoyagePersonal: stored1, CASTGC: stored2, tgtUrl: storedTgtUrl)
         } else {
             loginnedContext = BITLogin.LoginSuccessContext()
         }
