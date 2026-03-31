@@ -14,7 +14,7 @@ class GlobalVariables: ObservableObject {
     
     // 如果是true，则表示为本机调试，使用友盟的develop的key，同时显示debug build的标志，否则为发布版本，使用友盟的release的key
     // TODO: release 时改成 false!!!!!
-    let DEBUG_BUILD = true
+    let DEBUG_BUILD = false
     // TODO: 上架app store的时候改为app store
     let CURRENT_CHANNEL = "app_store"
     // TODO: 上架app store的时候改成false!!! 分发Test flight的时候裁成true!!!
@@ -61,6 +61,7 @@ class GlobalVariables: ObservableObject {
         .init(notificationName: "queryScore", titleName: "成绩查询", imageName: "graduationcap.fill", enable: true, color: .blue),
         .init(notificationName: "examArrange", titleName: "考试安排", imageName: "calendar", enable: true, color: .blue),
         .init(notificationName: "scheduleView", titleName: "课程表", imageName: "clock", enable: true, color: .blue),
+        // .init(notificationName: "chargerQuery", titleName: "电车充电", imageName: "bolt.square", enable: true, color: .blue),
         /*.init(notificationName: "schoolMap", titleName: "校园导航", imageName: "map.fill", enable: true, color: .blue),*/
     ]
     
